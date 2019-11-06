@@ -7,7 +7,7 @@ namespace MIPlan.Models
 {
     public class Acreditaciones
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public string Dependencia { get; set; }
         public string Carrera { get; set; }
         public string Organismo { get; set; }
