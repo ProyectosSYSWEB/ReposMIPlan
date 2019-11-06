@@ -15,5 +15,6 @@ namespace MIPlan.Models
         public string FechaFinal { get; set; }
         public string Status { get; set; }
         public string Observaciones { get; set; }
+
     }
 }

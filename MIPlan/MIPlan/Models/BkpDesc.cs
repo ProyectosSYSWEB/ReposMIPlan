@@ -9,5 +9,6 @@ namespace MIPlan.Models
     {
         public string Id { get; set; }
         public string Des { get; set; }
+
     }
 }
