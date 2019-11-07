@@ -7,7 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 
-namespace Sunva_Folios.Models
+namespace MIPlan.Models
 {
     public class ExeProcedimiento
     {

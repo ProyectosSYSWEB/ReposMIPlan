@@ -13,6 +13,7 @@ namespace MIPlan.Models
         public string EtiquetaTres { get; set; }
         public string EtiquetaCuatro { get; set; }
         public string EtiquetaCinco { get; set; }
+        
 
     }
 }

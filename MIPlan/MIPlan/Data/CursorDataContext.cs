@@ -1,12 +1,11 @@
 ﻿using MIPlan.Models;
 using Oracle.ManagedDataAccess.Client;
-using Sunva_Folios.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Sunva_Folios.Data.VIATICOS
+namespace MIPlan.Data
 {
     public class CursorDataContext
     {

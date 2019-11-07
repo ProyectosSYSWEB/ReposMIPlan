@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MIPlan.Data;
+using MIPlan.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -91,6 +93,23 @@ namespace MIPlan.Controllers
             }
         }
 
+        public JsonResult ListaAcreditadores(string TipoPer)
+        {
+            List<Comun> list = new List<Comun>();
+            list=CursorDataContext.ObtenerAcreditadores(TipoPer);
+            //List<Resultado> lstResultado = new List<Resultado>();
+           
+
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ListaBasicos(string TipoPer)
+        {
+            List<Comun> list = new List<Comun>();
+            list = CursorDataContext.ObtenerAcreditadores(TipoPer);
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
 
 
 

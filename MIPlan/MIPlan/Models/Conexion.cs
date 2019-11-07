@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Sunva_Folios.Models
+namespace MIPlan.Models
 {
     public class Conexion
     {
