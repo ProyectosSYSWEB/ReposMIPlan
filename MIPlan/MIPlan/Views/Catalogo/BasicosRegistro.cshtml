@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "BasicosRegistro";
+    Layout = "~/Views/Shared/_LayoutContenido.cshtml";
+
+}
+<br />
+<br />
+
+<h2>BasicosRegistro</h2>
+<div">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="lblTipo">Tipo:</label>
+            <select class="form-control" name="cmbTipo" ng-change="ctrl.ObtenerTiposComprobacion()" @*ng-options="option.Id as option.Descripcion for option in ctrl.dependencias"*@ ng-model="ctrl.cve_dependencia">
+                <option value="1">Viaticos</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="lblSubtipo">Subtipo:</label>
+            <select class="form-control" name="cmbSubtipo" ng-change="ctrl.ObtenerSubtipos()" @*ng-options="option.Id as option.Descripcion for option in ctrl.dependencias"*@ ng-model="ctrl.cve_dependencia">
+                <option value="1">Hotel</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="lblFechaComprobacion">Fecha:</label>
+            <input class="form-control" name="txtFechaComprobacion" type="text" ng-model="ctrl.cve_fecha_comprobacion" />
+        </div>
+        <div class="form-group col-md-6">
+            <label for="lblFolioComprobacion">Folio:</label>
+            <input class="form-control" name="txtFolioComprobacion" type="text" ng-model="ctrl.cve_folio_comprobacion" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label for="lblProveedor">Proveedor:</label>
+            <input class="form-control" id="txtProveedor" type="text" ng-model="ctrl.cve_proveedor" ng-required="true" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label for="lblRFC">RFC:</label>
+            <input class="form-control" name="txtRFC" type="text" ng-model="ctrl.cve_rfc" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <button type="button" id="bttnAgregarComprobacion" ng-click="ctrl.AgregarComprobacion()" class="btn btn-primary">Agregar</button>
+
+        </div>
+        <div class="form-group col-md-6">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Salir</button>
+        </div>
+    </div>
+</div>

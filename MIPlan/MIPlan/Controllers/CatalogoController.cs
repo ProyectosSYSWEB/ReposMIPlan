@@ -21,6 +21,11 @@ namespace MIPlan.Controllers
             return View();
         }
 
+        public ActionResult BasicosRegistro()
+        {
+            return View();
+        }
+
         // GET: Catalogo/Details/5
         public ActionResult Details(int id)
         {
@@ -104,10 +109,10 @@ namespace MIPlan.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult ListaBasicos(string TipoPer)
+        public JsonResult ListaBasicos()
         {
             List<Comun> list = new List<Comun>();
-            list = CursorDataContext.ObtenerAcreditadores(TipoPer);
+            list = CursorDataContext.ObtenerBasicos();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
