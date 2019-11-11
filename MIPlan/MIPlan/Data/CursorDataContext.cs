@@ -40,7 +40,7 @@ namespace MIPlan.Data
             }
 
         }
-        public static List<Comun> ObtenerBasicos()
+        public static List<Basicos> ObtenerBasicos()
         {
             OracleCommand cmd = null;
             ExeProcedimiento exeProc = new ExeProcedimiento();
@@ -49,15 +49,21 @@ namespace MIPlan.Data
             {
                 OracleDataReader dr = null;
                 cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Basicos", ref dr);
-                List<Comun> listarComun = new List<Comun>();
+                List<Basicos> listarBasicos = new List<Basicos>();
                 while (dr.Read())
                 {
-                    Comun objComun = new Comun();
-                    objComun.Id = Convert.ToString(dr[0]);
-                    objComun.Descripcion = Convert.ToString(dr[1]);
-                    listarComun.Add(objComun);
+                    Basicos objBasicos = new Basicos();
+                    objBasicos.Id = Convert.ToInt32(dr[0]);
+                    objBasicos.Tipo = Convert.ToString(dr[1]);
+                    objBasicos.Clave = Convert.ToString(dr[2]);
+                    objBasicos.Status = Convert.ToString(dr[3]);
+                    objBasicos.Descripcion = Convert.ToString(dr[4]);
+                    objBasicos.Valor = Convert.ToString(dr[5]);
+                    objBasicos.Orden = Convert.ToString(dr[6]);
+
+                    listarBasicos.Add(objBasicos);
                 }
-                return listarComun;
+                return listarBasicos;
 
             }
             catch (Exception ex)
@@ -71,6 +77,7 @@ namespace MIPlan.Data
             }
 
         }
+
 
         public static List<Comun> ObtenerDependencias(string Usuario)
         {
