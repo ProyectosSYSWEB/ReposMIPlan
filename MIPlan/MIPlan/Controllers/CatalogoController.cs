@@ -32,6 +32,20 @@ namespace MIPlan.Controllers
             return View();
         }
 
+        public JsonResult ObtenerDependencias()
+        {
+            try
+            {                
+                var List = CursorDataContext.ObtenerDependencias("LISSETH");
+                return Json(List, JsonRequestBehavior.AllowGet);
+
+            }
+            catch(Exception ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         // GET: Catalogo/Create
         public ActionResult Create()
         {

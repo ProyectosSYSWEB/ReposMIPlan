@@ -72,6 +72,14 @@ namespace MIPlan.Data
 
         }
 
+        public static List<Comun> ObtenerDependencias(string Usuario)
+        {
+            string[] Parametros = { "p_tipo" };
+            object[] Valores = { Usuario };
+            var Lista = ExeProcedimiento.GenerarOracleCommandCursor_Combo("PKG_PLANEACION.Obt_Combo_Dependencia", Parametros, Valores);
+            return Lista;
+        }
+
 
     }
 }
