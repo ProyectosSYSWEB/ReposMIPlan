@@ -1,19 +1,18 @@
 ﻿/// <reference path="../global.js"/>
 var catalogoContext =
-{
-    login: [],
-    infBasicos: [],
+{    
+    dependenciaslst: [],
     listaBasicos: function (callBackResult) {
             var self = this;
-            self.infDoctos.length = 0;
+            self.dependenciaslst.length = 0;
             $.ajax(
                 {
                     type: 'GET',
                     cache: false,
-                    url: urlServer + 'Catalogo/ListaBasicos',
+                    url: urlServer + 'Catalogo/ListaDependencias',
                     success: function (resp) {
                         for (var i = 0; i < resp.length; i++) {
-                            self.infBasicos.push({ Identificador: resp[i].Id, Desc: resp[i].Descripcion });
+                            self.dependenciaslst.push({ Identificador: resp[i].Id, Desc: resp[i].Descripcion });
                         }
                         if (callBackResult != undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
