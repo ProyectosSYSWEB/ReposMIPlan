@@ -1,4 +1,4 @@
-﻿/// <reference path="../Models/ViaticosModel.js"/>
+﻿/// <reference path="../Models/CatModel.js"/>
 /// <reference path="../global.js"/>
 
 
@@ -11,6 +11,10 @@
 
 
         this.InicioViaticos = function () {
+        };
+
+        this.FuncionPrueba = () => {
+
         };
     
 }]);
