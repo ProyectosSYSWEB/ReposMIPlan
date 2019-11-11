@@ -25,12 +25,16 @@ namespace MIPlan.Controllers
         {
             return View();
         }
+        public ActionResult Acreditadores()
+        {
+            return View();
+        }
 
         // GET: Catalogo/Details/5
         public ActionResult Details(int id)
         {
             return View();
-        }
+        }       
 
         // GET: Catalogo/Create
         public ActionResult Create()
@@ -109,14 +113,40 @@ namespace MIPlan.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult ListaBasicos()
+        //public JsonResult ListaBasicos()
+        //{
+        //    List<Comun> list = new List<Comun>();
+        //    list = CursorDataContext.ObtenerBasicos();
+        //    return Json(list, JsonRequestBehavior.AllowGet);
+        //}
+
+        public JsonResult ObtenerDependencias()
         {
-            List<Comun> list = new List<Comun>();
-            list = CursorDataContext.ObtenerBasicos();
-            return Json(list, JsonRequestBehavior.AllowGet);
+            try
+            {
+                var List = CursorDataContext.ObtenerDependencias("LISSETH");
+                return Json(List, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
         }
 
+        public JsonResult ObtenerGridBasicos()
+        {
+            try
+            {
+                var List = CursorDataContext.ObtenerBasicos();
+                return Json(List, JsonRequestBehavior.AllowGet);
 
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
 
     }
 }
