@@ -12,6 +12,10 @@
 
         this.InicioViaticos = function () {
         };
+
+        this.FuncionPrueba = () => {
+
+        };
     
 }]);
 
