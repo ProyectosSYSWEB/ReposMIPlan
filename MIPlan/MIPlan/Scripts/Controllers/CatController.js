@@ -34,6 +34,12 @@
                 $scope.$apply();
             });
         };   
+
+        this.ValorDependencia = function () {
+            alert(self.cve_dependencia);
+        };
+
+
     
 }]);
 
