@@ -29,6 +29,10 @@ namespace MIPlan.Controllers
         {
             return View();
         }
+        public ActionResult AcreditadoresRegistro()
+        {
+            return View();
+        }
 
         // GET: Catalogo/Details/5
         public ActionResult Details(int id)

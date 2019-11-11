@@ -1004,6 +1004,7 @@
     <Content Include="Views\Shared\_LayoutContenido.cshtml" />
     <Content Include="Views\Catalogo\BasicosRegistro.cshtml" />
     <Content Include="Views\Catalogo\Acreditadores.cshtml" />
+    <Content Include="Views\Catalogo\AcreditadoresRegistro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
