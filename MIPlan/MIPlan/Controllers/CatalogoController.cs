@@ -158,7 +158,7 @@ namespace MIPlan.Controllers
             {
                 var List = CursorDataContext.ObtenerAcreditaciones();
                 return Json(List, JsonRequestBehavior.AllowGet);
-
+                //S
             }
             catch (Exception ex)
             {
