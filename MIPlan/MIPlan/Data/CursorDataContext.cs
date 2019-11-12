@@ -88,5 +88,44 @@ namespace MIPlan.Data
         }
 
 
+        public static List<Acreditaciones> ObtenerAcreditaciones()
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+
+            try
+            {
+                OracleDataReader dr = null;
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Acreditaciones", ref dr);
+                List<Acreditaciones> listarAcreditaciones = new List<Acreditaciones>();
+                while (dr.Read())
+                {
+                    Acreditaciones objAcreditaciones = new Acreditaciones();
+                    objAcreditaciones.Id = Convert.ToInt32(dr[0]);
+                    objAcreditaciones.Dependencia = Convert.ToString(dr[1]);
+                    objAcreditaciones.Carrera = Convert.ToString(dr[2]);
+                    objAcreditaciones.Organismo = Convert.ToString(dr[3]);
+                    objAcreditaciones.FechaInicial = Convert.ToString(dr[4]);
+                    objAcreditaciones.FechaFinal = Convert.ToString(dr[5]);
+                    objAcreditaciones.Status = Convert.ToString(dr[6]);
+                    objAcreditaciones.Observaciones = Convert.ToString(dr[6]);
+
+                    listarAcreditaciones.Add(objAcreditaciones);
+                }
+                return listarAcreditaciones;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
+        }
+
     }
 }
