@@ -41,7 +41,7 @@
         <label for="lblCatalogo">Catalogo:</label>&nbsp;&nbsp;
     </div>
     <div class="form-inline col-md-1">
-        <select class="form-control" name="cmbCatalogo" ng-change="ctrl.ObtenerTiposComprobacion()" @*ng-options="option.Id as option.Descripcion for option in ctrl.dependencias"*@ ng-model="ctrl.cve_dependencia">
+        <select class="form-control" name="cmbCatalogo"  @*ng-options="option.Id as option.Descripcion for option in ctrl.dependencias"*@ ng-model="ctrl.cve_catalogo">
             <option value="0">--Seleccionar--</option>
         </select>
     </div>
@@ -105,7 +105,8 @@
 
 <script src="~/Scripts/angular.min.js"></script>
 <script src="~/Scripts/angular.js"></script>
-<script src="~/Scripts/angular.ng-modules.js"></script>
+<script src="~/Scripts/global.js"></script>
+@*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 
 <script src="~/Scripts/Models/CatModel.js"></script>
 <script src="~/Scripts/Controllers/CatController.js"></script>

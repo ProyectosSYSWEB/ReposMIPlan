@@ -1,10 +1,10 @@
-﻿// <reference path="../global.js"/>
-var catalogoContext =
+﻿var catalogoContext =
 {    
     dependenciaslst: [],
         ObtenerDependencias: function (callBackResult) {
             var self = this;
             self.dependenciaslst.length = 0;
+            //var urlServer = "http://localhost:53805/";
             $.ajax(
                 {
                     type: 'GET',

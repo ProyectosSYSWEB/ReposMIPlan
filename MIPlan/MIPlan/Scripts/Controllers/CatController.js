@@ -1,6 +1,5 @@
-﻿/// <reference path="../Models/CatModel.js"/>
-/// <reference path="../global.js"/>
-
+﻿
+// <reference path="../Models/CatModel.js"/>
 
 (function () {
     var app = angular.module('MIPlanWeb', []);
