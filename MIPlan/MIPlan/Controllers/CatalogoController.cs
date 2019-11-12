@@ -152,5 +152,19 @@ namespace MIPlan.Controllers
             }
         }
 
+        public JsonResult ObtenerGridAcreditaciones()
+        {
+            try
+            {
+                var List = CursorDataContext.ObtenerAcreditaciones();
+                return Json(List, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
     }
 }
