@@ -138,7 +138,7 @@ namespace MIPlan.Controllers
             }
         }
 
-        public JsonResult ObtenerGridBasicos()
+        public JsonResult ObtenerGridBasicos(string Dependencia)
         {
             try
             {

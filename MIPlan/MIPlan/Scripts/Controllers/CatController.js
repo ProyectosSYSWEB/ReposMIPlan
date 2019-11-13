@@ -11,6 +11,7 @@
 
         this.Inicio = function () {
             CargarCombos();
+            CargarGrid();
         };
 
         var CargarCombos = function () {
@@ -34,8 +35,28 @@
             });
         };   
 
+        var CargarGrid = function () {
+            catalogoContext.ObtenerBasicos(self.cve_dependencia, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.basicos = catalogoContext.basicoslst;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };   
+
         this.ValorDependencia = function () {
             alert(self.cve_dependencia);
+        };
+
+        this.BorrarBasico = function (Indice) {
+            alert(Indice);
         };
 
 
