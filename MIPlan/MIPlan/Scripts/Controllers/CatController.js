@@ -6,7 +6,7 @@
 
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
         var self = this;
-
+        var abc = "";
 
         this.Inicio = function () {
             CargarCombos();
