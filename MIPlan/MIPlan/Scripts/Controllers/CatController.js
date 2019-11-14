@@ -2,8 +2,7 @@
 // <reference path="../Models/CatModel.js"/>
 
 (function () {
-    var app = angular.module('MIPlanWeb', []);
-    
+    var app = angular.module('MIPlanWeb', []);    
 
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
         var self = this;
@@ -24,6 +23,7 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.dependencias = catalogoContext.dependenciaslst;
+                        self.cve_dependencia = catalogoContext.dependenciaslst[0].Id;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
