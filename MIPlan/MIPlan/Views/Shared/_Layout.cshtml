@@ -29,114 +29,67 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-
-    @*<ul class="navbar-nav mr-auto col-md-12">
-        <li class="nav-item active">
-            <a class="imagen"><img src="~/Imagenes/MiPlan encabezado.png" /></a>
-        </li>
-    </ul>*@
-    @*<nav class="">
-        
-    </nav>*@
-
-    <nav class="navbar navbar-nav navbar-fixed-top fixed-top py-0 navbar-expand-lg navbar-light bg-light" style="background-image:url('../../Imagenes/MiPlan encabezado.png')">
+    <nav class="navbar navbar-nav navbar-fixed-top fixed-top py-0 navbar-expand-lg navbar-light bg-light" style="background-image:url('../../Imagenes/MiPlan encabezado.png'); max-width:100%">
         <div class="container-fluid">
             <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2 ">
                 <div class="row py-5">
-                    <ul class="navbar-nav col-md-7">
-                        <li class="nav-item col-md-2 text-center">
-                            <a href=""><img src="~/Imagenes/MiPlan inicio.png" /></a>
-                        </li>
-                        <li class="nav-item col-md-2 text-center">
-                            <a href=""><img src="~/Imagenes/MiPlan catalogos.png" /></a>
-                        </li>
-                        <li class="nav-item col-md-2 text-center">
-                            <a href=""><img src="~/Imagenes/MiPlan movimientos.png" /></a>
-                        </li>
-                        <li class="nav-item col-md-2 text-center">
-                            <a href=""><img src="~/Imagenes/MiPlan reportes.png" /></a>
-                        </li>
-                        <li class="nav-item col-md-2 text-center">
-                            <a href=""><img src="~/Imagenes/MiPlan ayuda.png" /></a>
-                        </li>
-                        <li class="nav-item col-md-2 text-center">
-                            <a href=""><img src="~/Imagenes/MiPlan salir.png" /></a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav col-md-7" style="background-color:#E5C514">
-                        <li class="nav-item col-md-2 text-center">
-                            <a href=""><span class="col-md-1" style="color:white">Inicio</span></a>
-                        </li>
-                        <li class="nav-item col-md-2 text-center">
-                            <a href=""><span class="col-md-1" style="color:white">Catálogos</span></a>
-                        </li>
-                        <li class="nav-item col-md-2 text-center">
-                            <a href=""><span class="col-md-1" style="color:white">Movimientos</span></a>
-                        </li>
-                        <li class="nav-item col-md-2 text-center">
-                            <a href=""><span class="col-md-1" style="color:white">Reportes</span></a>
-                        </li>
-                        <li class="nav-item col-md-2 text-center">
-                            <a href=""><span class="col-md-1" style="color:white">Ayuda</span></a>
-                        </li>
-                        <li class="nav-item col-md-2 text-center">
-                            <a href=""><span class="col-md-1" style="color:white">Salir</span></a>
-                        </li>
-                        <li class="nav-item col-md-6">
+                    <br />
+                    <br />
+                    <br />                    
+                    @*<ul class="navbar-nav col-md-7">
+            <li class="nav-item col-md-2 text-center">
+                <a href=""><img src="~/Imagenes/MiPlan inicio.png" /></a>
+            </li>
+            <li class="nav-item col-md-2 text-center">
+                <a href=""><img src="~/Imagenes/MiPlan catalogos.png" /></a>
+            </li>
+            <li class="nav-item col-md-2 text-center">
+                <a href=""><img src="~/Imagenes/MiPlan movimientos.png" /></a>
+            </li>
+            <li class="nav-item col-md-2 text-center">
+                <a href=""><img src="~/Imagenes/MiPlan reportes.png" /></a>
+            </li>
+            <li class="nav-item col-md-2 text-center">
+                <a href=""><img src="~/Imagenes/MiPlan ayuda.png" /></a>
+            </li>
+            <li class="nav-item col-md-2 text-center">
+                <a href=""><img src="~/Imagenes/MiPlan salir.png" /></a>
+            </li>
+        </ul>
+        <ul class="navbar-nav col-md-7" style="background-color:#E5C514">
+            <li class="nav-item col-md-2 text-center">
+                <a href=""><span class="col-md-1" style="color:white">Inicio</span></a>
+            </li>
+            <li class="nav-item col-md-2 text-center">
+                <a href=""><span class="col-md-1" style="color:white">Catálogos</span></a>
+            </li>
+            <li class="nav-item col-md-2 text-center">
+                <a href=""><span class="col-md-1" style="color:white">Movimientos</span></a>
+            </li>
+            <li class="nav-item col-md-2 text-center">
+                <a href=""><span class="col-md-1" style="color:white">Reportes</span></a>
+            </li>
+            <li class="nav-item col-md-2 text-center">
+                <a href=""><span class="col-md-1" style="color:white">Ayuda</span></a>
+            </li>
+            <li class="nav-item col-md-2 text-center">
+                <a href=""><span class="col-md-1" style="color:white">Salir</span></a>
+            </li>
+            <li class="nav-item col-md-6">
 
-                        </li>
-                    </ul>
+            </li>
+        </ul>*@
                 </div>
             </div>
         </div>
     </nav>
+    <div class="body-content container-fluidp py-5 " style="background-image:url('../../Imagenes/MiPlan fondo.png')">
+        @RenderBody()
+        <img class="fixed-bottom" src="~/Imagenes/MiPlan pie.png" style="height:13%;width:100%" />
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 
-
-
-
-
-        @*<nav class="navbar navbar-nav navbar-fixed-top fixed-top py-0 navbar-expand-lg navbar-dark bg-dark">
-            <div class="collapse navbar-collapse container-fluid" id="navbarNavDropdown">
-                <div class="row">
-                    <ul class="navbar-nav col-10">
-                        <li class="nav-item col-2 text-center">
-                            <img src="~/Imagenes/MiPlan inicio.png" />
-                            <span class="col-1" style="color:white">Inicio</span>
-                        </li>
-                        <li class="nav-item col-2 text-center">
-                            <img src="~/Imagenes/MiPlan catalogos.png" />
-                            <span class="col-1" style="color:white">Catalogos</span>
-                        </li>
-                        <li class="nav-item col-2 text-center">
-                            <img src="~/Imagenes/MiPlan movimientos.png" />
-                            <span class="col-1" style="color:white">Movimientos</span>
-                        </li>
-                        <li class="nav-item col-2 text-center">
-                            <img src="~/Imagenes/MiPlan reportes.png" />
-                            <span class="col-1" style="color:white">Reportes</span>
-                        </li>
-                        <li class="nav-item col-2 text-center">
-                            <img src="~/Imagenes/MiPlan ayuda.png" />
-                            <span class="col-1" style="color:white">Ayuda</span>
-                        </li>
-                        <li class="nav-item col-2 text-center">
-                            <img src="~/Imagenes/MiPlan salir.png" />
-                            <span class="col-1" style="color:white">Salir</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>*@
-        <div class="container body-content container-fluidp py-5">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
-            </footer>
-        </div>
-
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
 </body>
 </html>
