@@ -127,5 +127,42 @@ namespace MIPlan.Data
 
         }
 
+
+        public static List<AreasAtencion> ObtenerAreasAtencion()
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+
+            try
+            {
+                OracleDataReader dr = null;
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_AreasAtencion", ref dr);
+                List<AreasAtencion> listarAreasAtencion = new List<AreasAtencion>();
+                while (dr.Read())
+                {
+                    AreasAtencion objAreasAtencion = new AreasAtencion();
+                    objAreasAtencion.Id = Convert.ToInt32(dr[0]);
+                    objAreasAtencion.Dependencia = Convert.ToString(dr[1]);
+                    objAreasAtencion.Clave = Convert.ToString(dr[2]);
+                    objAreasAtencion.Descripcion = Convert.ToString(dr[3]);
+                    objAreasAtencion.Status = Convert.ToString(dr[4]);
+
+                    listarAreasAtencion.Add(objAreasAtencion);
+                }
+                return listarAreasAtencion;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
+        }        
+
     }
 }

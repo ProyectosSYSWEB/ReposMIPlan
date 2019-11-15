@@ -171,5 +171,18 @@ namespace MIPlan.Controllers
             }
         }
 
+        public JsonResult ObtenerGridAreasAtencion()
+        {
+            try
+            {
+                var List = CursorDataContext.ObtenerAreasAtencion();
+                return Json(List, JsonRequestBehavior.AllowGet);                
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
     }
 }

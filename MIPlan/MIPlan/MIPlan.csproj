@@ -162,6 +162,18 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Imagenes\BTU.png" />
+    <Content Include="Imagenes\MiPlan ayuda.png" />
+    <Content Include="Imagenes\MiPlan catalogos.png" />
+    <Content Include="Imagenes\MiPlan encabezado.png" />
+    <Content Include="Imagenes\MiPlan fondo.png" />
+    <Content Include="Imagenes\MiPlan idea original.png" />
+    <Content Include="Imagenes\MiPlan inicio.png" />
+    <Content Include="Imagenes\MiPlan logo medio.png" />
+    <Content Include="Imagenes\MiPlan movimientos.png" />
+    <Content Include="Imagenes\MiPlan pie.png" />
+    <Content Include="Imagenes\MiPlan reportes.png" />
+    <Content Include="Imagenes\MiPlan salir.png" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -1050,6 +1062,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
+      <UserProperties content_4bootstrap-grid_1min_1css_1map__JsonSchema="" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
