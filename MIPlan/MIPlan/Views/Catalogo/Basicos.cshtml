@@ -12,7 +12,7 @@
 <br />
 <br />
 
-<div ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
+<div class="row" ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
     <div class="form-inline col-md-2">
         <label for="lblDependencia">Dependencia:</label>
     </div>
@@ -21,93 +21,93 @@
             <option value="0">--Seleccionar Dependencia--</option>
         </select>
     </div>
+</div>
 
-    <br />
+<br />
 
-    <div class="row">
-        <div class="form-inline col-md-2">
-            <label for="lblStatus">Status:</label>
-        </div>
-        <div class="form-inline col-md-3">
-            <input name="rbActivo" id="1" type="radio" /><label for="1">Activo</label>&nbsp;&nbsp;<input name="rbBaja" id="2" type="radio" /><label for="2">Baja</label>
-        </div>
+<div class="row">
+    <div class="form-inline col-md-2">
+        <label for="lblStatus">Status:</label>
     </div>
-
-    <br />
-
-    <div class="row">
-        <div class="form-inline col-md-2">
-            <label for="lblCatalogo">Catalogo:</label>&nbsp;&nbsp;
-        </div>
-        <div class="form-inline col-md-1">
-            <select class="form-control" name="cmbCatalogo" @*ng-options="option.Id as option.Descripcion for option in ctrl.dependencias"*@ ng-model="ctrl.cve_catalogo">
-                <option value="0">--Seleccionar--</option>
-            </select>
-        </div>
+    <div class="form-inline col-md-3">
+        <input name="rbActivo" id="1" type="radio" /><label for="1">Activo</label>&nbsp;&nbsp;<input name="rbBaja" id="2" type="radio" /><label for="2">Baja</label>
     </div>
+</div>
 
-    <div class="panel panel-default panel-table">
-        @*<h3 class="panel-title input-group-text">Viaticos Asignados</h3><input type="button" class="btn btn-sm btn-primary btn-create" data-toggle="modal" data-target="#InfViaticos" />Nuevo<i class="fa fa-plus" aria-hidden="true"></i>*@
-        <div class="panel-heading">
-            <div class="row">
-                <div class="col text-right">
-                    <button type="button" class="btn btn-sm btn-primary btn-create" data-toggle="modal" data-target="#InfViaticos" style="width:80px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
-                    <br />
-                </div>
+<br />
+
+<div class="row">
+    <div class="form-inline col-md-2">
+        <label for="lblCatalogo">Catalogo:</label>&nbsp;&nbsp;
+    </div>
+    <div class="form-inline col-md-1">
+        <select class="form-control" name="cmbCatalogo"  @*ng-options="option.Id as option.Descripcion for option in ctrl.dependencias"*@ ng-model="ctrl.cve_catalogo">
+            <option value="0">--Seleccionar--</option>
+        </select>
+    </div>
+</div>
+
+<div class="panel panel-default panel-table">
+    @*<h3 class="panel-title input-group-text">Viaticos Asignados</h3><input type="button" class="btn btn-sm btn-primary btn-create" data-toggle="modal" data-target="#InfViaticos" />Nuevo<i class="fa fa-plus" aria-hidden="true"></i>*@
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col text-right">
+                <button type="button" class="btn btn-sm btn-primary btn-create" data-toggle="modal" data-target="#InfViaticos" style="width:80px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                <br />
             </div>
         </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Clave</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Descripción</th>
-                    <th scope="col">Valor</th>
-                    <th scope="col">Orden</th>
-                    <th style="text-align:center"><em class="fa fa-cog"></em></th>
-                </tr>
-            </thead>
-            <tbody ng-repeat="i in ctrl.basicos">
-                <tr>
-                    <td>{{i.}}</td>
-                    <td>{{i.TipoBasico}}</td>
-                    <td>{{i.Cve}}</td>Identificador
-                    <td>{{i.Estatus}}</td>
-                    <td>{{i.Desc}}</td>
-                    <td>{{i.Valor}}</td>
-                    <td>{{i.Orden}}</td>
-
-                    <td style="text-align:center">
-                        <button type="button" class="btn" style="width:50px">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                        </button>
-
-                        <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarBasico($index)" style="width:50px">
-                            <i class="fa fa-eraser" aria-hidden="true"></i>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th style="text-align:center">
-                        <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
-                            <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                        </button>
-                        <button type="button" class="btn btn-success" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
-                            <i class="fa fa-file-excel-o" aria-hidden="true"></i>
-                        </button>
-                    </th>
-                </tr>
-            </tfoot>
-        </table>
     </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Clave</th>
+                <th scope="col">Status</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Orden</th>
+                <th style="text-align:center"><em class="fa fa-cog"></em></th>
+            </tr>
+        </thead>
+        <tbody ng-repeat="i in ctrl.basicos">
+            <tr>
+                <td>{{i.Identificador}}</td>
+                <td>{{i.TipoBasico}}</td>
+                <td>{{i.Cve}}</td>
+                <td>{{i.Estatus}}</td>
+                <td>{{i.Desc}}</td>
+                <td>{{i.Valor}}</td>
+                <td>{{i.Orden}}</td>
+
+                <td style="text-align:center">
+                    <button type="button" class="btn" style="width:50px">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarBasico($index)" style="width:50px">
+                        <i class="fa fa-eraser" aria-hidden="true"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th style="text-align:center">
+                    <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="btn btn-success" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                        <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                    </button>
+                </th>
+            </tr>
+        </tfoot>
+    </table>
 </div>
 
 <script src="~/Scripts/angular.min.js"></script>
