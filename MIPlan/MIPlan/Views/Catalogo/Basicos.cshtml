@@ -57,25 +57,32 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Catálogo</th>
+                <th scope="col">Id</th>
+                <th scope="col">Tipo</th>
                 <th scope="col">Clave</th>
-                <th scope="col">Organismo</th>
                 <th scope="col">Status</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Orden</th>
                 <th style="text-align:center"><em class="fa fa-cog"></em></th>
             </tr>
         </thead>
-        <tbody ng-repeat="i in ctrl.infImporteViaticos">
+        <tbody ng-repeat="i in ctrl.basicos">
             <tr>
-                <td>{{i.Catalogo}}</td>
-                <td>{{i.Clave}}</td>
-                <td>{{i.Organismo}}</td>
-                <td>{{i.Status}}</td>
+                <td>{{i.Identificador}}</td>
+                <td>{{i.TipoBasico}}</td>
+                <td>{{i.Cve}}</td>
+                <td>{{i.Estatus}}</td>
+                <td>{{i.Desc}}</td>
+                <td>{{i.Valor}}</td>
+                <td>{{i.Orden}}</td>
+
                 <td style="text-align:center">
                     <button type="button" class="btn" style="width:50px">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                     </button>
 
-                    <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                    <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarBasico($index)" style="width:50px">
                         <i class="fa fa-eraser" aria-hidden="true"></i>
                     </button>
                 </td>
@@ -104,6 +111,5 @@
 <script src="~/Scripts/angular.js"></script>
 <script src="~/Scripts/global.js"></script>
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
-
-<script src="~/Scripts/Models/CatModel.js"></script>
 <script src="~/Scripts/Controllers/CatController.js"></script>
+<script src="~/Scripts/Models/CatModel.js"></script>
