@@ -3,32 +3,48 @@
     ViewBag.Title = "Index";
 }
 
-<div class="container-fluid  py-5">
-    <div class="row">
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-5">
-            <div class="card text-center" style="width: 20rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Iniciar Sesión</h5>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Usuario</span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Usuario" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Contraseña</span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Contrasña" aria-label="Password" aria-describedby="basic-addon1">
+    <div class="">
+        <div class="row py-md-5">
+            <div class="col-md-12 py-md-5 d-flex justify-content-center">
+                <div class="text-center">
+                    <img src="~/Imagenes/MiPlan logo medio.png" />
+                    <div class="caption py-0" style="position:relative;top:-25%">
+                        <input type="button" class="btn btn-primary" value="Iniciar Sesión" data-toggle="modal" data-target="#exampleModal" />
                     </div>
                 </div>
-                <input type="button" class="btn btn-success col-md-12" value="Iniciar Sesión" />
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Iniciar Sesión</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Usuario</span>
+                            </div>
+                            <input style="max-width:100%" type="text" class="form-control" placeholder="Usuario" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Contraseña</span>
+                            </div>
+                            <input style="max-width:100%" type="password" class="form-control" placeholder="Contraseña" aria-label="Password" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary">Iniciar Sesión</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+
+
 

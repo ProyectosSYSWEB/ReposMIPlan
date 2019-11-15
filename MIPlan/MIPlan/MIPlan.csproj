@@ -169,7 +169,10 @@
     <Content Include="Imagenes\MiPlan fondo.png" />
     <Content Include="Imagenes\MiPlan idea original.png" />
     <Content Include="Imagenes\MiPlan inicio.png" />
+    <Content Include="Imagenes\MiPlan LetraMiPlan.png" />
     <Content Include="Imagenes\MiPlan logo medio.png" />
+    <Content Include="Imagenes\MiPlan LogoMiPlan.png" />
+    <Content Include="Imagenes\MiPlan LogoUnach.png" />
     <Content Include="Imagenes\MiPlan movimientos.png" />
     <Content Include="Imagenes\MiPlan pie.png" />
     <Content Include="Imagenes\MiPlan reportes.png" />
