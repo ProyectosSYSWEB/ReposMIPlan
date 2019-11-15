@@ -22,11 +22,11 @@
         </div>
     
         <div class="form-inline col-md-10">
-            <select name="" id="" style="margin-bottom: 0.3em;
+            <select name="cmbDependencia"  style="margin-bottom: 0.3em;
     background-color: transparent;
     border: solid 1px blue;
     border-radius: 7px;
-    padding: 0.5em;">
+    padding: 0.5em;"  ng-change="ctrl.ObtenerTiposComprobacion()"  ng-model="ctrl.cve_dependencia">
                 <option value="">--Seleccionar Dependencia--</option>
                 <option value="">---------------------------</option>
             </select>
@@ -55,7 +55,6 @@
                     <td>{{i.Inicio}}</td>
                     <td>{{i.Fin}}</td>
                     <td>{{i.Status}}</td>
-                    <td>{{i.Accion}}</td>
                     <td style="text-align:center">
                         <button type="button" class="btn" style="width:50px">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
