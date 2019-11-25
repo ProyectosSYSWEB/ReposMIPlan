@@ -177,6 +177,38 @@ namespace MIPlan.Controllers
             }
         }
 
+        public JsonResult ObtenerAcreditaciones(int IdAcreditacion)
+        {
+            string Verificador = string.Empty;
+            Resultado objResp = new Resultado();
+
+            try
+            {
+                var List = DataContext.ObtenerDatosAcreditaciones(IdAcreditacion, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResp.Error = false;
+                    objResp.MensajeError = string.Empty;
+                    objResp.LstAcreditaciones = List;
+                    return Json(objResp, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    objResp.Error = true;
+                    objResp.MensajeError = Verificador;
+                    objResp.LstAcreditaciones = null;
+                    return Json(objResp, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                objResp.Error = true;
+                objResp.MensajeError = Verificador;
+                objResp.LstAcreditaciones = null;
+                return Json(objResp, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public JsonResult ObtenerGridAreasAtencion()
         {
             try
