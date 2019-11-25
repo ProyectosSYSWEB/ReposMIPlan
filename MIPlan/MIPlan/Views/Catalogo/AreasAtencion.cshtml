@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutContenido.cshtml";
 
 }
-<br />ssss
+<br />
 
 <h2>Areas De Atención</h2>
 <br />
@@ -47,6 +47,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th scope="col">Id</th>
                     <th scope="col">Dependencia</th>
                     <th scope="col">Clave</th>
                     <th scope="col">Descripción</th>
@@ -56,6 +57,7 @@
             </thead>
             <tbody ng-repeat="i in ctrl.areasatencion">
                 <tr>
+                    <td>{{i.Id}}</td>
                     <td>{{i.Dependencia}}</td>
                     <td>{{i.Cve}}</td>
                     <td>{{i.Desc}}</td>

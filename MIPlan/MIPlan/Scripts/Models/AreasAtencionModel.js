@@ -25,7 +25,6 @@
                     }
                 }
             });
-
     },
 
     ObtenerAreasAtencion: function (Dependencia, callBackResult) {
@@ -39,7 +38,7 @@
                 data: { Dependencia },
                 success: function (resp) {
                     for (var i = 0; i < resp.length; i++) {
-                        self.areaslst.push({ Id: resp[i].Id, Descripcion: resp[i].Descripcion });
+                        self.areaslst.push({ Id: resp[i].Id, Dependencia: resp[i].Dependencia, Cve: resp[i].Clave, Desc: resp[i].Descripcion, Estatus: resp[i].Status });
                     }
                     if (callBackResult !== undefined) {
                         callBackResult({ ressult: 'tgp', message: null });
@@ -51,6 +50,5 @@
                     }
                 }
             });
-
     },
 };
