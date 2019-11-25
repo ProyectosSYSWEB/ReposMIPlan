@@ -10,5 +10,9 @@ namespace MIPlan.Models
         public bool Error { get; set; }
         public string MensajeError { get; set; }
         public List<Comun> LstComun {get; set;}
+        public List<Basicos> LstBasicos { get; set; }
+        public List<Acreditaciones> ListAcreditaciones { get; set; }
+        public List<AreasAtencion> ListAreasAtencion { get; set; }
+        public List<Unidades> ListUnidades { get; set; }
     }
 }
