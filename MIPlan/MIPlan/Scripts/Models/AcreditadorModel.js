@@ -29,16 +29,16 @@
     },
     ObtenerAcreditadores: function (Dependencia, callBackResult) {
         var self = this;
-        self.Acreditadoreslst.length = 0;
+        self.acreditadoreslst.length = 0;
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
-                url: urlServer + 'Catalogo/ObtenerGridAcreditadores',
+                url: urlServer + 'Catalogo/ObtenerGridAcreditaciones',
                 data: { Dependencia },
                 success: function (resp) {
                     for (var i = 0; i < resp.length; i++) {
-                        self.acreditadoreslst.push({ Identificador: resp[i].Id, TipoBasico: resp[i].Tipo, Cve: resp[i].Clave, Estatus: resp[i].Status, Desc: resp[i].Descripcion, Valor: resp[i].Valor, Orden: resp[i].Orden });
+                        self.acreditadoreslst.push({ Id: resp[i].Id, Dep: resp[i].Dependencia, Car: resp[i].Carrera, Organismo: resp[i].Organismo, Fecha_Inicial: resp[i].Fecha_Inicio, Fecha_Final: resp[i].Fecha_Fin, Status: resp[i].Status, Obs: resp[i].Observaciones });
                     }
                     if (callBackResult !== undefined) {
                         callBackResult({ ressult: 'tgp', message: null });
@@ -52,6 +52,4 @@
             });
 
     },
-
-
 };

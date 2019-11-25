@@ -38,22 +38,28 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Programa Educativa</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Dependencia</th>
+                    <th scope="col">Carrera</th>
                     <th scope="col">Organismo</th>
                     <th scope="col">Fecha Inicio</th>
                     <th scope="col">Fecha Fin</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Observaciones</th>
 
                     <th style="text-align:center"><em class="fa fa-cog"></em></th>
                 </tr>
             </thead>
             <tbody ng-repeat="i in ctrl.acreditador">
                 <tr>
-                    <td>{{i.Identificador}}</td>
+                    <td>{{i.Id}}</td>
+                    <td>{{i.Dep}}</td>
+                    <td>{{i.Car}}</td>
                     <td>{{i.Organismo}}</td>
                     <td>{{i.Fecha_Inicial}}</td>
                     <td>{{i.Fecha_Final}}</td>
                     <td>{{i.Status}}</td>
+                    <td>{{i.Obs}}</td>
 
                     <td style="text-align:center">
                         <button type="button" class="btn" style="width:50px">
