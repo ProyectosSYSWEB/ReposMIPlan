@@ -1,6 +1,11 @@
 ﻿var catalogoContext =
 {    
     dependenciaslst: [],
+
+
+
+
+
     basicoslst: [],
         ObtenerDependencias: function (callBackResult) {
             var self = this;
@@ -11,6 +16,7 @@
                     type: 'GET',
                     cache: false,
                     url: urlServer + 'Catalogo/ObtenerDependencias',
+
                     success: function (resp) {
                         for (var i = 0; i < resp.length; i++) {
                             self.dependenciaslst.push({ Id: resp[i].Id, Descripcion: resp[i].Descripcion });

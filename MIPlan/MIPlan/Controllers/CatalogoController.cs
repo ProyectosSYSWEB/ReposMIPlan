@@ -29,6 +29,12 @@ namespace MIPlan.Controllers
         {
             return View();
         }
+
+        public ActionResult UnidadesResponsables()
+        {
+            return View();
+        }
+
         public ActionResult AcreditadoresRegistro()
         {
             return View();
