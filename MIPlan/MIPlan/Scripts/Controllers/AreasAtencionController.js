@@ -10,6 +10,7 @@
 
         this.Inicio = function () {
             CargarCombos();
+            CargarGrid();
         };
 
         var CargarCombos = function () {
@@ -22,6 +23,22 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.dependencias = catalogoContext.dependenciaslst;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+
+        var CargarGrid = function () {
+            catalogoContext.ObtenerAreasAtencion(self.cve_dependencia, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.areasatencion = catalogoContext.areaslst;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
