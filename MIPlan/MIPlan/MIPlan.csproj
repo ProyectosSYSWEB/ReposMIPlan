@@ -210,6 +210,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Controllers\AcreditadorController.js" />
     <Content Include="Scripts\Controllers\AreasAtencionController.js" />
     <Content Include="Scripts\Controllers\CatController.js" />
     <Content Include="Scripts\Controllers\UnidadesResponsablesController.js" />
@@ -984,6 +985,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Models\AcreditadorModel.js" />
     <Content Include="Scripts\Models\AreasAtencionModel.js" />
     <Content Include="Scripts\Models\CatModel.js" />
     <Content Include="Scripts\Models\UnidadesResponsablesModel.js" />
