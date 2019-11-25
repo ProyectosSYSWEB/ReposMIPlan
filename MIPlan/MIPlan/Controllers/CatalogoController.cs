@@ -190,5 +190,18 @@ namespace MIPlan.Controllers
             }
         }
 
+        public JsonResult ObtenerUnidades()
+        {
+            try
+            {
+                var List = CursorDataContext.ObtenerUnidades();
+                return Json(List, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
     }
 }
