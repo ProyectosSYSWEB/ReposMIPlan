@@ -137,42 +137,66 @@ namespace MIPlan.Controllers
 
         public JsonResult ObtenerDependencias()
         {
+            List<Comun> list = new List<Comun>();
+            Resultado objResultado = new Resultado();
             try
             {
-                var List = CursorDataContext.ObtenerDependencias("LISSETH");
-                return Json(List, JsonRequestBehavior.AllowGet);
+                list = CursorDataContext.ObtenerDependencias("LISSETH");
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.LstComun = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception ex)
             {
-                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.LstComun = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
 
         public JsonResult ObtenerGridBasicos(string Dependencia)
         {
+            List<Basicos> list = new List<Basicos>();
+            Resultado objResultado = new Resultado();
             try
             {
-                var List = CursorDataContext.ObtenerBasicos();
-                return Json(List, JsonRequestBehavior.AllowGet);
+                list = CursorDataContext.ObtenerBasicos();
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.LstBasicos = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception ex)
             {
-                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.LstBasicos = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
 
         public JsonResult ObtenerGridAcreditaciones()
         {
+            List<Acreditaciones> list = new List<Acreditaciones>();
+            Resultado objResultado = new Resultado();
             try
             {
-                var List = CursorDataContext.ObtenerAcreditaciones();
-                return Json(List, JsonRequestBehavior.AllowGet);
+                list = CursorDataContext.ObtenerAcreditaciones();
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.ListAcreditaciones = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
                 //S
             }
             catch (Exception ex)
             {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.ListAcreditaciones = null;
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
@@ -277,13 +301,21 @@ namespace MIPlan.Controllers
 
         public JsonResult ObtenerGridAreasAtencion()
         {
+            List<AreasAtencion> list = new List<AreasAtencion>();
+            Resultado objResultado = new Resultado();
             try
-            {
-                var List = CursorDataContext.ObtenerAreasAtencion();
-                return Json(List, JsonRequestBehavior.AllowGet);                
+            {                
+                list = CursorDataContext.ObtenerAreasAtencion();
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.ListAreasAtencion = list;                
+                return Json(objResultado, JsonRequestBehavior.AllowGet);                
             }
             catch (Exception ex)
             {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.ListAreasAtencion = null;
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
@@ -325,14 +357,58 @@ namespace MIPlan.Controllers
 
         public JsonResult ObtenerUnidades()
         {
+            List<Unidades> list = new List<Unidades>();
+            Resultado objResultado = new Resultado();
             try
             {
-                var List = CursorDataContext.ObtenerUnidades();
-                return Json(List, JsonRequestBehavior.AllowGet);
+                list = CursorDataContext.ObtenerUnidades();
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.ListUnidades = list;                
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.ListUnidades = null;
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }        
+
+        public JsonResult GuardarBasicos(string tipo, string clave, string status, string descripcion, string valor, string orden)
+        {
+            Resultado objResultado = new Resultado();
+            try
+            {
+                //cambio
+                string Verificador = string.Empty;
+                Basicos objBasicos = new Basicos();
+                objBasicos.Tipo = tipo;
+                objBasicos.Clave = clave;
+                objBasicos.Status = status;
+                objBasicos.Descripcion = descripcion;
+                objBasicos.Valor = valor;
+                objBasicos.Orden = orden;
+                GuardarDataContext.GuardarBasicos(objBasicos, ref Verificador);
+                if(Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+                
+            }
+            catch(Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
 
