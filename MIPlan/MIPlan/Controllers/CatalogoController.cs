@@ -177,10 +177,11 @@ namespace MIPlan.Controllers
             }
         }
 
+
         public JsonResult ObtenerAcreditaciones(int IdAcreditacion)
         {
             string Verificador = string.Empty;
-            Resultado objResp = new Resultado();
+            ResultadoAcreditacion objResp = new ResultadoAcreditacion();
 
             try
             {
@@ -189,14 +190,14 @@ namespace MIPlan.Controllers
                 {
                     objResp.Error = false;
                     objResp.MensajeError = string.Empty;
-                    objResp.LstAcreditaciones = List;
+                    objResp.Resultado = List;
                     return Json(objResp, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
                     objResp.Error = true;
                     objResp.MensajeError = Verificador;
-                    objResp.LstAcreditaciones = null;
+                    objResp.Resultado = null;
                     return Json(objResp, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -204,10 +205,75 @@ namespace MIPlan.Controllers
             {
                 objResp.Error = true;
                 objResp.MensajeError = Verificador;
-                objResp.LstAcreditaciones = null;
+                objResp.Resultado = null;
                 return Json(objResp, JsonRequestBehavior.AllowGet);
             }
         }
+
+        public JsonResult ObtenerAreasAtencion(int IdAreaAtencion)
+        {
+            string Verificador = string.Empty;
+            ResultadoAreasAtencion objResp = new ResultadoAreasAtencion();
+
+            try
+            {
+                var List = DataContext.ObtenerDatosAreasAtencion(IdAreaAtencion, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResp.Error = false;
+                    objResp.MensajeError = string.Empty;
+                    objResp.Resultado = List;
+                    return Json(objResp, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    objResp.Error = true;
+                    objResp.MensajeError = Verificador;
+                    objResp.Resultado = null;
+                    return Json(objResp, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                objResp.Error = true;
+                objResp.MensajeError = Verificador;
+                objResp.Resultado = null;
+                return Json(objResp, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult ObtenerUnidadesResponsables(int IdUnidad)
+        {
+            string Verificador = string.Empty;
+            ResultadoUnidades objResp = new ResultadoUnidades();
+
+            try
+            {
+                var List = DataContext.ObtenerDatosUnidades(IdUnidad, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResp.Error = false;
+                    objResp.MensajeError = string.Empty;
+                    objResp.Resultado = List;
+                    return Json(objResp, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    objResp.Error = true;
+                    objResp.MensajeError = Verificador;
+                    objResp.Resultado = null;
+                    return Json(objResp, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                objResp.Error = true;
+                objResp.MensajeError = Verificador;
+                objResp.Resultado = null;
+                return Json(objResp, JsonRequestBehavior.AllowGet);
+            }
+        }
+
 
         public JsonResult ObtenerGridAreasAtencion()
         {
@@ -221,6 +287,41 @@ namespace MIPlan.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
+
+        public JsonResult ObtenerGridUnidadesResponsables()
+        {
+            string Verificador = string.Empty;
+
+            ResultadoUnidades objResp = new ResultadoUnidades();          
+            try
+            {
+                var List = CursorDataContext.ObtenerUnidadesResponsables();
+                if (Verificador == "0")
+                {
+                    objResp.Error = false;
+                    objResp.MensajeError = string.Empty;
+                    objResp.Resultado = List;
+                    return Json(objResp, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    objResp.Error = true;
+                    objResp.MensajeError = Verificador;
+                    objResp.Resultado = null;
+                    return Json(objResp, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                objResp.Error = true;
+                objResp.MensajeError = Verificador;
+                objResp.Resultado = null;
+                return Json(objResp, JsonRequestBehavior.AllowGet);
+            }
+
+
+        }
+
 
         public JsonResult ObtenerUnidades()
         {
