@@ -10,8 +10,34 @@
 <br />
 <br />
 
-<div  ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
-    
+
+
+<!-- pModal -->
+<div class="modal fade" id="UnidadesResponsables" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
+
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -34,7 +60,7 @@
             </div>
         </div>
     </div>
-   
+
     <!--
     <div class="row">
         <div class="form-group col-md-12">
@@ -53,7 +79,7 @@
         <div class="panel-heading">
             <div class="container">
                 <div class="col text-right">
-                    <button type="button" class="btn btn-sm btn-primary btn-create" data-toggle="modal" data-target="#InfViaticos" style="width:80px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                    <button type="button" class="btn btn-sm btn-primary btn-create" data-toggle="modal" data-target="#UnidadesResponsables" style="width:80px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
                     <br />
                 </div>
             </div>
@@ -105,7 +131,7 @@
                         </th>
                     </tr>
                 </tfoot>
-            </table> 
+            </table>
         </div>
     </div>
 </div>
