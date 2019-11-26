@@ -135,6 +135,7 @@
     <Compile Include="Controllers\CatalogoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\CursorDataContext.cs" />
+    <Compile Include="Data\DataContext.cs" />
     <Compile Include="Data\GuardarDataContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

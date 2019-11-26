@@ -138,13 +138,13 @@ namespace MIPlan.Controllers
         public JsonResult ObtenerDependencias()
         {
             List<Comun> list = new List<Comun>();
-            Resultado objResultado = new Resultado();
+            ResultadoComun objResultado = new ResultadoComun();
             try
             {
                 list = CursorDataContext.ObtenerDependencias("LISSETH");
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
-                objResultado.LstComun = list;
+                objResultado.Resultado = list;
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
 
             }
@@ -152,7 +152,7 @@ namespace MIPlan.Controllers
             {
                 objResultado.Error = true;
                 objResultado.MensajeError = ex.Message;
-                objResultado.LstComun = null;
+                objResultado.Resultado = null;
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
@@ -160,13 +160,13 @@ namespace MIPlan.Controllers
         public JsonResult ObtenerGridBasicos(string Dependencia)
         {
             List<Basicos> list = new List<Basicos>();
-            Resultado objResultado = new Resultado();
+            ResultadoBasicos objResultado = new ResultadoBasicos();
             try
             {
                 list = CursorDataContext.ObtenerBasicos();
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
-                objResultado.LstBasicos = list;
+                objResultado.Resultado = list;
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
 
             }
@@ -174,7 +174,7 @@ namespace MIPlan.Controllers
             {
                 objResultado.Error = true;
                 objResultado.MensajeError = ex.Message;
-                objResultado.LstBasicos = null;
+                objResultado.Resultado = null;
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
@@ -182,13 +182,13 @@ namespace MIPlan.Controllers
         public JsonResult ObtenerGridAcreditaciones()
         {
             List<Acreditaciones> list = new List<Acreditaciones>();
-            Resultado objResultado = new Resultado();
+            ResultadoAcreditacion objResultado = new ResultadoAcreditacion();
             try
             {
                 list = CursorDataContext.ObtenerAcreditaciones();
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
-                objResultado.ListAcreditaciones = list;
+                objResultado.Resultado = list;
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
                 //S
             }
@@ -196,7 +196,7 @@ namespace MIPlan.Controllers
             {
                 objResultado.Error = true;
                 objResultado.MensajeError = ex.Message;
-                objResultado.ListAcreditaciones = null;
+                objResultado.Resultado = null;
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
@@ -302,20 +302,20 @@ namespace MIPlan.Controllers
         public JsonResult ObtenerGridAreasAtencion()
         {
             List<AreasAtencion> list = new List<AreasAtencion>();
-            Resultado objResultado = new Resultado();
+            ResultadoAreasAtencion objResultado = new ResultadoAreasAtencion();
             try
             {                
                 list = CursorDataContext.ObtenerAreasAtencion();
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
-                objResultado.ListAreasAtencion = list;                
+                objResultado.Resultado = list;                
                 return Json(objResultado, JsonRequestBehavior.AllowGet);                
             }
             catch (Exception ex)
             {
                 objResultado.Error = true;
                 objResultado.MensajeError = ex.Message;
-                objResultado.ListAreasAtencion = null;
+                objResultado.Resultado = null;
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
@@ -358,20 +358,20 @@ namespace MIPlan.Controllers
         public JsonResult ObtenerUnidades()
         {
             List<Unidades> list = new List<Unidades>();
-            Resultado objResultado = new Resultado();
+            ResultadoUnidad objResultado = new ResultadoUnidad();
             try
             {
                 list = CursorDataContext.ObtenerUnidades();
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
-                objResultado.ListUnidades = list;                
+                objResultado.Resultado = list;                
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
                 objResultado.Error = true;
                 objResultado.MensajeError = ex.Message;
-                objResultado.ListUnidades = null;
+                objResultado.Resultado = null;
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }        

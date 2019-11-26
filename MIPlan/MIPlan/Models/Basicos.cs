@@ -17,4 +17,12 @@ namespace MIPlan.Models
         public string Orden { get; set; }
 
     }
+
+    public class ResultadoBasicos
+    {
+        public bool Error { get; set; }
+        public string MensajeError { get; set; }
+        public List<Basicos> Resultado { get; set; }
+
+    }
 }
