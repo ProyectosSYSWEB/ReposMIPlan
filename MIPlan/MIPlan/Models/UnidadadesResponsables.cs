@@ -15,7 +15,7 @@ namespace MIPlan.Models
         public string Coordinador { get; set; }
     }
 
-    public class ResultadoUnidades
+    public class ResultadoUnidades //Agregue 26-11-2019
     {
         public bool Error { get; set; }
         public string MensajeError { get; set; }
