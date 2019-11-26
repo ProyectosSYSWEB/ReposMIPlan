@@ -242,6 +242,7 @@ namespace MIPlan.Controllers
             Resultado objResultado = new Resultado();
             try
             {
+                //cambio
                 string Verificador = string.Empty;
                 Basicos objBasicos = new Basicos();
                 objBasicos.Tipo = tipo;
