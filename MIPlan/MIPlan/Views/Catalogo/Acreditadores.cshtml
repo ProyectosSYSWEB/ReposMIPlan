@@ -2,9 +2,6 @@
     ViewBag.Title = "Acreditadores";
     Layout = "~/Views/Shared/_LayoutContenido.cshtml";
 }
-
-<br />
-
 <h2>Acreditadores</h2>
 <br />
 <br />
@@ -30,7 +27,71 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col text-right">
-                    <button type="button" class="btn btn-sm btn-primary btn-create" data-toggle="modal" data-target="#InfViaticos" style="width:80px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                    <button type="button" class="btn btn-sm btn-primary btn-create" data-toggle="modal" data-target="#exampleModalCenter" style="width:80px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Acreditaciones</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label for="lblcarrera">Dependencia:</label>
+                                            <select class="form-control" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia">
+                                                <option value="">--Elegir Dependencia--</option>
+                                            </select>
+                                        </div>
+                                       </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="lblcarrera">Carrera:</label>
+                                            <select class="form-control" name="cmbCarrera" ng-change="ctrl.ObtenerCarrera()" ng-model="ctrl.Carrera">
+                                                <option value="">--Elegir Carrera--</option>
+                                            </select>
+                                        </div>
+                                    
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label for="lblorganismo">Organismo:</label>
+                                            <select class="form-control" name="cmbOrganismo" ng-change="ctrl.ObtenerOrganismo()" ng-model="ctrl.Organismo">
+                                                <option value="">--Elegir Organismo--</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="lblfechainicio">Fecha Inicio:</label>
+                                            <input class="form-control" name="txtFechaInicio" type="date" ng-model="ctrl.cve_fecha_comprobacion" />
+                                        </div>
+                                        </div>
+                                     <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label for="lblfechafin">Fecha Fin:</label>
+                                            <input class="form-control" name="txtFechaFin" type="date" ng-model="ctrl.cve_fecha_comprobacion1" />
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="lblStatus">Status:</label>
+                                            <select class="form-control" name="cmbStatus" ng-change="ctrl.ObtenerStatus()" ng-model="ctrl.Status">
+                                                <option value="">--Elegir Status</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
                     <br />
                 </div>
             </div>
@@ -91,6 +152,7 @@
             </tfoot>
         </table>
     </div>
+</div>
 </div>
 <script src="~/Scripts/angular.min.js"></script>
 <script src="~/Scripts/angular.js"></script>
