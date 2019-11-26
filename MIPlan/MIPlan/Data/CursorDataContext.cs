@@ -163,7 +163,7 @@ namespace MIPlan.Data
             }
 
         }
-        public static List<AreasAtencion> ObtenerUnidades()
+        public static List<Unidades> ObtenerUnidades()
         {
             OracleCommand cmd = null;
             ExeProcedimiento exeProc = new ExeProcedimiento();
@@ -172,19 +172,19 @@ namespace MIPlan.Data
             {
                 OracleDataReader dr = null;
                 cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Unidades", ref dr);
-                List<AreasAtencion> listarAreasAtencion = new List<AreasAtencion>();
+                List<Unidades> listarUnidades = new List<Unidades>();
                 while (dr.Read())
                 {
-                    AreasAtencion objAreasAtencion = new AreasAtencion();
-                    objAreasAtencion.Id = Convert.ToInt32(dr[0]);
-                    objAreasAtencion.Dependencia = Convert.ToString(dr[1]);
-                    objAreasAtencion.Clave = Convert.ToString(dr[2]);
-                    objAreasAtencion.Descripcion = Convert.ToString(dr[3]);
-                    objAreasAtencion.Status = Convert.ToString(dr[4]);
+                    Unidades objUnidades = new Unidades();
+                    objUnidades.Id = Convert.ToInt32(dr[0]);
+                    objUnidades.Dependencia = Convert.ToString(dr[1]);
+                    objUnidades.Clave = Convert.ToString(dr[2]);
+                    objUnidades.Descripcion = Convert.ToString(dr[3]);
+                    objUnidades.Status = Convert.ToString(dr[4]);
 
-                    listarAreasAtencion.Add(objAreasAtencion);
+                    listarUnidades.Add(objUnidades);
                 }
-                return listarAreasAtencion;
+                return listarUnidades;
 
             }
             catch (Exception ex)
@@ -197,7 +197,42 @@ namespace MIPlan.Data
                 exeProc.LimpiarOracleCommand(ref cmd);
             }
 
-        }        
+        }
+        public static List<UnidadesResponsables> ObtenerUnidadesResponsables()
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+
+            try
+            {
+                OracleDataReader dr = null;
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Unidades_Responsables", ref dr);
+                List<UnidadesResponsables> listarUnidades = new List<UnidadesResponsables>();
+                while (dr.Read())
+                {
+                    UnidadesResponsables objrUnidades = new UnidadesResponsables();
+                    objrUnidades.Id = Convert.ToInt32(dr[0]);
+                    objrUnidades.Dependecia = Convert.ToString(dr[1]);
+                    objrUnidades.Clave = Convert.ToString(dr[2]);
+                    objrUnidades.Descripcion = Convert.ToString(dr[3]);
+                    objrUnidades.Status = Convert.ToString(dr[4]);
+                    objrUnidades.Coordinador = Convert.ToString(dr[4]);
+                    listarUnidades.Add(objrUnidades);
+                }
+                return listarUnidades;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
+        }
 
     }
 }

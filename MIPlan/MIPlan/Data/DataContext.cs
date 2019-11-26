@@ -44,6 +44,72 @@ namespace MIPlan.Data
             return list;
             //return registroAgregado;
         }
+        public static List<AreasAtencion> ObtenerDatosAreasAtencion(int Id, ref string Verificador)
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+            List<AreasAtencion> list = new List<AreasAtencion>();
+            AreasAtencion objDatosAreasAtencion = new AreasAtencion();
+            try
+            {
+
+                OracleDataReader dr = null;
+                string[] Parametros = { "P_ID_ACREDITADOR" };
+                object[] Valores = { Id };
+                string[] ParametrosOut = { "P_DEPENDENCIA", "P_CLAVE", "P_DESCRIPCION", "P_STATUS", "P_CATEGORIA", "P_BANDERA" };
+                cmd = exeProc.GenerarOracleCommand("OBT_AREAS_ATENCION", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+                objDatosAreasAtencion.Dependencia = Convert.ToString(cmd.Parameters["P_DEPENDENCIA"].Value);
+                objDatosAreasAtencion.Clave = Convert.ToString(cmd.Parameters["P_CLAVE"].Value);
+                objDatosAreasAtencion.Descripcion = Convert.ToString(cmd.Parameters["P_DESCRIPCION"].Value);
+                objDatosAreasAtencion.Status = Convert.ToString(cmd.Parameters["P_STATUS"].Value);
+                objDatosAreasAtencion.Categoria = Convert.ToString(cmd.Parameters["P_CATEGORIA"].Value);
+                list.Add(objDatosAreasAtencion);
+
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+            return list;
+            //return registroAgregado;
+        }
+        public static List<UnidadesResponsables> ObtenerDatosUnidades(int Id, ref string Verificador)
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+            List<UnidadesResponsables> list = new List<UnidadesResponsables>();
+            UnidadesResponsables objDatosUnidadades = new UnidadesResponsables();
+            try
+            {
+
+                OracleDataReader dr = null;
+                string[] Parametros = { "P_ID_ACREDITADOR" };
+                object[] Valores = { Id };
+                string[] ParametrosOut = { "P_DEPENDENCIA", "P_CLAVE", "P_DESCRIPCION", "P_STATUS", "P_COORDINADOR", "P_BANDERA" };
+                cmd = exeProc.GenerarOracleCommand("OBT_UNIDADES_RESPONSABLES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+                objDatosUnidadades.Dependecia = Convert.ToString(cmd.Parameters["P_DEPENDENCIA"].Value);
+                objDatosUnidadades.Clave = Convert.ToString(cmd.Parameters["P_CLAVE"].Value);
+                objDatosUnidadades.Descripcion = Convert.ToString(cmd.Parameters["P_DESCRIPCION"].Value);
+                objDatosUnidadades.Status = Convert.ToString(cmd.Parameters["P_STATUS"].Value);
+                objDatosUnidadades.Coordinador = Convert.ToString(cmd.Parameters["P_COORDINADOR"].Value);
+                list.Add(objDatosUnidadades);
+
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+            return list;
+            //return registroAgregado;
+        }
 
     }
 }
