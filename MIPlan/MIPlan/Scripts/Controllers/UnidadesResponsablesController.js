@@ -6,12 +6,12 @@
 
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
         var self = this;
-        self.buscar = '';
-        
+        self.buscar = '';        
+
 
         this.Inicio = function () {
             CargarCombos();
-            CargarGrid(); 
+            CargarGrid();
         };
 
         var CargarCombos = function () {
@@ -40,7 +40,7 @@
             catalogoContext.ObtenerUnidades(self.cve_dependencia, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.unidades = catalogoContext.unidadesRlst;   
+                        self.unidades = catalogoContext.unidadesRlst;
                         console.log(self.unidades);
                         break;
                     case "notgp":
@@ -53,11 +53,31 @@
             });
         };
 
-        var cargarModal = function (Clave) {
-            catalogoContext.ObtenerUnidad(Clave, function (resp) {
+        var cargarModal = function (Idunidad) {
+            catalogoContext.ObtenerUnidad(Idunidad, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.unidad = catalogoContext.unidadadRlst;                        
+                        self.unidad = catalogoContext.unidadadRlst;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+
+
+        var UnidadUpdate = function () {            
+            
+            console.log("ID Update", self.unidad[0].Clave);
+            catalogoContext.UnidadResponsableUpdate(self.unidad[0].Clave, self.unidad[0].Dependencia, self.unidad[0].Clave, self.unidad[0].Descripcion, self.unidad[0].Status, self.unidad[0].Coordinador, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
+                        console.log("Updated!", self.unidadadUpdateRlst);
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -75,8 +95,15 @@
             alert(self.cve_dependencia);
         };
 
-        this.Update = function (Clave) {            
-            cargarModal(Clave);
+        this.UnidadResponsableUpdate = function () {
+            UnidadUpdate();
+            
+        }
+
+        this.Update = function (Indice) {
+            Indice = Indice + 1;
+            console.log(Indice);
+            cargarModal(Indice);
             
         };
 

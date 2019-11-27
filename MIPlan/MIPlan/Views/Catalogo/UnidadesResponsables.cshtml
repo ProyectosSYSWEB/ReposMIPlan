@@ -26,22 +26,20 @@
                 <div class="modal-body">
                                                                 
                     <div class="container-fluid">
-                        
-                        <div ng-repeat="item in ctrl.unidad">
-
+                                    
 
                             <!-- <div class="row justify-content-center">
-                                <label for="formGroupExampleInput" class="text-primary">Dependencia</label>
-                            </div>
-                            <div class="row justify-content-center">
-                                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="item.Dependencia" placeholder="Dependencia">
-                            </div>
-                             -->
+        <label for="formGroupExampleInput" class="text-primary">Dependencia</label>
+    </div>
+    <div class="row justify-content-center">
+        <input type="text" class="form-control" id="formGroupExampleInput" ng-model="item.Dependencia" placeholder="Dependencia">
+    </div>
+     -->
                             <div class="row justify-content-center">
                                 <label for="lblDependencia" class="text-primary">Dependencia:</label>
                             </div>
                             <div class="row justify-content-center">
-                                <select class="form-control" name="cmbDependencia" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="item.Dependencia">
+                                <select class="form-control" name="cmbDependencia" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.unidad[0].Dependencia">
                                     <option selected value="0">--Seleccionar Dependencia--</option>
                                 </select>
                             </div>
@@ -50,45 +48,44 @@
                                 <label for="formGroupExampleInput" class="text-primary">Clave</label>
                             </div>
                             <div class="row justify-content-center">
-                                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="item.Clave" placeholder="Clave">
+                                <input type="text" class="form-control" id="formGroupExampleInput"  ng-model="ctrl.unidad[0].Clave" placeholder="Clave">
                             </div>
+
                             <div class="row justify-content-center">
                                 <label for="formGroupExampleInput" class="text-primary">Descripción</label>
                             </div>
                             <div class="row justify-content-center">
-                                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="item.Descripcion" placeholder="Descripción">
-                            </div>
+                                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="ctrl.unidad[0].Descripcion" placeholder="Descripción">
+                            </div>                         
                             <div class="row justify-content-center">
                                 <label for="formGroupExampleInput" class="text-primary">Estatus</label>
                             </div>
                             <!--
+    <div class="row justify-content-center">
+        <input type="text" class="form-control" id="formGroupExampleInput" ng-model="item.Status" placeholder="Estatus">
+    </div>
+    -->
                             <div class="row justify-content-center">
-                                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="item.Status" placeholder="Estatus">
-                            </div>
-                            -->
-                            <div class="row justify-content-center">
-                                <select class="form-control" name="cmbDependencia_status" ng-model="item.Status">
-                                    <option selected value="A">A = Alta</option>
-                                    <option selected value="B">B = Baja</option>
+                                <select class="form-control" name="cmbDependencia_status" ng-model="ctrl.unidad[0].Status">
+                                    <option selected value="A">Alta</option>
+                                    <option selected value="B">Baja</option>
                                 </select>
 
                             </div>
 
-                                <div class="row justify-content-center">
-                                    <label for="formGroupExampleInput" class="text-primary">Coordinador</label>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <input type="text" class="form-control" id="formGroupExampleInput" ng-model="item.Coordinador" placeholder="Coordinador">
-                                </div>
-
+                            <div class="row justify-content-center">
+                                <label for="formGroupExampleInput" class="text-primary">Coordinador</label>
                             </div>
-
+                            <div class="row justify-content-center">
+                                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="ctrl.unidad[0].Coordinador" placeholder="Coordinador">
+                            </div>
+                    
                         </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" ng-click="ctrl.Inicio()" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="ctrl.UnidadResponsableUpdate()">Save changes</button>
                 </div>
             </div>
         </div>
@@ -168,8 +165,7 @@
 
                     <td style="text-align:center">
                         <!--data-toggle="modal" data-target="#UnidadesResponsables"-->
-                        <button type="button" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#UnidadesResponsables" ng-click="ctrl.Update(001)">
-                            {{i.Clave}}
+                        <button type="button" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#UnidadesResponsables" ng-click="ctrl.Update($index)">                            
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </button>
 
