@@ -201,7 +201,6 @@ namespace MIPlan.Controllers
             }
         }
 
-
         public JsonResult ObtenerAcreditaciones(int IdAcreditacion)
         {
             string Verificador = string.Empty;
@@ -354,7 +353,6 @@ namespace MIPlan.Controllers
 
         }
 
-
         public JsonResult ObtenerUnidades()
         {
             List<Unidades> list = new List<Unidades>();
@@ -374,7 +372,71 @@ namespace MIPlan.Controllers
                 objResultado.Resultado = null;
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
-        }        
+        }
+
+
+        /*METODOS DE LUIS*/
+        public JsonResult ObtenerCarreras(string Dependencia)
+        {
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            try
+            {
+                list = CursorDataContext.ObtenerCarreras(Dependencia);
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult ObtenerOrganismos()
+        {
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            try
+            {
+                list = CursorDataContext.ObtenerOrganismos();
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult ObtenerStatusAcreditaciones(string Dependencia)
+        {
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            try
+            {
+                list = CursorDataContext.ObtenerCarreras(Dependencia);
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+        /*FIN METODOS DE LUIS*/
 
         public JsonResult GuardarBasicos(string tipo, string clave, string status, string descripcion, string valor, string orden)
         {
