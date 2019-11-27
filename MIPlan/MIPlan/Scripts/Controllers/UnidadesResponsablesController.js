@@ -39,7 +39,8 @@
             catalogoContext.ObtenerUnidades(self.cve_dependencia, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.unidades = catalogoContext.unidadesRlst;
+                        self.unidades = catalogoContext.unidadesRlst;   
+                        console.log(self.unidades);
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -51,12 +52,12 @@
             });
         };
 
-        var IS = function (Indice) {
+        var cargarModal = function (Indice) {
             catalogoContext.ObtenerUnidad(Indice, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         self.unidad = catalogoContext.unidadadRlst;
-                        console.log("funioaidns", self.unidad);
+                        console.log(self.unidad);
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -76,7 +77,7 @@
 
         this.Update = function (Indice) {
             Indice = Indice + 1;
-            IS(Indice);
+            cargarModal(Indice);
         };
 
 

@@ -17,19 +17,53 @@
     <div class="modal fade" id="UnidadesResponsables" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header btn-primary">
                     <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <label for="formGroupExampleInput">Example label</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
-                    <label for="formGroupExampleInput">Example label</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
-                    <label for="formGroupExampleInput">Example label</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+                                                                
+                    <div class="container-fluid">
+                        
+                        <div ng-repeat="item in ctrl.unidad">
+                            <div class="row justify-content-center">
+                                <label for="formGroupExampleInput" class="text-primary">Dependencia</label>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="item.Dependencia" placeholder="Dependencia">
+                            </div>
+                            <div class="row justify-content-center">
+                                <label for="formGroupExampleInput" class="text-primary">Clave</label>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="item.Clave" placeholder="Clave">
+                            </div>
+                            <div class="row justify-content-center">
+                                <label for="formGroupExampleInput" class="text-primary">Descripción</label>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="item.Descripcion" placeholder="Descripción">
+                            </div>
+                            <div class="row justify-content-center">
+                                <label for="formGroupExampleInput" class="text-primary">Estatus</label>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="item.Status" placeholder="Estatus">
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <label for="formGroupExampleInput" class="text-primary">Coordinador</label>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="item.Coordinador" placeholder="Coordinador">
+                            </div>
+
+                        </div>
+                        
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -78,7 +112,7 @@
 
         -->
 
-<h2 ng-model="ctrl.unidad.Descripcion">pruebaaa</h2>
+
 
     <div class="panel panel-default panel-table">
         @*<h3 class="panel-title input-group-text">Viaticos Asignados</h3><input type="button" class="btn btn-sm btn-primary btn-create" data-toggle="modal" data-target="#InfViaticos" />Nuevo<i class="fa fa-plus" aria-hidden="true"></i>*@
@@ -98,6 +132,7 @@
                         <th scope="col">Clave</th>
                         <th scope="col">Descripcion</th>
                         <th scope="col">Estatus</th>
+                        <th scope="col">Coordinador</th>
 
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
@@ -108,10 +143,11 @@
                         <td>{{i.Clave}}</td>
                         <td>{{i.Descripcion}}</td>
                         <td>{{i.Status}}</td>
+                        <td>{{i.Coordinador}}</td>
 
 
                         <td style="text-align:center">                     <!--data-toggle="modal" data-target="#UnidadesResponsables"-->
-                            <button type="button" class="btn" style="width:50px"  ng-click="ctrl.Update($index)">
+                            <button type="button" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#UnidadesResponsables" ng-click="ctrl.Update($index)">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
 
