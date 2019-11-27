@@ -63,6 +63,7 @@ namespace MIPlan.Data
                 objDatosAreasAtencion.Descripcion = Convert.ToString(cmd.Parameters["P_DESCRIPCION"].Value);
                 objDatosAreasAtencion.Status = Convert.ToString(cmd.Parameters["P_STATUS"].Value);
                 objDatosAreasAtencion.Categoria = Convert.ToString(cmd.Parameters["P_CATEGORIA"].Value);
+                objDatosAreasAtencion.Id = Id;
                 list.Add(objDatosAreasAtencion);
 
             }
@@ -109,7 +110,7 @@ namespace MIPlan.Data
             }
             return list;
             //return registroAgregado;
-        }
+        }       
 
     }
 }
