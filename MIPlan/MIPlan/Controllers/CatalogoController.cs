@@ -374,8 +374,8 @@ namespace MIPlan.Controllers
             }
         }
 
-
-        /*METODOS DE LUIS*/
+        
+        /*METODOS DE LUIS */
         public JsonResult ObtenerCarreras(string Dependencia)
         {
             List<Comun> list = new List<Comun>();
