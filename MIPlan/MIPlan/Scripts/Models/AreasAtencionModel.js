@@ -12,11 +12,13 @@
                 cache: false,
                 url: urlServer + 'Catalogo/ObtenerDependencias',
                 success: function (resp) {
-                    for (var i = 0; i < resp.length; i++) {
-                        self.dependenciaslst.push({ Id: resp[i].Id, Descripcion: resp[i].Descripcion });
+                    for (var i = 0; i < resp.Resultado.length; i++) {
+                        self.dependenciaslst.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion });
                     }
                     if (callBackResult != undefined) {
                         callBackResult({ ressult: 'tgp', message: null });
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
                     }
                 },
                 error: function (ex) {
@@ -37,8 +39,8 @@
                 url: urlServer + 'Catalogo/ObtenerGridAreasAtencion',
                 data: { Dependencia },
                 success: function (resp) {
-                    for (var i = 0; i < resp.length; i++) {
-                        self.areaslst.push({ Id: resp[i].Id, Dependencia: resp[i].Dependencia, Cve: resp[i].Clave, Desc: resp[i].Descripcion, Estatus: resp[i].Status });
+                    for (var i = 0; i < resp.Resultado.length; i++) {
+                        self.areaslst.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependencia, Cve: resp.Resultado[i].Clave, Desc: resp.Resultado[i].Descripcion, Estatus: resp.Resultado[i].Status });
                     }
                     if (callBackResult !== undefined) {
                         callBackResult({ ressult: 'tgp', message: null });
