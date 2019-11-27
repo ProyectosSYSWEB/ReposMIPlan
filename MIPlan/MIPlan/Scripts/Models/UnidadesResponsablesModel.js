@@ -67,15 +67,15 @@
 
     },
 /********************************************************************************************************************************************************/
-    ObtenerUnidad: function (IdUnidad, callBackResult) {
+    ObtenerUnidad: function (Clave, callBackResult) {
         var self = this;        
         self.unidadadRlst.length = 0;
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
-                url: urlServer + 'Catalogo/ObtenerUnidadesResponsables',  
-                data: { IdUnidad },
+                url: urlServer + 'Catalogo/ObtenerUnidadesResponsables',
+                data: { Clave },
                 success: function (resp) {
                     if (resp.Error == false) { 
                         for (var i = 0; i < resp.Resultado.length; i++) {

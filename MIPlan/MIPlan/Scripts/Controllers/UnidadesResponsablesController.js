@@ -6,6 +6,7 @@
 
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
         var self = this;
+        self.buscar = '';
         
 
         this.Inicio = function () {
@@ -52,12 +53,11 @@
             });
         };
 
-        var cargarModal = function (Indice) {
-            catalogoContext.ObtenerUnidad(Indice, function (resp) {
+        var cargarModal = function (Clave) {
+            catalogoContext.ObtenerUnidad(Clave, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.unidad = catalogoContext.unidadadRlst;
-                        console.log(self.unidad);
+                        self.unidad = catalogoContext.unidadadRlst;                        
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -75,9 +75,9 @@
             alert(self.cve_dependencia);
         };
 
-        this.Update = function (Indice) {
-            Indice = Indice + 1;
-            cargarModal(Indice);
+        this.Update = function (Clave) {            
+            cargarModal(Clave);
+            
         };
 
 
