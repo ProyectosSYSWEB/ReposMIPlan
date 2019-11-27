@@ -13,7 +13,7 @@
         </div>
         <div class="form-inline col-md-1 col-xl-9">
             <select class="form-control" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia">
-                <option value="0">--Seleccionar Dependencia--</option>
+                <option value="">--Seleccionar Dependencia--</option>
             </select>
         </div>
     </div>
@@ -75,6 +75,7 @@
                                                 <input class="form-control" name="txtFechaInicio" type="date" ng-model="ctrl.cve_fecha_comprobacion" />
                                             </div>
                                         </div>
+                                    </br>
                                         <div class="row">
                                             <div class="form-inline col-md-6">
                                                 <label for="lblfechafin">Fecha Fin:</label>
@@ -132,7 +133,7 @@
                     <td>{{i.Obs}}</td>
 
                     <td style="text-align:center">
-                        <button type="button" class="btn" style="width:50px">
+                        <button type="button" class="btn" ng-click="ctrl.ObtDatos(i.Id)" style="width:50px">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </button>
 
