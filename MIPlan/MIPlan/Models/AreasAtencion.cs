@@ -12,5 +12,14 @@ namespace MIPlan.Models
         public string Clave { get; set; }
         public string Descripcion { get; set; }
         public string Status { get; set; }
+        public string Categoria { get; set; }
+    }
+
+    public class ResultadoAreasAtencion
+    {
+        public bool Error { get; set; }
+        public string MensajeError { get; set; }
+        public List<AreasAtencion> Resultado { get; set; }
+
     }
 }

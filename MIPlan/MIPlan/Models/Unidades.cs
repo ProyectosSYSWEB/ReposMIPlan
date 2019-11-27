@@ -14,4 +14,12 @@ namespace MIPlan.Models
         public string Status { get; set; }
         public string Coordinador { get; set; }
     }
+
+    public class ResultadoUnidad
+    {
+        public bool Error { get; set; }
+        public string MensajeError { get; set; }
+        public List<Unidades> Resultado { get; set; }
+
+    }
 }

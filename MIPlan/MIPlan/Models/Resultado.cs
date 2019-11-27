@@ -9,6 +9,8 @@ namespace MIPlan.Models
     {
         public bool Error { get; set; }
         public string MensajeError { get; set; }
-        public List<Comun> LstComun {get; set;}
+        //public List<Comun> LstComun {get; set;}
+        //public List<Acreditaciones> LstAcreditaciones { get; set; }
+
     }
 }

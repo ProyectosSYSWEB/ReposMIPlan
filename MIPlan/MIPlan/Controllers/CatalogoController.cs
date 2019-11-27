@@ -29,6 +29,12 @@ namespace MIPlan.Controllers
         {
             return View();
         }
+
+        public ActionResult UnidadesResponsables()
+        {
+            return View();
+        }
+
         public ActionResult AcreditadoresRegistro()
         {
             return View();
@@ -131,56 +137,278 @@ namespace MIPlan.Controllers
 
         public JsonResult ObtenerDependencias()
         {
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
             try
             {
-                var List = CursorDataContext.ObtenerDependencias("LISSETH");
-                return Json(List, JsonRequestBehavior.AllowGet);
+                list = CursorDataContext.ObtenerDependencias("LISSETH");
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception ex)
             {
-                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
 
         public JsonResult ObtenerGridBasicos(string Dependencia)
         {
+            List<Basicos> list = new List<Basicos>();
+            ResultadoBasicos objResultado = new ResultadoBasicos();
             try
             {
-                var List = CursorDataContext.ObtenerBasicos();
-                return Json(List, JsonRequestBehavior.AllowGet);
+                list = CursorDataContext.ObtenerBasicos();
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception ex)
             {
-                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
 
         public JsonResult ObtenerGridAcreditaciones()
         {
+            List<Acreditaciones> list = new List<Acreditaciones>();
+            ResultadoAcreditacion objResultado = new ResultadoAcreditacion();
             try
             {
-                var List = CursorDataContext.ObtenerAcreditaciones();
-                return Json(List, JsonRequestBehavior.AllowGet);
+                list = CursorDataContext.ObtenerAcreditaciones();
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
                 //S
             }
             catch (Exception ex)
             {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
 
-        public JsonResult ObtenerGridAreasAtencion()
+
+        public JsonResult ObtenerAcreditaciones(int IdAcreditacion)
         {
+            string Verificador = string.Empty;
+            ResultadoAcreditacion objResp = new ResultadoAcreditacion();
+
             try
             {
-                var List = CursorDataContext.ObtenerAreasAtencion();
-                return Json(List, JsonRequestBehavior.AllowGet);                
+                var List = DataContext.ObtenerDatosAcreditaciones(IdAcreditacion, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResp.Error = false;
+                    objResp.MensajeError = string.Empty;
+                    objResp.Resultado = List;
+                    return Json(objResp, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    objResp.Error = true;
+                    objResp.MensajeError = Verificador;
+                    objResp.Resultado = null;
+                    return Json(objResp, JsonRequestBehavior.AllowGet);
+                }
             }
             catch (Exception ex)
             {
+                objResp.Error = true;
+                objResp.MensajeError = Verificador;
+                objResp.Resultado = null;
+                return Json(objResp, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult ObtenerAreasAtencion(int IdAreaAtencion)
+        {
+            string Verificador = string.Empty;
+            ResultadoAreasAtencion objResp = new ResultadoAreasAtencion();
+
+            try
+            {
+                var List = DataContext.ObtenerDatosAreasAtencion(IdAreaAtencion, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResp.Error = false;
+                    objResp.MensajeError = string.Empty;
+                    objResp.Resultado = List;
+                    return Json(objResp, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    objResp.Error = true;
+                    objResp.MensajeError = Verificador;
+                    objResp.Resultado = null;
+                    return Json(objResp, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                objResp.Error = true;
+                objResp.MensajeError = Verificador;
+                objResp.Resultado = null;
+                return Json(objResp, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult ObtenerUnidadesResponsables(int IdUnidad)
+        {
+            string Verificador = string.Empty;
+            ResultadoUnidades objResp = new ResultadoUnidades();
+
+            try
+            {
+                var List = DataContext.ObtenerDatosUnidades(IdUnidad, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResp.Error = false;
+                    objResp.MensajeError = string.Empty;
+                    objResp.Resultado = List;
+                    return Json(objResp, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    objResp.Error = true;
+                    objResp.MensajeError = Verificador;
+                    objResp.Resultado = null;
+                    return Json(objResp, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                objResp.Error = true;
+                objResp.MensajeError = Verificador;
+                objResp.Resultado = null;
+                return Json(objResp, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public JsonResult ObtenerGridAreasAtencion()
+        {
+            List<AreasAtencion> list = new List<AreasAtencion>();
+            ResultadoAreasAtencion objResultado = new ResultadoAreasAtencion();
+            try
+            {                
+                list = CursorDataContext.ObtenerAreasAtencion();
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;                
+                return Json(objResultado, JsonRequestBehavior.AllowGet);                
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult ObtenerGridUnidadesResponsables()
+        {
+            string Verificador = string.Empty;
+
+            ResultadoUnidades objResp = new ResultadoUnidades();          
+            try
+            {
+                var List = CursorDataContext.ObtenerUnidadesResponsables();
+                if (Verificador == "0")
+                {
+                    objResp.Error = false;
+                    objResp.MensajeError = string.Empty;
+                    objResp.Resultado = List;
+                    return Json(objResp, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    objResp.Error = true;
+                    objResp.MensajeError = Verificador;
+                    objResp.Resultado = null;
+                    return Json(objResp, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                objResp.Error = true;
+                objResp.MensajeError = Verificador;
+                objResp.Resultado = null;
+                return Json(objResp, JsonRequestBehavior.AllowGet);
+            }
+
+
+        }
+
+
+        public JsonResult ObtenerUnidades()
+        {
+            List<Unidades> list = new List<Unidades>();
+            ResultadoUnidad objResultado = new ResultadoUnidad();
+            try
+            {
+                list = CursorDataContext.ObtenerUnidades();
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;                
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }        
+
+        public JsonResult GuardarBasicos(string tipo, string clave, string status, string descripcion, string valor, string orden)
+        {
+            Resultado objResultado = new Resultado();
+            try
+            {
+                //cambio
+                string Verificador = string.Empty;
+                Basicos objBasicos = new Basicos();
+                objBasicos.Tipo = tipo;
+                objBasicos.Clave = clave;
+                objBasicos.Status = status;
+                objBasicos.Descripcion = descripcion;
+                objBasicos.Valor = valor;
+                objBasicos.Orden = orden;
+                GuardarDataContext.GuardarBasicos(objBasicos, ref Verificador);
+                if(Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+                
+            }
+            catch(Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
 

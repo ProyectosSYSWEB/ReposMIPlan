@@ -1,12 +1,12 @@
-﻿// <reference path="../Models/AreasAtencionModel.js"/>
+﻿
+// <reference path="../Models/CatModel.js"/>
 
 (function () {
     var app = angular.module('MIPlanWeb', []);
 
-
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
         var self = this;
-        var abc = "";
+        
 
         this.Inicio = function () {
             CargarCombos();
@@ -23,6 +23,7 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.dependencias = catalogoContext.dependenciaslst;
+                        self.cve_dependencia = catalogoContext.dependenciaslst[0].Id;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -35,10 +36,10 @@
         };
 
         var CargarGrid = function () {
-            catalogoContext.ObtenerAreasAtencion(self.cve_dependencia, function (resp) {
+            catalogoContext.ObtenerUnidades(self.cve_dependencia, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.areasatencion = catalogoContext.areaslst;
+                        self.unidades = catalogoContext.unidadesRLst;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -65,3 +66,4 @@
 
 
 })();
+

@@ -16,4 +16,12 @@ namespace MIPlan.Models
         
 
     }
+
+    public class ResultadoComun
+    {
+        public bool Error { get; set; }
+        public string MensajeError { get; set; }
+        public List<Comun> Resultado { get; set;}
+
+    }
 }
