@@ -133,7 +133,7 @@ namespace MIPlan.Controllers
         //    List<Comun> list = new List<Comun>();
         //    list = CursorDataContext.ObtenerBasicos();
         //    return Json(list, JsonRequestBehavior.AllowGet);
-        //}
+        //}s
 
         public JsonResult ObtenerDependencias()
         {
