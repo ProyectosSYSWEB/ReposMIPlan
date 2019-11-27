@@ -111,5 +111,40 @@ namespace MIPlan.Data
             //return registroAgregado;
         }
 
+        public static List<Unidades> ObtenerUnidades(int Id, ref string Verificador)
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+            List<Unidades> list = new List<Unidades>();
+            Unidades objUnidadades = new Unidades();
+            try
+            {
+
+                OracleDataReader dr = null;
+                string[] Parametros = { "P_ID" };
+                object[] Valores = { Id };
+                string[] ParametrosOut = { "P_DEPENDENCIA", "P_CLAVE", "P_DESCRIPCION", "P_STATUS", "P_COORDINADOR", "P_BANDERA" };
+                cmd = exeProc.GenerarOracleCommand("OBT_UNIDADES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+                objUnidadades.Dependencia = Convert.ToString(cmd.Parameters["P_DEPENDENCIA"].Value);
+                objUnidadades.Clave = Convert.ToString(cmd.Parameters["P_CLAVE"].Value);
+                objUnidadades.Descripcion = Convert.ToString(cmd.Parameters["P_DESCRIPCION"].Value);
+                objUnidadades.Status = Convert.ToString(cmd.Parameters["P_STATUS"].Value);
+                objUnidadades.Coordinador = Convert.ToString(cmd.Parameters["P_COORDINADOR"].Value);
+                objUnidadades.Id = Id;
+                list.Add(objUnidadades);
+
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+            return list;
+            //return registroAgregado;
+        }
+
     }
 }

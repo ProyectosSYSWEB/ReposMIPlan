@@ -412,5 +412,27 @@ namespace MIPlan.Controllers
             }
         }
 
+        public JsonResult ObtenerDatosUnidades(int id)
+        {
+            List<Unidades> list = new List<Unidades>();
+            ResultadoUnidad objResultado = new ResultadoUnidad();
+            string Verificador = string.Empty;
+            try
+            {
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                list = DataContext.ObtenerUnidades(id, ref Verificador);
+                objResultado.Resultado = list;                
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
     }
 }
