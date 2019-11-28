@@ -114,19 +114,42 @@
         };       
 
             this.UnidadResponsableCreate = function () { UnidadCreate(); }
-/********************************************************************************************************************************************************/
+/********************************************************************************************************************************************************/            
+        var eliminarUnidadResponsable = function (Idunidad) {
+            catalogoContext.eliminarUnidad(Idunidad, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        console.log("Controller Eliminar ejecutado");
+                        CargarGrid();
+                        self.unidad = null;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        console.log("Error Controller");
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+     
+        this.EliminnarUR = function (Indice) { 
+            var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
+            if (opcion == true) {
+                eliminarUnidadResponsable(Indice);                                      
+                alert("¡Se ha elimnado con exito!");
+            } else {
+                alert("No se ha eliminado el registro");
+            }
+        };
+/*******************************************************************************************************************************************************/
 
         this.ValorDependencia = function () {
             alert(self.cve_dependencia);
         };
- 
-        this.BorrarBasico = function (Indice) {
-            alert(Indice);
-        };
-
+/*******************************************************************************************************************************************************/
+      
     }]);
-
-
-
 })();
 

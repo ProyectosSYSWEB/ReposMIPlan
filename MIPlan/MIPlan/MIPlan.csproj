@@ -215,6 +215,7 @@
     <Content Include="Scripts\Controllers\AcreditadorController.js" />
     <Content Include="Scripts\Controllers\AreasAtencionController.js" />
     <Content Include="Scripts\Controllers\CatController.js" />
+    <Content Include="Scripts\Controllers\PeriodosController.js" />
     <Content Include="Scripts\Controllers\UnidadesResponsablesController.js" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular.min.js.map" />
@@ -991,6 +992,7 @@
     <Content Include="Scripts\Models\AcreditadorModel.js" />
     <Content Include="Scripts\Models\AreasAtencionModel.js" />
     <Content Include="Scripts\Models\CatModel.js" />
+    <Content Include="Scripts\Models\PeriodosModel.js" />
     <Content Include="Scripts\Models\UnidadesResponsablesModel.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper-utils.js" />
@@ -1033,9 +1035,11 @@
     <Content Include="Views\Catalogo\AcreditadoresRegistro.cshtml" />
     <Content Include="Views\Catalogo\AreasAtencion.cshtml" />
     <Content Include="Views\Catalogo\UnidadesResponsables.cshtml" />
+    <Content Include="Views\Catalogo\Periodos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

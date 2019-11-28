@@ -35,6 +35,11 @@ namespace MIPlan.Controllers
             return View();
         }
 
+        public ActionResult Periodos()
+        {
+            return View();
+        }
+
         public ActionResult AcreditadoresRegistro()
         {
             return View();
