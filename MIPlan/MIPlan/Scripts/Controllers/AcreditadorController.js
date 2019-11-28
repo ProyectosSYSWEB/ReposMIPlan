@@ -22,7 +22,7 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.dependencias = catalogoContext.dependenciaslst;
-                        self.cve_dependencia = catalogoContext.dependenciaslst[0].Id;
+                        //self.cve_dependencia = catalogoContext.dependenciaslst[0].Id;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -50,13 +50,31 @@
             });
         };
 
-        this.ValorDependencia = function () {
-            alert(self.cve_dependencia);
-        };
 
-        this.BorrarAcreditador = function (Indice) {
-            alert(Indice);
-        };
+        //this.Obtdatos = function (Id) {
+        //    self.cve_dependencia = "";
+        //    catalogoContext.ObtenerDato(Id, function (resp) {
+        //        switch (resp.ressult) {
+        //            case "tgp":
+        //                self.Obtdatos = catalogoContext.ObtenerDatos;
+        //                break;
+        //            case "notgp":
+        //                self.mensaje_gral = resp.message;
+        //                break;
+        //            default:
+        //                break;
+        //        }
+        //        $scope.$apply();
+        //    });
+        //};
+
+        //this.ValorDependencia = function () {
+        //    alert(self.cve_dependencia);
+        //};
+
+        //this.BorrarAcreditador = function (Indice) {
+        //    alert(Indice);
+        //};
 
 
 
