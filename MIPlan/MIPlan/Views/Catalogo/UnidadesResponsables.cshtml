@@ -11,38 +11,94 @@
 <br />
 
 
+<div ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
 
-<!-- pruebasModal -->
-<div class="modal fade" id="UnidadesResponsables" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+    <!-- Modal -->
+    <div class="modal fade" id="UnidadesResponsables" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header btn-primary">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                                                                
+                    <div class="container-fluid">
+                                    
+
+                            <!-- <div class="row justify-content-center">
+        <label for="formGroupExampleInput" class="text-primary">Dependencia</label>
+    </div>
+    <div class="row justify-content-center">
+        <input type="text" class="form-control" id="formGroupExampleInput" ng-model="item.Dependencia" placeholder="Dependencia">
+    </div>
+     -->
+                            <div class="row justify-content-center">
+                                <label for="lblDependencia" class="text-primary">Dependencia:</label>
+                            </div>
+                            <div class="row justify-content-center">
+                                <select class="form-control" name="cmbDependencia" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.unidad[0].Dependencia">
+                                    <option selected value="0">--Seleccionar Dependencia--</option>
+                                </select>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <label for="formGroupExampleInput" class="text-primary">Clave</label>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="text" class="form-control" id="formGroupExampleInput"  ng-model="ctrl.unidad[0].Clave" placeholder="Clave">
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <label for="formGroupExampleInput" class="text-primary">Descripción</label>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="ctrl.unidad[0].Descripcion" placeholder="Descripción">
+                            </div>                         
+                            <div class="row justify-content-center">
+                                <label for="formGroupExampleInput" class="text-primary">Estatus</label>
+                            </div>
+                            <!--
+    <div class="row justify-content-center">
+        <input type="text" class="form-control" id="formGroupExampleInput" ng-model="item.Status" placeholder="Estatus">
+    </div>
+    -->
+                            <div class="row justify-content-center">
+                                <select class="form-control" name="cmbDependencia_status" ng-model="ctrl.unidad[0].Status">
+                                    <option selected value="A">Alta</option>
+                                    <option selected value="B">Baja</option>
+                                </select>
+
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <label for="formGroupExampleInput" class="text-primary">Coordinador</label>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="ctrl.unidad[0].Coordinador" placeholder="Coordinador">
+                            </div>
+                    
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" ng-click="ctrl.Inicio()" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="ctrl.UnidadResponsableUpdate()">Save changes</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
-
-<div ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
 
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
-                    <label for="lblDependencia">Dependencia:</label>
+                    <label for="lblDependencia" class="text-primary">Dependencia:</label>
 
                     <select class="form-control" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia">
                         <option value="0">--Seleccionar Dependencia--</option>
@@ -51,12 +107,10 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
-                    <label for="lblStatus">Status:</label>
-                    <select class="form-control" name="cmbDependencia">
-                        <option value="0">--Seleccionar Dependencia--</option>
-                    </select>
+                    <label for="lblStatus">Busqueda</label>
+                    <input type="text" class="form-control" placeholder="Busqueda" ng-model="buscar">
                     <!--<input name="rbActivo" id="1" type="radio" /><label for="1">Activo</label>&nbsp;&nbsp;<input name="rbBaja" id="2" type="radio" /><label for="2">Baja</label>-->
-                </div>
+                </div>               
             </div>
         </div>
     </div>
@@ -74,66 +128,72 @@
 
         -->
 
-    <div class="panel panel-default panel-table">
-        @*<h3 class="panel-title input-group-text">Viaticos Asignados</h3><input type="button" class="btn btn-sm btn-primary btn-create" data-toggle="modal" data-target="#InfViaticos" />Nuevo<i class="fa fa-plus" aria-hidden="true"></i>*@
-        <div class="panel-heading">
-            <div class="container">
-                <div class="col text-right">
-                    <button type="button" class="btn btn-sm btn-primary btn-create" data-toggle="modal" data-target="#UnidadesResponsables" style="width:80px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
-                    <br />
-                </div>
+
+
+<div class="panel panel-default panel-table">
+    @*<h3 class="panel-title input-group-text">Viaticos Asignados</h3><input type="button" class="btn btn-sm btn-primary btn-create" data-toggle="modal" data-target="#InfViaticos" />Nuevo<i class="fa fa-plus" aria-hidden="true"></i>*@
+    <div class="panel-heading">
+        <div class="container">
+            <div class="col text-right">
+                <button type="button" class="btn btn-sm btn-primary btn-create" data-toggle="modal" data-target="#UnidadesResponsables" style="width:80px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                <br />
             </div>
         </div>
-        <div class="container table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Dependencia</th>
-                        <th scope="col">Clave</th>
-                        <th scope="col">Descripcion</th>
-                        <th scope="col">Estatus</th>
-
-                        <th style="text-align:center"><em class="fa fa-cog"></em></th>
-                    </tr>
-                </thead>
-                <tbody ng-repeat="i in ctrl.unidades">
-                    <tr>
-                        <td>{{i.Dependencia}}</td>
-                        <td>{{i.Clave}}</td>
-                        <td>{{i.Descripcion}}</td>
-                        <td>{{i.Status}}</td>
-
-
-                        <td style="text-align:center">
-                            <button type="button" class="btn" style="width:50px">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </button>
-
-                            <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarBasico($index)" style="width:50px">
-                                <i class="fa fa-eraser" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th style="text-align:center">
-                            <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
-                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                            </button>
-                            <button type="button" class="btn btn-success" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
-                                <i class="fa fa-file-excel-o" aria-hidden="true"></i>
-                            </button>
-                        </th>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
     </div>
+   
+    <div class="container table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Dependencia</th>
+                    <th scope="col">Clave</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Estatus</th>
+                    <th scope="col">Coordinador</th>
+
+                    <th style="text-align:center"><em class="fa fa-cog"></em></th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="i in ctrl.unidades | filter:buscar">
+                <tr>
+                    <td>{{i.Dependencia}}</td>
+                    <td>{{i.Clave}}</td>
+                    <td>{{i.Descripcion}}</td>
+                    <td>{{i.Status}}</td>
+                    <td>{{i.Coordinador}}</td>
+
+
+                    <td style="text-align:center">
+                        <!--data-toggle="modal" data-target="#UnidadesResponsables"-->
+                        <button type="button" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#UnidadesResponsables" ng-click="ctrl.Update($index)">                            
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </button>
+
+                        <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarBasico($index)" style="width:50px">
+                            <i class="fa fa-eraser" aria-hidden="true"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th style="text-align:center">
+                        <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                            <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" class="btn btn-success" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                            <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                        </button>
+                    </th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
 </div>
 
 <script src="~/Scripts/angular.min.js"></script>
