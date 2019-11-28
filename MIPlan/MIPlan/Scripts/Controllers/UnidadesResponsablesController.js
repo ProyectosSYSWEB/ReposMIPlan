@@ -6,19 +6,20 @@
 
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
         var self = this;
-        self.buscar = '';        
-
+        self.buscar = '';
+        
 
         this.Inicio = function () {
             CargarCombos();
-            CargarGrid();
+            CargarGrid();         
+            self.unidad = null;
         };
 
         var CargarCombos = function () {
             ObtenerDependencias();
         };
 
-
+ /********************************************************************************************************************************************************/
         var ObtenerDependencias = function () {
             catalogoContext.ObtenerDependencias(function (resp) {
                 switch (resp.ressult) {
@@ -35,7 +36,7 @@
                 $scope.$apply();
             });
         };
-
+ /********************************************************************************************************************************************************/
         var CargarGrid = function () {
             catalogoContext.ObtenerUnidades(self.cve_dependencia, function (resp) {
                 switch (resp.ressult) {
@@ -52,7 +53,7 @@
                 $scope.$apply();
             });
         };
-
+ /********************************************************************************************************************************************************/
         var cargarModal = function (Idunidad) {
             catalogoContext.ObtenerUnidad(Idunidad, function (resp) {
                 switch (resp.ressult) {
@@ -69,15 +70,17 @@
             });
         };
 
+        this.Modal = function (Indice) { cargarModal(Indice); };
 
+/********************************************************************************************************************************************************/
         var UnidadUpdate = function () {            
             
-            console.log("ID Update", self.unidad[0].Clave);
-            catalogoContext.UnidadResponsableUpdate(self.unidad[0].Clave, self.unidad[0].Dependencia, self.unidad[0].Clave, self.unidad[0].Descripcion, self.unidad[0].Status, self.unidad[0].Coordinador, function (resp) {
+            
+            catalogoContext.UnidadResponsableUpdate(self.unidad[0].Id, self.unidad[0].Dependencia, self.unidad[0].Clave, self.unidad[0].Descripcion, self.unidad[0].Status, self.unidad[0].Coordinador, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                      //  self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
-                        console.log("Updated!");
+                        //  self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
+                        alert("¡Se han actualizado los datos correctamente!");
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -89,30 +92,37 @@
             });
         };
 
+        this.UnidadResponsableUpdate = function () { UnidadUpdate(); }
 
+/********************************************************************************************************************************************************/
+        var UnidadCreate = function () {
+            
+            catalogoContext.UnidadResponsableCreate(self.unidad[0].Dependencia, self.unidad[0].Clave, self.unidad[0].Descripcion, self.unidad[0].Status, self.unidad[0].Coordinador, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        //  self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
+                        alert("¡Se ha creado la unidad correctamente!");
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };       
+
+            this.UnidadResponsableCreate = function () { UnidadCreate(); }
+/********************************************************************************************************************************************************/
 
         this.ValorDependencia = function () {
             alert(self.cve_dependencia);
         };
-
-        this.UnidadResponsableUpdate = function () {
-            UnidadUpdate();
-            
-        }
-
-        this.Update = function (Indice) {
-          
-            console.log(Indice);
-            cargarModal(Indice);
-            
-        };
-
-
+ 
         this.BorrarBasico = function (Indice) {
             alert(Indice);
         };
-
-
 
     }]);
 

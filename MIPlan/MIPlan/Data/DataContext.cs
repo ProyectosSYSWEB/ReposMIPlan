@@ -92,6 +92,7 @@ namespace MIPlan.Data
                 object[] Valores = { Id };
                 string[] ParametrosOut = { "P_DEPENDENCIA", "P_CLAVE", "P_DESCRIPCION", "P_STATUS", "P_COORDINADOR", "P_BANDERA" };
                 cmd = exeProc.GenerarOracleCommand("OBT_UNIDADES_RESPONSABLES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+                objDatosUnidadades.Id = Id;
                 objDatosUnidadades.Dependecia = Convert.ToString(cmd.Parameters["P_DEPENDENCIA"].Value);
                 objDatosUnidadades.Clave = Convert.ToString(cmd.Parameters["P_CLAVE"].Value);
                 objDatosUnidadades.Descripcion = Convert.ToString(cmd.Parameters["P_DESCRIPCION"].Value);

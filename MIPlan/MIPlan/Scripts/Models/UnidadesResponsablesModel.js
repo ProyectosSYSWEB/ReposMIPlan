@@ -123,6 +123,29 @@
                     }
                 }
             });
-
+    },
+/********************************************************************************************************************************************************/
+    UnidadResponsableCreate: function (Dependencia, Clave, Descripcion, Status, Coordinador, callBackResult) {        
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'Catalogo/GuardarUnidadesResponsables',
+                data: {Dependencia, Clave, Descripcion, Status, Coordinador },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: res })
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EditarUnidadesResponsables." });
+                    }
+                }
+            });
     },
 };
