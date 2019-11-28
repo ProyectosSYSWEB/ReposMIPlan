@@ -76,8 +76,8 @@
             catalogoContext.UnidadResponsableUpdate(self.unidad[0].Clave, self.unidad[0].Dependencia, self.unidad[0].Clave, self.unidad[0].Descripcion, self.unidad[0].Status, self.unidad[0].Coordinador, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
-                        console.log("Updated!", self.unidadadUpdateRlst);
+                      //  self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
+                        console.log("Updated!");
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -101,7 +101,7 @@
         }
 
         this.Update = function (Indice) {
-            Indice = Indice + 1;
+          
             console.log(Indice);
             cargarModal(Indice);
             
