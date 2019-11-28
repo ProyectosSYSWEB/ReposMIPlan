@@ -334,6 +334,7 @@ namespace MIPlan.Data
 
         public static List<Periodos> ObtenerPeriodos()
         {
+            //
             OracleCommand cmd = null;
             ExeProcedimiento exeProc = new ExeProcedimiento();
 
