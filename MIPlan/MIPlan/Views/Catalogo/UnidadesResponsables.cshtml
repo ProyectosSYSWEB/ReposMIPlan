@@ -35,9 +35,10 @@
                                 <option value="">--Seleccionar Dependencia--</option>
                             </select>
                         </div>
-
+                        <a href="~/Views/Catalogo/UnidadesResponsables.cshtml">~/Views/Catalogo/UnidadesResponsables.cshtml</a>
                         <div class="row justify-content-center">
                             <label for="formGroupExampleInput" class="text-success">Clave</label>
+                            <a href="~/Views/Catalogo/UnidadesResponsables.cshtml">~/Views/Catalogo/UnidadesResponsables.cshtml</a>
                         </div>
                         <div class="row justify-content-center">
                             <input type="text" class="form-control border border-success" id="formGroupExampleInput" ng-model="ctrl.unidad[0].Clave" placeholder="Clave">
@@ -72,7 +73,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" ng-click="ctrl.Inicio()" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-secondary" ng-click="ctrl.Inicio()" data-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-success" ng-click="ctrl.UnidadResponsableCreate()">Crear Unidad</button>
                 </div>
             </div>
@@ -138,7 +139,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" ng-click="ctrl.Inicio()" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-secondary" ng-click="ctrl.Inicio()" data-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-primary" ng-click="ctrl.UnidadResponsableUpdate()">Actualizar Datos</button>
                 </div>
             </div>
@@ -194,7 +195,7 @@
     </div>          
 
     <div class="container table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.3)">
-        <table class="table table-hover">
+        <table id="Table" class="table table-hover">
             <thead>
                 <tr>
                     <th scope="col">Dependencia</th>
@@ -241,7 +242,7 @@
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </button>
 
-                        <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarBasico($index)" style="width:50px">
+                        <button type="button" class="btn btn-danger" ng-click="ctrl.EliminnarUR(i.Id)" style="width:50px">                                
                             <i class="fa fa-eraser" aria-hidden="true"></i>
                         </button>
                     </td>

@@ -8,12 +8,12 @@
     ObtenerDependencias: function (callBackResult) {
         var self = this;
         self.dependenciaslst.length = 0;
-        //var urlServer = "http://localhost:53805/";
+        var urlServer = "http://localhost:53805/";
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
-                url: urlServer + 'Catalogo/ObtenerDependencias',
+                //url: urlServer + 'Catalogo/ObtenerDependencias',
                 success: function (resp) {                    
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
@@ -103,7 +103,7 @@
         self.unidadadUpdateRlst.length = 0;
         $.ajax(
             {
-                type: 'GET',
+                type: 'POST',
                 cache: false,
                 url: urlServer + 'Catalogo/EditarUnidadesResponsables',
                 data: {Id, Dependencia, Clave, Descripcion, Status, Coordinador },
@@ -143,7 +143,31 @@
                 },
                 error: function (ex) {
                     if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EditarUnidadesResponsables." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en GuardarUnidadesResponsables." });
+                    }
+                }
+            });
+    },
+/********************************************************************************************************************************************************/
+    eliminarUnidad: function (IdUnidad, callBackResult) {
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'Catalogo/EliminarUnidadResponsable',
+                data: { IdUnidad },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: res })
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EliminarUnidadResponsable." });
                     }
                 }
             });
