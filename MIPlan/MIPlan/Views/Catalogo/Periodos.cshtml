@@ -1,12 +1,11 @@
 ﻿
-
 @{
-    ViewBag.Title = "Periodos";
+    ViewBag.Title = "UnidadesResponsables";
     Layout = "~/Views/Shared/_LayoutContenido.cshtml";
 
 }
 
-<h2>Periodos</h2>
+<h2>UnidadesResponsables</h2>
 <br />
 <br />
 <br />
@@ -14,41 +13,187 @@
 
 <div ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
 
+    <!-- Modal Create -->
+    <div class="modal fade border border-success" id="UnidadesResponsablesCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header btn-success justify-content-center">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear Unidad Responsable</h5>
+                    <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="container-fluid">
+
+                        <div class="row justify-content-center">
+                            <label for="lblDependencia" class="text-success">Dependencia:</label>
+                        </div>
+                        <div class="row justify-content-center">
+                            <select class="form-control border border-success" name="cmbDependencia" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.unidad[0].Dependencia">
+                                <option value="">--Seleccionar Dependencia--</option>
+                            </select>
+                        </div>
+                        <a href="~/Views/Catalogo/UnidadesResponsables.cshtml">~/Views/Catalogo/UnidadesResponsables.cshtml</a>
+                        <div class="row justify-content-center">
+                            <label for="formGroupExampleInput" class="text-success">Clave</label>
+                            <a href="~/Views/Catalogo/UnidadesResponsables.cshtml">~/Views/Catalogo/UnidadesResponsables.cshtml</a>
+                        </div>
+                        <div class="row justify-content-center">
+                            <input type="text" class="form-control border border-success" id="formGroupExampleInput" ng-model="ctrl.unidad[0].Clave" placeholder="Clave">
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <label for="formGroupExampleInput" class="text-success">Descripción</label>
+                        </div>
+                        <div class="row justify-content-center">
+                            <input type="text" class="form-control border border-success" id="formGroupExampleInput" ng-model="ctrl.unidad[0].Descripcion" placeholder="Descripción">
+                        </div>
+                        <div class="row justify-content-center">
+                            <label for="formGroupExampleInput" class="text-success">Estatus</label>
+                        </div>
+                        <div class="row justify-content-center">
+                            <select class="form-control border border-success" name="cmbDependencia_status" ng-model="ctrl.unidad[0].Status">
+                                <option value="">--Seleccionar Estatus--</option>
+                                <option value="A">Alta</option>
+                                <option value="B">Baja</option>
+                            </select>
+
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <label for="formGroupExampleInput" class="text-success">Coordinador</label>
+                        </div>
+                        <div class="row justify-content-center">
+                            <input type="text" class="form-control border border-success" id="formGroupExampleInput" ng-model="ctrl.unidad[0].Coordinador" placeholder="Coordinador">
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" ng-click="ctrl.Inicio()" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-success" ng-click="ctrl.UnidadResponsableCreate()">Crear Unidad</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+    <!-- Modal Update-->
+    <div class="modal fade" id="UnidadesResponsablesUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header btn-primary justify-content-center">
+                    <h5 class="modal-title" id="exampleModalLabel">Actualizar Unidad Responsable</h5>
+                    <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="container-fluid">
+
+                        <div class="row justify-content-center">
+                            <label for="lblDependencia" class="text-primary">Dependencia:</label>
+                        </div>
+                        <div class="row justify-content-center">
+                            <select class="form-control border border-primary" name="cmbDependencia" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.unidad[0].Dependencia">
+                                <option value="">--Seleccionar Dependencia--</option>
+                            </select>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <label for="formGroupExampleInput" class="text-primary">Clave</label>
+                        </div>
+                        <div class="row justify-content-center">
+                            <input type="text" class="form-control border border-primary" id="formGroupExampleInput" ng-model="ctrl.unidad[0].Clave" placeholder="Clave">
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <label for="formGroupExampleInput" class="text-primary">Descripción</label>
+                        </div>
+                        <div class="row justify-content-center">
+                            <input type="text" class="form-control border border-primary" id="formGroupExampleInput" ng-model="ctrl.unidad[0].Descripcion" placeholder="Descripción">
+                        </div>
+                        <div class="row justify-content-center">
+                            <label for="formGroupExampleInput" class="text-primary">Estatus</label>
+                        </div>
+                        <div class="row justify-content-center">
+                            <select class="form-control border border-primary" name="cmbDependencia_status" ng-model="ctrl.unidad[0].Status">
+                                <option value="">--Seleccionar Estatus--</option>
+                                <option value="A">Alta</option>
+                                <option value="B">Baja</option>
+                            </select>
+
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <label for="formGroupExampleInput" class="text-primary">Coordinador</label>
+                        </div>
+                        <div class="row justify-content-center">
+                            <input type="text" class="form-control border border-primary" id="formGroupExampleInput" ng-model="ctrl.unidad[0].Coordinador" placeholder="Coordinador">
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" ng-click="ctrl.Inicio()" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" ng-click="ctrl.UnidadResponsableUpdate()">Actualizar Datos</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 justify-content-center">
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
-                    <label for="lblDependencia" class="text-primary">Dependencia</label>
+                    <label for="lblDependencia" class="text-primary">Dependencia:</label>
                     <select class="form-control border border-primary" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia">
                         <option value="">--Seleccionar Dependencia--</option>
                     </select>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
-                    <label for="lblDependencia" class="text-info">Estatus</label>
-                    <select class="form-control border border-info" name="cmbDependencia_status">
+                    <label for="lblDependencia" class="text-info">Dependencia:</label>
+                    <select class="form-control border border-info" name="cmbDependencia">
                         <option value="">--Seleccionar Estatus--</option>
                         <option value="A">Alta</option>
                         <option value="B">Baja</option>
                     </select>
                 </div>
             </div>
-            <div class=" col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblStatus" class="text-success">Busqueda</label>
-                    <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-model="buscar">
+                    <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-model="buscar">              
                 </div>
             </div>
         </div>
     </div>
 
-    <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <!--
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label for="lblCatalogo">Catalogo:</label>&nbsp;&nbsp;
+
+            <select class="form-control" name="cmbCatalogo" @*ng-options="option.Id as option.Descripcion for option in ctrl.dependencias"*@ ng-model="ctrl.cve_catalogo">
+                <option value="0">--Seleccionar--</option>
+            </select>
+        </div>
+    </div>
+
+        -->
+
+
 
     <div class="panel panel-default panel-table">
+        @*<h3 class="panel-title input-group-text">Viaticos Asignados</h3><input type="button" class="btn btn-sm btn-primary btn-create" data-toggle="modal" data-target="#InfViaticos" />Nuevo<i class="fa fa-plus" aria-hidden="true"></i>*@
         <div class="panel-heading">
             <div class="container">
                 <div class="col text-right">
@@ -57,7 +202,7 @@
                 </div>
             </div>
         </div>
-        <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
         <div class="container table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.3)">
             <table class="table table-hover">
                 <thead>
@@ -97,13 +242,13 @@
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody ng-repeat="i in ctrl.Periodo | orderBy:sortType:sortReverse | filter:buscar">
+                <tbody ng-repeat="i in ctrl.periodos | orderBy:sortType:sortReverse | filter:buscar">
                     <tr>
                         <td>{{i.Dependencia}}</td>
+                        <td>{{i.Ejercicio}}</td>
                         <td>{{i.Periodo}}</td>
                         <td>{{i.Descripcion}}</td>
                         <td>{{i.Status}}</td>
-                        <td>{{i.Ejercicio}}</td>
                         <td>{{i.Inicio}}</td>
                         <td>{{i.Fin}}</td>
 
@@ -138,9 +283,7 @@
                 </tfoot>
             </table>
         </div>
-<!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     </div>
-
 </div>
 
 <br />

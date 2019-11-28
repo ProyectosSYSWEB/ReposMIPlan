@@ -11,7 +11,7 @@
 
         this.Inicio = function () {
             CargarCombos();
-            //CargarGrid();
+            CargarGrid();
             //self.unidad = null;
         };
 
@@ -36,8 +36,42 @@
                 $scope.$apply();
             });
         };
-        /********************************************************************************************************************************************************/   
+    /********************************************************************************************************************************************************/
+        var CargarGrid = function () {
+            catalogoContext.ObtenerGridPeriodos(function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.periodos = catalogoContext.periodoslst;
+                        console.log(self.periodos);
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+/********************************************************************************************************************************************************/
+        var cargarModal = function (Idunidad) {
+            catalogoContext.ObtenerPerdiodos(Idunidad, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.periodo = catalogoContext.periodolst;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
 
+        this.Modal = function (Indice) { cargarModal(Indice); };
+/********************************************************************************************************************************************************/
         this.ValorDependencia = function () {
             alert(self.cve_dependencia);
         };
