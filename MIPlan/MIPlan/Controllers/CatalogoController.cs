@@ -699,6 +699,102 @@ namespace MIPlan.Controllers
             }
         }
 
+        public JsonResult EliminarAcreditacion(int IdAcreditacion)
+        {
+            Acreditaciones objAcreditacion = new Acreditaciones();
+            ResultadoUnidad objResultado = new ResultadoUnidad();
+            string Verificador = string.Empty;
+            try
+            {               
+                objAcreditacion.Id = IdAcreditacion;
+                GuardarDataContext.EliminarAcreditacion(objAcreditacion, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult EliminarAreaAtencion(int IdArea)
+        {
+            AreasAtencion objAreasAt = new AreasAtencion();
+            ResultadoUnidad objResultado = new ResultadoUnidad();
+            string Verificador = string.Empty;
+            try
+            {
+                objAreasAt.Id = IdArea;
+                GuardarDataContext.EliminarAreaAtencion(objAreasAt, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult EliminarUnidadResponsable(int IdUnidad)
+        {
+            Unidades objUnidad = new Unidades();
+            ResultadoUnidad objResultado = new ResultadoUnidad();
+            string Verificador = string.Empty;
+            try
+            {
+                objUnidad.Id = IdUnidad;
+                GuardarDataContext.EliminarUnidadResponsable(objUnidad, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
 
 
 
