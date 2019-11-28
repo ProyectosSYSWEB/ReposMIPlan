@@ -16,4 +16,12 @@ namespace MIPlan.Models
         public string Inicio { get; set; }
         public string Fin { get; set; }
     }
+
+    public class ResultadoPeriodos
+    {
+        public bool Error { get; set; }
+        public string MensajeError { get; set; }
+        public List<Periodos> Resultado { get; set; }
+
+    }
 }

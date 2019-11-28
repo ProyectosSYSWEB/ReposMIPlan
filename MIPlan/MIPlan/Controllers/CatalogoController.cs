@@ -358,6 +358,27 @@ namespace MIPlan.Controllers
 
         }
 
+        public JsonResult ObtenerGridPeriodos()
+        {
+            List<Periodos> list = new List<Periodos>();
+            ResultadoPeriodos objResultado = new ResultadoPeriodos();
+            try
+            {
+                list = CursorDataContext.ObtenerPeriodos();
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public JsonResult ObtenerUnidades()
         {
             List<Unidades> list = new List<Unidades>();
@@ -439,6 +460,38 @@ namespace MIPlan.Controllers
                 objResultado.MensajeError = ex.Message;
                 objResultado.Resultado = null;
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult ObtenerPerdiodos(int Id)
+        {
+            List<Periodos> list = new List<Periodos>();
+            ResultadoPeriodos objResultado = new ResultadoPeriodos();
+            try
+            {
+                string Verificador = string.Empty;
+                list = DataContext.ObtenerDatosPeriodos(Id, ref Verificador);
+                if(Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = list;
+                    return Json(objResultado, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                    return Json(objResultado, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch(Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
         /*FIN METODOS DE LUIS*/
@@ -593,7 +646,44 @@ namespace MIPlan.Controllers
             }
         }
 
-
+        public JsonResult EditarPerdiodos(int id, string dependencia, string periodo, string descripcion, string status, string ejercicio, string inicio, string fin)
+        {
+            Periodos objPeriodos = new Periodos();
+            ResultadoPeriodos objResultado = new ResultadoPeriodos();
+            try
+            {
+                string Verificador = string.Empty;
+                objPeriodos.Id = id;
+                objPeriodos.Dependencia = dependencia;
+                objPeriodos.Periodo = periodo;
+                objPeriodos.Descripcion = descripcion;
+                objPeriodos.Status = status;
+                objPeriodos.Ejercicio = ejercicio;
+                objPeriodos.Inicio = inicio;
+                objPeriodos.Fin = fin;
+                GuardarDataContext.EditarPeriodos(objPeriodos, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
         public JsonResult GuardarAcreditaciones(string dependencia, string carrera, string organismo, string fechaIni, string fechaFin, string status, string observaciones)
         {
             Acreditaciones objAcreditaciones = new Acreditaciones();
@@ -704,6 +794,44 @@ namespace MIPlan.Controllers
             }
         }
 
+        public JsonResult GuardarPerdiodos(string dependencia, string periodo, string descripcion, string status, string ejercicio, string inicio, string fin)
+        {
+            Periodos objPeriodos = new Periodos();
+            ResultadoPeriodos objResultado = new ResultadoPeriodos();            
+            try
+            {
+                string Verificador = string.Empty;
+                objPeriodos.Dependencia = dependencia;
+                objPeriodos.Periodo = periodo;
+                objPeriodos.Descripcion = descripcion;
+                objPeriodos.Status = status;
+                objPeriodos.Ejercicio = ejercicio;
+                objPeriodos.Inicio = inicio;
+                objPeriodos.Fin = fin;
+                GuardarDataContext.GuardarPeriodos(objPeriodos, ref Verificador);
+                if(Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado,JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public JsonResult EliminarAcreditacion(int IdAcreditacion)
         {
             Acreditaciones objAcreditacion = new Acreditaciones();
@@ -777,6 +905,38 @@ namespace MIPlan.Controllers
             {
                 objUnidad.Id = IdUnidad;
                 GuardarDataContext.EliminarUnidadResponsable(objUnidad, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult EliminarPeriodo(int Id)
+        {
+            Periodos objPeriodos = new Periodos();
+            ResultadoPeriodos objResultado = new ResultadoPeriodos();
+            string Verificador = string.Empty;
+            try
+            {
+                objPeriodos.Id = Id;
+                GuardarDataContext.EliminarPeriodo(objPeriodos, ref Verificador);
                 if (Verificador == "0")
                 {
                     objResultado.Error = false;

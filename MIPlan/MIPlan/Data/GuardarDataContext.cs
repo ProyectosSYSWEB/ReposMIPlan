@@ -98,6 +98,27 @@ namespace MIPlan.Data
             }
         }
 
+        public static void EditarPeriodos(Periodos objPeriodos, ref string Verificador)
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+            try
+            {
+                OracleDataReader dr = null;
+                string[] Parametros = {"P_ID", "P_DEPENDENCIA", "P_PERIODO", "P_DESCRIPCION", "P_STATUS", "P_EJERCICIO", "P_INICIO", "P_FIN" };
+                object[] Valores = {objPeriodos.Id, objPeriodos.Dependencia, objPeriodos.Periodo, objPeriodos.Descripcion, objPeriodos.Status, objPeriodos.Ejercicio, objPeriodos.Inicio, objPeriodos.Fin };
+                string[] ParametrosOut = { "P_BANDERA" };
+                cmd = exeProc.GenerarOracleCommand("UPD_PLA_PERIODOS", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+        }
 
 
         public static void GuardarAcreditaciones(Acreditaciones objAcreditaciones, ref string Verificador)
@@ -166,6 +187,28 @@ namespace MIPlan.Data
             }
         }
 
+        public static void GuardarPeriodos (Periodos objPeriodos, ref string Verificador)
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+            try
+            {
+                OracleDataReader dr = null;
+                string[] Parametros = { "P_DEPENDENCIA", "P_PERIODO", "P_DESCRIPCION", "P_STATUS", "P_EJERCICIO", "P_INICIO", "P_FIN" };
+                object[] Valores = { objPeriodos.Dependencia, objPeriodos.Periodo, objPeriodos.Descripcion, objPeriodos.Status, objPeriodos.Ejercicio, objPeriodos.Inicio, objPeriodos.Fin };
+                string[] ParametrosOut = { "P_BANDERA" };
+                cmd = exeProc.GenerarOracleCommand("INS_PLA_PERIODOS", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+        }
+
         public static void EliminarAcreditacion(Acreditaciones objAcreditacion, ref string Verificador)
         {
             OracleCommand cmd = null;
@@ -221,6 +264,29 @@ namespace MIPlan.Data
                 object[] Valores = { objUnidad.Id };
                 string[] ParametrosOut = { "P_BANDERA" };
                 cmd = exeProc.GenerarOracleCommand("DEL_PLA_UNIDAD_RESPONSABLE", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+        }
+
+
+        public static void EliminarPeriodo(Periodos objPeriodos, ref string Verificador)
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+            try
+            {
+                OracleDataReader dr = null;
+                string[] Parametros = { "P_ID" };
+                object[] Valores = { objPeriodos.Id };
+                string[] ParametrosOut = { "P_BANDERA" };
+                cmd = exeProc.GenerarOracleCommand("DEL_PLA_PERIODOS", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
             }
             catch (Exception ex)
             {

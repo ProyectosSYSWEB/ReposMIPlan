@@ -111,7 +111,53 @@ namespace MIPlan.Data
             }
             return list;
             //return registroAgregado;
-        }       
+        }
+
+
+        public static List<Periodos> ObtenerDatosPeriodos(int Id, ref string Verificador)
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+            List<Periodos> list = new List<Periodos>();
+            Periodos objPeriodos = new Periodos();
+            try
+            {
+
+                OracleDataReader dr = null;
+                string[] Parametros = { "P_ID" };
+                object[] Valores = { Id };
+                string[] ParametrosOut = { "P_DEPENDENCIA", "P_DESCRIPCION","P_PERIODO", "P_STATUS", "P_EJERCICIO", "P_INICIO", "P_FIN", "P_BANDERA" };
+                cmd = exeProc.GenerarOracleCommand("OBT_PLA_PERIODOS", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+                objPeriodos.Dependencia = Convert.ToString(cmd.Parameters["P_DEPENDENCIA"].Value);                
+                objPeriodos.Descripcion = Convert.ToString(cmd.Parameters["P_DESCRIPCION"].Value);
+                objPeriodos.Periodo = Convert.ToString(cmd.Parameters["P_PERIODO"].Value);
+                objPeriodos.Status = Convert.ToString(cmd.Parameters["P_STATUS"].Value);
+                objPeriodos.Ejercicio = Convert.ToString(cmd.Parameters["P_EJERCICIO"].Value);
+                objPeriodos.Inicio = Convert.ToString(cmd.Parameters["P_INICIO"].Value);
+                objPeriodos.Fin = Convert.ToString(cmd.Parameters["P_FIN"].Value);
+                list.Add(objPeriodos);
+
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+            return list;
+            //return registroAgregado;
+        }
+
+
+
+
+
+
+
+
+
 
     }
 }

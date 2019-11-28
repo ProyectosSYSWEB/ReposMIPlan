@@ -331,5 +331,51 @@ namespace MIPlan.Data
 
         }
 
+
+        public static List<Periodos> ObtenerPeriodos()
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+
+            try
+            {
+                OracleDataReader dr = null;
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Periodos", ref dr);
+                List<Periodos> listarPeriodos = new List<Periodos>();
+                while (dr.Read())
+                {
+                    Periodos objPeriodos = new Periodos();
+                    objPeriodos.Id = Convert.ToInt32(dr[0]);
+                    objPeriodos.Dependencia = Convert.ToString(dr[1]);
+                    objPeriodos.Periodo = Convert.ToString(dr[2]);
+                    objPeriodos.Descripcion = Convert.ToString(dr[3]);
+                    objPeriodos.Status = Convert.ToString(dr[4]);
+                    objPeriodos.Ejercicio = Convert.ToString(dr[4]);
+                    objPeriodos.Inicio = Convert.ToString(dr[5]);
+                    objPeriodos.Fin = Convert.ToString(dr[6]);
+                    listarPeriodos.Add(objPeriodos);
+                }
+                return listarPeriodos;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
+        }
+
+
+
+
+
+
+
+
     }
 }
