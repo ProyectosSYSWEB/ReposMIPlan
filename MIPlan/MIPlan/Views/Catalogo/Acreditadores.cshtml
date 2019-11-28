@@ -27,9 +27,9 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col text-right">
-                    <button type="button" class="btn btn-sm btn-primary btn-create" data-toggle="modal" data-target="#exampleModalCenter" style="width:80px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                    <button type="button" class="btn btn-sm btn-primary btn-create" data-toggle="modal" data-target="#acreditadores" style="width:80px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal fade" id="acreditadores" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -44,7 +44,7 @@
                                             <label for="lblcarrera">Dependencia:</label>
                                             </div>
                                             <div class="form-inline col-md-1 col-xl-9">
-                                                <select class="form-control" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia">
+                                                <select class="form-control" name="cmbDependencia"  ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia">
                                                     <option value="">--Elegir Dependencia--</option>
                                                 </select>
                                             </div>
@@ -56,7 +56,7 @@
                                             <label for="lblcarrera">Carrera:</label>
                                         </div>
                                         <div class="form-inline col-md-1 col-xl-9">
-                                            <select class="form-control" name="cmbCarrera" ng-change="ctrl.ObtenerCarrera()" ng-model="ctrl.Carrera">
+                                            <select class="form-control" name="cmbCarrera" ng-model="ctrl.cve_carrera">
                                                 <option value="">--Elegir Carrera--</option>
                                             </select>
                                         </div>
@@ -66,24 +66,24 @@
                                         <div class="row">
                                             <div class="form-inline col-md-6">
                                                 <label for="lblorganismo">Organismo:</label>
-                                                <select class="form-control" name="cmbOrganismo" ng-change="ctrl.ObtenerOrganismo()" ng-model="ctrl.Organismo">
+                                                <select class="form-control" name="cmbOrganismo" ng-model="ctrl.cve_organismo">
                                                     <option value="">--Elegir Organismo--</option>
                                                 </select>
                                             </div>
                                             <div class="form-inline col-md-6">
                                                 <label for="lblfechainicio">Fecha Inicio:</label>
-                                                <input class="form-control" name="txtFechaInicio" type="date" ng-model="ctrl.cve_fecha_comprobacion" />
+                                                <input class="form-control" name="txtFechaInicio" type="date" ng-model="ctrl.cve_fecha_inicio" />
                                             </div>
                                         </div>
                                     <br />
                                         <div class="row">
                                             <div class="form-inline col-md-6">
                                                 <label for="lblfechafin">Fecha Fin:</label>
-                                                <input class="form-control" name="txtFechaFin" type="date" ng-model="ctrl.cve_fecha_comprobacion1" />
+                                                <input class="form-control" name="txtFechaFin" type="date" ng-model="ctrl.cve_fecha_fin" />
                                             </div>
                                             <div class="form-inline col-md-6">
                                                 <label for="lblStatus">Status:</label>
-                                                <select class="form-control" name="cmbStatus" ng-change="ctrl.ObtenerStatus()" ng-model="ctrl.Status">
+                                                <select class="form-control" name="cmbStatus" ng-model="ctrl.cve_status">
                                                     <option value="">---Elegir Estatus---</option>
                                                 </select>
                                             </div>
@@ -121,7 +121,7 @@
                     <th style="text-align:center"><em class="fa fa-cog"></em></th>
                 </tr>
             </thead>
-            <tbody ng-repeat="i in ctrl.acreditador">
+            <tbody ng-repeat="i in ctrl.acreditador | filter: buscar">
                 <tr>
                     <td>{{i.Id}}</td>
                     <td>{{i.Dep}}</td>
@@ -133,7 +133,7 @@
                     <td>{{i.Obs}}</td>
 
                     <td style="text-align:center">
-                        <button type="button" class="btn" ng-click="ctrl.ObtDatos(i.Id)" style="width:50px">
+                        <button type="button" class="btn" data-toggle="modal" data-target="#acreditadores" ng-click="ctrl.cargarModal(i.Id)" style="width:50px">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </button>
 
