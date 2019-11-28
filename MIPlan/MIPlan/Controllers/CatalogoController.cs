@@ -353,7 +353,7 @@ namespace MIPlan.Controllers
 
         }
 
-        public JsonResult ObtenerGirdPeriodos()
+        public JsonResult ObtenerGridPeriodos()
         {
             List<Periodos> list = new List<Periodos>();
             ResultadoPeriodos objResultado = new ResultadoPeriodos();
