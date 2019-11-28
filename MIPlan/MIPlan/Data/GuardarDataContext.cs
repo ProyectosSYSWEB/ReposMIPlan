@@ -166,7 +166,71 @@ namespace MIPlan.Data
             }
         }
 
+        public static void EliminarAcreditacion(Acreditaciones objAcreditacion, ref string Verificador)
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+            try
+            {
+                OracleDataReader dr = null;
+                string[] Parametros = { "P_ID" };
+                object[] Valores = { objAcreditacion.Id };
+                string[] ParametrosOut = { "P_BANDERA" };
+                cmd = exeProc.GenerarOracleCommand("DEL_PLA_ACREDITACION", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+        }
 
+        public static void EliminarAreaAtencion(AreasAtencion objAreaAtencion, ref string Verificador)
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+            try
+            {
+                OracleDataReader dr = null;
+                string[] Parametros = { "P_ID" };
+                object[] Valores = { objAreaAtencion.Id };
+                string[] ParametrosOut = { "P_BANDERA" };
+                cmd = exeProc.GenerarOracleCommand("DEL_PLA_AREA_ATENCION", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+        }
+
+        public static void EliminarUnidadResponsable(Unidades objUnidad, ref string Verificador)
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+            try
+            {
+                OracleDataReader dr = null;
+                string[] Parametros = { "P_ID" };
+                object[] Valores = { objUnidad.Id };
+                string[] ParametrosOut = { "P_BANDERA" };
+                cmd = exeProc.GenerarOracleCommand("DEL_PLA_UNIDAD_RESPONSABLE", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+        }
 
 
 
