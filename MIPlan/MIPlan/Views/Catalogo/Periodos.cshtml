@@ -143,14 +143,19 @@
                             <label for="formGroupExampleInput" class="text-primary">Inicio</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-primary" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Inicio" placeholder="Inicio">
+                            <input type="text" class="form-control border border-primary" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Inicio" ng-value="date" placeholder="Inicio">
                         </div>
+                            <!-- <div class="row justify-content-center">
+                                  <input type="text" class="form-control" ng-model="date" jqdatepicker />
+                             </div>
+                            -->
+
                         <div class="row justify-content-center">
                             <label for="formGroupExampleInput" class="text-primary">Fin</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-primary" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Fin" placeholder="Fin">
-                        </div>                     
+                            <input type="text" class="form-control border border-primary" ng-model="ctrl.periodo[0].Fin" placeholder="Fin">
+                        </div>
                     </div>
 
                 </div>
@@ -187,13 +192,13 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblStatus" class="text-success">Busqueda</label>
-                    <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-model="buscar">              
+                    <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-model="buscar">
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="panel panel-default panel-table">       
+    <div class="panel panel-default panel-table">
         <div class="panel-heading">
             <div class="container">
                 <div class="col text-right">
@@ -255,8 +260,7 @@
 
                         <td style="text-align:center">
                             <!--data-toggle="modal" data-target="#UnidadesResponsables"-->
-                            <button type="button" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#UnidadesResponsablesUpdate" ng-click="ctrl.Modal(i.Id)"
-                                    >
+                            <button type="button" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#UnidadesResponsablesUpdate" ng-click="ctrl.Modal(i.Id)">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
 
@@ -284,8 +288,9 @@
                 </tfoot>
             </table>
         </div>
-    </div>
+    </div> 
 </div>
+
 
 <br />
 <br />
@@ -299,3 +304,4 @@
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/PeriodosController.js"></script>
 <script src="~/Scripts/Models/PeriodosModel.js"></script>
+
