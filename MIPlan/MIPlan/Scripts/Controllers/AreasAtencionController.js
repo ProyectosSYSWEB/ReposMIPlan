@@ -50,9 +50,33 @@
             });
         };
 
+
+        this.ObtDatos = function (IdAreaAtencion) {
+            
+            catalogoContext.ObtenerAreas(IdAreaAtencion, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.cve_dependencia = catalogoContext.areasRlst[0].Dependencia;
+                        self.cve_clave = catalogoContext.areasRlst[0].Cve;
+                        self.cve_desc = catalogoContext.areasRlst[0].Desc;
+                        self.cve_status = catalogoContext.areasRlst[0].Estatus;
+                        self.cve_cat = catalogoContext.areasRlst[0].Cat;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+
+
         this.ValorDependencia = function () {
             alert(self.cve_dependencia);
         };
+
 
         this.BorrarBasico = function (Indice) {
             alert(Indice);

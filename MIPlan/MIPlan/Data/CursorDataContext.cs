@@ -334,6 +334,7 @@ namespace MIPlan.Data
 
         public static List<Periodos> ObtenerPeriodos()
         {
+            //
             OracleCommand cmd = null;
             ExeProcedimiento exeProc = new ExeProcedimiento();
 
@@ -350,9 +351,9 @@ namespace MIPlan.Data
                     objPeriodos.Periodo = Convert.ToString(dr[2]);
                     objPeriodos.Descripcion = Convert.ToString(dr[3]);
                     objPeriodos.Status = Convert.ToString(dr[4]);
-                    objPeriodos.Ejercicio = Convert.ToString(dr[4]);
-                    objPeriodos.Inicio = Convert.ToString(dr[5]);
-                    objPeriodos.Fin = Convert.ToString(dr[6]);
+                    objPeriodos.Ejercicio = Convert.ToString(dr[5]);
+                    objPeriodos.Inicio = Convert.ToString(dr[6]);
+                    objPeriodos.Fin = Convert.ToString(dr[7]);
                     listarPeriodos.Add(objPeriodos);
                 }
                 return listarPeriodos;
