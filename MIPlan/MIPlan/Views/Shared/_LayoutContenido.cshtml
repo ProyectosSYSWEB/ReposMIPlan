@@ -35,28 +35,49 @@
             <div class="collapse navbar-collapse barraMenu container-fluid" id="navbarSupportedContent">
                 <div class="row">
                     <ul class="navbar-nav mr-auto ubicacion">
-                        <li class="nav-item">
-                            <span style="color:white" class="nav-link fa fa-home"></span>
-                            <a style="color:white" href="">Inicio</a>
+                        <li class=" dropdown text-white">
+                            <a href="#" class="dropdown-toggle " style="color:white" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Catálogos <span class="caret"></span></a>
+                            <ul class="dropdown-menu" style="background-color: #9dbcce">
+                                <li class="nav-item">
+                                    <span style="color:black" class="nav-link fa fa-book"> <a style="color:white" href="~/Catalogo/AreasAtencion"> Areas de Atención</a></span>
+                                </li>
+                                <li class="nav-item">
+                                    <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white" href="~/Catalogo/Acreditadores"> Acreditadores</a></span>
+                                </li>
+                                <li class="nav-item">
+                                    <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white" href="~/Catalogo/UnidadesResponsables"> Unidades Responsables</a></span>
+                                </li>
+                                <li class="nav-item">
+                                    <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white" href="~/Catalogo/UnidadesResponsables"> Unidades Responsables</a></span>
+                                </li>
+                                <li class="nav-item">
+                                    <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white" href="~/Catalogo/Periodos"> Periodos</a></span>
+                                </li>
+                            </ul>
+
                         </li>
-                        <li class="nav-item">
-                            <span style="color:white" class="nav-link fa fa-book"> <a style="color:white" href="~/Catalogo/AreasAtencion"> Areas de Atención</a></span>
-                        </li>
+                        @*<li class="nav-item">
+            <span style="color:white" class="nav-link fa fa-home"></span>
+            <a style="color:white" href="">Inicio</a>
+        </li>
+        <li class="nav-item">
+            <span style="color:white" class="nav-link fa fa-book"> <a style="color:white" href="~/Catalogo/AreasAtencion"> Areas de Atención</a></span>
+        </li>
 
 
-                        <li class="nav-item">
-                            <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white" href="~/Catalogo/Acreditadores"> Acreditadores</a></span>
-                        </li>
+        <li class="nav-item">
+            <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white" href="~/Catalogo/Acreditadores"> Acreditadores</a></span>
+        </li>
 
-                        <li class="nav-item">
-                            <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white" href="~/Catalogo/UnidadesResponsables"> Unidades Responsables</a></span>
-                        </li>
-                        <li class="nav-item">
-                            <span style="color:white" class="nav-link fa fa-info"> <a style="color:white" href=""> Ayuda</a></span>
-                        </li>
-                        <li class="nav-item">
-                            <span style="color:white" class="nav-link fa fa-times"> <a style="color:white" href=""> Salir</a></span>
-                        </li>
+        <li class="nav-item">
+            <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white" href="~/Catalogo/UnidadesResponsables"> Unidades Responsables</a></span>
+        </li>
+        <li class="nav-item">
+            <span style="color:white" class="nav-link fa fa-info"> <a style="color:white" href=""> Ayuda</a></span>
+        </li>
+        <li class="nav-item">
+            <span style="color:white" class="nav-link fa fa-times"> <a style="color:white" href=""> Salir</a></span>
+        </li>*@
                     </ul>
                 </div>
                 <form class="form-inline my-2 my-lg-0 ubicacion2">
