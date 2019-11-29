@@ -39,7 +39,7 @@
                             <label for="formGroupExampleInput" class="text-success">Periodo</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-primary" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Periodo" placeholder="Periodo">
+                            <input type="text" class="form-control border border-success" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Periodo" placeholder="Periodo">
                         </div>
 
                         <div class="row justify-content-center">
@@ -68,13 +68,13 @@
                             <label for="formGroupExampleInput" class="text-success">Inicio</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-success" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Inicio" placeholder="Inicio">
+                            <input type="text" class="form-control border border-success" id="InicioCreate" ng-model="ctrl.periodo[0].Inicio" placeholder="Inicio">
                         </div>
                         <div class="row justify-content-center">
                             <label for="formGroupExampleInput" class="text-success">Fin</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-success" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Fin" placeholder="Fin">
+                            <input type="text" class="form-control border border-success" id="FinCreate" ng-model="ctrl.periodo[0].Fin" placeholder="Fin">
                         </div>
 
                     </div>
@@ -137,24 +137,19 @@
                             <label for="formGroupExampleInput" class="text-primary">Ejercicio</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-primary" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Ejercicio" placeholder="Ejercicio">
+                            <input type="text" class="form-control border border-primary" id="calendario" ng-model="ctrl.periodo[0].Ejercicio" placeholder="Ejercicio">
                         </div>
                         <div class="row justify-content-center">
                             <label for="formGroupExampleInput" class="text-primary">Inicio</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-primary" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Inicio" ng-value="date" placeholder="Inicio">
+                            <input type="text" class="form-control border border-primary" id="InicioUpdate" ng-model="ctrl.periodo[0].Inicio" placeholder="Inicio">
                         </div>
-                            <!-- <div class="row justify-content-center">
-                                  <input type="text" class="form-control" ng-model="date" jqdatepicker />
-                             </div>
-                            -->
-
                         <div class="row justify-content-center">
                             <label for="formGroupExampleInput" class="text-primary">Fin</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-primary" ng-model="ctrl.periodo[0].Fin" placeholder="Fin">
+                            <input type="text" class="form-control border border-primary" id="FinUpdate" ng-model="ctrl.periodo[0].Fin" placeholder="Fin">
                         </div>
                     </div>
 
@@ -288,7 +283,8 @@
                 </tfoot>
             </table>
         </div>
-    </div> 
+    </div>
+
 </div>
 
 
@@ -304,4 +300,22 @@
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/PeriodosController.js"></script>
 <script src="~/Scripts/Models/PeriodosModel.js"></script>
-
+InicioCreate
+<script type="text/javascript">
+    $('#InicioCreate').datetimepicker({
+        timepicker: false,
+        format: 'd/m/Y'
+    });
+     $('#FinCreate').datetimepicker({
+        timepicker: false,
+        format: 'd/m/Y'
+     });
+     $('#InicioUpdate').datetimepicker({
+        timepicker: false,
+        format: 'd/m/Y'
+     });
+     $('#FinUpdate').datetimepicker({
+        timepicker: false,
+        format: 'd/m/Y'
+    });
+</script>
