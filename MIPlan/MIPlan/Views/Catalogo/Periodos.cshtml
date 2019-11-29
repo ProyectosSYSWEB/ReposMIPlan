@@ -5,7 +5,7 @@
 
 }
 
-<h2>UnidadesResponsables</h2>
+<h2>Periodos</h2>
 <br />
 <br />
 <br />
@@ -65,7 +65,7 @@
                             <input type="text" class="form-control border border-success" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Ejercicio" placeholder="Ejercicio">
                         </div>
                         <div class="row justify-content-center">
-                            <label for="formGroupExampleInput" class="text-successv">Inicio</label>
+                            <label for="formGroupExampleInput" class="text-success">Inicio</label>
                         </div>
                         <div class="row justify-content-center">
                             <input type="text" class="form-control border border-success" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Inicio" placeholder="Inicio">
@@ -143,15 +143,19 @@
                             <label for="formGroupExampleInput" class="text-primary">Inicio</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-primary" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Inicio">
+                            <input type="text" class="form-control border border-primary" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Inicio" ng-value="date" placeholder="Inicio">
                         </div>
+                            <!-- <div class="row justify-content-center">
+                                  <input type="text" class="form-control" ng-model="date" jqdatepicker />
+                             </div>
+                            -->
+
                         <div class="row justify-content-center">
                             <label for="formGroupExampleInput" class="text-primary">Fin</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-primary" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Fin">
-                        </div>                       
-
+                            <input type="text" class="form-control border border-primary" ng-model="ctrl.periodo[0].Fin" placeholder="Fin">
+                        </div>
                     </div>
 
                 </div>
@@ -188,13 +192,13 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblStatus" class="text-success">Busqueda</label>
-                    <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-model="buscar">              
+                    <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-model="buscar">
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="panel panel-default panel-table">       
+    <div class="panel panel-default panel-table">
         <div class="panel-heading">
             <div class="container">
                 <div class="col text-right">
@@ -284,8 +288,9 @@
                 </tfoot>
             </table>
         </div>
-    </div>
+    </div> 
 </div>
+
 
 <br />
 <br />
@@ -299,3 +304,4 @@
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/PeriodosController.js"></script>
 <script src="~/Scripts/Models/PeriodosModel.js"></script>
+

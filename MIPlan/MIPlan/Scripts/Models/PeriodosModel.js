@@ -73,7 +73,7 @@
             {
                 type: 'GET',
                 cache: false,
-                url: urlServer + 'Catalogo/ObtenerPerdiodos',
+                url: urlServer + 'Catalogo/ObtenerPeriodos',
                 data: { Id },
                 success: function (resp) {
                     if (resp.Error == false) {
