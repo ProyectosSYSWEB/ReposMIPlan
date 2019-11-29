@@ -65,7 +65,7 @@
                             <input type="text" class="form-control border border-success" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Ejercicio" placeholder="Ejercicio">
                         </div>
                         <div class="row justify-content-center">
-                            <label for="formGroupExampleInput" class="text-successv">Inicio</label>
+                            <label for="formGroupExampleInput" class="text-success">Inicio</label>
                         </div>
                         <div class="row justify-content-center">
                             <input type="text" class="form-control border border-success" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Inicio" placeholder="Inicio">
@@ -143,15 +143,14 @@
                             <label for="formGroupExampleInput" class="text-primary">Inicio</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-primary" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Inicio">
+                            <input type="text" class="form-control border border-primary" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Inicio" placeholder="Inicio">
                         </div>
                         <div class="row justify-content-center">
                             <label for="formGroupExampleInput" class="text-primary">Fin</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-primary" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Fin">
-                        </div>                       
-
+                            <input type="text" class="form-control border border-primary" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Fin" placeholder="Fin">
+                        </div>                     
                     </div>
 
                 </div>
@@ -256,7 +255,8 @@
 
                         <td style="text-align:center">
                             <!--data-toggle="modal" data-target="#UnidadesResponsables"-->
-                            <button type="button" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#UnidadesResponsablesUpdate" ng-click="ctrl.Modal(i.Id)">
+                            <button type="button" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#UnidadesResponsablesUpdate" ng-click="ctrl.Modal(i.Id)"
+                                    >
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
 
