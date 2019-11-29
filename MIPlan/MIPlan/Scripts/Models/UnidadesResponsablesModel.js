@@ -8,12 +8,12 @@
     ObtenerDependencias: function (callBackResult) {
         var self = this;
         self.dependenciaslst.length = 0;
-        var urlServer = "http://localhost:53805/";
+        //var urlServer = "http://localhost:53805/";
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
-                //url: urlServer + 'Catalogo/ObtenerDependencias',
+                url: urlServer + 'Catalogo/ObtenerDependencias',
                 success: function (resp) {                    
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
@@ -37,15 +37,14 @@
 
     },
 /********************************************************************************************************************************************************/
-        ObtenerUnidades: function (Dependencia, callBackResult) {
+        ObtenerUnidades: function (callBackResult) {
         var self = this;
         self.unidadesRlst.length = 0;
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
-                url: urlServer + 'Catalogo/ObtenerUnidades',
-                data: { Dependencia },
+                url: urlServer + 'Catalogo/ObtenerUnidades',                
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
@@ -125,13 +124,13 @@
             });
     },
 /********************************************************************************************************************************************************/
-    UnidadResponsableCreate: function (Dependencia, Clave, Descripcion, Status, Coordinador, callBackResult) {        
-        $.ajax(
+    UnidadResponsableCreate: function ( dependencia, clave, descripcion, status, coordinador, callBackResult) {        
+        $.ajax( 
             {
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'Catalogo/GuardarUnidadesResponsables',
-                data: {Dependencia, Clave, Descripcion, Status, Coordinador },
+                data: { dependencia, clave, descripcion, status, coordinador, },
                 success: function (resp) {
                     if (resp.Error == false) {
                         if (callBackResult !== undefined) {

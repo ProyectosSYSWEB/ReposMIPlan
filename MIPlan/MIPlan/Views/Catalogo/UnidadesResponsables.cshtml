@@ -15,7 +15,7 @@
 
     <!-- Modal Create -->
     <div class="modal fade border border-success" id="UnidadesResponsablesCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header btn-success justify-content-center">
                     <h5 class="modal-title" id="exampleModalLabel">Crear Unidad Responsable</h5>
@@ -34,11 +34,9 @@
                             <select class="form-control border border-success" name="cmbDependencia" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.unidad[0].Dependencia">
                                 <option value="">--Seleccionar Dependencia--</option>
                             </select>
-                        </div>
-                        <a href="~/Views/Catalogo/UnidadesResponsables.cshtml">~/Views/Catalogo/UnidadesResponsables.cshtml</a>
+                        </div>                       
                         <div class="row justify-content-center">
-                            <label for="formGroupExampleInput" class="text-success">Clave</label>
-                            <a href="~/Views/Catalogo/UnidadesResponsables.cshtml">~/Views/Catalogo/UnidadesResponsables.cshtml</a>
+                            <label for="formGroupExampleInput" class="text-success">Clave</label>                            
                         </div>
                         <div class="row justify-content-center">
                             <input type="text" class="form-control border border-success" id="formGroupExampleInput" ng-model="ctrl.unidad[0].Clave" placeholder="Clave">
@@ -82,7 +80,7 @@
     <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
     <!-- Modal Update-->
     <div class="modal fade" id="UnidadesResponsablesUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header btn-primary justify-content-center">
                     <h5 class="modal-title" id="exampleModalLabel">Actualizar Unidad Responsable</h5>
@@ -162,29 +160,13 @@
                 <div class="form-group">
                     <label for="lblStatus" class="text-success">Busqueda</label>
                     <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-model="buscar">
-                    <!--<input name="rbActivo" id="1" type="radio" /><label for="1">Activo</label>&nbsp;&nbsp;<input name="rbBaja" id="2" type="radio" /><label for="2">Baja</label>-->
+               
                 </div>
             </div>
         </div>
     </div>
 
-    <!--
-    <div class="row">
-        <div class="form-group col-md-12">
-            <label for="lblCatalogo">Catalogo:</label>&nbsp;&nbsp;
-
-            <select class="form-control" name="cmbCatalogo" @*ng-options="option.Id as option.Descripcion for option in ctrl.dependencias"*@ ng-model="ctrl.cve_catalogo">
-                <option value="0">--Seleccionar--</option>
-            </select>
-        </div>
-    </div>
-
-        -->
-
-
-
-<div class="panel panel-default panel-table">
-    @*<h3 class="panel-title input-group-text">Viaticos Asignados</h3><input type="button" class="btn btn-sm btn-primary btn-create" data-toggle="modal" data-target="#InfViaticos" />Nuevo<i class="fa fa-plus" aria-hidden="true"></i>*@
+<div class="panel panel-default panel-table">   
     <div class="panel-heading">
         <div class="container">
             <div class="col text-right">
@@ -241,7 +223,6 @@
                         <button type="button" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#UnidadesResponsablesUpdate" ng-click="ctrl.Modal(i.Id)">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </button>
-
                         <button type="button" class="btn btn-danger" ng-click="ctrl.EliminnarUR(i.Id)" style="width:50px">                                
                             <i class="fa fa-eraser" aria-hidden="true"></i>
                         </button>
