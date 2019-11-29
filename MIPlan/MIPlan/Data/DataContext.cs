@@ -128,6 +128,7 @@ namespace MIPlan.Data
                 object[] Valores = { Id };
                 string[] ParametrosOut = { "P_DEPENDENCIA", "P_DESCRIPCION","P_PERIODO", "P_STATUS", "P_EJERCICIO", "P_INICIO", "P_FIN", "P_BANDERA" };
                 cmd = exeProc.GenerarOracleCommand("OBT_PLA_PERIODOS", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+                objPeriodos.Id = Id;
                 objPeriodos.Dependencia = Convert.ToString(cmd.Parameters["P_DEPENDENCIA"].Value);                
                 objPeriodos.Descripcion = Convert.ToString(cmd.Parameters["P_DESCRIPCION"].Value);
                 objPeriodos.Periodo = Convert.ToString(cmd.Parameters["P_PERIODO"].Value);

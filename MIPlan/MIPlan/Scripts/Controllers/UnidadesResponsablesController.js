@@ -1,7 +1,4 @@
-﻿
-//<reference path="../Models/CatModel.js"/>
-
-(function () {
+﻿(function () {
     var app = angular.module('MIPlanWeb', []);
 
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
@@ -38,7 +35,7 @@
         };
  /********************************************************************************************************************************************************/
         var CargarGrid = function () {
-            catalogoContext.ObtenerUnidades(self.cve_dependencia, function (resp) {
+            catalogoContext.ObtenerUnidades( function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         self.unidades = catalogoContext.unidadesRlst;
@@ -118,10 +115,8 @@
         var eliminarUnidadResponsable = function (Idunidad) {
             catalogoContext.eliminarUnidad(Idunidad, function (resp) {
                 switch (resp.ressult) {
-                    case "tgp":
-                        console.log("Controller Eliminar ejecutado");
-                        CargarGrid();
-                        self.unidad = null;
+                    case "tgp":                                                
+                        console.log("Controller Eliminar ejecutado");                      
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -130,15 +125,16 @@
                     default:
                         break;
                 }
-                $scope.$apply();
+                
             });
         };
      
         this.EliminnarUR = function (Indice) { 
             var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
-            if (opcion == true) {
-                eliminarUnidadResponsable(Indice);                                      
+            if (opcion == true) {                
+                eliminarUnidadResponsable(Indice);                  
                 alert("¡Se ha elimnado con exito!");
+                CargarGrid();
             } else {
                 alert("No se ha eliminado el registro");
             }
