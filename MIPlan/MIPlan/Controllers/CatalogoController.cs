@@ -463,7 +463,7 @@ namespace MIPlan.Controllers
             }
         }
 
-        public JsonResult ObtenerPerdiodos(int Id)
+        public JsonResult ObtenerPeriodos(int Id)
         {
             List<Periodos> list = new List<Periodos>();
             ResultadoPeriodos objResultado = new ResultadoPeriodos();
