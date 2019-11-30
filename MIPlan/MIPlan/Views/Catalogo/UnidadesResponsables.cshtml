@@ -175,12 +175,12 @@
             </div>
         </div>
     </div>
-<!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <div class="panel panel-default panel-table">
         <div class="panel-heading">
             <div class="container">
                 <div class="col text-right">
-                    <button type="button" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#UnidadesResponsablesCreate" style="width:80px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                    <button type="button" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#UnidadesResponsablesCreate" data-backdrop="static" data-keyboard="false" style="width:120px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
                     <br />
                 </div>
             </div>
@@ -230,7 +230,7 @@
 
                         <td style="text-align:center">
                             <!--data-toggle="modal" data-target="#UnidadesResponsables"-->
-                            <button type="button" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#UnidadesResponsablesUpdate" ng-click="ctrl.Modal(i.Id)">
+                            <button type="button" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#UnidadesResponsablesUpdate" data-backdrop="static" data-keyboard="false" ng-click="ctrl.Modal(i.Id)">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
                             <button type="button" class="btn btn-danger" ng-click="ctrl.EliminnarUR(i.Id)" style="width:50px">
@@ -272,3 +272,9 @@
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/UnidadesResponsablesController.js"></script>
 <script src="~/Scripts/Models/UnidadesResponsablesModel.js"></script>
+
+<!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<script type="text/javascript">
+
+
+</script>

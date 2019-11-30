@@ -13,11 +13,11 @@
 <div ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
 
     <!-- Modal Create -->
-    <div class="modal fade border border-success" id="UnidadesResponsablesCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade border border-success" id="PeriodoCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header btn-success">
-                    <h5 class="modal-title" id="exampleModalLabel">Crear Unidad Responsable</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Crear Periodo</h5>
                     <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -26,7 +26,7 @@
 
                     <div class="container-fluid">
 
-                        <div class="row align-items-md-center">
+                        <div class="row justify-content-center">
                             <label for="lblDependencia" class="text-success">Dependencia:</label>
                         </div>
                         <div class="row justify-content-center">
@@ -81,18 +81,18 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" ng-click="ctrl.Inicio()" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success" ng-click="ctrl.periodoeCreate()">Crear Unidad</button>
+                    <button type="button" class="btn btn-success" ng-click="ctrl.periodoeCreate()">Crear Periodo</button>
                 </div>
             </div>
         </div>
     </div>
     <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
     <!-- Modal Update-->
-    <div class="modal fade" id="UnidadesResponsablesUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="PeriodoUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header btn-primary justify-content-center">
-                    <h5 class="modal-title" id="exampleModalLabel">Actualizar Unidad Responsable</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Actualizar Periodo</h5>
                     <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -197,7 +197,7 @@
         <div class="panel-heading">
             <div class="container">
                 <div class="col text-right">
-                    <button type="button" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#UnidadesResponsablesCreate" style="width:80px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                    <button type="button" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#PeriodoCreate"  data-backdrop="static" data-keyboard="false" style="width:120px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
                     <br />
                 </div>
             </div>
@@ -255,7 +255,7 @@
 
                         <td style="text-align:center">
                             <!--data-toggle="modal" data-target="#UnidadesResponsables"-->
-                            <button type="button" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#UnidadesResponsablesUpdate" ng-click="ctrl.Modal(i.Id)">
+                            <button type="button" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#PeriodoUpdate" data-backdrop="static" data-keyboard="false" ng-click="ctrl.Modal(i.Id)">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
 
@@ -300,21 +300,23 @@
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/PeriodosController.js"></script>
 <script src="~/Scripts/Models/PeriodosModel.js"></script>
-InicioCreate
+ 
+ <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <script type="text/javascript">
+   
     $('#InicioCreate').datetimepicker({
         timepicker: false,
         format: 'd/m/Y'
     });
-     $('#FinCreate').datetimepicker({
+    $('#FinCreate').datetimepicker({
         timepicker: false,
         format: 'd/m/Y'
-     });
-     $('#InicioUpdate').datetimepicker({
+    });
+    $('#InicioUpdate').datetimepicker({
         timepicker: false,
         format: 'd/m/Y'
-     });
-     $('#FinUpdate').datetimepicker({
+    });
+    $('#FinUpdate').datetimepicker({
         timepicker: false,
         format: 'd/m/Y'
     });
