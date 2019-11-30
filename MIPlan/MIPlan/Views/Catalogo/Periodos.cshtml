@@ -16,7 +16,7 @@
     <div class="modal fade border border-success" id="UnidadesResponsablesCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header btn-success justify-content-center">
+                <div class="modal-header btn-success">
                     <h5 class="modal-title" id="exampleModalLabel">Crear Unidad Responsable</h5>
                     <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -26,7 +26,7 @@
 
                     <div class="container-fluid">
 
-                        <div class="row justify-content-center">
+                        <div class="row align-items-md-center">
                             <label for="lblDependencia" class="text-success">Dependencia:</label>
                         </div>
                         <div class="row justify-content-center">
@@ -164,19 +164,20 @@
 
 
     <div class="container">
+
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblDependencia" class="text-primary">Dependencia:</label>
-                    <select class="form-control border border-primary" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia">
+                    <select class="form-control border border-primary" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia" style="max-width:100%;">
                         <option value="">--Seleccionar Dependencia--</option>
                     </select>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
-                    <label for="lblDependencia" class="text-info">Dependencia:</label>
-                    <select class="form-control border border-info" name="cmbDependencia">
+                    <label for="lblDependencia" class="text-info">Estatus:</label>
+                    <select class="form-control border border-info" name="cmbDependencia" style="max-width:100%;">
                         <option value="">--Seleccionar Estatus--</option>
                         <option value="A">Alta</option>
                         <option value="B">Baja</option>
@@ -186,12 +187,12 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblStatus" class="text-success">Busqueda</label>
-                    <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-model="buscar">
+                    <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-model="buscar" style="max-width:100%;">
                 </div>
             </div>
         </div>
     </div>
-
+    <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <div class="panel panel-default panel-table">
         <div class="panel-heading">
             <div class="container">

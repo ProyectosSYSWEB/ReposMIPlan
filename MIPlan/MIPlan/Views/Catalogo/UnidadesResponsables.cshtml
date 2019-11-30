@@ -15,7 +15,7 @@
 
     <!-- Modal Create -->
     <div class="modal fade border border-success" id="UnidadesResponsablesCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header btn-success justify-content-center">
                     <h5 class="modal-title" id="exampleModalLabel">Crear Unidad Responsable</h5>
@@ -34,9 +34,9 @@
                             <select class="form-control border border-success" name="cmbDependencia" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.unidad[0].Dependencia">
                                 <option value="">--Seleccionar Dependencia--</option>
                             </select>
-                        </div>                       
+                        </div>
                         <div class="row justify-content-center">
-                            <label for="formGroupExampleInput" class="text-success">Clave</label>                            
+                            <label for="formGroupExampleInput" class="text-success">Clave</label>
                         </div>
                         <div class="row justify-content-center">
                             <input type="text" class="form-control border border-success" id="formGroupExampleInput" ng-model="ctrl.unidad[0].Clave" placeholder="Clave">
@@ -50,7 +50,7 @@
                         </div>
                         <div class="row justify-content-center">
                             <label for="formGroupExampleInput" class="text-success">Estatus</label>
-                        </div>                     
+                        </div>
                         <div class="row justify-content-center">
                             <select class="form-control border border-success" name="cmbDependencia_status" ng-model="ctrl.unidad[0].Status">
                                 <option value="">--Seleccionar Estatus--</option>
@@ -80,7 +80,7 @@
     <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
     <!-- Modal Update-->
     <div class="modal fade" id="UnidadesResponsablesUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header btn-primary justify-content-center">
                     <h5 class="modal-title" id="exampleModalLabel">Actualizar Unidad Responsable</h5>
@@ -116,7 +116,7 @@
                         </div>
                         <div class="row justify-content-center">
                             <label for="formGroupExampleInput" class="text-primary">Estatus</label>
-                        </div>                        
+                        </div>
                         <div class="row justify-content-center">
                             <select class="form-control border border-primary" name="cmbDependencia_status" ng-model="ctrl.unidad[0].Status">
                                 <option value="">--Seleccionar Estatus--</option>
@@ -143,111 +143,121 @@
             </div>
         </div>
     </div>
-<!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 
-    <div class="container" >
-        <div class="row">
-            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblDependencia" class="text-primary">Dependencia:</label>
-                    <select class="form-control border border-primary" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia">
+                    <select class="form-control border border-primary" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia" style="max-width:100%;">
                         <option value="">--Seleccionar Dependencia--</option>
                     </select>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                <div class="form-group">
+                    <label for="lblDependencia" class="text-info">Estatus:</label>
+                    <select class="form-control border border-info" name="cmbDependencia" style="max-width:100%;">
+                        <option value="">--Seleccionar Estatus--</option>
+                        <option value="A">Alta</option>
+                        <option value="B">Baja</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblStatus" class="text-success">Busqueda</label>
-                    <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-model="buscar">
-               
+                    <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-model="buscar" style="max-width:100%;">
                 </div>
             </div>
         </div>
     </div>
-
-<div class="panel panel-default panel-table">   
-    <div class="panel-heading">
-        <div class="container">
-            <div class="col text-right">
-                <button type="button" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#UnidadesResponsablesCreate" style="width:80px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
-                <br />
+<!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <div class="panel panel-default panel-table">
+        <div class="panel-heading">
+            <div class="container">
+                <div class="col text-right">
+                    <button type="button" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#UnidadesResponsablesCreate" style="width:80px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                    <br />
+                </div>
             </div>
         </div>
-    </div>          
 
-    <div class="container table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.3)">
-        <table id="Table" class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Dependencia</th>
-                    <th scope="col">
-                        <a href="" ng-click="sortType = 'Clave'; sortReverse = !sortReverse">
-                            Clave
-                            <span ng-class="sortType == 'Clave' && !sortReverse ? 'arrow arrow-down' : sortType == 'id' && sortReverse ? 'arrow arrow-up': ''"></span>
-                        </a>
-                    </th>
-                    <th scope="col">
-                        <a href="" ng-click="sortType = 'Descripcion'; sortReverse = !sortReverse">
-                            Descripción
-                            <span ng-class="sortType == 'Descripcion' && !sortReverse ? 'arrow arrow-down' : sortType == 'id' && sortReverse ? 'arrow arrow-up': ''"></span>
-                        </a>
-                    </th>
-                    <th scope="col">
-                        <a href="" ng-click="sortType = 'Status'; sortReverse = !sortReverse">
-                            Estatus
-                            <span ng-class="sortType == 'Status' && !sortReverse ? 'arrow arrow-down' : sortType == 'id' && sortReverse ? 'arrow arrow-up': ''"></span>
-                        </a>
-                    </th>
-                    <th scope="col">
-                        <a href="" ng-click="sortType = 'Coordinador'; sortReverse = !sortReverse">
-                            Coordinador
-                            <span ng-class="sortType == 'Coordinador' && !sortReverse ? 'arrow arrow-down' : sortType == 'id' && sortReverse ? 'arrow arrow-up': ''"></span>
-                        </a>
-                    </th>
+        <div class="container table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.3)">
+            <table id="Table" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Dependencia</th>
+                        <th scope="col">
+                            <a href="" ng-click="sortType = 'Clave'; sortReverse = !sortReverse">
+                                Clave
+                                <span ng-class="sortType == 'Clave' && !sortReverse ? 'arrow arrow-down' : sortType == 'id' && sortReverse ? 'arrow arrow-up': ''"></span>
+                            </a>
+                        </th>
+                        <th scope="col">
+                            <a href="" ng-click="sortType = 'Descripcion'; sortReverse = !sortReverse">
+                                Descripción
+                                <span ng-class="sortType == 'Descripcion' && !sortReverse ? 'arrow arrow-down' : sortType == 'id' && sortReverse ? 'arrow arrow-up': ''"></span>
+                            </a>
+                        </th>
+                        <th scope="col">
+                            <a href="" ng-click="sortType = 'Status'; sortReverse = !sortReverse">
+                                Estatus
+                                <span ng-class="sortType == 'Status' && !sortReverse ? 'arrow arrow-down' : sortType == 'id' && sortReverse ? 'arrow arrow-up': ''"></span>
+                            </a>
+                        </th>
+                        <th scope="col">
+                            <a href="" ng-click="sortType = 'Coordinador'; sortReverse = !sortReverse">
+                                Coordinador
+                                <span ng-class="sortType == 'Coordinador' && !sortReverse ? 'arrow arrow-down' : sortType == 'id' && sortReverse ? 'arrow arrow-up': ''"></span>
+                            </a>
+                        </th>
 
-                    <th style="text-align:center"><em class="fa fa-cog"></em></th>
-                </tr>
-            </thead>
-            <tbody ng-repeat="i in ctrl.unidades | orderBy:sortType:sortReverse | filter:buscar">
-                <tr>
-                    <td>{{i.Dependencia}}</td>
-                    <td>{{i.Clave}}</td>
-                    <td>{{i.Descripcion}}</td>
-                    <td>{{i.Status}}</td>
-                    <td>{{i.Coordinador}}</td>
+                        <th style="text-align:center"><em class="fa fa-cog"></em></th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="i in ctrl.unidades | orderBy:sortType:sortReverse | filter:buscar">
+                    <tr>
+                        <td>{{i.Dependencia}}</td>
+                        <td>{{i.Clave}}</td>
+                        <td>{{i.Descripcion}}</td>
+                        <td>{{i.Status}}</td>
+                        <td>{{i.Coordinador}}</td>
 
 
-                    <td style="text-align:center">
-                        <!--data-toggle="modal" data-target="#UnidadesResponsables"-->
-                        <button type="button" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#UnidadesResponsablesUpdate" ng-click="ctrl.Modal(i.Id)">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                        </button>
-                        <button type="button" class="btn btn-danger" ng-click="ctrl.EliminnarUR(i.Id)" style="width:50px">                                
-                            <i class="fa fa-eraser" aria-hidden="true"></i>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th style="text-align:center">
-                        <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
-                            <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                        </button>
-                        <button type="button" class="btn btn-success" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
-                            <i class="fa fa-file-excel-o" aria-hidden="true"></i>
-                        </button>
-                    </th>
-                </tr>
-            </tfoot>
-        </table>
+                        <td style="text-align:center">
+                            <!--data-toggle="modal" data-target="#UnidadesResponsables"-->
+                            <button type="button" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#UnidadesResponsablesUpdate" ng-click="ctrl.Modal(i.Id)">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" ng-click="ctrl.EliminnarUR(i.Id)" style="width:50px">
+                                <i class="fa fa-eraser" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th style="text-align:center">
+                            <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-success" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                                <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                            </button>
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
-</div>
 </div>
 
 <br />

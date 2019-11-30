@@ -38,8 +38,7 @@
             catalogoContext.ObtenerUnidades( function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.unidades = catalogoContext.unidadesRlst;
-                        console.log(self.unidades);
+                        self.unidades = catalogoContext.unidadesRlst;                        
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -75,8 +74,7 @@
             
             catalogoContext.UnidadResponsableUpdate(self.unidad[0].Id, self.unidad[0].Dependencia, self.unidad[0].Clave, self.unidad[0].Descripcion, self.unidad[0].Status, self.unidad[0].Coordinador, function (resp) {
                 switch (resp.ressult) {
-                    case "tgp":
-                        //  self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
+                    case "tgp":                        
                         alert("¡Se han actualizado los datos correctamente!");
                         break;
                     case "notgp":
@@ -96,8 +94,7 @@
             
             catalogoContext.UnidadResponsableCreate(self.unidad[0].Dependencia, self.unidad[0].Clave, self.unidad[0].Descripcion, self.unidad[0].Status, self.unidad[0].Coordinador, function (resp) {
                 switch (resp.ressult) {
-                    case "tgp":
-                        //  self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
+                    case "tgp":                        
                         alert("¡Se ha creado la unidad correctamente!");
                         break;
                     case "notgp":
@@ -115,12 +112,10 @@
         var eliminarUnidadResponsable = function (Idunidad) {
             catalogoContext.eliminarUnidad(Idunidad, function (resp) {
                 switch (resp.ressult) {
-                    case "tgp":                                                
-                        console.log("Controller Eliminar ejecutado");                      
+                    case "tgp":                                                                        
                         break;
                     case "notgp":
-                        self.mensaje_gral = resp.message;
-                        console.log("Error Controller");
+                        self.mensaje_gral = resp.message;                        
                         break;
                     default:
                         break;
