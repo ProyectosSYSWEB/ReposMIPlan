@@ -5,17 +5,28 @@
 
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
         var self = this;
-        //var self = this;
         self.buscar = '';
 
         this.Inicio = function () {
             CargarCombos();
             CargarGrid();
+            self.unidad = null;
+            //CargarCarrera();
         };
 
         var CargarCombos = function () {
             ObtenerDependencias();
+            
         };
+        this.Carrera = function () {
+            CargarCarre();
+
+        };
+        var CargarCarre = function () {
+            ObtenerCarreras();
+
+        };
+
 
 
         var ObtenerDependencias = function () {
@@ -34,6 +45,26 @@
                 $scope.$apply();
             });
         };
+
+        var ObtenerCarreras = function () {
+            catalogoContext.ObtenerCarreras(function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.carrera = catalogoContext.carreralst;
+                        //self.cve_dependencia = catalogoContext.dependenciaslst[0].Id;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+
+
+
 
         var CargarGrid = function () {
             catalogoContext.ObtenerAcreditadores(self.cve_dependencia, function (resp) {
@@ -58,12 +89,14 @@
             catalogoContext.ObtenerAcreditador(IdAcreditacion, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.cve_dependencia = catalogoContext.unidadAcreditacionlst[0].Dep;
-                        self.cve_carrera = catalogoContext.unidadAcreditacionlst[0].Car;
+                        self.cve_dependencia = catalogoContext.unidadAcreditacionlst[0].Dependencia;
+                        self.cve_carrera = catalogoContext.unidadAcreditacionlst[0].Carrera;
                         self.cve_organismo = catalogoContext.unidadAcreditacionlst[0].Organismo;
                         self.cve_fecha_inicio = catalogoContext.unidadAcreditacionlst[0].Fecha_Inicial;
                         self.cve_feha_fin = catalogoContext.unidadAcreditacionlst[0].Fecha_Final;
                         self.cve_status = catalogoContext.unidadAcreditacionlst[0].Status;
+                        self.cve_observacion = catalogoContext.unidadAcreditacionlst[0].Observacion;
+
                         
                         break;
                     case "notgp":
@@ -77,26 +110,31 @@
         };
 
 
-        //var UnidadUpdate = function () {
+        var UnidadCreate = function () {
 
-        //    console.log("ID Update", self.Acreditacion[0].Clave);
-        //    catalogoContext.UnidadAcreditadorUpdate(self.Acreditacion[0].Clave, self.Acreditacion[0].Dependencia, function (resp) {
-        //        switch (resp.ressult) {
-        //            case "tgp":
-        //                self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
-        //                console.log("Updated!", self.unidadadUpdateRlst);
-        //                break;
-        //            case "notgp":
-        //                self.mensaje_gral = resp.message;
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //        $scope.$apply();
-        //    });
-        //};
+            catalogoContext.AcreditadorCreate(self.unidad[0].Dependencia, self.unidad[0].Carrera, self.unidad[0].Organismo, self.unidad[0].FechaInicial, self.unidad[0].FechaFinal, self.unidad[0].Statu , self.unidad[0].Observaciones,function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        //  self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
+                        alert("¡Se ha creado la unidad correctamente!");
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+
+        this.AcreditadorCreate = function () { UnidadCreate(); }
 
 
+
+       
+
+        
 
         this.ValorDependencia = function () {
             alert(self.cve_dependencia);
@@ -107,12 +145,7 @@
 
         }
 
-        //this.Update = function (Indice) {
-        //    Indice = Indice + 1;
-        //    console.log(Indice);
-        //    cargarModal(Indice);
-
-        //};
+       
 
 
         this.BorrarBasico = function (Indice) {
