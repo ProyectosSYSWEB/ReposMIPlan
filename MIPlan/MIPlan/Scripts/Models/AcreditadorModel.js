@@ -3,9 +3,11 @@
     carreralst: [],
     dependenciaslst: [],
     acreditadoreslst: [],
-    unidadesRlst: [],
+    unidadadRlst:[],
     unidadAcreditacionlst: [],
+    acreditadorUpdatelst: [],
     //subtipo_comprobacioneslst: [],
+
     ObtenerDependencias: function (callBackResult) {
         var self = this;
         self.dependenciaslst.length = 0;
@@ -116,6 +118,34 @@
             });
 
     },
+
+    AcreditadorUpdate: function (Id, Dependencia, Carrera, Organismo, Fecha_Inicial, Fecha_Final, Status, Observacion, callBackResult) {
+        var self = this;
+        self.acreditadorUpdatelst.length = 0;
+        $.ajax(
+            {
+                type: 'POST',
+                cache: false,
+                url: urlServer + 'Catalogo/EditarAcreditaciones',
+                data: { Id, Dependencia, Carrera, Organismo, Fecha_Inicial, Fecha_Final, Status, Observacion },
+                success: function (resp) {
+                    if (resp.Error == false) {
+
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: res })
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EditarAcreditaciones." });
+                    }
+                }
+            });
+    },
+
     AcreditadorCreate: function (Dependencia,Carrera,Organismo,FechaInicial,FechaFinal,Status,Observaciones, callBackResult) {
         $.ajax(
             {
@@ -135,6 +165,31 @@
                 error: function (ex) {
                     if (callBackResult !== undefined) {
                         callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en GuardarUnidadesResponsables." });
+                    }
+                }
+            });
+    },
+
+
+    eliminarAcreditador: function (IdAcreditacion, callBackResult) {
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'Catalogo/EliminarAcreditacion',
+                data: { IdAcreditacion },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: res })
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EliminarAcreditador." });
                     }
                 }
             });
