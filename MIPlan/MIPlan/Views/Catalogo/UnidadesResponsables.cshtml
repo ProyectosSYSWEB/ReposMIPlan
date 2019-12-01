@@ -152,7 +152,7 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblDependencia" class="text-primary">Dependencia:</label>
-                    <select class="form-control border border-primary" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia" style="max-width:100%;">
+                    <select class="form-control border border-primary" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.buscar" style="max-width:100%;">
                         <option value="">--Seleccionar Dependencia--</option>
                     </select>
                 </div>
@@ -160,8 +160,9 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblDependencia" class="text-info">Estatus:</label>
-                    <select class="form-control border border-info" name="cmbDependencia" style="max-width:100%;">
+                    <select class="form-control border border-info" name="cmbDependencia" ng-change="ctrl.StatusFun()" ng-model="ctrl.Status.Status" style="max-width:100%;">
                         <option value="">--Seleccionar Estatus--</option>
+                        <option value="Todos">Todos</option>
                         <option value="A">Alta</option>
                         <option value="B">Baja</option>
                     </select>
@@ -170,7 +171,7 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblStatus" class="text-success">Busqueda</label>
-                    <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-model="buscar" style="max-width:100%;">
+                    <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-model="ctrl.buscar" style="max-width:100%;">
                 </div>
             </div>
         </div>
@@ -219,7 +220,7 @@
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody ng-repeat="i in ctrl.unidades | orderBy:sortType:sortReverse | filter:buscar">
+                <tbody ng-repeat="i in ctrl.unidades | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status">
                     <tr>
                         <td>{{i.Dependencia}}</td>
                         <td>{{i.Clave}}</td>
