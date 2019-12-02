@@ -4,21 +4,6 @@
 (function () {
     var app = angular.module('MIPlanWeb', []);
 
-    app.directive('jqdatepicker', function () {
-        return {
-            restrict: 'A',
-            require: 'ngModel',
-            link: function (scope, element, attrs, ngModelCtrl) {
-                element.datepicker({
-                    dateFormat: 'dd, mm, yy',
-                    onSelect: function (date) {
-                        scope.date = date;
-                        scope.$apply();
-                    }
-                });
-            }
-        };
-    });
 /********************************************************************************************************************************************************/
 
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
@@ -57,9 +42,7 @@
             catalogoContext.ObtenerGridPeriodos(function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.periodos = catalogoContext.periodoslst;
-
-                        console.log("controller",self.periodos);
+                        self.periodos = catalogoContext.periodoslst;                        
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -90,11 +73,10 @@
         this.Modal = function (Indice) { cargarModal(Indice); };
 /********************************************************************************************************************************************************/
         var periodoUpdateF = function () {
-                                                        /*id,                 dependencia,                 periodo,                descripcion,                  status,                 ejercicio,                 inicio,                 fin,*/
+                                                       
             catalogoContext.periodoUpdate(self.periodo[0].Id, self.periodo[0].Dependencia, self.periodo[0].Periodo, self.periodo[0].Descripcion, self.periodo[0].Status, self.periodo[0].Ejercicio, self.periodo[0].Inicio, self.periodo[0].Fin ,function (resp) {
                 switch (resp.ressult) {
-                    case "tgp":
-                        //  self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
+                    case "tgp":                      
                         alert("¡Se han actualizado los datos correctamente!");
                         break;
                     case "notgp":
@@ -114,8 +96,7 @@
                                                                                                                                                                                 
             catalogoContext.GuardarPerdiodos(self.periodo[0].Dependencia, self.periodo[0].Periodo, self.periodo[0].Descripcion, self.periodo[0].Status, self.periodo[0].Ejercicio, self.periodo[0].Inicio, self.periodo[0].Fin , function (resp) {
                 switch (resp.ressult) {
-                    case "tgp":
-                        //  self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
+                    case "tgp":                      
                         alert("¡Se ha creado el periodo correctamente!");
                         break;
                     case "notgp":
@@ -133,12 +114,10 @@
         var EliminnarPeriodoF = function (IdPeriodo) {
             catalogoContext.eliminarPeriodo(IdPeriodo, function (resp) {
                 switch (resp.ressult) {
-                    case "tgp":
-                        console.log("Controller Eliminar ejecutado");                                            
+                    case "tgp":                                
                         break;
                     case "notgp":
-                        self.mensaje_gral = resp.message;
-                        console.log("Error Controller");
+                        self.mensaje_gral = resp.message;                        
                         break;
                     default:
                         break;
@@ -158,9 +137,17 @@
         };
         /*******************************************************************************************************************************************************/
 
-        this.ValorDependencia = function () {
-            alert(self.cve_dependencia);
+        this.ValorDependencia = function () {            
+            if (self.buscar == "00000") {
+                self.buscar = '';
+            }
         };
+
+        this.StatusFun = function () {
+            if (self.Status.Status == "Todos") {
+                self.Status.Status = '';
+            }
+        }
         /*******************************************************************************************************************************************************/
 
     }]);
