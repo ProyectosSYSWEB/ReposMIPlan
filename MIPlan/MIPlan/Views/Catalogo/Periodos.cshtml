@@ -10,15 +10,14 @@
 <br />
 <br />
 
-
 <div ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
 
     <!-- Modal Create -->
-    <div class="modal fade border border-success" id="UnidadesResponsablesCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade border border-success" id="PeriodoCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header btn-success justify-content-center">
-                    <h5 class="modal-title" id="exampleModalLabel">Crear Unidad Responsable</h5>
+                <div class="modal-header btn-success">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear Periodo</h5>
                     <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -39,7 +38,7 @@
                             <label for="formGroupExampleInput" class="text-success">Periodo</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-primary" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Periodo" placeholder="Periodo">
+                            <input type="text" class="form-control border border-success" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Periodo" placeholder="Periodo">
                         </div>
 
                         <div class="row justify-content-center">
@@ -68,13 +67,13 @@
                             <label for="formGroupExampleInput" class="text-success">Inicio</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-success" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Inicio" placeholder="Inicio">
+                            <input type="text" class="form-control border border-success" id="InicioCreate" ng-model="ctrl.periodo[0].Inicio" placeholder="Inicio">
                         </div>
                         <div class="row justify-content-center">
                             <label for="formGroupExampleInput" class="text-success">Fin</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-success" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Fin" placeholder="Fin">
+                            <input type="text" class="form-control border border-success" id="FinCreate" ng-model="ctrl.periodo[0].Fin" placeholder="Fin">
                         </div>
 
                     </div>
@@ -82,18 +81,18 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" ng-click="ctrl.Inicio()" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success" ng-click="ctrl.periodoeCreate()">Crear Unidad</button>
+                    <button type="button" class="btn btn-success" ng-click="ctrl.periodoeCreate()">Crear Periodo</button>
                 </div>
             </div>
         </div>
     </div>
     <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
     <!-- Modal Update-->
-    <div class="modal fade" id="UnidadesResponsablesUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="PeriodoUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header btn-primary justify-content-center">
-                    <h5 class="modal-title" id="exampleModalLabel">Actualizar Unidad Responsable</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Actualizar Periodo</h5>
                     <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -137,24 +136,19 @@
                             <label for="formGroupExampleInput" class="text-primary">Ejercicio</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-primary" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Ejercicio" placeholder="Ejercicio">
+                            <input type="text" class="form-control border border-primary" id="calendario" ng-model="ctrl.periodo[0].Ejercicio" placeholder="Ejercicio">
                         </div>
                         <div class="row justify-content-center">
                             <label for="formGroupExampleInput" class="text-primary">Inicio</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-primary" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Inicio" ng-value="date" placeholder="Inicio">
+                            <input type="text" class="form-control border border-primary" id="InicioUpdate" ng-model="ctrl.periodo[0].Inicio" placeholder="Inicio">
                         </div>
-                            <!-- <div class="row justify-content-center">
-                                  <input type="text" class="form-control" ng-model="date" jqdatepicker />
-                             </div>
-                            -->
-
                         <div class="row justify-content-center">
                             <label for="formGroupExampleInput" class="text-primary">Fin</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-primary" ng-model="ctrl.periodo[0].Fin" placeholder="Fin">
+                            <input type="text" class="form-control border border-primary" id="FinUpdate" ng-model="ctrl.periodo[0].Fin" placeholder="Fin">
                         </div>
                     </div>
 
@@ -170,20 +164,22 @@
 
 
     <div class="container">
+
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblDependencia" class="text-primary">Dependencia:</label>
-                    <select class="form-control border border-primary" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia">
+                    <select class="form-control border border-primary" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.buscar" style="max-width:100%;">
                         <option value="">--Seleccionar Dependencia--</option>
                     </select>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
-                    <label for="lblDependencia" class="text-info">Dependencia:</label>
-                    <select class="form-control border border-info" name="cmbDependencia">
+                    <label for="lblDependencia" class="text-info">Estatus:</label>
+                    <select class="form-control border border-info" name="cmbDependencia" ng-change="ctrl.StatusFun()" ng-model="ctrl.Status.Status" style="max-width:100%;">
                         <option value="">--Seleccionar Estatus--</option>
+                        <option value="Todos">Todos</option>
                         <option value="A">Alta</option>
                         <option value="B">Baja</option>
                     </select>
@@ -192,17 +188,17 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblStatus" class="text-success">Busqueda</label>
-                    <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-model="buscar">
+                    <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-model="ctrl.buscar" style="max-width:100%;">
                 </div>
             </div>
         </div>
     </div>
-
+    <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <div class="panel panel-default panel-table">
         <div class="panel-heading">
             <div class="container">
                 <div class="col text-right">
-                    <button type="button" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#UnidadesResponsablesCreate" style="width:80px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                    <button type="button" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#PeriodoCreate"  data-backdrop="static" data-keyboard="false" style="width:120px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
                     <br />
                 </div>
             </div>
@@ -212,7 +208,11 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Dependencia</th>
+                        <th scope="col">
+                            <a href="" ng-click="sortType = 'Periodo'; sortReverse = !sortReverse">
+                                Dependencia
+                            </a>
+                        </th>
                         <th scope="col">
                             <a href="" ng-click="sortType = 'Periodo'; sortReverse = !sortReverse">
                                 Periodo
@@ -247,7 +247,7 @@
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody ng-repeat="i in ctrl.periodos | orderBy:sortType:sortReverse | filter:buscar">
+                <tbody ng-repeat="i in ctrl.periodos | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status" >
                     <tr>
                         <td>{{i.Dependencia}}</td>
                         <td>{{i.Periodo}}</td>
@@ -260,7 +260,7 @@
 
                         <td style="text-align:center">
                             <!--data-toggle="modal" data-target="#UnidadesResponsables"-->
-                            <button type="button" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#UnidadesResponsablesUpdate" ng-click="ctrl.Modal(i.Id)">
+                            <button type="button" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#PeriodoUpdate" data-backdrop="static" data-keyboard="false" ng-click="ctrl.Modal(i.Id)">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
 
@@ -288,7 +288,8 @@
                 </tfoot>
             </table>
         </div>
-    </div> 
+    </div>
+
 </div>
 
 
@@ -304,4 +305,24 @@
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/PeriodosController.js"></script>
 <script src="~/Scripts/Models/PeriodosModel.js"></script>
-
+ 
+ <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<script type="text/javascript">
+   
+    $('#InicioCreate').datetimepicker({
+        timepicker: false,
+        format: 'd/m/Y'
+    });
+    $('#FinCreate').datetimepicker({
+        timepicker: false,
+        format: 'd/m/Y'
+    });
+    $('#InicioUpdate').datetimepicker({
+        timepicker: false,
+        format: 'd/m/Y'
+    });
+    $('#FinUpdate').datetimepicker({
+        timepicker: false,
+        format: 'd/m/Y'
+    });
+</script>
