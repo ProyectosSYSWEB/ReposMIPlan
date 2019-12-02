@@ -72,6 +72,34 @@
             });
         };
 
+        var eliminarAreaAtencion = function (IdArea) {
+            catalogoContext.eliminarArea(IdArea, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        console.log("Controller Eliminar ejecutado");
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        console.log("Error Controller");
+                        break;
+                    default:
+                        break;
+                }
+
+            });
+        };
+
+        this.EliminarAreaAtencion = function (Indice) {
+            var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
+            if (opcion == true) {
+                eliminarAreaAtencion(Indice);
+                alert("¡Se ha elimnado con exito!");
+                CargarGrid();
+            } else {
+                alert("No se ha eliminado el registro");
+            }
+        };
+
 
         this.ValorDependencia = function () {
             alert(self.cve_dependencia);

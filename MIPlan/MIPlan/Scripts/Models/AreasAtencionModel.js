@@ -73,7 +73,7 @@
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
-                            self.areasRlst.push({ Dependencia: resp.Resultado[i].Dependecia, Cve: resp.Resultado[i].Clave, Desc: resp.Resultado[i].Descripcion, Estatus: resp.Resultado[i].Status, Cat: resp.Resultado[i].Categoria });
+                            self.areasRlst.push({ Dependencia: resp.Resultado[i].Dependencia, Cve: resp.Resultado[i].Clave, Desc: resp.Resultado[i].Descripcion, Estatus: resp.Resultado[i].Status, Cat: resp.Resultado[i].Categoria });
                         }
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
@@ -89,5 +89,29 @@
                 }
             });
 
+    },
+
+    eliminarArea: function (IdArea, callBackResult) {
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'Catalogo/EliminarAreaAtencion',
+                data: { IdArea },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: res })
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EliminarUnidadResponsable." });
+                    }
+                }
+            });
     },
 };
