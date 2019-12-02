@@ -52,7 +52,19 @@
 
 
         this.ObtDatos = function (IdAreaAtencion) {
-            
+            $('#btnActualizar').show();
+            $('#btnNuevo').hide();
+            document.getElementById("lblDependencia").className = "text-primary";
+            document.getElementById("cmdDependencia").className = "form-control border border-primary";
+            document.getElementById("lblClave").className = "text-primary";
+            document.getElementById("txtClave").className = "form-control border border-primary";
+            document.getElementById("lblDescripcion").className = "text-primary";
+            document.getElementById("txtDescripcion").className = "form-control border border-primary";
+            document.getElementById("lblStatus").className = "text-primary";
+            document.getElementById("cmdstatus").className = "form-control border border-primary";
+            document.getElementById("lblCategoria").className = "text-primary";
+            document.getElementById("cmdcat").className = "form-control border border-primary";
+
             catalogoContext.ObtenerAreas(IdAreaAtencion, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
@@ -70,6 +82,26 @@
                 }
                 $scope.$apply();
             });
+        };
+
+        this.Nuevo = function () {
+            $('#btnNuevo').show();
+            $('#btnActualizar').hide();
+            document.getElementById("lblDependencia").className = "text-success";
+            document.getElementById("cmdDependencia").className = "form-control border border-success";
+            document.getElementById("lblClave").className = "text-success";
+            document.getElementById("txtClave").className = "form-control border border-success";
+            document.getElementById("lblDescripcion").className = "text-success";
+            document.getElementById("txtDescripcion").className = "form-control border border-success";
+            document.getElementById("lblStatus").className = "text-success";
+            document.getElementById("cmdstatus").className = "form-control border border-success";
+            document.getElementById("lblCategoria").className = "text-success";
+            document.getElementById("cmdcat").className = "form-control border border-success";
+            self.cve_dependencia = "";
+            self.cve_clave = "";
+            self.cve_desc = "";
+            self.cve_status = "";
+            self.cve_cat = "";
         };
 
         var eliminarAreaAtencion = function (IdArea) {
