@@ -36,7 +36,7 @@
 
     },
 
-    ObtenerCarrera: function (callBackResult) {
+    ObtenerCarreras: function (Dependencia, callBackResult) {
         var self = this;
         self.carreralst.length = 0;
         //var urlServer = "http://localhost:53805/";
@@ -45,9 +45,10 @@
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'Catalogo/ObtenerCarreras',
+                data: { Dependencia },
                 success: function (resp) {
                     for (var i = 0; i < resp.Resultado.length; i++) {
-                        self.carreralst.push({ Carrera: resp.Resultado[i].Carrera });
+                        self.carreralst.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion, Carrera: resp.Resultado[i].Carrera });
                     }
                     if (callBackResult != undefined) {
                         callBackResult({ ressult: 'tgp', message: null });
