@@ -43,7 +43,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Áreas De Atención</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Crear Área de Atención</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -65,7 +65,7 @@
                                                 <label for="lblClave">Clave:</label>
                                             </div>
                                             <div class="form-inline col-md-1">
-                                                <input class="form-control" name="txtClave" type="text" ng-model="ctrl.cve_clave">
+                                                <input class="form-control" name="txtClave">
                                             </div>
                                         </div>
                                         <br />
@@ -74,7 +74,7 @@
                                                 <label for="lblDescripcion">Descripción:</label>
                                             </div>
                                             <div class="form-inline col-md-1">
-                                                <input class="form-control" name="txtDescripcion" type="text" ng-model="ctrl.cve_desc">
+                                                <input class="form-control" name="txtDescripcion" type="text">
                                             </div>
                                         </div>
                                         <br />
@@ -83,7 +83,7 @@
                                                 <label for="lblStatus">Status:</label>
                                             </div>
                                             <div class="form-inline col-md-1">
-                                                <select class="form-control" name="cmbstatus" ng-model="ctrl.cve_status">
+                                                <select class="form-control" name="cmbstatus">
                                                     <option value="0"></option>
                                                     <option value="A">Alta</option>
                                                     <option value="B">Baja</option>
@@ -96,7 +96,7 @@
                                                 <label for="lblCat">Categoria:</label>
                                             </div>
                                             <div class="form-inline col-md-1">
-                                                <input class="form-control" name="txtCat" type="text" ng-model="ctrl.cve_cat">
+                                                <input class="form-control" name="txtCat" type="text">
                                             </div>
                                         </div>
                                     </div">
@@ -108,10 +108,82 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
             <br />
         </div>
+
+        <div class="modal fade" id="updateareas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Actualizar Áreas de Atención</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div">
+                            <div class="row">
+                                <div class="form-inline col-md-3">
+                                    <label for="lblDependencia">Dependencia:</label>
+                                </div>
+                                <div class="form-inline col-md-1">
+                                    <select class="form-control" name="cmbDependencia" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia">
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="form-inline col-md-3">
+                                    <label for="lblClave">Clave:</label>
+                                </div>
+                                <div class="form-inline col-md-1">
+                                    <input class="form-control" name="txtClave" type="text" ng-model="ctrl.cve_clave">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="form-inline col-md-3">
+                                    <label for="lblDescripcion">Descripción:</label>
+                                </div>
+                                <div class="form-inline col-md-1">
+                                    <input class="form-control" name="txtDescripcion" type="text" ng-model="ctrl.cve_desc">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="form-inline col-md-3">
+                                    <label for="lblStatus">Status:</label>
+                                </div>
+                                <div class="form-inline col-md-1">
+                                    <select class="form-control" name="cmbstatus" ng-model="ctrl.cve_status">
+                                        <option value="0"></option>
+                                        <option value="A">Alta</option>
+                                        <option value="B">Baja</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="form-inline col-md-3">
+                                    <label for="lblCat">Categoria:</label>
+                                </div>
+                                <div class="form-inline col-md-1">
+                                    <input class="form-control" name="txtCat" type="text" ng-model="ctrl.cve_cat">
+                                </div>
+                            </div>
+                        </div">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Salir</button>
+                        <button type="button" class="btn btn-primary">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <table class="table">
             <thead>
                 <tr>
@@ -134,11 +206,11 @@
                     <td>{{i.Cat}}</td>
 
                     <td style="text-align:center">
-                        <button type="button" class="btn" style="width:50px" data-toggle="modal" data-target="#areasatencion" ng-click="ctrl.ObtDatos(i.Id)">
+                        <button type="button" class="btn btn-primary btn-create" style="width:50px" data-toggle="modal" data-target="#updateareas" ng-click="ctrl.ObtDatos(i.Id)">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </button>
 
-                        <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarAreas($index)" style="width:50px">
+                        <button type="button" class="btn btn-danger" ng-click="ctrl.EliminarAreaAtencion(i.Id)" style="width:50px">
                             <i class="fa fa-eraser" aria-hidden="true"></i>
                         </button>
                     </td>
