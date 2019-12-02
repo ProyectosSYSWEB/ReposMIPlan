@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.min.css">
+    <link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+
     @*<link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
         <link href="~/Content/Cargando.css" rel="stylesheet" />ss*@
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
@@ -23,8 +25,8 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg fixed-top" style="background-color:#37a0dd" >        
-        <div >
+    <nav class="navbar navbar-expand-lg fixed-top" style="background-color:#37a0dd">
+        <div>
             <div class="">
                 <img class="imgUnach" src="~/Imagenes/MiPlan LogoUnach.png" />
             </div>
@@ -57,27 +59,27 @@
 
                         </li>
                         @*<li class="nav-item">sss
-            <span style="color:white" class="nav-link fa fa-home"></span>
-            <a style="color:white" href="">Inicio</a>
-        </li>
-        <li class="nav-item">
-            <span style="color:white" class="nav-link fa fa-book"> <a style="color:white" href="~/Catalogo/AreasAtencion"> Areas de Atención</a></span>
-        </li>
+                                <span style="color:white" class="nav-link fa fa-home"></span>
+                                <a style="color:white" href="">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <span style="color:white" class="nav-link fa fa-book"> <a style="color:white" href="~/Catalogo/AreasAtencion"> Areas de Atención</a></span>
+                            </li>
 
 
-        <li class="nav-item">
-            <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white" href="~/Catalogo/Acreditadores"> Acreditadores</a></span>
-        </li>
+                            <li class="nav-item">
+                                <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white" href="~/Catalogo/Acreditadores"> Acreditadores</a></span>
+                            </li>
 
-        <li class="nav-item">
-            <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white" href="~/Catalogo/UnidadesResponsables"> Unidades Responsables</a></span>
-        </li>
-        <li class="nav-item">
-            <span style="color:white" class="nav-link fa fa-info"> <a style="color:white" href=""> Ayuda</a></span>
-        </li>
-        <li class="nav-item">
-            <span style="color:white" class="nav-link fa fa-times"> <a style="color:white" href=""> Salir</a></span>
-        </li>*@
+                            <li class="nav-item">
+                                <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white" href="~/Catalogo/UnidadesResponsables"> Unidades Responsables</a></span>
+                            </li>
+                            <li class="nav-item">
+                                <span style="color:white" class="nav-link fa fa-info"> <a style="color:white" href=""> Ayuda</a></span>
+                            </li>
+                            <li class="nav-item">
+                                <span style="color:white" class="nav-link fa fa-times"> <a style="color:white" href=""> Salir</a></span>
+                            </li>*@
                     </ul>
                 </div>
                 <form class="form-inline my-2 my-lg-0 ubicacion2">
@@ -104,6 +106,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
 
     @*<script src="~/Scripts/angular.min.js"></script>
         <script src="~/Scripts/global.js"></script>
