@@ -11,7 +11,7 @@
     ObtenerDependencias: function (callBackResult) {
         var self = this;
         self.dependenciaslst.length = 0;
-        //var urlServer = "http://localhost:53805/";
+        //var urlServer = "http://localhost:53805/"s;
         $.ajax(
             {
                 type: 'GET',
