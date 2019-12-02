@@ -22,7 +22,7 @@
             CargarCarre();
 
         };
-        var CargarCarre = function () {
+        this.CargarCarre = function () {
             ObtenerCarreras();
 
         };
@@ -54,7 +54,7 @@
         };
 
         var ObtenerCarreras = function () {
-            catalogoContext.ObtenerCarreras(function (resp) {
+            catalogoContext.ObtenerCarreras(self.cve_dependencia2, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         self.carrera = catalogoContext.carreralst;

@@ -54,7 +54,7 @@
                                     <label for="lblcarrera">Dependencia:</label>
                                 </div>
                                 <div class="form-inline col-md-1 col-xl-9">
-                                    <select class="form-control" name="cmbDependencia" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.unidad[0].dependencia">
+                                    <select class="form-control" name="cmbDependencia" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia2" ng-change="ctrl.CargarCarre()">
                                         <option value="">--Elegir Dependencia--</option>
                                     </select>
                                 </div>
@@ -66,10 +66,10 @@
                                     <label for="lblcarrera">Carrera:</label>
                                 </div>
                                 <div class="form-inline col-md-1 col-xl-9">
-                                    <input type="text" class="form-control" placeholder="" ng-model="ctrl.unidad[0].Carrera">
-                                    @*<select class="form-control" name="cmbCarrera"  ng-options="option.Carrera for option in ctrl.carrera" ng-model="ctrl.cve_carrera">
+                                    @*<input type="text" class="form-control" placeholder="" ng-model="ctrl.unidad[0].Carrera">*@
+                                    <select class="form-control" name="cmbCarrera"  ng-options="option.Id as option.Descripcion for option in ctrl.carrera" ng-model="ctrl.cve_carrera">
                                         <option value="">--Elegir Carrera--</option>
-                                    </select>*@
+                                    </select>
                                 </div>
                             </div>
                             <br />
@@ -141,7 +141,7 @@
                                 <label for="lblcarrera">Dependencia:</label>
                             </div>
                             <div class="form-inline col-md-1 col-xl-9">
-                                <select class="form-control" name="cmbDependencia" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.unidad[0].Dependencia">
+                                <select class="form-control" name="cmbDependencia" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.unidad[0].Dependencia" >
                                     <option value="">--Elegir Dependencia--</option>
                                 </select>
                             </div>
