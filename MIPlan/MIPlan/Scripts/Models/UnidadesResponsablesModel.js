@@ -137,7 +137,8 @@
                             callBackResult({ ressult: 'tgp', message: null });
                         }
                     } else {
-                        callBackResult({ ressult: "notgp", message: resp.MensajeError })
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                        console.log(resp.MensajeError);
                     }
                 },
                 error: function (ex) {

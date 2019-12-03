@@ -48,8 +48,9 @@
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
-                            self.periodoslst.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependencia, Periodo: resp.Resultado[i].Periodo, Descripcion: resp.Resultado[i].Descripcion, Status: resp.Resultado[i].Status, Ejercicio: resp.Resultado[i].Ejercicio, Inicio: resp.Resultado[i].Inicio, Fin: resp.Resultado[i].Fin });                        }
-
+                            self.periodoslst.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependencia, Periodo: resp.Resultado[i].Periodo, Descripcion: resp.Resultado[i].Descripcion, Status: resp.Resultado[i].Status, Ejercicio: resp.Resultado[i].Ejercicio, Inicio: resp.Resultado[i].Inicio, Fin: resp.Resultado[i].Fin });
+                        }
+                        
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
                         }

@@ -120,7 +120,7 @@
             });
         };
 
-        this.UnidadResponsableUpdate = function (ID) {     
+        this.UnidadResponsableUpdateCreate = function (ID) {     
             if (ID) {
                 UnidadUpdate();
             } else {
@@ -147,9 +147,7 @@
                 $scope.$apply();
             });
         };       
-        this.UnidadResponsableCreate = function () {
-            UnidadCreate();
-        }
+        this.UnidadResponsableCreate = function () { UnidadCreate(); }
 
 /********************************************************************************************************************************************************/            
         var eliminarUnidadResponsable = function (Idunidad) {

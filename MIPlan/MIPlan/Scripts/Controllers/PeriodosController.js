@@ -2,7 +2,7 @@
 //<reference path="../Models/CatModel.js"/>
 
 (function () {
-    var app = angular.module('MIPlanWeb', []);
+    var app = angular.module('MIPlanWeb', ['ngPagination']);
 
 /********************************************************************************************************************************************************/
 
@@ -42,7 +42,8 @@
             catalogoContext.ObtenerGridPeriodos(function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.periodos = catalogoContext.periodoslst;                                              
+                        self.periodos = catalogoContext.periodoslst;  
+                        console.log(self.periodos);
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;

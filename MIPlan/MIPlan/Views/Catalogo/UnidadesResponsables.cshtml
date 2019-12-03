@@ -72,7 +72,7 @@
 
                 </div>
                 <div class="modal-footer">                    
-                    <button type="button" id="btnModal" class="btn btn-primary" data-dismiss="modal" ng-click="ctrl.UnidadResponsableCreate(ctrl.unidad[0].Id)">Guardar</button>
+                    <button type="button" id="btnModal" class="btn btn-primary" data-dismiss="modal" ng-click="ctrl.UnidadResponsableUpdateCreate(ctrl.unidad[0].Id)">Guardar</button>
                 </div>
             </div>
         </div>
@@ -175,10 +175,7 @@
                             </button>
                             <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar" ng-click="ctrl.EliminnarUR(i.Id)" style="width:50px">
                                 <i class="fa fa-eraser" aria-hidden="true"></i>
-                            </button>
-                            <button type="button" class="btn btn-warning" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
-                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                            </button>
+                            </button>                          
                         </td>
                     </tr>
                 </tbody>
