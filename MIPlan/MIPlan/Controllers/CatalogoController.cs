@@ -494,6 +494,30 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
+
+        public JsonResult ObtenerCategorias()
+        {
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            try
+            {
+                string Verificador = string.Empty;
+                list = CursorDataContext.ObtenerCategorias();
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
         /*FIN METODOS DE LUIS*/
 
         public JsonResult GuardarBasicos(string tipo, string clave, string status, string descripcion, string valor, string orden)

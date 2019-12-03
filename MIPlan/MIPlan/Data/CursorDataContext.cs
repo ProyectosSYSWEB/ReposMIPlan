@@ -263,6 +263,37 @@ namespace MIPlan.Data
             }
 
         }
+        public static List<Comun> ObtenerCategorias()
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+
+            try
+            {
+                OracleDataReader dr = null;
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Combo_Categorias", ref dr);
+                List<Comun> listarComun = new List<Comun>();
+                while (dr.Read())
+                {
+                    Comun objComun = new Comun();
+                    objComun.Id = Convert.ToString(dr[0]);
+                    objComun.Descripcion = Convert.ToString(dr[1]);
+                    listarComun.Add(objComun);
+                }
+                return listarComun;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
+        }
+
         public static List<Comun> ObtenerStatusAcreditaciones()
         {
             OracleCommand cmd = null;
