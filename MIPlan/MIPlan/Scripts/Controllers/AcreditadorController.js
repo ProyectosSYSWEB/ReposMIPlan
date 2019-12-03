@@ -1,7 +1,7 @@
 ﻿// <reference path="../Models/AcreditadorModel.js"/>
 
 (function () {
-    var app = angular.module('MIPlanWeb', []);
+    var app = angular.module('MIPlanWeb', ['ngPagination']);
 
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
         var self = this;
@@ -97,7 +97,7 @@
 
 
         var ObtenerStatusAcreditaciones = function () {
-            catalogoContext.ObtenerStatusAcreditaciones(self.cve_dependencia, function (resp) {
+            catalogoContext.ObtenerStatusAcreditaciones( function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         self.status = catalogoContext.statuslst;
@@ -149,7 +149,7 @@
             document.getElementById("lblstatus").className = "text-primary";
             document.getElementById("cmbstatus").className = "form-control border border-primary";
             document.getElementById("lblobservacion").className = "text-primary";
-            document.getElementById("cmbobservacion").className = "form-control border border-primary";
+            document.getElementById("txtobservacion").className = "form-control border border-primary";
 
             catalogoContext.ObtenerAcreditador(IdAcreditacion, function (resp) {
                 switch (resp.ressult) {
@@ -161,7 +161,7 @@
                         self.cve_fecha_inicio = catalogoContext.unidadAcreditacionlst[0].Fecha_Inicial;
                         self.cve_fecha_fin = catalogoContext.unidadAcreditacionlst[0].Fecha_Final;
                         self.cve_status = catalogoContext.unidadAcreditacionlst[0].Status;
-                        self.cve_observacion = catalogoContext.unidadAcreditacionlst[0].Observacion;
+                        self.cve_observaciones = catalogoContext.unidadAcreditacionlst[0].Observaciones;
 
                         break;
                     case "notgp":
@@ -195,20 +195,20 @@
             document.getElementById("lblstatus").className = "text-success";
             document.getElementById("cmbstatus").className = "form-control border border-success";
             document.getElementById("lblobservacion").className = "text-success";
-            document.getElementById("cmbobservacion").className = "form-control border border-success";
+            document.getElementById("txtobservacion").className = "form-control border border-success";
             self.cve_dependencia = "";
             self.cve_carrera = "";
             self.cve_organismo = "";
             self.cve_fecha_inicio = "";
             self.cve_fecha_fin = "";
             self.cve_status = "";
-            self.cve_observacion = "";
+            self.cve_observaciones = "";
         };
 
 
 
         var UnidadUpdate = function () {
-            catalogoContext.AcreditadorUpdate(self.unidad[0].Id, self.unidad[0].Dependencia, self.unidad[0].Carrera, self.unidad[0].Organismo, self.unidad[0].Fecha_Inicial, self.unidad[0].Fecha_Final, self.unidad[0].Status, self.unidad[0].Observacion, function (resp) {
+            catalogoContext.AcreditadorUpdate(self.unidad[0].Id, self.unidad[0].Dependencia, self.unidad[0].Carrera, self.unidad[0].Organismo, self.unidad[0].Fecha_Inicial, self.unidad[0].Fecha_Final, self.unidad[0].Status, self.unidad[0].Observaciones, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         //  self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
@@ -281,6 +281,7 @@
         this.ValorDependencia = function () {
             alert(self.cve_dependencia);
         };
+        
 
 
 
