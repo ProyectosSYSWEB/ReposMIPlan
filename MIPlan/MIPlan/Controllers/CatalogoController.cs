@@ -442,13 +442,13 @@ namespace MIPlan.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-        public JsonResult ObtenerStatusAcreditaciones(string Dependencia)
+        public JsonResult ObtenerStatusAcreditaciones()
         {
             List<Comun> list = new List<Comun>();
             ResultadoComun objResultado = new ResultadoComun();
             try
             {
-                list = CursorDataContext.ObtenerCarreras(Dependencia);
+                list = CursorDataContext.ObtenerStatusAcreditaciones();
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
                 objResultado.Resultado = list;
