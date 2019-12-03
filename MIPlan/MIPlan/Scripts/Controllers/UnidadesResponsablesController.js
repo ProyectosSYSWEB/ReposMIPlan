@@ -67,7 +67,37 @@
             });
         };
 
-        this.Modal = function (Indice) { cargarModal(Indice); };
+        this.Modal = function (Indice) {
+            document.getElementById("title").className = "modal-header btn-primary justify-content-center";
+            document.getElementById("exampleModalLabel").innerHTML = "Actualizar Unidad Responsable";
+            document.getElementById("btnModal").className = "btn btn-primary";
+            document.getElementById("lblDependencia").className = "text-primary";
+            document.getElementById("cmbDependencia").className = "form-control border border-primary";
+            document.getElementById("lblClave").className = "text-primary";
+            document.getElementById("inputClave").className = "form-control border border-primary";
+            document.getElementById("lblDescripcion").className = "text-primary";
+            document.getElementById("inputDescripcion").className = "form-control border  border-primary";
+            document.getElementById("lblStatus").className = "text-primary";
+            document.getElementById("cmbStatus").className = "form-control border  border-primary";
+            document.getElementById("lblCoordinacion").className = "text-primary";
+            document.getElementById("inputCoordincacion").className = "form-control border border-primary";
+            cargarModal(Indice);
+        };
+        this.Color = function () {            
+            document.getElementById("title").className = "modal-header btn-success justify-content-center";
+            document.getElementById("exampleModalLabel").innerHTML = "Crear Unidad Responsable";
+            document.getElementById("btnModal").className = "btn btn-success";
+            document.getElementById("lblDependencia").className = "text-success";
+            document.getElementById("cmbDependencia").className = "form-control border border-success";
+            document.getElementById("lblClave").className = "text-success";
+            document.getElementById("inputClave").className = "form-control border border-success";
+            document.getElementById("lblDescripcion").className = "text-success";
+            document.getElementById("inputDescripcion").className = "form-control border  border-success";
+            document.getElementById("lblStatus").className = "text-success";
+            document.getElementById("cmbStatus").className = "form-control border  border-success";
+            document.getElementById("lblCoordinacion").className = "text-success";
+            document.getElementById("inputCoordincacion").className = "form-control border border-success";          
+        };
 
 /********************************************************************************************************************************************************/
         var UnidadUpdate = function () {            
@@ -76,6 +106,8 @@
             catalogoContext.UnidadResponsableUpdate(self.unidad[0].Id, self.unidad[0].Dependencia, self.unidad[0].Clave, self.unidad[0].Descripcion, self.unidad[0].Status, self.unidad[0].Coordinador, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":                        
+                        CargarGrid();
+                        self.unidad = null;
                         alert("¡Se han actualizado los datos correctamente!");
                         break;
                     case "notgp":
@@ -88,14 +120,18 @@
             });
         };
 
-        this.UnidadResponsableUpdate = function () { UnidadUpdate(); }
+        this.UnidadResponsableUpdate = function () {                    
+            UnidadUpdate();             
+        }
 
 /********************************************************************************************************************************************************/
         var UnidadCreate = function () {
             
             catalogoContext.UnidadResponsableCreate(self.unidad[0].Dependencia, self.unidad[0].Clave, self.unidad[0].Descripcion, self.unidad[0].Status, self.unidad[0].Coordinador, function (resp) {
                 switch (resp.ressult) {
-                    case "tgp":                        
+                    case "tgp":           
+                        CargarGrid();
+                        self.unidad = null;
                         alert("¡Se ha creado la unidad correctamente!");
                         break;
                     case "notgp":
@@ -107,8 +143,10 @@
                 $scope.$apply();
             });
         };       
+        this.UnidadResponsableCreate = function () {
+            UnidadCreate();
+        }
 
-            this.UnidadResponsableCreate = function () { UnidadCreate(); }
 /********************************************************************************************************************************************************/            
         var eliminarUnidadResponsable = function (Idunidad) {
             catalogoContext.eliminarUnidad(Idunidad, function (resp) {
