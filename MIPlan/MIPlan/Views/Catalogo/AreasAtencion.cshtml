@@ -21,8 +21,8 @@
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
-                    <label for="lblDependencia" class="text-info">Status:</label>
-                    <select class="form-control border border-info" name="cmbDependencia" ng-change="ctrl.StatusFun()" ng-model="ctrl.Status.Status" style="max-width:100%;">
+                    <label for="lblstatus" class="text-info">Status:</label>
+                    <select class="form-control border border-info" name="cmbstatus" ng-change="ctrl.StatusFun()" ng-model="ctrl.Status.Status" style="max-width:100%;">
                         <option value=""></option>
                         <option value="Todos">Todos</option>
                         <option value="A">Alta</option>
@@ -107,7 +107,7 @@
                                                 <label id="lblCategoria" for="lblCat" class="text-success">Categoria:</label>
                                             </div>
                                             <div class="form-inline col-md-1">
-                                                <select id="cmdcat" class="form-control border border-success" name="cmdcat" ng-model="ctrl.cve_cat">
+                                                <select id="cmdcat" class="form-control border border-success" name="cmdcat" required ng-options="option.Id as option.Descripcion for option in ctrl.categoria" ng-model="ctrl.cve_cat">
                                                 </select>
                                             </div>
                                         </div>
@@ -156,7 +156,7 @@
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
 
-                            <button type="button" class="btn btn-danger" title="Borrar" ng-click="ctrl.EliminarAreaAtencion(i.Id)" style="width:50px">
+                            <button type="button" class="btn btn-danger" title="Eliminar" ng-click="ctrl.EliminarAreaAtencion(i.Id)" style="width:50px">
                                 <i class="fa fa-eraser" aria-hidden="true"></i>
                             </button>
                         </td>
