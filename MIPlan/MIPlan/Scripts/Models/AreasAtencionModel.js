@@ -150,7 +150,7 @@
             });
     },
 
-   AreasAtencionUpdate: function (Id, Dependencia, Clave, Descripcion, Status, Categoria, callBackResult) {
+   AreasAtencionUpdate: function (id, dependencia, clave, descripcion, status, categoria, callBackResult) {
         var self = this;
        self.areasUplst.length = 0;
         $.ajax(
@@ -158,7 +158,7 @@
                 type: 'POST',
                 cache: false,
                 url: urlServer + 'Catalogo/EditarAreasAtencion',
-                data: { Id, Dependencia, Clave, Descripcion, Status, Categoria },
+                data: { id, dependencia, clave, descripcion, status, categoria },
                 success: function (resp) {
                     if (resp.Error == false) {
 
@@ -177,13 +177,13 @@
             });
     },
 
-    AreasAtencionCreate: function (Dependencia, Clave, Descripcion, Status, Categoria, callBackResult) {
+    AreasAtencionCreate: function (dependencia, clave, descripcion, status, categoria, callBackResult) {
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'Catalogo/GuardarAreasAtencion',
-                data: { Dependencia, Clave, Descripcion, Status, Categoria, },
+                data: { dependencia, clave, descripcion, status, categoria, },
                 success: function (resp) {
                     if (resp.Error == false) {
                         if (callBackResult !== undefined) {

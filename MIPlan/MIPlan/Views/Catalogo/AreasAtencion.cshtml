@@ -115,8 +115,8 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Salir</button>
-                                    <button type="button" id="btnNuevo" class="btn btn-success">Guardar</button>
-                                    <button type="button" id="btnActualizar" class="btn btn-primary">Guardar</button>
+                                    <button type="button" id="btnNuevo" class="btn btn-success" data-dismiss="modal" ng-click="ctrl.AreasAtencionCreate()">Guardar</button>
+                                    <button type="button" id="btnActualizar" class="btn btn-primary" ng-click="ctrl.AreasAtencionUpdate()">Guardar</button>
                                 </div>
                             </div>
                         </div>
@@ -142,7 +142,7 @@
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody ng-repeat="i in ctrl.areasatencion">
+                <tbody ng-repeat="i in ctrl.areasatencion | filter:ctrl.buscar | filter:ctrl.Status" ng-pagination-size="5">
                     <tr>
                         <td>{{i.Id}}</td>
                         <td>{{i.Dependencia}}</td>
@@ -164,15 +164,16 @@
                 </tbody>
                 <tfoot>
                     <tr>
+                        <th><ng-pagination-control pagination-id="ctrl.areasatencion" color="white" height="35px"></ng-pagination-control></th>
                         <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
                         <th style="text-align:center">
-                            <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                            <button type="button" title="PDF" class="btn btn-danger" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
                                 <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                             </button>
-                            <button type="button" class="btn btn-success" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                            <button type="button" title="Excel" class="btn btn-success" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
                                 <i class="fa fa-file-excel-o" aria-hidden="true"></i>
                             </button>
                         </th>
@@ -182,6 +183,9 @@
         </div>
     </div>
 </div>
+<br />
+<br />
+<br />
 <script src="~/Scripts/angular.min.js"></script>
 <script src="~/Scripts/angular.js"></script>
 <script src="~/Scripts/global.js"></script>
