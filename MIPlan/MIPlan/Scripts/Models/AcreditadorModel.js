@@ -109,7 +109,7 @@
                 data: { Dependencia },
                 success: function (resp) {
                     for (var i = 0; i < resp.Resultado.length; i++) {
-                        self.statuslst.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion });
+                        self.statuslst.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion, Status: resp.Resultado[i].Status });
                     }
                     if (callBackResult != undefined) {
                         callBackResult({ ressult: 'tgp', message: null });

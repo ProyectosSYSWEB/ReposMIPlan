@@ -13,7 +13,7 @@
                 <label for="lbldependencia" class="text-primary">Dependencia:</label>
 
 
-                <select class="form-control border border-primary" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia">
+                <select class="form-control border border-primary" title="Elegir Dependencia" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia">
                     <option value="">--Seleccionar Dependencia--</option>  
                 </select>
             </div>
@@ -21,7 +21,7 @@
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
                     <label for="lblStatus"  class="text-success">Busqueda</label>
-                    <input type="text" class="form-control  border border-success" placeholder="Busqueda" ng-model="buscar">
+                    <input type="text" class="form-control  border border-success" title="Buscar" placeholder="Busqueda" ng-model="buscar">
 
                 </div>
             </div>
@@ -31,29 +31,27 @@
         <div class="panel-heading">
             <div class="container">
                 <div class="col text-right">
-                    <button type="button" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#acreditadores" style="width:120px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                    <button type="button" id="Nuevo"  title="Nuevo"  class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#acreditadores" style="width:120px" ng-click="ctrl.Nuevo()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
                     <br />
                     <br />
-
-                    <!-- Modal -->
-                </div>
+              </div>
             </div>
-            <div class="modal fade border border-success" id="acreditadores" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="acreditadores" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <div class="modal-header btn-success justify-content-center">
-                            <h5 class="modal-title" id="exampleModalLabel">Crear Unidad Responsable</h5>
-                            <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close">
+                        <div class="modal-header justify-content-center">
+                            <h5 class="modal-title" id="crear">Crear Acreditador</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <div class="row">
                                 <div class="form-inline col-md-3">
-                                    <label for="lblcarrera"  class="text-success">Dependencia:</label>
+                                    <label id="lbldependencia" for="lbldependencia"  class="text-success">Dependencia:</label>
                                 </div>
                                 <div class="form-inline col-md-1 col-xl-9">
-                                    <select class="form-control border border-success" name="cmbDependencia" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia" ng-change="ctrl.CargarCarre()">
+                                    <select id="cmbdependencia" class="form-control border border-success" name="cmbdependencia" required ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia" ng-change="ctrl.CargarCarreras()" >
                                         <option value="">--Elegir Dependencia--</option>
                                     </select>
                                 </div>
@@ -62,11 +60,11 @@
 
                             <div class="row">
                                 <div class="form-inline col-md-3">
-                                    <label for="lblcarrera"  class="text-success">Carrera:</label>
+                                    <label id="lblcarrera" for="lblcarrera"  class="text-success">Carrera:</label>
                                 </div>
                                 <div class="form-inline col-md-1 col-xl-9">
                                     @*<input type="text" class="form-control" placeholder="" ng-model="ctrl.unidad[0].Carrera">*@
-                                    <select class="form-control border border-success" name="cmbCarrera" ng-options="option.Id as option.Descripcion for option in ctrl.carrera" ng-model="ctrl.cve_carrera">
+                                    <select  id="cmbcarrera" class="form-control border border-success" name="cmbcarrera" required ng-options="option.Id as option.Descripcion for option in ctrl.carrera" ng-model="ctrl.cve_carrera">
                                         <option value="">--Elegir Carrera--</option>
                                     </select>
                                 </div>
@@ -75,26 +73,27 @@
                             <br />
                             <div class="row">
                                 <div class="form-inline col-md-6">
-                                    <label for="lblorganismo"  class="text-success">Organismo:</label>
-                                    <select class="form-control border border-success"  name="cmbOrganismo" ng-options="option.Id as option.Descripcion for option in ctrl.organismo" ng-model="ctrl.cve_organismo" ng-change="ctrl.CargarOrga()">
+                                    <label id="lblorganismo" for="lblorganismo"  class="text-success">Organismo:</label>
+                                    @*<input id="cmborganismo"  type="text" class="form-control" placeholder="" ng-model="ctrl.cve_organismo">*@
+                                    <select id="cmborganismo" class="form-control border border-success"  name="cmborganismo"  required ng-options="option.Id as option.Descripcion for option in ctrl.organismo" ng-model="ctrl.cve_organismo" ng-change="ctrl.CargarOrganismos()">
                                         <option value="">--Elegir Organismo--</option>
                                        
                                     </select>
                                 </div>
                                 <div class="form-inline col-md-6">
-                                    <label for="lblfechainicio"  class="text-success">Fecha Inicio:</label>
-                                    <input class="form-control border border-success"  name="txtFechaInicio" type="date" ng-model="ctrl.cve_fecha_inicio">
+                                    <label id="lblfechainicio"  for="lblfechainicio"  class="text-success">Fecha Inicio:</label>
+                                    <input id="txtfechainicio"  class="form-control border border-success"  name="txtfechainicio" required type="date" ng-model="ctrl.cve_fecha_inicio">
                                 </div>
                             </div>
                             <br />
                             <div class="row">
                                 <div class="form-inline col-md-6">
-                                    <label for="lblfechafin"  class="text-success">Fecha Fin:</label>
-                                    <input class="form-control border border-success"  name="txtFechaFin" type="date" ng-model="ctrl.cve_fecha_fin">
+                                    <label id="lblfechafin"  for="lblfechafin"  class="text-success">Fecha Fin:</label>
+                                    <input id="txtfechafin"  class="form-control border border-success"  name="txtfechafin" required type="date" ng-model="ctrl.cve_fecha_fin">
                                 </div>
                                 <div class="form-inline col-md-6">
-                                    <label for="lblStatus"  class="text-success">Status:</label>
-                                    <select class="form-control border border-success" name="cmbStatus" ng-options="option.Id as option.Descripcion for option in ctrl.status" ng-model="ctrl.cve_status" ng-change="ctrl.CargarStatus()">
+                                    <label id="lblstatus" for="lblstatus"  class="text-success">Status:</label>
+                                    <select id="cmbstatus" class="form-control border border-success" name="cmbstatus" required ng-options="option.Id as option.Descripcion for option in ctrl.status" ng-model="ctrl.cve_status" ng-change="ctrl.CargarStatus()">
                                         <option value="">--Elegir Status--</option>
 
                                     </select>
@@ -103,17 +102,18 @@
                             <br />
                             <div class="row">
                                 <div class="form-inline col-md-3">
-                                    <label for="lblcarrera"  class="text-success">Observaciones:</label>
+                                    <label id="lblobservacion"  for="lblobservacion"  class="text-success">Observaciones:</label>
                                 </div>
                                 <div class="form-inline col-md-1 col-xl-9">
-                                    <input type="text" class="form-control border border-success"  placeholder="" ng-model="ctrl.cve_observacion">
+                                    <input type="text" id="cmbobservacion" class="form-control border border-success" name="cmbobservacion" required placeholder="" ng-model="ctrl.cve_observacion">
 
                                 </div>
                             </div>
                             <br />
                             <div class="modal-footer">
-                                <button type="button"  class="btn btn-danger" data-dismiss="modal">Salir</button>
-                                <button type="button" class="btn btn-success" ng-click="ctrl.AcreditadorCreate()">Guardar</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                                <button type="button" id="btnNuevo" class="btn btn-success">Guardar</button>
+                                <button type="button" id="btnActualizar" class="btn btn-primary" >Guardar</button>
                             </div>
                         </div>
                     </div>
@@ -152,11 +152,11 @@
                         <td>{{i.Observacion}}</td>
 
                         <td style="text-align:center">
-                            <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#acreditadores" ng-click="ctrl.cargarModal(i.Id)" style="width:50px">
+                            <button type="button" id="Actualizar" class="btn btn-primary" title="Editar" data-toggle="modal" data-target="#acreditadores" ng-click="ctrl.ObtenerDatos(i.Id)" style="width:50px">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
 
-                            <button type="button" class="btn btn-danger" ng-click="ctrl.Eliminar(i.Id)" style="width:50px">
+                            <button type="button" class="btn btn-danger" title="Borrar" ng-click="ctrl.Eliminar(i.Id)" style="width:50px">
                                 <i class="fa fa-eraser" aria-hidden="true"></i>
                             </button>
                         </td>

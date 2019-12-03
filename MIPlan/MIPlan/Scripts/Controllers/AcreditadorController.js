@@ -23,7 +23,7 @@
 
         //};
 
-        this.CargarCarre = function () {
+        this.CargarCarreras = function () {
             ObtenerCarreras();
 
         };
@@ -31,7 +31,7 @@
         //    CargarOrga();
 
         //};
-        this.CargarOrga= function () {
+        this.CargarOrganismos= function () {
             ObtenerOrganismos();
 
         };
@@ -77,7 +77,7 @@
         };
 
         var ObtenerOrganismos = function () {
-            catalogoContext.ObtenerOrganismos(self.cve_organismo, function (resp) {
+            catalogoContext.ObtenerOrganismos( function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         self.organismo = catalogoContext.organismolst;
@@ -129,8 +129,24 @@
         };
 
 
+        this.ObtenerDatos = function (IdAcreditacion) {
+            $('#btnActualizar').show();
+            $('#btnNuevo').hide();
+            document.getElementById("lbldependencia").className = "text-primary";
+            document.getElementById("cmbdependencia").className = "form-control border border-primary";
+            document.getElementById("lblcarrera").className = "text-primary";
+            document.getElementById("cmbcarrera").className = "form-control border border-primary";
+            document.getElementById("lblorganismo").className = "text-primary";
+            document.getElementById("cmborganismo").className = "form-control border border-primary";
+            document.getElementById("lblfechainicio").className = "text-primary";
+            document.getElementById("txtfechainicio").className = "form-control border border-primary";
+            document.getElementById("lblfechafin").className = "text-primary";
+            document.getElementById("txtfechafin").className = "form-control border border-primary";
+            document.getElementById("lblstatus").className = "text-primary";
+            document.getElementById("cmbstatus").className = "form-control border border-primary";
+            document.getElementById("lblobservacion").className = "text-primary";
+            document.getElementById("cmbobservacion").className = "form-control border border-primary";
 
-        this.cargarModal = function (IdAcreditacion) {
             catalogoContext.ObtenerAcreditador(IdAcreditacion, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
@@ -139,11 +155,10 @@
                         self.cve_carrera = catalogoContext.unidadAcreditacionlst[0].Carrera;
                         self.cve_organismo = catalogoContext.unidadAcreditacionlst[0].Organismo;
                         self.cve_fecha_inicio = catalogoContext.unidadAcreditacionlst[0].Fecha_Inicial;
-                        self.cve_feha_fin = catalogoContext.unidadAcreditacionlst[0].Fecha_Final;
+                        self.cve_fecha_fin = catalogoContext.unidadAcreditacionlst[0].Fecha_Final;
                         self.cve_status = catalogoContext.unidadAcreditacionlst[0].Status;
                         self.cve_observacion = catalogoContext.unidadAcreditacionlst[0].Observacion;
 
-                        
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -152,7 +167,36 @@
                         break;
                 }
                 $scope.$apply();
+
+
             });
+        };
+
+
+        this.Nuevo = function () {
+            $('#btnNuevo').show();
+            $('#btnActualizar').hide();
+            document.getElementById("lbldependencia").className = "text-success";
+            document.getElementById("cmbdependencia").className = "form-control border border-success";
+            document.getElementById("lblcarrera").className = "text-success";
+            document.getElementById("cmbcarrera").className = "form-control border border-success";
+            document.getElementById("lblorganismo").className = "text-success";
+            document.getElementById("cmborganismo").className = "form-control border border-success";
+            document.getElementById("lblfechainicio").className = "text-success";
+            document.getElementById("txtfechainicio").className = "form-control border border-success";
+            document.getElementById("lblfechafin").className = "text-success";
+            document.getElementById("txtfechafin").className = "form-control border border-success";
+            document.getElementById("lblstatus").className = "text-success";
+            document.getElementById("cmbstatus").className = "form-control border border-success";
+            document.getElementById("lblobservacion").className = "text-success";
+            document.getElementById("cmbobservacion").className = "form-control border border-success";
+            self.cve_dependencia = "";
+            self.cve_carrera = "";
+            self.cve_organismo = "";
+            self.cve_fecha_inicio = "";
+            self.cve_fecha_fin = "";
+            self.cve_status = "";
+            self.cve_observacion = "";
         };
 
 
