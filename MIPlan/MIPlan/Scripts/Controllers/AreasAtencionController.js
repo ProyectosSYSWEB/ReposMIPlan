@@ -54,6 +54,8 @@
         this.ObtDatos = function (IdAreaAtencion) {
             $('#btnActualizar').show();
             $('#btnNuevo').hide();
+            self.Titulo = "Modificar Área de Atención";
+            document.getElementById("Titulo").className = "modal-header btn-primary justify-content-center";
             document.getElementById("lblDependencia").className = "text-primary";
             document.getElementById("cmdDependencia").className = "form-control border border-primary";
             document.getElementById("lblClave").className = "text-primary";
@@ -87,6 +89,8 @@
         this.Nuevo = function () {
             $('#btnNuevo').show();
             $('#btnActualizar').hide();
+            self.Titulo = "Crear Área de Atención";
+            document.getElementById("Titulo").className = "modal-header btn-success justify-content-center";
             document.getElementById("lblDependencia").className = "text-success";
             document.getElementById("cmdDependencia").className = "form-control border border-success";
             document.getElementById("lblClave").className = "text-success";
@@ -131,6 +135,45 @@
                 alert("No se ha eliminado el registro");
             }
         };
+
+        var areasUpdate = function () {
+            catalogoContext.AreasAtencionUpdate(self.cve_id[0].Id, self.cve_dependencia[0].Dependencia, self.cve_clave[0].Clave, self.cve_desc[0].Descripcion, self.cve_status[0].Status, self.cve_cat[0].Categoria, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        alert("¡Se han actualizado los datos correctamente!");
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+
+        this.AreasAtencionUpdate = function () {
+            areasUpdate();
+        };
+
+        var AreaCreate = function () {
+
+            catalogoContext.AreasAtencionCreate(self.cve_dependencia[0].Dependencia, self.cve_clave[0].Clave, self.cve_desc[0].Descripcion, self.cve_status[0].Status, self.cve_cat[0].Categoria, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        alert("¡Se ha creado la unidad correctamente!");
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+
+        this.AreasAtencionCreate = function () { AreaCreate(); }
 
 
         this.ValorDependencia = function () {
