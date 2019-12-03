@@ -6,11 +6,12 @@
 
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
         var self = this;
-        var abc = "";
+        self.buscar = '';
 
         this.Inicio = function () {
             CargarCombos();
             CargarGrid();
+            ObtenerCategorias();
         };
 
         var CargarCombos = function () {
@@ -32,6 +33,27 @@
                 }
                 $scope.$apply();
             });
+        };
+
+        var ObtenerCategorias = function () {
+            catalogoContext.ObtenerCategorias(function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.categoria = catalogoContext.categorialst;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+
+        this.CargarCategorias = function () {
+            ObtenerCategorias();
+
         };
 
         var CargarGrid = function () {
@@ -177,13 +199,23 @@
 
 
         this.ValorDependencia = function () {
-            alert(self.cve_dependencia);
+            this.ValorDependencia = function () {
+                if (self.buscar == "00000") {
+                    self.buscar = '';
+                }
+            };
         };
 
 
         this.BorrarBasico = function (Indice) {
             alert(Indice);
         };
+
+        this.StatusFun = function () {
+            if (self.Status.Status == "Todos") {
+                self.Status.Status = '';
+            }
+        }
 
 
 
