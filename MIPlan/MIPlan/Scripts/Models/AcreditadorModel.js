@@ -168,7 +168,7 @@
                             callBackResult({ ressult: 'tgp', message: null });
                         }
                     } else {
-                        callBackResult({ ressult: "notgp", message: res })
+                        callBackResult({ ressult: "notgp", message: resp })
                     }
                 },
                 error: function (ex) {
@@ -180,7 +180,7 @@
 
     },
 
-    AcreditadorUpdate: function (Id, Dependencia, Carrera, Organismo, Fecha_Inicial, Fecha_Final, Status, Observaciones, callBackResult) {
+    AcreditadorUpdate: function (Id, Dependencia, Carrera, Organismo, FechaInicial, FechaFinal, Status, Observaciones, callBackResult) {
         var self = this;
         self.acreditadorUpdatelst.length = 0;
         $.ajax(
@@ -188,7 +188,7 @@
                 type: 'POST',
                 cache: false,
                 url: urlServer + 'Catalogo/EditarAcreditaciones',
-                data: { Id, Dependencia, Carrera, Organismo, Fecha_Inicial, Fecha_Final, Status, Observaciones },
+                data: { Id, Dependencia, Carrera, Organismo, FechaInicial, FechaFinal, Status, Observaciones },
                 success: function (resp) {
                     if (resp.Error == false) {
 
@@ -196,7 +196,7 @@
                             callBackResult({ ressult: 'tgp', message: null });
                         }
                     } else {
-                        callBackResult({ ressult: "notgp", message: res })
+                        callBackResult({ ressult: "notgp", message: resp })
                     }
                 },
                 error: function (ex) {

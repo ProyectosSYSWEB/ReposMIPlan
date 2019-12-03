@@ -1,7 +1,7 @@
 ﻿// <reference path="../Models/AcreditadorModel.js"/>
 
 (function () {
-    var app = angular.module('MIPlanWeb', ['ngPagination']);
+    var app = angular.module('MIPlanWeb', []);
 
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
         var self = this;
@@ -33,15 +33,15 @@
         //    CargarOrga();
 
         //};
-        this.CargarOrganismos= function () {
-            ObtenerOrganismos();
+        //this.CargarOrganismos= function () {
+        //    ObtenerOrganismos();
 
-        };
+        //};
 
-        this.CargarStatus = function () {
-            ObtenerStatusAcreditaciones();
+        //this.CargarStatus = function () {
+        //    ObtenerStatusAcreditaciones();
 
-        };
+        //};
 
 
         var ObtenerDependencias = function () {
@@ -208,7 +208,7 @@
 
 
         var UnidadUpdate = function () {
-            catalogoContext.AcreditadorUpdate(self.unidad[0].Id, self.unidad[0].Dependencia, self.unidad[0].Carrera, self.unidad[0].Organismo, self.unidad[0].Fecha_Inicial, self.unidad[0].Fecha_Final, self.unidad[0].Status, self.unidad[0].Observaciones, function (resp) {
+            catalogoContext.AcreditadorUpdate(sel.cve_id.Id,self.cve_dependencia.Dependencia, self.cve_carrera.Carrera, self.cve_organismo.Organismo, self.cve_fecha_inicio.FechaInicial, self.cve_feha_fin.FechaFinal, self.cve_status.Status, self.cve_observaciones.Observaciones, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         //  self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
@@ -230,7 +230,7 @@
 
         var UnidadCreate = function () {
 
-            catalogoContext.AcreditadorCreate(self.cve_dependencia.Dependencia, self.cve_carrera.Carrera, self.cve_organismo.Organismo, self.cve_fecha_inicio.FechaInicial, self.cve_feha_fin.FechaFinal, self.cve_status.Status, self.cve_observacion.Observaciones, function (resp) {
+            catalogoContext.AcreditadorCreate(self.cve_dependencia, self.cve_carrera, self.cve_organismo, self.cve_fecha_inicio.FechaInicial, self.cve_feha_fin.FechaFinal, self.cve_status.Status, self.cve_observaciones.Observaciones, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         //  self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
