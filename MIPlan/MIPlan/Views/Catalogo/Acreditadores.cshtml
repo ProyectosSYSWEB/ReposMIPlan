@@ -39,85 +39,84 @@
             <div class="modal fade" id="acreditadores" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <div class="modal-header justify-content-center">
-                            <div id="title" class="">
-                                <h5 class="modal-title" id="crear"></h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                    <div id="Titulo" class="modal-header btn-success justify-content-center">
+                            <h5 class="modal-title" id="exampleModalLabel">{{ctrl.Titulo}}</h5>
+                            <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="form-inline col-md-3">
+                                    <label id="lbldependencia" for="lbldependencia" class="text-success">Dependencia:</label>
+                                </div>
+                                <div class="form-inline col-md-1 col-xl-9">
+                                    <select id="cmbdependencia" class="form-control border border-success" name="cmbdependencia" required ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia" ng-change="ctrl.CargarCarreras()">
+                                        <option value="">--Elegir Dependencia--</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="form-inline col-md-3">
-                                        <label id="lbldependencia" for="lbldependencia" class="text-success">Dependencia:</label>
-                                    </div>
-                                    <div class="form-inline col-md-1 col-xl-9">
-                                        <select id="cmbdependencia" class="form-control border border-success" name="cmbdependencia" required ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia" ng-change="ctrl.CargarCarreras()">
-                                            <option value="">--Elegir Dependencia--</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <br />
+                            <br />
 
-                                <div class="row">
-                                    <div class="form-inline col-md-3">
-                                        <label id="lblcarrera" for="lblcarrera" class="text-success">Carrera:</label>
-                                    </div>
-                                    <div class="form-inline col-md-1 col-xl-9">
-                                        @*<input type="text" class="form-control" placeholder="" ng-model="ctrl.unidad[0].Carrera">*@
-                                        <select id="cmbcarrera" class="form-control border border-success" name="cmbcarrera" required ng-options="option.Id as option.Descripcion for option in ctrl.carrera" ng-model="ctrl.cve_carrera">
-                                            <option value="">--Elegir Carrera--</option>
-                                        </select>
-                                    </div>
+                            <div class="row">
+                                <div class="form-inline col-md-3">
+                                    <label id="lblcarrera" for="lblcarrera" class="text-success">Carrera:</label>
                                 </div>
-                                <br />
-                                <br />
-                                <div class="row">
-                                    <div class="form-inline col-md-6">
-                                        <label id="lblorganismo" for="lblorganismo" class="text-success">Organismo:</label>
-                                        @*<input id="cmborganismo"  type="text" class="form-control" placeholder="" ng-model="ctrl.cve_organismo">*@
-                                        <select id="cmborganismo" class="form-control border border-success" name="cmborganismo" required ng-options="option.Id as option.Descripcion for option in ctrl.organismo" ng-model="ctrl.cve_organismo" ng-change="ctrl.CargarOrganismos()">
-                                            <option value="">--Elegir Organismo--</option>
+                                <div class="form-inline col-md-1 col-xl-9">
+                                    @*<input type="text" class="form-control" placeholder="" ng-model="ctrl.unidad[0].Carrera">*@
+                                    <select id="cmbcarrera" class="form-control border border-success" name="cmbcarrera" required ng-options="option.Id as option.Descripcion for option in ctrl.carrera" ng-model="ctrl.cve_carrera">
+                                        <option value="">--Elegir Carrera--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <div class="row">
+                                <div class="form-inline col-md-6">
+                                    <label id="lblorganismo" for="lblorganismo" class="text-success">Organismo:</label>
+                                    @*<input id="cmborganismo"  type="text" class="form-control" placeholder="" ng-model="ctrl.cve_organismo">*@
+                                    <select id="cmborganismo" class="form-control border border-success" name="cmborganismo" required ng-options="option.Id as option.Descripcion for option in ctrl.organismo" ng-model="ctrl.cve_organismo" ng-change="ctrl.CargarOrganismos()">
+                                        <option value="">--Elegir Organismo--</option>
 
-                                        </select>
-                                    </div>
-                                    <div class="form-inline col-md-6">
-                                        <label id="lblfechainicio" for="lblfechainicio" class="text-success">Fecha Inicio:</label>
-                                        <input type="text" id="txtfechainicio" class="form-control border border-success" name="txtfechainicio" required placeholder="" ng-model="ctrl.cve_fecha_inicio">
-                                    </div>
+                                    </select>
                                 </div>
-                                <br />
-                                <div class="row">
-                                    <div class="form-inline col-md-6">
-                                        <label id="lblfechafin" for="lblfechafin" class="text-success">Fecha Fin:</label>
-                                        <input type="text" id="txtfechafin" class="form-control border border-success" name="txtfechafin" required placeholder="" ng-model="ctrl.cve_fecha_fin">
-                                    </div>
-                                    <div class="form-inline col-md-6">
-                                        <label id="lblstatus" for="lblstatus" class="text-success">Status:</label>
-                                        <select id="cmbstatus" class="form-control border border-success" name="cmbstatus" required ng-options="option.Id as option.Descripcion for option in ctrl.status" ng-model="ctrl.cve_status" ng-change="ctrl.CargarStatus()">
-                                            <option value="">--Elegir Status--</option>
+                                <div class="form-inline col-md-6">
+                                    <label id="lblfechainicio" for="lblfechainicio" class="text-success">Fecha Inicio:</label>
+                                    <input type="text" id="txtfechainicio" class="form-control border border-success" name="txtfechainicio" required placeholder="" ng-model="ctrl.cve_fecha_inicio">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="form-inline col-md-6">
+                                    <label id="lblfechafin" for="lblfechafin" class="text-success">Fecha Fin:</label>
+                                    <input type="text" id="txtfechafin" class="form-control border border-success" name="txtfechafin" required placeholder="" ng-model="ctrl.cve_fecha_fin">
+                                </div>
+                                <div class="form-inline col-md-6">
+                                    <label id="lblstatus" for="lblstatus" class="text-success">Status:</label>
+                                    <select id="cmbstatus" class="form-control border border-success" name="cmbstatus" required ng-options="option.Id as option.Descripcion for option in ctrl.status" ng-model="ctrl.cve_status" ng-change="ctrl.CargarStatus()">
+                                        <option value="">--Elegir Status--</option>
 
-                                        </select>
-                                    </div>
+                                    </select>
                                 </div>
-                                <br />
-                                <div class="row">
-                                    <div class="form-inline col-md-3">
-                                        <label id="lblobservacion" for="lblobservacion" class="text-success">Observaciones:</label>
-                                    </div>
-                                    <div class="form-inline col-md-1 col-xl-9">
-                                        <input type="text" id="cmbobservacion" class="form-control border border-success" name="cmbobservacion" required placeholder="" ng-model="ctrl.cve_observacion">
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="form-inline col-md-3">
+                                    <label id="lblobservacion" for="lblobservacion" class="text-success">Observaciones:</label>
+                                </div>
+                                <div class="form-inline col-md-1 col-xl-9">
+                                    <input type="text" id="cmbobservacion" class="form-control border border-success" name="cmbobservacion" required placeholder="" ng-model="ctrl.cve_observacion">
 
-                                    </div>
                                 </div>
-                                <br />
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
-                                    <button type="button" id="btnNuevo" class="btn btn-success">Guardar</button>
-                                    <button type="button" id="btnActualizar" class="btn btn-primary">Guardar</button>
-                                </div>
+                            </div>
+                            <br />
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                                <button type="button" id="btnNuevo" class="btn btn-success">Guardar</button>
+                                <button type="button" id="btnActualizar" class="btn btn-primary">Guardar</button>
                             </div>
                         </div>
+                   
                 </div>
 
                 <br />
