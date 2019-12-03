@@ -180,40 +180,40 @@
 
     },
 
-    AcreditadorUpdate: function (Id, Dependencia, Carrera, Organismo, FechaInicial, FechaFinal, Status, Observaciones, callBackResult) {
-        var self = this;
-        self.acreditadorUpdatelst.length = 0;
-        $.ajax(
-            {
-                type: 'POST',
-                cache: false,
-                url: urlServer + 'Catalogo/EditarAcreditaciones',
-                data: { Id, Dependencia, Carrera, Organismo, FechaInicial, FechaFinal, Status, Observaciones },
-                success: function (resp) {
-                    if (resp.Error == false) {
+    //AcreditadorUpdate: function (id, dependencia, carrera, organismo, fechaIni, fechaFin, status, observaciones, callBackResult) {
+    //    var self = this;
+    //    self.acreditadorUpdatelst.length = 0;
+    //    $.ajax(
+    //        {
+    //            type: 'POST',
+    //            cache: false,
+    //            url: urlServer + 'Catalogo/EditarAcreditaciones',
+    //            data: { id, dependencia, carrera, organismo, fechaIni,  fechaFin,  status,  observaciones },
+    //            success: function (resp) {
+    //                if (resp.Error == false) {
 
-                        if (callBackResult !== undefined) {
-                            callBackResult({ ressult: 'tgp', message: null });
-                        }
-                    } else {
-                        callBackResult({ ressult: "notgp", message: resp })
-                    }
-                },
-                error: function (ex) {
-                    if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EditarAcreditaciones." });
-                    }
-                }
-            });
-    },
+    //                    if (callBackResult !== undefined) {
+    //                        callBackResult({ ressult: 'tgp', message: null });
+    //                    }
+    //                } else {
+    //                    callBackResult({ ressult: "notgp", message: resp })
+    //                }
+    //            },
+    //            error: function (ex) {
+    //                if (callBackResult !== undefined) {
+    //                    callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EditarAcreditaciones." });
+    //                }
+    //            }
+    //        });
+    //},
 
-    AcreditadorCreate: function (Dependencia,Carrera,Organismo,FechaInicial,FechaFinal,Status,Observaciones, callBackResult) {
+    AcreditadorCreate: function (dependencia, carrera, organismo, fechaIni, fechaFin, status, observaciones, callBackResult) {
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'Catalogo/GuardarAcreditaciones',
-                data: { Dependencia, Carrera, Organismo, FechaInicial, FechaFinal, Status, Observaciones, },
+                data: { dependencia, carrera, organismo, fechaIni, fechaFin, status, observaciones, },
                 success: function (resp) {
                     if (resp.Error == false) {
                         if (callBackResult !== undefined) {
