@@ -2,7 +2,7 @@
 //<reference path="../Models/CatModel.js"/>
 
 (function () {
-    var app = angular.module('MIPlanWeb', []);
+    var app = angular.module('MIPlanWeb', ['ngPagination']);
 
 /********************************************************************************************************************************************************/
 
@@ -42,7 +42,7 @@
             catalogoContext.ObtenerGridPeriodos(function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.periodos = catalogoContext.periodoslst;                        
+                        self.periodos = catalogoContext.periodoslst;                                              
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -53,6 +53,7 @@
                 $scope.$apply();
             });
         };
+      
 /********************************************************************************************************************************************************/
         var cargarModal = function (Idunidad) {
             catalogoContext.ObtenerPeriodo(Idunidad, function (resp) {
@@ -70,14 +71,55 @@
             });
         };
 
-        this.Modal = function (Indice) { cargarModal(Indice); };
+        this.Modal = function (Indice) {            
+            document.getElementById("title").className = "modal-header btn-primary justify-content-center";
+            document.getElementById("exampleModalLabel").innerHTML = "Actualizar Periodo";
+            document.getElementById("btnModal").className = "btn btn-primary";
+            document.getElementById("lblDependencia").className = "text-primary";
+            document.getElementById("cmbDependencia").className = "form-control border border-primary";
+            document.getElementById("lblPeriodo").className = "text-primary";
+            document.getElementById("inputPeriodo").className = "form-control border border-primary";
+            document.getElementById("lblDescripcion").className = "text-primary";
+            document.getElementById("inputDescripcion").className = "form-control border  border-primary";
+            document.getElementById("lblStatus").className = "text-primary";
+            document.getElementById("cmbStatus").className = "form-control border  border-primary";
+            document.getElementById("lblEjercicio").className = "text-primary";
+            document.getElementById("inputEjercicio").className = "form-control border  border-primary";
+            document.getElementById("lblInicio").className = "text-primary";
+            document.getElementById("InicioUpdate").className = "form-control border border-primary";
+            document.getElementById("lblFin").className = "text-primary";
+            document.getElementById("FinUpdate").className = "form-control border border-primary";
+            cargarModal(Indice);
+        };
+        this.Color = function () {    
+            self.periodos[0].Status = "Activo";
+            document.getElementById("title").className = "modal-header btn-success justify-content-center";
+            document.getElementById("exampleModalLabel").innerHTML = "Crear Periodo";
+            document.getElementById("btnModal").className = "btn btn-success";
+            document.getElementById("lblDependencia").className = "text-success";
+            document.getElementById("cmbDependencia").className = "form-control border border-success";
+            document.getElementById("lblPeriodo").className = "text-success";
+            document.getElementById("inputPeriodo").className = "form-control border border-success";
+            document.getElementById("lblDescripcion").className = "text-success";
+            document.getElementById("inputDescripcion").className = "form-control border  border-success";
+            document.getElementById("lblStatus").className = "text-success";
+            document.getElementById("cmbStatus").className = "form-control border  border-success";
+            document.getElementById("lblEjercicio").className = "text-success";
+            document.getElementById("inputEjercicio").className = "form-control border  border-success";
+            document.getElementById("lblInicio").className = "text-success";
+            document.getElementById("InicioUpdate").className = "form-control border border-success";
+            document.getElementById("lblFin").className = "text-success";
+            document.getElementById("FinUpdate").className = "form-control border border-success";                        
+        };
 /********************************************************************************************************************************************************/
         var periodoUpdateF = function () {
                                                        
             catalogoContext.periodoUpdate(self.periodo[0].Id, self.periodo[0].Dependencia, self.periodo[0].Periodo, self.periodo[0].Descripcion, self.periodo[0].Status, self.periodo[0].Ejercicio, self.periodo[0].Inicio, self.periodo[0].Fin ,function (resp) {
                 switch (resp.ressult) {
-                    case "tgp":                      
-                        alert("¡Se han actualizado los datos correctamente!");
+                    case "tgp":       
+                        CargarGrid();
+                        self.periodo = null;
+                        alert("¡Se han actualizado los datos correctamente!");                        
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -89,14 +131,23 @@
             });
         };
 
-        this.periodoUpdate = function () { periodoUpdateF(); }
+        this.periodoUpdate = function (ID) {
+            if (ID) {
+                periodoUpdateF();
+            } else {
+                periodoCreateF();
+            }
+            
+        }
 
         /********************************************************************************************************************************************************/
         var periodoCreateF = function () {
                                                                                                                                                                                 
             catalogoContext.GuardarPerdiodos(self.periodo[0].Dependencia, self.periodo[0].Periodo, self.periodo[0].Descripcion, self.periodo[0].Status, self.periodo[0].Ejercicio, self.periodo[0].Inicio, self.periodo[0].Fin , function (resp) {
                 switch (resp.ressult) {
-                    case "tgp":                      
+                    case "tgp":         
+                        CargarGrid();
+                        self.periodo = null;
                         alert("¡Se ha creado el periodo correctamente!");
                         break;
                     case "notgp":
@@ -109,7 +160,7 @@
             });
         };
 
-        this.periodoeCreate = function () { periodoCreateF(); }
+       // this.periodoeCreate = function () { periodoCreateF(); }
         /********************************************************************************************************************************************************/
         var EliminnarPeriodoF = function (IdPeriodo) {
             catalogoContext.eliminarPeriodo(IdPeriodo, function (resp) {
