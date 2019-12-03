@@ -77,6 +77,7 @@
             $('#btnActualizar').show();
             $('#btnNuevo').hide();
             self.Titulo = "Modificar Área de Atención";
+            self.cve_id = IdAreaAtencion;
             document.getElementById("Titulo").className = "modal-header btn-primary justify-content-center";
             document.getElementById("lblDependencia").className = "text-primary";
             document.getElementById("cmdDependencia").className = "form-control border border-primary";
@@ -159,7 +160,7 @@
         };
 
         var areasUpdate = function () {
-            catalogoContext.AreasAtencionUpdate(self.cve_id[0].Id, self.cve_dependencia[0].Dependencia, self.cve_clave[0].Clave, self.cve_desc[0].Descripcion, self.cve_status[0].Status, self.cve_cat[0].Categoria, function (resp) {
+            catalogoContext.AreasAtencionUpdate(self.cve_id, self.cve_dependencia, self.cve_clave, self.cve_desc, self.cve_status, self.cve_cat, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         alert("¡Se han actualizado los datos correctamente!");
@@ -180,10 +181,10 @@
 
         var AreaCreate = function () {
 
-            catalogoContext.AreasAtencionCreate(self.cve_dependencia[0].Dependencia, self.cve_clave[0].Clave, self.cve_desc[0].Descripcion, self.cve_status[0].Status, self.cve_cat[0].Categoria, function (resp) {
+            catalogoContext.AreasAtencionCreate(self.cve_dependencia, self.cve_clave, self.cve_desc, self.cve_status, self.cve_cat, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        alert("¡Se ha creado la unidad correctamente!");
+                        alert("¡Se ha creado el área correctamente!");
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -199,11 +200,9 @@
 
 
         this.ValorDependencia = function () {
-            this.ValorDependencia = function () {
-                if (self.buscar == "00000") {
+                if (self.buscar == "") {
                     self.buscar = '';
                 }
-            };
         };
 
 
