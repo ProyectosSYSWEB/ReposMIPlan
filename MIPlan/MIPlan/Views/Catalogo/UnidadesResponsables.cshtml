@@ -235,10 +235,10 @@
 
                         <td style="text-align:center">
                             <!--data-toggle="modal" data-target="#UnidadesResponsables"-->
-                            <button type="button" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#UnidadesResponsablesUpdate" data-backdrop="static" data-keyboard="false" ng-click="ctrl.Modal(i.Id)">
+                            <button type="button" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#UnidadesResponsablesUpdate" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-placement="top" title="Editar"  ng-click="ctrl.Modal(i.Id)">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
-                            <button type="button" class="btn btn-danger" ng-click="ctrl.EliminnarUR(i.Id)" style="width:50px">
+                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar" ng-click="ctrl.EliminnarUR(i.Id)" style="width:50px">
                                 <i class="fa fa-eraser" aria-hidden="true"></i>
                             </button>
                         </td>
