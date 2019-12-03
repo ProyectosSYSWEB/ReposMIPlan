@@ -1,6 +1,8 @@
 ﻿var catalogoContext =
 {
     carreralst: [],
+    organismolst: [],
+    statuslst: [],
     dependenciaslst: [],
     acreditadoreslst: [],
     unidadadRlst:[],
@@ -65,6 +67,64 @@
 
     },
 
+    ObtenerOrganismos: function (callBackResult) {
+        var self = this;
+        self.organismolst.length = 0;
+        //var urlServer = "http://localhost:53805/";
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'Catalogo/ObtenerOrganismos',
+                
+                success: function (resp) {
+                    for (var i = 0; i < resp.Resultado.length; i++) {
+                        self.organismolst.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion});
+                    }
+                    if (callBackResult != undefined) {
+                        callBackResult({ ressult: 'tgp', message: null });
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult != undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerCarreas." });
+                    }
+                }
+            });
+
+    },
+
+
+    ObtenerStatusAcreditaciones: function (Dependencia,callBackResult) {
+        var self = this;
+        self.statuslst.length = 0;
+        //var urlServer = "http://localhost:53805/";
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'Catalogo/ObtenerOrganismos',
+                data: { Dependencia },
+                success: function (resp) {
+                    for (var i = 0; i < resp.Resultado.length; i++) {
+                        self.statuslst.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion });
+                    }
+                    if (callBackResult != undefined) {
+                        callBackResult({ ressult: 'tgp', message: null });
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult != undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerCarreas." });
+                    }
+                }
+            });
+
+    },
     ObtenerAcreditadores: function (Dependencia, callBackResult) {
         var self = this;
         self.acreditadoreslst.length = 0;

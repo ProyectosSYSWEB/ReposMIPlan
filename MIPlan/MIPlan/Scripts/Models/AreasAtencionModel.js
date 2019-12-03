@@ -114,4 +114,31 @@
                 }
             });
     },
+
+   //AreasAtencionUpdate: function (Id, Dependencia, Clave, Descripcion, Status, Categoria, callBackResult) {
+   //     var self = this;
+   //    self.areasUplst.length = 0;
+   //     $.ajax(
+   //         {
+   //             type: 'POST',
+   //             cache: false,
+   //             url: urlServer + 'Catalogo/EditarAreasAtencion',
+   //             data: { Id, Dependencia, Clave, Descripcion, Status, Categoria },
+   //             success: function (resp) {
+   //                 if (resp.Error == false) {
+
+   //                     if (callBackResult !== undefined) {
+   //                         callBackResult({ ressult: 'tgp', message: null });
+   //                     }
+   //                 } else {
+   //                     callBackResult({ ressult: "notgp", message: res })
+   //                 }
+   //             },
+   //             error: function (ex) {
+   //                 if (callBackResult !== undefined) {
+   //                     callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EditarUnidadesResponsables." });
+   //                 }
+   //             }
+   //         });
+   // },
 };
