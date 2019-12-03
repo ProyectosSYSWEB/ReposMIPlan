@@ -132,6 +132,8 @@
         this.ObtenerDatos = function (IdAcreditacion) {
             $('#btnActualizar').show();
             $('#btnNuevo').hide();
+            document.getElementById("title").className = "modal-header btn-primary justify-content-center";
+            document.getElementById("exampleModalLabel").innerHTML = "Actualizar ";
             document.getElementById("lbldependencia").className = "text-primary";
             document.getElementById("cmbdependencia").className = "form-control border border-primary";
             document.getElementById("lblcarrera").className = "text-primary";
@@ -176,6 +178,8 @@
         this.Nuevo = function () {
             $('#btnNuevo').show();
             $('#btnActualizar').hide();
+            document.getElementById("title").className = "modal-header btn-primary justify-content-center";
+            document.getElementById("exampleModalLabel").innerHTML = "Crear Acreditador";
             document.getElementById("lbldependencia").className = "text-success";
             document.getElementById("cmbdependencia").className = "form-control border border-success";
             document.getElementById("lblcarrera").className = "text-success";
