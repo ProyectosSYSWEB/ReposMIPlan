@@ -2,7 +2,7 @@
 //<reference path="../Models/CatModel.js"/>
 
 (function () {
-    var app = angular.module('MIPlanWeb', ['ngPagination']);
+    var app = angular.module('MIPlanWeb', []);
 
 /********************************************************************************************************************************************************/
 

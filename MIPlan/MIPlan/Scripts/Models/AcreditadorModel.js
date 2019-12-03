@@ -97,7 +97,7 @@
     },
 
 
-    ObtenerStatusAcreditaciones: function (Dependencia,callBackResult) {
+    ObtenerStatusAcreditaciones: function (callBackResult) {
         var self = this;
         self.statuslst.length = 0;
         //var urlServer = "http://localhost:53805/";
@@ -105,11 +105,11 @@
             {
                 type: 'GET',
                 cache: false,
-                url: urlServer + 'Catalogo/ObtenerOrganismos',
-                data: { Dependencia },
+                url: urlServer + 'Catalogo/ObtenerStatusAcreditaciones',
+               
                 success: function (resp) {
                     for (var i = 0; i < resp.Resultado.length; i++) {
-                        self.statuslst.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion, Status: resp.Resultado[i].Status });
+                        self.statuslst.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion });
                     }
                     if (callBackResult != undefined) {
                         callBackResult({ ressult: 'tgp', message: null });
@@ -119,7 +119,7 @@
                 },
                 error: function (ex) {
                     if (callBackResult != undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerCarreas." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerStatus." });
                     }
                 }
             });
@@ -162,7 +162,7 @@
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
-                            self.unidadAcreditacionlst.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependencia, Carrera: resp.Resultado[i].Carrera, Organismo: resp.Resultado[i].Organismo, Fecha_Inicial: resp.Resultado[i].FechaInicial, Fecha_Final: resp.Resultado[i].FechaFinal, Status: resp.Resultado[i].Status, Observacion: resp.Resultado[i].Observaciones });
+                            self.unidadAcreditacionlst.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependencia, Carrera: resp.Resultado[i].Carrera, Organismo: resp.Resultado[i].Organismo, Fecha_Inicial: resp.Resultado[i].FechaInicial, Fecha_Final: resp.Resultado[i].FechaFinal, Status: resp.Resultado[i].Status, Observaciones: resp.Resultado[i].Observaciones });
                         }
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
@@ -180,7 +180,7 @@
 
     },
 
-    AcreditadorUpdate: function (Id, Dependencia, Carrera, Organismo, Fecha_Inicial, Fecha_Final, Status, Observacion, callBackResult) {
+    AcreditadorUpdate: function (Id, Dependencia, Carrera, Organismo, Fecha_Inicial, Fecha_Final, Status, Observaciones, callBackResult) {
         var self = this;
         self.acreditadorUpdatelst.length = 0;
         $.ajax(
@@ -188,7 +188,7 @@
                 type: 'POST',
                 cache: false,
                 url: urlServer + 'Catalogo/EditarAcreditaciones',
-                data: { Id, Dependencia, Carrera, Organismo, Fecha_Inicial, Fecha_Final, Status, Observacion },
+                data: { Id, Dependencia, Carrera, Organismo, Fecha_Inicial, Fecha_Final, Status, Observaciones },
                 success: function (resp) {
                     if (resp.Error == false) {
 
