@@ -2,7 +2,7 @@
 //<reference path="../Models/CatModel.js"/>
 
 (function () {
-    var app = angular.module('MIPlanWeb', []);
+    var app = angular.module('MIPlanWeb', ['ngPagination']);
 
 /********************************************************************************************************************************************************/
 
@@ -42,40 +42,7 @@
             catalogoContext.ObtenerGridPeriodos(function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.periodos = catalogoContext.periodoslst;                        
-                        $("#tablaDatos").dataTable().fnDestroy();
-                        $('#tablaDatos').DataTable({
-                            data: self.periodos,
-                            pageLength: 5,
-                            "searching": true,
-                            "lengthChange": false,
-                            columns: [
-                                { data: "Dependencia" },
-                                { data: "Periodo" },
-                                { data: "Descripcion" },
-                                { data: "Status" },
-                                { data: "Ejercicio" },
-                                { data: "Inicio" },
-                                { data: "Fin" },
-                                {
-                                    "data": "Id",
-                                    render: function (data, type, row, meta) {
-                                        return '<button type="button" class="btn" style="width:50px" data-toggle="modal" data-target="#ModalPeriodo" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Actualizar" ng-click="ctrl.Modal(&quot;' + row.Id + '&quot;)"><i class="fa fa-pencil" aria-hidden="true" ></i></button> <button type="button" id="delete-button" class="btn btn-danger" style="width:50px" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminnarPeriodo(&quot;' + row.Id + '&quot;)" style="width:50px"><i class="fa fa-eraser" aria-hidden="true" ></i></button> <button type="button" class="btn btn-warning" style="width:50px" ng-click="ctrl.BorrarComision(&quot;' + row.Id + '&quot;)" style="width:50px"><i class="fa fa-print" aria-hidden="true" ></i></button>';
-                                        //if (self.cve_tipo_modal == "1")
-                                        //    return '<button type="button" class="btn" style="width:50px" ng-click="ctrl.IrComision(&quot;' + data + '&quot;)">< i class="fa fa-pencil" aria - hidden="true" ></i ></button >';
-                                        //else
-                                        //    return '<button type="button" class="btn btn-success" data-dismiss="modal" ng-click="ctrl.AgregarOcupante(&quot;' + data + '&quot;,&quot;' + row.Tipo + '&quot;,&quot;' + row.Nombre + '&quot;,&quot;' + row.IdEmp + '&quot;,&quot;' + row.Plaza + '&quot;)">Agregar</button>';
-                                    }
-                                }
-                            ]
-                            ,
-                            rowCallback: function (row) {
-                                if (!row.compiled) {
-                                    $compile(angular.element(row))($scope);
-                                    row.compiled = true;
-                                }
-                            }
-                        });
+                        self.periodos = catalogoContext.periodoslst;                                              
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -104,7 +71,46 @@
             });
         };
 
-        this.Modal = function (Indice) { cargarModal(Indice); };
+        this.Modal = function (Indice) {            
+            document.getElementById("title").className = "modal-header btn-primary justify-content-center";
+            document.getElementById("exampleModalLabel").innerHTML = "Actualizar Periodo";
+            document.getElementById("btnModal").className = "btn btn-primary";
+            document.getElementById("lblDependencia").className = "text-primary";
+            document.getElementById("cmbDependencia").className = "form-control border border-primary";
+            document.getElementById("lblPeriodo").className = "text-primary";
+            document.getElementById("inputPeriodo").className = "form-control border border-primary";
+            document.getElementById("lblDescripcion").className = "text-primary";
+            document.getElementById("inputDescripcion").className = "form-control border  border-primary";
+            document.getElementById("lblStatus").className = "text-primary";
+            document.getElementById("cmbStatus").className = "form-control border  border-primary";
+            document.getElementById("lblEjercicio").className = "text-primary";
+            document.getElementById("inputEjercicio").className = "form-control border  border-primary";
+            document.getElementById("lblInicio").className = "text-primary";
+            document.getElementById("InicioUpdate").className = "form-control border border-primary";
+            document.getElementById("lblFin").className = "text-primary";
+            document.getElementById("FinUpdate").className = "form-control border border-primary";
+            cargarModal(Indice);
+        };
+        this.Color = function () {    
+            self.periodos[0].Status = "Activo";
+            document.getElementById("title").className = "modal-header btn-success justify-content-center";
+            document.getElementById("exampleModalLabel").innerHTML = "Crear Periodo";
+            document.getElementById("btnModal").className = "btn btn-success";
+            document.getElementById("lblDependencia").className = "text-success";
+            document.getElementById("cmbDependencia").className = "form-control border border-success";
+            document.getElementById("lblPeriodo").className = "text-success";
+            document.getElementById("inputPeriodo").className = "form-control border border-success";
+            document.getElementById("lblDescripcion").className = "text-success";
+            document.getElementById("inputDescripcion").className = "form-control border  border-success";
+            document.getElementById("lblStatus").className = "text-success";
+            document.getElementById("cmbStatus").className = "form-control border  border-success";
+            document.getElementById("lblEjercicio").className = "text-success";
+            document.getElementById("inputEjercicio").className = "form-control border  border-success";
+            document.getElementById("lblInicio").className = "text-success";
+            document.getElementById("InicioUpdate").className = "form-control border border-success";
+            document.getElementById("lblFin").className = "text-success";
+            document.getElementById("FinUpdate").className = "form-control border border-success";                        
+        };
 /********************************************************************************************************************************************************/
         var periodoUpdateF = function () {
                                                        

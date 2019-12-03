@@ -1,7 +1,8 @@
 ﻿(function () {
-    var app = angular.module('MIPlanWeb', []);
-
+    var app = angular.module('MIPlanWeb', ['ngPagination']);
+/********************************************************************************************************************************************************/
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
+
         var self = this;
         self.buscar = '';
         

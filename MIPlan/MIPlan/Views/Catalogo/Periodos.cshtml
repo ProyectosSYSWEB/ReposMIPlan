@@ -16,8 +16,8 @@
     <div class="modal fade" id="ModalPeriodo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div id="UpdateTitle" class="modal-header btn-primary justify-content-center">
-                    <h5 class="modal-title" id="exampleModalLabel">Periodo</h5>
+                <div id="title" class="">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
                     <button type="button" ng-click="ctrl.Inicio()" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -27,60 +27,59 @@
                     <div class="container-fluid">
 
                         <div class="row justify-content-center">
-                            <label for="lblDependencia" class="text-primary">Dependencia:</label>
+                            <label id="lblDependencia" class="">Dependencia:</label>
                         </div>
                         <div class="row justify-content-center">
-                            <select class="form-control border border-primary" name="cmbDependencia" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.periodo[0].Dependencia">
+                            <select id="cmbDependencia" class="" name="cmbDependencia" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.periodo[0].Dependencia">
                                 <option value="">--Seleccionar Dependencia--</option>
                             </select>
                         </div>
                         <div class="row justify-content-center">
-                            <label for="formGroupExampleInput" class="text-primary">Periodo</label>
+                            <label id="lblPeriodo" for="formGroupExampleInput" class="">Periodo</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-primary" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Periodo" placeholder="Periodo">
+                            <input type="text" id="inputPeriodo" class="" ng-model="ctrl.periodo[0].Periodo" placeholder="Periodo">
                         </div>
 
                         <div class="row justify-content-center">
-                            <label for="formGroupExampleInput" class="text-primary">Descripción</label>
+                            <label id="lblDescripcion" class="">Descripción</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-primary" id="formGroupExampleInput" ng-model="ctrl.periodo[0].Descripcion" placeholder="Descripción">
+                            <input type="text" id="inputDescripcion" class="" ng-model="ctrl.periodo[0].Descripcion" placeholder="Descripción">
                         </div>
                         <div class="row justify-content-center">
-                            <label for="formGroupExampleInput" class="text-primary">Estatus</label>
+                            <label id="lblStatus" class="">Estatus</label>
                         </div>
                         <div class="row justify-content-center">
-                            <select class="form-control border border-primary" name="cmbDependencia_status" ng-model="ctrl.periodo[0].Status">
+                            <select id="cmbStatus" class="" name="cmbDependencia_status" ng-model="ctrl.periodo[0].Status">
                                 <option value="">--Seleccionar Estatus--</option>
-                                <option value="A">Alta</option>
+                                <option value="A" >Activo</option>
                                 <option value="B">Baja</option>
                             </select>
                         </div>
                         <div class="row justify-content-center">
-                            <label for="formGroupExampleInput" class="text-primary">Ejercicio</label>
+                            <label id="lblEjercicio" class="">Ejercicio</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-primary" id="calendario" ng-model="ctrl.periodo[0].Ejercicio" placeholder="Ejercicio">
+                            <input type="text" id="inputEjercicio" class="" ng-model="ctrl.periodo[0].Ejercicio" placeholder="Ejercicio">
                         </div>
                         <div class="row justify-content-center">
-                            <label for="formGroupExampleInput" class="text-primary">Inicio</label>
+                            <label id="lblInicio" class="">Inicio</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-primary" id="InicioUpdate" ng-model="ctrl.periodo[0].Inicio" placeholder="Inicio">
+                            <input type="text" class="" id="InicioUpdate" ng-model="ctrl.periodo[0].Inicio" placeholder="Inicio">
                         </div>
                         <div class="row justify-content-center">
-                            <label for="formGroupExampleInput" class="text-primary">Fin</label>
+                            <label id="lblFin" class="">Fin</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" class="form-control border border-primary" id="FinUpdate" ng-model="ctrl.periodo[0].Fin" placeholder="Fin">
+                            <input type="text" class="" id="FinUpdate" ng-model="ctrl.periodo[0].Fin" placeholder="Fin">
                         </div>
                     </div>
 
                 </div>
-                <div id="btnCreateTitle" class="modal-footer">
-                    <!--<button type="button" class="btn btn-secondary"  data-dismiss="modal">Cerrar</button>-->
-                    <button type="button" class="btn btn-success" ng-click="ctrl.periodoUpdate(ctrl.periodo[0].Id)" data-dismiss="modal">Guardar</button>
+                <div  class="modal-footer">                    
+                    <button type="button" id="btnModal" class="btn" ng-click="ctrl.periodoUpdate(ctrl.periodo[0].Id)" data-dismiss="modal">Guardar</button>
                 </div>
             </div>
         </div>
@@ -110,12 +109,12 @@
                     </select>
                 </div>
             </div>
-            <!--<div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblStatus" class="text-success">Busqueda</label>
-                    <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-model="ctrl.buscar" style="max-width:100%;">
+                    <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-pagination-search="ctrl.periodos" style="max-width:100%;">
                 </div>
-            </div> -->
+            </div> 
         </div>
     </div>
     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
@@ -123,14 +122,13 @@
         <div class="panel-heading">
             <div class="container">
                 <div class="col text-right">
-                    <button type="button" id="btnCrear" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#ModalPeriodo" data-backdrop="static" data-keyboard="false" style="width:120px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                    <button type="button" id="btnCrear" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#ModalPeriodo" data-backdrop="static" data-keyboard="false" style="width:120px" ng-click="ctrl.Color()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
                     <br />
                 </div>
             </div>
         </div>
-
         <div class="container table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.3)">
-            <table class="display" id="tablaDatos">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th scope="col">
@@ -172,7 +170,9 @@
                         <th scope="col" style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-              <!--  <tbody id="developers" ng-repeat="i in ctrl.periodos | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status">
+
+
+                <tbody ng-pagination="i in ctrl.periodos | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status" ng-pagination-size="5">
                     <tr>
                         <td>{{i.Dependencia}}</td>
                         <td>{{i.Periodo}}</td>
@@ -184,7 +184,7 @@
 
 
                         <td style="text-align:center">
-                           
+
                             <button type="button" id="btnUpdate" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#ModalPeriodo" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Actualizar" ng-click="ctrl.Modal(i.Id)">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
@@ -192,17 +192,18 @@
                             <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminnarPeriodo(i.Id)" style="width:50px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
                         </td>
                     </tr>
-                </tbody>-->
+                </tbody>
+                <!---->
                 <tfoot>
                     <tr>
+                        <th><ng-pagination-control pagination-id="ctrl.periodos" color="white" height="35px"></ng-pagination-control></th>
+                        <th></th>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
                         <th style="text-align:center" colspan="4">
-                            <div class="col-md-12 text-center">
-                                <ul class="pagination pagination-lg pager" id="developer_page"></ul>
-                            </div>
                             <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarImpViatico()" style="width:50px">
                                 <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                             </button>
@@ -228,6 +229,7 @@
 
 <script src="~/Scripts/angular.min.js"></script>
 <script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular-pagination.js"></script>
 <script src="~/Scripts/global.js"></script>
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/PeriodosController.js"></script>
