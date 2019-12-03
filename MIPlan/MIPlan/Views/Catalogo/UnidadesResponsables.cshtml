@@ -192,39 +192,40 @@
                 <thead>
                     <tr>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Periodo'; sortReverse = !sortReverse">
-                                Dependencia
+                            <a href="" ng-click="sortType = 'Dependencia'; sortReverse = !sortReverse">
+                                Dependencia  
+                                <span ng-class="sortType == 'Dependencia' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Dependencia' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
                             <a href="" ng-click="sortType = 'Clave'; sortReverse = !sortReverse">
                                 Clave
-                                <span ng-class="sortType == 'Clave' && !sortReverse ? 'arrow arrow-down' : sortType == 'id' && sortReverse ? 'arrow arrow-up': ''"></span>
+                                <span ng-class="sortType == 'Clave' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Clave' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
                             <a href="" ng-click="sortType = 'Descripcion'; sortReverse = !sortReverse">
                                 Descripción
-                                <span ng-class="sortType == 'Descripcion' && !sortReverse ? 'arrow arrow-down' : sortType == 'id' && sortReverse ? 'arrow arrow-up': ''"></span>
+                                <span ng-class="sortType == 'Descripcion' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Descripcion' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
                             <a href="" ng-click="sortType = 'Status'; sortReverse = !sortReverse">
-                                Estatus
-                                <span ng-class="sortType == 'Status' && !sortReverse ? 'arrow arrow-down' : sortType == 'id' && sortReverse ? 'arrow arrow-up': ''"></span>
+                               Estatus     
+                                <span ng-class="sortType == 'Status' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Status' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
                             <a href="" ng-click="sortType = 'Coordinador'; sortReverse = !sortReverse">
-                                Coordinador
-                                <span ng-class="sortType == 'Coordinador' && !sortReverse ? 'arrow arrow-down' : sortType == 'id' && sortReverse ? 'arrow arrow-up': ''"></span>
+                                Coordinador                     
+                                <span ng-class="sortType == 'Coordinador' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Coordinador' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
 
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody ng-pagination="i in ctrl.unidades  | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status" ng-pagination-size="10">
+                <tbody ng-pagination="i in ctrl.unidades  | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status" ng-pagination-size="5">
                     <tr>
                         <td>{{i.Dependencia}}</td>
                         <td>{{i.Clave}}</td>
@@ -235,24 +236,26 @@
 
                         <td style="text-align:center">
                             <!--data-toggle="modal" data-target="#UnidadesResponsables"-->
-                            <button type="button" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#UnidadesResponsablesUpdate" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-placement="top" title="Editar"  ng-click="ctrl.Modal(i.Id)">
+                            <button type="button" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#UnidadesResponsablesUpdate" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-placement="top" title="Editar" ng-click="ctrl.Modal(i.Id)">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
                             <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar" ng-click="ctrl.EliminnarUR(i.Id)" style="width:50px">
                                 <i class="fa fa-eraser" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-warning" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                             </button>
                         </td>
                     </tr>
                 </tbody>
                 <tfoot>
                     <tr>
+                        <th><ng-pagination-control pagination-id="ctrl.unidades" color="white" height="35px"></ng-pagination-control></th>
                         <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th style="text-align:center">                           
-                            <ng-pagination-control pagination-id="ctrl.unidades" color="white" height="35px"></ng-pagination-control>
-
+                        <th style="text-align:center">
                             <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
                                 <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                             </button>
