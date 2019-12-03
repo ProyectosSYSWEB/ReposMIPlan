@@ -120,13 +120,17 @@
             });
         };
 
-        this.UnidadResponsableUpdate = function () {                    
-            UnidadUpdate();             
+        this.UnidadResponsableUpdate = function (ID) {     
+            if (ID) {
+                UnidadUpdate();
+            } else {
+                UnidadCreate();           
+            }                 
         }
 
 /********************************************************************************************************************************************************/
         var UnidadCreate = function () {
-            
+            console.log(self.unidad[0].Dependencia, self.unidad[0].Clave, self.unidad[0].Descripcion, self.unidad[0].Status, self.unidad[0].Coordinador);
             catalogoContext.UnidadResponsableCreate(self.unidad[0].Dependencia, self.unidad[0].Clave, self.unidad[0].Descripcion, self.unidad[0].Status, self.unidad[0].Coordinador, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":           

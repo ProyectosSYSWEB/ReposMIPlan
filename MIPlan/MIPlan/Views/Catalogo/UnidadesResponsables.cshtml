@@ -55,8 +55,8 @@
                         <div class="row justify-content-center">
                             <select id="cmbStatus" class="" name="cmbDependencia_status" ng-model="ctrl.unidad[0].Status">
                                 <option value="">--Seleccionar Estatus--</option>
-                                <option value="Activo">Activo</option>
-                                <option value="Baja">Baja</option>
+                                <option value="A">Activo</option>
+                                <option value="B">Baja</option>
                             </select>
 
                         </div>
@@ -72,7 +72,7 @@
 
                 </div>
                 <div class="modal-footer">                    
-                    <button type="button" id="btnModal" class="btn btn-primary" data-dismiss="modal" ng-click="ctrl.UnidadResponsableCreate()">Guardar</button>
+                    <button type="button" id="btnModal" class="btn btn-primary" data-dismiss="modal" ng-click="ctrl.UnidadResponsableCreate(ctrl.unidad[0].Id)">Guardar</button>
                 </div>
             </div>
         </div>
