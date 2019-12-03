@@ -7,25 +7,33 @@
 <br />
 <br />
 <br />
-<h2>Áreas De Atención</h2>
 <br />
-<br />
-
 <div ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
     <div class="container">
-        <div class="row">
-            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
-                    <label for="lblDependencia">Dependencia:</label>
-                    <select class="form-control" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia">
+                    <label for="lblDependencia" class="text-primary">Dependencia:</label>
+                    <select class="form-control border border-primary" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.buscar" style="max-width:100%;">
                     </select>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
-                    <label for="lblBusqueda" class="text-success">Busqueda</label>
-                    <input type="text" class="form-control border border-success" ng-model="buscar">
-
+                    <label for="lblDependencia" class="text-info">Status:</label>
+                    <select class="form-control border border-info" name="cmbDependencia" ng-change="ctrl.StatusFun()" ng-model="ctrl.Status.Status" style="max-width:100%;">
+                        <option value=""></option>
+                        <option value="Todos">Todos</option>
+                        <option value="A">Alta</option>
+                        <option value="B">Baja</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                <div class="form-group">
+                    <label for="lblStatus" class="text-success">Busqueda</label>
+                    <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-model="ctrl.buscar" style="max-width:100%;">
                 </div>
             </div>
         </div>
@@ -37,13 +45,18 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col text-right">
-                    <button type="button" id="Nuevo" class="btn btn-success" data-toggle="modal" data-target="#areasatencion" style="width:80px" ng-click="ctrl.Nuevo()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                   <div class="container">
+                    <div class="col text-right">
+                        <button type="button" id="Nuevo" title="Nuevo" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#areasatencion" style="width:120px" ng-click="ctrl.Nuevo()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                        <br />
+                    </div>
+                   </div>
                     <div class="modal fade" id="areasatencion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="Crear">Crear Área de Atención</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <div id="Titulo" class="modal-header btn-success justify-content-center">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{ctrl.Titulo}}</h5>
+                                    <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
@@ -114,61 +127,61 @@
             <br />
         </div>
 
-        
 
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Dependencia</th>
-                    <th scope="col">Clave</th>
-                    <th scope="col">Descripción</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Categoria</th>
-                    <th style="text-align:center"><em class="fa fa-cog"></em></th>
-                </tr>
-            </thead>
-            <tbody ng-repeat="i in ctrl.areasatencion">
-                <tr>
-                    <td>{{i.Id}}</td>
-                    <td>{{i.Dependencia}}</td>
-                    <td>{{i.Cve}}</td>
-                    <td>{{i.Desc}}</td>
-                    <td>{{i.Estatus}}</td>
-                    <td>{{i.Cat}}</td>
+        <div class="container table-responsive" style="box-shadow: 10px 40px 96px #C8E7EC">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Dependencia</th>
+                        <th scope="col">Clave</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Categoria</th>
+                        <th style="text-align:center"><em class="fa fa-cog"></em></th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="i in ctrl.areasatencion">
+                    <tr>
+                        <td>{{i.Id}}</td>
+                        <td>{{i.Dependencia}}</td>
+                        <td>{{i.Cve}}</td>
+                        <td>{{i.Desc}}</td>
+                        <td>{{i.Estatus}}</td>
+                        <td>{{i.Cat}}</td>
 
-                    <td style="text-align:center">
-                        <button type="button" id="Actualizar" class="btn btn-primary btn-create" style="width:50px" data-toggle="modal" data-target="#areasatencion" ng-click="ctrl.ObtDatos(i.Id)">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                        </button>
+                        <td style="text-align:center">
+                            <button type="button" id="Actualizar" title="Editar" class="btn btn-primary btn-create" style="width:50px" data-toggle="modal" data-target="#areasatencion" ng-click="ctrl.ObtDatos(i.Id)">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </button>
 
-                        <button type="button" class="btn btn-danger" ng-click="ctrl.EliminarAreaAtencion(i.Id)" style="width:50px">
-                            <i class="fa fa-eraser" aria-hidden="true"></i>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th style="text-align:center">
-                        <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
-                            <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                        </button>
-                        <button type="button" class="btn btn-success" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
-                            <i class="fa fa-file-excel-o" aria-hidden="true"></i>
-                        </button>
-                    </th>
-                </tr>
-            </tfoot>
-        </table>
+                            <button type="button" class="btn btn-danger" title="Borrar" ng-click="ctrl.EliminarAreaAtencion(i.Id)" style="width:50px">
+                                <i class="fa fa-eraser" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th style="text-align:center">
+                            <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-success" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                                <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                            </button>
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
 </div>
-
 <script src="~/Scripts/angular.min.js"></script>
 <script src="~/Scripts/angular.js"></script>
 <script src="~/Scripts/global.js"></script>
