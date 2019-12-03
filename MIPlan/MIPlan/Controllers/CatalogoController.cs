@@ -324,14 +324,14 @@ namespace MIPlan.Controllers
             }
         }
 
-        public JsonResult ObtenerGridUnidadesResponsables()
+        public JsonResult ObtenerGridUnidadesResponsables(string Dependencia)
         {
             string Verificador = string.Empty;
 
             ResultadoUnidades objResp = new ResultadoUnidades();          
             try
             {
-                var List = CursorDataContext.ObtenerUnidadesResponsables();
+                var List = CursorDataContext.ObtenerUnidadesResponsables(Dependencia);
                 if (Verificador == "0")
                 {
                     objResp.Error = false;

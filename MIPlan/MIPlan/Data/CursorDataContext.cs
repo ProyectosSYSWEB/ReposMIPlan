@@ -326,15 +326,17 @@ namespace MIPlan.Data
         }
         /*FIN METODOS DE LUIS*/
 
-        public static List<UnidadesResponsables> ObtenerUnidadesResponsables()
+        public static List<UnidadesResponsables> ObtenerUnidadesResponsables(string Dependencia)
         {
             OracleCommand cmd = null;
             ExeProcedimiento exeProc = new ExeProcedimiento();
 
             try
             {
-                OracleDataReader dr = null;
-                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Unidades_Responsables", ref dr);
+                string[] Parametros = { "P_Dependencia" };
+                object[] Valores = { Dependencia };
+                OracleDataReader dr = null;              
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Unidades_Responsables", ref dr, Parametros, Valores);
                 List<UnidadesResponsables> listarUnidades = new List<UnidadesResponsables>();
                 while (dr.Read())
                 {
