@@ -53,6 +53,8 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("MessageError").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -70,6 +72,7 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        
                         break;
                     default:
                         break;
@@ -87,6 +90,7 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        
                         break;
                     default:
                         break;
@@ -122,6 +126,8 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("MessageError").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -167,6 +173,8 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("MessageError").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -214,11 +222,13 @@
                     case "tgp":
                        
                         alert("¡Se han actualizado los datos correctamente!");
-                        
+                        CargarGrid();
                         break;
                     case "notgp":
-                        CargarGrid();
+                      
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("MessageError").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -236,13 +246,15 @@
             catalogoContext.AcreditadorCreate(self.cve_dependencia, self.cve_carrera, self.cve_organismo, self.cve_fecha_inicio, self.cve_fecha_fin, self.cve_status, self.cve_observaciones, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-
-                        alert("¡Se ha creado la unidad correctamente!");
                         
+                        alert("¡Se ha creado la unidad correctamente!");
+                        CargarGrid();
                         break;
                     case "notgp":
 
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("MessageError").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -264,6 +276,8 @@ this.AcreditadorCreate = function () { AcreditadorCreate(); }
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("MessageError").innerHTML = self.mensaje_gral;
                         console.log("Error Controller");
                         break;
                     default:
@@ -295,11 +309,11 @@ this.AcreditadorCreate = function () { AcreditadorCreate(); }
 
 
 
-        //this.StatusFun = function () {
-        //    if (self.Status.Status == "Todos") {
-        //        self.Status.Status = '';
-        //    }
-        //}
+        this.StatusFun = function () {
+            if (self.Status.Status == "Todos") {
+                self.Status.Status = '';
+            }
+        }
 
         
 
