@@ -12,7 +12,7 @@
             CargarGrid();         
             self.unidad = null;  
             self.Clave = null;
-            self.EStatus = null;
+            self.EStatus = null;                     
         };
 
         var CargarCombos = function () {
@@ -223,6 +223,19 @@
                 self.Status.Status = '';
             }
         }
+
+
+        this.reset = function (form) {           
+            CargarGrid();
+            self.unidad = null;
+            self.Clave = null;
+            self.EStatus = null; 
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();                
+            }     
+        };
+        
 /*******************************************************************************************************************************************************/
       
     }]);
