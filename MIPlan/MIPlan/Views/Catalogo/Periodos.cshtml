@@ -88,6 +88,13 @@
 
 
     <div class="container">
+        
+        <div id="Error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
+            <strong id="Message">¡Ha ocurrido un error! </strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
 
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
@@ -114,7 +121,7 @@
                     <label for="lblStatus" class="text-success">Busqueda</label>
                     <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-pagination-search="ctrl.periodos" style="max-width:100%;">
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
@@ -196,10 +203,7 @@
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
 
-                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminnarPeriodo(i.Id)" style="width:50px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
-                            <button type="button" class="btn btn-warning" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
-                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                            </button>
+                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminnarPeriodo(i.Id)" style="width:50px"><i class="fa fa-eraser" aria-hidden="true"></i></button>                           
                         </td>
                     </tr>
                 </tbody>

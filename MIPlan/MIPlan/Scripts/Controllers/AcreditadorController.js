@@ -1,7 +1,7 @@
 ﻿// <reference path="../Models/AcreditadorModel.js"/>
 
 (function () {
-    var app = angular.module('MIPlanWeb', ['ngPagination']);
+    var app = angular.module('MIPlanWeb', []);
 
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
         var self = this;
@@ -33,15 +33,15 @@
         //    CargarOrga();
 
         //};
-        this.CargarOrganismos= function () {
-            ObtenerOrganismos();
+        //this.CargarOrganismos= function () {
+        //    ObtenerOrganismos();
 
-        };
+        //};
 
-        this.CargarStatus = function () {
-            ObtenerStatusAcreditaciones();
+        //this.CargarStatus = function () {
+        //    ObtenerStatusAcreditaciones();
 
-        };
+        //};
 
 
         var ObtenerDependencias = function () {
@@ -207,30 +207,30 @@
 
 
 
-        var UnidadUpdate = function () {
-            catalogoContext.AcreditadorUpdate(self.unidad[0].Id, self.unidad[0].Dependencia, self.unidad[0].Carrera, self.unidad[0].Organismo, self.unidad[0].Fecha_Inicial, self.unidad[0].Fecha_Final, self.unidad[0].Status, self.unidad[0].Observaciones, function (resp) {
-                switch (resp.ressult) {
-                    case "tgp":
-                        //  self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
-                        alert("¡Se han actualizado los datos correctamente!");
-                        break;
-                    case "notgp":
-                        self.mensaje_gral = resp.message;
-                        break;
-                    default:
-                        break;
-                }
-                $scope.$apply();
-            });
-        };
+        //var UnidadUpdate = function () {
+        //    catalogoContext.AcreditadorUpdate(self.cve_id[0].Id,self.cve_dependencia[0].Dependencia, self.cve_carrera[0].Carrera, self.cve_organismo[0].Organismo, self.cve_fecha_inicio[0].Fecha_Inicial, self.cve_feha_fin[0].FechaFinal, self.cve_status[0].Status, self.cve_observaciones[0].Observaciones,, function (resp) {
+        //        switch (resp.ressult) {
+        //            case "tgp":
+        //                //  self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
+        //                alert("¡Se han actualizado los datos correctamente!");
+        //                break;
+        //            case "notgp":
+        //                self.mensaje_gral = resp.message;
+        //                break;
+        //            default:
+        //                break;
+        //        }
+        //        $scope.$apply();
+        //    });
+        //};
 
-        this.AcreditadorUpdate = function () { UnidadUpdate(); }
+        //this.AcreditadorUpdate = function () { UnidadUpdate(); }
 
 
 
         var UnidadCreate = function () {
 
-            catalogoContext.AcreditadorCreate(self.cve_dependencia.Dependencia, self.cve_carrera.Carrera, self.cve_organismo.Organismo, self.cve_fecha_inicio.FechaInicial, self.cve_feha_fin.FechaFinal, self.cve_status.Status, self.cve_observacion.Observaciones, function (resp) {
+            catalogoContext.AcreditadorCreate(self.cve_dependencia[0].Dependencia, self.cve_carrera[0].Carrera, self.cve_organismo[0].Organismo, self.cve_fecha_inicio[0].Fecha_Inicial, self.cve_feha_fin[0].FechaFinal, self.cve_status[0].Status, self.cve_observaciones[0].Observaciones, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         //  self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
@@ -278,9 +278,23 @@
             }
         };
 
+
         this.ValorDependencia = function () {
-            alert(self.cve_dependencia);
+            this.ValorDependencia = function () {
+                if (self.buscar == "00000") {
+                    self.buscar = '';
+                }
+            };
         };
+
+
+
+        this.StatusFun = function () {
+            if (self.Status.Status == "Todos") {
+                self.Status.Status = '';
+            }
+        }
+
         
 
 
