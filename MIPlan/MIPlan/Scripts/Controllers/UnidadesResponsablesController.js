@@ -150,7 +150,7 @@
                 UnidadCreate();
             } else {
                 document.getElementById("ErrorModal").style.display = "block";
-                document.getElementById("MessageModal").innerHTML = "Error faltan campos por llenar wey";
+                document.getElementById("MessageModal").innerHTML = "¡Favor de llenar todos los campos!";
             }                 
         }
 
