@@ -22,7 +22,7 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblstatus" class="text-info">Status:</label>
-                    <select class="form-control border border-info" name="cmbstatus" ng-change="ctrl.StatusFun()" ng-model="ctrl.Status.Status" style="max-width:100%;">
+                    <select class="form-control border border-info" name="cmbstatus" style="max-width:100%;">
                         <option value="">--Seleccionar Estatus--</option>
                         <option value="Todos">Todos</option>
                         <option value="A">Alta</option>
@@ -97,7 +97,7 @@
                                                 <label id="lblStatus" for="lblStatus" class="text-success">Status:</label>
                                             </div>
                                             <div class="form-inline col-md-1">
-                                                <select id="cmdstatus" class="form-control border border-success" name="cmdstatus" ng-model="ctrl.cve_status">
+                                                <select id="cmdstatus" class="form-control border border-success" name="cmdstatus" ng-change="ctrl.ValorStatus()" ng-model="ctrl.cve_status">
                                                     <option value="">--Seleccionar Estatus--</option>
                                                     <option value="A">Alta</option>
                                                     <option value="B">Baja</option>
@@ -145,7 +145,7 @@
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody ng-repeat="i in ctrl.areasatencion | filter:ctrl.buscar | filter:ctrl.Status" ng-pagination-size="5">
+                <tbody ng-pagination="i in ctrl.areasatencion | filter:ctrl.buscar" ng-pagination-size="5">
                     <tr>
                         <td>{{i.Id}}</td>
                         <td>{{i.Dependencia}}</td>
@@ -173,7 +173,7 @@
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th style="text-align:center">
+                        <th style="text-align:center" colspan="4">
                             <button type="button" title="PDF" class="btn btn-danger" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
                                 <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                             </button>
@@ -192,6 +192,7 @@
 <br />
 <script src="~/Scripts/angular.min.js"></script>
 <script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular-pagination.js"></script>
 <script src="~/Scripts/global.js"></script>
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/AreasAtencionController.js"></script>

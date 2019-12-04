@@ -1,7 +1,7 @@
 ﻿// <reference path="../Models/AreasAtencionModel.js"/>
 
 (function () {
-    var app = angular.module('MIPlanWeb', [/*'ngPagination'*/]);
+    var app = angular.module('MIPlanWeb', ['ngPagination']);
 
 
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
@@ -164,6 +164,7 @@
                 switch (resp.ressult) {
                     case "tgp":
                         alert("¡Se han actualizado los datos correctamente!");
+                        CargarGrid();
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -185,6 +186,7 @@
                 switch (resp.ressult) {
                     case "tgp":
                         alert("¡Se ha creado el área correctamente!");
+                        CargarGrid();
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -205,21 +207,15 @@
                 }
         };
 
+        this.ValorStatus = function () {
+            if (self.cve_status = "") {
+                self.cve_status = '';
+            }
+        };
+
 
         this.BorrarBasico = function (Indice) {
             alert(Indice);
         };
-
-        this.StatusFun = function () {
-            if (self.Status.Status == "Todos") {
-                self.Status.Status = '';
-            }
-        }
-
-
-
     }]);
-
-
-
 })();
