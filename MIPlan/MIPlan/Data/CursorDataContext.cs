@@ -108,7 +108,7 @@ namespace MIPlan.Data
                     objAcreditaciones.FechaInicial = Convert.ToString(dr[4]);
                     objAcreditaciones.FechaFinal = Convert.ToString(dr[5]);
                     objAcreditaciones.Status = Convert.ToString(dr[6]);
-                    objAcreditaciones.Observaciones = Convert.ToString(dr[6]);
+                    objAcreditaciones.Observaciones = Convert.ToString(dr[7]);
 
                     listarAcreditaciones.Add(objAcreditaciones);
                 }
