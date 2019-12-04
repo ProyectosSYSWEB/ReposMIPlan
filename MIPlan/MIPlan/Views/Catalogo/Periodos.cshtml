@@ -1,4 +1,4 @@
-﻿
+﻿ValorStatus
 @{
     ViewBag.Title = "Periodos";
     Layout = "~/Views/Shared/_LayoutContenido.cshtml";
@@ -10,7 +10,7 @@
 <br />
 <br />
 
-<div ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">        
+<div ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
     <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
     <!-- Modal Update-->
     <div class="modal fade" id="ModalPeriodo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -21,9 +21,9 @@
                     <button type="button" ng-click="ctrl.Inicio()" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                </div>            
+                </div>
                 <div class="modal-body">
-
+                    ValorStatus
                     <div class="container-fluid">
 
                         <div class="row justify-content-center">
@@ -53,7 +53,7 @@
                         <div class="row justify-content-center">
                             <select id="cmbStatus" class="" name="cmbDependencia_status" ng-model="ctrl.periodo[0].Status">
                                 <option value="">--Seleccionar Estatus--</option>
-                                <option value="A" >Activo</option>
+                                <option value="A">Activo</option>
                                 <option value="B">Baja</option>
                             </select>
                         </div>
@@ -78,7 +78,7 @@
                     </div>
 
                 </div>
-                <div  class="modal-footer">                    
+                <div class="modal-footer">
                     <button type="button" id="btnModal" class="btn" ng-click="ctrl.periodoUpdate(ctrl.periodo[0].Id)" data-dismiss="modal">Guardar</button>
                 </div>
             </div>
@@ -88,7 +88,7 @@
 
 
     <div class="container">
-        
+
         <div id="Error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
             <strong id="Message">¡Ha ocurrido un error! </strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -203,7 +203,7 @@
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
 
-                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminnarPeriodo(i.Id)" style="width:50px"><i class="fa fa-eraser" aria-hidden="true"></i></button>                           
+                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminnarPeriodo(i.Id)" style="width:50px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -223,14 +223,14 @@
                             </button>
                             <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarImpViatico()" style="width:50px">
                                 <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                            </button>                          
+                            </button>
                         </th>
                     </tr>
                 </tfoot>
             </table>
         </div>
     </div>
-   
+
 
 </div>
 
@@ -248,11 +248,11 @@
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/PeriodosController.js"></script>
 <script src="~/Scripts/Models/PeriodosModel.js"></script>
- 
- <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<script type="text/javascript">    	         
 
-    
+<!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<script type="text/javascript">
+
+
 
     $('#InicioCreate').datetimepicker({
         timepicker: false,

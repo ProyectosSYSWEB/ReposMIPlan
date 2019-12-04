@@ -7,6 +7,7 @@
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
         var self = this;
         self.buscar = '';
+        self.estatus = '';
 
         this.Inicio = function () {
             CargarCombos();
@@ -208,8 +209,8 @@
         };
 
         this.ValorStatus = function () {
-            if (self.cve_status = "") {
-                self.cve_status = '';
+            if (self.estatus = "Todos") {
+                self.estatus = '';
             }
         };
 
