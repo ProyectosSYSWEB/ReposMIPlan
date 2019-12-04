@@ -30,6 +30,8 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -47,6 +49,8 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -64,6 +68,8 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -124,6 +130,8 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -152,6 +160,8 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -168,7 +178,9 @@
                     case "tgp":                                
                         break;
                     case "notgp":
-                        self.mensaje_gral = resp.message;                        
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;                     
                         break;
                     default:
                         break;

@@ -10,7 +10,9 @@
         this.Inicio = function () {
             CargarCombos();
             CargarGrid();         
-            self.unidad = null;
+            self.unidad = null;  
+            self.Clave = null;
+            self.EStatus = null;
         };
 
         var CargarCombos = function () {
@@ -27,6 +29,8 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -39,10 +43,13 @@
             catalogoContext.ObtenerUnidades( function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.unidades = catalogoContext.unidadesRlst;                        
+                        self.unidades = catalogoContext.unidadesRlst;  
+                        $('#UnidadesResponsablesModal').modal('hide');
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -56,9 +63,14 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.unidad = catalogoContext.unidadadRlst;
+                        self.EStatus = self.unidad[0].Status;
+                        self.Clave = self.unidad[0].Clave;
+                        //$('#UnidadesResponsablesModal').modal('hide');
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -83,7 +95,7 @@
             document.getElementById("inputCoordincacion").className = "form-control border border-primary";
             cargarModal(Indice);
         };
-        this.Color = function () {            
+        this.Color = function () {                 
             document.getElementById("title").className = "modal-header btn-success justify-content-center";
             document.getElementById("exampleModalLabel").innerHTML = "Crear Unidad Responsable";
             document.getElementById("btnModal").className = "btn btn-success";
@@ -97,13 +109,22 @@
             document.getElementById("cmbStatus").className = "form-control border  border-success";
             document.getElementById("lblCoordinacion").className = "text-success";
             document.getElementById("inputCoordincacion").className = "form-control border border-success";          
+
+            self.EStatus = "A";           
+            var iNumeroMayor = self.unidades[0].Clave;
+            for (var i = 0; i < self.unidades.length; i++) {
+                if (self.unidades[i].Clave > iNumeroMayor) {
+                    iNumeroMayor = self.unidades[i].Clave;                  
+                } 
+            }
+            self.Clave = parseInt(iNumeroMayor) + 1;
         };
 
 /********************************************************************************************************************************************************/
         var UnidadUpdate = function () {            
             
             
-            catalogoContext.UnidadResponsableUpdate(self.unidad[0].Id, self.unidad[0].Dependencia, self.unidad[0].Clave, self.unidad[0].Descripcion, self.unidad[0].Status, self.unidad[0].Coordinador, function (resp) {
+            catalogoContext.UnidadResponsableUpdate(self.unidad[0].Id, self.unidad[0].Dependencia, self.Clave, self.unidad[0].Descripcion, self.EStatus, self.unidad[0].Coordinador, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":                        
                         CargarGrid();
@@ -112,6 +133,8 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -121,25 +144,30 @@
         };
 
         this.UnidadResponsableUpdateCreate = function (ID) {     
-            if (ID) {
+            if (ID && self.unidad != null) {
                 UnidadUpdate();
+            } else if (self.unidad != null && self.unidad[0].Dependencia != null && self.Clave != null && self.unidad[0].Descripcion != null && self.EStatus != null && self.unidad[0].Coordinador != null) {
+                UnidadCreate();
             } else {
-                UnidadCreate();           
+                document.getElementById("ErrorModal").style.display = "block";
+                document.getElementById("MessageModal").innerHTML = "Error faltan campos por llenar wey";
             }                 
         }
 
 /********************************************************************************************************************************************************/
         var UnidadCreate = function () {
-            console.log(self.unidad[0].Dependencia, self.unidad[0].Clave, self.unidad[0].Descripcion, self.unidad[0].Status, self.unidad[0].Coordinador);
-            catalogoContext.UnidadResponsableCreate(self.unidad[0].Dependencia, self.unidad[0].Clave, self.unidad[0].Descripcion, self.unidad[0].Status, self.unidad[0].Coordinador, function (resp) {
+            console.log(self.unidad[0].Dependencia, self.Clave, self.unidad[0].Descripcion, self.EStatus, self.unidad[0].Coordinador);
+            catalogoContext.UnidadResponsableCreate(self.unidad[0].Dependencia, self.Clave, self.unidad[0].Descripcion, self.EStatus, self.unidad[0].Coordinador, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":           
                         CargarGrid();
-                        self.unidad = null;
+                        self.unidad = null;                       
                         alert("¡Se ha creado la unidad correctamente!");
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";   
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -156,7 +184,9 @@
                     case "tgp":                                                                        
                         break;
                     case "notgp":
-                        self.mensaje_gral = resp.message;                        
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;                   
                         break;
                     default:
                         break;
@@ -175,7 +205,14 @@
                 alert("No se ha eliminado el registro");
             }
         };
-/*******************************************************************************************************************************************************/
+    /*******************************************************************************************************************************************************/
+        this.DivError = function () {
+            document.getElementById("Error").style.display = "none";           
+        };
+        this.DivError = function () {
+            document.getElementById("ErrorModal").style.display = "none";
+        };
+        
         this.ValorDependencia = function () {
             if (self.buscar == "00000") {
                 self.buscar = '';

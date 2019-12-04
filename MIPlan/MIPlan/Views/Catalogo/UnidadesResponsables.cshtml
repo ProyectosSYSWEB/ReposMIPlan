@@ -12,7 +12,7 @@
 
 
 <div ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
-      <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+    <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
     <!-- Modal Update-->
     <div class="modal fade" id="UnidadesResponsablesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -40,25 +40,23 @@
                             <label id="lblClave" class="">Clave</label>
                         </div>
                         <div class="row justify-content-center">
-                           <input type="text" id="inputClave" class="" ng-model="ctrl.unidad[0].Clave" placeholder="Clave">
+                            <input type="text" id="inputClave" class="" ng-model="ctrl.Clave" placeholder="Clave">
                         </div>
 
                         <div class="row justify-content-center">
                             <label id="lblDescripcion" class="">Descripción</label>
                         </div>
                         <div class="row justify-content-center">
-                            <input type="text" id="inputDescripcion" class=""  ng-model="ctrl.unidad[0].Descripcion" placeholder="Descripción">
+                            <input type="text" id="inputDescripcion" class="" ng-model="ctrl.unidad[0].Descripcion" placeholder="Descripción">
                         </div>
                         <div class="row justify-content-center">
                             <label id="lblStatus" class="">Estatus</label>
                         </div>
                         <div class="row justify-content-center">
-                            <select id="cmbStatus" class="" name="cmbDependencia_status" ng-model="ctrl.unidad[0].Status">
-                                <option value="">--Seleccionar Estatus--</option>
+                            <select id="cmbStatus" class="" name="cmbDependencia_status" ng-model="ctrl.EStatus">
                                 <option value="A">Activo</option>
                                 <option value="B">Baja</option>
                             </select>
-
                         </div>
 
                         <div class="row justify-content-center">
@@ -66,21 +64,38 @@
                         </div>
                         <div class="row justify-content-center">
                             <input type="text" id="inputCoordincacion" class="" ng-model="ctrl.unidad[0].Coordinador" placeholder="Coordinador">
+
+                        </div>
+                        <br />                        
+                        <div class="row justify-content-center">
+                            <div id="ErrorModal" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
+                                <strong id="MessageModal">¡Ha ocurrido un error! </strong>
+                                <button type="button" class="close" ng-click="ctrl.DivError()" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                         </div>
 
                     </div>
 
                 </div>
-                <div class="modal-footer">                    
-                    <button type="button" id="btnModal" class="btn btn-primary" data-dismiss="modal" ng-click="ctrl.UnidadResponsableUpdateCreate(ctrl.unidad[0].Id)">Guardar</button>
+                <div class="modal-footer">
+                    <button type="button" id="btnModal" class="btn btn-primary" ng-click="ctrl.UnidadResponsableUpdateCreate(ctrl.unidad[0].Id)">Guardar</button>
                 </div>
             </div>
         </div>
     </div>
-    <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------data-dismiss="modal"------------------------------------------------------------------------------------------------------------------------------->
 
 
     <div class="container">
+
+        <div id="Error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
+            <strong id="Message">¡Ha ocurrido un error! </strong>
+            <button type="button" class="close" ng-click="ctrl.DivError()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
 
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
@@ -127,7 +142,7 @@
                     <tr>
                         <th scope="col">
                             <a href="" ng-click="sortType = 'Dependencia'; sortReverse = !sortReverse">
-                                Dependencia  
+                                Dependencia
                                 <span ng-class="sortType == 'Dependencia' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Dependencia' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
@@ -145,13 +160,13 @@
                         </th>
                         <th scope="col">
                             <a href="" ng-click="sortType = 'Status'; sortReverse = !sortReverse">
-                               Estatus     
+                                Estatus
                                 <span ng-class="sortType == 'Status' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Status' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
                             <a href="" ng-click="sortType = 'Coordinador'; sortReverse = !sortReverse">
-                                Coordinador                     
+                                Coordinador
                                 <span ng-class="sortType == 'Coordinador' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Coordinador' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
@@ -175,7 +190,7 @@
                             </button>
                             <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar" ng-click="ctrl.EliminnarUR(i.Id)" style="width:50px">
                                 <i class="fa fa-eraser" aria-hidden="true"></i>
-                            </button>                          
+                            </button>
                         </td>
                     </tr>
                 </tbody>

@@ -25,7 +25,7 @@
                         }
 
                     } else {
-                        callBackResult({ ressult: "notgp", message: resp.MensajeError })
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
                     }
                 },
                 error: function (ex) {
@@ -55,7 +55,7 @@
                             callBackResult({ ressult: 'tgp', message: null });
                         }
                     } else {
-                        callBackResult({ ressult: "notgp", message: res })
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
                     }                  
                 },
                 error: function (ex) {
@@ -85,7 +85,7 @@
                             callBackResult({ ressult: 'tgp', message: null });
                         }
                     } else {
-                        callBackResult({ ressult: "notgp", message: res })
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
                     }
                 },
                 error: function (ex) {
@@ -113,7 +113,7 @@
                             callBackResult({ ressult: 'tgp', message: null });
                         }
                     } else {
-                        callBackResult({ ressult: "notgp", message: res })
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
                     }
                 },
                 error: function (ex) {
@@ -138,7 +138,7 @@
                         }
                     } else {
                         callBackResult({ ressult: "notgp", message: resp.MensajeError });
-                        console.log(resp.MensajeError);
+                        
                     }
                 },
                 error: function (ex) {
@@ -162,7 +162,7 @@
                             callBackResult({ ressult: 'tgp', message: null });
                         }
                     } else {
-                        callBackResult({ ressult: "notgp", message: res })
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
                     }
                 },
                 error: function (ex) {
