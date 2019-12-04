@@ -209,7 +209,7 @@
         this.DivError = function () {
             document.getElementById("Error").style.display = "none";           
         };
-        this.DivError = function () {
+        this.DivErrorModal = function () {
             document.getElementById("ErrorModal").style.display = "none";
         };
         
