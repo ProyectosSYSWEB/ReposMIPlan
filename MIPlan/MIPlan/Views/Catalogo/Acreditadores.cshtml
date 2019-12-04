@@ -24,7 +24,7 @@
                     <select class="form-control border border-info" name="cmbDependencia" ng-options="option.Id as option.Descripcion for option in ctrl.status" ng-model="ctrl.cve_status" ng-change="ctrl.CargarStatus()" style="max-width:100%;">
                         <option value="">--Seleccionar Estatus--</option>
                         <option value="Todos">Todos</option>
-                        
+
                     </select>
                 </div>
             </div>
@@ -51,7 +51,7 @@
             <div class="modal fade" id="acreditadores" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                    <div id="Titulo" class="modal-header btn-success justify-content-center">
+                        <div id="Titulo" class="modal-header btn-success justify-content-center">
                             <h5 class="modal-title" id="exampleModalLabel">{{ctrl.Titulo}}</h5>
                             <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="form-inline col-md-6">
                                     <label id="lblfechainicio" for="lblfechainicio" class="text-success">Fecha Inicio:</label>
-                                    <input type="text" id="txtfechainicio" class="form-control border border-success" name="txtfechainicio"  placeholder="" ng-model="ctrl.cve_fecha_inicio">
+                                    <input type="text" id="txtfechainicio" class="form-control border border-success" name="txtfechainicio" placeholder="" ng-model="ctrl.cve_fecha_inicio">
                                 </div>
                             </div>
                             <br />
@@ -124,80 +124,80 @@
                             <br />
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
-                                <button type="button" id="btnNuevo" class="btn btn-success" ng-click="AcreditadorCreate()" >Guardar</button>
-                                <button type="button" id="btnActualizar" class="btn btn-primary"  @*ng-click="ctrl.AcreditadorUpdate()"*@>Guardar</button>
+                                <button type="button" id="btnNuevo" class="btn btn-success" ng-click="ctrl.AcreditadorCreate()">Guardar</button>
+                                <button type="button" id="btnActualizar" class="btn btn-primary" ng-click="ctrl.AcreditadorUpdate()">Guardar</button>
                             </div>
                         </div>
-                   
+
+                    </div>
+
+                    <br />
                 </div>
 
-                <br />
             </div>
+            <input type="hidden" ng-model="ctrl.cve_id" />
+            <div class="container table-responsive" style="box-shadow: 10px 40px 96px #C8E7EC">
+                <table id="Table" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Dependencia</th>
+                            <th scope="col">Carrera</th>
+                            <th scope="col">Organismo</th>
+                            <th scope="col">Fecha Inicio</th>
+                            <th scope="col">Fecha Fin</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Observaciones</th>
 
-        </div>
+                            <th style="text-align:center"><em class="fa fa-cog"></em></th>
+                        </tr>
+                    </thead>
+                    <tbody ng-pagination="i in ctrl.acreditador | filter:ctrl.buscar " ng-pagination-size="5">
+                        <tr>
+                            <td>{{i.Id}}</td>
+                            <td>{{i.Dependencia}}</td>
+                            <td>{{i.Carrera}}</td>
+                            <td>{{i.Organismo}}</td>
+                            <td>{{i.Fecha_Inicial}}</td>
+                            <td>{{i.Fecha_Final}}</td>
+                            <td>{{i.Status}}</td>
+                            <td>{{i.Observaciones}}</td>
 
-        <div class="container table-responsive" style="box-shadow: 10px 40px 96px #C8E7EC">
-            <table id="Table" class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Dependencia</th>
-                        <th scope="col">Carrera</th>
-                        <th scope="col">Organismo</th>
-                        <th scope="col">Fecha Inicio</th>
-                        <th scope="col">Fecha Fin</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Observaciones</th>
+                            <td style="text-align:center">
+                                <button type="button" id="Actualizar" class="btn btn-primary" title="Editar" data-toggle="modal" data-target="#acreditadores" ng-click="ctrl.ObtenerDatos(i.Id)" style="width:50px">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </button>
 
-                        <th style="text-align:center"><em class="fa fa-cog"></em></th>
-                    </tr>
-                </thead>
-                <tbody ng-repeat="i in ctrl.acreditador | filter:ctrl.buscar " ng-pagination-size="5">
-                    <tr>
-                        <td>{{i.Id}}</td>
-                        <td>{{i.Dependencia}}</td>
-                        <td>{{i.Carrera}}</td>
-                        <td>{{i.Organismo}}</td>
-                        <td>{{i.Fecha_Inicial}}</td>
-                        <td>{{i.Fecha_Final}}</td>
-                        <td>{{i.Status}}</td>
-                        <td>{{i.Observacion}}</td>
+                                <button type="button" class="btn btn-danger" title="Eliminar" ng-click="ctrl.Eliminar(i.Id)" style="width:50px">
+                                    <i class="fa fa-eraser" aria-hidden="true"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
 
-                        <td style="text-align:center">
-                            <button type="button" id="Actualizar" class="btn btn-primary" title="Editar" data-toggle="modal" data-target="#acreditadores" ng-click="ctrl.ObtenerDatos(i.Id)" style="width:50px">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </button>
-
-                            <button type="button" class="btn btn-danger" title="Eliminar" ng-click="ctrl.Eliminar(i.Id)" style="width:50px">
-                                <i class="fa fa-eraser" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-
-                    <tr>
-                        <th><ng-pagination-control pagination-id="ctrl.acreditador" color="white" height="35px"></ng-pagination-control></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th style="text-align:center"   colspan="4">
-                            <button type="button" class="btn btn-danger" title="PDF" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
-                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                            </button>
-                            <button type="button" class="btn btn-success" title="EXCEL" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
-                                <i class="fa fa-file-excel-o" aria-hidden="true"></i>
-                            </button>
-                        </th>
-                    </tr>
-                </tfoot>
-            </table>
+                        <tr>
+                            <th><ng-pagination-control pagination-id="ctrl.acreditador" color="white" height="35px"></ng-pagination-control></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th style="text-align:center" colspan="4">
+                                <button type="button" class="btn btn-danger" title="PDF" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class="btn btn-success" title="EXCEL" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                                    <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                                </button>
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     </div>
 </div>
-    </div>
 <br />
 <br />
 <br />
@@ -205,6 +205,7 @@
 <br />
 <script src="~/Scripts/angular.min.js"></script>
 <script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular-pagination.js"></script>
 <script src="~/Scripts/global.js"></script>
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/AcreditadorController.js"></script>
