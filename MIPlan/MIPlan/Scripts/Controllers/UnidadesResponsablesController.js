@@ -44,7 +44,7 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.unidades = catalogoContext.unidadesRlst;  
-                        $('#UnidadesResponsablesModal').modal('hide');
+                        //$('#UnidadesResponsablesModal').modal('hide');
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -223,15 +223,16 @@
         }
 
 
-        this.reset = function (form) {           
-            CargarGrid();
-            self.unidad = null;
-            self.Clave = null;
-            self.EStatus = null; 
+        this.reset = function (form) {   
+            $('#UnidadesResponsablesModal').modal('hide');               
             if (form) {
                 form.$setPristine();
                 form.$setUntouched();                
             }     
+            CargarGrid();       
+            self.unidad = null;
+            self.Clave = null;
+            self.EStatus = null; 
         };
         
 /*******************************************************************************************************************************************************/

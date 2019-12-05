@@ -181,6 +181,7 @@ namespace MIPlan.Data
                     objUnidades.Clave = Convert.ToString(dr[2]);
                     objUnidades.Descripcion = Convert.ToString(dr[3]);
                     objUnidades.Status = Convert.ToString(dr[4]);
+                    objUnidades.Coordinador = Convert.ToString(dr[5]);
 
                     listarUnidades.Add(objUnidades);
                 }
