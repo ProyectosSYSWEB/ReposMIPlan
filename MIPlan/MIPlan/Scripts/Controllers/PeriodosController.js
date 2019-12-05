@@ -66,7 +66,7 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.periodo = catalogoContext.periodolst;   
-                        self.EStatus = self.periodo[0].Status;
+                        self.EStatus = self.periodo[0].Status;                        
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;

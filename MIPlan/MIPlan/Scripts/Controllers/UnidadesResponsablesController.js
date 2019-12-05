@@ -92,7 +92,7 @@
             document.getElementById("lblStatus").className = "text-primary";
             document.getElementById("cmbStatus").className = "form-control border  border-primary";
             document.getElementById("lblCoordinacion").className = "text-primary";
-            //document.getElementById("inputCoordincacion").className = "form-control border border-primary";
+            document.getElementById("Radio").className = "radio-group form-control border border-primary text-center";  
             cargarModal(Indice);
         };
         this.Color = function () {                 
@@ -108,7 +108,7 @@
             document.getElementById("lblStatus").className = "text-success";
             document.getElementById("cmbStatus").className = "form-control border  border-success";
             document.getElementById("lblCoordinacion").className = "text-success";
-            //document.getElementById("inputCoordincacion").className = "form-control border border-success";          
+            document.getElementById("Radio").className = "radio-group form-control border border-success text-center";          
 
             self.EStatus = "A";           
             var iNumeroMayor = self.unidades[0].Clave;

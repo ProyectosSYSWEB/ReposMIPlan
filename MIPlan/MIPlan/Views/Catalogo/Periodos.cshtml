@@ -128,6 +128,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <button type="button" class="btn btn btn-danger" ng-click="ctrl.reset(modalForm)" >Salir</button>
                         <button type="button" id="btnModal" class="btn" ng-click="ctrl.periodoUpdate(ctrl.periodo[0].Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
                     </div>
                 </form>
@@ -262,14 +263,15 @@
                     <tr>
                         <th colspan="4"><ng-pagination-control pagination-id="ctrl.periodos" color="white" height="35px"></ng-pagination-control></th>
                         <th></th>
-                        <th></th>                        
-                        <th style="text-align:center" colspan="2">
-                            <button type="button" class="btn btn-success" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                        <th></th>
+                        <th></th>
+                        <th style="text-align:center" colspan="1">
+                            <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
                                 <i class="fa fa-file-excel-o" aria-hidden="true"></i>
                             </button>
-                            <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarImpViatico()" style="width:50px">
+                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Generar Reporte en PDF" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
                                 <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                            </button>                          
+                            </button>
                         </th>
                     </tr>
                 </tfoot>
@@ -297,17 +299,12 @@
  
  <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <script type="text/javascript">    	         
+      
+    //$('#inputEjercicio').datetimepicker({
+    //    timepicker: false,
+    //    format: 'Y'
+    //});
 
-    
-
-    $('#InicioCreate').datetimepicker({
-        timepicker: false,
-        format: 'd/m/Y'
-    });
-    $('#FinCreate').datetimepicker({
-        timepicker: false,
-        format: 'd/m/Y'
-    });
     $('#InicioUpdate').datetimepicker({
         timepicker: false,
         format: 'd/m/Y'
