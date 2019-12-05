@@ -66,7 +66,8 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.periodo = catalogoContext.periodolst;   
-                        self.EStatus = self.periodo[0].Status;                        
+                        self.EStatus = self.periodo[0].Status;
+                        self.Ejercicio = self.periodo[0].Ejercicio;  
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -119,11 +120,12 @@
             document.getElementById("lblFin").className = "text-success";
             document.getElementById("FinUpdate").className = "form-control border border-success";      
             self.EStatus = "A";    
+            self.Ejercicio = (new Date).getFullYear();
         };
 /********************************************************************************************************************************************************/
         var periodoUpdateF = function () {
                                                        
-            catalogoContext.periodoUpdate(self.periodo[0].Id, self.periodo[0].Dependencia, self.periodo[0].Periodo, self.periodo[0].Descripcion, self.EStatus, self.periodo[0].Ejercicio, self.periodo[0].Inicio, self.periodo[0].Fin ,function (resp) {
+            catalogoContext.periodoUpdate(self.periodo[0].Id, self.periodo[0].Dependencia, self.periodo[0].Periodo, self.periodo[0].Descripcion, self.EStatus, self.Ejercicio, self.periodo[0].Inicio, self.periodo[0].Fin ,function (resp) {
                 switch (resp.ressult) {
                     case "tgp":       
                         CargarGrid();
@@ -152,7 +154,7 @@
 
         /********************************************************************************************************************************************************/
         var periodoCreateF = function () {                                                                                                                                                                                
-            catalogoContext.GuardarPerdiodos(self.periodo[0].Dependencia, self.periodo[0].Periodo, self.periodo[0].Descripcion, self.EStatus, self.periodo[0].Ejercicio, self.periodo[0].Inicio, self.periodo[0].Fin , function (resp) {
+            catalogoContext.GuardarPerdiodos(self.periodo[0].Dependencia, self.periodo[0].Periodo, self.periodo[0].Descripcion, self.EStatus, self.Ejercicio, self.periodo[0].Inicio, self.periodo[0].Fin , function (resp) {
                 switch (resp.ressult) {
                     case "tgp":         
                         CargarGrid();
