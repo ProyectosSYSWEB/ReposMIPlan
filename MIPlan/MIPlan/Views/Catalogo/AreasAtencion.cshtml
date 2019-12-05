@@ -11,6 +11,13 @@
 <div ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
     <div class="container">
 
+        <div id="Error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
+            <strong id="Message">¡Ha ocurrido un error! </strong>
+            <button type="button" class="close" ng-click="ctrl.DivError()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
@@ -22,7 +29,7 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblstatus" class="text-info">Status:</label>
-                    <select class="form-control border border-info" name="cmbstatus" style="max-width:100%;" ng-change="ctrl.ValorStatus()" ng-model="ctrl.estatus">
+                    <select class="form-control border border-info" name="cmbstatus" style="max-width:100%;" ng-change="ctrl.StatusFun()" ng-model="ctrl.Estatus.Estatus">
                         <option value="">--Seleccionar Estatus--</option>
                         <option value="Todos">Todos</option>
                         <option value="A">Alta</option>
@@ -47,80 +54,116 @@
                 <div class="col text-right">
                    <div class="container">
                     <div class="col text-right">
-                        <button type="button" id="Nuevo" title="Nuevo" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#areasatencion" style="width:120px" ng-click="ctrl.Nuevo()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                        <button type="button" id="Nuevo" title="Nuevo" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#areasatencion" data-backdrop="static" data-keyboard="false" style="width:120px" ng-click="ctrl.Nuevo()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
                         <br />
                     </div>
                    </div>
 
-                    <div class="modal fade" id="areasatencion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" data-keyboard="false" data-backdrop="static" id="areasatencion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <div id="Titulo" class="modal-header btn-success justify-content-center">
-                                    <h5 class="modal-title" id="exampleModalLabel">{{ctrl.Titulo}}</h5>
-                                    <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
+                                <form name="modalForm" novalidate>
+                                    <div id="Titulo" class="modal-header btn-success justify-content-center">
+                                        <h5 class="modal-title" id="exampleModalLabel">{{ctrl.Titulo}}</h5>
+                                        <button type="button" class="close btn-danger" data-dismiss="modal" ng-click="ctrl.reset(modalForm)" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
 
-                                <div class="modal-body">
-                                    <div class="container-fluid">
-                                        <div class="row">
-                                            <div class="form-inline col-md-3">
-                                                <label id="lblDependencia" for="lblDependencia" class="text-success">Dependencia:</label>
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="form-inline col-md-3">
+                                                    <label id="lblDependencia" for="lblDependencia" class="text-success">Dependencia:</label>
+                                                </div>
+                                                <div class="form-inline col-md-1">
+                                                    <select id="cmdDependencia" class="form-control border border-success" name="cmdDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia">
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="form-inline col-md-1">
-                                                <select id="cmdDependencia" class="form-control border border-success" name="cmdDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia">
-                                                </select>
+                                            <div class="row justify-content-center">
+                                                <span class="messages" ng-show="modalForm.$submitted || modalForm.cmdDependencia.$touched">
+                                                    <span ng-show="!ctrl.cve_dependencia" class="text-danger">Campo Requerido</span>
+                                                </span>
                                             </div>
-                                        </div>
-                                        <br />
-                                        <div class="row">
-                                            <div class="form-inline col-md-3">
-                                                <label id="lblClave" for="lblClave" class="text-success">Clave:</label>
+                                            <br />
+                                            <div class="row">
+                                                <div class="form-inline col-md-3">
+                                                    <label id="lblClave" for="lblClave" class="text-success">Clave:</label>
+                                                </div>
+                                                <div class="form-inline col-md-1">
+                                                    <input id="txtClave" class="form-control border border-success" name="txtClave" ng-model="ctrl.cve_clave">
+                                                </div>
                                             </div>
-                                            <div class="form-inline col-md-1">
-                                                <input id="txtClave" class="form-control border border-success" name="txtClave" ng-model="ctrl.cve_clave">
+                                            <div class="row justify-content-center">
+                                                <span class="messages" ng-show="modalForm.$submitted || modalForm.txtClave.$touched">
+                                                    <span ng-show="!ctrl.cve_clave" class="text-danger">Campo Requerido</span>
+                                                </span>
                                             </div>
-                                        </div>
-                                        <br />
-                                        <div class="row">
-                                            <div class="form-inline col-md-3">
-                                                <label id="lblDescripcion" for="lblDescripcion" class="text-success">Descripción:</label>
+                                            <br />
+                                            <div class="row">
+                                                <div class="form-inline col-md-3">
+                                                    <label id="lblDescripcion" for="lblDescripcion" class="text-success">Descripción:</label>
+                                                </div>
+                                                <div class="form-inline col-md-1">
+                                                    <input id="txtDescripcion" class="form-control border border-success" name="txtDescripcion" type="text" ng-model="ctrl.cve_desc">
+                                                </div>
                                             </div>
-                                            <div class="form-inline col-md-1">
-                                                <input id="txtDescripcion" class="form-control border border-success" name="txtDescripcion" type="text" ng-model="ctrl.cve_desc">
+                                            <div class="row justify-content-center">
+                                                <span class="messages" ng-show="modalForm.$submitted || modalForm.txtDescripcion.$touched">
+                                                    <span ng-show="!ctrl.cve_desc" class="text-danger">Campo Requerido</span>
+                                                </span>
                                             </div>
-                                        </div>
-                                        <br />
-                                        <div class="row">
-                                            <div class="form-inline col-md-3">
-                                                <label id="lblStatus" for="lblStatus" class="text-success">Status:</label>
+                                            <br />
+                                            <div class="row">
+                                                <div class="form-inline col-md-3">
+                                                    <label id="lblStatus" for="lblStatus" class="text-success">Status:</label>
+                                                </div>
+                                                <div class="form-inline col-md-1">
+                                                    <select id="cmdstatus" class="form-control border border-success" name="cmdstatus" ng-model="ctrl.cve_status">
+                                                        <option value="">--Seleccionar Estatus--</option>
+                                                        <option value="A">Alta</option>
+                                                        <option value="B">Baja</option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="form-inline col-md-1">
-                                                <select id="cmdstatus" class="form-control border border-success" name="cmdstatus" ng-model="ctrl.cve_status">
-                                                    <option value="">--Seleccionar Estatus--</option>
-                                                    <option value="A">Alta</option>
-                                                    <option value="B">Baja</option>
-                                                </select>
+                                            <div class="row justify-content-center">
+                                                <span class="messages" ng-show="modalForm.$submitted || modalForm.cmdstatus.$touched">
+                                                    <span ng-show="!ctrl.cve_status" class="text-danger">Campo Requerido</span>
+                                                </span>
                                             </div>
-                                        </div>
-                                        <br />
-                                        <div class="row">
-                                            <div class="form-inline col-md-3">
-                                                <label id="lblCategoria" for="lblCat" class="text-success">Categoria:</label>
+                                            <br />
+                                            <div class="row">
+                                                <div class="form-inline col-md-3">
+                                                    <label id="lblCategoria" for="lblCat" class="text-success">Categoria:</label>
+                                                </div>
+                                                <div class="form-inline col-md-1">
+                                                    <select id="cmdcat" class="form-control border border-success" name="cmdcat" required ng-options="option.Id as option.Descripcion for option in ctrl.categoria" ng-model="ctrl.cve_cat">
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="form-inline col-md-1">
-                                                <select id="cmdcat" class="form-control border border-success" name="cmdcat" required ng-options="option.Id as option.Descripcion for option in ctrl.categoria" ng-model="ctrl.cve_cat">
-                                                </select>
+                                            <div class="row justify-content-center">
+                                                <span class="messages" ng-show="modalForm.$submitted || modalForm.cmdcat.$touched">
+                                                    <span ng-show="!ctrl.cve_cat" class="text-danger">Campo Requerido</span>
+                                                </span>
+                                            </div>
+                                            <br />
+                                            <div class="row justify-content-center">
+                                                <div id="ErrorModal" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
+                                                    <strong id="MessageModal">¡Ha ocurrido un error! </strong>
+                                                    <button type="button" class="close" ng-click="ctrl.DivErrorModal()" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Salir</button>
-                                    <button type="button" id="btnNuevo" class="btn btn-success" data-dismiss="modal" ng-disabled="!(ctrl.cve_dependencia && ctrl.cve_clave && ctrl.cve_desc && ctrl.cve_status ctrl.cve_cat)" ng-click="ctrl.AreasAtencionCreate()">Guardar</button>
-                                    <button type="button" id="btnActualizar" class="btn btn-primary" data-dismiss="modal" ng-click="ctrl.AreasAtencionUpdate()">Guardar</button>
-                                </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Salir</button>
+                                        <button type="button" id="btnNuevo"  class="btn btn-success" data-dismiss="modal" ng-click="ctrl.AreasAtencionCreate(ctrl.cve_id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
+                                        <button type="button" id="btnActualizar" class="btn btn-primary" data-dismiss="modal" ng-click="ctrl.AreasAtencionUpdate(ctrl.cve_id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -155,7 +198,7 @@
                         <td>{{i.Cat}}</td>
 
                         <td style="text-align:center">
-                            <button type="button" id="Actualizar" title="Editar" class="btn btn-primary btn-create" style="width:50px" data-toggle="modal" data-target="#areasatencion" ng-click="ctrl.ObtDatos(i.Id)">
+                            <button type="button" id="Actualizar" title="Editar" class="btn btn-primary btn-create" style="width:50px" data-toggle="modal" data-target="#areasatencion" data-backdrop="static" data-keyboard="false" data-html="true" ng-click="ctrl.ObtDatos(i.Id)">
 
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
@@ -168,12 +211,8 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th><ng-pagination-control pagination-id="ctrl.areasatencion" color="white" height="35px"></ng-pagination-control></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th style="text-align:center" colspan="4">
+                        <th colspan="4"><ng-pagination-control pagination-id="ctrl.areasatencion" color="white" height="35px"></ng-pagination-control></th>
+                        <th style="text-align:center" colspan="2">
                             <button type="button" title="PDF" class="btn btn-danger" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
                                 <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                             </button>
@@ -181,6 +220,7 @@
                                 <i class="fa fa-file-excel-o" aria-hidden="true"></i>
                             </button>
                         </th>
+
                     </tr>
                 </tfoot>
             </table>

@@ -7,7 +7,6 @@
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
         var self = this;
         self.buscar = '';
-        self.estatus = '';
 
         this.Inicio = function () {
             CargarCombos();
@@ -25,9 +24,12 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.dependencias = catalogoContext.dependenciaslst;
+                        self.cve_dependencia = catalogoContext.dependenciaslst.Id;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -44,6 +46,8 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -65,6 +69,8 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -102,6 +108,8 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -130,6 +138,15 @@
             self.cve_desc = "";
             self.cve_status = "";
             self.cve_cat = "";
+
+            self.cve_status = "A";
+            var iNumeroMayor = self.areasatencion[0].Cve;
+            for (var i = 0; i < self.areasatencion.length; i++) {
+                if (self.areasatencion[i].Cve > iNumeroMayor) {
+                    iNumeroMayor = self.areasatencion[i].Cve;
+                }
+            }
+            self.cve_clave = parseInt(iNumeroMayor) + 1;
         };
 
         var eliminarAreaAtencion = function (IdArea) {
@@ -141,6 +158,8 @@
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         console.log("Error Controller");
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -164,11 +183,18 @@
             catalogoContext.AreasAtencionUpdate(self.cve_id, self.cve_dependencia, self.cve_clave, self.cve_desc, self.cve_status, self.cve_cat, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
+                        self.cve_dependencia = null;
+                        self.cve_clave = null;
+                        self.cve_desc = null;
+                        self.cve_status = null;
+                        self.cve_cat = null;
                         alert("¡Se han actualizado los datos correctamente!");
                         CargarGrid();
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -186,11 +212,18 @@
             catalogoContext.AreasAtencionCreate(self.cve_dependencia, self.cve_clave, self.cve_desc, self.cve_status, self.cve_cat, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
+                        self.cve_dependencia = null;
+                        self.cve_clave = null;
+                        self.cve_desc = null;
+                        self.cve_status = null;
+                        self.cve_cat = null;
                         alert("¡Se ha creado el área correctamente!");
                         CargarGrid();
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -201,19 +234,37 @@
 
         this.AreasAtencionCreate = function () { AreaCreate(); }
 
+        this.DivError = function () {
+            document.getElementById("Error").style.display = "none";
+        };
+        this.DivErrorModal = function () {
+            document.getElementById("ErrorModal").style.display = "none";
+        };
 
         this.ValorDependencia = function () {
-                if (self.buscar == "") {
+                if (self.buscar == "00000") {
                     self.buscar = '';
                 }
         };
 
-        this.ValorStatus = function () {
-            if (self.estatus = "Todos") {
-                self.estatus = '';
+        this.StatusFun = function () {
+            if (self.Estatus.Estatus == "Todos") {
+                self.Estatus.Estatus = '';
+            }
+        }
+
+        this.reset = function (form) {
+            CargarGrid();
+            self.cve_dependencia = null;
+            self.cve_clave = null;
+            self.cve_desc = null;
+            self.cve_status = null;
+            self.cve_cat = null;
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
             }
         };
-
 
         this.BorrarBasico = function (Indice) {
             alert(Indice);
