@@ -29,21 +29,6 @@
             ObtenerCarreras();
 
         };
-        //this.Organismo = function () {
-        //    CargarOrga();
-
-        //};
-        //this.CargarOrganismos= function () {
-        //    ObtenerOrganismos();
-
-        //};
-
-        //this.CargarStatus = function () {
-        //    ObtenerStatusAcreditaciones();
-
-        //};
-
-
         var ObtenerDependencias = function () {
             catalogoContext.ObtenerDependencias(function (resp) {
                 switch (resp.ressult) {
@@ -54,7 +39,7 @@
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
-                        document.getElementById("MessageError").innerHTML = self.mensaje_gral;
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -123,11 +108,12 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.acreditador = catalogoContext.acreditadoreslst;
+                        $('#acreditadores').modal('hide');
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
-                        document.getElementById("MessageError").innerHTML = self.mensaje_gral;
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -169,12 +155,12 @@
                         self.cve_fecha_fin = catalogoContext.unidadAcreditacionlst[0].Fecha_Final;
                         self.cve_status = catalogoContext.unidadAcreditacionlst[0].Status;
                         self.cve_observaciones = catalogoContext.unidadAcreditacionlst[0].Observaciones;
-
+                        $('#acreditadores').modal('hide');
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
-                        document.getElementById("MessageError").innerHTML = self.mensaje_gral;
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -228,7 +214,7 @@
                       
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
-                        document.getElementById("MessageError").innerHTML = self.mensaje_gral;
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -249,12 +235,13 @@
                         
                         alert("¡Se ha creado la unidad correctamente!");
                         CargarGrid();
+                        
                         break;
                     case "notgp":
 
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
-                        document.getElementById("MessageError").innerHTML = self.mensaje_gral;
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -277,7 +264,7 @@ this.AcreditadorCreate = function () { AcreditadorCreate(); }
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
-                        document.getElementById("MessageError").innerHTML = self.mensaje_gral;
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         console.log("Error Controller");
                         break;
                     default:
@@ -291,11 +278,18 @@ this.AcreditadorCreate = function () { AcreditadorCreate(); }
             var opcion = confirm("¿Seguro que desea Eliminar el Registro?");
             if (opcion == true) {
                 AcreditadorDelete(Indice);
-                alert("¡Se ha elimnado con exito!");
+                alert("¡Se ha eliminado con exito!");
                 CargarGrid();
             } else {
                 alert("No se ha eliminado el registro");
             }
+        };
+
+        this.DivError = function () {
+            document.getElementById("Error").style.display = "none";
+        };
+        this.DivErrorModal = function () {
+            document.getElementById("ErrorModal").style.display = "none";
         };
 
 
@@ -316,7 +310,21 @@ this.AcreditadorCreate = function () { AcreditadorCreate(); }
         }
 
         
-
+        this.reset = function (form) {
+            CargarGrid();
+            self.cve_dependencia = null;
+            self.cve_carrera = null;
+            self.cve_organismo = null;
+            self.cve_fecha_inicio = null;
+            self.cve_fecha_fin = null;
+            self.cve_status = null;
+            self.cve_observaciones = null;
+            
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }
+        };
 
 
 }]);
