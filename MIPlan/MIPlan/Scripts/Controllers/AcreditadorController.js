@@ -1,7 +1,7 @@
 ﻿// <reference path="../Models/AcreditadorModel.js"/>
 
 (function () {
-    var app = angular.module('MIPlanWeb', []);
+    var app = angular.module('MIPlanWeb', ['ngPagination']);
 
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
         var self = this;
@@ -135,6 +135,7 @@
             $('#btnActualizar').show();
             $('#btnNuevo').hide();
             self.Titulo = "Modificar Acreditador";
+            self.cve_id = IdAcreditacion;
             document.getElementById("Titulo").className = "modal-header btn-primary justify-content-center";
             document.getElementById("lbldependencia").className = "text-primary";
             document.getElementById("cmbdependencia").className = "form-control border border-primary";
@@ -207,36 +208,16 @@
 
 
 
-        //var UnidadUpdate = function () {
-        //    catalogoContext.AcreditadorUpdate(self.cve_id[0].Id,self.cve_dependencia[0].Dependencia, self.cve_carrera[0].Carrera, self.cve_organismo[0].Organismo, self.cve_fecha_inicio[0].Fecha_Inicial, self.cve_feha_fin[0].FechaFinal, self.cve_status[0].Status, self.cve_observaciones[0].Observaciones,, function (resp) {
-        //        switch (resp.ressult) {
-        //            case "tgp":
-        //                //  self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
-        //                alert("¡Se han actualizado los datos correctamente!");
-        //                break;
-        //            case "notgp":
-        //                self.mensaje_gral = resp.message;
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //        $scope.$apply();
-        //    });
-        //};
-
-        //this.AcreditadorUpdate = function () { UnidadUpdate(); }
-
-
-
-        var UnidadCreate = function () {
-
-            catalogoContext.AcreditadorCreate(self.cve_dependencia[0].Dependencia, self.cve_carrera[0].Carrera, self.cve_organismo[0].Organismo, self.cve_fecha_inicio[0].Fecha_Inicial, self.cve_feha_fin[0].FechaFinal, self.cve_status[0].Status, self.cve_observaciones[0].Observaciones, function (resp) {
+        var AcreditadorUpdate = function () {
+            catalogoContext.AcreditadorUpdate(self.cve_id,self.cve_dependencia, self.cve_carrera, self.cve_organismo, self.cve_fecha_inicio, self.cve_fecha_fin, self.cve_status, self.cve_observaciones, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        //  self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
-                        alert("¡Se ha creado la unidad correctamente!");
+                       
+                        alert("¡Se han actualizado los datos correctamente!");
+                        
                         break;
                     case "notgp":
+                        CargarGrid();
                         self.mensaje_gral = resp.message;
                         break;
                     default:
@@ -246,7 +227,31 @@
             });
         };
 
-        this.AcreditadorCreate = function () { UnidadCreate(); }
+        this.AcreditadorUpdate = function () { AcreditadorUpdate(); }
+
+
+
+        var AcreditadorCreate = function () {
+
+            catalogoContext.AcreditadorCreate(self.cve_dependencia, self.cve_carrera, self.cve_organismo, self.cve_fecha_inicio, self.cve_fecha_fin, self.cve_status, self.cve_observaciones, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+
+                        alert("¡Se ha creado la unidad correctamente!");
+                        
+                        break;
+                    case "notgp":
+
+                        self.mensaje_gral = resp.message;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+
+this.AcreditadorCreate = function () { AcreditadorCreate(); }
 
 
 
@@ -254,6 +259,7 @@
             catalogoContext.eliminarAcreditador(IdAcreditacion, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
+
                         console.log("Controller Eliminar ejecutado");
                         break;
                     case "notgp":
@@ -289,11 +295,11 @@
 
 
 
-        this.StatusFun = function () {
-            if (self.Status.Status == "Todos") {
-                self.Status.Status = '';
-            }
-        }
+        //this.StatusFun = function () {
+        //    if (self.Status.Status == "Todos") {
+        //        self.Status.Status = '';
+        //    }
+        //}
 
         
 
