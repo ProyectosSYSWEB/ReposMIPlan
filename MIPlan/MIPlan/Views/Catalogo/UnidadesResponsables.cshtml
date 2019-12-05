@@ -46,11 +46,16 @@
                                 <label id="lblClave" class="">Clave</label>
                             </div>
                             <div class="row justify-content-center">
-                                <input type="text" id="inputClave" class="" name="Clave" readonly ng-model="ctrl.Clave" placeholder="Clave" required>
+                                <input type="text" id="inputClave" class="" name="Clave" readonly ng-maxlength="3" ng-model="ctrl.Clave" placeholder="Clave" required>
+                            </div>
+                            <div class="row justify-content-center"> 
+                                <span class="messages" ng-show="modalForm.$submitted || modalForm.Clave.$touched">
+                                    <span ng-show="!ctrl.Clave" class="text-danger">Campo Requerido</span>                                   
+                                </span>
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.Clave.$touched">
-                                    <span ng-show="!ctrl.Clave" class="text-danger">Campo Requerido</span>
+                                <span class="messages">                                    
+                                    <span ng-show="!modalForm.Clave.$valid" class="text-danger">¡Maximo 3 digitos!</span>
                                 </span>
                             </div>
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
@@ -83,10 +88,10 @@
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
                             <br />
                             <div class="row justify-content-center">
-                                <label id="lblCoordinacion" class="">Coordinacion</label>
+                                <label id="lblCoordinacion" class="">¿Es Coordinación?</label>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="radio-group">
+                                <div id="Radio" class="radio-group form-control border border-success text-center" style="max-width: 280px;">
                                     <label class="radio ">
                                         <input type="radio" value="S" name="gender" ng-model="ctrl.unidad[0].Coordinador" required />
                                         Si
@@ -117,7 +122,8 @@
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
                         </div>
                     </div>
-                    <div class="modal-footer">                        
+                    <div class="modal-footer">   
+                        <button type="button"  class="btn btn btn-danger" ng-click="ctrl.reset(modalForm)">Salir</button>
                         <button type="button" id="btnModal" class="btn btn-primary" ng-click="ctrl.UnidadResponsableUpdateCreate(ctrl.unidad[0].Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
                     </div>
                 </form>
@@ -151,8 +157,8 @@
                     <select class="form-control border border-info" name="cmbDependencia" ng-change="ctrl.StatusFun()" ng-model="ctrl.Status.Status" style="max-width:100%;">
                         <option value="">--Seleccionar Estatus--</option>
                         <option value="Todos">Todos</option>
-                        <option value="A">Alta</option>
-                        <option value="B">Baja</option>
+                        <option value="Activo">Activo</option>
+                        <option value="Baja">Baja</option>
                     </select>
                 </div>
             </div>
@@ -205,7 +211,7 @@
                         </th>
                         <th scope="col">
                             <a href="" ng-click="sortType = 'Coordinador'; sortReverse = !sortReverse">
-                                Coordinador
+                                Coordinación
                                 <span ng-class="sortType == 'Coordinador' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Coordinador' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
@@ -235,13 +241,14 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="4"><ng-pagination-control pagination-id="ctrl.unidades" color="white" height="35px"></ng-pagination-control></th>                                              
-                        <th style="text-align:center" colspan="2">
-                            <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
-                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                            </button>
-                            <button type="button" class="btn btn-success" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                        <th colspan="4"><ng-pagination-control pagination-id="ctrl.unidades" color="white" height="35px"></ng-pagination-control></th>   
+                        <th></th>
+                        <th style="text-align:center" colspan="1">
+                            <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
                                 <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Generar Reporte en PDF" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                             </button>
                         </th>
                     </tr>

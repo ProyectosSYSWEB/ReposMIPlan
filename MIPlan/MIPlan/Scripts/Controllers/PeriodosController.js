@@ -46,7 +46,7 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.periodos = catalogoContext.periodoslst;                         
-                        $('#ModalPeriodo').modal('hide');
+                        //$('#ModalPeriodo').modal('hide');
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -66,7 +66,7 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.periodo = catalogoContext.periodolst;   
-                        self.EStatus = self.periodo[0].Status;
+                        self.EStatus = self.periodo[0].Status;                        
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -220,13 +220,14 @@
         }
 
         this.reset = function (form) {
-            CargarGrid();
-            self.periodo = null;            
-            self.EStatus = null;
+            $('#ModalPeriodo').modal('hide');           
             if (form) {
                 form.$setPristine();
                 form.$setUntouched();
             }
+            CargarGrid();
+            self.periodo = null;
+            self.EStatus = null;
         };
         /*******************************************************************************************************************************************************/
 
