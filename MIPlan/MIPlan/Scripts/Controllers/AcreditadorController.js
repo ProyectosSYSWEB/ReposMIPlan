@@ -235,6 +235,7 @@
                         
                         alert("¡Se ha creado la unidad correctamente!");
                         CargarGrid();
+                        
                         break;
                     case "notgp":
 
@@ -284,6 +285,13 @@ this.AcreditadorCreate = function () { AcreditadorCreate(); }
             }
         };
 
+        this.DivError = function () {
+            document.getElementById("Error").style.display = "none";
+        };
+        this.DivErrorModal = function () {
+            document.getElementById("ErrorModal").style.display = "none";
+        };
+
 
         this.ValorDependencia = function () {
             this.ValorDependencia = function () {
@@ -302,7 +310,21 @@ this.AcreditadorCreate = function () { AcreditadorCreate(); }
         }
 
         
-
+        this.reset = function (form) {
+            CargarGrid();
+            self.cve_dependencia = null;
+            self.cve_carrera = null;
+            self.cve_organismo = null;
+            self.cve_fecha_inicio = null;
+            self.cve_fecha_fin = null;
+            self.cve_status = null;
+            self.cve_observaciones = null;
+            
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }
+        };
 
 
 }]);
