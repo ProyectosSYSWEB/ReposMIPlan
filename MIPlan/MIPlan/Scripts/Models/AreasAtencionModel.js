@@ -80,7 +80,7 @@
                             callBackResult({ ressult: 'tgp', message: null });
                         }
                     } else {
-                        callBackResult({ ressult: "notgp", message: res })
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError })
                     }
                 },
                 error: function (ex) {
@@ -139,7 +139,7 @@
                             callBackResult({ ressult: 'tgp', message: null });
                         }
                     } else {
-                        callBackResult({ ressult: "notgp", message: res })
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError })
                     }
                 },
                 error: function (ex) {
@@ -166,7 +166,7 @@
                             callBackResult({ ressult: 'tgp', message: null });
                         }
                     } else {
-                        callBackResult({ ressult: "notgp", message: resp })
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError })
                     }
                 },
                 error: function (ex) {
@@ -190,7 +190,7 @@
                             callBackResult({ ressult: 'tgp', message: null });
                         }
                     } else {
-                        callBackResult({ ressult: "notgp", message: resp })
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError })
                     }
                 },
                 error: function (ex) {
