@@ -165,6 +165,7 @@ namespace MIPlan.Data
         }
         public static List<Unidades> ObtenerUnidades()
         {
+            //s
             OracleCommand cmd = null;
             ExeProcedimiento exeProc = new ExeProcedimiento();
 
