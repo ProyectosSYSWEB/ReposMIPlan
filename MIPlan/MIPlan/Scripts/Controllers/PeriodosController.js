@@ -14,6 +14,7 @@
             CargarCombos();
             CargarGrid();
             self.periodo = null;
+            self.EStatus = null;   
         };
 
         var CargarCombos = function () {
@@ -44,8 +45,8 @@
             catalogoContext.ObtenerGridPeriodos(function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.periodos = catalogoContext.periodoslst;  
-                        console.log(self.periodos);
+                        self.periodos = catalogoContext.periodoslst;                         
+                        $('#ModalPeriodo').modal('hide');
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -64,7 +65,8 @@
             catalogoContext.ObtenerPeriodo(Idunidad, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.periodo = catalogoContext.periodolst;                      
+                        self.periodo = catalogoContext.periodolst;   
+                        self.EStatus = self.periodo[0].Status;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -98,8 +100,7 @@
             document.getElementById("FinUpdate").className = "form-control border border-primary";
             cargarModal(Indice);
         };
-        this.Color = function () {    
-            self.periodos[0].Status = "Activo";
+        this.Color = function () {               
             document.getElementById("title").className = "modal-header btn-success justify-content-center";
             document.getElementById("exampleModalLabel").innerHTML = "Crear Periodo";
             document.getElementById("btnModal").className = "btn btn-success";
@@ -116,12 +117,13 @@
             document.getElementById("lblInicio").className = "text-success";
             document.getElementById("InicioUpdate").className = "form-control border border-success";
             document.getElementById("lblFin").className = "text-success";
-            document.getElementById("FinUpdate").className = "form-control border border-success";                        
+            document.getElementById("FinUpdate").className = "form-control border border-success";      
+            self.EStatus = "A";    
         };
 /********************************************************************************************************************************************************/
         var periodoUpdateF = function () {
                                                        
-            catalogoContext.periodoUpdate(self.periodo[0].Id, self.periodo[0].Dependencia, self.periodo[0].Periodo, self.periodo[0].Descripcion, self.periodo[0].Status, self.periodo[0].Ejercicio, self.periodo[0].Inicio, self.periodo[0].Fin ,function (resp) {
+            catalogoContext.periodoUpdate(self.periodo[0].Id, self.periodo[0].Dependencia, self.periodo[0].Periodo, self.periodo[0].Descripcion, self.EStatus, self.periodo[0].Ejercicio, self.periodo[0].Inicio, self.periodo[0].Fin ,function (resp) {
                 switch (resp.ressult) {
                     case "tgp":       
                         CargarGrid();
@@ -149,9 +151,8 @@
         };
 
         /********************************************************************************************************************************************************/
-        var periodoCreateF = function () {
-                                                                                                                                                                                
-            catalogoContext.GuardarPerdiodos(self.periodo[0].Dependencia, self.periodo[0].Periodo, self.periodo[0].Descripcion, self.periodo[0].Status, self.periodo[0].Ejercicio, self.periodo[0].Inicio, self.periodo[0].Fin , function (resp) {
+        var periodoCreateF = function () {                                                                                                                                                                                
+            catalogoContext.GuardarPerdiodos(self.periodo[0].Dependencia, self.periodo[0].Periodo, self.periodo[0].Descripcion, self.EStatus, self.periodo[0].Ejercicio, self.periodo[0].Inicio, self.periodo[0].Fin , function (resp) {
                 switch (resp.ressult) {
                     case "tgp":         
                         CargarGrid();
@@ -199,6 +200,12 @@
             }
         };
         /*******************************************************************************************************************************************************/
+        this.DivError = function () {
+            document.getElementById("Error").style.display = "none";
+        };
+        this.DivErrorModal = function () {
+            document.getElementById("ErrorModal").style.display = "none";
+        };
 
         this.ValorDependencia = function () {            
             if (self.buscar == "00000") {
@@ -211,6 +218,16 @@
                 self.Status.Status = '';
             }
         }
+
+        this.reset = function (form) {
+            CargarGrid();
+            self.periodo = null;            
+            self.EStatus = null;
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }
+        };
         /*******************************************************************************************************************************************************/
 
     }]);

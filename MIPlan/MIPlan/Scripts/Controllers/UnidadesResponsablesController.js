@@ -92,7 +92,7 @@
             document.getElementById("lblStatus").className = "text-primary";
             document.getElementById("cmbStatus").className = "form-control border  border-primary";
             document.getElementById("lblCoordinacion").className = "text-primary";
-            document.getElementById("inputCoordincacion").className = "form-control border border-primary";
+            //document.getElementById("inputCoordincacion").className = "form-control border border-primary";
             cargarModal(Indice);
         };
         this.Color = function () {                 
@@ -108,7 +108,7 @@
             document.getElementById("lblStatus").className = "text-success";
             document.getElementById("cmbStatus").className = "form-control border  border-success";
             document.getElementById("lblCoordinacion").className = "text-success";
-            document.getElementById("inputCoordincacion").className = "form-control border border-success";          
+            //document.getElementById("inputCoordincacion").className = "form-control border border-success";          
 
             self.EStatus = "A";           
             var iNumeroMayor = self.unidades[0].Clave;
@@ -121,9 +121,8 @@
         };
 
 /********************************************************************************************************************************************************/
-        var UnidadUpdate = function () {            
-            
-            
+        var UnidadUpdate = function () {                        
+            console.log(self.unidad[0].Coordinador);
             catalogoContext.UnidadResponsableUpdate(self.unidad[0].Id, self.unidad[0].Dependencia, self.Clave, self.unidad[0].Descripcion, self.EStatus, self.unidad[0].Coordinador, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":                        
@@ -155,8 +154,7 @@
         }
 
 /********************************************************************************************************************************************************/
-        var UnidadCreate = function () {
-            console.log(self.unidad[0].Dependencia, self.Clave, self.unidad[0].Descripcion, self.EStatus, self.unidad[0].Coordinador);
+        var UnidadCreate = function () {           
             catalogoContext.UnidadResponsableCreate(self.unidad[0].Dependencia, self.Clave, self.unidad[0].Descripcion, self.EStatus, self.unidad[0].Coordinador, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":           
