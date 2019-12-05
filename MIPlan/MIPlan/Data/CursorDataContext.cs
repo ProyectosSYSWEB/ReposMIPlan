@@ -146,7 +146,7 @@ namespace MIPlan.Data
                     objAreasAtencion.Clave = Convert.ToString(dr[2]);
                     objAreasAtencion.Descripcion = Convert.ToString(dr[3]);
                     objAreasAtencion.Status = Convert.ToString(dr[4]);
-
+                    objAreasAtencion.Categoria = Convert.ToString(dr[5]);
                     listarAreasAtencion.Add(objAreasAtencion);
                 }
                 return listarAreasAtencion;
@@ -181,7 +181,7 @@ namespace MIPlan.Data
                     objUnidades.Clave = Convert.ToString(dr[2]);
                     objUnidades.Descripcion = Convert.ToString(dr[3]);
                     objUnidades.Status = Convert.ToString(dr[4]);
-
+                    objUnidades.Coordinador = Convert.ToString(dr[5]);
                     listarUnidades.Add(objUnidades);
                 }
                 return listarUnidades;

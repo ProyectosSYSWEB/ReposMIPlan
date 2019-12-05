@@ -21,7 +21,7 @@ namespace MIPlan.Data
                 OracleDataReader dr = null;
                 string[] Parametros = { "P_ID_ACREDITADOR" };
                 object[] Valores = { Id };
-                string[] ParametrosOut = { "P_CARRERA", "P_ORGANISMO", "P_FECHA_INICIAL", "P_FECHA_FINAL", "P_STATUS", "P_OBSERVACIONES", "P_BANDERA" };
+                string[] ParametrosOut = { "P_DEPENDENCIA", "P_CARRERA", "P_ORGANISMO", "P_FECHA_INICIAL", "P_FECHA_FINAL", "P_STATUS", "P_OBSERVACIONES", "P_BANDERA" };
                 cmd = exeProc.GenerarOracleCommand("OBT_ACREDITACIONES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
                 objDatosAcreditacion.Dependencia = Convert.ToString(cmd.Parameters["P_DEPENDENCIA"].Value);
                 objDatosAcreditacion.Carrera = Convert.ToString(cmd.Parameters["P_CARRERA"].Value);
