@@ -12,84 +12,115 @@
 
 
 <div ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
-    <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
     <!-- Modal Update-->
-    <div class="modal fade" id="UnidadesResponsablesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" data-keyboard="false" data-backdrop="static" id="UnidadesResponsablesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div id="title" class="">
-                    <h5 class="modal-title" id="exampleModalLabel"></h5>
-                    <button type="button" class="close btn-danger" data-dismiss="modal" ng-click="ctrl.Inicio()" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-                    <div class="container-fluid">
-                        <form name="modalForm" novalidate>
+                <form name="modalForm" novalidate>
+                    <div id="title" class="">
+                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                        <button type="button" class="close btn-danger" data-dismiss="modal" ng-click="ctrl.reset(modalForm)" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
                             <div class="row justify-content-center">
                                 <label id="lblDependencia" class="">Dependencia:</label>
                             </div>
                             <div class="row justify-content-center">
-                                <select id="cmbDependencia" class="" name="cmbDependencia" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.unidad[0].Dependencia">
+                                <select id="cmbDependencia" class="" name="cmbDependencia" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.unidad[0].Dependencia" required>
                                     <option value="">--Seleccionar Dependencia--</option>
                                 </select>
                             </div>
-
+                            <div class="row justify-content-center">
+                                <span class="messages" ng-show="modalForm.$submitted || modalForm.cmbDependencia.$touched">
+                                    <span ng-show="!ctrl.unidad[0].Dependencia" class="text-danger">Campo Requerido</span>
+                                </span>
+                            </div>
+                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
                             <div class="row justify-content-center">
                                 <label id="lblClave" class="">Clave</label>
                             </div>
                             <div class="row justify-content-center">
-                                <input type="text" id="inputClave" class="" ng-model="ctrl.Clave" placeholder="Clave">
+                                <input type="text" id="inputClave" class="" name="Clave" readonly ng-model="ctrl.Clave" placeholder="Clave" required>
                             </div>
-
+                            <div class="row justify-content-center">
+                                <span class="messages" ng-show="modalForm.$submitted || modalForm.Clave.$touched">
+                                    <span ng-show="!ctrl.Clave" class="text-danger">Campo Requerido</span>
+                                </span>
+                            </div>
+                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
                             <div class="row justify-content-center">
                                 <label id="lblDescripcion" class="">Descripción</label>
                             </div>
                             <div class="row justify-content-center">
-                                <input type="text" id="inputDescripcion" name="Descripcion" class="" ng-class="{'form-control border border-danger' : modalForm.Descripcion.$error.required}" ng-model="ctrl.unidad[0].Descripcion" ng-model-options="{ updateOn: 'blur' }" required placeholder="Descripción">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.Descripcion.$touched">
-                                    <span ng-show="modalForm.Descripcion.$error.required" class="text-danger fa"></span>
-                                </span>
+                                <input type="text" id="inputDescripcion" name="Descripcion" class="" ng-model="ctrl.unidad[0].Descripcion" required placeholder="Descripción">
                             </div>
                             <div class="row justify-content-center">
                                 <span class="messages" ng-show="modalForm.$submitted || modalForm.Descripcion.$touched">
-                                    <span ng-show="modalForm.Descripcion.$error.required" class="text-danger">Descripción Requerida</span>
+                                    <span ng-show="!ctrl.unidad[0].Descripcion" class="text-danger">Campo Requerido</span>
                                 </span>
                             </div>
-                                <div class="row justify-content-center">
-                                    <label id="lblStatus" class="">Estatus</label>
+                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+                            <div class="row justify-content-center">
+                                <label id="lblStatus" class="">Estatus</label>
+                            </div>
+                            <div class="row justify-content-center">
+                                <select id="cmbStatus" class="" name="cmbDependencia_status" ng-model="ctrl.EStatus" required>
+                                    <option value="A">Activo</option>
+                                    <option value="B">Baja</option>
+                                </select>
+                            </div>
+                            <div class="row justify-content-center">
+                                <span class="messages" ng-show="modalForm.$submitted || modalForm.cmbDependencia_status.$touched">
+                                    <span ng-show="!ctrl.EStatus" class="text-danger">Campo Requerido</span>
+                                </span>
+                            </div>
+                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+                            <br />
+                            <div class="row justify-content-center">
+                                <label id="lblCoordinacion" class="">Coordinacion</label>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="radio-group">
+                                    <label class="radio ">
+                                        <input type="radio" value="S" name="gender" ng-model="ctrl.unidad[0].Coordinador" required />
+                                        Si
+                                        <span></span>
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" value="N" name="gender" ng-model="ctrl.unidad[0].Coordinador" required />
+                                        No
+                                        <span></span>
+                                    </label>
                                 </div>
-                                <div class="row justify-content-center">
-                                    <select id="cmbStatus" class="" name="cmbDependencia_status" ng-model="ctrl.EStatus">
-                                        <option value="A">Activo</option>
-                                        <option value="B">Baja</option>
-                                    </select>
+                            </div>
+                            <div class="row justify-content-center">
+                                <span class="messages" ng-show="modalForm.$submitted || modalForm.gender.$touched">
+                                    <span ng-show="!ctrl.unidad[0].Coordinador" class="text-danger">Campo Requerido</span>
+                                </span>
+                            </div>
+                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+                            <br />
+                            <div class="row justify-content-center">
+                                <div id="ErrorModal" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
+                                    <strong id="MessageModal">¡Ha ocurrido un error! </strong>
+                                    <button type="button" class="close" ng-click="ctrl.DivErrorModal()" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-
-                                <div class="row justify-content-center">
-                                    <label id="lblCoordinacion" class="">Coordinador</label>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <input type="text" id="inputCoordincacion" class="" ng-model="ctrl.unidad[0].Coordinador" placeholder="Coordinador">
-                                </div>
-
-                                <br />
-                                <div class="row justify-content-center">
-                                    <div id="ErrorModal" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
-                                        <strong id="MessageModal">¡Ha ocurrido un error! </strong>
-                                        <button type="button" class="close" ng-click="ctrl.DivErrorModal()" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                </div>
-                        </form>
+                            </div>
+                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+                        </div>
                     </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="btnModal" class="btn btn-primary" ng-click="ctrl.UnidadResponsableUpdateCreate(ctrl.unidad[0].Id)" ng-disabled="modalForm.$invalid">Guardar</button>
-                </div>
+                    <div class="modal-footer">                        
+                        <button type="button" id="btnModal" class="btn btn-primary" ng-click="ctrl.UnidadResponsableUpdateCreate(ctrl.unidad[0].Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -204,12 +235,8 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th><ng-pagination-control pagination-id="ctrl.unidades" color="white" height="35px"></ng-pagination-control></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th style="text-align:center">
+                        <th colspan="4"><ng-pagination-control pagination-id="ctrl.unidades" color="white" height="35px"></ng-pagination-control></th>                                              
+                        <th style="text-align:center" colspan="2">
                             <button type="button" class="btn btn-danger" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
                                 <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                             </button>
@@ -240,5 +267,7 @@
 
 <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <script type="text/javascript">
+
+</script>
 
 
