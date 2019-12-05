@@ -24,7 +24,7 @@
                 <label for="lbldependencia" class="text-primary">Dependencia:</label>
 
 
-                <select class="form-control border border-primary" title="Elegir Dependencia" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.buscar" style="max-width:100%;">
+                <select class="form-control border border-primary"  name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.buscar" style="max-width:100%;">
                     <option value="">--Seleccionar Dependencia--</option>
                 </select>
             </div>
@@ -46,7 +46,7 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lbusqueda" class="text-success">Busqueda</label>
-                    <input type="text" class="form-control  border border-success" title="Buscar" placeholder="Busqueda" ng-pagination-search="ctrl.acreditador" style="max-width:100%;">
+                    <input type="text" class="form-control  border border-success"  placeholder="Busqueda" ng-pagination-search="ctrl.acreditador" style="max-width:100%;">
 
                 </div>
             </div>
@@ -56,7 +56,7 @@
         <div class="panel-heading">
             <div class="container">
                 <div class="col text-right">
-                    <button type="button" id="Nuevo" title="Nuevo" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#acreditadores" style="width:120px" ng-click="ctrl.Nuevo()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                    <button type="button" id="Nuevo" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#acreditadores" style="width:120px" ng-click="ctrl.Nuevo()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
                     <br />
                     <br />
                 </div>
