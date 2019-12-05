@@ -119,7 +119,7 @@
                 },
                 error: function (ex) {
                     if (callBackResult != undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerCarreas." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerCategorias." });
                     }
                 }
             });
@@ -144,7 +144,7 @@
                 },
                 error: function (ex) {
                     if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EliminarUnidadResponsable." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EliminarAreaAtencion." });
                     }
                 }
             });
@@ -166,12 +166,12 @@
                             callBackResult({ ressult: 'tgp', message: null });
                         }
                     } else {
-                        callBackResult({ ressult: "notgp", message: res })
+                        callBackResult({ ressult: "notgp", message: resp })
                     }
                 },
                 error: function (ex) {
                     if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EditarUnidadesResponsables." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EditarAreasAtencion." });
                     }
                 }
             });
@@ -183,19 +183,19 @@
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'Catalogo/GuardarAreasAtencion',
-                data: { dependencia, clave, descripcion, status, categoria, },
+                data: { dependencia, clave, descripcion, status, categoria },
                 success: function (resp) {
                     if (resp.Error == false) {
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
                         }
                     } else {
-                        callBackResult({ ressult: "notgp", message: res })
+                        callBackResult({ ressult: "notgp", message: resp })
                     }
                 },
                 error: function (ex) {
                     if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en GuardarUnidadesResponsables." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en GuardarAreasAtencion." });
                     }
                 }
             });
