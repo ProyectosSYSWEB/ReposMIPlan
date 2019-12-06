@@ -1,7 +1,233 @@
 ﻿
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutContenido.cshtml";
 }
 
 <h2>Index</h2>
+
+<br />
+<br />
+<br />
+<br />
+
+
+
+<div ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                <div class="form-group">
+                    <label for="lblStatus" class="text-primary">Ejercicio</label>
+                    <input type="text" class="form-control border border-primary" placeholder="Ejercicio" style="max-width:100%;">
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                <div class="form-group">
+                    <label for="lblDependencia" class="text-primary">Dependencia:</label>
+                    <select class="form-control border border-primary" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.buscar" style="max-width:100%;">
+                        <option value="">--Seleccionar Dependencia--</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                <div class="form-group">
+                    <label for="lblDependencia" class="text-primary">Plan de Trabajo:</label>
+                    <select class="form-control border border-primary" name="cmbPlanDeTrabajo" style="max-width:100%;">
+                        <option value="">--Seleccionar Plan de Trabajo--</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                <div class="form-group">
+                    <label for="lblDependencia" class="text-primary">Unidad Responsable</label>
+                    <select class="form-control border border-primary" name="cmbUnidadResponsable" ng-change="ctrl.ValorUnidad()" ng-options="option.Id as option.Descripcion for option in ctrl.UnidadesResponsables" ng-model="ctrl.buscar" style="max-width:100%;">
+                        <option value="">--Seleccionar Unidad Responsable--</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <button class="btn btn-info btn-block">Buscar</button>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="container-fluid border-bottom border-info"></div>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-sm-12 col-md-5 col-lg-4 col-xl-4">
+            <div class="panel panel-default panel-table">
+                <div class="panel-heading">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col text-right">
+                                <button type="button" id="btnCrear" class="btn btn-sm btn-success btn-create" style="width:120px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.1)">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Areas de Atención</th>
+                                <th scope="col" style="text-align:center"><em class="fa fa-check-square-o"></em></th>
+                                <th scope="col">%</th>
+                                <th scope="col" style="text-align:center"><em class="fa fa-cog"></em></th>
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+
+                                <td style="text-align:center">
+
+                                    <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalPeriodo" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Editar" ng-click="ctrl.Modal(i.Id)">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    </button>
+
+                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminnarPeriodo(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <!---->
+                        <tfoot>
+                            <tr>
+                                <th colspan="2">
+                                    <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:40px">
+                                        <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Generar Reporte en PDF" ng-click="ctrl.BorrarImpViatico($index)" style="width:40px">
+                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                    </button>
+                                </th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+        </div>
+        <div class="col-sm-12 col-md-7 col-lg-8 col-xl-8">
+
+            <div role="tabpanel" style="box-shadow: 10px 40px 96px rgba(0,0,0,.1)">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="Acciones-tab" data-toggle="tab" href="#Acciones" role="tab" aria-controls="Acciones" aria-selected="true">Acciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="UR-tab" data-toggle="tab" href="#UR" role="tab" aria-controls="UR" aria-selected="false">Unidades Responsables</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="Indicadores-tab" data-toggle="tab" href="#Indicadores" role="tab" aria-controls="Indicadores" aria-selected="false">Indicadores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="Evidencias-tab" data-toggle="tab" href="#Evidencias" role="tab" aria-controls="Evidencias" aria-selected="false">Evidencias</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="Acciones" role="tabpanel" aria-labelledby="Acciones-tab">
+                        <br />
+                        <div class="panel panel-default panel-table">
+                            <div class="panel-heading">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            <h6>Area de Atención:  <span class="badge badge-secondary">Matricula</span></h6>
+                                        </div>
+                                        <div class="col text-right">
+                                            <button type="button" id="btnCrear" class="btn btn-sm btn-success btn-create" style="width:120px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Programa</th>
+                                            <th scope="col">Acción</th>
+                                            <th scope="col">Inicio</th>
+                                            <th scope="col">Fin</th>
+                                            <th scope="col">Impacto</th>
+                                            <th scope="col">Prioritaria</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col" style="text-align:center"><em class="fa fa-cog"></em></th>
+                                        </tr>
+                                    </thead>
+
+
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>2</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                            <td>6</td>
+                                            <td>7</td>
+                                            <td style="text-align:center">
+
+                                                <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalPeriodo" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Editar" ng-click="ctrl.Modal(i.Id)">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                </button>
+
+                                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminnarPeriodo(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="4"><ng-pagination-control pagination-id="ctrl.periodos" color="white" height="35px"></ng-pagination-control></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="UR" role="tabpanel" aria-labelledby="UR-tab"><h3>Unidades Responsables</h3></div>
+                    <div class="tab-pane fade" id="Indicadores" role="tabpanel" aria-labelledby="Indicadores-tab"><h3>Indicadores</h3></div>
+                    <div class="tab-pane fade" id="Evidencias" role="tabpanel" aria-labelledby="Evidencias-tab"><h3>Evidencias</h3></div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+    </div>
+</div>
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular-pagination.js"></script>
+<script src="~/Scripts/global.js"></script>
+@*<script src="~/Scripts/angular.ng-modules.js"></script>*@
+<script src="~/Scripts/Controllers/PlanTrabajoController.js"></script>
+<script src="~/Scripts/Models/PlanTrabajoModel.js"></script>
+
+<!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<script type="text/javascript">
+    console.log("Funciona Script");
+</script>
 

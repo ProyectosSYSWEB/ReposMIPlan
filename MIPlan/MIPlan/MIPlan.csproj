@@ -377,6 +377,7 @@
     <Content Include="Scripts\Controllers\AreasAtencionController.js" />
     <Content Include="Scripts\Controllers\CatController.js" />
     <Content Include="Scripts\Controllers\PeriodosController.js" />
+    <Content Include="Scripts\Controllers\PlanTrabajoController.js" />
     <Content Include="Scripts\Controllers\UnidadesResponsablesController.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -1234,6 +1235,7 @@
     <Content Include="Scripts\Models\AreasAtencionModel.js" />
     <Content Include="Scripts\Models\CatModel.js" />
     <Content Include="Scripts\Models\PeriodosModel.js" />
+    <Content Include="Scripts\Models\PlanTrabajoModel.js" />
     <Content Include="Scripts\Models\UnidadesResponsablesModel.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper-utils.js" />
