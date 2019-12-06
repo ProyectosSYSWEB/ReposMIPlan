@@ -17,7 +17,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-
+        <br />
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
@@ -205,15 +205,15 @@
                 <tfoot>
                     <tr>
                         <th colspan="4"><ng-pagination-control pagination-id="ctrl.areasatencion" color="white" height="35px"></ng-pagination-control></th>
-                        <th style="text-align:center" colspan="2">
-                            <button type="button" title="PDF" class="btn btn-danger" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
-                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                            </button>
-                            <button type="button" title="Excel" class="btn btn-success" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                        <th></th>
+                        <th style="text-align:center" colspan="1">
+                            <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
                                 <i class="fa fa-file-excel-o" aria-hidden="true"></i>
                             </button>
+                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Generar Reporte en PDF" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                            </button>
                         </th>
-
                     </tr>
                 </tfoot>
             </table>
