@@ -77,8 +77,6 @@ namespace MIPlan.Data
             }
 
         }
-
-
         public static List<Comun> ObtenerDependencias(string Usuario)
         {
             string[] Parametros = { "p_tipo" };
@@ -86,8 +84,6 @@ namespace MIPlan.Data
             var Lista = ExeProcedimiento.GenerarOracleCommandCursor_Combo("PKG_PLANEACION.Obt_Combo_Dependencia", Parametros, Valores);
             return Lista;
         }
-
-
         public static List<Acreditaciones> ObtenerAcreditaciones()
         {
             OracleCommand cmd = null;
@@ -126,8 +122,6 @@ namespace MIPlan.Data
             }
 
         }
-
-
         public static List<AreasAtencion> ObtenerAreasAtencion()
         {
             OracleCommand cmd = null;
@@ -165,6 +159,7 @@ namespace MIPlan.Data
         }
         public static List<Unidades> ObtenerUnidades()
         {
+            //s
             OracleCommand cmd = null;
             ExeProcedimiento exeProc = new ExeProcedimiento();
 
@@ -199,8 +194,6 @@ namespace MIPlan.Data
             }
 
         }
-
-        /*METODOS DE LUIS*/
         public static List<Comun> ObtenerCarreras(string Dependencia)
         {
             OracleCommand cmd = null;
@@ -294,7 +287,6 @@ namespace MIPlan.Data
             }
 
         }
-
         public static List<Comun> ObtenerStatusAcreditaciones()
         {
             OracleCommand cmd = null;
@@ -325,8 +317,6 @@ namespace MIPlan.Data
             }
 
         }
-        /*FIN METODOS DE LUIS*/
-
         public static List<UnidadesResponsables> ObtenerUnidadesResponsables(string Dependencia)
         {
             OracleCommand cmd = null;
@@ -364,8 +354,6 @@ namespace MIPlan.Data
             }
 
         }
-
-
         public static List<Periodos> ObtenerPeriodos()
         {
             //
@@ -404,12 +392,110 @@ namespace MIPlan.Data
             }
 
         }
+        public static List<Comun> ObtenerComboUnidades(string Usuario)
+        {
+            //s
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+
+            try
+            {
+                string[] Parametros = { "P_Usuario" };
+                object[] Valores = { Usuario };
 
 
+                OracleDataReader dr = null;
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Combo_Unidades", ref dr, Parametros, Valores);
+                List<Comun> listarUnidades = new List<Comun>();
+                while (dr.Read())
+                {
+                    Comun objUnidades = new Comun();
+                    objUnidades.Id = Convert.ToString(dr[0]);                   
+                    objUnidades.Descripcion = Convert.ToString(dr[1]);
+                    listarUnidades.Add(objUnidades);
+                }
+                return listarUnidades;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
+        }
+        public static List<Comun> ObtenerComboEjercicios()
+        {
+            //s
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+
+            try
+            {
+               
+
+                OracleDataReader dr = null;
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Combo_Ejercicios", ref dr);
+                List<Comun> listarEjercicios = new List<Comun>();
+                while (dr.Read())
+                {
+                    Comun objEjercicio = new Comun();
+                    objEjercicio.Id = Convert.ToString(dr[0]);
+                    objEjercicio.Descripcion = Convert.ToString(dr[1]);
+                    listarEjercicios.Add(objEjercicio);
+                }
+                return listarUnidades;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
+        }
+        public static List<Comun> ObtenerComboPlanTrabajo()
+        {
+            //s
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+
+            try
+            {
 
 
+                OracleDataReader dr = null;
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Combo_Plan", ref dr);
+                List<Comun> listarPlanes = new List<Comun>();
+                while (dr.Read())
+                {
+                    Comun objPlan = new Comun();
+                    objPlan.Id = Convert.ToString(dr[0]);
+                    objPlan.Descripcion = Convert.ToString(dr[1]);
+                    listarPlanes.Add(objPlan);
+                }
+                return listarPlanes;
 
+            }
+            catch (Exception ex)
+            {
 
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
+        }
 
 
     }
