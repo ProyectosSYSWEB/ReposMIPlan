@@ -54,7 +54,7 @@ textarea {
         content: "";
         height: 8px;
         width: 8px;
-        background: #007bff;
+        background: #28a745;
         display: block;
         position: absolute;
         left: 50%;
@@ -67,8 +67,3 @@ textarea {
     .radio input[type="radio"]:checked ~ span:after {
         transform: translate(-50%, -50%) scale(1);
     }
-
-.tooltip-arrow,
-.red-tooltip + .tooltip > .tooltip-inner {
-    background-color: #f00;
-}
