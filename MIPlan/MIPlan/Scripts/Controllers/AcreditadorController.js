@@ -13,6 +13,7 @@
             self.unidad = null;
             ObtenerOrganismos();
             ObtenerStatusAcreditaciones();
+
            
         };
 
@@ -201,6 +202,17 @@
         };
 
 
+    //    self.cve_status = "A";
+    //    var iNumeroMayor = self.acreditadores[0].Cve;
+    //    for (var i = 0; i < self.acreditadores.length; i++) {
+    //        if (self.acreditadores[i].Cve > iNumeroMayor) {
+    //            iNumeroMayor = self.acreditadores[i].cve;
+    //        }
+    //    }
+    //    self.cve_clave = parseInt(iNumeroMayor) + 1;
+    //};
+
+
 
         var AcreditadorUpdate = function () {
             catalogoContext.AcreditadorUpdate(self.cve_id,self.cve_dependencia, self.cve_carrera, self.cve_organismo, self.cve_fecha_inicio, self.cve_fecha_fin, self.cve_status, self.cve_observaciones, function (resp) {
@@ -295,7 +307,7 @@ this.AcreditadorCreate = function () { AcreditadorCreate(); }
 
         this.ValorDependencia = function () {
             this.ValorDependencia = function () {
-                if (self.buscar == "00000") {
+                if (self.buscar == "00000" || sef.buscar == null) {
                     self.buscar = '';
                 }
             };

@@ -210,7 +210,7 @@
         };
 
         this.ValorDependencia = function () {            
-            if (self.buscar == "00000") {
+            if (self.buscar == "00000" || self.buscar == null) {
                 self.buscar = '';
             }
         };
