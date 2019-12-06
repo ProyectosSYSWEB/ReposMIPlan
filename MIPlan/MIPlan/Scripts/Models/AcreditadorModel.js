@@ -60,7 +60,7 @@
                 },
                 error: function (ex) {
                     if (callBackResult != undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerCarreas." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerCarreras." });
                     }
                 }
             });
@@ -89,7 +89,7 @@
                 },
                 error: function (ex) {
                     if (callBackResult != undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerCarreas." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerOrganismos." });
                     }
                 }
             });
@@ -119,7 +119,7 @@
                 },
                 error: function (ex) {
                     if (callBackResult != undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerStatus." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerStatusAcreditaciones." });
                     }
                 }
             });
@@ -144,7 +144,7 @@
                 },
                 error: function (ex) {
                     if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerDependencias." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerGridAcreditaciones." });
                     }
                 }
             });
@@ -173,7 +173,7 @@
                 },
                 error: function (ex) {
                     if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerAcreditadores." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerAcreditaciones." });
                     }
                 }
             });
@@ -225,7 +225,7 @@
                 },
                 error: function (ex) {
                     if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en GuardarUnidadesResponsables." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en GuardarAcreditaciones." });
                     }
                 }
             });
@@ -250,7 +250,7 @@
                 },
                 error: function (ex) {
                     if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EliminarAcreditador." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EliminarAcreditacion." });
                     }
                 }
             });
