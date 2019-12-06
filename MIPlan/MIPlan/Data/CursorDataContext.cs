@@ -448,7 +448,7 @@ namespace MIPlan.Data
                     objEjercicio.Descripcion = Convert.ToString(dr[1]);
                     listarEjercicios.Add(objEjercicio);
                 }
-                return listarUnidades;
+                return listarEjercicios;
 
             }
             catch (Exception ex)
