@@ -146,7 +146,7 @@
                     iNumeroMayor = self.areasatencion[i].Cve;
                 }
             }
-            self.cve_clave = parseInt(iNumeroMayor) + 1;
+            self.cve_clave = parseInt(iNumeroMayor) ;
         };
 
         var eliminarAreaAtencion = function (IdArea) {
