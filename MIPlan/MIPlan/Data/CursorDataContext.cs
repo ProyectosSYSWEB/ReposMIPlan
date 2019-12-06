@@ -140,7 +140,7 @@ namespace MIPlan.Data
                     objAreasAtencion.Clave = Convert.ToString(dr[2]);
                     objAreasAtencion.Descripcion = Convert.ToString(dr[3]);
                     objAreasAtencion.Status = Convert.ToString(dr[4]);
-
+                    objAreasAtencion.Categoria = Convert.ToString(dr[5]);
                     listarAreasAtencion.Add(objAreasAtencion);
                 }
                 return listarAreasAtencion;
