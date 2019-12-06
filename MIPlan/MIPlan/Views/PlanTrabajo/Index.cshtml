@@ -17,45 +17,49 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+            <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
                 <div class="form-group">
-                    <label for="lblStatus" class="text-primary">Ejercicio</label>
-                    <input type="text" class="form-control border border-primary" placeholder="Ejercicio" style="max-width:100%;">
+                    <label for="lblEjercicios" class="text-primary">Ejercicio:</label>
+                    <select class="form-control border border-primary" name="cmbEjercicio" ng-change="ctrl.ValorEjercicio()" ng-options="option.Id as option.Descripcion for option in ctrl.Ejercicios" ng-model="ctrl.buscarEjercicios" style="max-width:100%;">
+                        <option value="">Seleccionar Ejercicio</option>
+                    </select>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
                 <div class="form-group">
                     <label for="lblDependencia" class="text-primary">Dependencia:</label>
-                    <select class="form-control border border-primary" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.buscar" style="max-width:100%;">
-                        <option value="">--Seleccionar Dependencia--</option>
+                    <select class="form-control border border-primary" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.buscarDependencias" style="max-width:100%;">
+                        <option value="">Seleccionar Dependencia</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
+                <div class="form-group">
+                    <label for="lblPlanes" class="text-primary">Plan de Trabajo:</label>
+                    <select class="form-control border border-primary" name="cmbPlanDeTrabajo" ng-change="ctrl.ValorPlanes()" ng-options="option.Id as option.Descripcion for option in ctrl.Planes" ng-model="ctrl.buscarPlanes" style="max-width:100%;">
+                        <option value="">Seleccionar Plan de Trabajo</option>
                     </select>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
                 <div class="form-group">
-                    <label for="lblDependencia" class="text-primary">Plan de Trabajo:</label>
-                    <select class="form-control border border-primary" name="cmbPlanDeTrabajo" style="max-width:100%;">
-                        <option value="">--Seleccionar Plan de Trabajo--</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
-                <div class="form-group">
-                    <label for="lblDependencia" class="text-primary">Unidad Responsable</label>
+                    <label for="lblUnidadesR" class="text-primary">Unidad Responsable</label>
                     <select class="form-control border border-primary" name="cmbUnidadResponsable" ng-change="ctrl.ValorUnidad()" ng-options="option.Id as option.Descripcion for option in ctrl.UnidadesResponsables" ng-model="ctrl.buscar" style="max-width:100%;">
-                        <option value="">--Seleccionar Unidad Responsable--</option>
-                    </select>
+                        <option value="">Seleccionar Unidad Responsable</option>
+                    </select>                   
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
+                <div class="form-group">
+                    <label for="lblBuscar" class="text-primary">&nbsp;</label>
+                    <button class="btn btn-info btn-block">Buscar</button>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <button class="btn btn-info btn-block">Buscar</button>
-        </div>
+     
     </div>
-    <br />
-    <br />
-    <div class="container-fluid border-bottom border-info"></div>
-    <br />
+    <br />  
+    <div class="container-fluid border-bottom border-info"></div>  
     <br />
     <div class="row">
         <div class="col-sm-12 col-md-5 col-lg-4 col-xl-4">

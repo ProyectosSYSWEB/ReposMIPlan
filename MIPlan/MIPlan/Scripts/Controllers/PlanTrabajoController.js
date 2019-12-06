@@ -15,6 +15,8 @@
         var CargarCombos = function () {
             ObtenerDependencias();
             CargarComboUR();
+            CargarComboEjercicios();
+            CargarComboPlanes();
         };
 
         /********************************************************************************************************************************************************/
@@ -53,12 +55,44 @@
                 }
                 $scope.$apply();
             });
+        };      
+        /********************************************************************************************************************************************************/
+        var CargarComboEjercicios = function () {
+            catalogoContext.ListaEjercicios(function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.Ejercicios = catalogoContext.ListaEjerciciosLST;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
         };
         /********************************************************************************************************************************************************/
-      
-        /********************************************************************************************************************************************************/
      
-
+        var CargarComboPlanes = function () {
+            catalogoContext.ListaPlanes(function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.Planes = catalogoContext.ListaPlanesLST;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
         /********************************************************************************************************************************************************/
       
 
