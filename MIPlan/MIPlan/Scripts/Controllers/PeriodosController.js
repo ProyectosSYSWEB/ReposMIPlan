@@ -128,9 +128,9 @@
             catalogoContext.periodoUpdate(self.periodo[0].Id, self.periodo[0].Dependencia, self.periodo[0].Periodo, self.periodo[0].Descripcion, self.EStatus, self.Ejercicio, self.periodo[0].Inicio, self.periodo[0].Fin ,function (resp) {
                 switch (resp.ressult) {
                     case "tgp":       
+                        alert("¡Se han actualizado los datos correctamente!");    
                         CargarGrid();
-                        self.periodo = null;
-                        alert("¡Se han actualizado los datos correctamente!");                        
+                        self.periodo = null;                                           
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -157,9 +157,9 @@
             catalogoContext.GuardarPerdiodos(self.periodo[0].Dependencia, self.periodo[0].Periodo, self.periodo[0].Descripcion, self.EStatus, self.Ejercicio, self.periodo[0].Inicio, self.periodo[0].Fin , function (resp) {
                 switch (resp.ressult) {
                     case "tgp":         
-                        CargarGrid();
-                        self.periodo = null;
                         alert("¡Se ha creado el periodo correctamente!");
+                        CargarGrid();
+                        self.periodo = null;                       
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;

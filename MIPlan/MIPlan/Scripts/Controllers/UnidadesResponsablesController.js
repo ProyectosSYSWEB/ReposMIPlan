@@ -118,8 +118,9 @@
         var UnidadUpdate = function () {                                   
             catalogoContext.UnidadResponsableUpdate(self.unidad[0].Id, self.unidad[0].Dependencia, self.Clave, self.unidad[0].Descripcion, self.EStatus, self.unidad[0].Coordinador, function (resp) {
                 switch (resp.ressult) {
-                    case "tgp":                                                                        
+                    case "tgp":                                    
                         alert("¡Se han actualizado los datos correctamente!");
+                        CargarGrid();
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -148,8 +149,9 @@
         var UnidadCreate = function () {           
             catalogoContext.UnidadResponsableCreate(self.unidad[0].Dependencia, self.Clave, self.unidad[0].Descripcion, self.EStatus, self.unidad[0].Coordinador, function (resp) {
                 switch (resp.ressult) {
-                    case "tgp":                                                                              
-                        alert("¡Se ha creado la unidad correctamente!");                        
+                    case "tgp":                                   
+                        alert("¡Se ha creado la unidad correctamente!");        
+                        CargarGrid();
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -168,7 +170,8 @@
         var eliminarUnidadResponsable = function (Idunidad) {
             catalogoContext.eliminarUnidad(Idunidad, function (resp) {
                 switch (resp.ressult) {
-                    case "tgp":                                                                        
+                    case "tgp":    
+                       
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -185,9 +188,9 @@
         this.EliminnarUR = function (Indice) { 
             var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
             if (opcion == true) {                
-                eliminarUnidadResponsable(Indice);  
+                eliminarUnidadResponsable(Indice);      
+                alert("¡Se ha elimnado con exito!"); 
                 CargarGrid();
-                alert("¡Se ha elimnado con exito!");              
             } else {
                 alert("No se ha eliminado el registro");
             }
