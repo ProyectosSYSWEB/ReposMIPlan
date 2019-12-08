@@ -1,18 +1,14 @@
 ﻿(function () {
-    var app = angular.module('MIPlanWeb', ['ngPagination']);
+    var app = angular.module('MIPlanWeb', ['ngPagination']);    
 /********************************************************************************************************************************************************/
-    app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
-
-        var self = this;
+    app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {        
+        var self = this;        
         self.buscar = '';
         
 
         this.Inicio = function () {
             CargarCombos();
-            CargarGrid();         
-            self.unidad = null;  
-            self.Clave = null;
-            self.EStatus = null;                     
+            CargarGrid();                                         
         };
 
         var CargarCombos = function () {
@@ -43,8 +39,7 @@
             catalogoContext.ObtenerUnidades( function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.unidades = catalogoContext.unidadesRlst;  
-                        //$('#UnidadesResponsablesModal').modal('hide');
+                        self.unidades = catalogoContext.unidadesRlst;                          
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -64,8 +59,7 @@
                     case "tgp":
                         self.unidad = catalogoContext.unidadadRlst;
                         self.EStatus = self.unidad[0].Status;
-                        self.Clave = self.unidad[0].Clave;
-                        //$('#UnidadesResponsablesModal').modal('hide');
+                        self.Clave = self.unidad[0].Clave;                       
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -121,13 +115,10 @@
         };
 
 /********************************************************************************************************************************************************/
-        var UnidadUpdate = function () {                        
-            console.log(self.unidad[0].Coordinador);
+        var UnidadUpdate = function () {                                   
             catalogoContext.UnidadResponsableUpdate(self.unidad[0].Id, self.unidad[0].Dependencia, self.Clave, self.unidad[0].Descripcion, self.EStatus, self.unidad[0].Coordinador, function (resp) {
                 switch (resp.ressult) {
-                    case "tgp":                        
-                        CargarGrid();
-                        self.unidad = null;
+                    case "tgp":                                                                        
                         alert("¡Se han actualizado los datos correctamente!");
                         break;
                     case "notgp":
@@ -157,10 +148,8 @@
         var UnidadCreate = function () {           
             catalogoContext.UnidadResponsableCreate(self.unidad[0].Dependencia, self.Clave, self.unidad[0].Descripcion, self.EStatus, self.unidad[0].Coordinador, function (resp) {
                 switch (resp.ressult) {
-                    case "tgp":           
-                        CargarGrid();
-                        self.unidad = null;                       
-                        alert("¡Se ha creado la unidad correctamente!");
+                    case "tgp":                                                                              
+                        alert("¡Se ha creado la unidad correctamente!");                        
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -196,9 +185,9 @@
         this.EliminnarUR = function (Indice) { 
             var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
             if (opcion == true) {                
-                eliminarUnidadResponsable(Indice);                  
-                alert("¡Se ha elimnado con exito!");
+                eliminarUnidadResponsable(Indice);  
                 CargarGrid();
+                alert("¡Se ha elimnado con exito!");              
             } else {
                 alert("No se ha eliminado el registro");
             }
@@ -211,7 +200,7 @@
             document.getElementById("ErrorModal").style.display = "none";
         };
         
-        this.ValorDependencia = function () {
+        this.ValorDependencia = function () {                            
             if (self.buscar == "00000" || self.buscar == null) {
                 self.buscar = '';
             }

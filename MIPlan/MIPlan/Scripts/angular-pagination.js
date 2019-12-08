@@ -2,7 +2,7 @@
     .filter('startFrom', function () {
         return function (input, inicio) {
             if (input !== undefined) {
-                inicio = +inicio;
+                inicio = 0 + inicio;
                 return input.slice(inicio);
             } else {
                 //console.error("Modulo ng-pagination Filter startFrom Error");

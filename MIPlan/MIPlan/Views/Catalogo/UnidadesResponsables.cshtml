@@ -46,7 +46,7 @@
                                 <label id="lblClave" class="">Clave</label>
                             </div>
                             <div class="row justify-content-center">
-                                <input type="text" id="inputClave" class="" name="Clave" readonly ng-maxlength="3" ng-model="ctrl.Clave" placeholder="Clave" required>
+                                <input type="text" id="inputClave" class="" name="Clave" ng-maxlength="3" ng-model="ctrl.Clave" placeholder="Clave" required>
                             </div>
                             <div class="row justify-content-center"> 
                                 <span class="messages" ng-show="modalForm.$submitted || modalForm.Clave.$touched">
@@ -165,7 +165,7 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblStatus" class="text-success">Busqueda</label>
-                    <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-model="ctrl.buscar" style="max-width:100%;">
+                    <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-pagination-search="ctrl.unidades" style="max-width:100%;">
                 </div>
             </div>
         </div>
@@ -219,7 +219,7 @@
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody ng-pagination="i in ctrl.unidades  | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status" ng-pagination-size="5">
+                <tbody ng-pagination="i in ctrl.unidades | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status" ng-pagination-size="5">
                     <tr>
                         <td>{{i.Dependencia}}</td>
                         <td>{{i.Clave}}</td>
