@@ -61,7 +61,7 @@
                     <br />
                 </div>
             </div>
-           
+           </div>
                 <div class="modal fade" id="acreditadores" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -122,26 +122,18 @@
                                                 <label id="lblfechainicio" for="lblfechainicio" class="text-success">Fecha Inicio:</label>
                                                 </div>
                                         <div class="row justify-content-center">
-                                                <input type="text" id="txtfechainicio" class="form-control border border-success" name="txtfechainicio" required placeholder="" ng-model="ctrl.cve_fecha_inicio">
+                                                <input type="text" id="txtfechainicio" class="form-control border border-success" name="txtfechainicio"  placeholder="" ng-model="ctrl.cve_fecha_inicio">
                                             </div>
-                                            <div class="row justify-content-center">
-                                                <span class="messages" ng-show="modalForm.$submitted || modalForm.txtfechainicio.$touched">
-                                                    <span ng-show="!ctrl.cve_fecha_inicio" class="text-danger">Campo Requerido</span>
-                                                </span>
-                                            </div>
+                                           
                                        
                                                                              
                                         <div class="row justify-content-center">
                                             <label id="lblfechafin" for="lblfechafin" class="text-success">Fecha Fin:</label>
                                             </div>
                                         <div class="row justify-content-center">
-                                            <input type="text" id="txtfechafin" class="form-control border border-success" name="txtfechafin" required placeholder="" ng-model="ctrl.cve_fecha_fin">
+                                            <input type="text" id="txtfechafin" class="form-control border border-success" name="txtfechafin"  placeholder="" ng-model="ctrl.cve_fecha_fin">
                                         </div>
-                                          <div class="row justify-content-center">
-                                                <span class="messages" ng-show="modalForm.$submitted || modalForm.txtfechafin.$touched">
-                                                    <span ng-show="!ctrl.cve_fecha_inicio" class="text-danger">Campo Requerido</span>
-                                                </span>
-                                            </div>
+                                        
                                         <div class="row justify-content-center">
                                             <label id="lblstatus" for="lblstatus" class="text-success">Estatus:</label>
                                             </div>
@@ -153,7 +145,7 @@
                                         </div>
                                           <div class="row justify-content-center">
                                                 <span class="messages" ng-show="modalForm.$submitted || modalForm.cmbstatus.$touched">
-                                                    <span ng-show="!ctrl.cve_fecha_inicio" class="text-danger">Campo Requerido</span>
+                                                    <span ng-show="!ctrl.cve_status" class="text-danger">Campo Requerido</span>
                                                 </span>
                                             </div>
                                                                             
@@ -161,14 +153,10 @@
                                             <label id="lblobservacion" for="lblobservacion" class="text-success">Observaciones:</label>
                                         </div>
                                         <div class="row justify-content-center">
-                                            <input type="text" id="txtobservacion" class="form-control border border-success" name="txtobservacion" required placeholder="" ng-model="ctrl.cve_observaciones">
+                                            <input type="text" id="txtobservacion" class="form-control border border-success" name="txtobservacion"  placeholder="" ng-model="ctrl.cve_observaciones">
 
                                         </div>
-                                         <div class="row justify-content-center">
-                                            <span class="messages" ng-show="modalForm.$submitted || modalForm.txtobservacion.$touched">
-                                                <span ng-show="!ctrl.cve_observaciones" class="text-danger">Campo Requerido</span>
-                                            </span>
-                                        </div>
+                                        
                                     </div>
                                     <div class="row justify-content-center">
                                         <div id="ErrorModal" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
@@ -193,8 +181,8 @@
                     </div>
                 </div>
                 <input type="hidden" ng-model="ctrl.cve_id" />
-                <div class="container table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.3)">
-                    <table class="table table-hover">
+                <div class="container" style="box-shadow: 10px 40px 96px rgba(0,0,0,.3)">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">
@@ -222,15 +210,15 @@
                                     </a>
                                 </th>
                                 <th scope="col">
-                                    <a href="" ng-click="sortType = 'Fecha Inicio'; sortReverse = !sortReverse">
-                                        Fecha Inicio
-                                        <span ng-class="sortType == 'Fecha Inicio' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Fecha Inicio' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                    <a href="" ng-click="sortType = 'Inicio'; sortReverse = !sortReverse">
+                                        Inicio
+                                        <span ng-class="sortType == 'Inicio' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Inicio' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                                     </a>
                                 </th>
                                 <th scope="col">
-                                    <a href="" ng-click="sortType = 'Fecha Fin'; sortReverse = !sortReverse">
-                                        Fecha Fin
-                                        <span ng-class="sortType == 'Fecha Fin' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Fecha Fin' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                    <a href="" ng-click="sortType = 'Fin'; sortReverse = !sortReverse">
+                                        Fin
+                                        <span ng-class="sortType == 'Fin' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Fin' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                                     </a>
                                 </th>
                                 <th scope="col">
@@ -245,7 +233,11 @@
                                         <span ng-class="sortType == 'Observaciones' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Observaciones' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                                     </a>
                                 </th>
-
+                                @*<th scope="col">
+                                    <a class="fa fa-cog">
+                                                                                
+                                    </a>*@
+                                
                                 <th style="text-align:center"><em class="fa fa-cog"></em></th>
                             </tr>
                         </thead>
@@ -260,34 +252,38 @@
                                 <td>{{i.Status}}</td>
                                 <td>{{i.Observaciones}}</td>
 
-                                <td style="text-align:center">
-                                    <button type="button" id="Actualizar" class="btn btn-primary" title="Editar" data-toggle="modal" data-target="#acreditadores" data-backdrop="static" data-keyboard="false" data-html="true" ng-click="ctrl.ObtenerDatos(i.Id)"   style="width:50px">
-                                        <i class="fa fa-pencil" aria-hidden="true"></i> 
+                                <td style="display:inline-block !important">
+                                @*<td style="text-align:right" >*@
+                                    <button type="button" id="Actualizar" class="btn btn-primary" title="Editar" data-placement="top" data-toggle="modal" data-target="#acreditadores" data-backdrop="static" data-keyboard="false" data-html="true" ng-click="ctrl.ObtenerDatos(i.Id)" style="width:50px">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
                                     </button>
-
                                     <button type="button" class="btn btn-danger" title="Eliminar" ng-click="ctrl.Eliminar(i.Id)" style="width:50px">
-                                        <i class="fa fa-eraser" aria-hidden="true"></i>
+                                        <i class="fa fa-eraser" data-placement="top" aria-hidden="true"></i>
                                     </button>
                                 </td>
                             </tr>
                         </tbody>
+
+
                         <tfoot>
                             <tr>
-                                <th colspan="4"><ng-pagination-control pagination-id="ctrl.acreditador" color="white" height="35px"></ng-pagination-control></th>                                              
+                                <th colspan="4"><ng-pagination-control pagination-id="ctrl.acreditador" color="white" height="35px"></ng-pagination-control></th>
                                 <th></th>
-                                <th style="text-align:center" colspan="4">
-                                    <button type="button" class="btn btn-danger" title="Generar Reporte en PDF"  ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
-                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-success" title="Generar Reporte en Excel"   ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                                <th></th>
+                                <th></th>
+                                <th style="text-align:right" colspan="2">
+                                    <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
                                         <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Generar Reporte en PDF" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                     </button>
                                 </th>
                             </tr>
                         </tfoot>
                     </table>
                 </div>
-</div>
+
     </div>
 </div>
 <br />
