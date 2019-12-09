@@ -16,6 +16,9 @@ namespace MIPlan.Models
         public string Status { get; set; }
         public string Observaciones { get; set; }
         public string Observaciones2 { get; set; }
+        public string DescripcionDependencia { get; set; }
+        public string DescripcionCarrea { get; set; }
+
         //public Resultado resultado = new Resultado();
     }
 
