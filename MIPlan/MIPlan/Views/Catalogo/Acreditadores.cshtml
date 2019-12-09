@@ -7,12 +7,13 @@
 <br />
 <br />
 <div ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
-    <div class="container">
 
+
+    <div class="container">
 
         <div id="Error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
             <strong id="Message">¡Ha ocurrido un error! </strong>
-            <button type="button" class="close" data-dismiss="modal" ng-click="ctrl.DivError()" aria-label="Close">
+            <button type="button" class="close" ng-click="ctrl.DivError()" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -24,7 +25,7 @@
                 <label for="lbldependencia" class="text-primary">Dependencia:</label>
 
 
-                <select class="form-control border border-primary"  name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.buscar" style="max-width:100%;">
+                <select class="form-control border border-primary" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.buscar" style="max-width:100%;">
                     <option value="">--Seleccionar Dependencia--</option>
                 </select>
             </div>
@@ -46,7 +47,7 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lbusqueda" class="text-success">Busqueda</label>
-                    <input type="text" class="form-control  border border-success"  placeholder="Busqueda" ng-pagination-search="ctrl.acreditador" style="max-width:100%;">
+                    <input type="text" class="form-control  border border-success" placeholder="Busqueda" ng-pagination-search="ctrl.acreditador" style="max-width:100%;">
 
                 </div>
             </div>
@@ -158,6 +159,7 @@
                                         </div>
                                         
                                     </div>
+                                    <br />
                                     <div class="row justify-content-center">
                                         <div id="ErrorModal" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
                                             <strong id="MessageModal">¡Ha ocurrido un error! </strong>
@@ -181,8 +183,8 @@
                     </div>
                 </div>
                 <input type="hidden" ng-model="ctrl.cve_id" />
-                <div class="container" style="box-shadow: 10px 40px 96px rgba(0,0,0,.3)">
-                    <table class="table table-striped">
+                <div class="container table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.3)">
+                    <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">
@@ -234,10 +236,10 @@
                                     </a>
                                 </th>
                                 @*<th scope="col">
-                                    <a class="fa fa-cog">
-                                                                                
-                                    </a>*@
-                                
+                    <a class="fa fa-cog">
+
+                    </a>*@
+
                                 <th style="text-align:center"><em class="fa fa-cog"></em></th>
                             </tr>
                         </thead>
@@ -252,8 +254,8 @@
                                 <td>{{i.Status}}</td>
                                 <td>{{i.Observaciones}}</td>
 
-                                <td style="display:inline-block !important">
-                                @*<td style="text-align:right" >*@
+                                @*<td style="display:inline-block !important">*@
+                                <td style="text-align:right">
                                     <button type="button" id="Actualizar" class="btn btn-primary" title="Editar" data-placement="top" data-toggle="modal" data-target="#acreditadores" data-backdrop="static" data-keyboard="false" data-html="true" ng-click="ctrl.ObtenerDatos(i.Id)" style="width:50px">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                     </button>
