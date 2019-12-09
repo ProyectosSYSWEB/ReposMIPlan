@@ -14,6 +14,7 @@
             CargarCombos();
             CargarGrid();
             self.periodo = null;
+            self.EStatus = null;   
         };
 
         var CargarCombos = function () {
@@ -30,6 +31,8 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -42,10 +45,13 @@
             catalogoContext.ObtenerGridPeriodos(function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.periodos = catalogoContext.periodoslst;                                              
+                        self.periodos = catalogoContext.periodoslst;                         
+                        //$('#ModalPeriodo').modal('hide');
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -59,10 +65,14 @@
             catalogoContext.ObtenerPeriodo(Idunidad, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.periodo = catalogoContext.periodolst;                      
+                        self.periodo = catalogoContext.periodolst;   
+                        self.EStatus = self.periodo[0].Status;
+                        self.Ejercicio = self.periodo[0].Ejercicio;  
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -91,8 +101,7 @@
             document.getElementById("FinUpdate").className = "form-control border border-primary";
             cargarModal(Indice);
         };
-        this.Color = function () {    
-            self.periodos[0].Status = "Activo";
+        this.Color = function () {               
             document.getElementById("title").className = "modal-header btn-success justify-content-center";
             document.getElementById("exampleModalLabel").innerHTML = "Crear Periodo";
             document.getElementById("btnModal").className = "btn btn-success";
@@ -109,12 +118,14 @@
             document.getElementById("lblInicio").className = "text-success";
             document.getElementById("InicioUpdate").className = "form-control border border-success";
             document.getElementById("lblFin").className = "text-success";
-            document.getElementById("FinUpdate").className = "form-control border border-success";                        
+            document.getElementById("FinUpdate").className = "form-control border border-success";      
+            self.EStatus = "A";    
+            self.Ejercicio = (new Date).getFullYear();
         };
 /********************************************************************************************************************************************************/
         var periodoUpdateF = function () {
                                                        
-            catalogoContext.periodoUpdate(self.periodo[0].Id, self.periodo[0].Dependencia, self.periodo[0].Periodo, self.periodo[0].Descripcion, self.periodo[0].Status, self.periodo[0].Ejercicio, self.periodo[0].Inicio, self.periodo[0].Fin ,function (resp) {
+            catalogoContext.periodoUpdate(self.periodo[0].Id, self.periodo[0].Dependencia, self.periodo[0].Periodo, self.periodo[0].Descripcion, self.EStatus, self.Ejercicio, self.periodo[0].Inicio, self.periodo[0].Fin ,function (resp) {
                 switch (resp.ressult) {
                     case "tgp":       
                         CargarGrid();
@@ -123,6 +134,8 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -140,9 +153,8 @@
         };
 
         /********************************************************************************************************************************************************/
-        var periodoCreateF = function () {
-                                                                                                                                                                                
-            catalogoContext.GuardarPerdiodos(self.periodo[0].Dependencia, self.periodo[0].Periodo, self.periodo[0].Descripcion, self.periodo[0].Status, self.periodo[0].Ejercicio, self.periodo[0].Inicio, self.periodo[0].Fin , function (resp) {
+        var periodoCreateF = function () {                                                                                                                                                                                
+            catalogoContext.GuardarPerdiodos(self.periodo[0].Dependencia, self.periodo[0].Periodo, self.periodo[0].Descripcion, self.EStatus, self.Ejercicio, self.periodo[0].Inicio, self.periodo[0].Fin , function (resp) {
                 switch (resp.ressult) {
                     case "tgp":         
                         CargarGrid();
@@ -151,6 +163,8 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -167,7 +181,9 @@
                     case "tgp":                                
                         break;
                     case "notgp":
-                        self.mensaje_gral = resp.message;                        
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;                     
                         break;
                     default:
                         break;
@@ -186,11 +202,17 @@
             }
         };
         /*******************************************************************************************************************************************************/
+        this.DivError = function () {
+            document.getElementById("Error").style.display = "none";
+        };
+        this.DivErrorModal = function () {
+            document.getElementById("ErrorModal").style.display = "none";
+        };
 
         this.ValorDependencia = function () {            
-            if (self.buscar == "00000") {
+            if (self.buscar == "00000" || self.buscar == null) {
                 self.buscar = '';
-            }
+            }            
         };
 
         this.StatusFun = function () {
@@ -198,6 +220,17 @@
                 self.Status.Status = '';
             }
         }
+
+        this.reset = function (form) {
+            $('#ModalPeriodo').modal('hide');           
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }
+            CargarGrid();
+            self.periodo = null;
+            self.EStatus = null;
+        };
         /*******************************************************************************************************************************************************/
 
     }]);

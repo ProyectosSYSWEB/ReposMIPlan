@@ -1,7 +1,7 @@
 ﻿// <reference path="../Models/AreasAtencionModel.js"/>
 
 (function () {
-    var app = angular.module('MIPlanWeb', []);
+    var app = angular.module('MIPlanWeb', ['ngPagination']);
 
 
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
@@ -24,9 +24,12 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.dependencias = catalogoContext.dependenciaslst;
+                        self.cve_dependencia = catalogoContext.dependenciaslst.Id;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -43,6 +46,8 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -57,13 +62,15 @@
         };
 
         var CargarGrid = function () {
-            catalogoContext.ObtenerAreasAtencion(self.cve_dependencia, function (resp) {
+            catalogoContext.ObtenerAreasAtencion(function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         self.areasatencion = catalogoContext.areaslst;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -77,6 +84,7 @@
             $('#btnActualizar').show();
             $('#btnNuevo').hide();
             self.Titulo = "Modificar Área de Atención";
+            self.cve_id = IdAreaAtencion;
             document.getElementById("Titulo").className = "modal-header btn-primary justify-content-center";
             document.getElementById("lblDependencia").className = "text-primary";
             document.getElementById("cmdDependencia").className = "form-control border border-primary";
@@ -100,6 +108,8 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -128,6 +138,15 @@
             self.cve_desc = "";
             self.cve_status = "";
             self.cve_cat = "";
+
+            self.cve_status = "A";           
+            var iNumeroMayor = self.areasatencion[0].Cve;
+            for (var i = 0; i < self.areasatencion.length; i++) {
+                if (self.areasatencion[i].Cve > iNumeroMayor) {
+                    iNumeroMayor = self.areasatencion[i].Cve;                  
+                } 
+            }
+            self.cve_clave = parseInt(iNumeroMayor) + 1;
         };
 
         var eliminarAreaAtencion = function (IdArea) {
@@ -139,6 +158,8 @@
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         console.log("Error Controller");
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -159,13 +180,21 @@
         };
 
         var areasUpdate = function () {
-            catalogoContext.AreasAtencionUpdate(self.cve_id[0].Id, self.cve_dependencia[0].Dependencia, self.cve_clave[0].Clave, self.cve_desc[0].Descripcion, self.cve_status[0].Status, self.cve_cat[0].Categoria, function (resp) {
+            catalogoContext.AreasAtencionUpdate(self.cve_id, self.cve_dependencia, self.cve_clave, self.cve_desc, self.cve_status, self.cve_cat, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
+                        self.cve_dependencia = null;
+                        self.cve_clave = null;
+                        self.cve_desc = null;
+                        self.cve_status = null;
+                        self.cve_cat = null;
                         alert("¡Se han actualizado los datos correctamente!");
+                        CargarGrid();
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -180,13 +209,21 @@
 
         var AreaCreate = function () {
 
-            catalogoContext.AreasAtencionCreate(self.cve_dependencia[0].Dependencia, self.cve_clave[0].Clave, self.cve_desc[0].Descripcion, self.cve_status[0].Status, self.cve_cat[0].Categoria, function (resp) {
+            catalogoContext.AreasAtencionCreate(self.cve_dependencia, self.cve_clave, self.cve_desc, self.cve_status, self.cve_cat, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        alert("¡Se ha creado la unidad correctamente!");
+                        self.cve_dependencia = null;
+                        self.cve_clave = null;
+                        self.cve_desc = null;
+                        self.cve_status = null;
+                        self.cve_cat = null;
+                        alert("¡Se ha creado el área correctamente!");
+                        CargarGrid();
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -197,30 +234,41 @@
 
         this.AreasAtencionCreate = function () { AreaCreate(); }
 
-
-        this.ValorDependencia = function () {
-            this.ValorDependencia = function () {
-                if (self.buscar == "00000") {
-                    self.buscar = '';
-                }
-            };
+        this.DivError = function () {
+            document.getElementById("Error").style.display = "none";
+        };
+        this.DivErrorModal = function () {
+            document.getElementById("ErrorModal").style.display = "none";
         };
 
+        this.ValorDependencia = function () {
+                if (self.buscar == "00000" || self.buscar == null) {
+                    self.buscar = '';
+                }
+        };
+
+        this.StatusFun = function () {
+            if (self.Estatus.Estatus == "Todos") {
+                self.Estatus.Estatus = '';
+            }
+        }
+
+        this.reset = function (form) {
+            $('#areasatencion').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }
+            CargarGrid();
+            self.cve_dependencia = null;
+            self.cve_clave = null;
+            self.cve_desc = null;
+            self.cve_status = null;
+            self.cve_cat = null;
+        };
 
         this.BorrarBasico = function (Indice) {
             alert(Indice);
         };
-
-        this.StatusFun = function () {
-            if (self.Status.Status == "Todos") {
-                self.Status.Status = '';
-            }
-        }
-
-
-
     }]);
-
-
-
 })();

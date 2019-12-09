@@ -1,9 +1,10 @@
-﻿var catalogoContext =
+﻿console.log("Funciona Model");
+var catalogoContext =
 {
     dependenciaslst: [],
-    unidadesRlst: [],
-    unidadadRlst: [],
-    unidadadUpdateRlst: [],
+    ListaUnidadResponsableLST: [], 
+    ListaEjerciciosLST: [],
+    ListaPlanesLST:[],
 /********************************************************************************************************************************************************/
     ObtenerDependencias: function (callBackResult) {
         var self = this;
@@ -37,18 +38,18 @@
 
     },
 /********************************************************************************************************************************************************/
-        ObtenerUnidades: function (callBackResult) {
+    ListaUnidadResponsable: function (callBackResult) {
         var self = this;
-        self.unidadesRlst.length = 0;
+        self.ListaUnidadResponsableLST.length = 0;
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
-                url: urlServer + 'Catalogo/ObtenerUnidades',                
+                url: urlServer + 'PlanTrabajo/ListaUnidadResponsable',                
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
-                            self.unidadesRlst.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependencia, Clave: resp.Resultado[i].Clave, Descripcion: resp.Resultado[i].Descripcion, Status: resp.Resultado[i].Status, Coordinador: resp.Resultado[i].Coordinador });
+                            self.ListaUnidadResponsableLST.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion});
                         }
                                          
                         if (callBackResult !== undefined) {
@@ -60,104 +61,27 @@
                 },
                 error: function (ex) {
                     if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerUnidades." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ListaUnidadResponsable." });
                     }
                 }
             });
 
     },
 /********************************************************************************************************************************************************/
-    ObtenerUnidad: function (Idunidad, callBackResult) {
-        var self = this;        
-        self.unidadadRlst.length = 0;
-        $.ajax(
-            {
-                type: 'GET',
-                cache: false,
-                url: urlServer + 'Catalogo/ObtenerUnidadesResponsables',
-                data: { Idunidad },
-                success: function (resp) {
-                    if (resp.Error == false) { 
-                        for (var i = 0; i < resp.Resultado.length; i++) {
-                            self.unidadadRlst.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependecia, Clave: resp.Resultado[i].Clave, Descripcion: resp.Resultado[i].Descripcion, Status: resp.Resultado[i].Status, Coordinador: resp.Resultado[i].Coordinador });                            
-                        }
-                        if (callBackResult !== undefined) {
-                            callBackResult({ ressult: 'tgp', message: null });
-                        }
-                    } else {
-                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
-                    }
-                },
-                error: function (ex) {
-                    if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerUnidadesResponsables." });
-                    }
-                }
-            });
-
-    },
-/********************************************************************************************************************************************************/
-    UnidadResponsableUpdate: function (Id, Dependencia, Clave, Descripcion, Status, Coordinador, callBackResult) {
+    ListaEjercicios: function (callBackResult) {
         var self = this;
-        self.unidadadUpdateRlst.length = 0;
-        $.ajax(
-            {
-                type: 'POST',
-                cache: false,
-                url: urlServer + 'Catalogo/EditarUnidadesResponsables',
-                data: {Id, Dependencia, Clave, Descripcion, Status, Coordinador },
-                success: function (resp) {
-                    if (resp.Error == false) {
-                      
-                        if (callBackResult !== undefined) {
-                            callBackResult({ ressult: 'tgp', message: null });
-                        }
-                    } else {
-                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
-                    }
-                },
-                error: function (ex) {
-                    if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EditarUnidadesResponsables." });
-                    }
-                }
-            });
-    },
-/********************************************************************************************************************************************************/
-    UnidadResponsableCreate: function ( dependencia, clave, descripcion, status, coordinador, callBackResult) {        
-        $.ajax( 
-            {
-                type: 'GET',
-                cache: false,
-                url: urlServer + 'Catalogo/GuardarUnidadesResponsables',
-                data: { dependencia, clave, descripcion, status, coordinador, },
-                success: function (resp) {
-                    if (resp.Error == false) {
-                        if (callBackResult !== undefined) {
-                            callBackResult({ ressult: 'tgp', message: null });
-                        }
-                    } else {
-                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
-                        
-                    }
-                },
-                error: function (ex) {
-                    if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en GuardarUnidadesResponsables." });
-                    }
-                }
-            });
-    },
-/********************************************************************************************************************************************************/
-    eliminarUnidad: function (IdUnidad, callBackResult) {
+        self.ListaEjerciciosLST.length = 0;
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
-                url: urlServer + 'Catalogo/EliminarUnidadResponsable',
-                data: { IdUnidad },
+                url: urlServer + 'PlanTrabajo/ListaEjercicios',
                 success: function (resp) {
                     if (resp.Error == false) {
+                        for (var i = 0; i < resp.Resultado.length; i++) {
+                            self.ListaEjerciciosLST.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion });
+                        }3
+
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
                         }
@@ -167,9 +91,44 @@
                 },
                 error: function (ex) {
                     if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EliminarUnidadResponsable." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ListaEjercicios." });
                     }
                 }
             });
+
     },
+/********************************************************************************************************************************************************/
+    ListaPlanes: function (callBackResult) {
+        var self = this;
+        self.ListaPlanesLST.length = 0;
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'PlanTrabajo/ListaPlanes',
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        for (var i = 0; i < resp.Resultado.length; i++) {
+                            self.ListaPlanesLST.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion });
+                        } 3
+
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ListaEjercicios." });
+                    }
+                }
+            });
+
+    },
+/********************************************************************************************************************************************************/
+
+/********************************************************************************************************************************************************/
+  
 };

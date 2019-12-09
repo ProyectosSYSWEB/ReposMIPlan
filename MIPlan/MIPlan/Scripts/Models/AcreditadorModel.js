@@ -60,7 +60,7 @@
                 },
                 error: function (ex) {
                     if (callBackResult != undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerCarreas." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerCarreras." });
                     }
                 }
             });
@@ -89,7 +89,7 @@
                 },
                 error: function (ex) {
                     if (callBackResult != undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerCarreas." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerOrganismos." });
                     }
                 }
             });
@@ -97,7 +97,7 @@
     },
 
 
-    ObtenerStatusAcreditaciones: function (Dependencia,callBackResult) {
+    ObtenerStatusAcreditaciones: function (callBackResult) {
         var self = this;
         self.statuslst.length = 0;
         //var urlServer = "http://localhost:53805/";
@@ -105,11 +105,11 @@
             {
                 type: 'GET',
                 cache: false,
-                url: urlServer + 'Catalogo/ObtenerOrganismos',
-                data: { Dependencia },
+                url: urlServer + 'Catalogo/ObtenerStatusAcreditaciones',
+               
                 success: function (resp) {
                     for (var i = 0; i < resp.Resultado.length; i++) {
-                        self.statuslst.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion, Status: resp.Resultado[i].Status });
+                        self.statuslst.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion });
                     }
                     if (callBackResult != undefined) {
                         callBackResult({ ressult: 'tgp', message: null });
@@ -119,7 +119,7 @@
                 },
                 error: function (ex) {
                     if (callBackResult != undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerCarreas." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerStatusAcreditaciones." });
                     }
                 }
             });
@@ -136,7 +136,7 @@
                 data: { Dependencia },
                 success: function (resp) {
                     for (var i = 0; i < resp.Resultado.length; i++) {
-                        self.acreditadoreslst.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependencia, Carrera: resp.Resultado[i].Carrera, Organismo: resp.Resultado[i].Organismo, Fecha_Inicial: resp.Resultado[i].FechaInicial, Fecha_Final: resp.Resultado[i].FechaFinal, Status: resp.Resultado[i].Status, Observacion: resp.Resultado[i].Observaciones });
+                        self.acreditadoreslst.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependencia, Carrera: resp.Resultado[i].Carrera, Organismo: resp.Resultado[i].Organismo, Fecha_Inicial: resp.Resultado[i].FechaInicial, Fecha_Final: resp.Resultado[i].FechaFinal, Status: resp.Resultado[i].Status, Observaciones: resp.Resultado[i].Observaciones });
                     }
                     if (callBackResult !== undefined) {
                         callBackResult({ ressult: 'tgp', message: null });
@@ -144,7 +144,7 @@
                 },
                 error: function (ex) {
                     if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerDependencias." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerGridAcreditaciones." });
                     }
                 }
             });
@@ -162,25 +162,25 @@
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
-                            self.unidadAcreditacionlst.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependencia, Carrera: resp.Resultado[i].Carrera, Organismo: resp.Resultado[i].Organismo, Fecha_Inicial: resp.Resultado[i].FechaInicial, Fecha_Final: resp.Resultado[i].FechaFinal, Status: resp.Resultado[i].Status, Observacion: resp.Resultado[i].Observaciones });
+                            self.unidadAcreditacionlst.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependencia, Carrera: resp.Resultado[i].Carrera, Organismo: resp.Resultado[i].Organismo, Fecha_Inicial: resp.Resultado[i].FechaInicial, Fecha_Final: resp.Resultado[i].FechaFinal, Status: resp.Resultado[i].Status, Observaciones: resp.Resultado[i].Observaciones });
                         }
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
                         }
                     } else {
-                        callBackResult({ ressult: "notgp", message: res })
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError })
                     }
                 },
                 error: function (ex) {
                     if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerAcreditadores." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerAcreditaciones." });
                     }
                 }
             });
 
     },
 
-    AcreditadorUpdate: function (Id, Dependencia, Carrera, Organismo, Fecha_Inicial, Fecha_Final, Status, Observacion, callBackResult) {
+    AcreditadorUpdate: function (id, dependencia, carrera, organismo, fechaIni, fechaFin, status, observaciones, callBackResult) {
         var self = this;
         self.acreditadorUpdatelst.length = 0;
         $.ajax(
@@ -188,7 +188,7 @@
                 type: 'POST',
                 cache: false,
                 url: urlServer + 'Catalogo/EditarAcreditaciones',
-                data: { Id, Dependencia, Carrera, Organismo, Fecha_Inicial, Fecha_Final, Status, Observacion },
+                data: { id, dependencia, carrera, organismo, fechaIni,  fechaFin,  status,  observaciones },
                 success: function (resp) {
                     if (resp.Error == false) {
 
@@ -196,7 +196,7 @@
                             callBackResult({ ressult: 'tgp', message: null });
                         }
                     } else {
-                        callBackResult({ ressult: "notgp", message: res })
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError})
                     }
                 },
                 error: function (ex) {
@@ -207,25 +207,25 @@
             });
     },
 
-    AcreditadorCreate: function (Dependencia,Carrera,Organismo,FechaInicial,FechaFinal,Status,Observaciones, callBackResult) {
+    AcreditadorCreate: function (dependencia, carrera, organismo, fechaIni, fechaFin, status, observaciones, callBackResult) {
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'Catalogo/GuardarAcreditaciones',
-                data: { Dependencia, Carrera, Organismo, FechaInicial, FechaFinal, Status, Observaciones, },
+                data: { dependencia, carrera, organismo, fechaIni, fechaFin, status, observaciones },
                 success: function (resp) {
                     if (resp.Error == false) {
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
                         }
                     } else {
-                        callBackResult({ ressult: "notgp", message: res })
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError })
                     }
                 },
                 error: function (ex) {
                     if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en GuardarUnidadesResponsables." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en GuardarAcreditaciones." });
                     }
                 }
             });
@@ -245,12 +245,12 @@
                             callBackResult({ ressult: 'tgp', message: null });
                         }
                     } else {
-                        callBackResult({ ressult: "notgp", message: res })
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError })
                     }
                 },
                 error: function (ex) {
                     if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EliminarAcreditador." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EliminarAcreditacion." });
                     }
                 }
             });

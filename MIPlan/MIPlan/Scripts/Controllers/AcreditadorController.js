@@ -1,7 +1,7 @@
 ﻿// <reference path="../Models/AcreditadorModel.js"/>
 
 (function () {
-    var app = angular.module('MIPlanWeb', []);
+    var app = angular.module('MIPlanWeb', ['ngPagination']);
 
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
         var self = this;
@@ -13,6 +13,7 @@
             self.unidad = null;
             ObtenerOrganismos();
             ObtenerStatusAcreditaciones();
+
            
         };
 
@@ -29,30 +30,16 @@
             ObtenerCarreras();
 
         };
-        //this.Organismo = function () {
-        //    CargarOrga();
-
-        //};
-        this.CargarOrganismos= function () {
-            ObtenerOrganismos();
-
-        };
-
-        this.CargarStatus = function () {
-            ObtenerStatusAcreditaciones();
-
-        };
-
-
         var ObtenerDependencias = function () {
             catalogoContext.ObtenerDependencias(function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         self.dependencias = catalogoContext.dependenciaslst;
-                        //self.cve_dependencia = catalogoContext.dependenciaslst[0].Id;
-                        break;
+                       break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -66,10 +53,10 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.carrera = catalogoContext.carreralst;
-                        //self.cve_dependencia = catalogoContext.dependenciaslst[0].Id;
-                        break;
+                      break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        
                         break;
                     default:
                         break;
@@ -83,10 +70,10 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.organismo = catalogoContext.organismolst;
-                        //self.cve_dependencia = catalogoContext.dependenciaslst[0].Id;
-                        break;
+                    break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        
                         break;
                     default:
                         break;
@@ -97,11 +84,10 @@
 
 
         var ObtenerStatusAcreditaciones = function () {
-            catalogoContext.ObtenerStatusAcreditaciones(self.cve_dependencia, function (resp) {
+            catalogoContext.ObtenerStatusAcreditaciones( function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         self.status = catalogoContext.statuslst;
-                        //self.cve_dependencia = catalogoContext.dependenciaslst[0].Id;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -119,9 +105,12 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.acreditador = catalogoContext.acreditadoreslst;
+                        $('#acreditadores').modal('hide');
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -135,6 +124,7 @@
             $('#btnActualizar').show();
             $('#btnNuevo').hide();
             self.Titulo = "Modificar Acreditador";
+            self.cve_id = IdAcreditacion;
             document.getElementById("Titulo").className = "modal-header btn-primary justify-content-center";
             document.getElementById("lbldependencia").className = "text-primary";
             document.getElementById("cmbdependencia").className = "form-control border border-primary";
@@ -149,28 +139,30 @@
             document.getElementById("lblstatus").className = "text-primary";
             document.getElementById("cmbstatus").className = "form-control border border-primary";
             document.getElementById("lblobservacion").className = "text-primary";
-            document.getElementById("cmbobservacion").className = "form-control border border-primary";
+            document.getElementById("txtobservacion").className = "form-control border border-primary";
 
             catalogoContext.ObtenerAcreditador(IdAcreditacion, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         self.cve_dependencia = catalogoContext.unidadAcreditacionlst[0].Dependencia;
                         ObtenerCarreras();
-                        self.cve_carrera = catalogoContext.unidadAcreditacionlst[0].Carrera;
                         self.cve_organismo = catalogoContext.unidadAcreditacionlst[0].Organismo;
                         self.cve_fecha_inicio = catalogoContext.unidadAcreditacionlst[0].Fecha_Inicial;
                         self.cve_fecha_fin = catalogoContext.unidadAcreditacionlst[0].Fecha_Final;
                         self.cve_status = catalogoContext.unidadAcreditacionlst[0].Status;
-                        self.cve_observacion = catalogoContext.unidadAcreditacionlst[0].Observacion;
-
+                        self.cve_observaciones = catalogoContext.unidadAcreditacionlst[0].Observaciones;
+                        $('#acreditadores').modal('hide');
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
                 }
                 $scope.$apply();
+                self.cve_carrera = catalogoContext.unidadAcreditacionlst[0].Carrera;
 
 
             });
@@ -195,27 +187,31 @@
             document.getElementById("lblstatus").className = "text-success";
             document.getElementById("cmbstatus").className = "form-control border border-success";
             document.getElementById("lblobservacion").className = "text-success";
-            document.getElementById("cmbobservacion").className = "form-control border border-success";
+            document.getElementById("txtobservacion").className = "form-control border border-success";
             self.cve_dependencia = "";
             self.cve_carrera = "";
             self.cve_organismo = "";
             self.cve_fecha_inicio = "";
             self.cve_fecha_fin = "";
             self.cve_status = "";
-            self.cve_observacion = "";
+            self.cve_observaciones = "";
         };
 
 
-
-        var UnidadUpdate = function () {
-            catalogoContext.AcreditadorUpdate(self.unidad[0].Id, self.unidad[0].Dependencia, self.unidad[0].Carrera, self.unidad[0].Organismo, self.unidad[0].Fecha_Inicial, self.unidad[0].Fecha_Final, self.unidad[0].Status, self.unidad[0].Observacion, function (resp) {
+   
+        var AcreditadorUpdate = function () {
+            catalogoContext.AcreditadorUpdate(self.cve_id,self.cve_dependencia, self.cve_carrera, self.cve_organismo, self.cve_fecha_inicio, self.cve_fecha_fin, self.cve_status, self.cve_observaciones, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        //  self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
+                       
                         alert("¡Se han actualizado los datos correctamente!");
+                        CargarGrid();
                         break;
                     case "notgp":
+                      
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -224,20 +220,25 @@
             });
         };
 
-        this.AcreditadorUpdate = function () { UnidadUpdate(); }
+        this.AcreditadorUpdate = function () { AcreditadorUpdate(); }
 
 
 
-        var UnidadCreate = function () {
+        var AcreditadorCreate = function () {
 
-            catalogoContext.AcreditadorCreate(self.cve_dependencia.Dependencia, self.cve_carrera.Carrera, self.cve_organismo.Organismo, self.cve_fecha_inicio.FechaInicial, self.cve_feha_fin.FechaFinal, self.cve_status.Status, self.cve_observacion.Observaciones, function (resp) {
+            catalogoContext.AcreditadorCreate(self.cve_dependencia, self.cve_carrera, self.cve_organismo, self.cve_fecha_inicio, self.cve_fecha_fin, self.cve_status, self.cve_observaciones, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        //  self.unidadUpdate = catalogoContext.unidadadUpdateRlst;
+                        
                         alert("¡Se ha creado la unidad correctamente!");
+                        CargarGrid();
+                        
                         break;
                     case "notgp":
+
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -246,7 +247,7 @@
             });
         };
 
-        this.AcreditadorCreate = function () { UnidadCreate(); }
+this.AcreditadorCreate = function () { AcreditadorCreate(); }
 
 
 
@@ -254,10 +255,13 @@
             catalogoContext.eliminarAcreditador(IdAcreditacion, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
+
                         console.log("Controller Eliminar ejecutado");
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         console.log("Error Controller");
                         break;
                     default:
@@ -271,17 +275,49 @@
             var opcion = confirm("¿Seguro que desea Eliminar el Registro?");
             if (opcion == true) {
                 AcreditadorDelete(Indice);
-                alert("¡Se ha elimnado con exito!");
+                alert("¡Se ha eliminado con exito!");
                 CargarGrid();
             } else {
                 alert("No se ha eliminado el registro");
             }
         };
 
-        this.ValorDependencia = function () {
-            alert(self.cve_dependencia);
+        this.DivError = function () {
+            document.getElementById("Error").style.display = "none";
+        };
+        this.DivErrorModal = function () {
+            document.getElementById("ErrorModal").style.display = "none";
         };
 
+        this.ValorDependencia = function () {
+            if (self.buscar == "00000" || self.buscar == null) {
+                self.buscar = '';
+            }
+        };
+
+
+        this.StatusFun = function () {
+            if (self.Status.Status == "Todos") {
+                self.Status.Status = '';
+            }
+        }
+
+        
+        this.reset = function (form) {
+            CargarGrid();
+            self.cve_dependencia = null;
+            self.cve_carrera = null;
+            self.cve_organismo = null;
+            self.cve_fecha_inicio = null;
+            self.cve_fecha_fin = null;
+            self.cve_status = null;
+            self.cve_observaciones = null;
+            
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }
+        };
 
 
 }]);

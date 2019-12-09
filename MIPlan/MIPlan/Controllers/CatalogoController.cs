@@ -162,7 +162,7 @@ namespace MIPlan.Controllers
             }
         }
 
-        public JsonResult ObtenerGridBasicos(string Dependencia)
+        public JsonResult ObtenerGridBasicos()
         {
             List<Basicos> list = new List<Basicos>();
             ResultadoBasicos objResultado = new ResultadoBasicos();
@@ -184,13 +184,13 @@ namespace MIPlan.Controllers
             }
         }
 
-        public JsonResult ObtenerGridAcreditaciones()
+        public JsonResult ObtenerGridAcreditaciones(string Dependencia)
         {
             List<Acreditaciones> list = new List<Acreditaciones>();
             ResultadoAcreditacion objResultado = new ResultadoAcreditacion();
             try
             {
-                list = CursorDataContext.ObtenerAcreditaciones();
+                list = CursorDataContext.ObtenerAcreditaciones(Dependencia);
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
                 objResultado.Resultado = list;
@@ -303,13 +303,13 @@ namespace MIPlan.Controllers
         }
 
 
-        public JsonResult ObtenerGridAreasAtencion()
+        public JsonResult ObtenerGridAreasAtencion(string Dependencia)
         {
             List<AreasAtencion> list = new List<AreasAtencion>();
             ResultadoAreasAtencion objResultado = new ResultadoAreasAtencion();
             try
             {                
-                list = CursorDataContext.ObtenerAreasAtencion();
+                list = CursorDataContext.ObtenerAreasAtencion(Dependencia);
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
                 objResultado.Resultado = list;                
@@ -324,14 +324,14 @@ namespace MIPlan.Controllers
             }
         }
 
-        public JsonResult ObtenerGridUnidadesResponsables()
+        public JsonResult ObtenerGridUnidadesResponsables(string Dependencia)
         {
             string Verificador = string.Empty;
 
             ResultadoUnidades objResp = new ResultadoUnidades();          
             try
             {
-                var List = CursorDataContext.ObtenerUnidadesResponsables();
+                var List = CursorDataContext.ObtenerUnidadesResponsables(Dependencia);
                 if (Verificador == "0")
                 {
                     objResp.Error = false;
@@ -358,13 +358,13 @@ namespace MIPlan.Controllers
 
         }
 
-        public JsonResult ObtenerGridPeriodos()
+        public JsonResult ObtenerGridPeriodos(string Dependencia)
         {
             List<Periodos> list = new List<Periodos>();
             ResultadoPeriodos objResultado = new ResultadoPeriodos();
             try
             {
-                list = CursorDataContext.ObtenerPeriodos();
+                list = CursorDataContext.ObtenerPeriodos(Dependencia);
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
                 objResultado.Resultado = list;
@@ -379,13 +379,13 @@ namespace MIPlan.Controllers
             }
         }
 
-        public JsonResult ObtenerUnidades()
-        {
+        public JsonResult ObtenerUnidades(string Dependencia)
+        {//parametro
             List<Unidades> list = new List<Unidades>();
             ResultadoUnidad objResultado = new ResultadoUnidad();
             try
             {
-                list = CursorDataContext.ObtenerUnidades();
+                list = CursorDataContext.ObtenerUnidades(Dependencia);
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
                 objResultado.Resultado = list;                

@@ -134,6 +134,7 @@
     <Compile Include="Controllers\AccesoController.cs" />
     <Compile Include="Controllers\CatalogoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PlanTrabajoController.cs" />
     <Compile Include="Data\CursorDataContext.cs" />
     <Compile Include="Data\DataContext.cs" />
     <Compile Include="Data\GuardarDataContext.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Models\Configuracion.cs" />
     <Compile Include="Models\Comun.cs" />
     <Compile Include="Models\Resultado.cs" />
+    <Compile Include="Models\Sesion.cs" />
     <Compile Include="Models\UnidadadesResponsables.cs" />
     <Compile Include="Models\Unidades.cs" />
     <Compile Include="Models\Periodos.cs" />
@@ -376,6 +378,7 @@
     <Content Include="Scripts\Controllers\AreasAtencionController.js" />
     <Content Include="Scripts\Controllers\CatController.js" />
     <Content Include="Scripts\Controllers\PeriodosController.js" />
+    <Content Include="Scripts\Controllers\PlanTrabajoController.js" />
     <Content Include="Scripts\Controllers\UnidadesResponsablesController.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -1234,6 +1237,7 @@
     <Content Include="Scripts\Models\AreasAtencionModel.js" />
     <Content Include="Scripts\Models\CatModel.js" />
     <Content Include="Scripts\Models\PeriodosModel.js" />
+    <Content Include="Scripts\Models\PlanTrabajoModel.js" />
     <Content Include="Scripts\Models\UnidadesResponsablesModel.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper-utils.js" />
@@ -1277,6 +1281,7 @@
     <Content Include="Views\Catalogo\AreasAtencion.cshtml" />
     <Content Include="Views\Catalogo\UnidadesResponsables.cshtml" />
     <Content Include="Views\Catalogo\Periodos.cshtml" />
+    <Content Include="Views\PlanTrabajo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

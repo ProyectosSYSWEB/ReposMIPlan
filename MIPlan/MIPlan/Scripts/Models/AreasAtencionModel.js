@@ -33,7 +33,7 @@
             });
     },
 
-    ObtenerAreasAtencion: function (Dependencia, callBackResult) {
+    ObtenerAreasAtencion: function (callBackResult) {
         var self = this;
         self.areaslst.length = 0;
         $.ajax(
@@ -41,7 +41,6 @@
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'Catalogo/ObtenerGridAreasAtencion',
-                data: { Dependencia },
                 success: function (resp) {
                     for (var i = 0; i < resp.Resultado.length; i++) {
                         self.areaslst.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependencia, Cve: resp.Resultado[i].Clave, Desc: resp.Resultado[i].Descripcion, Estatus: resp.Resultado[i].Status, Cat: resp.Resultado[i].Categoria });
@@ -80,7 +79,7 @@
                             callBackResult({ ressult: 'tgp', message: null });
                         }
                     } else {
-                        callBackResult({ ressult: "notgp", message: res })
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError })
                     }
                 },
                 error: function (ex) {
@@ -119,7 +118,7 @@
                 },
                 error: function (ex) {
                     if (callBackResult != undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerCarreas." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerCategorias." });
                     }
                 }
             });
@@ -139,18 +138,18 @@
                             callBackResult({ ressult: 'tgp', message: null });
                         }
                     } else {
-                        callBackResult({ ressult: "notgp", message: res })
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError })
                     }
                 },
                 error: function (ex) {
                     if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EliminarUnidadResponsable." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EliminarAreaAtencion." });
                     }
                 }
             });
     },
 
-   AreasAtencionUpdate: function (Id, Dependencia, Clave, Descripcion, Status, Categoria, callBackResult) {
+   AreasAtencionUpdate: function (id, dependencia, clave, descripcion, status, categoria, callBackResult) {
         var self = this;
        self.areasUplst.length = 0;
         $.ajax(
@@ -158,7 +157,7 @@
                 type: 'POST',
                 cache: false,
                 url: urlServer + 'Catalogo/EditarAreasAtencion',
-                data: { Id, Dependencia, Clave, Descripcion, Status, Categoria },
+                data: { id, dependencia, clave, descripcion, status, categoria },
                 success: function (resp) {
                     if (resp.Error == false) {
 
@@ -166,36 +165,36 @@
                             callBackResult({ ressult: 'tgp', message: null });
                         }
                     } else {
-                        callBackResult({ ressult: "notgp", message: res })
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError })
                     }
                 },
                 error: function (ex) {
                     if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EditarUnidadesResponsables." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EditarAreasAtencion." });
                     }
                 }
             });
     },
 
-    AreasAtencionCreate: function (Dependencia, Clave, Descripcion, Status, Categoria, callBackResult) {
+    AreasAtencionCreate: function (dependencia, clave, descripcion, status, categoria, callBackResult) {
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'Catalogo/GuardarAreasAtencion',
-                data: { Dependencia, Clave, Descripcion, Status, Categoria, },
+                data: { dependencia, clave, descripcion, status, categoria },
                 success: function (resp) {
                     if (resp.Error == false) {
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
                         }
                     } else {
-                        callBackResult({ ressult: "notgp", message: res })
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError })
                     }
                 },
                 error: function (ex) {
                     if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en GuardarUnidadesResponsables." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en GuardarAreasAtencion." });
                     }
                 }
             });

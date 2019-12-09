@@ -10,7 +10,9 @@
         this.Inicio = function () {
             CargarCombos();
             CargarGrid();         
-            self.unidad = null;
+            self.unidad = null;  
+            self.Clave = null;
+            self.EStatus = null;                     
         };
 
         var CargarCombos = function () {
@@ -27,6 +29,8 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -39,10 +43,13 @@
             catalogoContext.ObtenerUnidades( function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.unidades = catalogoContext.unidadesRlst;                        
+                        self.unidades = catalogoContext.unidadesRlst;  
+                        //$('#UnidadesResponsablesModal').modal('hide');
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -56,9 +63,14 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.unidad = catalogoContext.unidadadRlst;
+                        self.EStatus = self.unidad[0].Status;
+                        self.Clave = self.unidad[0].Clave;
+                        //$('#UnidadesResponsablesModal').modal('hide');
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -80,10 +92,10 @@
             document.getElementById("lblStatus").className = "text-primary";
             document.getElementById("cmbStatus").className = "form-control border  border-primary";
             document.getElementById("lblCoordinacion").className = "text-primary";
-            document.getElementById("inputCoordincacion").className = "form-control border border-primary";
+            document.getElementById("Radio").className = "radio-group form-control border border-primary text-center";  
             cargarModal(Indice);
         };
-        this.Color = function () {            
+        this.Color = function () {                 
             document.getElementById("title").className = "modal-header btn-success justify-content-center";
             document.getElementById("exampleModalLabel").innerHTML = "Crear Unidad Responsable";
             document.getElementById("btnModal").className = "btn btn-success";
@@ -96,14 +108,22 @@
             document.getElementById("lblStatus").className = "text-success";
             document.getElementById("cmbStatus").className = "form-control border  border-success";
             document.getElementById("lblCoordinacion").className = "text-success";
-            document.getElementById("inputCoordincacion").className = "form-control border border-success";          
+            document.getElementById("Radio").className = "radio-group form-control border border-success text-center";          
+
+            self.EStatus = "A";           
+            var iNumeroMayor = self.unidades[0].Clave;
+            for (var i = 0; i < self.unidades.length; i++) {
+                if (self.unidades[i].Clave > iNumeroMayor) {
+                    iNumeroMayor = self.unidades[i].Clave;                  
+                } 
+            }
+            self.Clave = parseInt(iNumeroMayor) + 1;
         };
 
 /********************************************************************************************************************************************************/
-        var UnidadUpdate = function () {            
-            
-            
-            catalogoContext.UnidadResponsableUpdate(self.unidad[0].Id, self.unidad[0].Dependencia, self.unidad[0].Clave, self.unidad[0].Descripcion, self.unidad[0].Status, self.unidad[0].Coordinador, function (resp) {
+        var UnidadUpdate = function () {                        
+            console.log(self.unidad[0].Coordinador);
+            catalogoContext.UnidadResponsableUpdate(self.unidad[0].Id, self.unidad[0].Dependencia, self.Clave, self.unidad[0].Descripcion, self.EStatus, self.unidad[0].Coordinador, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":                        
                         CargarGrid();
@@ -112,6 +132,8 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -120,22 +142,30 @@
             });
         };
 
-        this.UnidadResponsableUpdate = function () {                    
-            UnidadUpdate();             
+        this.UnidadResponsableUpdateCreate = function (ID) {     
+            if (ID && self.unidad != null) {
+                UnidadUpdate();
+            } else if (self.unidad != null && self.unidad[0].Dependencia != null && self.Clave != null && self.unidad[0].Descripcion != null && self.EStatus != null && self.unidad[0].Coordinador != null) {
+                UnidadCreate();
+            } else {
+                document.getElementById("ErrorModal").style.display = "block";
+                document.getElementById("MessageModal").innerHTML = "¡Favor de llenar todos los campos!";
+            }                 
         }
 
 /********************************************************************************************************************************************************/
-        var UnidadCreate = function () {
-            
-            catalogoContext.UnidadResponsableCreate(self.unidad[0].Dependencia, self.unidad[0].Clave, self.unidad[0].Descripcion, self.unidad[0].Status, self.unidad[0].Coordinador, function (resp) {
+        var UnidadCreate = function () {           
+            catalogoContext.UnidadResponsableCreate(self.unidad[0].Dependencia, self.Clave, self.unidad[0].Descripcion, self.EStatus, self.unidad[0].Coordinador, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":           
                         CargarGrid();
-                        self.unidad = null;
+                        self.unidad = null;                       
                         alert("¡Se ha creado la unidad correctamente!");
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";   
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -143,9 +173,7 @@
                 $scope.$apply();
             });
         };       
-        this.UnidadResponsableCreate = function () {
-            UnidadCreate();
-        }
+        this.UnidadResponsableCreate = function () { UnidadCreate(); }
 
 /********************************************************************************************************************************************************/            
         var eliminarUnidadResponsable = function (Idunidad) {
@@ -154,7 +182,9 @@
                     case "tgp":                                                                        
                         break;
                     case "notgp":
-                        self.mensaje_gral = resp.message;                        
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;                   
                         break;
                     default:
                         break;
@@ -173,9 +203,16 @@
                 alert("No se ha eliminado el registro");
             }
         };
-/*******************************************************************************************************************************************************/
+    /*******************************************************************************************************************************************************/
+        this.DivError = function () {
+            document.getElementById("Error").style.display = "none";           
+        };
+        this.DivErrorModal = function () {
+            document.getElementById("ErrorModal").style.display = "none";
+        };
+        
         this.ValorDependencia = function () {
-            if (self.buscar == "00000") {
+            if (self.buscar == "00000" || self.buscar == null) {
                 self.buscar = '';
             }
         };
@@ -184,6 +221,20 @@
                 self.Status.Status = '';
             }
         }
+
+
+        this.reset = function (form) {   
+            $('#UnidadesResponsablesModal').modal('hide');               
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();                
+            }     
+            CargarGrid();       
+            self.unidad = null;
+            self.Clave = null;
+            self.EStatus = null; 
+        };
+        
 /*******************************************************************************************************************************************************/
       
     }]);
