@@ -152,7 +152,38 @@ namespace MIPlan.Data
         }
 
 
+        public static List<Comun> VerificaUsuario(Comun objDatosSesion, ref string Verificador)
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();            
+            List<Comun> list = new List<Comun>();
 
+            try
+            {
+
+                OracleDataReader dr = null;
+                string[] Parametros = { "P_USUARIO", "P_PASSWORD"};
+                object[] Valores = { objDatosSesion.Usuario, objDatosSesion.Contrasena};
+                string[] ParametrosOut = {"P_VALIDADO", "P_NOMBRE", "P_CORREO", "P_BANDERA" };
+                cmd = exeProc.GenerarOracleCommand_Exe("VERIFICA_USUARIO", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+                if (Verificador == "0")
+                {                   
+                    objDatosSesion.Usuario = Convert.ToString(cmd.Parameters["P_NOMBRE"].Value);
+                    objDatosSesion.Correo = Convert.ToString(cmd.Parameters["P_CORREO"].Value);
+                    list.Add(objDatosSesion);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+            return list;
+        }
 
 
 
