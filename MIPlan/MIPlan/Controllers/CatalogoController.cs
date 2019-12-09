@@ -168,7 +168,7 @@ namespace MIPlan.Controllers
             ResultadoBasicos objResultado = new ResultadoBasicos();
             try
             {
-                list = CursorDataContext.ObtenerBasicos();
+                list = CursorDataContext.ObtenerBasicos(Dependencia);
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
                 objResultado.Resultado = list;
@@ -184,13 +184,13 @@ namespace MIPlan.Controllers
             }
         }
 
-        public JsonResult ObtenerGridAcreditaciones()
+        public JsonResult ObtenerGridAcreditaciones(string Dependencia)
         {
             List<Acreditaciones> list = new List<Acreditaciones>();
             ResultadoAcreditacion objResultado = new ResultadoAcreditacion();
             try
             {
-                list = CursorDataContext.ObtenerAcreditaciones();
+                list = CursorDataContext.ObtenerAcreditaciones(Dependencia);
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
                 objResultado.Resultado = list;
@@ -303,13 +303,13 @@ namespace MIPlan.Controllers
         }
 
 
-        public JsonResult ObtenerGridAreasAtencion()
+        public JsonResult ObtenerGridAreasAtencion(string Dependencia)
         {
             List<AreasAtencion> list = new List<AreasAtencion>();
             ResultadoAreasAtencion objResultado = new ResultadoAreasAtencion();
             try
             {                
-                list = CursorDataContext.ObtenerAreasAtencion();
+                list = CursorDataContext.ObtenerAreasAtencion(Dependencia);
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
                 objResultado.Resultado = list;                
@@ -358,13 +358,13 @@ namespace MIPlan.Controllers
 
         }
 
-        public JsonResult ObtenerGridPeriodos()
+        public JsonResult ObtenerGridPeriodos(string Dependencia)
         {
             List<Periodos> list = new List<Periodos>();
             ResultadoPeriodos objResultado = new ResultadoPeriodos();
             try
             {
-                list = CursorDataContext.ObtenerPeriodos();
+                list = CursorDataContext.ObtenerPeriodos(Dependencia);
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
                 objResultado.Resultado = list;
@@ -379,13 +379,13 @@ namespace MIPlan.Controllers
             }
         }
 
-        public JsonResult ObtenerUnidades()
+        public JsonResult ObtenerUnidades(string Dependencia)
         {
             List<Unidades> list = new List<Unidades>();
             ResultadoUnidad objResultado = new ResultadoUnidad();
             try
             {
-                list = CursorDataContext.ObtenerUnidades();
+                list = CursorDataContext.ObtenerUnidades(Dependencia);
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
                 objResultado.Resultado = list;                
