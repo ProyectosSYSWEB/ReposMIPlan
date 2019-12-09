@@ -380,7 +380,7 @@ namespace MIPlan.Controllers
         }
 
         public JsonResult ObtenerUnidades(string Dependencia)
-        {
+        {//parametro
             List<Unidades> list = new List<Unidades>();
             ResultadoUnidad objResultado = new ResultadoUnidad();
             try
