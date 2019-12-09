@@ -162,13 +162,13 @@ namespace MIPlan.Controllers
             }
         }
 
-        public JsonResult ObtenerGridBasicos(string Dependencia)
+        public JsonResult ObtenerGridBasicos()
         {
             List<Basicos> list = new List<Basicos>();
             ResultadoBasicos objResultado = new ResultadoBasicos();
             try
             {
-                list = CursorDataContext.ObtenerBasicos(Dependencia);
+                list = CursorDataContext.ObtenerBasicos();
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
                 objResultado.Resultado = list;

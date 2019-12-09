@@ -40,17 +40,15 @@ namespace MIPlan.Data
             }
 
         }
-        public static List<Basicos> ObtenerBasicos(string Dependencia)
+        public static List<Basicos> ObtenerBasicos()
         {
             OracleCommand cmd = null;
             ExeProcedimiento exeProc = new ExeProcedimiento();
 
             try
-            {
-                string[] Parametros = { "P_Dependencia" };
-                object[] Valores = { Dependencia };
+            {                
                 OracleDataReader dr = null;
-                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Basicos", ref dr, Parametros, Valores);
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Basicos", ref dr);
                 List<Basicos> listarBasicos = new List<Basicos>();
                 while (dr.Read())
                 {
