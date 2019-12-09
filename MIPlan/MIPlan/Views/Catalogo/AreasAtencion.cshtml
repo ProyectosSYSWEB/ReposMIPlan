@@ -153,8 +153,8 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
-                                        <button type="button" id="btnNuevo"  class="btn btn-success" data-dismiss="modal" ng-click="ctrl.AreasAtencionCreate(ctrl.cve_id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
-                                        <button type="button" id="btnActualizar" class="btn btn-primary" data-dismiss="modal" ng-click="ctrl.AreasAtencionUpdate(ctrl.cve_id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
+                                        <button type="button" id="btnNuevo"  class="btn btn-success" ng-click="ctrl.AreasAtencionCreate(ctrl.cve_id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
+                                        <button type="button" id="btnActualizar" class="btn btn-primary" ng-click="ctrl.AreasAtencionUpdate(ctrl.cve_id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
                                     </div>
                                 </form>
                             </div>
@@ -220,7 +220,7 @@
                         <td>{{i.Estatus}}</td>
                         <td>{{i.Cat}}</td>
 
-                        <td style="text-align:center">
+                        <td style="text-align:right">
                             <button type="button" id="Actualizar" title="Editar" class="btn btn-primary btn-create" style="width:50px" data-toggle="modal" data-target="#areasatencion" data-backdrop="static" data-keyboard="false" data-html="true" ng-click="ctrl.ObtDatos(i.Id)">
 
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -236,7 +236,7 @@
                     <tr>
                         <th colspan="4"><ng-pagination-control pagination-id="ctrl.areasatencion" color="white" height="35px"></ng-pagination-control></th>
                         <th></th>
-                        <th style="text-align:center" colspan="1">
+                        <th style="text-align:right" colspan="2">
                             <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
                                 <i class="fa fa-file-excel-o" aria-hidden="true"></i>
                             </button>
