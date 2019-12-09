@@ -10,7 +10,6 @@
 
         this.Inicio = function () {
             CargarCombos();
-            CargarGrid();
             ObtenerCategorias();
         };
 
@@ -62,7 +61,7 @@
         };
 
         var CargarGrid = function () {
-            catalogoContext.ObtenerAreasAtencion(function (resp) {
+            catalogoContext.ObtenerAreasAtencion(Dependencia, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         self.areasatencion = catalogoContext.areaslst;
@@ -78,6 +77,10 @@
                 $scope.$apply();
             });
         };
+
+        //this.Mostrargrid = function () {
+        //    ObtenerAreasAtencion();
+        //}
 
 
         this.ObtDatos = function (IdAreaAtencion) {
