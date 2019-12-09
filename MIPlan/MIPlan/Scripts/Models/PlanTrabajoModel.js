@@ -3,6 +3,8 @@ var catalogoContext =
 {
     dependenciaslst: [],
     ListaUnidadResponsableLST: [], 
+    ListaEjerciciosLST: [],
+    ListaPlanesLST:[],
 /********************************************************************************************************************************************************/
     ObtenerDependencias: function (callBackResult) {
         var self = this;
@@ -66,19 +68,19 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-    ListaUnidadResponsable: function (callBackResult) {
+    ListaEjercicios: function (callBackResult) {
         var self = this;
-        self.ListaUnidadResponsableLST.length = 0;
+        self.ListaEjerciciosLST.length = 0;
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
-                url: urlServer + 'PlanTrabajo/ListaUnidadResponsable',
+                url: urlServer + 'PlanTrabajo/ListaEjercicios',
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
-                            self.ListaUnidadResponsableLST.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion });
-                        }
+                            self.ListaEjerciciosLST.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion });
+                        }3
 
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
@@ -89,14 +91,42 @@ var catalogoContext =
                 },
                 error: function (ex) {
                     if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ListaUnidadResponsable." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ListaEjercicios." });
                     }
                 }
             });
 
     },
 /********************************************************************************************************************************************************/
-   
+    ListaPlanes: function (callBackResult) {
+        var self = this;
+        self.ListaPlanesLST.length = 0;
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'PlanTrabajo/ListaPlanes',
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        for (var i = 0; i < resp.Resultado.length; i++) {
+                            self.ListaPlanesLST.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion });
+                        } 3
+
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ListaEjercicios." });
+                    }
+                }
+            });
+
+    },
 /********************************************************************************************************************************************************/
 
 /********************************************************************************************************************************************************/

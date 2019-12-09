@@ -150,7 +150,6 @@
                     case "tgp":
                         self.cve_dependencia = catalogoContext.unidadAcreditacionlst[0].Dependencia;
                         ObtenerCarreras();
-                        self.cve_carrera = catalogoContext.unidadAcreditacionlst[0].Carrera;
                         self.cve_organismo = catalogoContext.unidadAcreditacionlst[0].Organismo;
                         self.cve_fecha_inicio = catalogoContext.unidadAcreditacionlst[0].Fecha_Inicial;
                         self.cve_fecha_fin = catalogoContext.unidadAcreditacionlst[0].Fecha_Final;
@@ -167,6 +166,7 @@
                         break;
                 }
                 $scope.$apply();
+                self.cve_carrera = catalogoContext.unidadAcreditacionlst[0].Carrera;
 
 
             });
@@ -304,15 +304,11 @@ this.AcreditadorCreate = function () { AcreditadorCreate(); }
             document.getElementById("ErrorModal").style.display = "none";
         };
 
-
         this.ValorDependencia = function () {
-            this.ValorDependencia = function () {
-                if (self.buscar == "00000" || sef.buscar == null) {
-                    self.buscar = '';
-                }
-            };
+            if (self.buscar == "00000" || self.buscar == null) {
+                self.buscar = '';
+            }
         };
-
 
 
         this.StatusFun = function () {
