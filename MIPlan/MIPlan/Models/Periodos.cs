@@ -15,8 +15,6 @@ namespace MIPlan.Models
         public string Ejercicio { get; set; }
         public string Inicio { get; set; }
         public string Fin { get; set; }
-        public string DescripcionDependencia { get; set; }
-
     }
 
     public class ResultadoPeriodos

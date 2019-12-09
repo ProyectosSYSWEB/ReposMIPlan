@@ -96,8 +96,8 @@ namespace MIPlan.Controllers
             string Verificador = string.Empty;
             try
             {                
-                objComun.Usuario = usuario.ToUpper();
-                objComun.Contrasena = contrasena.ToUpper();
+                objComun.Usuario = usuario;
+                objComun.Contrasena = contrasena;
                 objComun.Ejercicio = ejercicio;
                 list = DataContext.VerificaUsuario(objComun, ref Verificador);                                
                 if(Verificador == "0")

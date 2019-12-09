@@ -108,9 +108,8 @@ namespace MIPlan.Data
                     objAcreditaciones.FechaInicial = Convert.ToString(dr[4]);
                     objAcreditaciones.FechaFinal = Convert.ToString(dr[5]);
                     objAcreditaciones.Status = Convert.ToString(dr[6]);
-                    objAcreditaciones.Observaciones = Convert.ToString(dr[7]);
-                    objAcreditaciones.DescripcionDependencia = Convert.ToString(dr[8]);
-                    objAcreditaciones.DescripcionCarrea = Convert.ToString(dr[9]);
+                    objAcreditaciones.Observaciones = Convert.ToString(dr[6]);
+
                     listarAcreditaciones.Add(objAcreditaciones);
                 }
                 return listarAcreditaciones;
@@ -147,8 +146,6 @@ namespace MIPlan.Data
                     objAreasAtencion.Clave = Convert.ToString(dr[2]);
                     objAreasAtencion.Descripcion = Convert.ToString(dr[3]);
                     objAreasAtencion.Status = Convert.ToString(dr[4]);
-                    objAreasAtencion.Categoria = Convert.ToString(dr[5]);
-                    objAreasAtencion.DescripcionDependencia = Convert.ToString(dr[6]);
 
                     listarAreasAtencion.Add(objAreasAtencion);
                 }
@@ -184,7 +181,6 @@ namespace MIPlan.Data
                     objUnidades.Clave = Convert.ToString(dr[2]);
                     objUnidades.Descripcion = Convert.ToString(dr[3]);
                     objUnidades.Status = Convert.ToString(dr[4]);
-                    objUnidades.DescripcionDependencia = Convert.ToString(dr[5]);
 
                     listarUnidades.Add(objUnidades);
                 }
@@ -389,7 +385,6 @@ namespace MIPlan.Data
                     objPeriodos.Ejercicio = Convert.ToString(dr[5]);
                     objPeriodos.Inicio = Convert.ToString(dr[6]);
                     objPeriodos.Fin = Convert.ToString(dr[7]);
-                    objPeriodos.DescripcionDependencia = Convert.ToString(dr[8]);
                     listarPeriodos.Add(objPeriodos);
                 }
                 return listarPeriodos;

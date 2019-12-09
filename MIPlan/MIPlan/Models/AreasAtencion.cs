@@ -13,8 +13,6 @@ namespace MIPlan.Models
         public string Descripcion { get; set; }
         public string Status { get; set; }
         public string Categoria { get; set; }
-        public string DescripcionDependencia { get; set; }
-
     }
 
     public class ResultadoAreasAtencion

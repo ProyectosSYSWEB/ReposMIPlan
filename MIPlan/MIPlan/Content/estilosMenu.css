@@ -1,7 +1,6 @@
 ﻿@media only screen and (max-width: 991px) {
     .imgUnach {
-        position:absolute;
-        display: none;        
+        display: none
     }
 }
 
@@ -10,13 +9,12 @@
         position: absolute;
         background-color: #003d5f;
         left: 0%;
-        height: 25px;
+        height: 70px;
 
     }
 
     .ubicacion {
         position: absolute;
-        height:0%;
         left: 0%;
     }
     .ubicacion2 {
