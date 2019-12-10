@@ -38,28 +38,25 @@
             </button>
 
             <div class="collapse navbar-collapse barraMenu container-fluid" id="navbarSupportedContent">
-                <div class="row">
+                <form class="form-inline my-2 my-lg-0 ubicacion">
                     <ul class="navbar-nav mr-auto ubicacion">
                         <li class=" dropdown text-white">
-                            <a href="#" class="dropdown-toggle " style="color:white" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Catálogos <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle " style="color:white;font-family:Arial" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Catálogos <span class="caret"></span></a>
                             <ul class="dropdown-menu" style="background-color: #9dbcce">
                                 <li class="nav-item">
-                                    <span style="color:black" class="nav-link fa fa-book"> <a style="color:white" href="~/Catalogo/AreasAtencion"> Areas de Atención</a></span>
+                                    <span style="color:black" class="nav-link fa fa-book"> <a style="color:white; font-family:Arial" href="~/Catalogo/AreasAtencion"> Areas de Atención</a></span>
                                 </li>
                                 <li class="nav-item">
-                                    <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white" href="~/Catalogo/Acreditadores"> Acreditadores</a></span>
+                                    <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white;font-family:Arial" href="~/Catalogo/Acreditadores"> Acreditadores</a></span>
                                 </li>
                                 <li class="nav-item">
-                                    <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white" href="~/Catalogo/UnidadesResponsables"> Unidades Responsables</a></span>
+                                    <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white;font-family:Arial" href="~/Catalogo/UnidadesResponsables"> Unidades Responsables</a></span>
                                 </li>
                                 <li class="nav-item">
-                                    <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white" href="~/Catalogo/UnidadesResponsables"> Unidades Responsables</a></span>
+                                    <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white;font-family:Arial" href="~/Catalogo/Periodos"> Periodos</a></span>
                                 </li>
                                 <li class="nav-item">
-                                    <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white" href="~/Catalogo/Periodos"> Periodos</a></span>
-                                </li>
-                                <li class="nav-item">
-                                    <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white" href="~/PlanTrabajo"> Plan de Trabajo</a></span>
+                                    <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white;font-family:Arial" href="~/PlanTrabajo"> Plan de Trabajo</a></span>
                                 </li>
                             </ul>
 
@@ -87,12 +84,13 @@
                                 <span style="color:white" class="nav-link fa fa-times"> <a style="color:white" href=""> Salir</a></span>
                             </li>*@
                     </ul>
-                </div>
+                </form>
+
                 <form class="form-inline my-2 my-lg-0 ubicacion2">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">
-                                <span strong style="color:white" class="fa fa-user"><strong style="color:white"> Usuario</strong></span>
+                                <span strong style="color:white" class="fa fa-user"><strong style="color:white;font-family:Arial"> Usuario</strong></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" style="color:black" href="#">Usuario</a>
@@ -105,10 +103,12 @@
         </div>
     </nav>
 
-    <div class="body-content container-fluid">
+    <div class="body-content container-fluid" style="position:relative">
         @RenderBody()
-        <img class="fixed-bottom" src="~/Imagenes/MiPlan pie.png" />
-    </div>
+        <div class="piePagina">
+            <img style="width:100%" src="~/Imagenes/MiPlan pie.png" />
+        </div>
+    </div>   
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

@@ -9,7 +9,7 @@
         position: absolute;
         background-color: #003d5f;
         left: 0%;
-        height: 70px;
+        height: 20px;
 
     }
 
@@ -24,5 +24,13 @@
 
     .estiloLetras {
         font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    }
+
+    .piePagina {
+        position: absolute;
+        left: 0px;
+        bottom: -160px;
+        width: auto;
+        height: auto;
     }
 }
