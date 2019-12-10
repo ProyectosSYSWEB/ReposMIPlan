@@ -35,8 +35,7 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.dependencias = catalogoContext.dependenciaslst;
-                        //self.cve_dependencia = catalogoContext.dependenciaslst[0].Id;
-                        break;
+                       break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
@@ -54,8 +53,7 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.carrera = catalogoContext.carreralst;
-                        //self.cve_dependencia = catalogoContext.dependenciaslst[0].Id;
-                        break;
+                      break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         
@@ -72,8 +70,7 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.organismo = catalogoContext.organismolst;
-                        //self.cve_dependencia = catalogoContext.dependenciaslst[0].Id;
-                        break;
+                    break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         
@@ -91,7 +88,6 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.status = catalogoContext.statuslst;
-                        //self.cve_dependencia = catalogoContext.dependenciaslst[0].Id;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -150,7 +146,6 @@
                     case "tgp":
                         self.cve_dependencia = catalogoContext.unidadAcreditacionlst[0].Dependencia;
                         ObtenerCarreras();
-                        self.cve_carrera = catalogoContext.unidadAcreditacionlst[0].Carrera;
                         self.cve_organismo = catalogoContext.unidadAcreditacionlst[0].Organismo;
                         self.cve_fecha_inicio = catalogoContext.unidadAcreditacionlst[0].Fecha_Inicial;
                         self.cve_fecha_fin = catalogoContext.unidadAcreditacionlst[0].Fecha_Final;
@@ -167,6 +162,7 @@
                         break;
                 }
                 $scope.$apply();
+                self.cve_carrera = catalogoContext.unidadAcreditacionlst[0].Carrera;
 
 
             });
@@ -202,18 +198,7 @@
         };
 
 
-    //    self.cve_status = "A";
-    //    var iNumeroMayor = self.acreditadores[0].Cve;
-    //    for (var i = 0; i < self.acreditadores.length; i++) {
-    //        if (self.acreditadores[i].Cve > iNumeroMayor) {
-    //            iNumeroMayor = self.acreditadores[i].cve;
-    //        }
-    //    }
-    //    self.cve_clave = parseInt(iNumeroMayor) + 1;
-    //};
-
-
-
+   
         var AcreditadorUpdate = function () {
             catalogoContext.AcreditadorUpdate(self.cve_id,self.cve_dependencia, self.cve_carrera, self.cve_organismo, self.cve_fecha_inicio, self.cve_fecha_fin, self.cve_status, self.cve_observaciones, function (resp) {
                 switch (resp.ressult) {
@@ -304,15 +289,11 @@ this.AcreditadorCreate = function () { AcreditadorCreate(); }
             document.getElementById("ErrorModal").style.display = "none";
         };
 
-
         this.ValorDependencia = function () {
-            this.ValorDependencia = function () {
-                if (self.buscar == "00000" || sef.buscar == null) {
-                    self.buscar = '';
-                }
-            };
+            if (self.buscar == "00000" || self.buscar == null) {
+                self.buscar = '';
+            }
         };
-
 
 
         this.StatusFun = function () {

@@ -62,7 +62,7 @@
         };
 
         var CargarGrid = function () {
-            catalogoContext.ObtenerAreasAtencion(self.cve_dependencia, function (resp) {
+            catalogoContext.ObtenerAreasAtencion(function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         self.areasatencion = catalogoContext.areaslst;
@@ -139,14 +139,14 @@
             self.cve_status = "";
             self.cve_cat = "";
 
-            self.cve_status = "A";
+            self.cve_status = "A";           
             var iNumeroMayor = self.areasatencion[0].Cve;
             for (var i = 0; i < self.areasatencion.length; i++) {
                 if (self.areasatencion[i].Cve > iNumeroMayor) {
-                    iNumeroMayor = self.areasatencion[i].Cve;
-                }
+                    iNumeroMayor = self.areasatencion[i].Cve;                  
+                } 
             }
-            self.cve_clave = parseInt(iNumeroMayor) ;
+            self.cve_clave = parseInt(iNumeroMayor) + 1;
         };
 
         var eliminarAreaAtencion = function (IdArea) {
@@ -242,7 +242,7 @@
         };
 
         this.ValorDependencia = function () {
-                if (self.buscar == "00000") {
+                if (self.buscar == "00000" || self.buscar == null) {
                     self.buscar = '';
                 }
         };
@@ -254,16 +254,17 @@
         }
 
         this.reset = function (form) {
+            $('#areasatencion').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }
             CargarGrid();
             self.cve_dependencia = null;
             self.cve_clave = null;
             self.cve_desc = null;
             self.cve_status = null;
             self.cve_cat = null;
-            if (form) {
-                form.$setPristine();
-                form.$setUntouched();
-            }
         };
 
         this.BorrarBasico = function (Indice) {

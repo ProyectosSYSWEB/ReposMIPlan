@@ -46,7 +46,7 @@ namespace MIPlan.Data
             ExeProcedimiento exeProc = new ExeProcedimiento();
 
             try
-            {
+            {                
                 OracleDataReader dr = null;
                 cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Basicos", ref dr);
                 List<Basicos> listarBasicos = new List<Basicos>();
@@ -84,15 +84,17 @@ namespace MIPlan.Data
             var Lista = ExeProcedimiento.GenerarOracleCommandCursor_Combo("PKG_PLANEACION.Obt_Combo_Dependencia", Parametros, Valores);
             return Lista;
         }
-        public static List<Acreditaciones> ObtenerAcreditaciones()
+        public static List<Acreditaciones> ObtenerAcreditaciones(string Dependencia)
         {
             OracleCommand cmd = null;
             ExeProcedimiento exeProc = new ExeProcedimiento();
 
             try
             {
+                string[] Parametros = { "P_Dependencia" };
+                object[] Valores = { Dependencia };
                 OracleDataReader dr = null;
-                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Acreditaciones", ref dr);
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Acreditaciones", ref dr, Parametros, Valores);
                 List<Acreditaciones> listarAcreditaciones = new List<Acreditaciones>();
                 while (dr.Read())
                 {
@@ -122,15 +124,17 @@ namespace MIPlan.Data
             }
 
         }
-        public static List<AreasAtencion> ObtenerAreasAtencion()
+        public static List<AreasAtencion> ObtenerAreasAtencion(string Dependencia)
         {
             OracleCommand cmd = null;
             ExeProcedimiento exeProc = new ExeProcedimiento();
 
             try
             {
+                string[] Parametros = { "P_Dependencia" };
+                object[] Valores = { Dependencia };
                 OracleDataReader dr = null;
-                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_AreasAtencion", ref dr);
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_AreasAtencion", ref dr, Parametros, Valores);
                 List<AreasAtencion> listarAreasAtencion = new List<AreasAtencion>();
                 while (dr.Read())
                 {
@@ -157,7 +161,7 @@ namespace MIPlan.Data
             }
 
         }
-        public static List<Unidades> ObtenerUnidades()
+        public static List<Unidades> ObtenerUnidades(string Dependencia)
         {
             //s
             OracleCommand cmd = null;
@@ -165,8 +169,10 @@ namespace MIPlan.Data
 
             try
             {
+                string[] Parametros = { "P_Dependencia" };
+                object[] Valores = { Dependencia };
                 OracleDataReader dr = null;
-                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Unidades", ref dr);
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Unidades", ref dr, Parametros, Valores);
                 List<Unidades> listarUnidades = new List<Unidades>();
                 while (dr.Read())
                 {
@@ -354,7 +360,7 @@ namespace MIPlan.Data
             }
 
         }
-        public static List<Periodos> ObtenerPeriodos()
+        public static List<Periodos> ObtenerPeriodos(string Dependencia)
         {
             //
             OracleCommand cmd = null;
@@ -362,8 +368,10 @@ namespace MIPlan.Data
 
             try
             {
+                string[] Parametros = { "P_Dependencia" };
+                object[] Valores = { Dependencia };
                 OracleDataReader dr = null;
-                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Periodos", ref dr);
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Periodos", ref dr,Parametros, Valores);
                 List<Periodos> listarPeriodos = new List<Periodos>();
                 while (dr.Read())
                 {

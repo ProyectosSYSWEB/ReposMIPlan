@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MIPlan.Data;
+using MIPlan.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -83,6 +85,44 @@ namespace MIPlan.Controllers
             catch
             {
                 return View();
+            }
+        }
+
+        public JsonResult IniciarSesion (string usuario, string contrasena, string ejercicio)
+        {
+            Comun objComun = new Comun();
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            string Verificador = string.Empty;
+            try
+            {                
+                objComun.Usuario = usuario;
+                objComun.Contrasena = contrasena;
+                objComun.Ejercicio = ejercicio;
+                list = DataContext.VerificaUsuario(objComun, ref Verificador);                                
+                if(Verificador == "0")
+                {
+                    System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"] = list;
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = list;
+                    return Json(objResultado, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                    return Json(objResultado, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            catch(Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
     }
