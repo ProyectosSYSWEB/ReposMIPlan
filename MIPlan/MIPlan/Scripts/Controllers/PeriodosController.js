@@ -221,13 +221,24 @@
             }
         }
 
+        this.close = function (form) {
+            $('#ModalPeriodo').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+                CargarGrid();
+            }
+            self.unidad = null;
+            self.Clave = null;
+            self.EStatus = null;
+        };
+
         this.reset = function (form) {
             $('#ModalPeriodo').modal('hide');           
             if (form) {
                 form.$setPristine();
                 form.$setUntouched();
-            }
-            CargarGrid();
+            }        
             self.periodo = null;
             self.EStatus = null;
         };

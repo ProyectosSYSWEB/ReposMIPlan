@@ -19,7 +19,7 @@
                 <form name="modalForm" novalidate>
                     <div id="title" class="">
                         <h5 class="modal-title" id="exampleModalLabel"></h5>
-                        <button type="button" class="close btn-danger" data-dismiss="modal" ng-click="ctrl.reset(modalForm)" aria-label="Close">
+                        <button type="button" class="close btn-danger" data-dismiss="modal" ng-click="ctrl.close(modalForm)" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -128,7 +128,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn btn-danger" ng-click="ctrl.reset(modalForm)" >Salir</button>
+                        <button type="button" class="btn btn btn-danger" ng-click="ctrl.close(modalForm)"  >Salir</button>
                         <button type="button" id="btnModal" class="btn" ng-click="ctrl.periodoUpdate(ctrl.periodo[0].Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
                     </div>
                 </form>

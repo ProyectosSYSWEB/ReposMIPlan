@@ -58,7 +58,7 @@
 
 var getPaginas = function (datos, size) {
     var pag = 0;
-    if (datos !== undefined) { pag = Math.ceil(datos.length / size); }
+    if (datos !== undefined) { pag = Math.ceil(datos.length / size);}
     return pag;
 };
 
@@ -71,12 +71,13 @@ var getVarname = function (RepeatValue) {
 };
 
 // DIRECTIVA PARA PAGINAR
-application.directive('ngPagination', function ($compile, $parse, $paginationRegister) {
+application.directive('ngPagination', ['$compile', '$parse', '$paginationRegister',  function ($compile, $parse, $paginationRegister) {
+
 
     return {
         terminal: true, // NOS SIRVE POR SI TENEMOS OTRA DIRECTIVA DENTRO DEL  NG-REPEAT
         multiElement: true,
-        priority: 20,
+        priority: 100,
         restrict: 'A', // RESTRINGIDO SOLO A ATTRIBUTO
         scope: false, // NOS DICE QUE EL SCOPE ES EL MISMO DEL CONTROLADOR
 
@@ -109,20 +110,28 @@ application.directive('ngPagination', function ($compile, $parse, $paginationReg
                 // EVENTO WATCH PARA CUANDO CAMBIA LA VARIABLE DE LOS DATOS
                 scope.$watch(dataNotation, function () {
                     var data = $parse(dataNotation)(scope);
-                    var paginas = getPaginas(data, $parse(registro.getSizeNotation())(scope));
-                    $parse(registro.getPagesNotation()).assign(scope, Number(paginas));
-                    $parse(registro.getDataLengthNotation()).assign(scope, (data || []).length);
+                    if (data === !undefined) {
+                        console.log('Mensaje: No hay datos');
+                    } else {
+                        var paginas = Number(getPaginas(data, $parse(registro.getSizeNotation())(scope)));
+                        if (paginas > 0) {
+                            $parse(registro.getPagesNotation()).assign(scope, paginas);
+                        } else {
+                            $parse(registro.getPagesNotation()).assign(scope, 1);
+                        }
+                        $parse(registro.getDataLengthNotation()).assign(scope, (data || []).length);
+                    }
                 });
 
                 $compile(element)(scope);
             };
         }
     };
-});
+}]);
 
 
 // DIRECTIVA PARA LOS CONTROLES DE PAGINACION
-application.directive('ngPaginationControl', function ($compile, $parse, $paginationRegister) {
+application.directive('ngPaginationControl', ['$compile', '$parse', '$paginationRegister', function ($compile, $parse, $paginationRegister) {
     // VARIABLES PARA CREAR ESTILO
     var fondo = '#03A9F4';
     var fondoHover = '#286090';
@@ -236,7 +245,7 @@ application.directive('ngPaginationControl', function ($compile, $parse, $pagina
             };
         }
     };
-});
+}]);
 
 
 // METODO PARA FILTRAR DATOS DE UN JSON
@@ -296,14 +305,14 @@ application.directive('ngPaginationSearch', function ($compile, $parse, $paginat
                     var filtro = $parse(modelo)(scope);
                     // AL MOMENTO DE BUSQUEDA MANDAR EL CURRENT PAGE A 0 PARA QUE SE VAYA A LA PRIMERA PAGINA
                     $parse(registro.getCurrentNotation()).assign(scope, 0);
-                    if (filtro === undefined || filtro === '') {
+                    if (filtro === undefined) {
                         paginas = getPaginas($parse(dataNotation)(scope), $parse(registro.getSizeNotation())(scope));
                         $parse(registro.getDataLengthNotation()).assign(scope, ($parse(dataNotation)(scope))|| []).length; //.length
                         $parse(registro.getPagesNotation()).assign(scope, Number(paginas));
                     } else {
                         var resultados = filtrar($parse(dataNotation)(scope), filtro);
                         paginas = getPaginas(resultados, $parse(registro.getSizeNotation())(scope));
-                        $parse(registro.getDataLengthNotation()).assign(scope, resultados.length);
+                        $parse(registro.getDataLengthNotation()).assign(scope, (resultados || []).length);
                         $parse(registro.getPagesNotation()).assign(scope, Number(paginas));
                     }
                 });
