@@ -12,7 +12,7 @@
 
         this.Inicio = function () {
             CargarCombos();
-            CargarGrid();
+            //CargarGrid();
             self.periodo = null;
             self.EStatus = null;   
         };
@@ -42,11 +42,11 @@
         };
     /********************************************************************************************************************************************************/
         var CargarGrid = function () {
-            catalogoContext.ObtenerGridPeriodos(function (resp) {
+            console.log(self.depen);
+            catalogoContext.ObtenerGridPeriodos(self.depen,function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.periodos = catalogoContext.periodoslst;                         
-                        //$('#ModalPeriodo').modal('hide');
+                        self.periodos = catalogoContext.periodoslst;                                                 
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -209,7 +209,8 @@
             document.getElementById("ErrorModal").style.display = "none";
         };
 
-        this.ValorDependencia = function () {            
+        this.ValorDependencia = function () {     
+            CargarGrid();
             if (self.buscar == "00000" || self.buscar == null) {
                 self.buscar = '';
             }            

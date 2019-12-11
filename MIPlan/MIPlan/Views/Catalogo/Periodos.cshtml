@@ -150,7 +150,7 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblDependencia" class="text-primary">Dependencia:</label>
-                    <select class="form-control border border-primary" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.buscar" style="max-width:100%;">
+                    <select class="form-control border border-primary" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.depen" style="max-width:100%;">
                         <option value="">--Seleccionar Dependencia--</option>
                     </select>
                 </div>
@@ -169,7 +169,7 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblStatus" class="text-success">Busqueda</label>
-                    <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-pagination-search="ctrl.periodos" style="max-width:100%;">
+                    <input type="text" class="form-control border border-success" placeholder="Busqueda" ng-model="ctrl.buscar" style="max-width:100%;">
                 </div>
             </div>
         </div>
@@ -236,7 +236,7 @@
                 </thead>
 
 
-                <tbody ng-pagination="i in ctrl.periodos | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status" ng-pagination-size="5">
+                <tbody dir-paginate="i in ctrl.periodos | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status | itemsPerPage: 5 "" >
                     <tr>
                         <td>{{i.Dependencia}}</td>
                         <td>{{i.Periodo}}</td>
@@ -260,7 +260,7 @@
                 <!---->
                 <tfoot>
                     <tr>
-                        <th colspan="4"><ng-pagination-control pagination-id="ctrl.periodos" color="white" height="35px"></ng-pagination-control></th>
+                        <th colspan="4"><dir-pagination-controls boundary-links="true"></dir-pagination-controls></th>
                         <th></th>
                         <th></th>
                         <th></th>

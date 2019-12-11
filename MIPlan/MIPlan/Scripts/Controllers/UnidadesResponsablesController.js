@@ -8,7 +8,7 @@
 
         this.Inicio = function () {
             CargarCombos();
-            CargarGrid();
+            //CargarGrid();
         };
 
         var CargarCombos = function () {
@@ -36,11 +36,12 @@
         };
         /********************************************************************************************************************************************************/
         var CargarGrid = function () {
-            catalogoContext.ObtenerUnidades(function (resp) {
+            //self.depen = "41101";
+            catalogoContext.ObtenerUnidades(self.depen, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.unidades = catalogoContext.unidadesRlst;                                        
-                        break;
+                        self.unidades = catalogoContext.unidadesRlst;                  
+                        break; 
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
@@ -204,6 +205,8 @@
         };
 
         this.ValorDependencia = function () {
+            CargarGrid();
+
             if (self.buscar == "00000" || self.buscar == null) {
                 self.buscar = '';
             }
