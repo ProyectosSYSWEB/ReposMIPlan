@@ -1,4 +1,4 @@
-﻿console.log("Funciona Model");
+﻿
 var catalogoContext =
 {
     dependenciaslst: [],
