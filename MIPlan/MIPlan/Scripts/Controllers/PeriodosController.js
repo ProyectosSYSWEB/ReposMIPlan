@@ -41,8 +41,7 @@
             });
         };
     /********************************************************************************************************************************************************/
-        var CargarGrid = function () {
-            console.log(self.depen);
+        var CargarGrid = function () {            
             catalogoContext.ObtenerGridPeriodos(self.depen,function (resp) {
                 switch (resp.ressult) {
                     case "tgp":

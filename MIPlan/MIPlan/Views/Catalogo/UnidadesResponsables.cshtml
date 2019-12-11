@@ -219,7 +219,7 @@
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody dir-paginate="i in ctrl.unidades | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status | itemsPerPage: 5 ">
+                <tbody ng-pagination="i in ctrl.unidades | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status | itemsPerPage: 5 ">
                     <tr>
                         <td>{{i.Dependencia}}</td>
                         <td>{{i.Clave}}</td>
@@ -241,7 +241,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="4"><dir-pagination-controls boundary-links="true"></dir-pagination-controls>
+                        <th colspan="4"><ng-pagination-control boundary-links="true"></ng-pagination-control>
                         </th>   
                         <th></th>
                         <th style="text-align:center" colspan="1">

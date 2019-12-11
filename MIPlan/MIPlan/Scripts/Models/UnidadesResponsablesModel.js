@@ -124,7 +124,8 @@
             });
     },
 /********************************************************************************************************************************************************/
-    UnidadResponsableCreate: function ( dependencia, clave, descripcion, status, coordinador, callBackResult) {        
+    UnidadResponsableCreate: function (dependencia, clave, descripcion, status, coordinador, callBackResult) {       
+        console.log(coordinador);
         $.ajax( 
             {
                 type: 'GET',

@@ -26,15 +26,15 @@
      * Module
      */
     angular.module(moduleName, [])
-        .directive('dirPaginate', ['$compile', '$parse', 'paginationService', dirPaginateDirective])
-        .directive('dirPaginateNoCompile', noCompileDirective)
-        .directive('dirPaginationControls', ['paginationService', 'paginationTemplate', dirPaginationControlsDirective])
+        .directive('ngPagination', ['$compile', '$parse', 'paginationService', ngPaginationDirective])
+        .directive('ngPaginationNoCompile', noCompileDirective)
+        .directive('ngPaginationControl', ['paginationService', 'paginationTemplate', ngPaginationControlDirective])
         .filter('itemsPerPage', ['paginationService', itemsPerPageFilter])
         .service('paginationService', paginationService)
         .provider('paginationTemplate', paginationTemplateProvider)
-        .run(['$templateCache',dirPaginationControlsTemplateInstaller]);
+        .run(['$templateCache',ngPaginationControlTemplateInstaller]);
 
-    function dirPaginateDirective($compile, $parse, paginationService) {
+    function ngPaginationDirective($compile, $parse, paginationService) {
 
         return  {
             terminal: true,
@@ -45,7 +45,7 @@
 
         function dirPaginationCompileFn(tElement, tAttrs){
 
-            var expression = tAttrs.dirPaginate;
+            var expression = tAttrs.ngPagination;
             // regex taken directly from https://github.com/angular/angular.js/blob/v1.4.x/src/ng/directive/ngRepeat.js#L339
             var match = expression.match(/^\s*([\s\S]+?)\s+in\s+([\s\S]+?)(?:\s+as\s+([\s\S]+?))?(?:\s+track\s+by\s+([\s\S]+?))?\s*$/);
 
@@ -148,8 +148,8 @@
          * @param repeatExpression
          */
         function addNgRepeatToElement(element, attrs, repeatExpression) {
-            if (element[0].hasAttribute('dir-paginate-start') || element[0].hasAttribute('data-dir-paginate-start')) {
-                // using multiElement mode (dir-paginate-start, dir-paginate-end)
+            if (element[0].hasAttribute('ng-pagination-start') || element[0].hasAttribute('data-ng-pagination-start')) {
+                // using multiElement mode (ng-pagination-start, ng-pagination-end)
                 attrs.$set('ngRepeatStart', repeatExpression);
                 element.eq(element.length - 1).attr('ng-repeat-end', true);
             } else {
@@ -158,29 +158,29 @@
         }
 
         /**
-         * Adds the dir-paginate-no-compile directive to each element in the tElement range.
+         * Adds the ng-pagination-no-compile directive to each element in the tElement range.
          * @param tElement
          */
         function addNoCompileAttributes(tElement) {
             angular.forEach(tElement, function(el) {
                 if (el.nodeType === 1) {
-                    angular.element(el).attr('dir-paginate-no-compile', true);
+                    angular.element(el).attr('ng-pagination-no-compile', true);
                 }
             });
         }
 
         /**
-         * Removes the variations on dir-paginate (data-, -start, -end) and the dir-paginate-no-compile directives.
+         * Removes the variations on ng-pagination (data-, -start, -end) and the ng-pagination-no-compile directives.
          * @param element
          */
         function removeTemporaryAttributes(element) {
             angular.forEach(element, function(el) {
                 if (el.nodeType === 1) {
-                    angular.element(el).removeAttr('dir-paginate-no-compile');
+                    angular.element(el).removeAttr('ng-pagination-no-compile');
                 }
             });
-            element.eq(0).removeAttr('dir-paginate-start').removeAttr('dir-paginate').removeAttr('data-dir-paginate-start').removeAttr('data-dir-paginate');
-            element.eq(element.length - 1).removeAttr('dir-paginate-end').removeAttr('data-dir-paginate-end');
+            element.eq(0).removeAttr('ng-pagination-start').removeAttr('ng-pagination').removeAttr('data-ng-pagination-start').removeAttr('data-ng-pagination');
+            element.eq(element.length - 1).removeAttr('ng-pagination-end').removeAttr('data-ng-pagination-end');
         }
 
         /**
@@ -212,8 +212,8 @@
     }
 
     /**
-     * This is a helper directive that allows correct compilation when in multi-element mode (ie dir-paginate-start, dir-paginate-end).
-     * It is dynamically added to all elements in the dir-paginate compile function, and it prevents further compilation of
+     * This is a helper directive that allows correct compilation when in multi-element mode (ie ng-pagination-start, ng-pagination-end).
+     * It is dynamically added to all elements in the ng-pagination compile function, and it prevents further compilation of
      * any inner directives. It is then removed in the link function, and all inner directives are then manually compiled.
      */
     function noCompileDirective() {
@@ -223,11 +223,11 @@
         };
     }
 
-    function dirPaginationControlsTemplateInstaller($templateCache) {
+    function ngPaginationControlTemplateInstaller($templateCache) {
         $templateCache.put('ngPagination.template','<ul class="pagination" ng-if="1 < pages.length || !autoHide"><li class="page-item" ng-if="boundaryLinks" ng-class="{ disabled : pagination.current == 1 }"><a class="page-link" href="" ng-click="setCurrent(1)">&laquo;</a></li><li class="page-item" ng-if="directionLinks" ng-class="{ disabled : pagination.current == 1 }"><a class="page-link" href="" ng-click="setCurrent(pagination.current - 1)">&lsaquo;</a></li><li class="page-item" ng-repeat="pageNumber in pages track by tracker(pageNumber, $index)" ng-class="{ active : pagination.current == pageNumber, disabled : pageNumber == \'...\' || ( ! autoHide && pages.length === 1 ) }"><a class="page-link" href="" ng-click="setCurrent(pageNumber)">{{ pageNumber }}</a></li><li class="page-item" ng-if="directionLinks" ng-class="{ disabled : pagination.current == pagination.last }"><a class="page-link" href="" ng-click="setCurrent(pagination.current + 1)">&rsaquo;</a></li><li class="page-item" ng-if="boundaryLinks" ng-class="{ disabled : pagination.current == pagination.last }"><a class="page-link" href="" ng-click="setCurrent(pagination.last)">&raquo;</a></li></ul>'); 
     }
 
-    function dirPaginationControlsDirective(paginationService, paginationTemplate) {
+    function ngPaginationControlDirective(paginationService, paginationTemplate) {
 
         var numberRegex = /^\d+$/;
 
@@ -239,7 +239,7 @@
                 paginationId: '=?',
                 autoHide: '=?'
             },
-            link: dirPaginationControlsLinkFn
+            link: ngPaginationControlLinkFn
         };
 
         // We need to check the paginationTemplate service to see whether a template path or
@@ -259,11 +259,11 @@
         }
         return DDO;
 
-        function dirPaginationControlsLinkFn(scope, element, attrs) {
+        function ngPaginationControlLinkFn(scope, element, attrs) {
 
-            // rawId is the un-interpolated value of the pagination-id attribute. This is only important when the corresponding dir-paginate directive has
+            // rawId is the un-interpolated value of the pagination-id attribute. This is only important when the corresponding ng-pagination directive has
             // not yet been linked (e.g. if it is inside an ng-if block), and in that case it prevents this controls directive from assuming that there is
-            // no corresponding dir-paginate directive and wrongly throwing an exception.
+            // no corresponding ng-pagination directive and wrongly throwing an exception.
             var rawId = attrs.paginationId ||  DEFAULT_ID;
             var paginationId = scope.paginationId || attrs.paginationId ||  DEFAULT_ID;
 

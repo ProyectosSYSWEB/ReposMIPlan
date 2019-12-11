@@ -236,7 +236,7 @@
                 </thead>
 
 
-                <tbody dir-paginate="i in ctrl.periodos | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status | itemsPerPage: 5 "" >
+                <tbody ng-pagination="i in ctrl.periodos | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status | itemsPerPage: 5 "" >
                     <tr>
                         <td>{{i.Dependencia}}</td>
                         <td>{{i.Periodo}}</td>
@@ -260,7 +260,7 @@
                 <!---->
                 <tfoot>
                     <tr>
-                        <th colspan="4"><dir-pagination-controls boundary-links="true"></dir-pagination-controls></th>
+                        <th colspan="4"><ng-pagination-control boundary-links="true"></ng-pagination-control></th>
                         <th></th>
                         <th></th>
                         <th></th>
