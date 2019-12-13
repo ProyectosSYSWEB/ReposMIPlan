@@ -10,7 +10,6 @@
         this.Inicio = function () {
             CargarCombos();
             //CargarGrid();
-            //self.unidad = null;
             ObtenerOrganismos();
             ObtenerStatusAcreditaciones();
 
@@ -27,10 +26,7 @@
             ObtenerCarreras();
 
         };
-        //this.Cargargr = function () {
-        //    CargarGrid();
-
-        //};
+        
 
         var ObtenerDependencias = function () {
             catalogoContext.ObtenerDependencias(function (resp) {
