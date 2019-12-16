@@ -140,6 +140,8 @@
                     }
                     if (callBackResult !== undefined) {
                         callBackResult({ ressult: 'tgp', message: null });
+                    } else{
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
                     }
                 },
                 error: function (ex) {

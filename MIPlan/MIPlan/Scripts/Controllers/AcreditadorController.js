@@ -9,8 +9,7 @@
 
         this.Inicio = function () {
             CargarCombos();
-            CargarGrid();
-            self.unidad = null;
+            //CargarGrid();
             ObtenerOrganismos();
             ObtenerStatusAcreditaciones();
 
@@ -21,15 +20,14 @@
             ObtenerDependencias();
             
         };
-        //this.Carrera = function () {
-        //    CargarCarre();
 
-        //};
 
         this.CargarCarreras = function () {
             ObtenerCarreras();
 
         };
+        
+
         var ObtenerDependencias = function () {
             catalogoContext.ObtenerDependencias(function (resp) {
                 switch (resp.ressult) {
@@ -101,7 +99,7 @@
 
 
         var CargarGrid = function () {
-            catalogoContext.ObtenerAcreditadores(self.cve_dependencia, function (resp) {
+            catalogoContext.ObtenerAcreditadores(self.buscar, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         self.acreditador = catalogoContext.acreditadoreslst;
@@ -290,6 +288,7 @@ this.AcreditadorCreate = function () { AcreditadorCreate(); }
         };
 
         this.ValorDependencia = function () {
+            CargarGrid();
             if (self.buscar == "00000" || self.buscar == null) {
                 self.buscar = '';
             }
