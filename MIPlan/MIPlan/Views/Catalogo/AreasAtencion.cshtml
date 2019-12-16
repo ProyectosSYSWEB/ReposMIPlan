@@ -77,7 +77,7 @@
                                                 <label id="lblDependencia" for="lblDependencia" class="text-success">Dependencia:</label>
                                             </div>
                                             <div class="row justify-content-center">
-                                                <select id="cmdDependencia" class="form-control border border-success" name="cmdDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia">
+                                                <select id="cmdDependencia" class="form-control border border-success" name="cmdDependencia" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_dependencia">
                                                     <option value="">--Seleccionar Dependencia--</option>
                                                 </select>
                                             </div>
@@ -211,7 +211,7 @@
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody ng-pagination="i in ctrl.areasatencion | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter: ctrl.Estatus" ng-pagination-size="5">
+                <tbody ng-pagination="i in ctrl.areasatencion | orderBy:sortType:sortReverse | filter: ctrl.Estatus" ng-pagination-size="5">
                     <tr>
                         <td>{{i.Id}}</td>
                         <td>{{i.Dependencia}}</td>

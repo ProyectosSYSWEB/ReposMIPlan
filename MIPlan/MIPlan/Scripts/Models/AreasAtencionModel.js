@@ -33,7 +33,7 @@
             });
     },
 
-    ObtenerAreasAtencion: function (callBackResult) {
+    ObtenerAreasAtencion: function (Dependencia, callBackResult) {
         var self = this;
         self.areaslst.length = 0;
         $.ajax(
@@ -41,7 +41,9 @@
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'Catalogo/ObtenerGridAreasAtencion',
+                data: { Dependencia },
                 success: function (resp) {
+                    console.log(resp);
                     for (var i = 0; i < resp.Resultado.length; i++) {
                         self.areaslst.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependencia, Cve: resp.Resultado[i].Clave, Desc: resp.Resultado[i].Descripcion, Estatus: resp.Resultado[i].Status, Cat: resp.Resultado[i].Categoria });
                     }

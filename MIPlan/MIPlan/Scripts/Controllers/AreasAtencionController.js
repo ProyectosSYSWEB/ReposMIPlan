@@ -10,7 +10,6 @@
 
         this.Inicio = function () {
             CargarCombos();
-            CargarGrid();
             ObtenerCategorias();
         };
 
@@ -62,7 +61,7 @@
         };
 
         var CargarGrid = function () {
-            catalogoContext.ObtenerAreasAtencion(function (resp) {
+            catalogoContext.ObtenerAreasAtencion(self.buscar, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         self.areasatencion = catalogoContext.areaslst;
@@ -78,7 +77,6 @@
                 $scope.$apply();
             });
         };
-
 
         this.ObtDatos = function (IdAreaAtencion) {
             $('#btnActualizar').show();
@@ -241,7 +239,8 @@
             document.getElementById("ErrorModal").style.display = "none";
         };
 
-        this.ValorDependencia = function () {
+        this.ValorDependencia = function () { 
+            CargarGrid();
                 if (self.buscar == "00000" || self.buscar == null) {
                     self.buscar = '';
                 }
