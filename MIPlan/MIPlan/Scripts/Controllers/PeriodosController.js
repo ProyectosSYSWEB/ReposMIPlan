@@ -12,7 +12,7 @@
 
         this.Inicio = function () {
             CargarCombos();
-            CargarGrid();
+            //CargarGrid();
             self.periodo = null;
             self.EStatus = null;   
         };
@@ -41,12 +41,11 @@
             });
         };
     /********************************************************************************************************************************************************/
-        var CargarGrid = function () {
-            catalogoContext.ObtenerGridPeriodos(function (resp) {
+        var CargarGrid = function () {            
+            catalogoContext.ObtenerGridPeriodos(self.depen,function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.periodos = catalogoContext.periodoslst;                         
-                        //$('#ModalPeriodo').modal('hide');
+                        self.periodos = catalogoContext.periodoslst;                                                 
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -128,9 +127,9 @@
             catalogoContext.periodoUpdate(self.periodo[0].Id, self.periodo[0].Dependencia, self.periodo[0].Periodo, self.periodo[0].Descripcion, self.EStatus, self.Ejercicio, self.periodo[0].Inicio, self.periodo[0].Fin ,function (resp) {
                 switch (resp.ressult) {
                     case "tgp":       
+                        alert("¡Se han actualizado los datos correctamente!");    
                         CargarGrid();
-                        self.periodo = null;
-                        alert("¡Se han actualizado los datos correctamente!");                        
+                        self.periodo = null;                                           
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -157,9 +156,9 @@
             catalogoContext.GuardarPerdiodos(self.periodo[0].Dependencia, self.periodo[0].Periodo, self.periodo[0].Descripcion, self.EStatus, self.Ejercicio, self.periodo[0].Inicio, self.periodo[0].Fin , function (resp) {
                 switch (resp.ressult) {
                     case "tgp":         
-                        CargarGrid();
-                        self.periodo = null;
                         alert("¡Se ha creado el periodo correctamente!");
+                        CargarGrid();
+                        self.periodo = null;                       
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -209,7 +208,8 @@
             document.getElementById("ErrorModal").style.display = "none";
         };
 
-        this.ValorDependencia = function () {            
+        this.ValorDependencia = function () {     
+            CargarGrid();
             if (self.buscar == "00000" || self.buscar == null) {
                 self.buscar = '';
             }            
@@ -221,13 +221,24 @@
             }
         }
 
+        this.close = function (form) {
+            $('#ModalPeriodo').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+                CargarGrid();
+            }
+            self.unidad = null;
+            self.Clave = null;
+            self.EStatus = null;
+        };
+
         this.reset = function (form) {
             $('#ModalPeriodo').modal('hide');           
             if (form) {
                 form.$setPristine();
                 form.$setUntouched();
-            }
-            CargarGrid();
+            }        
             self.periodo = null;
             self.EStatus = null;
         };

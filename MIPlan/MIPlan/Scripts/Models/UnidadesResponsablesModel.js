@@ -7,8 +7,7 @@
 /********************************************************************************************************************************************************/
     ObtenerDependencias: function (callBackResult) {
         var self = this;
-        self.dependenciaslst.length = 0;
-        //var urlServer = "http://localhost:53805/";
+        self.dependenciaslst.length = 0;        
         $.ajax(
             {
                 type: 'GET',
@@ -37,14 +36,15 @@
 
     },
 /********************************************************************************************************************************************************/
-        ObtenerUnidades: function (callBackResult) {
-        var self = this;
+    ObtenerUnidades: function (Dependencia, callBackResult) {
+        var self = this;        
         self.unidadesRlst.length = 0;
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
-                url: urlServer + 'Catalogo/ObtenerUnidades',                
+                url: urlServer + 'Catalogo/ObtenerUnidades',
+                data: { Dependencia },
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
@@ -124,7 +124,8 @@
             });
     },
 /********************************************************************************************************************************************************/
-    UnidadResponsableCreate: function ( dependencia, clave, descripcion, status, coordinador, callBackResult) {        
+    UnidadResponsableCreate: function (dependencia, clave, descripcion, status, coordinador, callBackResult) {       
+        console.log(coordinador);
         $.ajax( 
             {
                 type: 'GET',

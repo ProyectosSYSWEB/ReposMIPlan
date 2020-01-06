@@ -7,8 +7,7 @@
     /********************************************************************************************************************************************************/
     ObtenerDependencias: function (callBackResult) {
         var self = this;
-        self.dependenciaslst.length = 0;
-        var urlServer = "http://localhost:53805/";
+        self.dependenciaslst.length = 0;        
         $.ajax(
             {
                 type: 'GET',
@@ -37,14 +36,15 @@
 
     },
     /********************************************************************************************************************************************************/
-    ObtenerGridPeriodos: function (callBackResult) {
+    ObtenerGridPeriodos: function (Dependencia, callBackResult) {
         var self = this;
         self.periodoslst.length = 0;
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
-                url: urlServer + 'Catalogo/ObtenerGridPeriodos',       
+                url: urlServer + 'Catalogo/ObtenerGridPeriodos',
+                data: { Dependencia },
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {

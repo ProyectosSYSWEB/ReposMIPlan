@@ -21,7 +21,7 @@
                 <form name="modalForm" novalidate>
                     <div id="title" class="">
                         <h5 class="modal-title" id="exampleModalLabel"></h5>
-                        <button type="button" class="close btn-danger" data-dismiss="modal" ng-click="ctrl.reset(modalForm)" aria-label="Close">
+                        <button type="button" class="close btn-danger" data-dismiss="modal" ng-click="ctrl.close(modalForm)" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -46,7 +46,7 @@
                                 <label id="lblClave" class="">Clave</label>
                             </div>
                             <div class="row justify-content-center">
-                                <input type="text" id="inputClave" class="" name="Clave" readonly ng-maxlength="3" ng-model="ctrl.Clave" placeholder="Clave" required>
+                                <input type="text" id="inputClave" class="" name="Clave" ng-maxlength="3" ng-model="ctrl.Clave" placeholder="Clave" required>
                             </div>
                             <div class="row justify-content-center"> 
                                 <span class="messages" ng-show="modalForm.$submitted || modalForm.Clave.$touched">
@@ -123,7 +123,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">   
-                        <button type="button"  class="btn btn btn-danger" ng-click="ctrl.reset(modalForm)">Salir</button>
+                        <button type="button"  class="btn btn btn-danger" ng-click="ctrl.close(modalForm)">Salir</button>
                         <button type="button" id="btnModal" class="btn btn-primary" ng-click="ctrl.UnidadResponsableUpdateCreate(ctrl.unidad[0].Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
                     </div>
                 </form>
@@ -146,7 +146,7 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblDependencia" class="text-primary">Dependencia:</label>
-                    <select class="form-control border border-primary" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.buscar" style="max-width:100%;">
+                    <select class="form-control border border-primary" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.depen" style="max-width:100%;">
                         <option value="">--Seleccionar Dependencia--</option>
                     </select>
                 </div>
@@ -219,7 +219,7 @@
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody ng-pagination="i in ctrl.unidades  | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status" ng-pagination-size="5">
+                <tbody ng-pagination="i in ctrl.unidades | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status | itemsPerPage: 5 ">
                     <tr>
                         <td>{{i.Dependencia}}</td>
                         <td>{{i.Clave}}</td>
@@ -241,7 +241,8 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="4"><ng-pagination-control pagination-id="ctrl.unidades" color="white" height="35px"></ng-pagination-control></th>   
+                        <th colspan="4"><ng-pagination-control boundary-links="true"></ng-pagination-control>
+                        </th>   
                         <th></th>
                         <th style="text-align:center" colspan="1">
                             <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">

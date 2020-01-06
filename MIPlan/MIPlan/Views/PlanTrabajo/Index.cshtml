@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Plan de Trabajo";
     Layout = "~/Views/Shared/_LayoutContenido.cshtml";
 }
 
@@ -16,6 +16,16 @@
 <div ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
 
     <div class="container">
+
+
+        <div id="Error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
+            <strong id="Message">¡Ha ocurrido un error! </strong>
+            <button type="button" class="close" ng-click="ctrl.DivError()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
                 <div class="form-group">
@@ -46,7 +56,7 @@
                     <label for="lblUnidadesR" class="text-primary">Unidad Responsable</label>
                     <select class="form-control border border-primary" name="cmbUnidadResponsable" ng-change="ctrl.ValorUnidad()" ng-options="option.Id as option.Descripcion for option in ctrl.UnidadesResponsables" ng-model="ctrl.buscar" style="max-width:100%;">
                         <option value="">Seleccionar Unidad Responsable</option>
-                    </select>                   
+                    </select>
                 </div>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
@@ -56,13 +66,16 @@
                 </div>
             </div>
         </div>
-     
+
     </div>
     <br />  
     <div class="container-fluid border-bottom border-info"></div>  
     <br />
+
+
+
     <div class="row">
-        <div class="col-sm-12 col-md-5 col-lg-4 col-xl-4">
+        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
             <div class="panel panel-default panel-table">
                 <div class="panel-heading">
                     <div class="container">
@@ -77,8 +90,7 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">Areas de Atención</th>
-                                <th scope="col" style="text-align:center"><em class="fa fa-check-square-o"></em></th>
+                                <th scope="col">Areas de Atención</th>                                
                                 <th scope="col">%</th>
                                 <th scope="col" style="text-align:center"><em class="fa fa-cog"></em></th>
                             </tr>
@@ -88,15 +100,9 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
+                                <td>2</td>                                
 
                                 <td style="text-align:center">
-
-                                    <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalPeriodo" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Editar" ng-click="ctrl.Modal(i.Id)">
-                                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                                    </button>
-
                                     <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminnarPeriodo(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
                                 </td>
                             </tr>
@@ -123,7 +129,7 @@
             <br />
             <br />
         </div>
-        <div class="col-sm-12 col-md-7 col-lg-8 col-xl-8">
+        <div class="col-sm-12 col-md-8 col-lg-9 col-xl-9">
 
             <div role="tabpanel" style="box-shadow: 10px 40px 96px rgba(0,0,0,.1)">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -172,9 +178,9 @@
                                     </thead>
 
 
-                                    <tbody>
+                                    <tbody >
                                         <tr>
-                                            <td>1</td>
+                                            <td >1</td>
                                             <td>2</td>
                                             <td>3</td>
                                             <td>4</td>
@@ -193,7 +199,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="4"><ng-pagination-control pagination-id="ctrl.periodos" color="white" height="35px"></ng-pagination-control></th>
+                                            <th colspan="4"><dir-pagination-controls boundary-links="true"></dir-pagination-controls></th>
                                             <th></th>
                                             <th></th>
                                             <th></th>
@@ -232,6 +238,6 @@
 
 <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <script type="text/javascript">
-    console.log("Funciona Script");
+  
 </script>
 
