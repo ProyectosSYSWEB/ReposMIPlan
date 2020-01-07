@@ -164,7 +164,7 @@ namespace MIPlan.Controllers
 
             }
         }
-        public JsonResult ListaAreasAtencion(string Dependencia)
+        public JsonResult ListaAreasAtencion(string Dependencia)/**/
         {
             Sesion SesionUsu = new Sesion();
             List<AreasAtencion> list = new List<AreasAtencion>();
