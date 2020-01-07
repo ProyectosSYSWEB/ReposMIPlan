@@ -164,6 +164,30 @@ namespace MIPlan.Controllers
 
             }
         }
+        public JsonResult ListaAreasAtencion(string Dependencia)
+        {
+            Sesion SesionUsu = new Sesion();
+            List<AreasAtencion> list = new List<AreasAtencion>();
+            ResultadoAreasAtencion objResultado = new ResultadoAreasAtencion();
+            try
+            {
+
+
+                list =  CursorDataContext.ObtenerGridAreasAtencion(Dependencia);
+                objResultado.Error = false;
+                objResultado.MensajeError = string.Empty;
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+
+            }
+        }
 
     }
 }
