@@ -211,7 +211,7 @@
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody ng-pagination="i in ctrl.areasatencion | orderBy:sortType:sortReverse | filter: ctrl.Estatus" ng-pagination-size="5">
+                <tbody ng-pagination="i in ctrl.areasatencion | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Estatus | itemsPerPage: 5">
                     <tr>
                         <td>{{i.Id}}</td>
                         <td>{{i.Dependencia}}</td>
@@ -234,7 +234,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="4"><ng-pagination-control pagination-id="ctrl.areasatencion" color="white" height="35px"></ng-pagination-control></th>
+                        <th colspan="4"><ng-pagination-control boundary-links="true"></ng-pagination-control></th>
                         <th></th>
                         <th style="text-align:right" colspan="2">
                             <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
