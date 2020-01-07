@@ -2,7 +2,7 @@
     ViewBag.Title = "Acreditadores";
     Layout = "~/Views/Shared/_LayoutContenido.cshtml";
 }
-<h2>Acreditadores</h2>
+<h2>Acreditaciones</h2>
 <br />
 <br />
 <br />
@@ -149,7 +149,7 @@
                                             <label id="lblobservacion" for="lblobservacion" class="text-success">Observaciones:</label>
                                         </div>
                                         <div class="row justify-content-center">
-                                            <input type="text" id="txtobservacion" class="form-control border border-success" name="txtobservacion"  placeholder="" ng-model="ctrl.cve_observaciones">
+                                            <textarea id="txtobservacion" class="form-control border border-success" name="txtobservacion"  placeholder="" ng-model="ctrl.cve_observaciones"></textarea>
 
                                         </div>
                                         
@@ -247,7 +247,7 @@
                                 <td>{{i.Fecha_Inicial}}</td>
                                 <td>{{i.Fecha_Final}}</td>
                                 <td>{{i.Status}}</td>
-                                <td>{{i.Observaciones}}</td>
+                                <td><font size="2">{{i.Observaciones}}</font></td>
 
                                 @*<td style="display:inline-block !important">*@
                                 <td style="text-align:right">
