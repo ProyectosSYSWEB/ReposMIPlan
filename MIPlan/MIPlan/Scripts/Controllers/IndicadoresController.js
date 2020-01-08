@@ -1,0 +1,1 @@
+﻿// <reference path="../Models/IndicadoresModel.js"/>
