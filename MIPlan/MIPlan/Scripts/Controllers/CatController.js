@@ -9,34 +9,34 @@
         var abc = "";
 
         this.Inicio = function () {
-            CargarCombos();
+            //CargarCombos();
             CargarGrid();
         };
 
-        var CargarCombos = function () {
-            ObtenerDependencias();
-        }; 
+        //var CargarCombos = function () {
+        //    ObtenerDependencias();
+        //}; 
 
 
-        var ObtenerDependencias = function () {
-            catalogoContext.ObtenerDependencias(function (resp) {
-                switch (resp.ressult) {
-                    case "tgp":
-                        self.dependencias = catalogoContext.dependenciaslst;
-                        self.cve_dependencia = catalogoContext.dependenciaslst[0].Id;
-                        break;
-                    case "notgp":
-                        self.mensaje_gral = resp.message;
-                        break;
-                    default:
-                        break;
-                }
-                $scope.$apply();
-            });
-        };   
+        //var ObtenerDependencias = function () {
+        //    catalogoContext.ObtenerDependencias(function (resp) {
+        //        switch (resp.ressult) {
+        //            case "tgp":
+        //                self.dependencias = catalogoContext.dependenciaslst;
+        //                self.cve_dependencia = catalogoContext.dependenciaslst[0].Id;
+        //                break;
+        //            case "notgp":
+        //                self.mensaje_gral = resp.message;
+        //                break;
+        //            default:
+        //                break;
+        //        }
+        //        $scope.$apply();
+        //    });
+        //};   
 
         var CargarGrid = function () {
-            catalogoContext.ObtenerBasicos(self.cve_dependencia, function (resp) {
+            catalogoContext.ObtenerBasicos( function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         self.basicos = catalogoContext.basicoslst;

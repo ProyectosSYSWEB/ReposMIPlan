@@ -103,6 +103,7 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.acreditador = catalogoContext.acreditadoreslst;
+                        $('[data-toggle="tooltip"]').tooltip();
                         $('#acreditadores').modal('hide');
                         break;
                     case "notgp":
