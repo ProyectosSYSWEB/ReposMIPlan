@@ -96,7 +96,6 @@
     ObtenerCategorias: function (callBackResult) {
         var self = this;
         self.categorialst.length = 0;
-        //var urlServer = "http://localhost:53805/";
         $.ajax(
             {
                 type: 'GET',

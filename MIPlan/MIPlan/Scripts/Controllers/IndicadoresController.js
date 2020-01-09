@@ -1,1 +1,144 @@
 ﻿// <reference path="../Models/IndicadoresModel.js"/>
+
+(function () {
+    var app = angular.module('MIPlanWeb', ['ngPagination']);
+
+
+    app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
+        var self = this;
+        self.buscar = '';
+
+        this.Inicio = function () {
+            ObtenerCategorias();
+        };
+
+        var ObtenerCategorias = function () {
+            catalogoContext.ObtenerCategorias(function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.categoria = catalogoContext.categorialst;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+
+        this.CargarCategorias = function () {
+            ObtenerCategorias();
+
+        };
+
+        this.ObtDatos = function (/*IdAreaAtencion*/) {
+            $('#btnActualizar').show();
+            $('#btnNuevo').hide();
+            self.Titulo = "Modificar Indicador";
+            //self.cve_id = IdAreaAtencion;
+            document.getElementById("Titulo").className = "modal-header btn-primary justify-content-center";
+            document.getElementById("lblCategoria").className = "text-primary";
+            document.getElementById("cmdCategoria").className = "form-control border border-primary";
+            document.getElementById("lblSubtipo").className = "text-primary";
+            document.getElementById("cmdSubtipo").className = "form-control border border-primary";
+            document.getElementById("lblDescripcion").className = "text-primary";
+            document.getElementById("txtDescripcion").className = "form-control border border-primary";
+            document.getElementById("lblEtiqueta1").className = "text-primary";
+            document.getElementById("cmdEtiqueta1").className = "form-control border border-primary";
+            document.getElementById("lblEtiqueta2").className = "text-primary";
+            document.getElementById("cmdEtiqueta2").className = "form-control border border-primary";
+            document.getElementById("lblSeguimiento").className = "text-primary";
+            document.getElementById("Radio").className = "radio-group form-control border border-primary text-center";
+
+            //catalogoContext.ObtenerAreas(IdAreaAtencion, function (resp) {
+            //    switch (resp.ressult) {
+            //        case "tgp":
+            //            self.cve_dependencia = catalogoContext.areasRlst[0].Dependencia;
+            //            self.cve_clave = catalogoContext.areasRlst[0].Cve;
+            //            self.cve_desc = catalogoContext.areasRlst[0].Desc;
+            //            self.cve_status = catalogoContext.areasRlst[0].Estatus;
+            //            self.cve_cat = catalogoContext.areasRlst[0].Cat;
+            //            break;
+            //        case "notgp":
+            //            self.mensaje_gral = resp.message;
+            //            document.getElementById("Error").style.display = "block";
+            //            document.getElementById("Message").innerHTML = self.mensaje_gral;
+            //            break;
+            //        default:
+            //            break;
+            //    }
+            //    $scope.$apply();
+            //});
+        };
+
+        this.Nuevo = function () {
+            $('#btnNuevo').show();
+            $('#btnActualizar').hide();
+            self.Titulo = "Crear Indicador";
+            document.getElementById("Titulo").className = "modal-header btn-success justify-content-center";
+            document.getElementById("lblCategoria").className = "text-success";
+            document.getElementById("cmdCategoria").className = "form-control border border-success";
+            document.getElementById("lblSubtipo").className = "text-success";
+            document.getElementById("cmdSubtipo").className = "form-control border border-success";
+            document.getElementById("lblDescripcion").className = "text-success";
+            document.getElementById("txtDescripcion").className = "form-control border border-success";
+            document.getElementById("lblEtiqueta1").className = "text-success";
+            document.getElementById("cmdEtiqueta1").className = "form-control border border-success";
+            document.getElementById("lblEtiqueta2").className = "text-success";
+            document.getElementById("cmdEtiqueta2").className = "form-control border border-success";
+            document.getElementById("lblSeguimiento").className = "text-success";
+            document.getElementById("Radio").className = "radio-group form-control border border-success text-center";
+            //self.cve_cat = "";
+            //self.cve_sub = "";
+            //self.cve_desc = "";
+            //self.cve_et1 = "";
+            //self.cve_et2 = "";
+            //self.cve_seg = "";
+
+            //self.cve_status = "A";
+            //var iNumeroMayor = self.areasatencion[0].Cve;
+            //for (var i = 0; i < self.areasatencion.length; i++) {
+            //    if (self.areasatencion[i].Cve > iNumeroMayor) {
+            //        iNumeroMayor = self.areasatencion[i].Cve;
+            //    }
+            //}
+            //self.cve_clave = parseInt(iNumeroMayor) + 1;
+        };
+
+        this.DivError = function () {
+            document.getElementById("Error").style.display = "none";
+        };
+
+        this.DivErrorModal = function () {
+            document.getElementById("ErrorModal").style.display = "none";
+        };
+
+        this.ValorCategoria = function () {
+            //CargarGrid();
+            if (self.buscar == null) {
+                self.buscar = '';
+            }
+        };
+
+        this.reset = function (form) {
+            $('#indicadores').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }
+            //CargarGrid();
+            self.cve_cat = null;
+            self.cve_sub = null;
+            self.cve_desc = null;
+            self.cve_et1 = null;
+            self.cve_et2 = null;
+            self.cve_seg = null;
+        };
+
+    }]);
+
+})();

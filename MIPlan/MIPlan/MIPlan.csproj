@@ -1285,7 +1285,6 @@
     <Content Include="Views\Catalogo\Periodos.cshtml" />
     <Content Include="Views\PlanTrabajo\Index.cshtml" />
     <Content Include="Views\Catalogo\Indicadores.cshtml" />
-    <Content Include="Views\Catalogo\IndicadoresModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
