@@ -28,6 +28,8 @@
         //        });
 
         //},
+     //},
+     //},
         ObtenerBasicos: function (callBackResult) {
         var self = this;
         self.basicoslst.length = 0;
