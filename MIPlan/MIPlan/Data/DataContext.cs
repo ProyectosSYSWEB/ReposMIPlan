@@ -112,8 +112,6 @@ namespace MIPlan.Data
             return list;
             //return registroAgregado;
         }
-
-
         public static List<Periodos> ObtenerDatosPeriodos(int Id, ref string Verificador)
         {
             OracleCommand cmd = null;
@@ -150,8 +148,6 @@ namespace MIPlan.Data
             return list;
             //return registroAgregado;
         }
-
-
         public static List<Comun> VerificaUsuario(Comun objDatosSesion, ref string Verificador)
         {
             OracleCommand cmd = null;
@@ -184,12 +180,5 @@ namespace MIPlan.Data
             }
             return list;
         }
-
-
-
-
-
-
-
     }
 }

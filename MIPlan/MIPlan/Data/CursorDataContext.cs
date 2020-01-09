@@ -540,7 +540,50 @@ namespace MIPlan.Data
             }
 
         }
+        public static List<Comun> ObtenerComboCatBasicos()
+        {            
+            var Lista = ExeProcedimiento.GenerarOracleCommandCursor_Combo("PKG_PLANEACION.Obt_Combo_Cat_Basicos");
+            return Lista;
+        }
+        public static List<Basicos> ObtenerGridBasicos(string IdBasicos)
+        {
+            //s
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
 
+            try
+            {
+
+                string[] Parametros = { "p_clave" };
+                object[] Valores = { IdBasicos };
+
+                OracleDataReader dr = null;
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Basicos", ref dr, Parametros, Valores);
+                List<Basicos> list = new List<Basicos>();
+                while (dr.Read())
+                {
+                    Basicos objBasicos = new Basicos();
+                    objBasicos.Id = Convert.ToInt32(dr[0]);
+                    objBasicos.DescripcionPadre = Convert.ToString(dr[7]);
+                    objBasicos.Clave = Convert.ToString(dr[2]);
+                    objBasicos.Descripcion = Convert.ToString(dr[4]);
+                    objBasicos.Status = Convert.ToString(dr[3]);
+                    list.Add(objBasicos);
+                }
+                return list;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
+        }
 
     }
 }

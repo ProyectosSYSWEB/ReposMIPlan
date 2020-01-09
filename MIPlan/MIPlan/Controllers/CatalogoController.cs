@@ -167,27 +167,27 @@ namespace MIPlan.Controllers
             }
         }
 
-        public JsonResult ObtenerGridBasicos()
-        {
-            List<Basicos> list = new List<Basicos>();
-            ResultadoBasicos objResultado = new ResultadoBasicos();
-            try
-            {
-                list = CursorDataContext.ObtenerBasicos();
-                objResultado.Error = false;
-                objResultado.MensajeError = "";
-                objResultado.Resultado = list;
-                return Json(objResultado, JsonRequestBehavior.AllowGet);
+        //public JsonResult ObtenerGridBasicos()
+        //{
+        //    List<Basicos> list = new List<Basicos>();
+        //    ResultadoBasicos objResultado = new ResultadoBasicos();
+        //    try
+        //    {
+        //        list = CursorDataContext.ObtenerBasicos();
+        //        objResultado.Error = false;
+        //        objResultado.MensajeError = "";
+        //        objResultado.Resultado = list;
+        //        return Json(objResultado, JsonRequestBehavior.AllowGet);
 
-            }
-            catch (Exception ex)
-            {
-                objResultado.Error = true;
-                objResultado.MensajeError = ex.Message;
-                objResultado.Resultado = null;
-                return Json(objResultado, JsonRequestBehavior.AllowGet);
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        objResultado.Error = true;
+        //        objResultado.MensajeError = ex.Message;
+        //        objResultado.Resultado = null;
+        //        return Json(objResultado, JsonRequestBehavior.AllowGet);
+        //    }
+        //}
 
         public JsonResult ObtenerGridAcreditaciones(string Dependencia)
         {
@@ -989,8 +989,50 @@ namespace MIPlan.Controllers
             }
         }
 
-        /**/
+        /*PARA FORMULARIO CATÁLOGO BÁSICOS*/
+        public JsonResult ObtenerCatalogoBasicos()
+        {
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            try
+            {
+                list = CursorDataContext.ObtenerComboCatBasicos();
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
 
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult ObtenerGridBasicos(string IdBasicos)
+        {
+            List<Basicos> list = new List<Basicos>();
+            ResultadoBasicos objResultado = new ResultadoBasicos();
+            try
+            {
+                list = CursorDataContext.ObtenerGridBasicos(IdBasicos);
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
 
 
     }
