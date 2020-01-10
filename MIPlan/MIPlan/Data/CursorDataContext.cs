@@ -263,15 +263,19 @@ namespace MIPlan.Data
             }
 
         }
-        public static List<Comun> ObtenerCategorias()
+        public static List<Comun> ObtenerComboBasicos(string Tipo, string SubTipo)
         {
+            //IND
             OracleCommand cmd = null;
             ExeProcedimiento exeProc = new ExeProcedimiento();
 
             try
             {
+                string[] Parametros = { "P_TIPO", "P_SUBTIPO" };
+                object[] Valores = { Tipo, SubTipo };
+
                 OracleDataReader dr = null;
-                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Combo_Categorias", ref dr);
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Combo_Basicos", ref dr, Parametros, Valores);
                 List<Comun> listarComun = new List<Comun>();
                 while (dr.Read())
                 {

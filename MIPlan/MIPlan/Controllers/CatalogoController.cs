@@ -507,7 +507,7 @@ namespace MIPlan.Controllers
             try
             {
                 string Verificador = string.Empty;
-                list = CursorDataContext.ObtenerCategorias();
+                list = CursorDataContext.ObtenerComboBasicos("IND", "null");
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
                 objResultado.Resultado = list;
@@ -1011,7 +1011,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult ObtenerGridBasicos(string IdBasicos)
         {
             List<Basicos> list = new List<Basicos>();
@@ -1034,6 +1033,50 @@ namespace MIPlan.Controllers
             }
         }
 
+        /* PARA FORMULARIO INDICADORES */
+        public JsonResult ObtenerSubtipo()
+        {
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            try
+            {
+                list = CursorDataContext.ObtenerComboBasicos("SUB", "null");
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
 
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public JsonResult ObtenerEtiqueta()
+        {
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            try
+            {
+                list = CursorDataContext.ObtenerComboBasicos("ETQ", "null");
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }
