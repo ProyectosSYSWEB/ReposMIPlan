@@ -22,14 +22,16 @@
                     <label for="lblCategoria" class="text-primary">Categoría:</label>
                     <select class="form-control border border-primary" name="cmbCategoria" ng-change="ctrl.ValorCategoria()" ng-options="option.Id as option.Descripcion for option in ctrl.categoria" ng-model="ctrl.buscar" style="max-width:100%;">
                         <option value="">--Seleccionar CategorÍa--</option>
+                        <option value="Todas">Todas</option>
                     </select>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblSubtipo" class="text-info">Subtipo:</label>
-                    <select class="form-control border border-info" name="cmbsubtipo" style="max-width:100%;">
+                    <select class="form-control border border-info" name="cmbsubtipo" ng-change="ctrl.SubtipoFun()" ng-options="option.Id as option.Descripcion for option in ctrl.subtipo" ng-model="ctrl.Subtipo.Subtipo" style="max-width:100%;">
                         <option value="">--Seleccionar Subtipo--</option>
+                        <option value="Todos">Todos</option>
                     </select>
                 </div>
             </div>
@@ -79,7 +81,7 @@
                                                 <label id="lblSubtipo" for="lblSubtipo" class="text-success">Subtipo:</label>
                                             </div>
                                             <div class="row justify-content-center">
-                                                <select id="cmdSubtipo" class="form-control border border-success" name="cmdSubtipo" required ng-options="" ng-model="ctrl.cve_sub">
+                                                <select id="cmdSubtipo" class="form-control border border-success" name="cmdSubtipo" required ng-options="option.Id as option.Descripcion for option in ctrl.subtipo" ng-model="ctrl.cve_sub">
                                                     <option value="">--Seleccionar Subtipo--</option>
                                                 </select>
                                             </div>
@@ -93,7 +95,7 @@
                                                 <label id="lblDescripcion" for="lblDescripcion" class="text-success">Descripción:</label>
                                             </div>
                                             <div class="row justify-content-center">
-                                                <input id="txtDescripcion" class="form-control border border-success" name="txtDescripcion" type="text" ng-model="ctrl.cve_desc">
+                                                <input id="txtDescripcion" class="form-control border border-success" name="txtDescripcion" type="text" ng-model="ctrl.cve_desc" required placeholder="Descripción">
                                             </div>
                                             <div class="row justify-content-center">
                                                 <span class="messages" ng-show="modalForm.$submitted || modalForm.txtDescripcion.$touched">
@@ -105,7 +107,7 @@
                                                 <label id="lblEtiqueta1" for="lblEtiqueta1" class="text-success">Etiqueta 1:</label>
                                             </div>
                                             <div class="row justify-content-center">
-                                                <select id="cmdEtiqueta1" class="form-control border border-success" name="cmdEtiqueta1" ng-model="ctrl.cve_et1">
+                                                <select id="cmdEtiqueta1" class="form-control border border-success" name="cmdEtiqueta1" required ng-options="option.Id as option.Descripcion for option in ctrl.etiqueta" ng-model="ctrl.cve_et1">
                                                     <option value="">--Seleccionar Etiqueta--</option>
                                                 </select>
                                             </div>
@@ -119,7 +121,7 @@
                                                 <label id="lblEtiqueta2" for="lblEtiqueta2" class="text-success">Etiqueta 2:</label>
                                             </div>
                                             <div class="row justify-content-center">
-                                                <select id="cmdEtiqueta2" class="form-control border border-success" name="cmdEtiqueta2" required ng-options="" ng-model="ctrl.cve_et2">
+                                                <select id="cmdEtiqueta2" class="form-control border border-success" name="cmdEtiqueta2" required ng-options="option.Id as option.Descripcion for option in ctrl.etiqueta" ng-model="ctrl.cve_et2">
                                                     <option value="">--Seleccionar Etiqueta--</option>
                                                 </select>
                                             </div>
@@ -222,7 +224,7 @@
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody ng-pagination="i in ctrl.indicadores | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Estatus | itemsPerPage: 5">
+                <tbody ng-pagination="i in ctrl.indicadores | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Subtipo | itemsPerPage: 5">
                     <tr>
                         <td>{{i.Cat}}</td>
                         <td>{{i.Sub}}</td>

@@ -10,6 +10,8 @@
 
         this.Inicio = function () {
             ObtenerCategorias();
+            ObtenerEtiqueta();
+            ObtenerSubtipo();
         };
 
         var ObtenerCategorias = function () {
@@ -32,6 +34,52 @@
 
         this.CargarCategorias = function () {
             ObtenerCategorias();
+
+        };
+
+        var ObtenerEtiqueta = function () {
+            catalogoContext.ObtenerEtiquetas(function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.etiqueta = catalogoContext.etiquetalst;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+
+        this.CargarEtiquetas = function () {
+            ObtenerEtiqueta();
+
+        };
+
+        var ObtenerSubtipo = function () {
+            catalogoContext.ObtenerSubtipos(function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.subtipo = catalogoContext.subtipolst;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+
+        this.CargarSubtipos = function () {
+            ObtenerSubtipo();
 
         };
 
@@ -92,21 +140,12 @@
             document.getElementById("cmdEtiqueta2").className = "form-control border border-success";
             document.getElementById("lblSeguimiento").className = "text-success";
             document.getElementById("Radio").className = "radio-group form-control border border-success text-center";
-            //self.cve_cat = "";
-            //self.cve_sub = "";
-            //self.cve_desc = "";
-            //self.cve_et1 = "";
-            //self.cve_et2 = "";
-            //self.cve_seg = "";
-
-            //self.cve_status = "A";
-            //var iNumeroMayor = self.areasatencion[0].Cve;
-            //for (var i = 0; i < self.areasatencion.length; i++) {
-            //    if (self.areasatencion[i].Cve > iNumeroMayor) {
-            //        iNumeroMayor = self.areasatencion[i].Cve;
-            //    }
-            //}
-            //self.cve_clave = parseInt(iNumeroMayor) + 1;
+            self.cve_cat = "";
+            self.cve_sub = "";
+            self.cve_desc = "";
+            self.cve_et1 = "";
+            self.cve_et2 = "";
+            self.cve_seg = "";
         };
 
         this.DivError = function () {
@@ -119,10 +158,16 @@
 
         this.ValorCategoria = function () {
             //CargarGrid();
-            if (self.buscar == null) {
+            if (self.buscar == "Todas") {
                 self.buscar = '';
             }
         };
+
+        this.SubtipoFun = function () {
+            if (self.Subtipo.Subtipo == "Todos") {
+                self.Subtipo.Subtipo = '';
+            }
+        }
 
         this.reset = function (form) {
             $('#indicadores').modal('hide');
