@@ -2,15 +2,15 @@
 // <reference path="../Models/CatModel.js"/>
 
 (function () {
-    var app = angular.module('MIPlanWeb', []);    
+    var app = angular.module('MIPlanWeb', ['ngPagination']);
 
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
         var self = this;
-        //var abc = "";
+        self.buscar = '';
 
         this.Inicio = function () {
             ObtenerCatalogoBasicos();
-            //CargarGrid();
+            CargarGrid();
         };
 
         //var CargarCombos = function () {
@@ -23,6 +23,7 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.catalogos = catalogoContext.catalogoslst;
+                        //self.error1 = catalogoContext.catalogoslst[0].Id;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -34,98 +35,93 @@
             });
         };   
 
-        //var CargarGrid = function (IdBasicos) {
-        //    catalogoContext.ObtenerBasicos(IdBasicos,function (resp) {
-        //        switch (resp.ressult) {
-        //            case "tgp":
-        //                self.basicos = catalogoContext.basicoslst;
-        //                break;
-        //            case "notgp":
-        //                self.mensaje_gral = resp.message;
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //        $scope.$apply();
-        //    });
-        //};   
+        var CargarGrid = function () {
+            catalogoContext.ObtenerBasicos(self.buscar,function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.basicos = catalogoContext.basicoslst;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };   
 
-        //this.ObtenerDatos = function (IdAcreditacion) {
-        //    $('#btnActualizar').show();
-        //    $('#btnNuevo').hide();
-        //    self.Titulo = "Modificar Acreditador";
-        //    self.cve_id = IdAcreditacion;
-        //    document.getElementById("Titulo").className = "modal-header btn-primary justify-content-center";
-        //    document.getElementById("lbldependencia").className = "text-primary";
-        //    document.getElementById("cmbdependencia").className = "form-control border border-primary";
-        //    document.getElementById("lblcarrera").className = "text-primary";
-        //    document.getElementById("cmbcarrera").className = "form-control border border-primary";
-        //    document.getElementById("lblorganismo").className = "text-primary";
-        //    document.getElementById("cmborganismo").className = "form-control border border-primary";
-        //    document.getElementById("lblfechainicio").className = "text-primary";
-        //    document.getElementById("txtfechainicio").className = "form-control border border-primary";
-        //    document.getElementById("lblfechafin").className = "text-primary";
-        //    document.getElementById("txtfechafin").className = "form-control border border-primary";
-        //    document.getElementById("lblstatus").className = "text-primary";
-        //    document.getElementById("cmbstatus").className = "form-control border border-primary";
-        //    document.getElementById("lblobservacion").className = "text-primary";
-        //    document.getElementById("txtobservacion").className = "form-control border border-primary";
-
-        //    catalogoContext.ObtenerAcreditador(IdAcreditacion, function (resp) {
-        //        switch (resp.ressult) {
-        //            case "tgp":
-        //                self.cve_dependencia = catalogoContext.unidadAcreditacionlst[0].Dependencia;
-        //                ObtenerCarreras();
-        //                self.cve_organismo = catalogoContext.unidadAcreditacionlst[0].Organismo;
-        //                self.cve_fecha_inicio = catalogoContext.unidadAcreditacionlst[0].Fecha_Inicial;
-        //                self.cve_fecha_fin = catalogoContext.unidadAcreditacionlst[0].Fecha_Final;
-        //                self.cve_status = catalogoContext.unidadAcreditacionlst[0].Status;
-        //                self.cve_observaciones = catalogoContext.unidadAcreditacionlst[0].Observaciones;
-        //                $('#acreditadores').modal('hide');
-        //                break;
-        //            case "notgp":
-        //                self.mensaje_gral = resp.message;
-        //                document.getElementById("Error").style.display = "block";
-        //                document.getElementById("Message").innerHTML = self.mensaje_gral;
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //        $scope.$apply();
-        //        self.cve_carrera = catalogoContext.unidadAcreditacionlst[0].Carrera;
+        this.ObtenerDatos = function (/*IdBasicos*/) {
+            $('#btnActualizar').show();
+            $('#btnNuevo').hide();
+            self.Titulo = "Modificar Basico";
+            //self.cve_id = IdBasicos;
+            
+            document.getElementById("Titulo").className = "modal-header btn-primary justify-content-center";
+            document.getElementById("lblcatalogo").className = "text-primary";
+            document.getElementById("cmbcatalogo").className = "form-control border border-primary";
+            document.getElementById("lblorganismo").className = "text-primary";
+            document.getElementById("cmborganismo").className = "form-control border border-primary";
+            document.getElementById("lblClave").className = "text-primary";
+            document.getElementById("txtClave").className = "form-control border border-primary";
+            document.getElementById("lblDescripcion").className = "text-primary";
+            document.getElementById("txtDescripcion").className = "form-control border border-primary";
+            document.getElementById("lblstatus").className = "text-primary";
+            document.getElementById("cmbstatus").className = "form-control border border-primary";
 
 
-        //    });
-        //};
+            //catalogoContext.ObtenerAcreditador(IdBasicos, function (resp) {
+            //    switch (resp.ressult) {
+            //        case "tgp":
+            //            self.cve_dependencia = catalogoContext.unidadAcreditacionlst[0].Dependencia;
+            //            ObtenerCarreras();
+            //            self.cve_organismo = catalogoContext.unidadAcreditacionlst[0].Organismo;
+            //            self.cve_fecha_inicio = catalogoContext.unidadAcreditacionlst[0].Fecha_Inicial;
+            //            self.cve_fecha_fin = catalogoContext.unidadAcreditacionlst[0].Fecha_Final;
+            //            self.cve_status = catalogoContext.unidadAcreditacionlst[0].Status;
+            //            self.cve_observaciones = catalogoContext.unidadAcreditacionlst[0].Observaciones;
+            //            $('#acreditadores').modal('hide');
+            //            break;
+            //        case "notgp":
+            //            self.mensaje_gral = resp.message;
+            //            document.getElementById("Error").style.display = "block";
+            //            document.getElementById("Message").innerHTML = self.mensaje_gral;
+            //            break;
+            //        default:
+            //            break;
+            //    }
+            //    $scope.$apply();
+               
 
 
-        //this.Nuevo = function () {
-        //    $('#btnNuevo').show();
-        //    $('#btnActualizar').hide();
-        //    self.Titulo = "Agregar Acreditador";
-        //    document.getElementById("Titulo").className = "modal-header btn-success justify-content-center";
-        //    document.getElementById("lbldependencia").className = "text-success";
-        //    document.getElementById("cmbdependencia").className = "form-control border border-success";
-        //    document.getElementById("lblcarrera").className = "text-success";
-        //    document.getElementById("cmbcarrera").className = "form-control border border-success";
-        //    document.getElementById("lblorganismo").className = "text-success";
-        //    document.getElementById("cmborganismo").className = "form-control border border-success";
-        //    document.getElementById("lblfechainicio").className = "text-success";
-        //    document.getElementById("txtfechainicio").className = "form-control border border-success";
-        //    document.getElementById("lblfechafin").className = "text-success";
-        //    document.getElementById("txtfechafin").className = "form-control border border-success";
-        //    document.getElementById("lblstatus").className = "text-success";
-        //    document.getElementById("cmbstatus").className = "form-control border border-success";
-        //    document.getElementById("lblobservacion").className = "text-success";
-        //    document.getElementById("txtobservacion").className = "form-control border border-success";
-        //    self.cve_dependencia = "";
-        //    self.cve_carrera = "";
-        //    self.cve_organismo = "";
-        //    self.cve_fecha_inicio = "";
-        //    self.cve_fecha_fin = "";
-        //    self.cve_status = "";
-        //    self.cve_observaciones = "";
-        //};
+            //});
+        };
+
+
+        this.Nuevo = function () {
+            $('#btnNuevo').show();
+            $('#btnActualizar').hide();
+            self.Titulo = "Crear Basico";
+            document.getElementById("Titulo").className = "modal-header btn-success justify-content-center";
+            document.getElementById("lblcatalogo").className = "text-success";
+            document.getElementById("cmbcatalogo").className = "form-control border border-success";
+            document.getElementById("lblorganismo").className = "text-success";
+            document.getElementById("cmborganismo").className = "form-control border border-success";
+            document.getElementById("lblClave").className = "text-success";
+            document.getElementById("txtClave").className = "form-control border border-success";
+            document.getElementById("lblDescripcion").className = "text-success";
+            document.getElementById("txtDescripcion").className = "form-control border border-success";
+            document.getElementById("lblstatus").className = "text-success";
+            document.getElementById("cmbstatus").className = "form-control border border-success";
+           
+            //self.cve_dependencia = "";
+            //self.cve_carrera = "";
+            //self.cve_organismo = "";
+            //self.cve_fecha_inicio = "";
+            //self.cve_fecha_fin = "";
+            //self.cve_status = "";
+            //self.cve_observaciones = "";
+        };
 
 
 
@@ -219,12 +215,12 @@
         //    document.getElementById("ErrorModal").style.display = "none";
         //};
 
-        //this.ValorDependencia= function () {
-        //    CargarGrid();
-        //    if (self.buscar == "00000" || self.buscar == null) {
-        //        self.buscar = '';
-        //    }
-        //};
+        this.Valorbasicos= function () {
+            CargarGrid();
+            if (self.buscar == "00000" || self.buscar == null) {
+                self.buscar = '';
+            }
+        };
 
 
         //this.StatusFun = function () {
