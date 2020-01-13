@@ -180,5 +180,73 @@ namespace MIPlan.Data
             }
             return list;
         }
+        public static List<Basicos> ObtenerDatosBasico(int Id, ref string Verificador)
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+            List<Basicos> list = new List<Basicos>();
+            Basicos objBasico = new Basicos();
+            try
+            {
+
+                OracleDataReader dr = null;
+                string[] Parametros = { "P_ID_BASICOS" };
+                object[] Valores = { Id };
+                string[] ParametrosOut = { "P_TIPO", "P_CLAVE", "P_STATUS", "P_DESCRIPCION", "P_ORDEN", "P_BANDERA" };
+                cmd = exeProc.GenerarOracleCommand("OBT_PLA_BASICOS", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+                objBasico.Tipo = Convert.ToString(cmd.Parameters["P_TIPO"].Value);
+                objBasico.Clave = Convert.ToString(cmd.Parameters["P_CLAVE"].Value);
+                objBasico.Status = Convert.ToString(cmd.Parameters["P_STATUS"].Value);
+                objBasico.Descripcion = Convert.ToString(cmd.Parameters["P_DESCRIPCION"].Value);
+                objBasico.Orden = Convert.ToString(cmd.Parameters["P_ORDEN"].Value);
+                list.Add(objBasico);
+
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+            return list;
+            //return registroAgregado;
+        }
+        public static List<Indicadores> ObtenerDatosIndicador(int Id, ref string Verificador)
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+            List<Indicadores> list = new List<Indicadores>();
+            Indicadores objIndicador = new Indicadores();
+            try
+            {
+
+                OracleDataReader dr = null;
+                string[] Parametros = { "P_ID" };
+                object[] Valores = { Id };
+                string[] ParametrosOut = { "P_CATEGORIA", "P_SUBTIPO", "P_ETIQUETA_1", "P_ETIQUETA_2", "P_DESCRIPCION", "P_BANDERA" };
+                cmd = exeProc.GenerarOracleCommand("OBT_PLA_INDICADORES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+                objIndicador.Categoria = Convert.ToString(cmd.Parameters["P_CATEGORIA"].Value);
+                objIndicador.Subtipo = Convert.ToString(cmd.Parameters["P_SUBTIPO"].Value);
+                objIndicador.Etiqueta_1 = Convert.ToString(cmd.Parameters["P_ETIQUETA_1"].Value);
+                objIndicador.Etiqueta_2 = Convert.ToString(cmd.Parameters["P_ETIQUETA_2"].Value);
+                objIndicador.Descripcion = Convert.ToString(cmd.Parameters["P_DESCRIPCION"].Value);
+                list.Add(objIndicador);
+
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+            return list;
+            //return registroAgregado;
+        }
+
+
     }
 }

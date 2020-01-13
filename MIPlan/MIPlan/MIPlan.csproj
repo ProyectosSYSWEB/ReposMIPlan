@@ -147,6 +147,7 @@
     <Compile Include="Models\BkpDesc.cs" />
     <Compile Include="Models\Configuracion.cs" />
     <Compile Include="Models\Comun.cs" />
+    <Compile Include="Models\Indicadores.cs" />
     <Compile Include="Models\Resultado.cs" />
     <Compile Include="Models\Sesion.cs" />
     <Compile Include="Models\UnidadadesResponsables.cs" />

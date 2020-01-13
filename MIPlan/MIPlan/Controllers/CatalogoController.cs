@@ -467,7 +467,6 @@ namespace MIPlan.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult ObtenerPeriodos(int Id)
         {
             List<Periodos> list = new List<Periodos>();
@@ -499,7 +498,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult ObtenerCategorias()
         {
             List<Comun> list = new List<Comun>();
@@ -521,8 +519,6 @@ namespace MIPlan.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-
-
         /*FIN METODOS DE LUIS*/
 
         public JsonResult GuardarBasicos(string tipo, string clave, string status, string descripcion, string valor, string orden)
@@ -559,9 +555,7 @@ namespace MIPlan.Controllers
                 objResultado.MensajeError = ex.Message;
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
-        }   
-        
-
+        }           
         public JsonResult EditarUnidadesResponsables (int id, string dependencia, string clave, string descripcion, string status, string coordinador)
         {
             Unidades objUnidades = new Unidades();
@@ -597,8 +591,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
-
         public JsonResult EditarAreasAtencion(int id, string dependencia, string clave, string descripcion, string status, string categoria)
         {
             AreasAtencion objAreasAt = new AreasAtencion();
@@ -635,7 +627,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult EditarAcreditaciones(int id, string dependencia, string carrera, string organismo, string fechaIni, string fechaFin, string status, string observaciones)
         {
             Acreditaciones objAcreditaciones = new Acreditaciones();
@@ -674,7 +665,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult EditarPerdiodos(int id, string dependencia, string periodo, string descripcion, string status, string ejercicio, string inicio, string fin)
         {
             Periodos objPeriodos = new Periodos();
@@ -750,7 +740,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult GuardarAreasAtencion(string dependencia, string clave, string descripcion, string status, string categoria)
         {
             AreasAtencion objAreasAt = new AreasAtencion();
@@ -786,7 +775,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult GuardarUnidadesResponsables(string dependencia, string clave, string descripcion, string status, string coordinador)
         {
             Unidades objUnidades = new Unidades();
@@ -822,7 +810,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult GuardarPerdiodos(string dependencia, string periodo, string descripcion, string status, string ejercicio, string inicio, string fin)
         {
             Periodos objPeriodos = new Periodos();
@@ -860,7 +847,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado,JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult EliminarAcreditacion(int IdAcreditacion)
         {
             Acreditaciones objAcreditacion = new Acreditaciones();
@@ -892,7 +878,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult EliminarAreaAtencion(int IdArea)
         {
             AreasAtencion objAreasAt = new AreasAtencion();
@@ -924,7 +909,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult EliminarUnidadResponsable(int IdUnidad)
         {
             Unidades objUnidad = new Unidades();
@@ -956,7 +940,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult EliminarPeriodo(int Id)
         {
             Periodos objPeriodos = new Periodos();
@@ -1032,6 +1015,37 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
+        public JsonResult ObtenerDatosBasico(int IdBasico)
+        {
+            string Verificador = string.Empty;
+            ResultadoBasicos objResultado = new ResultadoBasicos();
+
+            try
+            {
+                var List = DataContext.ObtenerDatosBasico(IdBasico, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = string.Empty;
+                    objResultado.Resultado = List;
+                    return Json(objResultado, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                    return Json(objResultado, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = Verificador;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         /* PARA FORMULARIO INDICADORES */
         public JsonResult ObtenerSubtipo()
@@ -1055,8 +1069,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
-
         public JsonResult ObtenerEtiqueta()
         {
             List<Comun> list = new List<Comun>();
@@ -1078,5 +1090,37 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
+        public JsonResult ObtenerDatosIndicador(int Indicador)
+        {
+            string Verificador = string.Empty;
+            ResultadoIndicadores objResultado = new ResultadoIndicadores();
+
+            try
+            {
+                var List = DataContext.ObtenerDatosIndicador(Indicador, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = string.Empty;
+                    objResultado.Resultado = List;
+                    return Json(objResultado, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                    return Json(objResultado, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = Verificador;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
     }
 }
