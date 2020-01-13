@@ -103,7 +103,7 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.acreditador = catalogoContext.acreditadoreslst;
-                        $('[data-toggle="tooltip"]').tooltip();
+                       
                         $('#acreditadores').modal('hide');
                         break;
                     case "notgp":
@@ -171,7 +171,7 @@
         this.Nuevo = function () {
             $('#btnNuevo').show();
             $('#btnActualizar').hide();
-            self.Titulo = "Agregar Acreditador";
+            self.Titulo = "Crear Acreditador";
             document.getElementById("Titulo").className = "modal-header btn-success justify-content-center";
             document.getElementById("lbldependencia").className = "text-success";
             document.getElementById("cmbdependencia").className = "form-control border border-success";
