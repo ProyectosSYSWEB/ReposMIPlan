@@ -4,7 +4,8 @@ var catalogoContext =
     dependenciaslst: [],
     ListaUnidadResponsableLST: [], 
     ListaEjerciciosLST: [],
-    ListaPlanesLST:[],
+    ListaPlanesLST: [],
+    GridAreasAtencionLST: [],
 /********************************************************************************************************************************************************/
     ObtenerDependencias: function (callBackResult) {
         var self = this;
@@ -80,7 +81,7 @@ var catalogoContext =
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
                             self.ListaEjerciciosLST.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion });
-                        }3
+                        }
 
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
@@ -110,7 +111,7 @@ var catalogoContext =
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
                             self.ListaPlanesLST.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion });
-                        } 3
+                        } 
 
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
@@ -129,6 +130,36 @@ var catalogoContext =
     },
 /********************************************************************************************************************************************************/
 
+    GridAreasAtencion: function (Dependencia, callBackResult) {
+        var self = this;
+        self.GridAreasAtencionLST.length = 0;
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'PlanTrabajo/GridAreasAtencion',
+                data: { Dependencia },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        for (var i = 0; i < resp.Resultado.length; i++) {
+                            self.GridAreasAtencionLST.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion });                            
+                       }
+                        console.log(self.GridAreasAtencionLST);
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ListaEjercicios." });
+                    }
+                }
+            });
+
+    },
 /********************************************************************************************************************************************************/
   
 };
