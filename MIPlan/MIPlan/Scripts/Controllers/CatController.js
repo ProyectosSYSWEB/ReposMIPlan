@@ -27,6 +27,8 @@
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -36,13 +38,15 @@
         };   
 
         var CargarGrid = function () {
-            catalogoContext.ObtenerBasicos(self.buscar,function (resp) {
+            catalogoContext.ObtenerBasicos(self.buscar,function(resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         self.basicos = catalogoContext.basicoslst;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
                     default:
                         break;
@@ -51,50 +55,48 @@
             });
         };   
 
-        this.ObtenerDatos = function (/*IdBasicos*/) {
+        this.ObtenerDatos = function (IdBasicos) {
             $('#btnActualizar').show();
             $('#btnNuevo').hide();
             self.Titulo = "Modificar Basico";
-            //self.cve_id = IdBasicos;
+            self.cve_id = IdBasicos;
             
             document.getElementById("Titulo").className = "modal-header btn-primary justify-content-center";
             document.getElementById("lblcatalogo").className = "text-primary";
             document.getElementById("cmbcatalogo").className = "form-control border border-primary";
-            document.getElementById("lblorganismo").className = "text-primary";
-            document.getElementById("cmborganismo").className = "form-control border border-primary";
+            document.getElementById("lblorden").className = "text-primary";
+            document.getElementById("txtorden").className = "form-control border border-primary";
             document.getElementById("lblClave").className = "text-primary";
             document.getElementById("txtClave").className = "form-control border border-primary";
             document.getElementById("lblDescripcion").className = "text-primary";
             document.getElementById("txtDescripcion").className = "form-control border border-primary";
             document.getElementById("lblstatus").className = "text-primary";
-            document.getElementById("cmbstatus").className = "form-control border border-primary";
+            document.getElementById("Radio").className = "radio-group form-control border border-primary text-center";
 
 
-            //catalogoContext.ObtenerAcreditador(IdBasicos, function (resp) {
-            //    switch (resp.ressult) {
-            //        case "tgp":
-            //            self.cve_dependencia = catalogoContext.unidadAcreditacionlst[0].Dependencia;
-            //            ObtenerCarreras();
-            //            self.cve_organismo = catalogoContext.unidadAcreditacionlst[0].Organismo;
-            //            self.cve_fecha_inicio = catalogoContext.unidadAcreditacionlst[0].Fecha_Inicial;
-            //            self.cve_fecha_fin = catalogoContext.unidadAcreditacionlst[0].Fecha_Final;
-            //            self.cve_status = catalogoContext.unidadAcreditacionlst[0].Status;
-            //            self.cve_observaciones = catalogoContext.unidadAcreditacionlst[0].Observaciones;
-            //            $('#acreditadores').modal('hide');
-            //            break;
-            //        case "notgp":
-            //            self.mensaje_gral = resp.message;
-            //            document.getElementById("Error").style.display = "block";
-            //            document.getElementById("Message").innerHTML = self.mensaje_gral;
-            //            break;
-            //        default:
-            //            break;
-            //    }
-            //    $scope.$apply();
+            catalogoContext.ObtenerBasico(IdBasicos, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.cve_catalogo = catalogoContext.basicolst[0].Id;
+                        self.cve_orden = catalogoContext.basicolst[0].DescripcionPadre;
+                        self.cve_clave = catalogoContext.basicolst[0].Clave;
+                        self.cve_descripcion = catalogoContext.basicolst[0].Descripcion;
+                        self.cve_status = catalogoContext.basicolst[0].Status;
+                        $('#basicos').modal('hide');
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
                
 
 
-            //});
+            });
         };
 
 
@@ -105,23 +107,33 @@
             document.getElementById("Titulo").className = "modal-header btn-success justify-content-center";
             document.getElementById("lblcatalogo").className = "text-success";
             document.getElementById("cmbcatalogo").className = "form-control border border-success";
-            document.getElementById("lblorganismo").className = "text-success";
-            document.getElementById("cmborganismo").className = "form-control border border-success";
+            document.getElementById("lblorden").className = "text-success";
+            document.getElementById("txtorden").className = "form-control border border-success";
             document.getElementById("lblClave").className = "text-success";
             document.getElementById("txtClave").className = "form-control border border-success";
             document.getElementById("lblDescripcion").className = "text-success";
             document.getElementById("txtDescripcion").className = "form-control border border-success";
             document.getElementById("lblstatus").className = "text-success";
-            document.getElementById("cmbstatus").className = "form-control border border-success";
+            document.getElementById("Radio").className = "radio-group form-control border border-success text-center";
            
-            //self.cve_dependencia = "";
-            //self.cve_carrera = "";
-            //self.cve_organismo = "";
-            //self.cve_fecha_inicio = "";
-            //self.cve_fecha_fin = "";
-            //self.cve_status = "";
-            //self.cve_observaciones = "";
+            self.cve_catalogo = "";
+            self.cve_orden = "";
+            self.cve_clave = "";
+            self.cve_descripcion = "";
+            self.cve_status = "";
+           
+
+            self.cve_status = "A";
+            var iNumeroMayor = self.basico[0].Cve;
+            for (var i = 0; i < self.basico.length; i++) {
+                if (self.basico[i].Cve > iNumeroMayor) {
+                    iNumeroMayor = self.basico[i].Cve;
+                }
+            }
+            self.cve_clave = parseInt(iNumeroMayor) + 1;
         };
+
+        
 
 
 
@@ -208,16 +220,16 @@
         //    }
         //};
 
-        //this.DivError = function () {
-        //    document.getElementById("Error").style.display = "none";
-        //};
-        //this.DivErrorModal = function () {
-        //    document.getElementById("ErrorModal").style.display = "none";
-        //};
+        this.DivError = function () {
+            document.getElementById("Error").style.display = "none";
+        };
+        this.DivErrorModal = function () {
+            document.getElementById("ErrorModal").style.display = "none";
+        };
 
         this.Valorbasicos= function () {
             CargarGrid();
-            if (self.buscar == "00000" || self.buscar == null) {
+            if (self.buscar == null) {
                 self.buscar = '';
             }
         };
