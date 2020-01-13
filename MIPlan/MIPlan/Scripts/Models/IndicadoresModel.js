@@ -3,6 +3,7 @@
     categorialst: [],
     etiquetalst: [],
     subtipolst: [],
+    indicadoresRlst: [],
 
     ObtenerCategorias: function (callBackResult) {
         var self = this;
@@ -97,6 +98,36 @@
                 error: function (ex) {
                     if (callBackResult != undefined) {
                         callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerCategorias." });
+                    }
+                }
+            });
+
+    },
+
+    ObtenerIndicadores: function (Indicador, callBackResult) {
+        var self = this;
+        self.indicadoresRlst.length = 0;
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'Catalogo/ObtenerDatosIndicador',
+                data: { Indicador },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        for (var i = 0; i < resp.Resultado.length; i++) {
+                            self.indicadoresRlst.push({ Cat: resp.Resultado[i].Categoria, Sub: resp.Resultado[i].Subtipo, Desc: resp.Resultado[i].Descripcion, Et1: resp.Resultado[i].Etiqueta_1, Et2: resp.Resultado[i].Etiqueta_2, Seg: resp.Resultado[i].Seguimiento });
+                        }
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError })
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerDatosIndicador." });
                     }
                 }
             });
