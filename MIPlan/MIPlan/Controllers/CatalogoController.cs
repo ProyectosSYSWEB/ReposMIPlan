@@ -972,7 +972,7 @@ namespace MIPlan.Controllers
             }
         }
 
-        /* PARA FORMULARIO CATÁLOGO BÁSICOS */
+        /* PARA FORMULARIO CATÁLOGO BÁSICOS*/
         public JsonResult ObtenerCatalogoBasicos()
         {
             List<Comun> list = new List<Comun>();
