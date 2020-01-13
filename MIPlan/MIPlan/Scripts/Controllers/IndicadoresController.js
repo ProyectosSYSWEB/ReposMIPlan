@@ -83,11 +83,11 @@
 
         };
 
-        this.ObtDatos = function (/*IdAreaAtencion*/) {
+        this.ObtDatos = function (Indicador) {
             $('#btnActualizar').show();
             $('#btnNuevo').hide();
             self.Titulo = "Modificar Indicador";
-            //self.cve_id = IdAreaAtencion;
+            self.cve_id = Indicador;
             document.getElementById("Titulo").className = "modal-header btn-primary justify-content-center";
             document.getElementById("lblCategoria").className = "text-primary";
             document.getElementById("cmdCategoria").className = "form-control border border-primary";
@@ -102,25 +102,26 @@
             document.getElementById("lblSeguimiento").className = "text-primary";
             document.getElementById("Radio").className = "radio-group form-control border border-primary text-center";
 
-            //catalogoContext.ObtenerAreas(IdAreaAtencion, function (resp) {
-            //    switch (resp.ressult) {
-            //        case "tgp":
-            //            self.cve_dependencia = catalogoContext.areasRlst[0].Dependencia;
-            //            self.cve_clave = catalogoContext.areasRlst[0].Cve;
-            //            self.cve_desc = catalogoContext.areasRlst[0].Desc;
-            //            self.cve_status = catalogoContext.areasRlst[0].Estatus;
-            //            self.cve_cat = catalogoContext.areasRlst[0].Cat;
-            //            break;
-            //        case "notgp":
-            //            self.mensaje_gral = resp.message;
-            //            document.getElementById("Error").style.display = "block";
-            //            document.getElementById("Message").innerHTML = self.mensaje_gral;
-            //            break;
-            //        default:
-            //            break;
-            //    }
-            //    $scope.$apply();
-            //});
+            catalogoContext.ObtenerIndicadores(Indicador, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.cve_cat = catalogoContext.indicadoresRlst[0].Cat;
+                        self.cve_sub = catalogoContext.indicadoresRlst[0].Sub;
+                        self.cve_desc = catalogoContext.indicadoresRlst[0].Desc;
+                        self.cve_et1 = catalogoContext.indicadoresRlst[0].Et1;
+                        self.cve_et2 = catalogoContext.indicadoresRlst[0].Et2;
+                        self.cve_seg = catalogoContext.indicadoresRlst[0].Seg;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
         };
 
         this.Nuevo = function () {

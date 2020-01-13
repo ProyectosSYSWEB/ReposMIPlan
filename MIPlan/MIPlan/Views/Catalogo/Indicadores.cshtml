@@ -166,8 +166,8 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
-                                        <button type="button" id="btnNuevo" class="btn btn-success" ng-click="ctrl.IndicadoresCreate(ctrl.cve_id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
-                                        <button type="button" id="btnActualizar" class="btn btn-primary" ng-click="ctrl.IndicadoresUpdate(ctrl.cve_id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
+                                        <button type="button" id="btnNuevo" class="btn btn-success" @*ng-click="ctrl.IndicadoresCreate(ctrl.cve_id); ctrl.reset(modalForm)"*@ ng-disabled="modalForm.$invalid">Guardar</button>
+                                        <button type="button" id="btnActualizar" class="btn btn-primary" @*ng-click="ctrl.IndicadoresUpdate(ctrl.cve_id); ctrl.reset(modalForm)"*@ ng-disabled="modalForm.$invalid">Guardar</button>
                                     </div>
                                 </form>
                             </div>
@@ -224,7 +224,7 @@
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody ng-pagination="i in ctrl.indicadores | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Subtipo | itemsPerPage: 5">
+                <tbody @*ng-pagination="i in ctrl.indicadores | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Subtipo | itemsPerPage: 5"*@>
                     <tr>
                         <td>{{i.Cat}}</td>
                         <td>{{i.Sub}}</td>
@@ -238,7 +238,7 @@
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
 
-                            <button type="button" class="btn btn-danger" title="Eliminar" ng-click="ctrl.EliminarIndicadores(i.Id)" style="width:50px">
+                            <button type="button" class="btn btn-danger" title="Eliminar" @*ng-click="ctrl.EliminarIndicadores(i.Id)*@" style="width:50px">
                                 <i class="fa fa-eraser" aria-hidden="true"></i>
                             </button>
                         </td>
