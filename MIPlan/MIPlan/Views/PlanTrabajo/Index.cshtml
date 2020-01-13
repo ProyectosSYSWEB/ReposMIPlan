@@ -62,7 +62,7 @@
             <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                 <div class="form-group">
                     <label for="lblBuscar" class="text-primary">&nbsp;</label>
-                    <button class="btn btn-info btn-block">Buscar</button>
+                    <button class="btn btn-info btn-block" ng-click="ctrl.BtnBuscar()">Buscar</button>
                 </div>
             </div>
         </div>
@@ -75,7 +75,7 @@
 
 
     <div class="row">
-        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
             <div class="panel panel-default panel-table">
                 <div class="panel-heading">
                     <div class="container">
@@ -90,17 +90,17 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">Areas de Atención</th>                                
+                                <th scope="col">Areas de Atención</th>
                                 <th scope="col">%</th>
                                 <th scope="col" style="text-align:center"><em class="fa fa-cog"></em></th>
                             </tr>
                         </thead>
 
 
-                        <tbody>
+                        <tbody ng-pagination="i in ctrl.GridAreasAtencionView |  itemsPerPage: 10 ">
                             <tr>
-                                <td>1</td>
-                                <td>2</td>                                
+                                <td>{{i.Id}}.- {{i.Descripcion}}</td>
+                                <td>0</td>
 
                                 <td style="text-align:center">
                                     <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminnarPeriodo(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
@@ -110,26 +110,30 @@
                         <!---->
                         <tfoot>
                             <tr>
-                                <th colspan="2">
+                                <th>
+
+                                </th>
+                                <th>
                                     <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:40px">
                                         <i class="fa fa-file-excel-o" aria-hidden="true"></i>
                                     </button>
+                                </th>
+                                <th>
                                     <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Generar Reporte en PDF" ng-click="ctrl.BorrarImpViatico($index)" style="width:40px">
                                         <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                     </button>
                                 </th>
-                                <th></th>
-                                <th></th>
                             </tr>
                         </tfoot>
                     </table>
                 </div>
+                <ng-pagination-control boundary-links="true"></ng-pagination-control>
             </div>
             <br />
             <br />
             <br />
         </div>
-        <div class="col-sm-12 col-md-8 col-lg-9 col-xl-9">
+        <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
 
             <div role="tabpanel" style="box-shadow: 10px 40px 96px rgba(0,0,0,.1)">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -180,7 +184,7 @@
 
                                     <tbody >
                                         <tr>
-                                            <td >1</td>
+                                            <td>1</td>
                                             <td>2</td>
                                             <td>3</td>
                                             <td>4</td>
