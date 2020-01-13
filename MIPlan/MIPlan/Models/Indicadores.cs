@@ -14,8 +14,6 @@ namespace MIPlan.Models
         public string Etiqueta_1 { get; set; }
         public string Etiqueta_2 { get; set; }
         public string Evolutivo { get; set; }
-
-
     }
 
     public class ResultadoIndicadores
