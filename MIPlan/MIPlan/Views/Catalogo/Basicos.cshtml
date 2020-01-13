@@ -73,41 +73,36 @@
                         </div>
                         <div class="modal-body">
                             <div class="container-fluid">
-                               
-                                
+
+
 
                                 <div class="row justify-content-center">
                                     <label id="lblcatalogo" for="lblcatalogo" class="text-success">Catalogo:</label>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <select id="cmbcatalogo" class="form-control border border-success" name="cmbcatalogo" ng-model="ctrl.cve_catalogo" ng-options="option.Id as option.Descripcion for option in ctrl.catalogos" >
+                                    <select id="cmbcatalogo" class="form-control border border-success" required name="cmbcatalogo" ng-model="ctrl.cve_catalogo" ng-options="option.Id as option.Descripcion for option in ctrl.catalogos">
                                         <option value="">--Seleccionar Catalogo--</option>
                                     </select>
                                 </div>
 
-
                                 <div class="row justify-content-center">
-                                    <label id="lblorganismo" for="lblorganismo" class="text-success">Organismo:</label>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <select id="cmborganismo" class="form-control border border-success" name="cmborganismo" @*required ng-options="option.Id as option.Descripcion for option in ctrl.organismo" ng-model="ctrl.cve_organismo" ng-change="ctrl.CargarOrganismos()"*@>
-                                        <option value="">--Elegir Organismo--</option>
-
-                                    </select>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <span class="messages" ng-show="modalForm.$submitted || modalForm.cmborganismo.$touched">
-                                        <span ng-show="!ctrl.cve_organismo" class="text-danger">Campo Requerido</span>
+                                    <span class="messages" ng-show="modalForm.$submitted || modalForm.cmbcatalogo.$touched">
+                                        <span ng-show="!ctrl.cve_catalogo" class="text-danger">Campo Requerido</span>
                                     </span>
                                 </div>
+
                                 <div class="row justify-content-center">
                                     <label id="lblClave" for="lblClave" class="text-success">Clave:</label>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <input type="text" id="txtClave" class="form-control border border-success" name="txtClave" placeholder="" ng-model="ctrl.cve_clave">
+                                    <input type="text" id="txtClave" class="form-control border border-success" required name="txtClave" placeholder="" ng-model="ctrl.cve_clave">
                                 </div>
 
-
+                                <div class="row justify-content-center">
+                                    <span class="messages" ng-show="modalForm.$submitted || modalForm.txtClave.$touched">
+                                        <span ng-show="!ctrl.cve_clave" class="text-danger">!Digitos¡</span>
+                                    </span>
+                                </div>
 
                                 <div class="row justify-content-center">
                                     <label id="lblDescripcion" for="lblDescripcion" class="text-success">Descripcion:</label>
@@ -115,23 +110,37 @@
                                 <div class="row justify-content-center">
                                     <input type="text" id="txtDescripcion" class="form-control border border-success" name="txtDescripcion" placeholder="" ng-model="ctrl.cve_descripcion">
                                 </div>
+                                <div class="row justify-content-center">
+                                    <label id="lblorden" for="lblorden" class="text-success">Orden:</label>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <input type="text" id="txtorden" class="form-control border border-success" name="txtorden" placeholder="" ng-model="ctrl.cve_orden">
 
+                                </div>
+                                <div class="row justify-content-center">
+                                    <span class="messages" ng-show="modalForm.$submitted || modalForm.txtorden.$touched">
+                                        <span ng-show="!ctrl.cve_orden" class="text-danger">Campo Requerido</span>
+                                    </span>
+                                </div>
                                 <div class="row justify-content-center">
                                     <label id="lblstatus" for="lblstatus" class="text-success">Estatus:</label>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <select id="cmbstatus" class="form-control border border-success" name="cmbstatus" required ng-options="option.Id as option.Descripcion for option in ctrl.status" ng-model="ctrl.cve_status" ng-change="ctrl.CargarStatus()">
-                                        <option value="">--Elegir Status--</option>
-
-                                    </select>
+                                    <div id="Radio" class="radio-group form-control border border-success text-center" style="max-width: 280px;">
+                                        <label class="radio ">
+                                            <input type="radio" value="S" name="gender" ng-model="ctrl.cve_status" required />
+                                            Alta
+                                            <span></span>
+                                        </label>
+                                        <label class="radio">
+                                            <input type="radio" value="N" name="gender" ng-model="ctrl.cve_status" required />
+                                            Baja
+                                            <span></span>
+                                        </label>
+                                    </div>
                                 </div>
-                                <div class="row justify-content-center">
-                                    <span class="messages" ng-show="modalForm.$submitted || modalForm.cmbstatus.$touched">
-                                        <span ng-show="!ctrl.cve_status" class="text-danger">Campo Requerido</span>
-                                    </span>
-                                </div>
+                              
 
-                                
 
                             </div>
                             <br />
@@ -146,8 +155,8 @@
                             <br />
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
-                                <button type="button" id="btnNuevo" class="btn btn-success" data-dismiss="modal" @*ng-click="ctrl.AcreditadorCreate(ctrl.cve_id.Id); ctrl.reset(modalForm)"*@ ng-disabled="modalForm.$invalid">Guardar</button>
-                                <button type="button" id="btnActualizar" class="btn btn-primary" data-dismiss="modal" @*ng-click="ctrl.AcreditadorUpdate(ctrl.cve_id.Id); ctrl.reset(modalForm)"*@ ng-disabled="modalForm.$invalid">Guardar</button>
+                                <button type="button" id="btnNuevo" class="btn btn-success" data-dismiss="modal" ng-click="ctrl.AcreditadorCreate(ctrl.cve_id.Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
+                                <button type="button" id="btnActualizar" class="btn btn-primary" data-dismiss="modal" ng-click="ctrl.AcreditadorUpdate(ctrl.cve_id.Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
                             </div>
 
                         </div>
@@ -157,7 +166,7 @@
                 <br />
             </div>
         </div>
-        @*<input type="hidden" ng-model="ctrl.cve_id" />*@
+        <input type="hidden" ng-model="ctrl.cve_id" />
         <div class="container table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.3)">
             <table class="table table-hover">
                 <thead>
