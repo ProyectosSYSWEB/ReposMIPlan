@@ -544,6 +544,48 @@ namespace MIPlan.Data
             }
 
         }
+        public static List<Actividades> ObtenerGridActividades(int idMeta)
+        {
+            //s
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+
+            try
+            {
+
+                string[] Parametros = { "P_Id_Meta" };
+                object[] Valores = { idMeta };
+
+                OracleDataReader dr = null;
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Actividades", ref dr, Parametros, Valores);
+                List<Actividades> listarActividades = new List<Actividades>();
+                while (dr.Read())
+                {
+                    Actividades objActividad = new Actividades();
+                    objActividad.Id = Convert.ToInt32(dr[0]);
+                    objActividad.Desc_Programa = Convert.ToString(dr[1]);
+                    objActividad.Desc_Accion = Convert.ToString(dr[2]);
+                    objActividad.Fecha_Inicio = Convert.ToString(dr[3]);
+                    objActividad.Fecha_Fin = Convert.ToString(dr[4]);
+                    objActividad.Impacto = Convert.ToString(dr[5]);
+                    objActividad.Prioritaria = Convert.ToString(dr[6]);
+                    listarActividades.Add(objActividad);
+                }
+                return listarActividades;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
+        }
+
         public static List<Comun> ObtenerComboCatBasicos()
         {            
             var Lista = ExeProcedimiento.GenerarOracleCommandCursor_Combo("PKG_PLANEACION.Obt_Combo_Cat_Basicos");
