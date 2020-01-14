@@ -99,7 +99,7 @@
 
                         <tbody ng-pagination="i in ctrl.GridAreasAtencionView |  itemsPerPage: 10 ">
                             <tr>
-                                <td>{{i.Id}}.- {{i.Descripcion}}</td>
+                                <td ng-click="ctrl.Meta(i.Id) " class="cursor-pointer">{{i.Id}}.- {{i.Descripcion}}</td>
                                 <td>0</td>
 
                                 <td style="text-align:center">
@@ -182,15 +182,15 @@
                                     </thead>
 
 
-                                    <tbody >
+                                    <tbody ng-pagination="i in ctrl.GridActividadesView |  itemsPerPage: 5">
                                         <tr>
-                                            <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>5</td>
-                                            <td>6</td>
-                                            <td>7</td>
+                                            <td>{{i.Desc_Programa}}</td>
+                                            <td>{{i.Desc_Accion}}</td>
+                                            <td>{{i.Fecha_Inicio}}</td>
+                                            <td>{{i.Fecha_Fin}}</td>
+                                            <td>{{i.Impacto}}</td>
+                                            <td>{{i.Prioritaria}}</td>
+                                            <td></td>
                                             <td style="text-align:center">
 
                                                 <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalPeriodo" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Editar" ng-click="ctrl.Modal(i.Id)">
