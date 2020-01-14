@@ -77,11 +77,11 @@
             catalogoContext.ObtenerBasico(IdBasicos, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.cve_catalogo = catalogoContext.basicolst[0].Id;
-                        self.cve_orden = catalogoContext.basicolst[0].DescripcionPadre;
-                        self.cve_clave = catalogoContext.basicolst[0].Clave;
+                        self.cve_catalogo = catalogoContext.basicolst[0].Tipo;
+                        self.cve_orden = catalogoContext.basicolst[0].Clave;
+                        self.cve_clave = catalogoContext.basicolst[0].Status;
                         self.cve_descripcion = catalogoContext.basicolst[0].Descripcion;
-                        self.cve_status = catalogoContext.basicolst[0].Status;
+                        self.cve_status = catalogoContext.basicolst[0].Orden;
                         $('#basicos').modal('hide');
                         break;
                     case "notgp":
@@ -227,19 +227,22 @@
             document.getElementById("ErrorModal").style.display = "none";
         };
 
-        this.Valorbasicos= function () {
+        this.Valorbasicos = function () {
+           
             CargarGrid();
-            if (self.buscar == null) {
+            if (self.buscar == "Todas") {
                 self.buscar = '';
             }
         };
+        
 
 
-        //this.StatusFun = function () {
-        //    if (self.Status.Status == "Todos") {
-        //        self.Status.Status = '';
-        //    }
-        //}
+
+        this.StatusFun = function () {
+            if (self.Status.Status == "Todos") {
+                self.Status.Status = '';
+            }
+        }
 
 
         //this.reset = function (form) {

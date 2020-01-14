@@ -43,7 +43,7 @@
                 data: { IdBasicos },
                 success: function (resp) {
                     for (var i = 0; i < resp.Resultado.length; i++) {
-                        self.basicoslst.push({ Id: resp.Resultado[i].Catalogo, DescripcionPadre: resp.Resultado[i].DescripcionPadre, Clave: resp.Resultado[i].Clave, Descripcion: resp.Resultado[i].Descripcion, Status: resp.Resultado[i].Status });
+                        self.basicoslst.push({ Id: resp.Resultado[i].Id, DescripcionPadre: resp.Resultado[i].DescripcionPadre, Clave: resp.Resultado[i].Clave, Descripcion: resp.Resultado[i].Descripcion, Status: resp.Resultado[i].Status });
                     }
                     if (callBackResult !== undefined) {
                         callBackResult({ ressult: 'tgp', message: null });
@@ -72,7 +72,7 @@
                 data: { IdBasicos },
                 success: function (resp) {
                     for (var i = 0; i < resp.Resultado.length; i++) {
-                        self.basicolst.push({ Id: resp.Resultado[i].Catalogo, DescripcionPadre: resp.Resultado[i].DescripcionPadre, Clave: resp.Resultado[i].Clave, Descripcion: resp.Resultado[i].Descripcion, Status: resp.Resultado[i].Status });
+                        self.basicolst.push({ Tipo: resp.Resultado[i].Tipo, Clave: resp.Resultado[i].Clave, Status: resp.Resultado[i].Status, Descripcion: resp.Resultado[i].Descripcion,   Orden: resp.Resultado[i].Orden});
                     }
                     if (callBackResult !== undefined) {
                         callBackResult({ ressult: 'tgp', message: null });

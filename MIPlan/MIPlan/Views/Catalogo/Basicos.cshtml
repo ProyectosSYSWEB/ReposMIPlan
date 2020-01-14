@@ -30,6 +30,8 @@
                     <label for="lbcatalogo" class="text-success">Catalogo:</label>
                     <select class="form-control border border-success" name="cmbcatalogo" ng-change="ctrl.Valorbasicos()" ng-model="ctrl.buscar" ng-options="option.Id as option.Descripcion for option in ctrl.catalogos" style="max-width:100%;">
                         <option value="">--Seleccionar Catalogo--</option>
+                        <option value="Todas">Todas</option>
+
                     </select>
 
                 </div>
@@ -37,11 +39,11 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblstatus" class="text-info">Estatus:</label>
-                    <select class="form-control border border-info" name="cmbDependencia" @*ng-change="ctrl.StatusFun()" ng-model="ctrl.Status.Status"*@ style="max-width:100%;">
+                    <select class="form-control border border-info" name="cmbDependencia" ng-change="ctrl.StatusFun()" ng-model="ctrl.Status.Status" style="max-width:100%;">
                         <option value="">--Seleccionar Estatus--</option>
                         <option value="Todos">TODOS</option>
-                        <option value="alta">ALTA</option>
-                        <option value="baja">BAJA</option>
+                        <option value="A">ALTA</option>
+                        <option value="B">BAJA</option>
 
                     </select>
                 </div>
@@ -82,6 +84,8 @@
                                 <div class="row justify-content-center">
                                     <select id="cmbcatalogo" class="form-control border border-success" required name="cmbcatalogo" ng-model="ctrl.cve_catalogo" ng-options="option.Id as option.Descripcion for option in ctrl.catalogos">
                                         <option value="">--Seleccionar Catalogo--</option>
+                                        <option value="Todas">Todas</option>
+                                    
                                     </select>
                                 </div>
 
@@ -202,12 +206,7 @@
                                 <span ng-class="sortType == 'Status' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Status' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
-                        <th scope="col">
-                            <a href="" ng-click="sortType = 'Status'; sortReverse = !sortReverse">
-                                Status
-                                <span ng-class="sortType == 'Status' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Status' && sortReverse ? 'fa fa-arrow-up': ''"></span>
-                            </a>
-                        </th>
+                        
 
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
