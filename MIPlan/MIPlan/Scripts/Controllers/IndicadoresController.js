@@ -83,6 +83,24 @@
 
         };
 
+        var CargarGrid = function () {
+            catalogoContext.ObtenerIndicador(self.buscar, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.indicadores = catalogoContext.indicadoreslst;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+
         this.ObtDatos = function (Indicador) {
             $('#btnActualizar').show();
             $('#btnNuevo').hide();
@@ -158,14 +176,14 @@
         };
 
         this.ValorCategoria = function () {
-            //CargarGrid();
-            if (self.buscar == "Todas") {
+            CargarGrid();
+            if (self.buscar == null) {
                 self.buscar = '';
             }
         };
 
         this.SubtipoFun = function () {
-            if (self.Subtipo.Subtipo == "Todos") {
+            if (self.Subtipo.Subtipo == "") {
                 self.Subtipo.Subtipo = '';
             }
         }
@@ -176,7 +194,7 @@
                 form.$setPristine();
                 form.$setUntouched();
             }
-            //CargarGrid();
+            CargarGrid();
             self.cve_cat = null;
             self.cve_sub = null;
             self.cve_desc = null;

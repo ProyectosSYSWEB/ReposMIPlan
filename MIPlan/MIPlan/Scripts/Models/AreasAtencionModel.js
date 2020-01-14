@@ -56,7 +56,7 @@
                 },
                 error: function (ex) {
                     if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerDependencias." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerGridAreasAtencion." });
                     }
                 }
             });
