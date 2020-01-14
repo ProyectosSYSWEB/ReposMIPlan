@@ -1047,6 +1047,49 @@ namespace MIPlan.Controllers
             }
         }
 
+
+        public JsonResult EditarBasicos(int Id, string Tipo, string Clave, string Status, string Descripcion, string Valor, string Orden)
+        {
+            Basicos objBasicos = new Basicos();
+            ResultadoBasicos objResultado = new ResultadoBasicos();
+            string Verificador = string.Empty;
+            try
+            {
+                objBasicos.Id = Id;
+                objBasicos.Tipo = Tipo;
+                objBasicos.Clave = Clave;
+                objBasicos.Status = Status;
+                objBasicos.Descripcion = Descripcion;
+                objBasicos.Valor = Valor;
+                objBasicos.Orden = Orden;
+                GuardarDataContext.EditarBasicos(objBasicos, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = "No existe el registro";
+                    objResultado.Resultado = null;
+                }
+
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+
+
+
+
+
         /* PARA FORMULARIO INDICADORES */
         public JsonResult ObtenerSubtipo()
         {
@@ -1121,6 +1164,5 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
     }
 }
