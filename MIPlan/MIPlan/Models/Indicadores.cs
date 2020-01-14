@@ -21,6 +21,5 @@ namespace MIPlan.Models
         public bool Error { get; set; }
         public string MensajeError { get; set; }
         public List<Indicadores> Resultado { get; set; }
-
     }
 }
