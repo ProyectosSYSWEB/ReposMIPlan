@@ -1,4 +1,5 @@
-﻿using MIPlan.Data;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MIPlan.Data;
 using MIPlan.Models;
 using System;
 using System.Collections.Generic;
@@ -1047,7 +1048,50 @@ namespace MIPlan.Controllers
             }
         }
 
-        /* PARA FORMULARIO INDICADORES*/
+
+        public JsonResult EditarBasicos(int Id, string Tipo, string Clave, string Status, string Descripcion, string Valor, string Orden)
+        {
+            Basicos objBasicos = new Basicos();
+            ResultadoBasicos objResultado = new ResultadoBasicos();
+            string Verificador = string.Empty;
+            try
+            {
+                objBasicos.Id = Id;
+                objBasicos.Tipo = Tipo;
+                objBasicos.Clave = Clave;
+                objBasicos.Status = Status;
+                objBasicos.Descripcion = Descripcion;
+                objBasicos.Valor = Valor;
+                objBasicos.Orden = Orden;
+                GuardarDataContext.EditarBasicos(objBasicos, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = "No existe el registro";
+                    objResultado.Resultado = null;
+                }
+
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+
+
+
+
+
+        /* PARA FORMULARIO INDICADORES */
         public JsonResult ObtenerSubtipo()
         {
             List<Comun> list = new List<Comun>();
