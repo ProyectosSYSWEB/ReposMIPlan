@@ -1047,7 +1047,7 @@ namespace MIPlan.Controllers
             }
         }
 
-        /* PARA FORMULARIO INDICADORES */
+        /* PARA FORMULARIO INDICADORES*/
         public JsonResult ObtenerSubtipo()
         {
             List<Comun> list = new List<Comun>();
@@ -1121,6 +1121,27 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
+        public JsonResult ObtenerGridIndicadores(string Categoria)
+        {
+            List<Indicadores> list = new List<Indicadores>();
+            ResultadoIndicadores objResultado = new ResultadoIndicadores();
+            try
+            {
+                list = CursorDataContext.ObtenerGridIndicadores(Categoria);
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
 
     }
 }
