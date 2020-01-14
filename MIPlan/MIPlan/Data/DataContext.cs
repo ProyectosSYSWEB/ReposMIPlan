@@ -65,7 +65,6 @@ namespace MIPlan.Data
                 objDatosAreasAtencion.Categoria = Convert.ToString(cmd.Parameters["P_CATEGORIA"].Value);
                 objDatosAreasAtencion.Id = Id;
                 list.Add(objDatosAreasAtencion);
-
             }
             catch (Exception ex)
             {
