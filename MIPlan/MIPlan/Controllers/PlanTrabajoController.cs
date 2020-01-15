@@ -87,7 +87,6 @@ namespace MIPlan.Controllers
                 return View();
             }
         }
-
         public JsonResult ListaUnidadResponsable()
         {
             Sesion SesionUsu = new Sesion();
@@ -210,6 +209,88 @@ namespace MIPlan.Controllers
                 objResultado.Resultado = null;
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
 
+            }
+        }
+        public JsonResult ObtenerDatosActividades(int Id)
+        {
+            Actividades objActividades = new Actividades();
+            ResultadoActividades objResultado = new ResultadoActividades();
+            string Verificador = string.Empty;
+            try
+            {                
+                objResultado.Resultado = DataContext.ObtenerDatosActividades(Id, ref Verificador);
+                if(Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult EliminarActividades(int Id)
+        {
+            Actividades objActividades = new Actividades();
+            ResultadoActividades objResultado = new ResultadoActividades();
+            string Verificador = string.Empty;
+            try
+            {
+                objActividades.Id = Id;
+                GuardarDataContext.EliminarActividades(objActividades, ref Verificador);
+                if(Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult ObtenerProgramas()
+        {
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            try
+            {
+                string Verificador = string.Empty;
+                list = CursorDataContext.ObtenerComboBasicos("PRO", "null");
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
 

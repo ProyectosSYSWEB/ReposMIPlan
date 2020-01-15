@@ -282,6 +282,7 @@ namespace MIPlan.Data
                     Comun objComun = new Comun();
                     objComun.Id = Convert.ToString(dr[0]);
                     objComun.Descripcion = Convert.ToString(dr[1]);
+                    objComun.EtiquetaDos = Convert.ToString(dr[2]);
                     listarComun.Add(objComun);
                 }
                 return listarComun;
@@ -585,7 +586,6 @@ namespace MIPlan.Data
             }
 
         }
-
         public static List<Comun> ObtenerComboCatBasicos()
         {            
             var Lista = ExeProcedimiento.GenerarOracleCommandCursor_Combo("PKG_PLANEACION.Obt_Combo_Cat_Basicos");
@@ -668,6 +668,7 @@ namespace MIPlan.Data
             }
 
         }
+
 
 
     }
