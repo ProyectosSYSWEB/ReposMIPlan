@@ -1046,7 +1046,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult EditarBasicos(int Id, string Tipo, string Clave, string Status, string Descripcion, string Valor, string Orden)
         {
             Basicos objBasicos = new Basicos();
@@ -1082,7 +1081,6 @@ namespace MIPlan.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult EliminarBasicos(int Id)
         {
             Basicos objBasicos = new Basicos();
@@ -1114,8 +1112,7 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
-
+        /* FIN FORMULARIO BÁSICOS */
 
 
         /* PARA FORMULARIO INDICADORES */
@@ -1192,7 +1189,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult EditarIndicadores (int Id, string Categoria, string Descripcion, string Subtipo, string Etiqueta1, string Etiqueta2, string Evolutivo)
         {
             Indicadores objIndicadores = new Indicadores();
@@ -1231,7 +1227,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult GuardarIndicadores(string Categoria, string Descripcion, string Subtipo, string Etiqueta1, string Etiqueta2, string Evolutivo)
         {
             Indicadores objIndicadores = new Indicadores();
@@ -1269,8 +1264,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
-
         public JsonResult EliminarIndicadores(int Id)
         {
             Indicadores objIndicadores = new Indicadores();
@@ -1302,7 +1295,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult ObtenerGridIndicadores(string Categoria)
         {
             List<Indicadores> list = new List<Indicadores>();
@@ -1323,7 +1315,7 @@ namespace MIPlan.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-
+        /* FIN FORMULARIO INDICADORES */
 
     }
 }

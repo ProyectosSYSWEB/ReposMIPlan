@@ -87,7 +87,6 @@ namespace MIPlan.Controllers
                 return View();
             }
         }
-
         public JsonResult ListaUnidadResponsable()
         {
             Sesion SesionUsu = new Sesion();
@@ -212,7 +211,6 @@ namespace MIPlan.Controllers
 
             }
         }
-
         public JsonResult ObtenerDatosActividades(int Id)
         {
             Actividades objActividades = new Actividades();
@@ -243,8 +241,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
-
         public JsonResult EliminarActividades(int Id)
         {
             Actividades objActividades = new Actividades();
@@ -276,6 +272,5 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
     }
 }
