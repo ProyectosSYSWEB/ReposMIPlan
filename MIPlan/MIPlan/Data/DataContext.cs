@@ -225,13 +225,14 @@ namespace MIPlan.Data
                 OracleDataReader dr = null;
                 string[] Parametros = { "P_ID" };
                 object[] Valores = { Id };
-                string[] ParametrosOut = { "P_CATEGORIA", "P_SUBTIPO", "P_ETIQUETA_1", "P_ETIQUETA_2", "P_DESCRIPCION", "P_BANDERA" };
+                string[] ParametrosOut = { "P_CATEGORIA", "P_SUBTIPO", "P_ETIQUETA_1", "P_ETIQUETA_2", "P_DESCRIPCION", "P_EVOLUTIVO", "P_BANDERA" };
                 cmd = exeProc.GenerarOracleCommand("OBT_PLA_INDICADORES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
                 objIndicador.Categoria = Convert.ToString(cmd.Parameters["P_CATEGORIA"].Value);
                 objIndicador.Subtipo = Convert.ToString(cmd.Parameters["P_SUBTIPO"].Value);
                 objIndicador.Etiqueta_1 = Convert.ToString(cmd.Parameters["P_ETIQUETA_1"].Value);
                 objIndicador.Etiqueta_2 = Convert.ToString(cmd.Parameters["P_ETIQUETA_2"].Value);
                 objIndicador.Descripcion = Convert.ToString(cmd.Parameters["P_DESCRIPCION"].Value);
+                objIndicador.Evolutivo = Convert.ToString(cmd.Parameters["P_EVOLUTIVO"].Value);
                 list.Add(objIndicador);
 
             }

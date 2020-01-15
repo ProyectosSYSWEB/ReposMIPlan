@@ -106,29 +106,29 @@
                                                 <label id="lblEtiqueta1" for="lblEtiqueta1" class="text-success">Etiqueta 1:</label>
                                             </div>
                                             <div class="row justify-content-center">
-                                                <select id="cmdEtiqueta1" class="form-control border border-success" name="cmdEtiqueta1" required ng-options="option.Id as option.Descripcion for option in ctrl.etiqueta" ng-model="ctrl.cve_et1">
+                                                <select id="cmdEtiqueta1" class="form-control border border-success" name="cmdEtiqueta1" ng-options="option.Id as option.Descripcion for option in ctrl.etiqueta" ng-model="ctrl.cve_et1">
                                                     <option value="">--Seleccionar Etiqueta--</option>
                                                 </select>
                                             </div>
-                                            <div class="row justify-content-center">
+                                            @*<div class="row justify-content-center">
                                                 <span class="messages" ng-show="modalForm.$submitted || modalForm.cmdEtiqueta1.$touched">
                                                     <span ng-show="!ctrl.cve_et1" class="text-danger">Campo Requerido</span>
                                                 </span>
-                                            </div>
+                                            </div>*@
                                             <br />
                                             <div class="row justify-content-center">
                                                 <label id="lblEtiqueta2" for="lblEtiqueta2" class="text-success">Etiqueta 2:</label>
                                             </div>
                                             <div class="row justify-content-center">
-                                                <select id="cmdEtiqueta2" class="form-control border border-success" name="cmdEtiqueta2" required ng-options="option.Id as option.Descripcion for option in ctrl.etiqueta" ng-model="ctrl.cve_et2">
+                                                <select id="cmdEtiqueta2" class="form-control border border-success" name="cmdEtiqueta2" ng-options="option.Id as option.Descripcion for option in ctrl.etiqueta" ng-model="ctrl.cve_et2">
                                                     <option value="">--Seleccionar Etiqueta--</option>
                                                 </select>
                                             </div>
-                                            <div class="row justify-content-center">
+                                            @*<div class="row justify-content-center">
                                                 <span class="messages" ng-show="modalForm.$submitted || modalForm.cmdEtiqueta2.$touched">
                                                     <span ng-show="!ctrl.cve_et2" class="text-danger">Campo Requerido</span>
                                                 </span>
-                                            </div>
+                                            </div>*@
                                             <br />
                                             <div class="row justify-content-center">
                                                 <label id="lblSeguimiento" class="">¿Seguimiento?</label>
@@ -136,13 +136,13 @@
                                             <div class="row justify-content-center">
                                                 <div id="Radio" class="radio-group form-control border border-success text-center" style="max-width: 280px;">
                                                     <label class="radio ">
-                                                        <input type="radio" value="Si" name="btnseg" required ng-model="ctrl.cve_seg" />
-                                                        Si
+                                                        <input type="radio" value="SI" name="btnseg" required ng-model="ctrl.cve_seg" />
+                                                        SI
                                                         <span></span>
                                                     </label>
                                                     <label class="radio">
-                                                        <input type="radio" value="No" name="btnseg" required ng-model="ctrl.cve_seg" />
-                                                        No
+                                                        <input type="radio" value="NO" name="btnseg" required ng-model="ctrl.cve_seg" />
+                                                        NO
                                                         <span></span>
                                                     </label>
                                                 </div>
@@ -165,8 +165,8 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
-                                        <button type="button" id="btnNuevo" class="btn btn-success" @*ng-click="ctrl.IndicadoresCreate(ctrl.cve_id); ctrl.reset(modalForm)"*@ ng-disabled="modalForm.$invalid">Guardar</button>
-                                        <button type="button" id="btnActualizar" class="btn btn-primary" @*ng-click="ctrl.IndicadoresUpdate(ctrl.cve_id); ctrl.reset(modalForm)"*@ ng-disabled="modalForm.$invalid">Guardar</button>
+                                        <button type="button" id="btnNuevo" class="btn btn-success" ng-click="ctrl.IndicadoresCreate(ctrl.cve_id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
+                                        <button type="button" id="btnActualizar" class="btn btn-primary" ng-click="ctrl.IndicadoresUpdate(ctrl.cve_id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
                                     </div>
                                 </form>
                             </div>
@@ -223,7 +223,7 @@
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody ng-pagination="i in ctrl.indicadores | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Subtipo | itemsPerPage: 5">
+                <tbody ng-pagination="i in ctrl.indicadores |  filter:ctrl.buscar | filter:ctrl.Subtipo | itemsPerPage: 5">
                     <tr>
                         <td>{{i.Cat}}</td>
                         <td>{{i.Sub}}</td>
@@ -237,7 +237,7 @@
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
 
-                            <button type="button" class="btn btn-danger" title="Eliminar" @*ng-click="ctrl.EliminarIndicadores(i.Id)*@" style="width:50px">
+                            <button type="button" class="btn btn-danger" title="Eliminar" ng-click="ctrl.EliminarIndicadores(i.Id)" style="width:50px">
                                 <i class="fa fa-eraser" aria-hidden="true"></i>
                             </button>
                         </td>
@@ -245,7 +245,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="4"><ng-pagination-control boundary-links="true"></ng-pagination-control></th>
+
                         <th></th>
                         <th style="text-align:right" colspan="2">
                             <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
@@ -259,6 +259,7 @@
                 </tfoot>
             </table>
         </div>
+        <ng-pagination-control boundary-links="true"></ng-pagination-control>
     </div>
 
 </div>
