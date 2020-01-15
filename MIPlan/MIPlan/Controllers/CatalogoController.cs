@@ -1046,8 +1046,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
-
         public JsonResult EditarBasicos(int Id, string Tipo, string Clave, string Status, string Descripcion, string Valor, string Orden)
         {
             Basicos objBasicos = new Basicos();
@@ -1083,11 +1081,38 @@ namespace MIPlan.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-
-
-
-
-
+        public JsonResult EliminarBasicos(int Id)
+        {
+            Basicos objBasicos = new Basicos();
+            ResultadoBasicos objResultado = new ResultadoBasicos();
+            string Verificador = string.Empty;
+            try
+            {
+                objBasicos.Id = Id;
+                GuardarDataContext.EliminarBasicos(objBasicos, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+        /* FIN FORMULARIO BÁSICOS */
 
 
         /* PARA FORMULARIO INDICADORES */
@@ -1164,6 +1189,112 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
+        public JsonResult EditarIndicadores (int Id, string Categoria, string Descripcion, string Subtipo, string Etiqueta1, string Etiqueta2, string Evolutivo)
+        {
+            Indicadores objIndicadores = new Indicadores();
+            ResultadoIndicadores objResultado = new ResultadoIndicadores();
+            string Verificador = string.Empty;
+            try
+            {
+                objIndicadores.Id = Id;
+                objIndicadores.Categoria = Categoria;
+                objIndicadores.Descripcion = Descripcion;
+                objIndicadores.Subtipo = Subtipo;
+                objIndicadores.Etiqueta_1 = Etiqueta1;
+                objIndicadores.Etiqueta_2 = Etiqueta2;
+                objIndicadores.Evolutivo = Evolutivo;
+                GuardarDataContext.EditarIndicadores(objIndicadores, ref Verificador);
+                if(Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+
+            }
+            catch(Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult GuardarIndicadores(string Categoria, string Descripcion, string Subtipo, string Etiqueta1, string Etiqueta2, string Evolutivo)
+        {
+            Indicadores objIndicadores = new Indicadores();
+            ResultadoIndicadores objResultado = new ResultadoIndicadores();
+            string Verificador = string.Empty;
+            try
+            {                
+                objIndicadores.Categoria = Categoria;
+                objIndicadores.Descripcion = Descripcion;
+                objIndicadores.Subtipo = Subtipo;
+                objIndicadores.Etiqueta_1 = Etiqueta1;
+                objIndicadores.Etiqueta_2 = Etiqueta2;
+                objIndicadores.Evolutivo = Evolutivo;
+                GuardarDataContext.GuardarIndicadores(objIndicadores, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult EliminarIndicadores(int Id)
+        {
+            Indicadores objIndicadores = new Indicadores();
+            ResultadoIndicadores objResultado = new ResultadoIndicadores();
+            string Verificador = string.Empty;
+            try
+            {
+                objIndicadores.Id = Id;
+                GuardarDataContext.EliminarIndicadores(objIndicadores, ref Verificador);
+                if(Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
         public JsonResult ObtenerGridIndicadores(string Categoria)
         {
             List<Indicadores> list = new List<Indicadores>();
@@ -1184,7 +1315,7 @@ namespace MIPlan.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-
+        /* FIN FORMULARIO INDICADORES */
 
     }
 }
