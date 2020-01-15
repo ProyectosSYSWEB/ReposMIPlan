@@ -1046,7 +1046,7 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-        public JsonResult EditarBasicos(int Id, string Tipo, string Clave, string Status, string Descripcion, string Valor, string Orden)
+        public JsonResult EditarBasicos(int Id, string Tipo, string Clave, string Status, string Descripcion, string Orden)
         {
             Basicos objBasicos = new Basicos();
             ResultadoBasicos objResultado = new ResultadoBasicos();
@@ -1058,7 +1058,7 @@ namespace MIPlan.Controllers
                 objBasicos.Clave = Clave;
                 objBasicos.Status = Status;
                 objBasicos.Descripcion = Descripcion;
-                objBasicos.Valor = Valor;
+                objBasicos.Valor = "0";
                 objBasicos.Orden = Orden;
                 GuardarDataContext.EditarBasicos(objBasicos, ref Verificador);
                 if (Verificador == "0")

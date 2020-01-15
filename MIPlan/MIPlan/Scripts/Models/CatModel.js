@@ -3,6 +3,7 @@
     catalogoslst: [],
     basicoslst: [],
     basicolst: [],
+    basicoUpdatelst: [],
 
     ObtenerCatalogoBasicos : function (callBackResult) {
             var self = this;
@@ -61,7 +62,7 @@
     },
 
 
-    ObtenerBasico: function (IdBasicos, callBackResult) {
+    ObtenerBasico: function (IdBasico, callBackResult) {
         var self = this;
         self.basicolst.length = 0;
         $.ajax(
@@ -69,10 +70,10 @@
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'Catalogo/ObtenerDatosBasico',
-                data: { IdBasicos },
+                data: { IdBasico },
                 success: function (resp) {
                     for (var i = 0; i < resp.Resultado.length; i++) {
-                        self.basicolst.push({ Tipo: resp.Resultado[i].Tipo, Clave: resp.Resultado[i].Clave, Status: resp.Resultado[i].Status, Descripcion: resp.Resultado[i].Descripcion,   Orden: resp.Resultado[i].Orden});
+                        self.basicolst.push({ Tipo: resp.Resultado[i].Tipo, Clave: resp.Resultado[i].Clave, Status: resp.Resultado[i].Status, Descripcion: resp.Resultado[i].Descripcion,   Orden: resp.Resultado[i].Orden });
                     }
                     if (callBackResult !== undefined) {
                         callBackResult({ ressult: 'tgp', message: null });
@@ -89,4 +90,76 @@
 
     },
 
+    BasicoUpdate: function (Id,Tipo, Clave,Descripcion,Orden,Status, callBackResult) {
+        var self = this;
+        self.basicoUpdatelst.length = 0;
+        $.ajax(
+            {
+                type: 'POST',
+                cache: false,
+                url: urlServer + 'Catalogo/EditarBasicos',
+                data: { Id, Tipo, Clave, Descripcion, Orden, Status},
+                success: function (resp) {
+                    if (resp.Error == false) {
+
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError })
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EditarBasicos." });
+                    }
+                }
+            });
+    },
+    BasicoCreate: function (Tipo, Clave, Descripcion, Orden, Status, callBackResult) {
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'Catalogo/GuardarBasicos',
+                data: { Tipo, Clave, Descripcion, Orden, Status },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError })
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en GuardarBasicos." });
+                    }
+                }
+            });
+    },
+    eliminarBasico: function (Id, callBackResult) {
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'Catalogo/EliminarBasicos',
+                data: { Id },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError })
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EliminarBasicos." });
+                    }
+                }
+            });
+    },
 };
