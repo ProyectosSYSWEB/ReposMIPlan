@@ -123,14 +123,14 @@
             self.cve_status = "";
            
 
-            //self.cve_status = "A";
-            //var iNumeroMayor = self.basicos[0].Clave;
-            //for (var i = 0; i < self.basicos.length; i++) {
-            //    if (self.basico[i].Clave > iNumeroMayor) {
-            //        iNumeroMayor = self.basicos[i].Clave;
-            //    }
-            //}
-            //self.cve_clave = parseInt(iNumeroMayor) + 1;
+            self.cve_status = "";
+            var iNumeroMayor = self.basicos[0].Clave;
+            for (var i = 0; i < self.basicos.length; i++) {
+                if (self.basicos[i].Clave > iNumeroMayor) {
+                    iNumeroMayor = self.basicos[i].Clave;
+                }
+            }
+            self.cve_clave = parseInt(iNumeroMayor) + 1;
         };
 
         
@@ -167,7 +167,11 @@
             catalogoContext.BasicoCreate( self.cve_catalogo, self.cve_clave, self.cve_descripcion, self.cve_orden, self.cve_status, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-
+                        self.cve_catalogo = null;
+                        self.cve_orden = null;
+                        self.cve_clave = null;
+                        self.cve_descripcion = null;
+                        self.cve_status = null;
                         alert("¡Se ha creado la unidad correctamente!");
                         CargarGrid();
 
@@ -245,7 +249,18 @@
         }
 
 
-  
+        //this.close = function (form) {
+        //    $('#basicos').modal('hide');
+        //    if (form) {
+        //        form.$setPristine();
+        //        form.$setUntouched();
+        //        CargarGrid();
+        //    }
+        //    //self.unidad = null;
+        //    self.cve_clave = null;
+        //    self.cve_status= null;
+        //};
+
         this.reset = function (form) {
             $('#basicos').modal('hide');
             if (form) {
@@ -253,7 +268,7 @@
                 form.$setUntouched();
             }
             CargarGrid();
-               self.cve_catalogo = null;
+            self.cve_catalogo = null;
             self.cve_orden = null;
             self.cve_clave = null;
             self.cve_descripcion = null;
