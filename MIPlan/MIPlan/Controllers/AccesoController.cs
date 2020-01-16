@@ -115,7 +115,6 @@ namespace MIPlan.Controllers
                     objResultado.Resultado = null;
                     return Json(objResultado, JsonRequestBehavior.AllowGet);
                 }
-
             }
             catch(Exception ex)
             {
