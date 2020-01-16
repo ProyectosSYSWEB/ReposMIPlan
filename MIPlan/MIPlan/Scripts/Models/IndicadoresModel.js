@@ -4,6 +4,8 @@
     etiquetalst: [],
     subtipolst: [],
     indicadoresRlst: [],
+    indicadoreslst: [],
+    indicadoresUplst: [],
 
     ObtenerCategorias: function (callBackResult) {
         var self = this;
@@ -36,6 +38,35 @@
                 }
             });
 
+    },
+
+    ObtenerIndicador: function (Categoria, callBackResult) {
+        var self = this;
+        self.indicadoreslst.length = 0;
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'Catalogo/ObtenerGridIndicadores',
+                data: { Categoria },
+                success: function (resp) {
+                    console.log(resp);
+                    for (var i = 0; i < resp.Resultado.length; i++) {
+                        self.indicadoreslst.push({ Id: resp.Resultado[i].Id, Cat: resp.Resultado[i].Categoria, Sub: resp.Resultado[i].Subtipo, Desc: resp.Resultado[i].Descripcion, Et1: resp.Resultado[i].Etiqueta_1, Et2: resp.Resultado[i].Etiqueta_2, Seg: resp.Resultado[i].Evolutivo });
+                    }
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: 'tgp', message: null });
+                    }
+                    else {
+                        callBackResult({ ressult: "nottgp", message: resp.MensajeError })
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerGridIndicadores." });
+                    }
+                }
+            });
     },
 
     ObtenerEtiquetas: function (callBackResult) {
@@ -116,7 +147,7 @@
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
-                            self.indicadoresRlst.push({ Cat: resp.Resultado[i].Categoria, Sub: resp.Resultado[i].Subtipo, Desc: resp.Resultado[i].Descripcion, Et1: resp.Resultado[i].Etiqueta_1, Et2: resp.Resultado[i].Etiqueta_2, Seg: resp.Resultado[i].Seguimiento });
+                            self.indicadoresRlst.push({ Cat: resp.Resultado[i].Categoria, Sub: resp.Resultado[i].Subtipo, Desc: resp.Resultado[i].Descripcion, Et1: resp.Resultado[i].Etiqueta_1, Et2: resp.Resultado[i].Etiqueta_2, Seg: resp.Resultado[i].Evolutivo });
                         }
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
@@ -132,5 +163,80 @@
                 }
             });
 
+    },
+
+    IndicadoresUpdate: function (Id, Categoria, Descripcion, Subtipo, Etiqueta1, Etiqueta2, Evolutivo, callBackResult) {
+        var self = this;
+        self.indicadoresUplst.length = 0;
+        $.ajax(
+            {
+                type: 'POST',
+                cache: false,
+                url: urlServer + 'Catalogo/EditarIndicadores',
+                data: { Id, Categoria, Descripcion, Subtipo, Etiqueta1, Etiqueta2, Evolutivo },
+                success: function (resp) {
+                    if (resp.Error == false) {
+
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError })
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EditarIndicadores." });
+                    }
+                }
+            });
+    },
+
+    IndicadoresCreate: function (Categoria, Descripcion, Subtipo, Etiqueta1, Etiqueta2, Evolutivo, callBackResult) {
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'Catalogo/GuardarIndicadores',
+                data: { Categoria, Descripcion, Subtipo, Etiqueta1, Etiqueta2, Evolutivo },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError })
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en GuardarIndicadores." });
+                    }
+                }
+            });
+    },
+
+    eliminarIndicador: function (Id, callBackResult) {
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'Catalogo/EliminarIndicadores',
+                data: { Id },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError })
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EliminarIndicadores." });
+                    }
+                }
+            });
     },
 };
