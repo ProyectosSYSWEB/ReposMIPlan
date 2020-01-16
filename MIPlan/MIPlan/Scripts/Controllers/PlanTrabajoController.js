@@ -113,8 +113,32 @@
         };
 
         /********************************************************************************************************************************************************/
-       
-        /*******************************************************************************************************************************************************/
+        var GridActividades = function (idMeta) {
+            catalogoContext.GridActividades(idMeta, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.GridActividadesView = catalogoContext.GridActividadesLST;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+
+        /********************************************************************************************************************************************************/
+
+    /*******************************************************************************************************************************************************/
+
+        this.Meta = function (idMeta) {
+            GridActividades(idMeta);
+        }
+
         this.BtnBuscar = function () {
             GridAreasAtencion();            
         }
