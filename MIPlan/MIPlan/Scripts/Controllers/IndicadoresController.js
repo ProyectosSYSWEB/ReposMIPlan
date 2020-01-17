@@ -84,7 +84,6 @@
         };
 
         var CargarGrid = function () {
-            self.indicadores = "";
             catalogoContext.ObtenerIndicador(self.buscar, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
