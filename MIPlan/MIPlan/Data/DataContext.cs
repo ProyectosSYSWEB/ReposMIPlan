@@ -261,9 +261,12 @@ namespace MIPlan.Data
                 OracleDataReader dr = null;
                 string[] Parametros = { "P_ID" };
                 object[] Valores = { Id };
-                string[] ParametrosOut = { "P_ID_PROGRAMA", "P_DESCRIPCION", "P_FECHA_INICIO", "P_FECHA_FIN", "P_IMPACTO", "P_PRIORITARIA" };
+                string[] ParametrosOut = { "P_ID_PROGRAMA", "P_DESCRIPCION", "P_FECHA_INICIO", "P_FECHA_FIN", "P_IMPACTO", "P_PRIORITARIA", "P_BANDERA" };
                 cmd = exeProc.GenerarOracleCommand("OBT_PLA_ACTIVIDADES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
-                objActividaes.Id_Programa = Convert.ToInt32(cmd.Parameters["P_ID_PROGRAMA"].Value);
+                string IdPrograma = Convert.ToString(cmd.Parameters["P_ID_PROGRAMA"].Value);
+                objActividaes.Id_Programa = Convert.ToInt32(IdPrograma);
+
+                //objActividaes.Id_Programa = Convert.ToInt32(Convert.ToString(cmd.Parameters["P_ID_PROGRAMA"].Value));
                 objActividaes.Descripcion = Convert.ToString(cmd.Parameters["P_DESCRIPCION"].Value);
                 objActividaes.Fecha_Inicio = Convert.ToString(cmd.Parameters["P_FECHA_INICIO"].Value);
                 objActividaes.Fecha_Fin = Convert.ToString(cmd.Parameters["P_FECHA_FIN"].Value);
