@@ -533,7 +533,7 @@ namespace MIPlan.Controllers
                 objBasicos.Clave = clave;
                 objBasicos.Status = status;
                 objBasicos.Descripcion = descripcion;
-                objBasicos.Valor = valor;
+                objBasicos.Valor = "1";
                 objBasicos.Orden = orden;
                 GuardarDataContext.GuardarBasicos(objBasicos, ref Verificador);
                 if(Verificador == "0")

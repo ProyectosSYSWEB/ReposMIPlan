@@ -99,10 +99,14 @@
                                     <label id="lblClave" for="lblClave" class="text-success">Clave:</label>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <input type="text" id="txtClave" class="form-control border border-success" name="txtClave" @*maxlength="6"*@ placeholder="Clave" ng-model="ctrl.cve_clave">
+                                    <input type="text" id="txtClave" class="form-control border border-success" name="txtClave" required maxlength="6" placeholder="Clave" ng-model="ctrl.cve_clave">
                                 </div>
 
-
+                                <div class="row justify-content-center">
+                                    <span class="messages" ng-show="modalForm.$submitted || modalForm.txtClave.$touched">
+                                        <span ng-show="!ctrl.cve_clave" class="text-danger">Campo Requerido</span>
+                                    </span>
+                                </div>
                                 <div class="row justify-content-center">
                                     <label id="lblDescripcion" for="lblDescripcion" class="text-success">Descripcion:</label>
                                 </div>
@@ -140,7 +144,7 @@
                                 </div>
                                 <div class="row justify-content-center">
                                     <span class="messages" ng-show="modalForm.$submitted || modalForm.gender.$touched">
-                                        <span ng-show="!ctrl.unidad[0].Coordinador" class="text-danger">Campo Requerido</span>
+                                        <span ng-show="!ctrl.cve_status" class="text-danger">Campo Requerido</span>
                                     </span>
                                 </div>
 
@@ -215,7 +219,7 @@
                         <td>{{i.Id}}</td>
                         <td>{{i.DescripcionPadre}}</td>
                         <td>{{i.Clave}}</td>
-                        <td>{{i.Descripcion}}</td>
+                        <td><font size="2">{{i.Descripcion}}</font></td>
                         <td>{{i.Status}}</td>
 
                         <td style="text-align:right">
@@ -232,11 +236,11 @@
 
                 <tfoot>
                     <tr>
-                        <th colspan="4"><ng-pagination-control boundary-links="true"></ng-pagination-control>
+                        <th colspan="4">
+                            <ng-pagination-control boundary-links="true"></ng-pagination-control>
+                        </th>
                         <th></th>
-                        <th></th>
-                        <th></th>
-                        <th style="text-align:right" colspan="2">
+                        <th style="text-align:right" colspan="3">
                             <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
                                 <i class="fa fa-file-excel-o" aria-hidden="true"></i>
                             </button>
