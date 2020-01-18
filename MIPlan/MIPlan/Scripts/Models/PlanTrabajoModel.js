@@ -166,6 +166,7 @@ var catalogoContext =
     GridActividades: function (idMeta, callBackResult) {
         var self = this;
         self.GridActividadesLST.length = 0;
+        console.log("IdMeta:", idMeta);
         $.ajax(
             {
                 type: 'GET',
