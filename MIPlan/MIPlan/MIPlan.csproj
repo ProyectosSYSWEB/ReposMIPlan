@@ -149,6 +149,7 @@
     <Compile Include="Models\Configuracion.cs" />
     <Compile Include="Models\Comun.cs" />
     <Compile Include="Models\Indicadores.cs" />
+    <Compile Include="Models\MENU.cs" />
     <Compile Include="Models\Resultado.cs" />
     <Compile Include="Models\Sesion.cs" />
     <Compile Include="Models\UnidadadesResponsables.cs" />
@@ -374,6 +375,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\checklist-model.js" />
     <Content Include="Scripts\Controllers\AccesoController.js" />
     <Content Include="Scripts\Controllers\AcreditadorController.js" />
     <Content Include="Scripts\Controllers\AreasAtencionController.js" />

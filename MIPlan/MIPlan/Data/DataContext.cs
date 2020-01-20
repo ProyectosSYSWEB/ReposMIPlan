@@ -164,7 +164,7 @@ namespace MIPlan.Data
                 cmd = exeProc.GenerarOracleCommand_Exe("VERIFICA_USUARIO", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
                 if (Verificador == "0")
                 {                   
-                    objDatosSesion.Usuario = Convert.ToString(cmd.Parameters["P_NOMBRE"].Value);
+                    //objDatosSesion.Usuario = Convert.ToString(cmd.Parameters["P_NOMBRE"].Value);
                     objDatosSesion.Correo = Convert.ToString(cmd.Parameters["P_CORREO"].Value);
                     list.Add(objDatosSesion);
                 }
@@ -287,6 +287,11 @@ namespace MIPlan.Data
             //return registroAgregado;
         }
 
+
+
+
+
+        
 
     }
 }
