@@ -27,7 +27,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body ng-app="rootApp">
     <nav class="navbar navbar-expand-lg fixed-top" style="background-color:#37a0dd">
         <div>
             <div class="">
@@ -37,27 +37,44 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse barraMenu container-fluid" id="navbarSupportedContent">
+            <div  class="collapse navbar-collapse barraMenu container-fluid" id="navbarSupportedContent">
                 <form class="form-inline my-2 my-lg-0 ubicacion">
-                    <ul class="navbar-nav mr-auto ubicacion">
-                        <li class=" dropdown text-white">
+
+                    @*<div class="navbar-collapse collapse" >
+                            <div ng-init="mnu.MenuUsuario()" class="menu">
+                                <ul class="nav navbar-nav">
+                                    <li class="dropdown mega-dropdown" >
+                                        <a class="dropdown-toggle elementoMenu" data-toggle="dropdown"> <span class="caret"></span></a>
+                                        <ul class="dropdown-menu mega-dropdown-menu  elementoMenu">
+                                            <li ng-repeat="item in menu.SubMenu">
+                                                <a href="{{item.CONTROL_NOMBRE}}" target="{{menu.caracteristica}}">{{item.NOMBRE}}</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>*@
+
+
+                    <ul class="navbar-nav mr-auto ubicacion" ng-controller="MIPlanAccesoController as mnu">
+                        <li ng-init="mnu.funcionenenen()" class=" dropdown text-white">
                             <a href="#" class="dropdown-toggle " style="color:white;font-family:Arial" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Catálogos <span class="caret"></span></a>
-                            <ul class="dropdown-menu" style="background-color: #9dbcce">
-                                <li class="nav-item">
-                                    <span style="color:black" class="nav-link fa fa-book"> <a style="color:white; font-family:Arial" href="~/Catalogo/AreasAtencion"> Areas de Atención</a></span>
+                            <ul class="dropdown-menu" style="background-color: #9dbcce" >
+                                <li class="nav-item"ng-repeat="menu in mnu.SiteMenu">
+                                    <span style="color:black" class="nav-link fa fa-book"> <a style="color:white; font-family:Arial" href=""> {{menu.NOMBRE}}</a></span>
                                 </li>
-                                <li class="nav-item">
-                                    <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white;font-family:Arial" href="~/Catalogo/Acreditadores"> Acreditadores</a></span>
-                                </li>
-                                <li class="nav-item">
-                                    <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white;font-family:Arial" href="~/Catalogo/UnidadesResponsables"> Unidades Responsables</a></span>
-                                </li>
-                                <li class="nav-item">
-                                    <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white;font-family:Arial" href="~/Catalogo/Periodos"> Periodos</a></span>
-                                </li>
-                                <li class="nav-item">
-                                    <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white;font-family:Arial" href="~/PlanTrabajo"> Plan de Trabajo</a></span>
-                                </li>
+                                @*<li class="nav-item">
+                                        <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white;font-family:Arial" href="~/Catalogo/Acreditadores"> Acreditadores</a></span>
+                                    </li>
+                                    <li class="nav-item">
+                                        <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white;font-family:Arial" href="~/Catalogo/UnidadesResponsables"> Unidades Responsables</a></span>
+                                    </li>
+                                    <li class="nav-item">
+                                        <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white;font-family:Arial" href="~/Catalogo/Periodos"> Periodos</a></span>
+                                    </li>
+                                    <li class="nav-item">
+                                        <span style="color:white" class="nav-link fa fa-file-text-o"> <a style="color:white;font-family:Arial" href="~/PlanTrabajo"> Plan de Trabajo</a></span>
+                                    </li>*@
                             </ul>
 
                         </li>
@@ -108,16 +125,15 @@
         <div class="piePagina">
             <img style="width:100%" src="~/Imagenes/MiPlan pie.png" />
         </div>
-    </div>   
+    </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
-
-    @*<script src="~/Scripts/angular.min.js"></script>
+    @*<script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+        <script src="~/Scripts/angular.min.js"></script>
         <script src="~/Scripts/global.js"></script>
-        <script src="~/Scripts/Controllers/AccesoController.js"></script>
-        <script src="~/Scripts/Models/AccesoModel.js"></script>
-        <script src="~/Scripts/application.js"></script>*@
+        <script src="~/Scripts/checklist-model.js"></script>    
+    <script src="~/Scripts/Controllers/AccesoController.js"></script>
+    <script src="~/Scripts/Models/AccesoModel.js"></script>*@
 </body>
 </html>

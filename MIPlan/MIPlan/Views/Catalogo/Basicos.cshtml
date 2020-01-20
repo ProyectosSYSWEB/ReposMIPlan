@@ -9,10 +9,10 @@
 <br />
 <br />
 <br />
-<div ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
+<div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
 
     <div class="container">
-      
+
 
         <div id="Error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
             <strong id="Message">¡Ha ocurrido un error! </strong>
@@ -63,7 +63,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="basicos" @*data-keyboard="false" data-backdrop="static"*@tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="basicos" @*data-keyboard="false" data-backdrop="static"*@ tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <form name="modalForm" novalidate>
@@ -163,7 +163,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                                 <button type="button" id="btnNuevo" class="btn btn-success" data-dismiss="modal" ng-click="ctrl.BasicoCreate(ctrl.cve_id.Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
-                                <button type="button" id="btnActualizar" class="btn btn-primary" data-dismiss="modal"  ng-click="ctrl.BasicoUpdate(ctrl.cve_id.Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
+                                <button type="button" id="btnActualizar" class="btn btn-primary" data-dismiss="modal" ng-click="ctrl.BasicoUpdate(ctrl.cve_id.Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
                             </div>
 
                         </div>
@@ -209,7 +209,7 @@
                                 <span ng-class="sortType == 'Status' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Status' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
-                        
+
 
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
@@ -267,5 +267,7 @@
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/CatController.js"></script>
 <script src="~/Scripts/Models/CatModel.js"></script>
+<script src="~/Scripts/Controllers/AccesoController.js"></script>
+<script src="~/Scripts/Models/AccesoModel.js"></script>
 
 
