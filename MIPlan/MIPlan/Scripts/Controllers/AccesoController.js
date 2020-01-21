@@ -26,7 +26,7 @@
             });            
         };
 
-        this.funcionenenen = () => {
+        this.cargarMenu = () => {
             accesoContext.CrearMenu(function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
