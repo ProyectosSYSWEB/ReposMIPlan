@@ -146,8 +146,7 @@ var catalogoContext =
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
                             self.GridAreasAtencionLST.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion });                            
-                       }
-                        console.log(self.GridAreasAtencionLST);
+                       }                        
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
                         }
@@ -197,8 +196,7 @@ var catalogoContext =
  /********************************************************************************************************************************************************/
     ObtenerDatosActividades: function (Id, callBackResult) {
         var self = this;
-        self.ObtenerDatosActividadesLST.length = 0;
-        console.log("Id:", Id);
+        self.ObtenerDatosActividadesLST.length = 0;        
         $.ajax(
             {
                 type: 'GET',
