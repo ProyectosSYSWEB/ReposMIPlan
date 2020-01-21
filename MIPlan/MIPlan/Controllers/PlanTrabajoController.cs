@@ -1,4 +1,5 @@
 ﻿using MIPlan.Data;
+using MIPlan.Data.PlanTrabajo;
 using MIPlan.Models;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ namespace MIPlan.Controllers
 {
     public class PlanTrabajoController : Controller
     {
+        
+
         // GET: PlanTrabajo
         public ActionResult Index()
         {
@@ -241,6 +244,84 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
+        public JsonResult EditarActividades(int Id, string Programa, string Descripcion, string FechaInicio, string FechaFin, string Impacto, string Prioritaria)
+        {
+            List<Sesion> SesionUsu = new List<Sesion>();
+            Sesion objUsuario = new Sesion();
+
+            Actividades objActividad = new Actividades();
+            ResultadoActividades objResultado = new ResultadoActividades();
+            string Verificador = string.Empty;
+            try
+            {
+                objActividad.Id = Id;
+                objActividad.Id_Programa = Convert.ToInt32(Programa);
+                objActividad.Descripcion = Descripcion;
+                objActividad.Fecha_Inicio = FechaInicio;
+                objActividad.Fecha_Fin = FechaFin;
+                objActividad.Impacto = Impacto;
+                objActividad.Prioritaria = Prioritaria;
+
+                SesionUsu = (List<Sesion>)System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"];
+                Data.PlanTrabajo.GuardarDataContext.EditarActividades(objActividad, objUsuario.Usuario, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = "No existe el registro";
+                    objResultado.Resultado = null;
+                }
+
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult GuardarActividades(string Usuario, string Meta, string Clave, string Descripcion, string Impacto,  string Status, string FechaInicio, string FechaFin, string Programa, string Prioritaria)
+        {
+            Actividades objActividad = new Actividades();
+            ResultadoActividades objResultado = new ResultadoActividades();
+            string Verificador = string.Empty;
+            try
+            {
+                objActividad.Categoria = Categoria;
+                objActividad.Descripcion = Descripcion;
+                objActividad.Subtipo = Subtipo;
+                objActividad.Etiqueta_1 = Etiqueta1;
+                objActividad.Etiqueta_2 = Etiqueta2;
+                objActividad.Evolutivo = Evolutivo;
+                GuardarDataContext.GuardarIndicadores(objIndicadores, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public JsonResult EliminarActividades(int Id)
         {
             Actividades objActividades = new Actividades();
@@ -249,7 +330,7 @@ namespace MIPlan.Controllers
             try
             {
                 objActividades.Id = Id;
-                GuardarDataContext.EliminarActividades(objActividades, ref Verificador);
+                Data.PlanTrabajo.GuardarDataContext.EliminarActividades(objActividades, ref Verificador);
                 if(Verificador == "0")
                 {
                     objResultado.Error = false;

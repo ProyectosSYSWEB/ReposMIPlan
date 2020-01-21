@@ -90,16 +90,16 @@ namespace MIPlan.Controllers
 
         public JsonResult IniciarSesion (string usuario, string contrasena, string ejercicio)
         {
-            Comun objComun = new Comun();
-            List<Comun> list = new List<Comun>();
-            ResultadoComun objResultado = new ResultadoComun();
+            Sesion objSesion = new Sesion();
+            List<Sesion> list = new List<Sesion>();
+            ResultadoSesion objResultado = new ResultadoSesion();
             string Verificador = string.Empty;
             try
-            {                
-                objComun.Usuario = usuario;
-                objComun.Contrasena = contrasena;
-                objComun.Ejercicio = ejercicio;
-                list = DataContext.VerificaUsuario(objComun, ref Verificador);                                
+            {
+                objSesion.Usuario = usuario;
+                objSesion.Contrasena = contrasena;
+                objSesion.Ejercicio = Convert.ToInt32(ejercicio);
+                list = DataContext.VerificaUsuario(objSesion, ref Verificador);                                
                 if(Verificador == "0")
                 {
                     System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"] = list;
@@ -128,8 +128,8 @@ namespace MIPlan.Controllers
 
         public JsonResult ObtenerMenu()
         {
-            List<Comun> SesionUsu = new List<Comun>();
-            SesionUsu = (List< Comun>)System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"];
+            List<Sesion> SesionUsu = new List<Sesion>();
+            SesionUsu = (List<Sesion>)System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"];
             if (SesionUsu != null)
             {
                 try

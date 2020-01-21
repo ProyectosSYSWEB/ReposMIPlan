@@ -148,11 +148,11 @@ namespace MIPlan.Data
             //return registroAgregado;
         }
         
-        public static List<Comun> VerificaUsuario(Comun objDatosSesion, ref string Verificador)
+        public static List<Sesion> VerificaUsuario(Sesion objDatosSesion, ref string Verificador)
         {
             OracleCommand cmd = null;
             ExeProcedimiento exeProc = new ExeProcedimiento();            
-            List<Comun> list = new List<Comun>();
+            List<Sesion> list = new List<Sesion>();
 
             try
             {
