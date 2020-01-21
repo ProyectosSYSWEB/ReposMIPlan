@@ -22,5 +22,4 @@ namespace MIPlan.Models
         public List<Sesion> Resultado { get; set; }
 
     }
-
 }

@@ -291,25 +291,25 @@ namespace MIPlan.Controllers
             string Verificador = string.Empty;
             try
             {
-                objActividad.Categoria = Categoria;
-                objActividad.Descripcion = Descripcion;
-                objActividad.Subtipo = Subtipo;
-                objActividad.Etiqueta_1 = Etiqueta1;
-                objActividad.Etiqueta_2 = Etiqueta2;
-                objActividad.Evolutivo = Evolutivo;
-                GuardarDataContext.GuardarIndicadores(objIndicadores, ref Verificador);
-                if (Verificador == "0")
-                {
-                    objResultado.Error = false;
-                    objResultado.MensajeError = "";
-                    objResultado.Resultado = null;
-                }
-                else
-                {
-                    objResultado.Error = true;
-                    objResultado.MensajeError = Verificador;
-                    objResultado.Resultado = null;
-                }
+                //objActividad.Categoria = Categoria;
+                //objActividad.Descripcion = Descripcion;
+                //objActividad.Subtipo = Subtipo;
+                //objActividad.Etiqueta_1 = Etiqueta1;
+                //objActividad.Etiqueta_2 = Etiqueta2;
+                //objActividad.Evolutivo = Evolutivo;
+                //GuardarDataContext.GuardarIndicadores(objIndicadores, ref Verificador);
+                //if (Verificador == "0")
+                //{
+                //    objResultado.Error = false;
+                //    objResultado.MensajeError = "";
+                //    objResultado.Resultado = null;
+                //}
+                //else
+                //{
+                //    objResultado.Error = true;
+                //    objResultado.MensajeError = Verificador;
+                //    objResultado.Resultado = null;
+                //}
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
 
             }
