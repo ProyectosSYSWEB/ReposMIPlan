@@ -103,7 +103,7 @@ namespace MIPlan.Controllers
                 else
                     SesionUsu.Usuario = "";
 
-                list = CursorDataContext.ObtenerComboUnidades(SesionUsu.Usuario);
+                list = Data.PlanTrabajo.CursorDataContext.ObtenerComboUnidades(SesionUsu.Usuario);
                 objResultado.Error = false;
                 objResultado.MensajeError = string.Empty;
                 objResultado.Resultado = list;
@@ -127,7 +127,7 @@ namespace MIPlan.Controllers
             {
 
               
-                list = CursorDataContext.ObtenerComboEjercicios();
+                list = Data.PlanTrabajo.CursorDataContext.ObtenerComboEjercicios();
                 objResultado.Error = false;
                 objResultado.MensajeError = string.Empty;
                 objResultado.Resultado = list;
@@ -151,7 +151,7 @@ namespace MIPlan.Controllers
             {
 
 
-                list = CursorDataContext.ObtenerComboPlanTrabajo();
+                list = Data.PlanTrabajo.CursorDataContext.ObtenerComboPlanTrabajo();
                 objResultado.Error = false;
                 objResultado.MensajeError = string.Empty;
                 objResultado.Resultado = list;
@@ -175,7 +175,7 @@ namespace MIPlan.Controllers
             {
 
 
-                list =  CursorDataContext.ObtenerGridAreasAtencion(Dependencia);
+                list = Data.PlanTrabajo.CursorDataContext.ObtenerGridAreasAtencion(Dependencia);
                 objResultado.Error = false;
                 objResultado.MensajeError = string.Empty;
                 objResultado.Resultado = list;
@@ -199,7 +199,7 @@ namespace MIPlan.Controllers
             {
 
 
-                list = CursorDataContext.ObtenerGridActividades(idMeta);
+                list = Data.PlanTrabajo.CursorDataContext.ObtenerGridActividades(idMeta);
                 objResultado.Error = false;
                 objResultado.MensajeError = string.Empty;
                 objResultado.Resultado = list;
@@ -221,7 +221,7 @@ namespace MIPlan.Controllers
             string Verificador = string.Empty;
             try
             {                
-                objResultado.Resultado = DataContext.ObtenerDatosActividades(Id, ref Verificador);
+                objResultado.Resultado = Data.PlanTrabajo.DataContext.ObtenerDatosActividades(Id, ref Verificador);
                 if(Verificador == "0")
                 {
                     objResultado.Error = false;
@@ -289,27 +289,32 @@ namespace MIPlan.Controllers
             Actividades objActividad = new Actividades();
             ResultadoActividades objResultado = new ResultadoActividades();
             string Verificador = string.Empty;
+            List<Sesion> SesionUsu = new List<Sesion>();
+            if (System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"] != null)                        
+                SesionUsu = (List<Sesion>)System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"];
             try
             {
-                //objActividad.Categoria = Categoria;
-                //objActividad.Descripcion = Descripcion;
-                //objActividad.Subtipo = Subtipo;
-                //objActividad.Etiqueta_1 = Etiqueta1;
-                //objActividad.Etiqueta_2 = Etiqueta2;
-                //objActividad.Evolutivo = Evolutivo;
-                //GuardarDataContext.GuardarIndicadores(objIndicadores, ref Verificador);
-                //if (Verificador == "0")
-                //{
-                //    objResultado.Error = false;
-                //    objResultado.MensajeError = "";
-                //    objResultado.Resultado = null;
-                //}
-                //else
-                //{
-                //    objResultado.Error = true;
-                //    objResultado.MensajeError = Verificador;
-                //    objResultado.Resultado = null;
-                //}
+                objActividad.Id_Meta = Convert.ToInt32(Meta);
+                objActividad.Clave = Clave;
+                objActividad.Descripcion = Descripcion;
+                objActividad.Impacto = Impacto;
+                objActividad.Fecha_Inicio = FechaInicio;
+                objActividad.Fecha_Fin = FechaFin;
+                objActividad.Id_Programa = Convert.ToInt32(Programa);
+                objActividad.Prioritaria = Prioritaria;
+                Data.PlanTrabajo.GuardarDataContext.GuardarActividades(objActividad, SesionUsu[0].Usuario, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
 
             }
@@ -360,7 +365,7 @@ namespace MIPlan.Controllers
             try
             {
                 string Verificador = string.Empty;
-                list = CursorDataContext.ObtenerComboBasicos("PRO", "null");
+                list = Data.CursorDataContext.ObtenerComboBasicos("PRO", "null");
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
                 objResultado.Resultado = list;
