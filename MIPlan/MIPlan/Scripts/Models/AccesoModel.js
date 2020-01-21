@@ -54,9 +54,19 @@
                     if (isArreglo) {
                         for (var i = 0; i < resp.length; i++) {
                             let caracteristica = "";
+                            let clase = "";
+                            let clase2 = "";
                             if (resp[i].ID === 15769)
                                 caracteristica = '_blank"';
-                            self.menu.push({ ID: resp[i].ID, NOMBRE: resp[i].NOMBRE, SubMenu: resp[i].SubMenu, caracteristica });
+                            if (resp[i].SubMenu.length === 0) {
+                                clase = 'nav-item';
+                                clase2 = 'nav-link';
+                            }
+                            else {
+                                clase = 'nav-item dropdown';
+                                clase2 = 'nav-link dropdown-toggle';
+                            }
+                            self.menu.push({ ID: resp[i].ID, NOMBRE: resp[i].NOMBRE, SubMenu: resp[i].SubMenu, caracteristica, Clase: clase, Clase2: clase2 });
                         }
                         callBackResult({ ressult: "tgp", message: null });
                     }

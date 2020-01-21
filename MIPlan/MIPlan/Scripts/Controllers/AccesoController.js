@@ -26,7 +26,7 @@
             });            
         };
 
-        this.funcionenenen = () => {
+        this.cargarMenu = () => {
             accesoContext.CrearMenu(function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
@@ -45,6 +45,22 @@
                 $scope.$apply();
             });
         };
+
+        this.cargarDatosUsuario = () => {
+            accesoContext.CargarDatosUsuario(function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        alert("");
+                        break;
+                    case "notgp":
+                        alert();
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        }
 
     }]);
 })();
