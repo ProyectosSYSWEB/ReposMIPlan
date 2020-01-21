@@ -6,6 +6,7 @@ var catalogoContext =
     ListaEjerciciosLST: [],
     ListaPlanesLST: [],
     GridAreasAtencionLST: [],
+    GridActividadesLST: [],
 /********************************************************************************************************************************************************/
     ObtenerDependencias: function (callBackResult) {
         var self = this;
@@ -154,7 +155,39 @@ var catalogoContext =
                 },
                 error: function (ex) {
                     if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ListaEjercicios." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en GridAreasAtencion." });
+                    }
+                }
+            });
+
+    },
+/********************************************************************************************************************************************************/
+
+    GridActividades: function (idMeta, callBackResult) {
+        var self = this;
+        self.GridActividadesLST.length = 0;
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'PlanTrabajo/GridActividades',
+                data: { idMeta },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        for (var i = 0; i < resp.Resultado.length; i++) {
+                            self.GridActividadesLST.push({ Id: resp.Resultado[i].Id, Desc_Programa: resp.Resultado[i].Desc_Programa, Desc_Accion: resp.Resultado[i].Desc_Accion, Fecha_Inicio: resp.Resultado[i].Fecha_Inicio, Fecha_Fin: resp.Resultado[i].Fecha_Fin, Impacto: resp.Resultado[i].Impacto, Prioritaria: resp.Resultado[i].Prioritaria });
+                        }
+                        console.log(self.GridAreasAtencionLST);
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en GridActividades." });
                     }
                 }
             });

@@ -152,7 +152,7 @@ namespace MIPlan.Data
                 string[] Parametros = {"P_ID", "P_CATEGORIA", "P_DESCRIPCION", "P_SUBTIPO", "P_ETIQUETA_1", "P_ETIQUETA_2", "P_EVOLUTIVO" };
                 object[] Valores = {objIndicadores.Id, objIndicadores.Categoria, objIndicadores.Descripcion, objIndicadores.Subtipo, objIndicadores.Etiqueta_1, objIndicadores.Etiqueta_2, objIndicadores.Evolutivo };
                 string[] ParametrosOut = { "P_BANDERA" };
-                cmd = exeProc.GenerarOracleCommand("OBT_PLA_INDICADORES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+                cmd = exeProc.GenerarOracleCommand("UPD_PLA_INDICADORES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
             }
             catch (Exception ex)
             {

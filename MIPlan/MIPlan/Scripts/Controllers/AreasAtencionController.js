@@ -230,7 +230,9 @@
             });
         };
 
-        this.AreasAtencionCreate = function () { AreaCreate(); }
+        this.AreasAtencionCreate = function () {
+            AreaCreate();
+        }
 
         this.DivError = function () {
             document.getElementById("Error").style.display = "none";
@@ -264,10 +266,6 @@
             self.cve_desc = null;
             self.cve_status = null;
             self.cve_cat = null;
-        };
-
-        this.BorrarBasico = function (Indice) {
-            alert(Indice);
         };
     }]);
 })();

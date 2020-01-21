@@ -87,7 +87,6 @@ namespace MIPlan.Controllers
                 return View();
             }
         }
-
         public JsonResult ListaUnidadResponsable()
         {
             Sesion SesionUsu = new Sesion();
@@ -212,7 +211,6 @@ namespace MIPlan.Controllers
 
             }
         }
-
         public JsonResult ObtenerDatosActividades(int Id)
         {
             Actividades objActividades = new Actividades();
@@ -243,8 +241,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
-
         public JsonResult EliminarActividades(int Id)
         {
             Actividades objActividades = new Actividades();
@@ -274,6 +270,27 @@ namespace MIPlan.Controllers
                 objResultado.MensajeError = ex.Message;
                 objResultado.Resultado = null;
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult ObtenerProgramas()
+        {
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            try
+            {
+                string Verificador = string.Empty;
+                list = CursorDataContext.ObtenerComboBasicos("PRO", "null");
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
 

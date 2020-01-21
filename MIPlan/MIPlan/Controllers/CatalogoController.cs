@@ -533,7 +533,7 @@ namespace MIPlan.Controllers
                 objBasicos.Clave = clave;
                 objBasicos.Status = status;
                 objBasicos.Descripcion = descripcion;
-                objBasicos.Valor = valor;
+                objBasicos.Valor = "1";
                 objBasicos.Orden = orden;
                 GuardarDataContext.GuardarBasicos(objBasicos, ref Verificador);
                 if(Verificador == "0")
@@ -1046,8 +1046,7 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
-        public JsonResult EditarBasicos(int Id, string Tipo, string Clave, string Status, string Descripcion, string Valor, string Orden)
+        public JsonResult EditarBasicos(int Id, string Tipo, string Clave, string Status, string Descripcion, string Orden)
         {
             Basicos objBasicos = new Basicos();
             ResultadoBasicos objResultado = new ResultadoBasicos();
@@ -1059,7 +1058,7 @@ namespace MIPlan.Controllers
                 objBasicos.Clave = Clave;
                 objBasicos.Status = Status;
                 objBasicos.Descripcion = Descripcion;
-                objBasicos.Valor = Valor;
+                objBasicos.Valor = "0";
                 objBasicos.Orden = Orden;
                 GuardarDataContext.EditarBasicos(objBasicos, ref Verificador);
                 if (Verificador == "0")
@@ -1082,7 +1081,6 @@ namespace MIPlan.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult EliminarBasicos(int Id)
         {
             Basicos objBasicos = new Basicos();
@@ -1114,8 +1112,7 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
-
+        /* FIN FORMULARIO BÁSICOS */
 
 
         /* PARA FORMULARIO INDICADORES */
@@ -1192,7 +1189,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult EditarIndicadores (int Id, string Categoria, string Descripcion, string Subtipo, string Etiqueta1, string Etiqueta2, string Evolutivo)
         {
             Indicadores objIndicadores = new Indicadores();
@@ -1231,7 +1227,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult GuardarIndicadores(string Categoria, string Descripcion, string Subtipo, string Etiqueta1, string Etiqueta2, string Evolutivo)
         {
             Indicadores objIndicadores = new Indicadores();
@@ -1269,8 +1264,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
-
         public JsonResult EliminarIndicadores(int Id)
         {
             Indicadores objIndicadores = new Indicadores();
@@ -1302,6 +1295,27 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
+        public JsonResult ObtenerGridIndicadores(string Categoria)
+        {
+            List<Indicadores> list = new List<Indicadores>();
+            ResultadoIndicadores objResultado = new ResultadoIndicadores();
+            try
+            {
+                list = CursorDataContext.ObtenerGridIndicadores(Categoria);
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+        /* FIN FORMULARIO INDICADORES */
 
     }
 }

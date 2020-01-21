@@ -9,7 +9,7 @@
 <br />
 <br />
 <br />
-<div  ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio();">
+<div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
 
     <div class="container">
 
@@ -30,6 +30,8 @@
                     <label for="lbcatalogo" class="text-success">Catalogo:</label>
                     <select class="form-control border border-success" name="cmbcatalogo" ng-change="ctrl.Valorbasicos()" ng-model="ctrl.buscar" ng-options="option.Id as option.Descripcion for option in ctrl.catalogos" style="max-width:100%;">
                         <option value="">--Seleccionar Catalogo--</option>
+                        <option value="Todas">Todas</option>
+
                     </select>
 
                 </div>
@@ -37,11 +39,11 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblstatus" class="text-info">Estatus:</label>
-                    <select class="form-control border border-info" name="cmbDependencia" @*ng-change="ctrl.StatusFun()" ng-model="ctrl.Status.Status"*@ style="max-width:100%;">
+                    <select class="form-control border border-info" name="cmbDependencia" ng-change="ctrl.StatusFun()" ng-model="ctrl.Status.Status" style="max-width:100%;">
                         <option value="">--Seleccionar Estatus--</option>
                         <option value="Todos">TODOS</option>
-                        <option value="alta">ALTA</option>
-                        <option value="baja">BAJA</option>
+                        <option value="A">ALTA</option>
+                        <option value="B">BAJA</option>
 
                     </select>
                 </div>
@@ -61,7 +63,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="basicos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="basicos" @*data-keyboard="false" data-backdrop="static"*@ tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <form name="modalForm" novalidate>
@@ -82,6 +84,8 @@
                                 <div class="row justify-content-center">
                                     <select id="cmbcatalogo" class="form-control border border-success" required name="cmbcatalogo" ng-model="ctrl.cve_catalogo" ng-options="option.Id as option.Descripcion for option in ctrl.catalogos">
                                         <option value="">--Seleccionar Catalogo--</option>
+                                        <option value="Todas">Todas</option>
+
                                     </select>
                                 </div>
 
@@ -95,26 +99,25 @@
                                     <label id="lblClave" for="lblClave" class="text-success">Clave:</label>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <input type="text" id="txtClave" class="form-control border border-success" required name="txtClave" placeholder="" ng-model="ctrl.cve_clave">
+                                    <input type="text" id="txtClave" class="form-control border border-success" name="txtClave" required maxlength="6" placeholder="Clave" ng-model="ctrl.cve_clave">
                                 </div>
 
                                 <div class="row justify-content-center">
                                     <span class="messages" ng-show="modalForm.$submitted || modalForm.txtClave.$touched">
-                                        <span ng-show="!ctrl.cve_clave" class="text-danger">!Digitos¡</span>
+                                        <span ng-show="!ctrl.cve_clave" class="text-danger">Campo Requerido</span>
                                     </span>
                                 </div>
-
                                 <div class="row justify-content-center">
                                     <label id="lblDescripcion" for="lblDescripcion" class="text-success">Descripcion:</label>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <input type="text" id="txtDescripcion" class="form-control border border-success" name="txtDescripcion" placeholder="" ng-model="ctrl.cve_descripcion">
+                                    <textarea id="txtDescripcion" class="form-control border border-success" name="txtDescripcion" placeholder="Descripcion" ng-model="ctrl.cve_descripcion"></textarea>
                                 </div>
                                 <div class="row justify-content-center">
                                     <label id="lblorden" for="lblorden" class="text-success">Orden:</label>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <input type="text" id="txtorden" class="form-control border border-success" name="txtorden" placeholder="" ng-model="ctrl.cve_orden">
+                                    <input type="text" id="txtorden" class="form-control border border-success" name="txtorden" placeholder="Orden" ng-model="ctrl.cve_orden">
 
                                 </div>
                                 <div class="row justify-content-center">
@@ -128,18 +131,22 @@
                                 <div class="row justify-content-center">
                                     <div id="Radio" class="radio-group form-control border border-success text-center" style="max-width: 280px;">
                                         <label class="radio ">
-                                            <input type="radio" value="S" name="gender" ng-model="ctrl.cve_status" required />
+                                            <input type="radio" value="A" name="gender" ng-model="ctrl.cve_status" required />
                                             Alta
                                             <span></span>
                                         </label>
                                         <label class="radio">
-                                            <input type="radio" value="N" name="gender" ng-model="ctrl.cve_status" required />
+                                            <input type="radio" value="B" name="gender" ng-model="ctrl.cve_status" required />
                                             Baja
                                             <span></span>
                                         </label>
                                     </div>
                                 </div>
-
+                                <div class="row justify-content-center">
+                                    <span class="messages" ng-show="modalForm.$submitted || modalForm.gender.$touched">
+                                        <span ng-show="!ctrl.cve_status" class="text-danger">Campo Requerido</span>
+                                    </span>
+                                </div>
 
 
                             </div>
@@ -155,8 +162,8 @@
                             <br />
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
-                                <button type="button" id="btnNuevo" class="btn btn-success" data-dismiss="modal" ng-click="ctrl.AcreditadorCreate(ctrl.cve_id.Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
-                                <button type="button" id="btnActualizar" class="btn btn-primary" data-dismiss="modal" ng-click="ctrl.AcreditadorUpdate(ctrl.cve_id.Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
+                                <button type="button" id="btnNuevo" class="btn btn-success" data-dismiss="modal" ng-click="ctrl.BasicoCreate(ctrl.cve_id.Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
+                                <button type="button" id="btnActualizar" class="btn btn-primary" data-dismiss="modal" ng-click="ctrl.BasicoUpdate(ctrl.cve_id.Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
                             </div>
 
                         </div>
@@ -202,12 +209,7 @@
                                 <span ng-class="sortType == 'Status' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Status' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
-                        <th scope="col">
-                            <a href="" ng-click="sortType = 'Status'; sortReverse = !sortReverse">
-                                Status
-                                <span ng-class="sortType == 'Status' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Status' && sortReverse ? 'fa fa-arrow-up': ''"></span>
-                            </a>
-                        </th>
+
 
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
@@ -217,7 +219,7 @@
                         <td>{{i.Id}}</td>
                         <td>{{i.DescripcionPadre}}</td>
                         <td>{{i.Clave}}</td>
-                        <td>{{i.Descripcion}}</td>
+                        <td><font size="2">{{i.Descripcion}}</font></td>
                         <td>{{i.Status}}</td>
 
                         <td style="text-align:right">
@@ -234,11 +236,11 @@
 
                 <tfoot>
                     <tr>
-                        <th colspan="4"><ng-pagination-control boundary-links="true"></ng-pagination-control>
+                        <th colspan="4">
+                            <ng-pagination-control boundary-links="true"></ng-pagination-control>
+                        </th>
                         <th></th>
-                        <th></th>
-                        <th></th>
-                        <th style="text-align:right" colspan="2">
+                        <th style="text-align:right" colspan="3">
                             <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
                                 <i class="fa fa-file-excel-o" aria-hidden="true"></i>
                             </button>
@@ -262,9 +264,10 @@
 <script src="~/Scripts/angular.js"></script>
 <script src="~/Scripts/angular-pagination.js"></script>
 <script src="~/Scripts/global.js"></script>
-
-<script src="~/Scripts/Controllers/AccesoController.js"></script>
+@*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/CatController.js"></script>
-<script src="~/Scripts/Models/AccesoModel.js"></script>
 <script src="~/Scripts/Models/CatModel.js"></script>
+<script src="~/Scripts/Controllers/AccesoController.js"></script>
+<script src="~/Scripts/Models/AccesoModel.js"></script>
+
 

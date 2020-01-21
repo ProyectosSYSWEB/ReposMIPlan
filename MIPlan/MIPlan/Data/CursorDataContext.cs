@@ -282,6 +282,7 @@ namespace MIPlan.Data
                     Comun objComun = new Comun();
                     objComun.Id = Convert.ToString(dr[0]);
                     objComun.Descripcion = Convert.ToString(dr[1]);
+                    objComun.EtiquetaDos = Convert.ToString(dr[2]);
                     listarComun.Add(objComun);
                 }
                 return listarComun;
@@ -585,7 +586,6 @@ namespace MIPlan.Data
             }
 
         }
-
         public static List<Comun> ObtenerComboCatBasicos()
         {            
             var Lista = ExeProcedimiento.GenerarOracleCommandCursor_Combo("PKG_PLANEACION.Obt_Combo_Cat_Basicos");
@@ -630,6 +630,46 @@ namespace MIPlan.Data
             }
 
         }
+        public static List<Indicadores> ObtenerGridIndicadores(string Categoria)
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+
+            try
+            {
+                string[] Parametros = { "p_categoria" };
+                object[] Valores = { Categoria };
+                OracleDataReader dr = null;
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Indicadores", ref dr, Parametros, Valores);
+                List<Indicadores> list = new List<Indicadores>();
+                while (dr.Read())
+                {
+                    Indicadores objIndicador = new Indicadores();
+                    objIndicador.Id = Convert.ToInt32(dr[0]);
+                    objIndicador.Categoria = Convert.ToString(dr[1]);
+                    objIndicador.Subtipo = Convert.ToString(dr[2]);
+                    objIndicador.Descripcion = Convert.ToString(dr[3]);
+                    objIndicador.Etiqueta_1 = Convert.ToString(dr[4]);
+                    objIndicador.Etiqueta_2 = Convert.ToString(dr[5]);
+                    objIndicador.Evolutivo = Convert.ToString(dr[6]);
+                    list.Add(objIndicador);
+                }
+                return list;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
+        }
+
+
 
 
         //Menú

@@ -83,6 +83,25 @@
 
         };
 
+        var CargarGrid = function () {
+            catalogoContext.ObtenerIndicador(self.buscar, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        
+                        self.indicadores = catalogoContext.indicadoreslst;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+
         this.ObtDatos = function (Indicador) {
             $('#btnActualizar').show();
             $('#btnNuevo').hide();
@@ -149,6 +168,95 @@
             self.cve_seg = "";
         };
 
+        var indicadorUpdate = function () {
+            catalogoContext.IndicadoresUpdate(self.cve_id, self.cve_cat, self.cve_desc, self.cve_sub, self.cve_et1, self.cve_et2, self.cve_seg, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.cve_cat = null;
+                        self.cve_desc = null;
+                        self.cve_sub = null;
+                        self.cve_et1 = null;
+                        self.cve_et2 = null;
+                        self.cve_seg = null;
+                        alert("¡Se han actualizado los datos correctamente!");
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+                CargarGrid();
+            });
+        };
+
+        this.IndicadoresUpdate = function () {
+            indicadorUpdate();
+        };
+
+        var IndicadorCreate = function () {
+
+            catalogoContext.IndicadoresCreate(self.cve_cat, self.cve_desc, self.cve_sub, self.cve_et1, self.cve_et2, self.cve_seg, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.cve_cat = null;
+                        self.cve_desc = null;
+                        self.cve_sub = null;
+                        self.cve_et1 = null;
+                        self.cve_et2 = null;
+                        self.cve_seg = null;
+                        alert("¡Se ha creado el indicador correctamente!");
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+                CargarGrid();
+            });
+        };
+
+        this.IndicadoresCreate = function () {
+            IndicadorCreate();
+        }
+
+        var eliminarIndicadores = function (Id) {
+            catalogoContext.eliminarIndicador(Id, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        console.log("Controller Eliminar ejecutado");
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        console.log("Error Controller");
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+
+            });
+        };
+
+        this.EliminarIndicadores = function (Indice) {
+            var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
+            if (opcion == true) {
+                eliminarIndicadores(Indice);
+                alert("¡Se ha elimnado con exito!");
+                CargarGrid();
+            } else {
+                alert("No se ha eliminado el registro");
+            }
+        };
+
         this.DivError = function () {
             document.getElementById("Error").style.display = "none";
         };
@@ -158,14 +266,14 @@
         };
 
         this.ValorCategoria = function () {
-            //CargarGrid();
-            if (self.buscar == "Todas") {
+            CargarGrid();
+            if (self.buscar == null) {
                 self.buscar = '';
             }
         };
 
         this.SubtipoFun = function () {
-            if (self.Subtipo.Subtipo == "Todos") {
+            if (self.Subtipo.Subtipo == "") {
                 self.Subtipo.Subtipo = '';
             }
         }
@@ -176,7 +284,7 @@
                 form.$setPristine();
                 form.$setUntouched();
             }
-            //CargarGrid();
+            CargarGrid();
             self.cve_cat = null;
             self.cve_sub = null;
             self.cve_desc = null;
