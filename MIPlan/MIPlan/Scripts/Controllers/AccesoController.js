@@ -9,6 +9,7 @@
 
     app.controller('MIPlanAccesoController', ['$scope', '$compile', function ($scope, $compile) {
         var self = this;
+        let datosUsuario = "";
               
         this.IniciarSesion = () => {
             accesoContext.iniciarSesion(self.Usuario, self.Contrasena, self.Ejercicio, function (resp) {
@@ -43,14 +44,17 @@
                         break;
                 }
                 $scope.$apply();
+                obtenerDatosUsuario();
             });
         };
 
-        this.cargarDatosUsuario = () => {
-            accesoContext.CargarDatosUsuario(function (resp) {
+        var obtenerDatosUsuario = () => {
+            accesoContext.ObtenerDatosUsuario(function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        alert("");
+                        self.datosUsuario = accesoContext.datosUsuario;
+                        self.Usuario = self.datosUsuario[0].Usuario;
+                        self.Correo = self.datosUsuario[0].Correo;
                         break;
                     case "notgp":
                         alert();

@@ -88,6 +88,25 @@ namespace MIPlan.Controllers
             }
         }
 
+        public JsonResult ObtenerDatosUsuario()
+        {
+            ResultadoSesion objResultado = new ResultadoSesion();
+            try
+            {
+                objResultado.Resultado = (List<Sesion>)System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"];
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public JsonResult IniciarSesion (string usuario, string contrasena, string ejercicio)
         {
             Sesion objSesion = new Sesion();
@@ -96,7 +115,7 @@ namespace MIPlan.Controllers
             string Verificador = string.Empty;
             try
             {
-                objSesion.Usuario = usuario;
+                objSesion.Usuario = usuario.ToUpper();
                 objSesion.Contrasena = contrasena;
                 objSesion.Ejercicio = Convert.ToInt32(ejercicio);
                 list = DataContext.VerificaUsuario(objSesion, ref Verificador);                                
