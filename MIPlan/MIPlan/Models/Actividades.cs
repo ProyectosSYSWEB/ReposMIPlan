@@ -21,6 +21,7 @@ namespace MIPlan.Models
         public string Alta_Usario { get; set; }
         public string Modificacion_Fecha { get; set; }
         public string Modificacion_Usuario { get; set; }
+        public string Status { get; set; }
         public int Id_Programa { get; set; }
         public string Desc_Programa { get; set; }
         public string Desc_Accion { get; set; }

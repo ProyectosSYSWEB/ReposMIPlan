@@ -174,6 +174,7 @@ namespace MIPlan.Data.PlanTrabajo
                     objActividad.Fecha_Fin = Convert.ToString(dr[4]);
                     objActividad.Impacto = Convert.ToString(dr[5]);
                     objActividad.Prioritaria = Convert.ToString(dr[6]);
+                    objActividad.Status = Convert.ToString(dr[8]);
                     listarActividades.Add(objActividad);
                 }
                 return listarActividades;
