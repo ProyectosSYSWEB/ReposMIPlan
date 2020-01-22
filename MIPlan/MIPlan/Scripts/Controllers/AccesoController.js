@@ -15,7 +15,7 @@
             accesoContext.iniciarSesion(self.Usuario, self.Contrasena, self.Ejercicio, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":                        
-                        window.location.href = urlServer + "PlanTrabajo/Index";                        
+                        window.location.href = urlServer + "Catalogo/Basicos";                        
                         break;
                     case "notgp":
                         alert(resp.message);
@@ -27,26 +27,24 @@
             });            
         };
 
-        this.cargarMenu = () => {
-            accesoContext.CrearMenu(function (resp) {
-                switch (resp.ressult) {
-                    case "tgp":
-                        self.SiteMenu = accesoContext.menu;
-                        //idHide = self.SiteMenu[0].ID;
-                        break;
-                    case "errortgp":
-                        console.log(resp.message);
-                        break;
-                    case "notgp":
-                        resp.message;
-                        break;
-                    default:
-                        break;
-                }
-                $scope.$apply();
-                obtenerDatosUsuario();
-            });
-        };
+        accesoContext.CrearMenu(function (resp) {
+            switch (resp.ressult) {
+                case "tgp":
+                    self.SiteMenu = accesoContext.menu;
+                    //idHide = self.SiteMenu[0].ID;
+                    break;
+                case "errortgp":
+                    console.log(resp.message);
+                    break;
+                case "notgp":
+                    resp.message;
+                    break;
+                default:
+                    break;
+            }
+            $scope.$apply();
+            obtenerDatosUsuario();
+        });
 
         var obtenerDatosUsuario = () => {
             accesoContext.ObtenerDatosUsuario(function (resp) {
