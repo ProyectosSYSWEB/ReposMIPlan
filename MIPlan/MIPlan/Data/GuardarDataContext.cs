@@ -411,17 +411,17 @@ namespace MIPlan.Data
         }
 
 
-        public static void EliminarActividades(Actividades objActividades, ref string Verificador)
+        public static void EditarActividades(Basicos objBasicos, ref string Verificador)
         {
             OracleCommand cmd = null;
             ExeProcedimiento exeProc = new ExeProcedimiento();
             try
             {
                 OracleDataReader dr = null;
-                string[] Parametros = { "P_ID" };
-                object[] Valores = { objActividades.Id };
+                string[] Parametros = { "P_ID", "P_TIPO", "P_CLAVE", "P_STATUS", "P_DESCRIPCION", "P_VALOR", "P_ORDEN" };
+                object[] Valores = { objBasicos.Id, objBasicos.Tipo, objBasicos.Clave, objBasicos.Status, objBasicos.Descripcion, objBasicos.Valor, objBasicos.Orden };
                 string[] ParametrosOut = { "P_BANDERA" };
-                cmd = exeProc.GenerarOracleCommand("DEL_PLA_PLAN_ACTIVIDADES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+                cmd = exeProc.GenerarOracleCommand("UPD_PLA_PLAN_ACTIVIDADES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
             }
             catch (Exception ex)
             {
