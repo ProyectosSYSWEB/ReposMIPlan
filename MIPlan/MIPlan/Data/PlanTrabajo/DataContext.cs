@@ -21,7 +21,7 @@ namespace MIPlan.Data.PlanTrabajo
                 OracleDataReader dr = null;
                 string[] Parametros = { "P_ID" };
                 object[] Valores = { Id };
-                string[] ParametrosOut = { "P_ID_PROGRAMA", "P_DESCRIPCION", "P_FECHA_INICIO", "P_FECHA_FIN", "P_IMPACTO", "P_PRIORITARIA", "P_BANDERA" };
+                string[] ParametrosOut = { "P_ID_PROGRAMA", "P_DESCRIPCION", "P_FECHA_INICIO", "P_FECHA_FIN", "P_IMPACTO", "P_PRIORITARIA", "P_STATUS", "P_CLAVE", "P_BANDERA" };
                 cmd = exeProc.GenerarOracleCommand("OBT_PLA_ACTIVIDADES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
                 string IdPrograma = Convert.ToString(cmd.Parameters["P_ID_PROGRAMA"].Value);
                 objActividaes.Id_Programa = Convert.ToInt32(IdPrograma);
@@ -31,7 +31,9 @@ namespace MIPlan.Data.PlanTrabajo
                 objActividaes.Fecha_Fin = Convert.ToString(cmd.Parameters["P_FECHA_FIN"].Value);
                 objActividaes.Impacto = Convert.ToString(cmd.Parameters["P_IMPACTO"].Value);
                 objActividaes.Prioritaria = Convert.ToString(cmd.Parameters["P_PRIORITARIA"].Value);
-                objActividaes.Id = 1;
+                objActividaes.Status = Convert.ToString(cmd.Parameters["P_STATUS"].Value);
+                objActividaes.Id = Id;
+                objActividaes.Clave = Convert.ToString(cmd.Parameters["P_CLAVE"].Value);
                 list.Add(objActividaes);
 
             }

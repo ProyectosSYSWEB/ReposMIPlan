@@ -34,13 +34,25 @@
                                 <label id="lblPrograma" class="">Programa:</label>
                             </div>
                             <div class="row justify-content-center">
-                                <select id="cmbPrograma" class="" name="cmbPrograma" ng-options="option.Id as option.Id for option in ctrl.ObtenerProgramasView" ng-model="ctrl.ObtenerDatosActividadesView[0].Programa" required>
+                                <select id="cmbPrograma" class="" name="cmbPrograma" ng-options="option.Id as option.Programa for option in ctrl.ObtenerProgramasView" ng-model="ctrl.ObtenerDatosActividadesView[0].Id_Programa" required>
                                     <option value="">--Seleccionar Programa--</option>
                                 </select>
                             </div>
                             <div class="row justify-content-center">
                                 <span class="messages" ng-show="modalForm.$submitted || modalForm.cmbPrograma.$touched">
-                                    <span ng-show="!ctrl.ObtenerDatosActividadesView[0].Programa" class="text-danger">Campo Requerido</span>
+                                    <span ng-show="!ctrl.ObtenerDatosActividadesView[0].Id_Programa" class="text-danger">Campo Requerido</span>
+                                </span>
+                            </div>
+                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+                            <div class="row justify-content-center">
+                                <label id="lblClave" for="formGroupExampleInput" class="">Clave</label>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="text" id="inputClave" class="" name="Clave" ng-model="ctrl.ObtenerDatosActividadesView[0].Clave" placeholder="Clave" required>
+                            </div>
+                            <div class="row justify-content-center">
+                                <span class="messages" ng-show="modalForm.$submitted || modalForm.Clave.$touched">
+                                    <span ng-show="!ctrl.ObtenerDatosActividadesView[0].Clave" class="text-danger">Campo Requerido</span>
                                 </span>
                             </div>
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
@@ -137,7 +149,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn btn-danger" ng-click="ctrl.close(modalForm)">Salir</button>
-                        <button type="button" id="btnModal" class="btn" ng-click="ctrl.ActividadesCrud(ctrl.ObtenerDatosActividadesView[0].Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">{{ctrl.ObtenerDatosActividadesView[0].Id      }}</button>
+                        <button type="button" id="btnModal" class="btn" ng-click="ctrl.ActividadesCrud(ctrl.ObtenerDatosActividadesView[0].Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -292,7 +304,7 @@
                                             <h6>Area de Atención:  <span class="badge badge-secondary">Matricula</span></h6>
                                         </div>
                                         <div class="col text-right">
-                                            <button type="button" id="btnCrear" class="btn btn-sm btn-success btn-create" style="width:120px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Crear"  ng-click="ctrl.Color()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                                            <button type="button" id="btnCrear" class="btn btn-sm btn-success btn-create" style="width:120px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Crear" ng-click="ctrl.Color()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
                                         </div>
                                     </div>
                                 </div>
@@ -370,7 +382,8 @@
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/PlanTrabajoController.js"></script>
 <script src="~/Scripts/Models/PlanTrabajoModel.js"></script>
-
+<script src="~/Scripts/Controllers/AccesoController.js"></script>
+<script src="~/Scripts/Models/AccesoModel.js"></script>
 <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <script type="text/javascript">
 
