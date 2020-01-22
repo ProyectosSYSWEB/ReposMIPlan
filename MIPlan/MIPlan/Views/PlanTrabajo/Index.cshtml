@@ -34,13 +34,13 @@
                                 <label id="lblPrograma" class="">Programa:</label>
                             </div>
                             <div class="row justify-content-center">
-                                <select id="cmbPrograma" class="" name="cmbPrograma" ng-options="option.Id as option.Programa for option in ctrl.ObtenerProgramasView" ng-model="ctrl.ObtenerDatosActividadesView[0].Descripcion" required>
+                                <select id="cmbPrograma" class="" name="cmbPrograma" ng-options="option.Id as option.Id for option in ctrl.ObtenerProgramasView" ng-model="ctrl.ObtenerDatosActividadesView[0].Programa" required>
                                     <option value="">--Seleccionar Programa--</option>
                                 </select>
                             </div>
                             <div class="row justify-content-center">
                                 <span class="messages" ng-show="modalForm.$submitted || modalForm.cmbPrograma.$touched">
-                                    <span ng-show="!ctrl.ObtenerDatosActividadesView[0].Descripcion" class="text-danger">Campo Requerido</span>
+                                    <span ng-show="!ctrl.ObtenerDatosActividadesView[0].Programa" class="text-danger">Campo Requerido</span>
                                 </span>
                             </div>
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
@@ -137,7 +137,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn btn-danger" ng-click="ctrl.close(modalForm)">Salir</button>
-                        <button type="button" id="btnModal" class="btn" ng-click="ctrl.periodoUpdate(ctrl.periodo[0].Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
+                        <button type="button" id="btnModal" class="btn" ng-click="ctrl.ActividadesCrud(ctrl.ObtenerDatosActividadesView[0].Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">{{ctrl.ObtenerDatosActividadesView[0].Id      }}</button>
                     </div>
                 </form>
             </div>

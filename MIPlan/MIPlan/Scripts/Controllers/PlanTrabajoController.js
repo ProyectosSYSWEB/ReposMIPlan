@@ -137,8 +137,7 @@
             catalogoContext.ObtenerDatosActividades(Id, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.ObtenerDatosActividadesView = catalogoContext.ObtenerDatosActividadesLST;
-                        //self.EStatus = self.ObtenerDatosActividadesView[0].Status;
+                        self.ObtenerDatosActividadesView = catalogoContext.ObtenerDatosActividadesLST;                        
                         self.Prioritaria = self.ObtenerDatosActividadesView[0].Prioritaria;  
                         break;
                     case "notgp":
@@ -179,7 +178,7 @@
             catalogoContext.ObtenerProgramas(function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.ObtenerProgramasView = catalogoContext.ObtenerProgramasLST;
+                        self.ObtenerProgramasView = catalogoContext.ObtenerProgramasLST;                        
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -193,7 +192,28 @@
             });
         };
 
-    /********************************************************************************************************************************************************/
+        /********************************************************************************************************************************************************/
+
+        var EditarActividades = function () {
+            catalogoContext.EditarActividades(self.ObtenerDatosActividadesView[0].Id, self.ObtenerDatosActividadesView[0].Programa, self.ObtenerDatosActividadesView[0].Accion, self.ObtenerDatosActividadesView[0].Fecha_Inicio, self.ObtenerDatosActividadesView[0].Fecha_Fin, self.ObtenerDatosActividadesView[0].Impacto, self.Prioritaria, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":                                                
+                        alert("¡Se han actualizado los datos correctamente!");                    
+                        self.ObtenerDatosActividadesView = null;                                     
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+
+        /********************************************************************************************************************************************************/
 
 
         this.Modal = function (Id) {
@@ -241,7 +261,16 @@
             self.Prioritaria = "S";
             ObtenerProgramas();
         };
-        /*******************************************************************************************************************************************************/
+    /*******************************************************************************************************************************************************/
+        this.ActividadesCrud = function (ID) {
+            if (ID) {
+                console.log("IF");
+                EditarActividades();
+            } else {
+                console.log("Else");
+            }
+        };
+
         this.close = function (form) {
             $('#ModalActividades').modal('hide');
             if (form) {

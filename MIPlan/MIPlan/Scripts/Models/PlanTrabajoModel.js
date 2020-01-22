@@ -8,7 +8,8 @@ var catalogoContext =
     GridAreasAtencionLST: [],
     GridActividadesLST: [],
     ObtenerDatosActividadesLST: [],
-    ObtenerProgramasLST:[],
+    ObtenerProgramasLST: [],
+    EditarActividadesLST: [],
 /********************************************************************************************************************************************************/
     ObtenerDependencias: function (callBackResult) {
         var self = this;
@@ -206,7 +207,7 @@ var catalogoContext =
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
-                            self.ObtenerDatosActividadesLST.push({ Id: resp.Resultado[i].Id, Accion: resp.Resultado[i].Descripcion, Fecha_Inicio: resp.Resultado[i].Fecha_Inicio, Fecha_Fin: resp.Resultado[i].Fecha_Fin, Impacto: resp.Resultado[i].Impacto, Prioritaria: resp.Resultado[i].Prioritaria });
+                            self.ObtenerDatosActividadesLST.push({ Id: resp.Resultado[i].Id, Programa: resp.Resultado[i].Id_Programa ,Accion: resp.Resultado[i].Descripcion, Fecha_Inicio: resp.Resultado[i].Fecha_Inicio, Fecha_Fin: resp.Resultado[i].Fecha_Fin, Impacto: resp.Resultado[i].Impacto, Prioritaria: resp.Resultado[i].Prioritaria });
                         }                       
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
@@ -261,7 +262,7 @@ var catalogoContext =
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
-                            self.ObtenerProgramasLST.push({ Id: resp.Resultado[i].Id, Programa: resp.Resultado[i].Id + " " + resp.Resultado[i].Descripcion});
+                            self.ObtenerProgramasLST.push({ Id: resp.Resultado[i].EtiquetaDos, Programa: resp.Resultado[i].Descripcion});
                         }
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
@@ -279,6 +280,56 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
+    EditarActividades: function (Id, Programa, Descripcion, FechaInicio, FechaFin, Impacto, Prioritaria, callBackResult) {        
+        console.log(Id);
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'PlanTrabajo/EditarActividades',
+                data: { Id, Programa, Descripcion, FechaInicio, FechaFin, Impacto, Prioritaria },
+                success: function (resp) {
+                    if (resp.Error == false) {                     
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EditarActividades." });
+                    }
+                }
+            });
 
+    },
+/********************************************************************************************************************************************************/
+    GuardarActividades: function (Id, Programa, Descripcion, FechaInicio, FechaFin, Impacto, Prioritaria, callBackResult) {                        
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'PlanTrabajo/GuardarActividades',
+                data: { Id, Programa, Descripcion, FechaInicio, FechaFin, Impacto, Prioritaria },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en GuardarActividades." });
+                    }
+                }
+            });
+
+    },
+/********************************************************************************************************************************************************/
 
 };

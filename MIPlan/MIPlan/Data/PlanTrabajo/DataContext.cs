@@ -25,13 +25,13 @@ namespace MIPlan.Data.PlanTrabajo
                 cmd = exeProc.GenerarOracleCommand("OBT_PLA_ACTIVIDADES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
                 string IdPrograma = Convert.ToString(cmd.Parameters["P_ID_PROGRAMA"].Value);
                 objActividaes.Id_Programa = Convert.ToInt32(IdPrograma);
-
                 //objActividaes.Id_Programa = Convert.ToInt32(Convert.ToString(cmd.Parameters["P_ID_PROGRAMA"].Value));
                 objActividaes.Descripcion = Convert.ToString(cmd.Parameters["P_DESCRIPCION"].Value);
                 objActividaes.Fecha_Inicio = Convert.ToString(cmd.Parameters["P_FECHA_INICIO"].Value);
                 objActividaes.Fecha_Fin = Convert.ToString(cmd.Parameters["P_FECHA_FIN"].Value);
                 objActividaes.Impacto = Convert.ToString(cmd.Parameters["P_IMPACTO"].Value);
                 objActividaes.Prioritaria = Convert.ToString(cmd.Parameters["P_PRIORITARIA"].Value);
+                objActividaes.Id = 1;
                 list.Add(objActividaes);
 
             }
