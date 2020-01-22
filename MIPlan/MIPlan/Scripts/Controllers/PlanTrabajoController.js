@@ -137,9 +137,10 @@
             catalogoContext.ObtenerDatosActividades(Id, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.ObtenerDatosActividadesView = catalogoContext.ObtenerDatosActividadesLST;
-                        //self.EStatus = self.ObtenerDatosActividadesView[0].Status;
-                        self.Prioritaria = self.ObtenerDatosActividadesView[0].Prioritaria;  
+                        self.ObtenerDatosActividadesView = catalogoContext.ObtenerDatosActividadesLST;                        
+                        self.Prioritaria = self.ObtenerDatosActividadesView[0].Prioritaria;
+                        self.EStatus = self.ObtenerDatosActividadesView[0].Status;
+                        self.ObtenerDatosActividadesView[0].Id_Programa = self.ObtenerDatosActividadesView[0].Id_Programa + "";                        
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -179,7 +180,7 @@
             catalogoContext.ObtenerProgramas(function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.ObtenerProgramasView = catalogoContext.ObtenerProgramasLST;
+                        self.ObtenerProgramasView = catalogoContext.ObtenerProgramasLST;                        
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -193,8 +194,67 @@
             });
         };
 
-    /********************************************************************************************************************************************************/
+        /********************************************************************************************************************************************************/
 
+        var EditarActividades = function () {
+            catalogoContext.EditarActividades(
+                self.ObtenerDatosActividadesView[0].Id  ,
+                self.ObtenerDatosActividadesView[0].Id_Programa,
+                self.ObtenerDatosActividadesView[0].Accion,
+                self.ObtenerDatosActividadesView[0].Fecha_Inicio,
+                self.ObtenerDatosActividadesView[0].Fecha_Fin,
+                self.ObtenerDatosActividadesView[0].Impacto,
+                self.Prioritaria,
+                self.ObtenerDatosActividadesView[0].Clave,
+                self.EStatus,function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":                                                
+                        alert("¡Se han actualizado los datos correctamente!");                    
+                        self.ObtenerDatosActividadesView = null;                                     
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+
+        /********************************************************************************************************************************************************/
+
+        var GuardarActividades = function () {
+            catalogoContext.GuardarActividades(
+                self.IDMETA,
+                self.ObtenerDatosActividadesView[0].Clave,
+                self.ObtenerDatosActividadesView[0].Accion,
+                self.ObtenerDatosActividadesView[0].Impacto,
+                self.EStatus,
+                self.ObtenerDatosActividadesView[0].Fecha_Inicio,
+                self.ObtenerDatosActividadesView[0].Fecha_Fin,
+                self.ObtenerDatosActividadesView[0].Id_Programa,
+                self.Prioritaria, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        alert("¡Se han guardado los datos correctamente!");
+                        self.ObtenerDatosActividadesView = null;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+
+        /********************************************************************************************************************************************************/
 
         this.Modal = function (Id) {
             document.getElementById("title").className = "modal-header btn-primary justify-content-center";
@@ -202,6 +262,8 @@
             document.getElementById("btnModal").className = "btn btn-primary";
             document.getElementById("lblPrograma").className = "text-primary";
             document.getElementById("cmbPrograma").className = "form-control border border-primary";
+            document.getElementById("lblClave").className = "text-primary";
+            document.getElementById("inputClave").className = "form-control border border-primary";
             document.getElementById("lblAccion").className = "text-primary";
             document.getElementById("inputAccion").className = "form-control border border-primary";
             document.getElementById("lblInicio").className = "text-primary";
@@ -225,6 +287,8 @@
             document.getElementById("btnModal").className = "btn btn-success";
             document.getElementById("lblPrograma").className = "text-success";
             document.getElementById("cmbPrograma").className = "form-control border border-success";
+            document.getElementById("lblClave").className = "text-success";
+            document.getElementById("inputClave").className = "form-control border border-success";
             document.getElementById("lblAccion").className = "text-success";
             document.getElementById("inputAccion").className = "form-control border border-success";
             document.getElementById("lblInicio").className = "text-success";
@@ -241,7 +305,17 @@
             self.Prioritaria = "S";
             ObtenerProgramas();
         };
-        /*******************************************************************************************************************************************************/
+    /*******************************************************************************************************************************************************/
+        this.ActividadesCrud = function (ID) {
+            if (ID) {
+                console.log("IF");
+                EditarActividades();
+            } else {
+                console.log("Else");
+                GuardarActividades();
+            }
+        };
+
         this.close = function (form) {
             $('#ModalActividades').modal('hide');
             if (form) {
@@ -266,6 +340,7 @@
 
         this.Meta = function (idMeta) {
             GridActividades(idMeta);
+            self.IDMETA = idMeta;
         }
 
         this.BtnBuscar = function () {
