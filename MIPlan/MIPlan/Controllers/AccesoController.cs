@@ -145,6 +145,26 @@ namespace MIPlan.Controllers
         }
 
 
+        public JsonResult CerrarSesion()
+        {
+            ResultadoSesion objResultado = new ResultadoSesion();
+            try
+            {
+                System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"] = null;
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public JsonResult ObtenerMenu()
         {
             List<Sesion> SesionUsu = new List<Sesion>();

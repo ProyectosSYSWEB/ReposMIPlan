@@ -64,7 +64,22 @@
                 }
                 $scope.$apply();
             });
-        }
+        };
+
+        this.cerrarSesion = () => {
+            accesoContext.CerrarSesion(function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        window.location.href = urlServer + "Acceso/Index";    
+                        break;
+                    case "notgp":
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
 
     }]);
 })();
