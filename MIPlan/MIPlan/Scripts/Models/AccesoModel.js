@@ -108,5 +108,28 @@
                     }
                 }
             });
+    },
+
+    CerrarSesion: function (callBackResult) {
+        var self = this;        
+        $.ajax(
+            {
+                type: "POST",
+                cache: false,
+                url: urlServer + "Acceso/CerrarSesion",
+                success: function (resp) {
+                    if (resp.Error === false) {                        
+                        callBackResult({ ressult: "tgp", message: null });
+                    }
+                    else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al crear el menu" });
+                    }
+                }
+            });
     }
 };
