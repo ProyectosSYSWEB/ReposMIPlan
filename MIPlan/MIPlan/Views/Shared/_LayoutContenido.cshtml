@@ -45,7 +45,7 @@
                             <a class="{{menu.Clase2}}" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="color:white">{{menu.NOMBRE}}</a>                            
                                 <ul class="dropdown-menu">
                                     <li  ng-repeat="item in menu.SubMenu">
-                                        <a class="dropdown-item" href="#">{{item.NOMBRE}}</a>
+                                        <a class="dropdown-item" href="{{item.CONTROL_NOMBRE}}">{{item.NOMBRE}}</a>
                                     </li>
                                 </ul>
                         </li>
@@ -59,8 +59,18 @@
                                 <span strong style="color:white" class="fa fa-user"><strong style="color:white;font-family:Arial"> Usuario</strong></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" style="color:black" href="#">Usuario</a>
-                                <a class="dropdown-item" style="color:black" href="#">Correo</a>
+                                <div style="width: 18rem;">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Usuario: {{mnu.Usuario}}</li>
+                                        <li class="list-group-item">Correo: {{mnu.Correo}}</li>                                        
+                                    </ul>
+                                    <div class="card-body">                                        
+                                        <a href="#" class="card-link" ng-click="mnu.cerrarSesion()">Cerrar Sesión</a>
+                                    </div>
+                                </div>
+                                @*<a class="dropdown-item" style="color:black" href="#">Usuario: {{mnu.Usuario}}</a>
+        <a class="dropdown-item" style="color:black" href="#">Correo: {{mnu.Correo}}</a>
+        <a class="dropdown-item">Cerrar Sesión</a>*@
                             </div>
                         </li>
                     </ul>

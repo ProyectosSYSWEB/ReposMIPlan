@@ -173,8 +173,6 @@ namespace MIPlan.Controllers
             ResultadoAreasAtencion objResultado = new ResultadoAreasAtencion();
             try
             {
-
-
                 list = Data.PlanTrabajo.CursorDataContext.ObtenerGridAreasAtencion(Dependencia);
                 objResultado.Error = false;
                 objResultado.MensajeError = string.Empty;

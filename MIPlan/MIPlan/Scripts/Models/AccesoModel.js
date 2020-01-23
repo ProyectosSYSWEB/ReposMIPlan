@@ -1,7 +1,8 @@
 ﻿var accesoContext = {
     listaDatosUsuario: [],
     menu: [],
-    submenu : [],
+    submenu: [],
+    datosUsuario: [],
 
     iniciarSesion: function (usuario, contrasena, ejercicio, callBackResult) {
         var self = this;
@@ -72,6 +73,56 @@
                     }
                     else if (comp === "Error256") {
                         callBackResult({ ressult: "errortgp", message: resp });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al crear el menu" });
+                    }
+                }
+            });
+    },
+
+    ObtenerDatosUsuario: function (callBackResult) {
+        var self = this;
+        self.datosUsuario.length = 0;        
+        $.ajax(
+            {
+                type: "POST",
+                cache: false,
+                url: urlServer + "Acceso/ObtenerDatosUsuario",
+                success: function (resp) {
+                    if (resp.Error === false) {
+                        for (let i = 0; i < resp.Resultado.length; i++) {
+                            self.datosUsuario.push({ Usuario: resp.Resultado[i].Usuario, Correo: resp.Resultado[i].Correo });
+                        }
+                        callBackResult({ ressult: "tgp", message: null });
+                    }
+                    else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al crear el menu" });
+                    }
+                }
+            });
+    },
+
+    CerrarSesion: function (callBackResult) {
+        var self = this;        
+        $.ajax(
+            {
+                type: "POST",
+                cache: false,
+                url: urlServer + "Acceso/CerrarSesion",
+                success: function (resp) {
+                    if (resp.Error === false) {                        
+                        callBackResult({ ressult: "tgp", message: null });
+                    }
+                    else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
                     }
                 },
                 error: function (ex) {
