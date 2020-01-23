@@ -121,10 +121,19 @@ namespace MIPlan.Controllers
                 list = DataContext.VerificaUsuario(objSesion, ref Verificador);                                
                 if(Verificador == "0")
                 {
-                    System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"] = list;
-                    objResultado.Error = false;
-                    objResultado.MensajeError = "";
-                    objResultado.Resultado = list;
+                    if (list[0].Existe == "S")
+                    {
+                        System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"] = list;
+                        objResultado.Error = false;
+                        objResultado.MensajeError = "";
+                        objResultado.Resultado = list;
+                    }
+                    else
+                    {
+                        objResultado.Error = true;
+                        objResultado.MensajeError = "Usuario o contraseña erroneos";
+                        objResultado.Resultado = null;
+                    }
                     return Json(objResultado, JsonRequestBehavior.AllowGet);
                 }
                 else

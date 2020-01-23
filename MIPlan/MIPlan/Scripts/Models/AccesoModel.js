@@ -15,7 +15,7 @@
                 success: function (resp) {
                     if (resp.Error === false) {
                         for (let i = 0; i < resp.Resultado.length; i++) {
-                            self.listaDatosUsuario.push({ Usuario: resp.Resultado[i].Usuario, Ejercicio: resp.Resultado[i].Ejercicio });
+                            self.listaDatosUsuario.push({ Usuario: resp.Resultado[i].Usuario, Ejercicio: resp.Resultado[i].Ejercicio, Existe: resp.Resultado[i].Existe });
                         }
                         callBackResult({ ressult: 'tgp', message: null });
                     }

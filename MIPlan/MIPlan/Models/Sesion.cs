@@ -12,6 +12,9 @@ namespace MIPlan.Models
         public string Contrasena { get; set; }
         public string Correo { get; set; }
         public int Ejercicio { get; set; }
+        //Agregado para saber si el SP regreso si el usuario existe o no
+        public string Existe { get; set; }
+
 
     }
 

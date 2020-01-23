@@ -166,6 +166,7 @@ namespace MIPlan.Data
                 {                   
                     //objDatosSesion.Usuario = Convert.ToString(cmd.Parameters["P_NOMBRE"].Value);
                     objDatosSesion.Correo = Convert.ToString(cmd.Parameters["P_CORREO"].Value);
+                    objDatosSesion.Existe = Convert.ToString(cmd.Parameters["P_VALIDADO"].Value);
                     list.Add(objDatosSesion);
                 }
                 
