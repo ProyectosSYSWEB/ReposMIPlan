@@ -117,7 +117,7 @@
             catalogoContext.GridActividades(idMeta, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.GridActividadesView = catalogoContext.GridActividadesLST;
+                        self.GridActividadesView = catalogoContext.GridActividadesLST;                                                    
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;

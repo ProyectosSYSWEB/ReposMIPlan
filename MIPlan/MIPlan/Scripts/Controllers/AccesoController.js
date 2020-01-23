@@ -13,7 +13,7 @@
         this.IniciarSesion = () => {
             accesoContext.iniciarSesion(self.Usuario, self.Contrasena, self.Ejercicio, function (resp) {
                 switch (resp.ressult) {
-                    case "tgp":                        
+                    case "tgp":                                           
                         window.location.href = urlServer + "PlanTrabajo/Index";                        
                         break;
                     case "notgp":
