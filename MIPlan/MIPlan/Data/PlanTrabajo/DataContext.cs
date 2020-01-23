@@ -35,7 +35,6 @@ namespace MIPlan.Data.PlanTrabajo
                 objActividaes.Id = Id;
                 objActividaes.Clave = Convert.ToString(cmd.Parameters["P_CLAVE"].Value);
                 list.Add(objActividaes);
-
             }
             catch (Exception ex)
             {

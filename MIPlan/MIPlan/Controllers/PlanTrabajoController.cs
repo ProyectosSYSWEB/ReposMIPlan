@@ -250,11 +250,9 @@ namespace MIPlan.Controllers
             Actividades objActividad = new Actividades();
             ResultadoActividades objResultado = new ResultadoActividades();
             string Verificador = string.Empty;
-            if (System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"] != null)
-               SesionUsu = (List<Sesion>)System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"];
             try
             {
-                objActividad.Id = Convert.ToInt32(Id); 
+                objActividad.Id = Id;
                 objActividad.Id_Programa = Convert.ToInt32(Programa);
                 objActividad.Descripcion = Descripcion;
                 objActividad.Fecha_Inicio = FechaInicio;
@@ -264,8 +262,8 @@ namespace MIPlan.Controllers
                 objActividad.Clave = Clave;
                 objActividad.Status = Status;
 
-                 //SesionUsu = (List<Sesion>)System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"];
-                 Data.PlanTrabajo.GuardarDataContext.EditarActividades(objActividad, SesionUsu[0].Usuario, ref Verificador);
+                SesionUsu = (List<Sesion>)System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"];
+                Data.PlanTrabajo.GuardarDataContext.EditarActividades(objActividad, SesionUsu[0].Usuario, ref Verificador);
                 if (Verificador == "0")
                 {
                     objResultado.Error = false;
@@ -275,21 +273,17 @@ namespace MIPlan.Controllers
                 else
                 {
                     objResultado.Error = true;
-                    objResultado.MensajeError = Verificador;
+                    objResultado.MensajeError = "No existe el registro";
                     objResultado.Resultado = null;
                 }
-                return Json(objResultado, JsonRequestBehavior.AllowGet);
 
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                objResultado.Error = true;
-                objResultado.MensajeError = ex.Message;
-                objResultado.Resultado = null;
-                return Json(objResultado, JsonRequestBehavior.AllowGet);
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-
         public JsonResult GuardarActividades(string Meta, string Clave, string Descripcion, string Impacto,  string Status, string FechaInicio, string FechaFin, string Programa, string Prioritaria)
         {
             Actividades objActividad = new Actividades();

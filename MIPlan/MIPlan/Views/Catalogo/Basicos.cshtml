@@ -10,30 +10,21 @@
 <br />
 <br />
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
-
     <div class="container">
-
-
         <div id="Error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
             <strong id="Message">¡Ha ocurrido un error! </strong>
             <button type="button" class="close" ng-click="ctrl.DivError()" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-
-
-
         <div class="row justify-content-center">
-
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lbcatalogo" class="text-success">Catalogo:</label>
                     <select class="form-control border border-success" name="cmbcatalogo" ng-change="ctrl.Valorbasicos()" ng-model="ctrl.buscar" ng-options="option.Id as option.Descripcion for option in ctrl.catalogos" style="max-width:100%;">
                         <option value="">--Seleccionar Catalogo--</option>
                         <option value="Todas">Todas</option>
-
                     </select>
-
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
