@@ -280,8 +280,7 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-    EditarActividades: function (Id, Programa, Descripcion, FechaInicio, FechaFin, Impacto, Prioritaria, Clave, Status, callBackResult) { 
-        console.log(Id, Programa, Descripcion, FechaInicio, FechaFin, Impacto, Prioritaria, Clave, Status);
+    EditarActividades: function (Id, Programa, Descripcion, FechaInicio, FechaFin, Impacto, Prioritaria, Clave, Status, callBackResult) {       
         $.ajax(
             {
                 type: 'GET',
