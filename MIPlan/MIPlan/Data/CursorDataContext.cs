@@ -405,187 +405,6 @@ namespace MIPlan.Data
             }
 
         }
-        public static List<Comun> ObtenerComboUnidades(string Usuario)
-        {
-            //s
-            OracleCommand cmd = null;
-            ExeProcedimiento exeProc = new ExeProcedimiento();
-
-            try
-            {
-                string[] Parametros = { "P_Usuario" };
-                object[] Valores = { Usuario };
-
-
-                OracleDataReader dr = null;
-                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Combo_Unidades", ref dr, Parametros, Valores);
-                List<Comun> listarUnidades = new List<Comun>();
-                while (dr.Read())
-                {
-                    Comun objUnidades = new Comun();
-                    objUnidades.Id = Convert.ToString(dr[0]);                   
-                    objUnidades.Descripcion = Convert.ToString(dr[1]);
-                    listarUnidades.Add(objUnidades);
-                }
-                return listarUnidades;
-
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                exeProc.LimpiarOracleCommand(ref cmd);
-            }
-
-        }
-        public static List<Comun> ObtenerComboEjercicios()
-        {
-            //s
-            OracleCommand cmd = null;
-            ExeProcedimiento exeProc = new ExeProcedimiento();
-
-            try
-            {
-               
-
-                OracleDataReader dr = null;
-                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Combo_Ejercicios", ref dr);
-                List<Comun> listarEjercicios = new List<Comun>();
-                while (dr.Read())
-                {
-                    Comun objEjercicio = new Comun();
-                    objEjercicio.Id = Convert.ToString(dr[0]);
-                    objEjercicio.Descripcion = Convert.ToString(dr[1]);
-                    listarEjercicios.Add(objEjercicio);
-                }
-                return listarEjercicios;
-
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                exeProc.LimpiarOracleCommand(ref cmd);
-            }
-
-        }
-        public static List<Comun> ObtenerComboPlanTrabajo()
-        {
-            //s
-            OracleCommand cmd = null;
-            ExeProcedimiento exeProc = new ExeProcedimiento();
-
-            try
-            {
-
-
-                OracleDataReader dr = null;
-                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Combo_Plan", ref dr);
-                List<Comun> listarPlanes = new List<Comun>();
-                while (dr.Read())
-                {
-                    Comun objPlan = new Comun();
-                    objPlan.Id = Convert.ToString(dr[0]);
-                    objPlan.Descripcion = Convert.ToString(dr[1]);
-                    listarPlanes.Add(objPlan);
-                }
-                return listarPlanes;
-
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                exeProc.LimpiarOracleCommand(ref cmd);
-            }
-
-        }
-        public static List<AreasAtencion> ObtenerGridAreasAtencion(string Dependencia)
-        {
-            //s
-            OracleCommand cmd = null;
-            ExeProcedimiento exeProc = new ExeProcedimiento();
-
-            try
-            {
-
-                string[] Parametros = { "p_dependencia" };
-                object[] Valores = { Dependencia };
-
-                OracleDataReader dr = null;
-                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Areas_Atencion", ref dr, Parametros, Valores);
-                List<AreasAtencion> listarAreasAtencion = new List<AreasAtencion>();
-                while (dr.Read())
-                {
-                    AreasAtencion objAreaAtencion = new AreasAtencion();
-                    objAreaAtencion.Id = Convert.ToInt32(dr[0]);
-                    objAreaAtencion.Descripcion = Convert.ToString(dr[2]);
-                    listarAreasAtencion.Add(objAreaAtencion);
-                }
-                return listarAreasAtencion;
-
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                exeProc.LimpiarOracleCommand(ref cmd);
-            }
-
-        }
-        public static List<Actividades> ObtenerGridActividades(int idMeta)
-        {
-            //s
-            OracleCommand cmd = null;
-            ExeProcedimiento exeProc = new ExeProcedimiento();
-
-            try
-            {
-
-                string[] Parametros = { "P_Id_Meta" };
-                object[] Valores = { idMeta };
-
-                OracleDataReader dr = null;
-                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Actividades", ref dr, Parametros, Valores);
-                List<Actividades> listarActividades = new List<Actividades>();
-                while (dr.Read())
-                {
-                    Actividades objActividad = new Actividades();
-                    objActividad.Id = Convert.ToInt32(dr[0]);
-                    objActividad.Desc_Programa = Convert.ToString(dr[1]);
-                    objActividad.Desc_Accion = Convert.ToString(dr[2]);
-                    objActividad.Fecha_Inicio = Convert.ToString(dr[3]);
-                    objActividad.Fecha_Fin = Convert.ToString(dr[4]);
-                    objActividad.Impacto = Convert.ToString(dr[5]);
-                    objActividad.Prioritaria = Convert.ToString(dr[6]);
-                    listarActividades.Add(objActividad);
-                }
-                return listarActividades;
-
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                exeProc.LimpiarOracleCommand(ref cmd);
-            }
-
-        }
         public static List<Comun> ObtenerComboCatBasicos()
         {            
             var Lista = ExeProcedimiento.GenerarOracleCommandCursor_Combo("PKG_PLANEACION.Obt_Combo_Cat_Basicos");
@@ -670,6 +489,93 @@ namespace MIPlan.Data
         }
 
 
+
+
+        //Menú
+        public static MENU ObtenerMenu(string Valor)
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+
+            try
+            {
+
+                OracleDataReader dr = null;
+                string[] Parametros = { "p_usuario", "p_grupo" };
+                object[] Valores = { Valor, 15 };
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Sistemas_Anuarios", ref dr, Parametros, Valores);
+                List<MENU> listMenu = new List<MENU>();
+                List<MENU> listMenu2 = new List<MENU>();
+                List<MENU> list = new List<MENU>();
+                //List<MENUPADRE> listMenuPadre = new List<MENUPADRE>();
+                List<SUBMENU> listSubMenu = new List<SUBMENU>();
+                MENU objMenu = new MENU();
+                MENU objMenu2 = new MENU();
+                while (dr.Read())
+                {
+                    objMenu.MENUPADRE.Add(new MENUPADRE(Convert.ToInt32(dr[0]), Convert.ToString(dr[1]), Convert.ToString(dr[3]), Convert.ToString(dr[4]), Convert.ToInt32(dr[5])));
+                    listMenu.Add(objMenu);
+                    listMenu2.Add(objMenu);
+                }
+
+                var listMenuPadre = from c in listMenu[0].MENUPADRE
+                                    where (c.ID_PADRE == 15)
+                                    select c;
+
+                //foreach (MENU mnu in listMenu)
+                //{
+                foreach (MENUPADRE mnuPadre in listMenuPadre)//mnu.MENUPADRE)
+                {
+                    if (mnuPadre.PADRE == "")
+                    {
+                        listSubMenu = SubMenu(listMenu2, mnuPadre.ID);
+                        objMenu2.MENUPADRE.Add(new MENUPADRE(mnuPadre.ID, mnuPadre.NOMBRE, mnuPadre.CLAVE, mnuPadre.PADRE, 0, listSubMenu));
+                    }
+                }
+                //}
+
+                //var list = from c in listMenu[0].MENUPADRE
+                //           where (c.ID_PADRE==10)
+                //           select c;
+                //list.Add(objMenu2);
+                return objMenu2;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
+        }
+
+
+
+
+
+        public static List<SUBMENU> SubMenu(List<MENU> ListMenu, int IdMenu)
+        {
+            try
+            {
+                List<SUBMENU> listarSubMenu = new List<SUBMENU>();
+                var list = from c in ListMenu[0].MENUPADRE
+                           where (c.ID_PADRE == IdMenu)
+                           select c;
+                foreach (MENUPADRE mnuPadre in list)
+                {
+                    listarSubMenu.Add(new SUBMENU(mnuPadre.ID, mnuPadre.NOMBRE, mnuPadre.CLAVE));
+                }
+
+                return listarSubMenu;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
     }
 }

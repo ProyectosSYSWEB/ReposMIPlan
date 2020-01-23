@@ -11,6 +11,7 @@ namespace MIPlan.Models
         public int Id_Meta { get; set; }
         public string Clave { get; set; }
         public string Descripcion { get; set; }
+        public string Status { get; set; }
         public string Impacto { get; set; }
         public string Fecha_Inicio { get; set; }
         public string Fecha_Fin { get; set; }

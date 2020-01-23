@@ -90,16 +90,16 @@ namespace MIPlan.Controllers
 
         public JsonResult IniciarSesion (string usuario, string contrasena, string ejercicio)
         {
-            Comun objComun = new Comun();
-            List<Comun> list = new List<Comun>();
-            ResultadoComun objResultado = new ResultadoComun();
+            Sesion objSesion = new Sesion();
+            List<Sesion> list = new List<Sesion>();
+            ResultadoSesion objResultado = new ResultadoSesion();
             string Verificador = string.Empty;
             try
-            {                
-                objComun.Usuario = usuario;
-                objComun.Contrasena = contrasena;
-                objComun.Ejercicio = ejercicio;
-                list = DataContext.VerificaUsuario(objComun, ref Verificador);                                
+            {
+                objSesion.Usuario = usuario;
+                objSesion.Contrasena = contrasena;
+                objSesion.Ejercicio = Convert.ToInt32(ejercicio);
+                list = DataContext.VerificaUsuario(objSesion, ref Verificador);                                
                 if(Verificador == "0")
                 {
                     System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"] = list;
@@ -123,6 +123,84 @@ namespace MIPlan.Controllers
                 objResultado.Resultado = null;
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
+        }
+
+
+        public JsonResult ObtenerMenu()
+        {
+            List<Sesion> SesionUsu = new List<Sesion>();
+            SesionUsu = (List<Sesion>)System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"];
+            if (SesionUsu != null)
+            {
+                try
+                {
+                    var ListaMenu = System.Web.HttpContext.Current.Session["ListaMenu"];
+                    if (ListaMenu == null)
+                    {
+                        var Lista = CursorDataContext.ObtenerMenu(SesionUsu[0].Usuario.ToUpper());
+                        List<MENUPADRE> list = new List<MENUPADRE>();
+                        if (Lista.MENUPADRE.Count > 0)
+                        {
+                            MENU dc = new MENU();
+                            {
+                                var menu = Lista.MENUPADRE.Select(c => new
+                                {
+                                    c.ID,
+                                    c.NOMBRE,
+                                    SubMenu = c.SUBMENU.Select(s => new
+                                    {
+                                        s.NOMBRE,
+                                        s.CONTROL_NOMBRE
+                                    })
+                                });
+                                System.Web.HttpContext.Current.Session["ListaMenu"] = Lista;
+                                return new JsonResult
+                                {
+                                    Data = menu,
+                                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                                };
+                            }
+                        }
+                        else
+                            return Json(false, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        var Lista = System.Web.HttpContext.Current.Session["ListaMenu"] as MENU;
+                        List<MENUPADRE> list = new List<MENUPADRE>();
+                        if (Lista.MENUPADRE.Count > 0)
+                        {
+                            MENU dc = new MENU();
+                            {
+                                var menu = Lista.MENUPADRE.Select(c => new
+                                {
+                                    c.ID,
+                                    c.NOMBRE,
+                                    SubMenu = c.SUBMENU.Select(s => new
+                                    {
+                                        s.NOMBRE,
+                                        s.CONTROL_NOMBRE
+                                    })
+                                });
+                                System.Web.HttpContext.Current.Session["ListaMenu"] = Lista;
+                                return new JsonResult
+                                {
+                                    Data = menu,
+                                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                                };
+                            }
+                        }
+                        else
+                            return Json(false, JsonRequestBehavior.AllowGet);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    return Json("Error256" + ex.Message, JsonRequestBehavior.AllowGet);
+                }
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -8,7 +8,7 @@
 <br />
 <br />
 <br />
-<div ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
+<div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
     <div class="container">
 
         <div id="Error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
@@ -53,12 +53,12 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col text-right">
-                   <div class="container">
-                     <div class="col text-right">
-                        <button type="button" id="Nuevo" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#areasatencion" data-backdrop="static" data-keyboard="false" style="width:120px" ng-click="ctrl.Nuevo()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
-                        <br />
-                     </div>
-                   </div>
+                    <div class="container">
+                        <div class="col text-right">
+                            <button type="button" id="Nuevo" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#areasatencion" data-backdrop="static" data-keyboard="false" style="width:120px" ng-click="ctrl.Nuevo()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                            <br />
+                        </div>
+                    </div>
 
                     <div class="modal fade" data-keyboard="false" data-backdrop="static" id="areasatencion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -99,10 +99,10 @@
                                                 </span>
                                             </div>
                                             @*<div class="row justify-content-center">
-                                                <span class="messages">
-                                                    <span ng-show="!modalForm.ctrl.cve_clave.$valid" class="text-danger">¡Maximo 3 digitos!</span>
-                                                </span>
-                                            </div>*@
+                                                    <span class="messages">
+                                                        <span ng-show="!modalForm.ctrl.cve_clave.$valid" class="text-danger">¡Maximo 3 digitos!</span>
+                                                    </span>
+                                                </div>*@
                                             <br />
                                             <div class="row justify-content-center">
                                                 <label id="lblDescripcion" for="lblDescripcion" class="text-success">Descripción:</label>
@@ -158,7 +158,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
-                                        <button type="button" id="btnNuevo"  class="btn btn-success" ng-click="ctrl.AreasAtencionCreate(ctrl.cve_id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
+                                        <button type="button" id="btnNuevo" class="btn btn-success" ng-click="ctrl.AreasAtencionCreate(ctrl.cve_id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
                                         <button type="button" id="btnActualizar" class="btn btn-primary" ng-click="ctrl.AreasAtencionUpdate(ctrl.cve_id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
                                     </div>
                                 </form>
@@ -263,5 +263,11 @@
 <script src="~/Scripts/angular-pagination.js"></script>
 <script src="~/Scripts/global.js"></script>
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
+<script src="~/Scripts/Controllers/AccesoController.js"></script>
+<script src="~/Scripts/Models/AccesoModel.js"></script>
+
 <script src="~/Scripts/Controllers/AreasAtencionController.js"></script>
 <script src="~/Scripts/Models/AreasAtencionModel.js"></script>
+
+
+
