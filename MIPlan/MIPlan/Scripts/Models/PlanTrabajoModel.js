@@ -225,8 +225,7 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-    EliminarActividades: function (Id, callBackResult) {  
-        console.log("Id Delete:", Id);
+    EliminarActividades: function (Id, callBackResult) {        
         $.ajax(
             {
                 type: 'GET',
@@ -236,7 +235,7 @@ var catalogoContext =
                 success: function (resp) {
                     if (resp.Error == false) {                       
                         if (callBackResult !== undefined) {
-                            callBackResult({ ressult: 'tgp', message: null });
+                            callBackResult({ ressult: 'tgp', message: null });                          
                         }
                     } else {
                         callBackResult({ ressult: "notgp", message: resp.MensajeError });
