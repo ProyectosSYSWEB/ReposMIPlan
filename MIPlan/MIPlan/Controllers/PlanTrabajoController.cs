@@ -381,5 +381,24 @@ namespace MIPlan.Controllers
             }
         }
 
+        public JsonResult ObtenerGridUnidades(string IdActividad)
+        {            
+            ResultadoUnidad objResultado = new ResultadoUnidad();
+            try
+            {
+                objResultado.Resultado = Data.CursorDataContext.ObtenerGridUnidades(IdActividad);
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                objResultado.Resultado = null;
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
     }
 }
