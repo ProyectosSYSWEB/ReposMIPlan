@@ -99,6 +99,7 @@
                 switch (resp.ressult) {
                     case "tgp":                        
                         self.GridAreasAtencionView = catalogoContext.GridAreasAtencionLST;
+                        self.Descripcion = "ASD";
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -352,9 +353,10 @@
             GridActividades(self.IDMETA);
         };
 
-        this.Meta = function (idMeta) {
+        this.Meta = function (idMeta, Descripcion) {
             GridActividades(idMeta);
             self.IDMETA = idMeta;
+            self.Descripcion = Descripcion;
         }
 
         this.BtnBuscar = function () {

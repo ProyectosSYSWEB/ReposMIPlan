@@ -60,7 +60,7 @@
                                 <label id="lblAccion" for="formGroupExampleInput" class="">Acción</label>
                             </div>
                             <div class="row justify-content-center">
-                                <input type="text" id="inputAccion" class="" name="Accion" ng-model="ctrl.ObtenerDatosActividadesView[0].Accion" placeholder="Accion" required>
+                                <textarea  id="inputAccion" class="" name="Accion"  rows="5" ng-model="ctrl.ObtenerDatosActividadesView[0].Accion" placeholder="Accion" required> </textarea>                                
                             </div>
                             <div class="row justify-content-center">
                                 <span class="messages" ng-show="modalForm.$submitted || modalForm.Accion.$touched">
@@ -231,7 +231,7 @@
                     </div>
                 </div>
                 <div class="table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.1)">
-                    <table class="table table-hover">
+                    <table class="table table-hover ">
                         <thead>
                             <tr>
                                 <th scope="col">Areas de Atención</th>
@@ -242,8 +242,8 @@
 
 
                         <tbody ng-pagination="i in ctrl.GridAreasAtencionView |  itemsPerPage: 10 ">
-                            <tr>
-                                <td ng-click="ctrl.Meta(i.Id) " class="cursor-pointer">{{i.Id}}.- {{i.Descripcion}}</td>
+                            <tr ng-class="{'bg-secondary text-white': A == ctrl.Descripcion}">
+                                <td ng-click="ctrl.Meta(i.Id, i.Descripcion); A= ctrl.Descripcion" class="cursor-pointer"> {{i.Id}}.- {{i.Descripcion}} </td>
                                 <td>0</td>
 
                                 <td style="text-align:center">
