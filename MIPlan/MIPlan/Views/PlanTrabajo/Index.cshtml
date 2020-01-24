@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutContenido.cshtml";
 }
 
-<h2>Index</h2>
+<h2></h2>
 
 <br />
 <br />
@@ -31,7 +31,7 @@
                         <div class="container-fluid">
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
                             <div class="row justify-content-center">
-                                <label id="lblPrograma" class="">Programa:</label>
+                                <label id="lblPrograma" class="">Programa</label>
                             </div>
                             <div class="row justify-content-center">
                                 <select id="cmbPrograma" class="" name="cmbPrograma" ng-options="option.Id as option.Programa for option in ctrl.ObtenerProgramasView" ng-model="ctrl.ObtenerDatosActividadesView[0].Id_Programa" required>
@@ -126,6 +126,7 @@
                                 <select id="cmbStatus" class="" name="Estatus" ng-model="ctrl.EStatus" required>
                                     <option value="A">Activo</option>
                                     <option value="B">Baja</option>
+                                    <option value="P">Pendiente</option>
                                 </select>
                             </div>
                             <div class="row justify-content-center">
@@ -340,7 +341,7 @@
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                                 </button>
 
-                                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminnarPeriodo(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+                                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminnarA(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
                                             </td>
                                         </tr>
                                     </tbody>

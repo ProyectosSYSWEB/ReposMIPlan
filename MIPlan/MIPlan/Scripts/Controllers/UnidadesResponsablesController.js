@@ -190,7 +190,7 @@
             var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
             if (opcion == true) {
                 eliminarUnidadResponsable(Indice);
-                alert("¡Se ha elimnado con exito!");
+                alert("¡Se ha eliminado con exito!");  
                 CargarGrid();
             } else {
                 alert("No se ha eliminado el registro");

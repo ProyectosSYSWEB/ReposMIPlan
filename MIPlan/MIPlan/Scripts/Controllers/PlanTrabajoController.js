@@ -117,7 +117,7 @@
             catalogoContext.GridActividades(idMeta, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.GridActividadesView = catalogoContext.GridActividadesLST;
+                        self.GridActividadesView = catalogoContext.GridActividadesLST;                                                    
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -156,13 +156,14 @@
 
         /********************************************************************************************************************************************************/
 
-        var EliminarActividades = function (Id) {
+        var EliminarActividad = function (Id) {
             catalogoContext.EliminarActividades(Id, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        alert("¡Se ha eliminado con exito!");
+                        console.log("1");
                         break;
-                    case "notgp":
+                    case "notgp":     
+                        console.log("2");
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
                         document.getElementById("Message").innerHTML = self.mensaje_gral;
@@ -170,7 +171,7 @@
                     default:
                         break;
                 }
-                $scope.$apply();
+                //$scope.$apply();
             });
         };
 
@@ -210,7 +211,7 @@
                 switch (resp.ressult) {
                     case "tgp":                                                
                         alert("¡Se han actualizado los datos correctamente!");                    
-                        self.ObtenerDatosActividadesView = null;                                     
+                        self.ObtenerDatosActividadesView = null;                 
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -241,6 +242,7 @@
                     case "tgp":
                         alert("¡Se han guardado los datos correctamente!");
                         self.ObtenerDatosActividadesView = null;
+                        GridActividades(self.IDMETA);
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -310,12 +312,22 @@
             if (ID) {
                 console.log("IF");
                 EditarActividades();
-            } else {
-                console.log("Else");
+            } else {               
                 GuardarActividades();
             }
         };
 
+        this.EliminnarA = function (Indice) {
+            var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
+            if (opcion == true) {
+                EliminarActividad(Indice);                               
+                alert("¡Se ha eliminado con exito!");    
+                GridActividades(self.IDMETA);
+                
+            } else {
+                alert("No se ha eliminado el registro");
+            }
+        };
         this.close = function (form) {
             $('#ModalActividades').modal('hide');
             if (form) {
@@ -325,6 +337,7 @@
             self.ObtenerDatosActividadesView = null;
             self.EStatus = null;
             self.Prioritaria = null;
+           
         };
 
         this.reset = function (form) {
@@ -336,6 +349,7 @@
             self.ObtenerDatosActividadesView = null;
             self.EStatus = null;
             self.Prioritaria = null;
+            GridActividades(self.IDMETA);
         };
 
         this.Meta = function (idMeta) {
