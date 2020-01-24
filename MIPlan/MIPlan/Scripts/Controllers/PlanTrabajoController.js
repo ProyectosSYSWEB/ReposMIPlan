@@ -210,7 +210,8 @@
                 switch (resp.ressult) {
                     case "tgp":                                                
                         alert("¡Se han actualizado los datos correctamente!");                    
-                        self.ObtenerDatosActividadesView = null;                                     
+                        self.ObtenerDatosActividadesView = null;   
+                        GridActividades(self.IDMETA);
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -241,6 +242,7 @@
                     case "tgp":
                         alert("¡Se han guardado los datos correctamente!");
                         self.ObtenerDatosActividadesView = null;
+                        GridActividades(self.IDMETA);
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
