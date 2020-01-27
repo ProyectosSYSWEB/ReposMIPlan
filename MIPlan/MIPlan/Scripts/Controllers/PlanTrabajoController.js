@@ -118,8 +118,13 @@
             catalogoContext.GridActividades(idMeta, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.GridActividadesView = catalogoContext.GridActividadesLST;                                                    
-                        break;
+                        self.GridActividadesView = catalogoContext.GridActividadesLST;
+ 
+                        self.GridProgramas = catalogoContext.GridProgramas;
+                        self.GridProgramas = self.GridProgramas.filter((valorActual, indiceActual, arreglo) => {                           
+                            return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo) === JSON.stringify(valorActual)) === indiceActual
+                        });                        
+           
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
@@ -130,8 +135,7 @@
                 }
                 $scope.$apply();
             });
-        };
-
+        };        
         /********************************************************************************************************************************************************/
 
         var ObtenerDatosActividades = function (Id) {
@@ -182,7 +186,7 @@
             catalogoContext.ObtenerProgramas(function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.ObtenerProgramasView = catalogoContext.ObtenerProgramasLST;                        
+                        self.ObtenerProgramasView = catalogoContext.ObtenerProgramasLST;                       
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;

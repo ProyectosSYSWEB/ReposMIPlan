@@ -60,7 +60,7 @@
                                 <label id="lblAccion" for="formGroupExampleInput" class="">Acción</label>
                             </div>
                             <div class="row justify-content-center">
-                                <textarea  id="inputAccion" class="" name="Accion"  rows="5" ng-model="ctrl.ObtenerDatosActividadesView[0].Accion" placeholder="Accion" required> </textarea>                                
+                                <textarea id="inputAccion" class="" name="Accion" rows="5" ng-model="ctrl.ObtenerDatosActividadesView[0].Accion" placeholder="Accion" required> </textarea>
                             </div>
                             <div class="row justify-content-center">
                                 <span class="messages" ng-show="modalForm.$submitted || modalForm.Accion.$touched">
@@ -311,7 +311,7 @@
                                 </div>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table class="table table-hover"  id="tableMain">
                                     <thead>
                                         <tr>
                                             <th scope="col">Programa</th>
@@ -326,9 +326,12 @@
                                     </thead>
 
 
-                                    <tbody ng-pagination="i in ctrl.GridActividadesView |  itemsPerPage: 5">
-                                        <tr>
-                                            <td>{{i.Desc_Programa}}</td>
+                                    <tbody>
+
+                                        <tr class="breakrow bg-secondary text-white" ng-repeat="pro in ctrl.GridProgramas "> <td>{{pro.Desc_Programa}}</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+
+                                        <tr  class="datarow" style="display:none"  ng-pagination="i in ctrl.GridActividadesView |  itemsPerPage: 5">
+                                            <td></td>
                                             <td>{{i.Desc_Accion}}</td>
                                             <td>{{i.Fecha_Inicio}}</td>
                                             <td>{{i.Fecha_Fin}}</td>
@@ -367,6 +370,7 @@
         <br />
         <br />
     </div>
+
 </div>
 
 
@@ -375,6 +379,7 @@
 <br />
 <br />
 <br />
+
 
 <script src="~/Scripts/angular.min.js"></script>
 <script src="~/Scripts/angular.js"></script>
@@ -401,5 +406,17 @@
         timepicker: false,
         format: 'd/m/Y'
     });
+
+
+      $( document ).ready(function() {
+
+            //collapse and expand sections
+
+            //$('.breakrow').click(function(){
+			$('#tableMain').on('click', 'tr.breakrow',function(){
+                $(this).nextUntil('tr.breakrow').slideToggle(200);
+            });
+        });
+
 </script>
 

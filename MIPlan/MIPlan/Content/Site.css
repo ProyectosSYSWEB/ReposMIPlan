@@ -17,6 +17,16 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
+#container {
+    margin: 0 auto;
+    width: 80%;
+    overflow: auto;
+}
+
+
+
+
+
 input,
 select,
 textarea {
@@ -76,3 +86,5 @@ textarea {
 .cursor-pointer {
     cursor: pointer;
 }
+
+
