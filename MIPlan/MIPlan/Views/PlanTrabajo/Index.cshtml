@@ -242,7 +242,7 @@
 
 
                         <tbody ng-pagination="i in ctrl.GridAreasAtencionView |  itemsPerPage: 10 ">
-                            <tr ng-class="{'bg-secondary text-white': A == ctrl.Descripcion}">
+                            <tr ng-class="{'Mybg text-white': A == ctrl.Descripcion}">
                                 <td ng-click="ctrl.Meta(i.Id, i.Descripcion); A= ctrl.Descripcion" class="cursor-pointer"> {{i.Id}}.- {{i.Descripcion}} </td>
                                 <td>0</td>
 
