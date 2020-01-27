@@ -17,15 +17,6 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-#container {
-    margin: 0 auto;
-    width: 80%;
-    overflow: auto;
-}
-
-
-
-
 
 input,
 select,
@@ -37,7 +28,10 @@ textarea {
     resize: vertical;
 }
 .Mybg {
-    background-color: rgba(0,0,0,.3);
+    background-color: rgba(0,0,0,.5);
+}
+.bgAct{
+    background-color:cadetblue;
 }
 .radio {
     font-size: 16px;

@@ -168,6 +168,7 @@ var catalogoContext =
     GridActividades: function (idMeta, callBackResult) {
         var self = this;
         self.GridActividadesLST.length = 0;
+        self.GridProgramas.length = 0;
         $.ajax(
             {
                 type: 'GET',
