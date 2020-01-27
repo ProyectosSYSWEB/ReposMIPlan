@@ -11,9 +11,9 @@
 <br />
 
 
-<div ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
+<div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
 
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+    <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
     <!-- Modal Update-->
     <div class="modal fade" data-keyboard="false" data-backdrop="static" id="UnidadesResponsablesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -48,13 +48,13 @@
                             <div class="row justify-content-center">
                                 <input type="text" id="inputClave" class="" name="Clave" ng-maxlength="3" ng-model="ctrl.Clave" placeholder="Clave" required>
                             </div>
-                            <div class="row justify-content-center"> 
+                            <div class="row justify-content-center">
                                 <span class="messages" ng-show="modalForm.$submitted || modalForm.Clave.$touched">
-                                    <span ng-show="!ctrl.Clave" class="text-danger">Campo Requerido</span>                                   
+                                    <span ng-show="!ctrl.Clave" class="text-danger">Campo Requerido</span>
                                 </span>
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages">                                    
+                                <span class="messages">
                                     <span ng-show="!modalForm.Clave.$valid" class="text-danger">¡Maximo 3 digitos!</span>
                                 </span>
                             </div>
@@ -122,8 +122,8 @@
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
                         </div>
                     </div>
-                    <div class="modal-footer">   
-                        <button type="button"  class="btn btn btn-danger" ng-click="ctrl.close(modalForm)">Salir</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn btn-danger" ng-click="ctrl.close(modalForm)">Salir</button>
                         <button type="button" id="btnModal" class="btn btn-primary" ng-click="ctrl.UnidadResponsableUpdateCreate(ctrl.unidad[0].Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
                     </div>
                 </form>
@@ -241,8 +241,9 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="4"><ng-pagination-control boundary-links="true"></ng-pagination-control>
-                        </th>   
+                        <th colspan="4">
+                            <ng-pagination-control boundary-links="true"></ng-pagination-control>
+                        </th>
                         <th></th>
                         <th style="text-align:center" colspan="1">
                             <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
@@ -272,6 +273,8 @@
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/UnidadesResponsablesController.js"></script>
 <script src="~/Scripts/Models/UnidadesResponsablesModel.js"></script>
+<script src="~/Scripts/Controllers/AccesoController.js"></script>
+<script src="~/Scripts/Models/AccesoModel.js"></script>
 
 <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <script type="text/javascript">

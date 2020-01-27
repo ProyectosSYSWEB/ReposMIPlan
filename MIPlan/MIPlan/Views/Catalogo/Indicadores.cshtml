@@ -7,7 +7,7 @@
 <br />
 <br />
 <br />
-<div ng-app="MIPlanWeb" ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
+<div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
     <div class="container">
         <div id="Error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
             <strong id="Message">¡Ha ocurrido un error! </strong>
@@ -111,10 +111,10 @@
                                                 </select>
                                             </div>
                                             @*<div class="row justify-content-center">
-                                                <span class="messages" ng-show="modalForm.$submitted || modalForm.cmdEtiqueta1.$touched">
-                                                    <span ng-show="!ctrl.cve_et1" class="text-danger">Campo Requerido</span>
-                                                </span>
-                                            </div>*@
+                                                    <span class="messages" ng-show="modalForm.$submitted || modalForm.cmdEtiqueta1.$touched">
+                                                        <span ng-show="!ctrl.cve_et1" class="text-danger">Campo Requerido</span>
+                                                    </span>
+                                                </div>*@
                                             <br />
                                             <div class="row justify-content-center">
                                                 <label id="lblEtiqueta2" for="lblEtiqueta2" class="text-success">Etiqueta 2:</label>
@@ -125,10 +125,10 @@
                                                 </select>
                                             </div>
                                             @*<div class="row justify-content-center">
-                                                <span class="messages" ng-show="modalForm.$submitted || modalForm.cmdEtiqueta2.$touched">
-                                                    <span ng-show="!ctrl.cve_et2" class="text-danger">Campo Requerido</span>
-                                                </span>
-                                            </div>*@
+                                                    <span class="messages" ng-show="modalForm.$submitted || modalForm.cmdEtiqueta2.$touched">
+                                                        <span ng-show="!ctrl.cve_et2" class="text-danger">Campo Requerido</span>
+                                                    </span>
+                                                </div>*@
                                             <br />
                                             <div class="row justify-content-center">
                                                 <label id="lblSeguimiento" class="">¿Seguimiento?</label>
@@ -272,4 +272,7 @@
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/IndicadoresController.js"></script>
 <script src="~/Scripts/Models/IndicadoresModel.js"></script>
+<script src="~/Scripts/Controllers/AccesoController.js"></script>
+<script src="~/Scripts/Models/AccesoModel.js"></script>
+
 

@@ -260,10 +260,10 @@ namespace MIPlan.Controllers
                 objActividad.Impacto = Impacto;
                 objActividad.Prioritaria = Prioritaria;
                 objActividad.Clave = Clave;
-                objActividad.Clave = Status;
+                objActividad.Status = Status;
 
                 SesionUsu = (List<Sesion>)System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"];
-                Data.PlanTrabajo.GuardarDataContext.EditarActividades(objActividad, objUsuario.Usuario, ref Verificador);
+                Data.PlanTrabajo.GuardarDataContext.EditarActividades(objActividad, SesionUsu[0].Usuario, ref Verificador);
                 if (Verificador == "0")
                 {
                     objResultado.Error = false;
