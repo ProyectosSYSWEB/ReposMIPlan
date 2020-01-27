@@ -30,7 +30,7 @@
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
-                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        document.getElementById("Message").innerHTML = self.mensaje_gral + " ObtenerDependencias";
                         break;
                     default:
                         break;
@@ -48,7 +48,7 @@
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
-                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        document.getElementById("Message").innerHTML = self.mensaje_gral + " CargarComboUR";
                         break;
                     default:
                         break;
@@ -66,7 +66,7 @@
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
-                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        document.getElementById("Message").innerHTML = self.mensaje_gral + " CargarComboEjercicios";
                         break;
                     default:
                         break;
@@ -85,7 +85,7 @@
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
-                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        document.getElementById("Message").innerHTML = self.mensaje_gral + " CargarComboPlanes";
                         break;
                     default:
                         break;
@@ -99,11 +99,12 @@
                 switch (resp.ressult) {
                     case "tgp":                        
                         self.GridAreasAtencionView = catalogoContext.GridAreasAtencionLST;
+                        self.Descripcion = "ASD";
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
-                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        document.getElementById("Message").innerHTML = self.mensaje_gral + " GridAreasAtencion";
                         break;
                     default:
                         break;
@@ -117,20 +118,32 @@
             catalogoContext.GridActividades(idMeta, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.GridActividadesView = catalogoContext.GridActividadesLST;                                                    
+                       
+                        self.GridActividadesView = catalogoContext.GridActividadesLST;
+
+                        self.GridProgramas = catalogoContext.GridProgramas;
+                        self.GridProgramas = self.GridProgramas.filter((valorActual, indiceActual, arreglo) => {
+                            return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo) === JSON.stringify(valorActual)) === indiceActual
+                        });  
+                       
+                        if (self.GridActividadesView.length == 0) {
+                            self.NoActv = "¡No Existen registros para esta área de atención!";
+                        } else {
+                            self.NoActv = "";
+                        }
+
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
-                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        document.getElementById("Message").innerHTML = self.mensaje_gral + " GridActividades";
                         break;
                     default:
                         break;
                 }
                 $scope.$apply();
             });
-        };
-
+        };        
         /********************************************************************************************************************************************************/
 
         var ObtenerDatosActividades = function (Id) {
@@ -145,7 +158,7 @@
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
-                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        document.getElementById("Message").innerHTML = self.mensaje_gral + " ObtenerDatosActividades";
                         break;
                     default:
                         break;
@@ -160,13 +173,13 @@
             catalogoContext.EliminarActividades(Id, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        console.log("1");
+                        
                         break;
                     case "notgp":     
-                        console.log("2");
+                    
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
-                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        document.getElementById("Message").innerHTML = self.mensaje_gral ;
                         break;
                     default:
                         break;
@@ -181,12 +194,12 @@
             catalogoContext.ObtenerProgramas(function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.ObtenerProgramasView = catalogoContext.ObtenerProgramasLST;                        
+                        self.ObtenerProgramasView = catalogoContext.ObtenerProgramasLST;                       
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
-                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        document.getElementById("Message").innerHTML = self.mensaje_gral + " ObtenerProgramas";
                         break;
                     default:
                         break;
@@ -198,8 +211,17 @@
         /********************************************************************************************************************************************************/
 
         var EditarActividades = function () {
+            console.log(self.ObtenerDatosActividadesView[0].Id,
+                self.ObtenerDatosActividadesView[0].Id_Programa,
+                self.ObtenerDatosActividadesView[0].Accion,
+                self.ObtenerDatosActividadesView[0].Fecha_Inicio,
+                self.ObtenerDatosActividadesView[0].Fecha_Fin,
+                self.ObtenerDatosActividadesView[0].Impacto,
+                self.Prioritaria,
+                self.ObtenerDatosActividadesView[0].Clave,
+                self.EStatus);
             catalogoContext.EditarActividades(
-                self.ObtenerDatosActividadesView[0].Id  ,
+                self.ObtenerDatosActividadesView[0].Id,
                 self.ObtenerDatosActividadesView[0].Id_Programa,
                 self.ObtenerDatosActividadesView[0].Accion,
                 self.ObtenerDatosActividadesView[0].Fecha_Inicio,
@@ -216,7 +238,7 @@
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
-                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        document.getElementById("Message").innerHTML = self.mensaje_gral + " EditarActividades";
                         break;
                     default:
                         break;
@@ -247,7 +269,7 @@
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
-                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        document.getElementById("Message").innerHTML = self.mensaje_gral + " GuardarActividades";
                         break;
                     default:
                         break;
@@ -303,7 +325,7 @@
             document.getElementById("cmbPrioritaria").className = "form-control border  border-success";
             document.getElementById("lblStatus").className = "text-success";
             document.getElementById("cmbStatus").className = "form-control border  border-success";
-            self.EStatus = "A";
+            self.EStatus = "P";
             self.Prioritaria = "S";
             ObtenerProgramas();
         };
@@ -352,9 +374,10 @@
             GridActividades(self.IDMETA);
         };
 
-        this.Meta = function (idMeta) {
+        this.Meta = function (idMeta, Descripcion) {
             GridActividades(idMeta);
             self.IDMETA = idMeta;
+            self.Descripcion = Descripcion;
         }
 
         this.BtnBuscar = function () {

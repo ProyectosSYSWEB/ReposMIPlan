@@ -60,7 +60,7 @@
                                 <label id="lblAccion" for="formGroupExampleInput" class="">Acción</label>
                             </div>
                             <div class="row justify-content-center">
-                                <input type="text" id="inputAccion" class="" name="Accion" ng-model="ctrl.ObtenerDatosActividadesView[0].Accion" placeholder="Accion" required>
+                                <textarea id="inputAccion" class="" name="Accion" rows="5" ng-model="ctrl.ObtenerDatosActividadesView[0].Accion" placeholder="Accion" required> </textarea>
                             </div>
                             <div class="row justify-content-center">
                                 <span class="messages" ng-show="modalForm.$submitted || modalForm.Accion.$touched">
@@ -109,8 +109,8 @@
                             </div>
                             <div class="row justify-content-center">
                                 <select id="cmbPrioritaria" class="" name="Prioritaria" ng-model="ctrl.Prioritaria" required>
-                                    <option value="S">SI</option>
-                                    <option value="N">NO</option>
+                                    <option value="S">Si</option>
+                                    <option value="N">No</option>
                                 </select>
                             </div>
                             <div class="row justify-content-center">
@@ -124,9 +124,9 @@
                             </div>
                             <div class="row justify-content-center">
                                 <select id="cmbStatus" class="" name="Estatus" ng-model="ctrl.EStatus" required>
-                                    <option value="A">Activo</option>
-                                    <option value="B">Baja</option>
-                                    <option value="P">Pendiente</option>
+                                    <option value="P">Proceso</option>
+                                    <option value="T">Terminada</option>
+                                    <option value="C">Cancelada</option>
                                 </select>
                             </div>
                             <div class="row justify-content-center">
@@ -217,7 +217,6 @@
     <br />
 
 
-
     <div class="row">
         <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
             <div class="panel panel-default panel-table">
@@ -231,10 +230,10 @@
                     </div>
                 </div>
                 <div class="table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.1)">
-                    <table class="table table-hover">
+                    <table class="table table-hover ">
                         <thead>
                             <tr>
-                                <th scope="col">Areas de Atención</th>
+                                <th scope="col">Áreas de Atención</th>
                                 <th scope="col">%</th>
                                 <th scope="col" style="text-align:center"><em class="fa fa-cog"></em></th>
                             </tr>
@@ -242,8 +241,8 @@
 
 
                         <tbody ng-pagination="i in ctrl.GridAreasAtencionView |  itemsPerPage: 10 ">
-                            <tr>
-                                <td ng-click="ctrl.Meta(i.Id) " class="cursor-pointer">{{i.Id}}.- {{i.Descripcion}}</td>
+                            <tr ng-class="{'Mybg text-white': A == ctrl.Descripcion}">
+                                <td ng-click="ctrl.Meta(i.Id, i.Descripcion); A= ctrl.Descripcion" class="cursor-pointer"> {{i.Id}}.- {{i.Descripcion}} </td>
                                 <td>0</td>
 
                                 <td style="text-align:center">
@@ -295,6 +294,7 @@
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
+                    
                     <div class="tab-pane fade show active" id="Acciones" role="tabpanel" aria-labelledby="Acciones-tab">
                         <br />
                         <div class="panel panel-default panel-table">
@@ -302,7 +302,7 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col text-left">
-                                            <h6>Area de Atención:  <span class="badge badge-secondary">Matricula</span></h6>
+                                            <h6>Área de Atención:  <span class="badge badge-secondary">{{ctrl.Descripcion}}</span></h6>
                                         </div>
                                         <div class="col text-right">
                                             <button type="button" id="btnCrear" class="btn btn-sm btn-success btn-create" style="width:120px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Crear" ng-click="ctrl.Color()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
@@ -311,7 +311,8 @@
                                 </div>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-hover">
+
+                                <table class="table table-hover" id="tableMain">
                                     <thead>
                                         <tr>
                                             <th scope="col">Programa</th>
@@ -321,22 +322,24 @@
                                             <th scope="col">Impacto</th>
                                             <th scope="col">Prioritaria</th>
                                             <th scope="col">Status</th>
-                                            <th scope="col" style="text-align:center"><em class="fa fa-cog"></em></th>
+                                            <th scope="col" style="text-align:center" colspan="3"><em class="fa fa-cog"></em></th>
                                         </tr>
                                     </thead>
 
 
-                                    <tbody ng-pagination="i in ctrl.GridActividadesView |  itemsPerPage: 5">
-                                        <tr>
-                                            <td>{{i.Desc_Programa}}</td>
+                                    <tbody>
+
+                                        <tr class="breakrow bgAct text-white cursor-pointer" ng-repeat="pro in ctrl.GridProgramas "> <td colspan="10">{{pro.Desc_Programa}}</td></tr>
+
+                                        <tr class="datarow" style="display:none" ng-pagination="i in ctrl.GridActividadesView |  itemsPerPage: 5">
+                                            <td></td>
                                             <td>{{i.Desc_Accion}}</td>
                                             <td>{{i.Fecha_Inicio}}</td>
                                             <td>{{i.Fecha_Fin}}</td>
                                             <td>{{i.Impacto}}</td>
                                             <td>{{i.Prioritaria}}</td>
                                             <td>{{i.Status}}</td>
-                                            <td style="text-align:center">
-
+                                            <td colspan="3">
                                                 <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Editar" ng-click="ctrl.Modal(i.Id)">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                                 </button>
@@ -345,16 +348,15 @@
                                             </td>
                                         </tr>
                                     </tbody>
+
                                     <tfoot>
                                         <tr>
-                                            <th colspan="4"><dir-pagination-controls boundary-links="true"></dir-pagination-controls></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
+                                            <th colspan="10"><dir-pagination-controls boundary-links="true"></dir-pagination-controls></th>
+
                                         </tr>
                                     </tfoot>
                                 </table>
+                                <div class="mb-5" style="text-align:center">{{ctrl.NoActv}}</div>
                             </div>
                         </div>
                     </div>
@@ -367,6 +369,7 @@
         <br />
         <br />
     </div>
+
 </div>
 
 
@@ -375,6 +378,7 @@
 <br />
 <br />
 <br />
+
 
 <script src="~/Scripts/angular.min.js"></script>
 <script src="~/Scripts/angular.js"></script>
@@ -401,5 +405,17 @@
         timepicker: false,
         format: 'd/m/Y'
     });
+
+
+      $( document ).ready(function() {
+
+            //collapse and expand sections
+
+            //$('.breakrow').click(function(){
+			$('#tableMain').on('click', 'tr.breakrow',function(){
+                $(this).nextUntil('tr.breakrow').slideToggle(200);
+            });
+        });
+
 </script>
 
