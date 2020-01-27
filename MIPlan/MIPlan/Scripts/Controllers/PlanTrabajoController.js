@@ -99,7 +99,7 @@
                 switch (resp.ressult) {
                     case "tgp":                        
                         self.GridAreasAtencionView = catalogoContext.GridAreasAtencionLST;
-                        self.Descripcion = "ASD";
+                        self.Descripcion = "";
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
