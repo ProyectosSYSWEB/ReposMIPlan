@@ -118,12 +118,20 @@
             catalogoContext.GridActividades(idMeta, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
+                       
                         self.GridActividadesView = catalogoContext.GridActividadesLST;
- 
+
                         self.GridProgramas = catalogoContext.GridProgramas;
-                        self.GridProgramas = self.GridProgramas.filter((valorActual, indiceActual, arreglo) => {                           
+                        self.GridProgramas = self.GridProgramas.filter((valorActual, indiceActual, arreglo) => {
                             return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo) === JSON.stringify(valorActual)) === indiceActual
-                        });                        
+                        });  
+                       
+                        if (self.GridActividadesView.length == 0) {
+                            self.NoActv = "¡No Existen registros para esta área de atención!";
+                        } else {
+                            self.NoActv = "";
+                        }
+
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -165,13 +173,13 @@
             catalogoContext.EliminarActividades(Id, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        console.log("1");
+                        
                         break;
                     case "notgp":     
-                        console.log("2");
+                    
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
-                        document.getElementById("Message").innerHTML = self.mensaje_gral + " EliminarActividad";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral ;
                         break;
                     default:
                         break;

@@ -233,7 +233,7 @@
                     <table class="table table-hover ">
                         <thead>
                             <tr>
-                                <th scope="col">Areas de Atención</th>
+                                <th scope="col">Áreas de Atención</th>
                                 <th scope="col">%</th>
                                 <th scope="col" style="text-align:center"><em class="fa fa-cog"></em></th>
                             </tr>
@@ -294,6 +294,7 @@
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
+                    
                     <div class="tab-pane fade show active" id="Acciones" role="tabpanel" aria-labelledby="Acciones-tab">
                         <br />
                         <div class="panel panel-default panel-table">
@@ -301,7 +302,7 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col text-left">
-                                            <h6>Area de Atención:  <span class="badge badge-secondary">{{ctrl.Descripcion}}</span></h6>
+                                            <h6>Área de Atención:  <span class="badge badge-secondary">{{ctrl.Descripcion}}</span></h6>
                                         </div>
                                         <div class="col text-right">
                                             <button type="button" id="btnCrear" class="btn btn-sm btn-success btn-create" style="width:120px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Crear" ng-click="ctrl.Color()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
@@ -310,7 +311,8 @@
                                 </div>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-hover"  id="tableMain">
+
+                                <table class="table table-hover" id="tableMain">
                                     <thead>
                                         <tr>
                                             <th scope="col">Programa</th>
@@ -340,19 +342,21 @@
                                             <td colspan="3">
                                                 <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Editar" ng-click="ctrl.Modal(i.Id)">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                </button>  
-                                          
+                                                </button>
+
                                                 <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminnarA(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
                                             </td>
                                         </tr>
                                     </tbody>
+
                                     <tfoot>
                                         <tr>
                                             <th colspan="10"><dir-pagination-controls boundary-links="true"></dir-pagination-controls></th>
-                              
+
                                         </tr>
                                     </tfoot>
                                 </table>
+                                <div class="mb-5" style="text-align:center">{{ctrl.NoActv}}</div>
                             </div>
                         </div>
                     </div>
