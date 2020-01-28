@@ -12,7 +12,7 @@
 <br />
 
 
-<table class="table" id="tableMain">
+@*<table class="table" id="tableMain">
   <thead>
     <tr>
       <th scope="col">Prueba de </th>
@@ -31,7 +31,7 @@
       <tr class="collapseCategory collapse datarow" style="display:none"><td>sub- Acción 03</td><td>product 01</td></tr>
 
   </tbody>
-</table>
+</table>*@
 
 
 
@@ -436,10 +436,6 @@
         //$('.breakrow').click(function(){
         $('#tableMain').on('click', 'tr.breakrow', function () {
             $(this).nextUntil('tr.breakrow').slideToggle(200);
-        });
-
-         $('#tableMain').on('click', 'tr.breakrow2', function () {
-            $(this).nextUntil('tr.breakrow2').slideToggle(200);
         });
     });
 
