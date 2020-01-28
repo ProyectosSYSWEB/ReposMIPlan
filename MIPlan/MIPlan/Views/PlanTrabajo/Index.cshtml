@@ -12,6 +12,28 @@
 <br />
 
 
+<table class="table" id="tableMain">
+  <thead>
+    <tr>
+      <th scope="col">Prueba de </th>
+      <th scope="col" width="50%">Multi-Fila Collapse By. LuisLG</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr class="categoryRow" data-toggle="collapse" data-target=".collapseCategory">
+          <td id="categoryTd" colspan="5">
+            Programa 01
+          </td>
+      </tr>
+ 
+      <tr class="collapseCategory collapse breakrow"><td>Acción 02 </td><td></td></tr>
+
+      <tr class="collapseCategory collapse datarow" style="display:none"><td>sub- Acción 03</td><td>product 01</td></tr>
+
+  </tbody>
+</table>
+
+
 
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
 
@@ -294,7 +316,7 @@
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    
+
                     <div class="tab-pane fade show active" id="Acciones" role="tabpanel" aria-labelledby="Acciones-tab">
                         <br />
                         <div class="panel panel-default panel-table">
@@ -407,15 +429,19 @@
     });
 
 
-      $( document ).ready(function() {
+    $(document).ready(function () {
 
-            //collapse and expand sections
+        //collapse and expand sections
 
-            //$('.breakrow').click(function(){
-			$('#tableMain').on('click', 'tr.breakrow',function(){
-                $(this).nextUntil('tr.breakrow').slideToggle(200);
-            });
+        //$('.breakrow').click(function(){
+        $('#tableMain').on('click', 'tr.breakrow', function () {
+            $(this).nextUntil('tr.breakrow').slideToggle(200);
         });
+
+         $('#tableMain').on('click', 'tr.breakrow2', function () {
+            $(this).nextUntil('tr.breakrow2').slideToggle(200);
+        });
+    });
 
 </script>
 
