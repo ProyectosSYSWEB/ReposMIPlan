@@ -172,12 +172,6 @@
             catalogoContext.IndicadoresUpdate(self.cve_id, self.cve_cat, self.cve_desc, self.cve_sub, self.cve_et1, self.cve_et2, self.cve_seg, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.cve_cat = null;
-                        self.cve_desc = null;
-                        self.cve_sub = null;
-                        self.cve_et1 = null;
-                        self.cve_et2 = null;
-                        self.cve_seg = null;
                         alert("¡Se han actualizado los datos correctamente!");
                         break;
                     case "notgp":
@@ -193,7 +187,7 @@
             });
         };
 
-        this.IndicadoresUpdate = function () {
+        this.IndicadorUp = function () {
             indicadorUpdate();
         };
 
@@ -202,13 +196,8 @@
             catalogoContext.IndicadoresCreate(self.cve_cat, self.cve_desc, self.cve_sub, self.cve_et1, self.cve_et2, self.cve_seg, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.cve_cat = null;
-                        self.cve_desc = null;
-                        self.cve_sub = null;
-                        self.cve_et1 = null;
-                        self.cve_et2 = null;
-                        self.cve_seg = null;
-                        alert("¡Se ha creado el indicador correctamente!");
+                        alert("¡Se han actualizado los datos correctamente!");
+                        CargarGrid();
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -219,11 +208,10 @@
                         break;
                 }
                 $scope.$apply();
-                CargarGrid();
             });
         };
 
-        this.IndicadoresCreate = function () {
+        this.IndicadorCreat = function () {
             IndicadorCreate();
         }
 
@@ -273,8 +261,8 @@
         };
 
         this.SubtipoFun = function () {
-            if (self.Subtipo.Subtipo == "") {
-                self.Subtipo.Subtipo = '';
+            if (self.Sub.Sub == "") {
+                self.Sub.Sub = '';
             }
         }
 
