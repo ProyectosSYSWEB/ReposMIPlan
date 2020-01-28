@@ -164,7 +164,6 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-
     GridActividades: function (idMeta, callBackResult) {
         var self = this;
         self.GridActividadesLST.length = 0;
