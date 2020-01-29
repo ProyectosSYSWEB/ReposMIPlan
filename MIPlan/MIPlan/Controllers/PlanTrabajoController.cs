@@ -380,6 +380,30 @@ namespace MIPlan.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
+        public JsonResult GridUnidadesResp(int idActividad)/**/
+        {
+            Sesion SesionUsu = new Sesion();
+            List<UnidadesResponsables> list = new List<UnidadesResponsables>();
+            ResultadoUnidades objResultado = new ResultadoUnidades();
+            try
+            {
+
+
+                list = Data.PlanTrabajo.CursorDataContext.ObtenerGridUnidadesResp(idActividad);
+                objResultado.Error = false;
+                objResultado.MensajeError = string.Empty;
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+
+            }
+        }
 
     }
 }
