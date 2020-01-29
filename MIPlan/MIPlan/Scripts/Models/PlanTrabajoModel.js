@@ -6,7 +6,7 @@ var catalogoContext =
     ListaEjerciciosLST: [],
     ListaPlanesLST: [],
     GridAreasAtencionLST: [],
-    GridActividadesLST: [],
+    GridActividadesLST: [], GridProgramas: [],
     ObtenerDatosActividadesLST: [],
     ObtenerProgramasLST: [],
     EditarActividadesLST: [],
@@ -164,10 +164,10 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-
     GridActividades: function (idMeta, callBackResult) {
         var self = this;
         self.GridActividadesLST.length = 0;
+        self.GridProgramas.length = 0;
         $.ajax(
             {
                 type: 'GET',
@@ -177,8 +177,9 @@ var catalogoContext =
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
-                            self.GridActividadesLST.push({ Id: resp.Resultado[i].Id, Desc_Programa: resp.Resultado[i].Desc_Programa, Desc_Accion: resp.Resultado[i].Desc_Accion, Fecha_Inicio: resp.Resultado[i].Fecha_Inicio, Fecha_Fin: resp.Resultado[i].Fecha_Fin, Impacto: resp.Resultado[i].Impacto, Prioritaria: resp.Resultado[i].Prioritaria });
-                        }
+                            self.GridActividadesLST.push({ Id: resp.Resultado[i].Id, Desc_Programa: resp.Resultado[i].Desc_Programa, Desc_Accion: resp.Resultado[i].Desc_Accion, Fecha_Inicio: resp.Resultado[i].Fecha_Inicio, Fecha_Fin: resp.Resultado[i].Fecha_Fin, Impacto: resp.Resultado[i].Impacto, Prioritaria: resp.Resultado[i].Prioritaria, Status: resp.Resultado[i].Status });
+                            self.GridProgramas.push({ Desc_Programa: resp.Resultado[i].Desc_Programa });
+                        }                      
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
                         }
@@ -225,8 +226,7 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-    EliminarActividades: function (Id, callBackResult) {  
-        console.log("Id Delete:", Id);
+    EliminarActividades: function (Id, callBackResult) {        
         $.ajax(
             {
                 type: 'GET',
@@ -236,7 +236,7 @@ var catalogoContext =
                 success: function (resp) {
                     if (resp.Error == false) {                       
                         if (callBackResult !== undefined) {
-                            callBackResult({ ressult: 'tgp', message: null });
+                            callBackResult({ ressult: 'tgp', message: null });                          
                         }
                     } else {
                         callBackResult({ ressult: "notgp", message: resp.MensajeError });
@@ -280,7 +280,7 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-    EditarActividades: function (Id, Programa, Descripcion, FechaInicio, FechaFin, Impacto, Prioritaria, Clave, Status, callBackResult) {               
+    EditarActividades: function (Id, Programa, Descripcion, FechaInicio, FechaFin, Impacto, Prioritaria, Clave, Status, callBackResult) {       
         $.ajax(
             {
                 type: 'GET',
