@@ -132,6 +132,7 @@
                             self.NoActv = "";
                         }
 
+                        self.DescActividad = "";
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -143,7 +144,36 @@
                 }
                 $scope.$apply();
             });
+        };     
+        
+    /********************************************************************************************************************************************************/
+
+        var GridUnidadesResp = function (idActividad) {
+            catalogoContext.GridUnidadesResp(idActividad, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+
+                        self.GridUnidadesRespView = catalogoContext.GridUnidadesRespLST;
+
+
+                        if (self.GridUnidadesRespView.length == 0) {
+                            self.NoUR = "¡No Existen registros para esta Actividad!";
+                        } else {
+                            self.NoUR = "";
+                        }
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral + " GridUnidadesResp";
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
         };        
+
         /********************************************************************************************************************************************************/
 
         var ObtenerDatosActividades = function (Id) {
@@ -167,7 +197,29 @@
             });
         };
 
-        /********************************************************************************************************************************************************/
+    /********************************************************************************************************************************************************/
+
+        var ObtenerDatosUnidadesResp = function (Id) {
+            catalogoContext.ObtenerDatosUnidadesResp(Id, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.ObtenerDatosUnidadesRespView = catalogoContext.ObtenerDatosUnidadesRespLST;                        
+                        self.EStatus = self.ObtenerDatosUnidadesRespView[0].Status;
+                        self.Coordinador = self.ObtenerDatosUnidadesRespView[0].Coordinador;  
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral + " ObtenerDatosUnidadesResp";
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+
+    /********************************************************************************************************************************************************/
 
         var EliminarActividad = function (Id) {
             catalogoContext.EliminarActividades(Id, function (resp) {
@@ -280,32 +332,48 @@
 
         /********************************************************************************************************************************************************/
 
-        this.Modal = function (Id) {
-            document.getElementById("title").className = "modal-header btn-primary justify-content-center";
-            document.getElementById("exampleModalLabel").innerHTML = "Actualizar Actividades";
-            document.getElementById("btnModal").className = "btn btn-primary";
-            document.getElementById("lblPrograma").className = "text-primary";
-            document.getElementById("cmbPrograma").className = "form-control border border-primary";
-            document.getElementById("lblClave").className = "text-primary";
-            document.getElementById("inputClave").className = "form-control border border-primary";
-            document.getElementById("lblAccion").className = "text-primary";
-            document.getElementById("inputAccion").className = "form-control border border-primary";
-            document.getElementById("lblInicio").className = "text-primary";
-            document.getElementById("InicioUpdate").className = "form-control border border-primary";
-            document.getElementById("lblFin").className = "text-primary";
-            document.getElementById("FinUpdate").className = "form-control border border-primary";
-            document.getElementById("lblImpacto").className = "text-primary";
-            document.getElementById("inputImpacto").className = "form-control border  border-primary";
-            document.getElementById("lblPrioritaria").className = "text-primary";
-            document.getElementById("cmbPrioritaria").className = "form-control border  border-primary";
-            document.getElementById("lblStatus").className = "text-primary";
-            document.getElementById("cmbStatus").className = "form-control border  border-primary";
+        this.ModalACTV = function (Id) {                        
+                    document.getElementById("title").className = "modal-header btn-primary justify-content-center";
+                    document.getElementById("exampleModalLabel").innerHTML = "Actualizar Actividades";
+                    document.getElementById("btnModal").className = "btn btn-primary";
+                    document.getElementById("lblPrograma").className = "text-primary";
+                    document.getElementById("cmbPrograma").className = "form-control border border-primary";
+                    document.getElementById("lblClave").className = "text-primary";
+                    document.getElementById("inputClave").className = "form-control border border-primary";
+                    document.getElementById("lblAccion").className = "text-primary";
+                    document.getElementById("inputAccion").className = "form-control border border-primary";
+                    document.getElementById("lblInicio").className = "text-primary";
+                    document.getElementById("InicioUpdate").className = "form-control border border-primary";
+                    document.getElementById("lblFin").className = "text-primary";
+                    document.getElementById("FinUpdate").className = "form-control border border-primary";
+                    document.getElementById("lblImpacto").className = "text-primary";
+                    document.getElementById("inputImpacto").className = "form-control border  border-primary";
+                    document.getElementById("lblPrioritaria").className = "text-primary";
+                    document.getElementById("cmbPrioritaria").className = "form-control border  border-primary";
+                    document.getElementById("lblStatus").className = "text-primary";
+                    document.getElementById("cmbStatus").className = "form-control border  border-primary";
 
-           
-            ObtenerDatosActividades(Id);
-            ObtenerProgramas();
+                    ObtenerDatosActividades(Id);
+                    ObtenerProgramas();
         };
-        this.Color = function () {
+        this.ModalUR = function (Id) {                   
+                    document.getElementById("titleUR").className = "modal-header btn-primary justify-content-center";
+                    document.getElementById("exampleModalLabelUR").innerHTML = "Actualizar Unidad Responsable";
+                    document.getElementById("btnModalUR").className = "btn btn-primary";
+                    document.getElementById("lblDependencia").className = "text-primary";
+                    document.getElementById("cmbDependencia").className = "form-control border border-primary";
+                    document.getElementById("lblClaveUR").className = "text-primary";
+                    document.getElementById("inputClaveUR").className = "form-control border border-primary";
+                    document.getElementById("lblDescripcion").className = "text-primary";
+                    document.getElementById("inputDescripcion").className = "form-control border  border-primary";
+                    document.getElementById("lblStatusUR").className = "text-primary";
+                    document.getElementById("cmbStatusUR").className = "form-control border  border-primary";
+                    document.getElementById("lblCoordinacion").className = "text-primary";
+                    document.getElementById("Radio").className = "radio-group form-control border border-primary text-center";
+                    ObtenerDatosUnidadesResp(Id);
+        };
+        this.ColorATCV = function () {
+
             document.getElementById("title").className = "modal-header btn-success justify-content-center";
             document.getElementById("exampleModalLabel").innerHTML = "Crear Actividades";
             document.getElementById("btnModal").className = "btn btn-success";
@@ -329,7 +397,30 @@
             self.Prioritaria = "S";
             ObtenerProgramas();
         };
-    /*******************************************************************************************************************************************************/
+        this.ColorUR = function () {
+                    document.getElementById("titleUR").className = "modal-header btn-success justify-content-center";
+                    document.getElementById("exampleModalLabelUR").innerHTML = "Crear Unidad Responsable";
+                    document.getElementById("btnModalUR").className = "btn btn-success";
+                    document.getElementById("lblDependencia").className = "text-success";
+                    document.getElementById("cmbDependencia").className = "form-control border border-success";
+                    document.getElementById("lblClaveUR").className = "text-success";
+                    document.getElementById("inputClaveUR").className = "form-control border border-success";
+                    document.getElementById("lblDescripcion").className = "text-success";
+                    document.getElementById("inputDescripcion").className = "form-control border  border-success";
+                    document.getElementById("lblStatusUR").className = "text-success";
+                    document.getElementById("cmbStatusUR").className = "form-control border  border-success";
+                    document.getElementById("lblCoordinacion").className = "text-success";
+                    document.getElementById("Radio").className = "radio-group form-control border border-success text-center";
+
+                    self.EStatus = "A";                                            
+        };
+        /*******************************************************************************************************************************************************/
+        this.getUR = function (Id, Descripcion)
+        {
+            GridUnidadesResp(Id);
+            self.DescActividad = Descripcion;            
+        }
+
         this.ActividadesCrud = function (ID) {
             if (ID) {
                 console.log("IF");
@@ -359,9 +450,15 @@
             self.ObtenerDatosActividadesView = null;
             self.EStatus = null;
             self.Prioritaria = null;
-           
-        };
 
+            $('#ModalUnidadesResp').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();                
+            }
+            self.ObtenerDatosUnidadesRespView = null;            
+            self.EStatus = null;
+        };
         this.reset = function (form) {
             $('#ModalActividades').modal('hide');
             if (form) {
