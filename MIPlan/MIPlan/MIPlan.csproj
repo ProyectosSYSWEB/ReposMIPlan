@@ -165,10 +165,10 @@
     <Compile Include="Models\ExeProcedimiento.cs" />
     <Compile Include="Models\UnidadesUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rep\CrystalReport1.cs">
+    <Compile Include="Rep\ReporteAreasAtencion.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CrystalReport1.rpt</DependentUpon>
+      <DependentUpon>ReporteAreasAtencion.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
@@ -1319,9 +1319,9 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rep\CrystalReport1.rpt">
+    <EmbeddedResource Include="Rep\ReporteAreasAtencion.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>CrystalReport1.cs</LastGenOutput>
+      <LastGenOutput>ReporteAreasAtencion.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

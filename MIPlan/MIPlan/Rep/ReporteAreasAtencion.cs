@@ -16,14 +16,14 @@ namespace MIPlan.Rep {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class CrystalReport1 : ReportClass {
+    public class ReporteAreasAtencion : ReportClass {
         
-        public CrystalReport1() {
+        public ReporteAreasAtencion() {
         }
         
         public override string ResourceName {
             get {
-                return "CrystalReport1.rpt";
+                return "ReporteAreasAtencion.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace MIPlan.Rep {
         
         public override string FullResourceName {
             get {
-                return "MIPlan.Rep.CrystalReport1.rpt";
+                return "MIPlan.Rep.ReporteAreasAtencion.rpt";
             }
             set {
                 // Do nothing
@@ -90,9 +90,9 @@ namespace MIPlan.Rep {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedCrystalReport1 : Component, ICachedReport {
+    public class CachedReporteAreasAtencion : Component, ICachedReport {
         
-        public CachedCrystalReport1() {
+        public CachedReporteAreasAtencion() {
         }
         
         [Browsable(false)]
@@ -129,7 +129,7 @@ namespace MIPlan.Rep {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            CrystalReport1 rpt = new CrystalReport1();
+            ReporteAreasAtencion rpt = new ReporteAreasAtencion();
             rpt.Site = this.Site;
             return rpt;
         }
