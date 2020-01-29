@@ -1298,6 +1298,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="NewFolder1\" />
+    <Folder Include="reports\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
