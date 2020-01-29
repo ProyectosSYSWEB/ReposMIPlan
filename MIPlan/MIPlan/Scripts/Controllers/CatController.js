@@ -10,12 +10,9 @@
 
         this.Inicio = function () {
             ObtenerCatalogoBasicos();
-            CargarGrid();
+            //CargarGrid();
         };
 
-        //var CargarCombos = function () {
-          
-        //}; 
 
 
         var ObtenerCatalogoBasicos = function () {
@@ -23,7 +20,7 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.catalogos = catalogoContext.catalogoslst;
-                        //self.error1 = catalogoContext.catalogoslst[0].Id;
+                        self.cve_catalogo = catalogoContext.catalogoslst[0].Id;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -194,7 +191,7 @@
 
 
         var BasicoDelete = function (Id) {
-            catalogoContext.eliminarAcreditador(Id, function (resp) {
+            catalogoContext.eliminarBasico(Id, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
 
