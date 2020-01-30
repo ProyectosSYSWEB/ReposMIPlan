@@ -90,6 +90,8 @@ namespace MIPlan.Controllers
                 return View();
             }
         }
+
+        /******************************************************************************************************************************Combos**************************/
         public JsonResult ListaUnidadResponsable()
         {
             Sesion SesionUsu = new Sesion();
@@ -166,6 +168,8 @@ namespace MIPlan.Controllers
 
             }
         }
+        /********************************************************************************************************************************************************/
+        /******************************************************************************************************************************Areas de Atención**************************/
         public JsonResult GridAreasAtencion(string Dependencia)/**/
         {
             Sesion SesionUsu = new Sesion();
@@ -188,6 +192,8 @@ namespace MIPlan.Controllers
 
             }
         }
+
+        /******************************************************************************************************************************Actividades**************************/
         public JsonResult GridActividades(int idMeta)/**/
         {
             Sesion SesionUsu = new Sesion();
@@ -242,42 +248,7 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
-
-        public JsonResult ObtenerDatosUnidadesResp(int IdUnidad)
-        {
-            UnidadesResponsables objUnidadesResp = new UnidadesResponsables();
-            ResultadoUnidades objResultado = new ResultadoUnidades();
-            string Verificador = string.Empty;
-            try
-            {
-                objResultado.Resultado = Data.PlanTrabajo.DataContext.ObtenerDatosUnidadesResp(IdUnidad, ref Verificador);
-                if (Verificador == "0")
-                {
-                    objResultado.Error = false;
-                    objResultado.MensajeError = "";
-                }
-                else
-                {
-                    objResultado.Error = true;
-                    objResultado.MensajeError = Verificador;
-                    objResultado.Resultado = null;
-                }
-                return Json(objResultado, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                objResultado.Error = true;
-                objResultado.MensajeError = ex.Message;
-                objResultado.Resultado = null;
-
-                return Json(objResultado, JsonRequestBehavior.AllowGet);
-            }
-        }
-
-
-
-
+       
 
 
         public JsonResult EditarActividades(int Id, string Programa, string Descripcion, string FechaInicio, string FechaFin, string Impacto, string Prioritaria, string Clave, string Status)
@@ -397,6 +368,9 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
+
+
+        /********************************************************************************************************************************************************/
         public JsonResult ObtenerProgramas()
         {
             List<Comun> list = new List<Comun>();
@@ -418,6 +392,9 @@ namespace MIPlan.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
+
+
+        /**********************************************************************************************************************Unidades Reponsables**********************************/
         public JsonResult GridUnidadesResp(int idActividad)/**/
         {
             Sesion SesionUsu = new Sesion();
@@ -442,6 +419,112 @@ namespace MIPlan.Controllers
 
             }
         }
+
+        public JsonResult ObtenerDatosUnidadesResp(int IdUnidad)
+        {
+            UnidadesResponsables objUnidadesResp = new UnidadesResponsables();
+            ResultadoUnidades objResultado = new ResultadoUnidades();
+            string Verificador = string.Empty;
+            try
+            {
+                objResultado.Resultado = Data.PlanTrabajo.DataContext.ObtenerDatosUnidadesResp(IdUnidad, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult EditarUnidadesResp(int Id, string Dependencia, string Clave, string Descripcion, string Status, string Coordinador)
+        {
+
+            UnidadesResponsables objUnidadesResp = new UnidadesResponsables();
+            ResultadoUnidades objResultado = new ResultadoUnidades();
+            string Verificador = string.Empty;
+            try
+            {
+                objUnidadesResp.Id = Id;
+                objUnidadesResp.Dependecia = Dependencia;
+                objUnidadesResp.Clave = Clave;
+                objUnidadesResp.Descripcion = Descripcion;
+                objUnidadesResp.Status = Status;
+                objUnidadesResp.Coordinador = Coordinador;
+           
+                Data.PlanTrabajo.GuardarDataContext.EditarUnidadesResp(objUnidadesResp, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public JsonResult EliminarUnidadResponsable(int IdUnidad)
+        {
+            UnidadesResponsables objUnidad = new UnidadesResponsables();
+            ResultadoUnidad objResultado = new ResultadoUnidad();
+            string Verificador = string.Empty;
+            try
+            {
+                objUnidad.Id = IdUnidad;
+                Data.PlanTrabajo.GuardarDataContext.EliminarUnidadesResp(objUnidad, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        /********************************************************************************************************************************************************/
+
+
 
     }
 }

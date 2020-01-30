@@ -93,6 +93,7 @@
                 $scope.$apply();
             });
         };
+
         /********************************************************************************************************************************************************/
         var GridAreasAtencion = function () {
             catalogoContext.GridAreasAtencion(self.buscarDependencias, function (resp) {
@@ -146,7 +147,7 @@
             });
         };     
         
-    /********************************************************************************************************************************************************/
+        /********************************************************************************************************************************************************/
 
         var GridUnidadesResp = function (idActividad) {
             catalogoContext.GridUnidadesResp(idActividad, function (resp) {
@@ -197,7 +198,7 @@
             });
         };
 
-    /********************************************************************************************************************************************************/
+       /********************************************************************************************************************************************************/
 
         var ObtenerDatosUnidadesResp = function (Id) {
             catalogoContext.ObtenerDatosUnidadesResp(Id, function (resp) {
@@ -216,6 +217,54 @@
                         break;
                 }
                 $scope.$apply();
+            });
+        };
+
+         /********************************************************************************************************************************************************/
+        var EditarUnidadesResp = function () {           
+            catalogoContext.EditarUnidadesResp(
+                self.ObtenerDatosUnidadesRespView[0].Id,
+                self.ObtenerDatosUnidadesRespView[0].Dependencia,
+                self.ObtenerDatosUnidadesRespView[0].Clave,
+                self.ObtenerDatosUnidadesRespView[0].Descripcion,
+                self.EStatus,
+                self.ObtenerDatosUnidadesRespView[0].Coordinador,
+                function (resp) {
+                    switch (resp.ressult) {
+                        case "tgp":
+                            alert("¡Se han actualizado los datos correctamente!");
+                            self.ObtenerDatosUnidadesRespView = null;
+                            break;
+                        case "notgp":
+                            self.mensaje_gral = resp.message;
+                            document.getElementById("Error").style.display = "block";
+                            document.getElementById("Message").innerHTML = self.mensaje_gral + " EditarUnidadesResp";
+                            break;
+                        default:
+                            break;
+                    }
+                    $scope.$apply();
+                });
+        };
+
+       /********************************************************************************************************************************************************/
+
+        var EliminarUnidadesResp = function (Id) {         
+            catalogoContext.EliminarUnidadResponsable(Id, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+
+                        break;
+                    case "notgp":
+
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                //$scope.$apply();
             });
         };
 
@@ -262,16 +311,7 @@
 
         /********************************************************************************************************************************************************/
 
-        var EditarActividades = function () {
-            console.log(self.ObtenerDatosActividadesView[0].Id,
-                self.ObtenerDatosActividadesView[0].Id_Programa,
-                self.ObtenerDatosActividadesView[0].Accion,
-                self.ObtenerDatosActividadesView[0].Fecha_Inicio,
-                self.ObtenerDatosActividadesView[0].Fecha_Fin,
-                self.ObtenerDatosActividadesView[0].Impacto,
-                self.Prioritaria,
-                self.ObtenerDatosActividadesView[0].Clave,
-                self.EStatus);
+        var EditarActividades = function () {   
             catalogoContext.EditarActividades(
                 self.ObtenerDatosActividadesView[0].Id,
                 self.ObtenerDatosActividadesView[0].Id_Programa,
@@ -418,17 +458,25 @@
         this.getUR = function (Id, Descripcion)
         {
             GridUnidadesResp(Id);
-            self.DescActividad = Descripcion;            
+            self.DescActividad = Descripcion;
+            self.idActividad = Id;
         }
 
         this.ActividadesCrud = function (ID) {
-            if (ID) {
-                console.log("IF");
+            if (ID) { 
                 EditarActividades();
             } else {               
                 GuardarActividades();
             }
         };
+
+        this.UnidadResponsableCRUD = function (ID) {
+            if (ID) {                
+                EditarUnidadesResp();
+            } else {
+                
+            }
+        }
 
         this.EliminnarA = function (Indice) {
             var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
@@ -441,21 +489,33 @@
                 alert("No se ha eliminado el registro");
             }
         };
+        this.EliminarUR = function (Indice) {
+            var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
+            if (opcion == true) {
+                EliminarUnidadesResp(Indice);
+                alert("¡Se ha eliminado con exito!");
+                GridUnidadesResp(self.idActividad);
+
+            } else {
+                alert("No se ha eliminado el registro");
+            }
+        };
         this.close = function (form) {
             $('#ModalActividades').modal('hide');
             if (form) {
                 form.$setPristine();
                 form.$setUntouched();               
             }
-            self.ObtenerDatosActividadesView = null;
-            self.EStatus = null;
-            self.Prioritaria = null;
+          
 
             $('#ModalUnidadesResp').modal('hide');
             if (form) {
                 form.$setPristine();
                 form.$setUntouched();                
             }
+
+            self.ObtenerDatosActividadesView = null;            
+            self.Prioritaria = null;
             self.ObtenerDatosUnidadesRespView = null;            
             self.EStatus = null;
         };
@@ -469,7 +529,20 @@
             self.EStatus = null;
             self.Prioritaria = null;
             GridActividades(self.IDMETA);
+   
         };
+
+        this.resetUR = function (form) {
+            $('#ModalUnidadesResp').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }
+            self.ObtenerDatosUnidadesRespView = null;
+            self.EStatus = null;          
+            GridUnidadesResp(self.idActividad);
+        };
+
 
         this.Meta = function (idMeta, Descripcion) {
             GridActividades(idMeta);
