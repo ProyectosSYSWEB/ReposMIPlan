@@ -1328,8 +1328,8 @@ namespace MIPlan.Controllers
             System.Web.UI.Page p = new System.Web.UI.Page();
 
             ReportDocument rd = new ReportDocument();
-            string Ruta = Path.Combine(Server.MapPath("~/Reports"), "rpt_CuotasPosgradoGral.rpt");
-            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "rpt_CuotasPosgradoGral.rpt"));
+            string Ruta = Path.Combine(Server.MapPath("~/reports"), "ReporteAreasAtencion.rpt");
+            rd.Load(Path.Combine(Server.MapPath("~/reports"), "ReporteAreasAtencion.rpt"));
             rd.SetParameterValue(0, Dependencia);
             rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
             connectionInfo.ServerName = "DSIA";
