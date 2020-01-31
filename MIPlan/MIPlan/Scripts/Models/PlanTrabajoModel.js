@@ -6,10 +6,12 @@ var catalogoContext =
     ListaEjerciciosLST: [],
     ListaPlanesLST: [],
     GridAreasAtencionLST: [],
-    GridActividadesLST: [],
+    GridActividadesLST: [], GridProgramas: [],
     ObtenerDatosActividadesLST: [],
     ObtenerProgramasLST: [],
     EditarActividadesLST: [],
+    GridUnidadesRespLST: [],
+    ObtenerDatosUnidadesRespLST: [],
 /********************************************************************************************************************************************************/
     ObtenerDependencias: function (callBackResult) {
         var self = this;
@@ -164,10 +166,10 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-
     GridActividades: function (idMeta, callBackResult) {
         var self = this;
         self.GridActividadesLST.length = 0;
+        self.GridProgramas.length = 0;
         $.ajax(
             {
                 type: 'GET',
@@ -177,8 +179,9 @@ var catalogoContext =
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
-                            self.GridActividadesLST.push({ Id: resp.Resultado[i].Id, Desc_Programa: resp.Resultado[i].Desc_Programa, Desc_Accion: resp.Resultado[i].Desc_Accion, Fecha_Inicio: resp.Resultado[i].Fecha_Inicio, Fecha_Fin: resp.Resultado[i].Fecha_Fin, Impacto: resp.Resultado[i].Impacto, Prioritaria: resp.Resultado[i].Prioritaria });
-                        }
+                            self.GridActividadesLST.push({ Id: resp.Resultado[i].Id, Desc_Programa: resp.Resultado[i].Desc_Programa, Desc_Accion: resp.Resultado[i].Desc_Accion, Fecha_Inicio: resp.Resultado[i].Fecha_Inicio, Fecha_Fin: resp.Resultado[i].Fecha_Fin, Impacto: resp.Resultado[i].Impacto, Prioritaria: resp.Resultado[i].Prioritaria, Status: resp.Resultado[i].Status });
+                            self.GridProgramas.push({ Desc_Programa: resp.Resultado[i].Desc_Programa });
+                        }                      
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
                         }
@@ -208,7 +211,8 @@ var catalogoContext =
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
                             self.ObtenerDatosActividadesLST.push({ Id: resp.Resultado[i].Id, Id_Programa: resp.Resultado[i].Id_Programa, Accion: resp.Resultado[i].Descripcion, Fecha_Inicio: resp.Resultado[i].Fecha_Inicio, Fecha_Fin: resp.Resultado[i].Fecha_Fin, Impacto: resp.Resultado[i].Impacto, Prioritaria: resp.Resultado[i].Prioritaria, Status: resp.Resultado[i].Status, Clave: resp.Resultado[i].Clave });
-                        }                       
+                        }
+                        console.log(self.ObtenerDatosActividadesLST);
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
                         }
@@ -225,8 +229,7 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-    EliminarActividades: function (Id, callBackResult) {  
-        console.log("Id Delete:", Id);
+    EliminarActividades: function (Id, callBackResult) {        
         $.ajax(
             {
                 type: 'GET',
@@ -236,7 +239,7 @@ var catalogoContext =
                 success: function (resp) {
                     if (resp.Error == false) {                       
                         if (callBackResult !== undefined) {
-                            callBackResult({ ressult: 'tgp', message: null });
+                            callBackResult({ ressult: 'tgp', message: null });                          
                         }
                     } else {
                         callBackResult({ ressult: "notgp", message: resp.MensajeError });
@@ -280,7 +283,7 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-    EditarActividades: function (Id, Programa, Descripcion, FechaInicio, FechaFin, Impacto, Prioritaria, Clave, Status, callBackResult) {               
+    EditarActividades: function (Id, Programa, Descripcion, FechaInicio, FechaFin, Impacto, Prioritaria, Clave, Status, callBackResult) {       
         $.ajax(
             {
                 type: 'GET',
@@ -330,5 +333,113 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
+    GridUnidadesResp: function (idActividad, callBackResult) {
+        var self = this;
+        self.GridUnidadesRespLST.length = 0;        
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'PlanTrabajo/GridUnidadesResp',
+                data: { idActividad },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        for (var i = 0; i < resp.Resultado.length; i++) {
+                            self.GridUnidadesRespLST.push({ Id: resp.Resultado[i].Id, Dependecia: resp.Resultado[i].Dependecia, Clave: resp.Resultado[i].Clave, Descripcion: resp.Resultado[i].Descripcion, Status: resp.Resultado[i].Status, Coordinador: resp.Resultado[i].Coordinador});                            
+                        }                       
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en GridUnidadesResp." });
+                    }
+                }
+            });
 
+    },
+/********************************************************************************************************************************************************/
+    ObtenerDatosUnidadesResp: function (IdUnidad, callBackResult) {
+        var self = this;
+        self.ObtenerDatosUnidadesRespLST.length = 0;
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'PlanTrabajo/ObtenerDatosUnidadesResp',
+                data: { IdUnidad },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        for (var i = 0; i < resp.Resultado.length; i++) {
+                            self.ObtenerDatosUnidadesRespLST.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependecia, Clave: resp.Resultado[i].Clave, Descripcion: resp.Resultado[i].Descripcion, Status: resp.Resultado[i].Status, Coordinador: resp.Resultado[i].Coordinador});
+                        }
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerDatosUnidadesResp." });
+                    }
+                }
+            });
+
+    },
+/********************************************************************************************************************************************************/
+    EditarUnidadesResp: function (Id, Dependencia, Clave, Descripcion, Status, Coordinador, callBackResult) {
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'PlanTrabajo/EditarUnidadesResp',
+                data: { Id, Dependencia, Clave, Descripcion, Status, Coordinador },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EditarUnidadesResp." });
+                    }
+                }
+            });
+
+    },
+/********************************************************************************************************************************************************/
+    EliminarUnidadResponsable: function (IdUnidad, callBackResult) {
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'PlanTrabajo/EliminarUnidadResponsable',
+                data: { IdUnidad },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EliminarUnidadResponsable." });
+                    }
+                }
+            });
+    },
+/********************************************************************************************************************************************************/
 };

@@ -191,6 +191,47 @@ namespace MIPlan.Data.PlanTrabajo
             }
 
         }
+        public static List<UnidadesResponsables> ObtenerGridUnidadesResp(int idActividad)
+        {
+            //s
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+
+            try
+            {
+
+                string[] Parametros = { "P_Id_Actividad" };
+                object[] Valores = { idActividad };
+
+                OracleDataReader dr = null;
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Unidades_Resp", ref dr, Parametros, Valores);
+                List<UnidadesResponsables> list = new List<UnidadesResponsables>();
+                while (dr.Read())
+                {
+                    UnidadesResponsables objUnidadResp = new UnidadesResponsables();
+                    objUnidadResp.Id = Convert.ToInt32(dr[0]);
+                    objUnidadResp.Dependecia = Convert.ToString(dr[1]);
+                    objUnidadResp.Clave = Convert.ToString(dr[2]);
+                    objUnidadResp.Descripcion = Convert.ToString(dr[3]);
+                    objUnidadResp.Status = Convert.ToString(dr[4]);
+                    objUnidadResp.Coordinador = Convert.ToString(dr[5]);
+                    list.Add(objUnidadResp);
+                }
+                return list;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
+        }
+
 
     }
 }

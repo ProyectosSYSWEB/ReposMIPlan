@@ -10,7 +10,7 @@ namespace MIPlan.Controllers
 {
     public class AccesoController : Controller
     {
-        // GET: Acceso
+        // GET: Accesoss
         public ActionResult Index()
         {
             return View();

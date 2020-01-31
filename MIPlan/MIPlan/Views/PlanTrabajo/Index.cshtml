@@ -4,19 +4,41 @@
     Layout = "~/Views/Shared/_LayoutContenido.cshtml";
 }
 
-<h2>Index</h2>
+<h2></h2>
 
 <br />
 <br />
 <br />
 <br />
+
+
+@*<table class="table" id="tableMain">
+  <thead>
+    <tr>
+      <th scope="col">Prueba de </th>
+      <th scope="col" width="50%">Multi-Fila Collapse By. LuisLG</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr class="categoryRow" data-toggle="collapse" data-target=".collapseCategory">
+          <td id="categoryTd" colspan="5">
+            Programa 01
+          </td>
+      </tr>
+ 
+      <tr class="collapseCategory collapse breakrow"><td>Acción 02 </td><td></td></tr>
+
+      <tr class="collapseCategory collapse datarow" style="display:none"><td>sub- Acción 03</td><td>product 01</td></tr>
+
+  </tbody>
+</table>*@
 
 
 
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
 
     <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
-    <!-- Modal Update-->
+    <!-- Modal Actividades-->
     <div class="modal fade" data-keyboard="false" data-backdrop="static" id="ModalActividades" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -31,7 +53,7 @@
                         <div class="container-fluid">
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
                             <div class="row justify-content-center">
-                                <label id="lblPrograma" class="">Programa:</label>
+                                <label id="lblPrograma" class="">Programa</label>
                             </div>
                             <div class="row justify-content-center">
                                 <select id="cmbPrograma" class="" name="cmbPrograma" ng-options="option.Id as option.Programa for option in ctrl.ObtenerProgramasView" ng-model="ctrl.ObtenerDatosActividadesView[0].Id_Programa" required>
@@ -60,7 +82,7 @@
                                 <label id="lblAccion" for="formGroupExampleInput" class="">Acción</label>
                             </div>
                             <div class="row justify-content-center">
-                                <input type="text" id="inputAccion" class="" name="Accion" ng-model="ctrl.ObtenerDatosActividadesView[0].Accion" placeholder="Accion" required>
+                                <textarea id="inputAccion" class="" name="Accion" rows="5" ng-model="ctrl.ObtenerDatosActividadesView[0].Accion" placeholder="Accion" required> </textarea>
                             </div>
                             <div class="row justify-content-center">
                                 <span class="messages" ng-show="modalForm.$submitted || modalForm.Accion.$touched">
@@ -109,8 +131,8 @@
                             </div>
                             <div class="row justify-content-center">
                                 <select id="cmbPrioritaria" class="" name="Prioritaria" ng-model="ctrl.Prioritaria" required>
-                                    <option value="S">SI</option>
-                                    <option value="N">NO</option>
+                                    <option value="S">Si</option>
+                                    <option value="N">No</option>
                                 </select>
                             </div>
                             <div class="row justify-content-center">
@@ -124,8 +146,9 @@
                             </div>
                             <div class="row justify-content-center">
                                 <select id="cmbStatus" class="" name="Estatus" ng-model="ctrl.EStatus" required>
-                                    <option value="A">Activo</option>
-                                    <option value="B">Baja</option>
+                                    <option value="P">Proceso</option>
+                                    <option value="T">Terminada</option>
+                                    <option value="C">Cancelada</option>
                                 </select>
                             </div>
                             <div class="row justify-content-center">
@@ -156,6 +179,124 @@
         </div>
     </div>
     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+    <!-- Modal Unidades Responsables-->
+    <div class="modal fade" data-keyboard="false" data-backdrop="static" id="ModalUnidadesResp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form name="modalForm" novalidate>
+                    <div id="titleUR" class="">
+                        <h5 class="modal-title" id="exampleModalLabelUR"></h5>
+                        <button type="button" class="close btn-danger" data-dismiss="modal" ng-click="ctrl.close(modalForm)" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+                            <div class="row justify-content-center">
+                                <label id="lblDependencia" class="">Dependencia:</label>
+                            </div>
+                            <div class="row justify-content-center">
+                                <select id="cmbDependencia" class="" name="cmbDependencia" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.ObtenerDatosUnidadesRespView[0].Dependencia" required>
+                                    <option value="">--Seleccionar Dependencia--</option>
+                                </select>
+                            </div>
+                            <div class="row justify-content-center">
+                                <span class="messages" ng-show="modalForm.$submitted || modalForm.cmbDependencia.$touched">
+                                    <span ng-show="!ctrl.ObtenerDatosUnidadesRespView[0].Dependencia" class="text-danger">Campo Requerido</span>
+                                </span>
+                            </div>
+                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+                            <div class="row justify-content-center">
+                                <label id="lblClaveUR" class="">Clave</label>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="text" id="inputClaveUR" class="" name="ClaveUR" ng-maxlength="3" ng-model="ctrl.ObtenerDatosUnidadesRespView[0].Clave" placeholder="Clave" required>
+                            </div>
+                            <div class="row justify-content-center">
+                                <span class="messages" ng-show="modalForm.$submitted || modalForm.ClaveUR.$touched">
+                                    <span ng-show="!ctrl.ObtenerDatosUnidadesRespView[0].Clave" class="text-danger">Campo Requerido</span>
+                                </span>
+                            </div>
+                            <div class="row justify-content-center">
+                                <span class="messages">
+                                    <span ng-show="!modalForm.ClaveUR" class="text-danger">¡Maximo 3 digitos!</span>
+                                </span>
+                            </div>
+                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+                            <div class="row justify-content-center">
+                                <label id="lblDescripcion" class="">Descripción</label>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="text" id="inputDescripcion" name="Descripcion" class="" ng-model="ctrl.ObtenerDatosUnidadesRespView[0].Descripcion" required placeholder="Descripción">
+                            </div>
+                            <div class="row justify-content-center">
+                                <span class="messages" ng-show="modalForm.$submitted || modalForm.Descripcion.$touched">
+                                    <span ng-show="!ctrl.ObtenerDatosUnidadesRespView[0].Descripcion" class="text-danger">Campo Requerido</span>
+                                </span>
+                            </div>
+                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+                            <div class="row justify-content-center">
+                                <label id="lblStatusUR" class="">Estatus</label>
+                            </div>
+                            <div class="row justify-content-center">
+                                <select id="cmbStatusUR" class="" name="cmbDependencia_status" ng-model="ctrl.EStatus" required>
+                                    <option value="A">Activo</option>
+                                    <option value="B">Baja</option>
+                                </select>
+                            </div>
+                            <div class="row justify-content-center">
+                                <span class="messages" ng-show="modalForm.$submitted || modalForm.cmbDependencia_status.$touched">
+                                    <span ng-show="!ctrl.EStatus" class="text-danger">Campo Requerido</span>
+                                </span>
+                            </div>
+                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+                            <br />
+                            <div class="row justify-content-center">
+                                <label id="lblCoordinacion" class="">¿Es Coordinación?</label>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div id="Radio" class="radio-group form-control border border-success text-center" style="max-width: 280px;">
+                                    <label class="radio ">
+                                        <input type="radio" value="S" name="gender" ng-model="ctrl.ObtenerDatosUnidadesRespView[0].Coordinador" required />
+                                        Si
+                                        <span></span>
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" value="N" name="gender" ng-model="ctrl.ObtenerDatosUnidadesRespView[0].Coordinador" required />
+                                        No
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <span class="messages" ng-show="modalForm.$submitted || modalForm.gender.$touched">
+                                    <span ng-show="!ctrl.ObtenerDatosUnidadesRespView[0].Coordinador" class="text-danger">Campo Requerido</span>
+                                </span>
+                            </div>
+                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+                            <br />
+                            <div class="row justify-content-center">
+                                <div id="ErrorModal" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
+                                    <strong id="MessageModal">¡Ha ocurrido un error! </strong>
+                                    <button type="button" class="close" ng-click="ctrl.DivErrorModal()" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn btn-danger" ng-click="ctrl.close(modalForm)">Salir</button>
+                        <button type="button" id="btnModalUR" class="btn btn-primary" ng-click="ctrl.UnidadResponsableCRUD(ctrl.ObtenerDatosUnidadesRespView[0].Id); ctrl.resetUR(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--------------------------------------------------------------data-dismiss="modal"------------------------------------------------------------------------------------------------------------------------------->
 
 
     <div class="container">
@@ -216,7 +357,6 @@
     <br />
 
 
-
     <div class="row">
         <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
             <div class="panel panel-default panel-table">
@@ -230,10 +370,10 @@
                     </div>
                 </div>
                 <div class="table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.1)">
-                    <table class="table table-hover">
+                    <table class="table table-hover ">
                         <thead>
                             <tr>
-                                <th scope="col">Areas de Atención</th>
+                                <th scope="col">Áreas de Atención</th>
                                 <th scope="col">%</th>
                                 <th scope="col" style="text-align:center"><em class="fa fa-cog"></em></th>
                             </tr>
@@ -241,8 +381,8 @@
 
 
                         <tbody ng-pagination="i in ctrl.GridAreasAtencionView |  itemsPerPage: 10 ">
-                            <tr>
-                                <td ng-click="ctrl.Meta(i.Id) " class="cursor-pointer">{{i.Id}}.- {{i.Descripcion}}</td>
+                            <tr ng-class="{'Mybg text-white': A == ctrl.Descripcion}">
+                                <td ng-click="ctrl.Meta(i.Id, i.Descripcion); A= ctrl.Descripcion" class="cursor-pointer"> {{i.Id}}.- {{i.Descripcion}} </td>
                                 <td>0</td>
 
                                 <td style="text-align:center">
@@ -281,7 +421,7 @@
             <div role="tabpanel" style="box-shadow: 10px 40px 96px rgba(0,0,0,.1)">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="Acciones-tab" data-toggle="tab" href="#Acciones" role="tab" aria-controls="Acciones" aria-selected="true">Acciones</a>
+                        <a class="nav-link active" id="Acciones-tab" data-toggle="tab" href="#Acciones" role="tab" aria-controls="Acciones" aria-selected="true">Actividades</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="UR-tab" data-toggle="tab" href="#UR" role="tab" aria-controls="UR" aria-selected="false">Unidades Responsables</a>
@@ -294,6 +434,7 @@
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
+
                     <div class="tab-pane fade show active" id="Acciones" role="tabpanel" aria-labelledby="Acciones-tab">
                         <br />
                         <div class="panel panel-default panel-table">
@@ -301,16 +442,17 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col text-left">
-                                            <h6>Area de Atención:  <span class="badge badge-secondary">Matricula</span></h6>
+                                            <h6>Ubicación:  <span class="badge badge-secondary">{{ctrl.Descripcion}}</span></h6>
                                         </div>
                                         <div class="col text-right">
-                                            <button type="button" id="btnCrear" class="btn btn-sm btn-success btn-create" style="width:120px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Crear" ng-click="ctrl.Color()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                                            <button type="button" id="btnCrear" class="btn btn-sm btn-success btn-create" style="width:120px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Crear" ng-click="ctrl.ColorATCV()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-hover">
+
+                                <table class="table table-hover" id="tableMain">
                                     <thead>
                                         <tr>
                                             <th scope="col">Programa</th>
@@ -320,44 +462,112 @@
                                             <th scope="col">Impacto</th>
                                             <th scope="col">Prioritaria</th>
                                             <th scope="col">Status</th>
-                                            <th scope="col" style="text-align:center"><em class="fa fa-cog"></em></th>
+                                            <th scope="col" style="text-align:center" colspan="3"><em class="fa fa-cog"></em></th>
                                         </tr>
                                     </thead>
 
 
-                                    <tbody ng-pagination="i in ctrl.GridActividadesView |  itemsPerPage: 5">
-                                        <tr>
-                                            <td>{{i.Desc_Programa}}</td>
+                                    <tbody>
+
+                                        <tr class="breakrow bgAct text-white cursor-pointer" ng-repeat="pro in ctrl.GridProgramas "> <td colspan="10">{{pro.Desc_Programa}}</td></tr>
+
+                                        <tr class="datarow cursor-pointer" style="display:none" ng-pagination="i in ctrl.GridActividadesView |  itemsPerPage: 5" ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'MybgUR text-white': A == ctrl.DescActividad}">
+                                            <td></td>
                                             <td>{{i.Desc_Accion}}</td>
                                             <td>{{i.Fecha_Inicio}}</td>
                                             <td>{{i.Fecha_Fin}}</td>
                                             <td>{{i.Impacto}}</td>
                                             <td>{{i.Prioritaria}}</td>
                                             <td>{{i.Status}}</td>
-                                            <td style="text-align:center">
-
-                                                <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Editar" ng-click="ctrl.Modal(i.Id)">
+                                            <td colspan="3">
+                                                <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Editar" ng-click="ctrl.ModalACTV(i.Id)">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                                 </button>
 
-                                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminnarPeriodo(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+                                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminnarA(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
                                             </td>
                                         </tr>
                                     </tbody>
+
                                     <tfoot>
                                         <tr>
-                                            <th colspan="4"><dir-pagination-controls boundary-links="true"></dir-pagination-controls></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
+                                            <th colspan="10"><dir-pagination-controls boundary-links="true"></dir-pagination-controls></th>
+
                                         </tr>
                                     </tfoot>
                                 </table>
+                                <div class="mb-5" style="text-align:center">{{ctrl.NoActv}}</div>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="UR" role="tabpanel" aria-labelledby="UR-tab"><h3>Unidades Responsables</h3></div>
+                    <div class="tab-pane fade" id="UR" role="tabpanel" aria-labelledby="UR-tab">
+
+                        <br />
+                        <div class="panel panel-default panel-table">
+                            <div class="panel-heading">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            <h6>Ubicación:  <span class="badge badge-secondary">{{ctrl.Descripcion}}  /  {{ctrl.DescActividad}}</span></h6>
+                                        </div>
+                                        <div class="col text-right">
+                                            <button type="button" id="btnCrear" class="btn btn-sm btn-success btn-create" style="width:120px" data-toggle="modal" data-target="#ModalUnidadesResp" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Crear" ng-click="ctrl.ColorUR()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Dependencia</th>
+                                            <th scope="col">Clave</th>
+                                            <th scope="col">Descripción</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Coordinador</th>
+                                            <th scope="col" style="text-align:center" colspan="3"><em class="fa fa-cog"></em></th>
+                                        </tr>
+                                    </thead>
+
+
+                                    <tbody ng-pagination="i in ctrl.GridUnidadesRespView |  itemsPerPage: 5">
+
+                                        <tr class="cursor-pointer">
+
+                                            <td>{{i.Dependecia}}</td>
+                                            <td>{{i.Clave}}</td>
+                                            <td>{{i.Descripcion}}</td>
+                                            <td>{{i.Status}}</td>
+                                            <td>{{i.Coordinador}}</td>
+                                            <td colspan="3">
+                                                <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalUnidadesResp" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Editar" ng-click="ctrl.ModalUR(i.Id)">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                </button>
+
+                                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminarUR(i.Id)" style="width:40px" >
+                                                <i class="fa fa-eraser" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="10"><dir-pagination-controls boundary-links="true"></dir-pagination-controls></th>
+
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <div class="mb-5" style="text-align:center">{{ctrl.NoUR}}</div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
                     <div class="tab-pane fade" id="Indicadores" role="tabpanel" aria-labelledby="Indicadores-tab"><h3>Indicadores</h3></div>
                     <div class="tab-pane fade" id="Evidencias" role="tabpanel" aria-labelledby="Evidencias-tab"><h3>Evidencias</h3></div>
                 </div>
@@ -366,6 +576,7 @@
         <br />
         <br />
     </div>
+
 </div>
 
 
@@ -374,6 +585,7 @@
 <br />
 <br />
 <br />
+
 
 <script src="~/Scripts/angular.min.js"></script>
 <script src="~/Scripts/angular.js"></script>
@@ -400,5 +612,17 @@
         timepicker: false,
         format: 'd/m/Y'
     });
+
+
+    $(document).ready(function () {
+
+        //collapse and expand sections
+
+        //$('.breakrow').click(function(){
+        $('#tableMain').on('click', 'tr.breakrow', function () {
+            $(this).nextUntil('tr.breakrow').slideToggle(200);
+        });
+    });
+
 </script>
 

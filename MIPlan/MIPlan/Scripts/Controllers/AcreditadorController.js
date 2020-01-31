@@ -33,6 +33,7 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.dependencias = catalogoContext.dependenciaslst;
+                        self.cve_dependencia = catalogoContext.dependenciaslst.Id;
                        break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
