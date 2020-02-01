@@ -137,6 +137,7 @@
     <Compile Include="Controllers\AccesoController.cs" />
     <Compile Include="Controllers\CatalogoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MovimientosController.cs" />
     <Compile Include="Controllers\PlanTrabajoController.cs" />
     <Compile Include="Data\CursorDataContext.cs" />
     <Compile Include="Data\DataContext.cs" />
@@ -1299,6 +1300,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Default\" />
+    <Folder Include="Views\Movimientos\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
