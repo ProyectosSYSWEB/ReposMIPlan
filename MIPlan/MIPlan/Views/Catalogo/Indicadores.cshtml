@@ -185,45 +185,45 @@
                 <thead>
                     <tr>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Id'; sortReverse = !sortReverse">
+                            <a href="" ng-click="sortType = 'Categoría'; sortReverse = !sortReverse">
                                 Categoría
-                                <span ng-class="sortType == 'Id' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Categoria' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                <span ng-class="sortType == 'Categoría' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Categoría' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Dependencia'; sortReverse = !sortReverse">
+                            <a href="" ng-click="sortType = 'Subtipo'; sortReverse = !sortReverse">
                                 Subtipo
-                                <span ng-class="sortType == 'Dependencia' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Subtipo' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                <span ng-class="sortType == 'Subtipo' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Subtipo' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Clave'; sortReverse = !sortReverse">
+                            <a href="" ng-click="sortType = 'Descripción'; sortReverse = !sortReverse">
                                 Descripción
-                                <span ng-class="sortType == 'Clave' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Descripción' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                <span ng-class="sortType == 'Descripción' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Descripción' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Descripcion'; sortReverse = !sortReverse">
+                            <a href="" ng-click="sortType = 'Etiqueta 1'; sortReverse = !sortReverse">
                                 Etiqueta 1
-                                <span ng-class="sortType == 'Descripcion' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Etiqueta 1' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                <span ng-class="sortType == 'Etiqueta 1' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Etiqueta 1' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Estatus'; sortReverse = !sortReverse">
+                            <a href="" ng-click="sortType = 'Etiqueta 2'; sortReverse = !sortReverse">
                                 Etiqueta 2
-                                <span ng-class="sortType == 'Estatus' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Etiqueta 2' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                <span ng-class="sortType == 'Etiqueta 2' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Etiqueta 2' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Categoria'; sortReverse = !sortReverse">
+                            <a href="" ng-click="sortType = 'Seguimiento'; sortReverse = !sortReverse">
                                 Seguimiento
-                                <span ng-class="sortType == 'Categoria' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Seguimiento' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                <span ng-class="sortType == 'Seguimiento' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Seguimiento' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody ng-pagination="i in ctrl.indicadores |  filter:ctrl.buscar | filter:ctrl.Subtipo | itemsPerPage: 5">
+                <tbody ng-pagination="i in ctrl.indicadores |  filter:ctrl.buscar | filter:ctrl.Subtipo.Subtipo | itemsPerPage: 5">
                     <tr>
                         <td><font size="2">{{i.Cat}}</font></td>
                         <td><font size="2">{{i.Sub}}</font></td>

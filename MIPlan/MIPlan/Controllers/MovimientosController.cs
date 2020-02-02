@@ -9,7 +9,7 @@ namespace MIPlan.Controllers
     public class MovimientosController : Controller
     {
         // GET: Movimientos
-        public ActionResult Index()
+        public ActionResult Configuracion()
         {
             return View();
         }
