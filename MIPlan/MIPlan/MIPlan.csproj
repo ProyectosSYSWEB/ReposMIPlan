@@ -137,6 +137,7 @@
     <Compile Include="Controllers\AccesoController.cs" />
     <Compile Include="Controllers\CatalogoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MovimientosController.cs" />
     <Compile Include="Controllers\PlanTrabajoController.cs" />
     <Compile Include="Data\CursorDataContext.cs" />
     <Compile Include="Data\DataContext.cs" />
@@ -398,6 +399,7 @@
     <Content Include="Scripts\Controllers\AcreditadorController.js" />
     <Content Include="Scripts\Controllers\AreasAtencionController.js" />
     <Content Include="Scripts\Controllers\CatController.js" />
+    <Content Include="Scripts\Controllers\ConfiguracionController.js" />
     <Content Include="Scripts\Controllers\IndicadoresController.js" />
     <Content Include="Scripts\Controllers\PeriodosController.js" />
     <Content Include="Scripts\Controllers\PlanTrabajoController.js" />
@@ -1258,6 +1260,7 @@
     <Content Include="Scripts\Models\AcreditadorModel.js" />
     <Content Include="Scripts\Models\AreasAtencionModel.js" />
     <Content Include="Scripts\Models\CatModel.js" />
+    <Content Include="Scripts\Models\ConfiguracionModel.js" />
     <Content Include="Scripts\Models\IndicadoresModel.js" />
     <Content Include="Scripts\Models\PeriodosModel.js" />
     <Content Include="Scripts\Models\PlanTrabajoModel.js" />
@@ -1307,6 +1310,7 @@
     <Content Include="Views\Catalogo\Periodos.cshtml" />
     <Content Include="Views\PlanTrabajo\Index.cshtml" />
     <Content Include="Views\Catalogo\Indicadores.cshtml" />
+    <Content Include="Views\Movimientos\Configuracion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
