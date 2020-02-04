@@ -16,14 +16,14 @@ namespace MIPlan.reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class ReporteAreasAtencion : ReportClass {
+    public class ReporteAreasAtencionPdf : ReportClass {
         
-        public ReporteAreasAtencion() {
+        public ReporteAreasAtencionPdf() {
         }
         
         public override string ResourceName {
             get {
-                return "ReporteAreasAtencion.rpt";
+                return "ReporteAreasAtencionPdf.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace MIPlan.reports {
         
         public override string FullResourceName {
             get {
-                return "MIPlan.reports.ReporteAreasAtencion.rpt";
+                return "MIPlan.reports.ReporteAreasAtencionPdf.rpt";
             }
             set {
                 // Do nothing
@@ -98,9 +98,9 @@ namespace MIPlan.reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedReporteAreasAtencion : Component, ICachedReport {
+    public class CachedReporteAreasAtencionPdf : Component, ICachedReport {
         
-        public CachedReporteAreasAtencion() {
+        public CachedReporteAreasAtencionPdf() {
         }
         
         [Browsable(false)]
@@ -137,7 +137,7 @@ namespace MIPlan.reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            ReporteAreasAtencion rpt = new ReporteAreasAtencion();
+            ReporteAreasAtencionPdf rpt = new ReporteAreasAtencionPdf();
             rpt.Site = this.Site;
             return rpt;
         }

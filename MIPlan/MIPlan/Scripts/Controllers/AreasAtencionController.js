@@ -269,8 +269,6 @@
         };
 
         this.PdfReportAreas = function (Dependencia) {
-            //var e = document.getElementById("cmdDependencia");
-            //var descConc = e.value;
             var xhr = new XMLHttpRequest();
             var ruta = urlServer + 'Catalogo/ReporteAreasAtencionPdf';
             xhr.responseType = 'blob';
@@ -279,6 +277,23 @@
             xhr.onreadystatechange = function () {//Call a function when the state changes.
                 if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
                     var blob = new Blob([this.response], { type: 'application/pdf' });
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    window.open(link, "", "width=600,height=800");
+                }
+            }
+            xhr.send("Dependencia=" + Dependencia);
+        };
+
+        this.ExcelReportAreas = function (Dependencia) {
+            var xhr = new XMLHttpRequest();
+            var ruta = urlServer + 'Catalogo/ReporteAreasAtencionExcel';
+            xhr.responseType = 'blob';
+            xhr.open("POST", ruta, true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {//Call a function when the state changes.
+                if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+                    var blob = new Blob([this.response], { type: 'application/xls' });
                     var link = document.createElement('a');
                     link.href = window.URL.createObjectURL(blob);
                     window.open(link, "", "width=600,height=800");

@@ -241,10 +241,10 @@
                         <th colspan="4"><ng-pagination-control boundary-links="true"></ng-pagination-control></th>
                         <th></th>
                         <th style="text-align:right" colspan="2">
-                            <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                            <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.ExcelReportAreas(ctrl.buscar)" style="width:50px">
                                 <i class="fa fa-file-excel-o" aria-hidden="true"></i>
                             </button>
-                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Generar Reporte en PDF" ng-click="ctrl.PdfReportAreas(ctrl.cve_dependencia)" style="width:50px">
+                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Generar Reporte en PDF" ng-click="ctrl.PdfReportAreas(ctrl.buscar)" style="width:50px">
                                 <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                             </button>
                         </th>

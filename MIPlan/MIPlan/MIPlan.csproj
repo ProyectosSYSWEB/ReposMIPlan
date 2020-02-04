@@ -165,10 +165,16 @@
     <Compile Include="Models\ExeProcedimiento.cs" />
     <Compile Include="Models\UnidadesUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="reports\ReporteAreasAtencion.cs">
+    <Compile Include="reports\ReporteAreasAtencionExcel.cs">
+      <DependentUpon>ReporteAreasAtencionExcel.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="reports\ReporteAreasAtencionPdf.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ReporteAreasAtencion.rpt</DependentUpon>
+      <DependentUpon>ReporteAreasAtencionPdf.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
@@ -1319,9 +1325,13 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="reports\ReporteAreasAtencion.rpt">
+    <EmbeddedResource Include="reports\ReporteAreasAtencionExcel.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ReporteAreasAtencion.cs</LastGenOutput>
+      <LastGenOutput>ReporteAreasAtencionExcel.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reports\ReporteAreasAtencionPdf.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteAreasAtencionPdf.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

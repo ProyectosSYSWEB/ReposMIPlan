@@ -1328,8 +1328,8 @@ namespace MIPlan.Controllers
             System.Web.UI.Page p = new System.Web.UI.Page();
 
             ReportDocument rd = new ReportDocument();
-            string Ruta = Path.Combine(Server.MapPath("~/reports"), "ReporteAreasAtencion.rpt");
-            rd.Load(Path.Combine(Server.MapPath("~/reports"), "ReporteAreasAtencion.rpt"));
+            string Ruta = Path.Combine(Server.MapPath("~/reports"), "ReporteAreasAtencionPdf.rpt");
+            rd.Load(Path.Combine(Server.MapPath("~/reports"), "ReporteAreasAtencionPdf.rpt"));
             rd.SetParameterValue(0, Dependencia);
             rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
             connectionInfo.ServerName = "DSIA";
@@ -1342,6 +1342,28 @@ namespace MIPlan.Controllers
             Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
             return File(stream, "application/pdf", "CuotasPosgrado_General.pdf");
+        }
+
+        public ActionResult ReporteAreasAtencionExcel(string Dependencia)
+        {
+            ConnectionInfo connectionInfo = new ConnectionInfo();
+            System.Web.UI.Page p = new System.Web.UI.Page();
+
+            ReportDocument rd = new ReportDocument();
+            string Ruta = Path.Combine(Server.MapPath("~/reports"), "ReporteAreasAtencionExcel.rpt");
+            rd.Load(Path.Combine(Server.MapPath("~/reports"), "ReporteAreasAtencionExcel.rpt"));
+            rd.SetParameterValue(0, Dependencia);
+            rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
+            connectionInfo.ServerName = "DSIA";
+            connectionInfo.UserID = "ANUARIOS";
+            connectionInfo.Password = "conta41101";
+            SetDBLogonForReport(connectionInfo, rd);
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.ExcelWorkbook);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/xls", "CuotasPosgrado_General.xls");
         }
 
         private void SetDBLogonForReport(ConnectionInfo connectionInfo, ReportDocument reportDocument)
