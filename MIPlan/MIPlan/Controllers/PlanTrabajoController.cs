@@ -396,15 +396,19 @@ namespace MIPlan.Controllers
 
         /**********************************************************************************************************************Unidades Reponsables**********************************/
         public JsonResult GridUnidadesResp(int idActividad)/**/
-        {
-            Sesion SesionUsu = new Sesion();
+        {            
             List<UnidadesResponsables> list = new List<UnidadesResponsables>();
             ResultadoUnidades objResultado = new ResultadoUnidades();
+            string Verificador = string.Empty;
+            List<Sesion> SesionUsu = new List<Sesion>();
+            if (System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"] != null)
+                SesionUsu = (List<Sesion>)System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"];
+
             try
             {
 
 
-                list = Data.PlanTrabajo.CursorDataContext.ObtenerGridUnidadesResp(idActividad);
+                list = Data.PlanTrabajo.CursorDataContext.ObtenerGridUnidadesResp(idActividad, SesionUsu[0].Usuario, ref Verificador);
                 objResultado.Error = false;
                 objResultado.MensajeError = string.Empty;
                 objResultado.Resultado = list;

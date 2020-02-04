@@ -191,7 +191,7 @@ namespace MIPlan.Data.PlanTrabajo
             }
 
         }
-        public static List<UnidadesResponsables> ObtenerGridUnidadesResp(int idActividad)
+        public static List<UnidadesResponsables> ObtenerGridUnidadesResp(int idActividad, string Usuario, ref string Verificador)
         {
             //s
             OracleCommand cmd = null;
@@ -200,8 +200,8 @@ namespace MIPlan.Data.PlanTrabajo
             try
             {
 
-                string[] Parametros = { "P_Id_Actividad" };
-                object[] Valores = { idActividad };
+                string[] Parametros = { "P_Id_Actividad", "P_USUARIO" };
+                object[] Valores = { idActividad, Usuario };
 
                 OracleDataReader dr = null;
                 cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Unidades_Resp", ref dr, Parametros, Valores);
