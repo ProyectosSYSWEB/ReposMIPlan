@@ -13,7 +13,7 @@ namespace MIPlan.Controllers
 {
     public class CatalogoController : Controller
     {
-        // GET: Catalogo
+        // GET: Catalogos
         public ActionResult Index()
         {
             return View();
