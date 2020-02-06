@@ -293,7 +293,7 @@
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function () {//Call a function when the state changes.
                 if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-                    var blob = new Blob([this.response], { type: 'application/xls' });
+                    var blob = new Blob([this.response], { type: 'application/xlsx' });
                     var link = document.createElement('a');
                     link.href = window.URL.createObjectURL(blob);
                     window.open(link, "", "width=600,height=800");
