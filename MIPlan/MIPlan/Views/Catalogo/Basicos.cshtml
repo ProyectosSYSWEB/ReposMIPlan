@@ -167,7 +167,7 @@
         </div>
         <input type="hidden" ng-model="ctrl.cve_id" />
         <div class="container table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.3)">
-            <table class="table table-hover">
+            <table id="table_basico" class="table table-hover">
                 <thead>
                     <tr>
                         <th scope="col">
@@ -240,7 +240,7 @@
                         </th>
                         <th></th>
                         <th style="text-align:right" colspan="3">
-                            <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                            <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.exportTableToExcel('table_basico')" style="width:50px">
                                 <i class="fa fa-file-excel-o" aria-hidden="true"></i>
                             </button>
                             <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Generar Reporte en PDF" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
