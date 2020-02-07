@@ -1361,9 +1361,9 @@ namespace MIPlan.Controllers
             Response.Buffer = false;
             Response.ClearContent();
             Response.ClearHeaders();
-            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.ExcelWorkbook);
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.Excel);
             stream.Seek(0, SeekOrigin.Begin);
-            return File(stream, "application/xls", "CuotasPosgrado_General.xls");
+            return File(stream, "application/xlsx", "CuotasPosgrado_General.xlsx");
         }
 
         private void SetDBLogonForReport(ConnectionInfo connectionInfo, ReportDocument reportDocument)
