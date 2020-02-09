@@ -1,0 +1,241 @@
+﻿
+@{
+    ViewBag.Title = "UnidadesPorUsuario";
+    Layout = "~/Views/Shared/_LayoutContenido.cshtml";
+}
+
+<br />
+<br />
+<br />
+
+<h2></h2>
+
+
+<!--
+SELECT
+    Id, Descripcion
+FROM
+    PLA_UNIDADES
+WHERE
+    Id NOT IN (SELECT
+                    Id_Unidad
+               FROM
+                    PLA_UNIDADES_USUARIO
+               WHERE
+                    Usuario = 'BATALLA');
+
+    SELECT
+    a.Id, a.Descripcion
+FROM
+    PLA_UNIDADES a,
+    PLA_UNIDADES_USUARIO b
+WHERE
+    b.ID_UNIDAD NOT IN
+    a.ID
+AND
+    b.USUARIO = 'BATALLA';
+-->
+
+
+<div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
+
+    <div id="Error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
+        <strong id="Message">¡Ha ocurrido un error! </strong>
+        <button type="button" class="close" ng-click="ctrl.DivError()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="container">
+        <!---------------------------------------------------------------------------------------------------->
+        <div class="row">
+
+            <div class="container col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                <div class="form-group">
+                    <label for="" class="font-weight-bold text-primary">
+                        Usuario
+                    </label>
+                    <select name="" id="" class="form-control border border-primary" ng-options="option.Id as option.Usuario for option in ctrl.Usuarios" ng-model="Usuario" required>
+                        <option value="">Seleccionar Usuario...</option>
+                    </select>
+
+                </div>
+            </div>
+
+            <!---------------------------------------------------------------------------------------------------->
+
+
+            <div class="container col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                <div class="form-group">
+                    <label for="" class="font-weight-bold text-primary">
+                        Dependencia
+                    </label>
+                    <select name="" id="" class="form-control border border-primary" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="Dependencia" required>
+                        <option value="">Seleccionar Dependencia...</option>
+                    </select>
+
+                </div>
+            </div>
+        </div>
+        <!---------------------------------------------------------------------------------------------------->
+        <div class="row">
+
+
+            <div class="col-sm-12 col-md-6 col-lg-5 col-xl-5">
+                <br />
+                <br />
+                <label for="" class="text-primary">
+                    Unidades disponibles
+                </label>
+                <br />
+                <br />
+                <table class="table table-hover">
+                    <thead class="bg-info">
+                        <tr>
+                            <th scope="col" class="text-white">#</th>
+                            <th scope="col" class="text-white">First</th>
+                            <th scope="col" class="text-white">Last</th>
+                            <th scope="col" class="text-white">Handle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>14</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>13</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!---------------------------------------------------------------------------------------------------->
+
+            <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
+                <div class="form-group text-center">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <button type="button" class="btn btn-outline-primary">></button>
+                    <br />
+                    <br />
+                    <button type="button" class="btn btn-outline-primary"><</button>
+                    <br />
+                    <br />
+                    <button type="button" class="btn btn-outline-primary">>></button>
+                    <br />
+                    <br />
+                    <button type="button" class="btn btn-outline-primary"><<</button>
+
+
+                </div>
+
+            </div>
+            <!---------------------------------------------------------------------------------------------------->
+
+            <div class="col-sm-12 col-md-6 col-lg-5 col-xl-5">
+                <br />
+                <br />
+                <label for="" class="text-primary">
+                    Unidades asignadas
+                </label>
+                <br />
+                <br />
+                <table class="table table-hover">
+                    <thead class="bg-primary">
+                        <tr>
+                            <th scope="col" class="text-white">#</th>
+                            <th scope="col" class="text-white">First</th>
+                            <th scope="col" class="text-white">Last</th>
+                            <th scope="col" class="text-white">Handle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>13</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>11</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>12</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+
+        </div>
+
+        <!---------------------------------------------------------------------------------------------------->
+
+        <br />
+        <br />
+        <br />
+        <div class="col text-right">
+            <button class="btn btn-primary">
+                Guardar
+            </button>
+
+            <button class="btn btn-danger">
+                Salir
+            </button>
+        </div>
+
+
+
+
+    </div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<br />
+<br />
+
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular-pagination.js"></script>
+<script src="~/Scripts/global.js"></script>
+@*<script src="~/Scripts/angular.ng-modules.js"></script>*@
+<script src="~/Scripts/Controllers/UnidadesPorUsuarioController.js"></script>
+<script src="~/Scripts/Models/UnidadesPorUsuarioModel.js"></script>
+<script src="~/Scripts/Controllers/AccesoController.js"></script>
+<script src="~/Scripts/Models/AccesoModel.js"></script>
+
+<!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<script type="text/javascript">
+
+</script>
+

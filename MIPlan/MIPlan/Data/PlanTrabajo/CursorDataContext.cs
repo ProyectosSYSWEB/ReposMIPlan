@@ -122,11 +122,11 @@ namespace MIPlan.Data.PlanTrabajo
             try
             {
 
-                string[] Parametros = { "p_dependencia" };
-                object[] Valores = { Dependencia };
+                //string[] Parametros = { "p_dependencia" };
+                //object[] Valores = { Dependencia };
 
                 OracleDataReader dr = null;
-                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Areas_Atencion", ref dr, Parametros, Valores);
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Areas_Atencion", ref dr);
                 List<AreasAtencion> listarAreasAtencion = new List<AreasAtencion>();
                 while (dr.Read())
                 {
@@ -175,9 +175,54 @@ namespace MIPlan.Data.PlanTrabajo
                     objActividad.Impacto = Convert.ToString(dr[5]);
                     objActividad.Prioritaria = Convert.ToString(dr[6]);
                     objActividad.Status = Convert.ToString(dr[8]);
+                   
+                    
                     listarActividades.Add(objActividad);
                 }
                 return listarActividades;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
+        }
+        public static List<UnidadesResponsables> ObtenerGridUnidadesModal(string usuario, string dependencia, ref string Verificador)
+        {
+            //s
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+
+            try
+            {
+
+                string[] Parametros = { "P_Usuario", "P_Dependencia" };
+                object[] Valores = { usuario, dependencia };
+
+                OracleDataReader dr = null;
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Unidades_Usuario", ref dr, Parametros, Valores);
+                List<UnidadesResponsables> listarUnidad = new List<UnidadesResponsables>();
+                while (dr.Read())
+                {
+                    UnidadesResponsables objUnidad = new UnidadesResponsables();
+                    objUnidad.Id = Convert.ToInt32(dr[0]);
+                    objUnidad.Dependencia = Convert.ToString(dr[1]);
+                    objUnidad.Clave = Convert.ToString(dr[2]);
+                    objUnidad.Descripcion = Convert.ToString(dr[3]);
+                    objUnidad.Status = Convert.ToString(dr[4]);
+                    objUnidad.Coordinador = Convert.ToString(dr[5]);
+                    
+
+
+                    listarUnidad.Add(objUnidad);
+                }
+                return listarUnidad;
 
             }
             catch (Exception ex)
@@ -200,7 +245,7 @@ namespace MIPlan.Data.PlanTrabajo
             try
             {
 
-                string[] Parametros = { "P_Id_Actividad", "P_USUARIO" };
+                string[] Parametros = { "P_Id_Actividad", "P_Usuario" };
                 object[] Valores = { idActividad, Usuario };
 
                 OracleDataReader dr = null;
@@ -210,11 +255,12 @@ namespace MIPlan.Data.PlanTrabajo
                 {
                     UnidadesResponsables objUnidadResp = new UnidadesResponsables();
                     objUnidadResp.Id = Convert.ToInt32(dr[0]);
-                    objUnidadResp.Dependecia = Convert.ToString(dr[1]);
+                    objUnidadResp.Dependencia = Convert.ToString(dr[1]);
                     objUnidadResp.Clave = Convert.ToString(dr[2]);
                     objUnidadResp.Descripcion = Convert.ToString(dr[3]);
                     objUnidadResp.Status = Convert.ToString(dr[4]);
                     objUnidadResp.Coordinador = Convert.ToString(dr[5]);
+                    objUnidadResp.Id2 = Convert.ToString(dr[6]);
                     list.Add(objUnidadResp);
                 }
                 return list;

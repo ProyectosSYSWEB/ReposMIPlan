@@ -55,6 +55,11 @@ namespace MIPlan.Controllers
             return View();
         }
 
+        public ActionResult UnidadesPorUsuario()
+        {
+            return View();
+        }
+
         // GET: Catalogo/Details/5
         public ActionResult Details(int id)
         {
@@ -1316,6 +1321,27 @@ namespace MIPlan.Controllers
             }
         }
         /* FIN FORMULARIO INDICADORES */
+
+        public JsonResult ObtenerUsuarios()
+        {
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            try
+            {
+                list = CursorDataContext.ObtenerUsuarios();
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
 
     }
 }

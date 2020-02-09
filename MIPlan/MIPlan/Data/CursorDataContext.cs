@@ -344,7 +344,7 @@ namespace MIPlan.Data
                 {
                     UnidadesResponsables objrUnidades = new UnidadesResponsables();
                     objrUnidades.Id = Convert.ToInt32(dr[0]);
-                    objrUnidades.Dependecia = Convert.ToString(dr[1]);
+                    objrUnidades.Dependencia = Convert.ToString(dr[1]);
                     objrUnidades.Clave = Convert.ToString(dr[2]);
                     objrUnidades.Descripcion = Convert.ToString(dr[3]);
                     objrUnidades.Status = Convert.ToString(dr[4]);
@@ -575,6 +575,36 @@ namespace MIPlan.Data
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public static List<Comun> ObtenerUsuarios()
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+
+            try
+            {
+                OracleDataReader dr = null;
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Combo_Usuarios", ref dr);
+                List<Comun> listarComun = new List<Comun>();
+                while (dr.Read())
+                {
+                    Comun objComun = new Comun();
+                    objComun.Usuario = Convert.ToString(dr[0]);
+                    listarComun.Add(objComun);
+                }
+                return listarComun;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
         }
 
     }

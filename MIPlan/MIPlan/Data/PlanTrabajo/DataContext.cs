@@ -64,7 +64,7 @@ namespace MIPlan.Data.PlanTrabajo
                 cmd = exeProc.GenerarOracleCommand("OBT_UNIDADES_RESPONSABLES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
 
                 objUnidadesResp.Id = Id;
-                objUnidadesResp.Dependecia = Convert.ToString(cmd.Parameters["P_DEPENDENCIA"].Value);
+                objUnidadesResp.Dependencia = Convert.ToString(cmd.Parameters["P_DEPENDENCIA"].Value);
                 objUnidadesResp.Clave = Convert.ToString(cmd.Parameters["P_CLAVE"].Value);
                 objUnidadesResp.Descripcion = Convert.ToString(cmd.Parameters["P_DESCRIPCION"].Value);
                 objUnidadesResp.Status = Convert.ToString(cmd.Parameters["P_STATUS"].Value);                
