@@ -9,6 +9,7 @@
 <br />
 <br />
 <br />
+
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
     <div class="container">
         <div id="Error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
@@ -54,7 +55,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="basicos" @*data-keyboard="false" data-backdrop="static"*@ tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="basicos"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <form name="modalForm" novalidate>
@@ -73,7 +74,7 @@
                                     <label id="lblcatalogo" for="lblcatalogo" class="text-success">Catalogo:</label>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <select id="cmbcatalogo" class="form-control border border-success" required name="cmbcatalogo" ng-model="ctrl.cve_catalogo" ng-options="option.Id as option.Descripcion for option in ctrl.catalogos">
+                                    <select id="cmbcatalogo" class="form-control border border-success" name="cmbcatalogo" required  ng-model="ctrl.cve_catalogo" ng-options="option.Id as option.Descripcion for option in ctrl.catalogos">
                                         <option value="">--Seleccionar Catalogo--</option>
                                         <option value="Todas">Todas</option>
 
@@ -90,14 +91,14 @@
                                     <label id="lblClave" for="lblClave" class="text-success">Clave:</label>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <input type="text" id="txtClave" class="form-control border border-success" name="txtClave" required maxlength="6" placeholder="Clave" ng-model="ctrl.cve_clave">
+                                    <input type="text" id="txtClave" class="form-control border border-success" name="txtClave"  maxlength="6" placeholder="Clave" ng-model="ctrl.cve_clave">
                                 </div>
 
-                                <div class="row justify-content-center">
+                                @*<div class="row justify-content-center">
                                     <span class="messages" ng-show="modalForm.$submitted || modalForm.txtClave.$touched">
                                         <span ng-show="!ctrl.cve_clave" class="text-danger">Campo Requerido</span>
                                     </span>
-                                </div>
+                                </div>*@
                                 <div class="row justify-content-center">
                                     <label id="lblDescripcion" for="lblDescripcion" class="text-success">Descripcion:</label>
                                 </div>
@@ -111,11 +112,11 @@
                                     <input type="text" id="txtorden" class="form-control border border-success" name="txtorden" placeholder="Orden" ng-model="ctrl.cve_orden">
 
                                 </div>
-                                <div class="row justify-content-center">
+                                @*<div class="row justify-content-center">
                                     <span class="messages" ng-show="modalForm.$submitted || modalForm.txtorden.$touched">
                                         <span ng-show="!ctrl.cve_orden" class="text-danger">Campo Requerido</span>
                                     </span>
-                                </div>
+                                </div>*@
                                 <div class="row justify-content-center">
                                     <label id="lblstatus" for="lblstatus" class="text-success">Estatus:</label>
                                 </div>
@@ -154,7 +155,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                                 <button type="button" id="btnNuevo" class="btn btn-success" data-dismiss="modal" ng-click="ctrl.BasicoCreate(ctrl.cve_id.Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
-                                <button type="button" id="btnActualizar" class="btn btn-primary" data-dismiss="modal" ng-click="ctrl.BasicoUpdate(ctrl.cve_id.Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
+                                <button type="button" id="btnActualizar" class="btn btn-primary" data-dismiss="modal" ng-click="ctrl.BasicoUpdate(ctrl.cve_id.Id); ctrl.reset(modalForm)" @*ng-disabled="modalForm.$invalid*@">Guardar</button>
                             </div>
 
                         </div>
@@ -170,16 +171,16 @@
                 <thead>
                     <tr>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Catalogo'; sortReverse = !sortReverse">
-                                Catalogo
-                                <span ng-class="sortType == 'Catalogo' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Catalogo' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                            <a href="" ng-click="sortType = 'Id'; sortReverse = !sortReverse">
+                                Id
+                                <span ng-class="sortType == 'Id' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Id' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
 
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Organismo'; sortReverse = !sortReverse">
-                                Organismo
-                                <span ng-class="sortType == 'Organismo' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Organismo' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                            <a href="" ng-click="sortType = 'Catálogo'; sortReverse = !sortReverse">
+                                Catálogo
+                                <span ng-class="sortType == 'Catálogo' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Catálogo' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
@@ -189,14 +190,14 @@
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Descripcion'; sortReverse = !sortReverse">
-                                Descripcion
-                                <span ng-class="sortType == 'Descripcion' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Descripcion' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                            <a href="" ng-click="sortType = 'Descripción'; sortReverse = !sortReverse">
+                                Descripción
+                                <span ng-class="sortType == 'Descripción' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Descripción' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
                             <a href="" ng-click="sortType = 'Status'; sortReverse = !sortReverse">
-                                Status
+                                Estatus
                                 <span ng-class="sortType == 'Status' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Status' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>

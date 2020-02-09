@@ -47,9 +47,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine">
+      <HintPath>..\..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource">
+      <HintPath>..\..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared">
+      <HintPath>..\..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Shared.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Oracle.ManagedDataAccess, Version=4.122.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <HintPath>..\packages\Oracle.ManagedDataAccess.19.5.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
@@ -137,7 +143,6 @@
     <Compile Include="Controllers\AccesoController.cs" />
     <Compile Include="Controllers\CatalogoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MovimientosController.cs" />
     <Compile Include="Controllers\PlanTrabajoController.cs" />
     <Compile Include="Data\CursorDataContext.cs" />
     <Compile Include="Data\DataContext.cs" />
@@ -157,7 +162,6 @@
     <Compile Include="Models\Comun.cs" />
     <Compile Include="Models\Indicadores.cs" />
     <Compile Include="Models\MENU.cs" />
-    <Compile Include="Models\ResponsableModel.cs" />
     <Compile Include="Models\Resultado.cs" />
     <Compile Include="Models\Sesion.cs" />
     <Compile Include="Models\UnidadadesResponsables.cs" />
@@ -167,16 +171,10 @@
     <Compile Include="Models\ExeProcedimiento.cs" />
     <Compile Include="Models\UnidadesUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="reports\ReporteAreasAtencionExcel.cs">
-      <DependentUpon>ReporteAreasAtencionExcel.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="reports\ReporteAreasAtencionPdf.cs">
+    <Compile Include="reports\ReporteBasicos.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ReporteAreasAtencionPdf.rpt</DependentUpon>
+      <DependentUpon>ReporteBasicos.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
@@ -400,11 +398,9 @@
     <Content Include="Scripts\Controllers\AcreditadorController.js" />
     <Content Include="Scripts\Controllers\AreasAtencionController.js" />
     <Content Include="Scripts\Controllers\CatController.js" />
-    <Content Include="Scripts\Controllers\ConfiguracionController.js" />
     <Content Include="Scripts\Controllers\IndicadoresController.js" />
     <Content Include="Scripts\Controllers\PeriodosController.js" />
     <Content Include="Scripts\Controllers\PlanTrabajoController.js" />
-    <Content Include="Scripts\Controllers\UnidadesPorUsuarioController.js" />
     <Content Include="Scripts\Controllers\UnidadesResponsablesController.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -1262,11 +1258,9 @@
     <Content Include="Scripts\Models\AcreditadorModel.js" />
     <Content Include="Scripts\Models\AreasAtencionModel.js" />
     <Content Include="Scripts\Models\CatModel.js" />
-    <Content Include="Scripts\Models\ConfiguracionModel.js" />
     <Content Include="Scripts\Models\IndicadoresModel.js" />
     <Content Include="Scripts\Models\PeriodosModel.js" />
     <Content Include="Scripts\Models\PlanTrabajoModel.js" />
-    <Content Include="Scripts\Models\UnidadesPorUsuarioModel.js" />
     <Content Include="Scripts\Models\UnidadesResponsablesModel.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\angular-pagination.js" />
@@ -1313,8 +1307,6 @@
     <Content Include="Views\Catalogo\Periodos.cshtml" />
     <Content Include="Views\PlanTrabajo\Index.cshtml" />
     <Content Include="Views\Catalogo\Indicadores.cshtml" />
-    <Content Include="Views\Movimientos\Configuracion.cshtml" />
-    <Content Include="Views\Catalogo\UnidadesPorUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1333,13 +1325,9 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="reports\ReporteAreasAtencionExcel.rpt">
+    <EmbeddedResource Include="reports\ReporteBasicos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ReporteAreasAtencionExcel.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="reports\ReporteAreasAtencionPdf.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ReporteAreasAtencionPdf.cs</LastGenOutput>
+      <LastGenOutput>ReporteBasicos.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

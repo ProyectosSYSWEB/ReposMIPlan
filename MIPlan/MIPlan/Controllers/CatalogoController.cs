@@ -1,7 +1,10 @@
-﻿using MIPlan.Data;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
+using MIPlan.Data;
 using MIPlan.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,7 +13,7 @@ namespace MIPlan.Controllers
 {
     public class CatalogoController : Controller
     {
-        // GET: Catalogo
+        // GET: Catalogos
         public ActionResult Index()
         {
             return View();
@@ -51,11 +54,6 @@ namespace MIPlan.Controllers
         }
 
         public ActionResult Indicadores()
-        {
-            return View();
-        }
-
-        public ActionResult UnidadesPorUsuario()
         {
             return View();
         }
@@ -1322,26 +1320,73 @@ namespace MIPlan.Controllers
         }
         /* FIN FORMULARIO INDICADORES */
 
-        public JsonResult ObtenerUsuarios()
+
+        /**/        
+        public ActionResult ReporteAreasAtencionPdf(string Dependencia)
         {
-            List<Comun> list = new List<Comun>();
-            ResultadoComun objResultado = new ResultadoComun();
+            ConnectionInfo connectionInfo = new ConnectionInfo();
+            System.Web.UI.Page p = new System.Web.UI.Page();
+
+            ReportDocument rd = new ReportDocument();
+            string Ruta = Path.Combine(Server.MapPath("~/reports"), "ReporteAreasAtencionPdf.rpt");
+            rd.Load(Path.Combine(Server.MapPath("~/reports"), "ReporteAreasAtencionPdf.rpt"));
+            rd.SetParameterValue(0, Dependencia);
+            rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
+            connectionInfo.ServerName = "DSIA";
+            connectionInfo.UserID = "ANUARIOS";
+            connectionInfo.Password = "conta41101";
+            SetDBLogonForReport(connectionInfo, rd);
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "CuotasPosgrado_General.pdf");
+        }
+
+        public ActionResult ReporteAreasAtencionExcel(string Dependencia)
+        {
+            ConnectionInfo connectionInfo = new ConnectionInfo();
+            System.Web.UI.Page p = new System.Web.UI.Page();
+
+            ReportDocument rd = new ReportDocument();
+            string Ruta = Path.Combine(Server.MapPath("~/reports"), "ReporteAreasAtencionExcel.rpt");
+            rd.Load(Path.Combine(Server.MapPath("~/reports"), "ReporteAreasAtencionExcel.rpt"));
+            rd.SetParameterValue(0, Dependencia);
+            rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
+            connectionInfo.ServerName = "DSIA";
+            connectionInfo.UserID = "ANUARIOS";
+            connectionInfo.Password = "conta41101";
+            SetDBLogonForReport(connectionInfo, rd);
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.ExcelWorkbook);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/xls", "CuotasPosgrado_General.xls");
+        }
+
+        private void SetDBLogonForReport(ConnectionInfo connectionInfo, ReportDocument reportDocument)
+        {
             try
             {
-                list = CursorDataContext.ObtenerUsuarios();
-                objResultado.Error = false;
-                objResultado.MensajeError = "";
-                objResultado.Resultado = list;
-                return Json(objResultado, JsonRequestBehavior.AllowGet);
+                Tables tables = reportDocument.Database.Tables;
+
+                foreach (CrystalDecisions.CrystalReports.Engine.Table table in tables)
+                {
+                    TableLogOnInfo tableLogonInfo = table.LogOnInfo;
+                    tableLogonInfo.ConnectionInfo = connectionInfo;
+                    table.ApplyLogOnInfo(tableLogonInfo);
+                }
+
             }
             catch (Exception ex)
             {
-                objResultado.Error = true;
-                objResultado.MensajeError = ex.Message;
-                objResultado.Resultado = null;
-                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+                Console.WriteLine(ex.Message);
             }
         }
+
+
 
     }
 }
