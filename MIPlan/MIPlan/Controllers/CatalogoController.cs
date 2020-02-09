@@ -1,5 +1,6 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
+using Microsoft.AspNetCore.Http;
 using MIPlan.Data;
 using MIPlan.Models;
 using System;
@@ -54,6 +55,10 @@ namespace MIPlan.Controllers
         }
 
         public ActionResult Indicadores()
+        {
+            return View();
+        }
+        public ActionResult UnidadesPorUsuario()
         {
             return View();
         }
@@ -1340,6 +1345,76 @@ namespace MIPlan.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
+
+        /* FIN FORMULARIO INDICADORES */
+
+
+        /**/
+        public ActionResult ReporteAreasAtencionPdf(string Dependencia)
+        {
+            ConnectionInfo connectionInfo = new ConnectionInfo();
+            System.Web.UI.Page p = new System.Web.UI.Page();
+
+            ReportDocument rd = new ReportDocument();
+            string Ruta = Path.Combine(Server.MapPath("~/reports"), "ReporteAreasAtencionPdf.rpt");
+            rd.Load(Path.Combine(Server.MapPath("~/reports"), "ReporteAreasAtencionPdf.rpt"));
+            rd.SetParameterValue(0, Dependencia);
+            rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
+            connectionInfo.ServerName = "DSIA";
+            connectionInfo.UserID = "ANUARIOS";
+            connectionInfo.Password = "conta41101";
+            SetDBLogonForReport(connectionInfo, rd);
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "CuotasPosgrado_General.pdf");
+        }
+
+        public ActionResult ReporteAreasAtencionExcel(string Dependencia)
+        {
+            ConnectionInfo connectionInfo = new ConnectionInfo();
+            System.Web.UI.Page p = new System.Web.UI.Page();
+
+            ReportDocument rd = new ReportDocument();
+            string Ruta = Path.Combine(Server.MapPath("~/reports"), "ReporteAreasAtencionExcel.rpt");
+            rd.Load(Path.Combine(Server.MapPath("~/reports"), "ReporteAreasAtencionExcel.rpt"));
+            rd.SetParameterValue(0, Dependencia);
+            rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
+            connectionInfo.ServerName = "DSIA";
+            connectionInfo.UserID = "ANUARIOS";
+            connectionInfo.Password = "conta41101";
+            SetDBLogonForReport(connectionInfo, rd);
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.ExcelWorkbook);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/xls", "CuotasPosgrado_General.xls");
+        }
+
+        private void SetDBLogonForReport(ConnectionInfo connectionInfo, ReportDocument reportDocument)
+        {
+            try
+            {
+                Tables tables = reportDocument.Database.Tables;
+
+                foreach (CrystalDecisions.CrystalReports.Engine.Table table in tables)
+                {
+                    TableLogOnInfo tableLogonInfo = table.LogOnInfo;
+                    tableLogonInfo.ConnectionInfo = connectionInfo;
+                    table.ApplyLogOnInfo(tableLogonInfo);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+
 
     }
 }
