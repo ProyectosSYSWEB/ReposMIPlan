@@ -219,8 +219,59 @@
                 $scope.$apply();
             });
         };
+        /********************************************************************************************************************************************************/
+        this.GridUR = function () {
+            ObtenerGridUnidadesModal();
+        }
+        var ObtenerGridUnidadesModal = function () {            
+            catalogoContext.ObtenerGridUnidadesModal(self.buscarDependencias, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.ObtenerGridUnidadesModalView = catalogoContext.ObtenerGridUnidadesModalLST;                        
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral + "  ObtenerGridUnidadesModal";
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+    /********************************************************************************************************************************************************/
+        this.SaveUR = function () {
+            GuardarUnidadesResp();
+        }
+        this.getId = function (Id) {
+            self.idU = Id;
+        }
 
-         /********************************************************************************************************************************************************/
+        var GuardarUnidadesResp = function () {
+
+            catalogoContext.GuardarUnidadesResp( 
+                self.idActividad,
+                self.idU,
+                function (resp) {
+                    switch (resp.ressult) {
+                        case "tgp":
+                            GridUnidadesResp(self.idActividad);
+                            alert("¡Se han Guardado los datos correctamente!");                             
+                            break;
+                        case "notgp":
+                            self.mensaje_gral = resp.message;
+                            document.getElementById("Error").style.display = "block";
+                            document.getElementById("Message").innerHTML = self.mensaje_gral + " GuardarUnidadesResp";
+                            break;
+                        default:
+                            break;
+                    }
+                    $scope.$apply();
+                });
+
+        };
+    /********************************************************************************************************************************************************/
         var EditarUnidadesResp = function () {           
             catalogoContext.EditarUnidadesResp(
                 self.ObtenerDatosUnidadesRespView[0].Id,
@@ -370,6 +421,15 @@
             });
         };
 
+        self.array = [
+            { id: 1, name: "Ruffles", price: 12.0 },
+            { id: 2, name: "Chettos", price: 8.0 },
+            { id: 3, name: "Chettos", price: 8.0 },
+            { id: 4, name: "Chettos", price: 8.0 },
+            { id: 5, name: "Chettos", price: 8.0 },
+            { id: 6, name: "Chettos", price: 8.0 }
+        ];
+
         /********************************************************************************************************************************************************/
 
         this.ModalACTV = function (Id) {                        
@@ -437,23 +497,6 @@
             self.Prioritaria = "S";
             ObtenerProgramas();
         };
-        this.ColorUR = function () {
-                    document.getElementById("titleUR").className = "modal-header btn-success justify-content-center";
-                    document.getElementById("exampleModalLabelUR").innerHTML = "Crear Unidad Responsable";
-                    document.getElementById("btnModalUR").className = "btn btn-success";
-                    document.getElementById("lblDependencia").className = "text-success";
-                    document.getElementById("cmbDependencia").className = "form-control border border-success";
-                    document.getElementById("lblClaveUR").className = "text-success";
-                    document.getElementById("inputClaveUR").className = "form-control border border-success";
-                    document.getElementById("lblDescripcion").className = "text-success";
-                    document.getElementById("inputDescripcion").className = "form-control border  border-success";
-                    document.getElementById("lblStatusUR").className = "text-success";
-                    document.getElementById("cmbStatusUR").className = "form-control border  border-success";
-                    document.getElementById("lblCoordinacion").className = "text-success";
-                    document.getElementById("Radio").className = "radio-group form-control border border-success text-center";
-
-                    self.EStatus = "A";                                            
-        };
         /*******************************************************************************************************************************************************/
         this.getUR = function (Id, Descripcion)
         {
@@ -470,13 +513,9 @@
             }
         };
 
-        this.UnidadResponsableCRUD = function (ID) {
-            if (ID) {                
-                EditarUnidadesResp();
-            } else {
-                
-            }
-        }
+        this.EditUR = function () {            
+                EditarUnidadesResp();        
+        }   
 
         this.EliminnarA = function (Indice) {
             var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
@@ -514,6 +553,12 @@
                 form.$setUntouched();                
             }
 
+            $('#ModalAddUR').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }
+
             self.ObtenerDatosActividadesView = null;            
             self.Prioritaria = null;
             self.ObtenerDatosUnidadesRespView = null;            
@@ -549,7 +594,9 @@
             self.IDMETA = idMeta;
             self.Descripcion = Descripcion;
         }
-
+        this.URS = function (Descripcion) {            
+            self.Descripcion = Descripcion;
+        }
         this.BtnBuscar = function () {
             GridAreasAtencion();            
         }

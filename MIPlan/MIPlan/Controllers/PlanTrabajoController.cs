@@ -423,7 +423,7 @@ namespace MIPlan.Controllers
 
             }
         }
-
+        /********************************************************************************************************************************************************/
         public JsonResult ObtenerDatosUnidadesResp(int IdUnidad)
         {
             UnidadesResponsables objUnidadesResp = new UnidadesResponsables();
@@ -454,7 +454,7 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
+        /********************************************************************************************************************************************************/
         public JsonResult EditarUnidadesResp(int Id, string Dependencia, string Clave, string Descripcion, string Status, string Coordinador)
         {
 
@@ -464,7 +464,7 @@ namespace MIPlan.Controllers
             try
             {
                 objUnidadesResp.Id = Id;
-                objUnidadesResp.Dependecia = Dependencia;
+                objUnidadesResp.Dependencia = Dependencia;
                 objUnidadesResp.Clave = Clave;
                 objUnidadesResp.Descripcion = Descripcion;
                 objUnidadesResp.Status = Status;
@@ -491,16 +491,16 @@ namespace MIPlan.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
+        /********************************************************************************************************************************************************/
 
-
-        public JsonResult EliminarUnidadResponsable(int IdUnidad)
+        public JsonResult EliminarUnidadResponsable(int IdR)
         {
             UnidadesResponsables objUnidad = new UnidadesResponsables();
             ResultadoUnidad objResultado = new ResultadoUnidad();
             string Verificador = string.Empty;
             try
             {
-                objUnidad.Id = IdUnidad;
+                objUnidad.Id = IdR;
                 Data.PlanTrabajo.GuardarDataContext.EliminarUnidadesResp(objUnidad, ref Verificador);
                 if (Verificador == "0")
                 {
@@ -528,6 +528,71 @@ namespace MIPlan.Controllers
 
         /********************************************************************************************************************************************************/
 
+        public JsonResult GuardarUnidadesResp(int Id_Actividades, int Id_Unidad)
+        {
+            ResponsableModel objUnidadesResp = new ResponsableModel();
+            ResultadoResponsable objResultado = new ResultadoResponsable();
+            string Verificador = string.Empty;
+            try
+            {
+
+                objUnidadesResp.Id_Actividades = Id_Actividades;
+                objUnidadesResp.Id_Unidad = Id_Unidad;
+                Data.PlanTrabajo.GuardarDataContext.GuardarUnidadesResp(objUnidadesResp, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        /********************************************************************************************************************************************************/
+
+
+        public JsonResult ObtenerGridUnidadesModal(string dependencia)
+        {
+            List<UnidadesResponsables> list = new List<UnidadesResponsables>();
+            ResultadoUnidades objResultado = new ResultadoUnidades();
+            string Verificador = string.Empty;
+            List<Sesion> SesionUsu = new List<Sesion>();
+            if (System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"] != null)
+                SesionUsu = (List<Sesion>)System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"];
+
+            try
+            {
+
+
+                list = Data.PlanTrabajo.CursorDataContext.ObtenerGridUnidadesModal(SesionUsu[0].Usuario, dependencia, ref Verificador);
+                objResultado.Error = false;
+                objResultado.MensajeError = string.Empty;
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+
+            }
+        }
 
 
     }
