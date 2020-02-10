@@ -167,7 +167,7 @@
         </div>
         <input type="hidden" ng-model="ctrl.cve_id" />
         <div class="container table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.3)">
-            <table class="table table-hover">
+            <table id="table_basico" class="table table-hover">
                 <thead>
                     <tr>
                         <th scope="col">
@@ -183,6 +183,13 @@
                                 <span ng-class="sortType == 'Catálogo' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Catálogo' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
+
+                        @*<th scope="col">
+                            <a href="" ng-click="sortType = 'Catálogo'; sortReverse = !sortReverse">
+                                Catálogo
+                                <span ng-class="sortType == 'Catálogo' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Catálogo' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                            </a>
+                        </th>*@
                         <th scope="col">
                             <a href="" ng-click="sortType = 'Clave'; sortReverse = !sortReverse">
                                 Clave
@@ -196,9 +203,9 @@
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Status'; sortReverse = !sortReverse">
+                            <a href="" ng-click="sortType = 'Estatus'; sortReverse = !sortReverse">
                                 Estatus
-                                <span ng-class="sortType == 'Status' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Status' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                <span ng-class="sortType == 'Estatus' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Estatus' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
 
@@ -233,7 +240,7 @@
                         </th>
                         <th></th>
                         <th style="text-align:right" colspan="3">
-                            <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                            <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.exportTableToExcel('table_basico')" style="width:50px">
                                 <i class="fa fa-file-excel-o" aria-hidden="true"></i>
                             </button>
                             <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Generar Reporte en PDF" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
