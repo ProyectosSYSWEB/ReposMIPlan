@@ -99,6 +99,7 @@
                     case "tgp":                        
                         self.GridAreasAtencionView = catalogoContext.GridAreasAtencionLST;
                         self.Descripcion = "";
+                        console.log(self.GridAreasAtencionView );
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -114,6 +115,7 @@
         /********************************************************************************************************************************************************/
         this.ModalAreasDeAtencion = function () {
             ObtenerModalGridAreasAtencion();
+            self.DescripcionAA = "";
         }
         var ObtenerModalGridAreasAtencion = function () {
             catalogoContext.ObtenerModalGridAreasAtencion(self.buscarEjercicios, self.buscarDependencias, function (resp) {
@@ -130,6 +132,66 @@
                         break;
                 }
                 $scope.$apply();
+            });
+        };
+        /********************************************************************************************************************************************************/
+        this.SaveAA = function () {
+            GuardarAreasAtencion();
+        }
+        this.getIdAA = function (Id_Plan, Id_Area_Atencion, Descripcion) {
+            self.Id_Plan = Id_Plan;
+            self.Id_Area_Atencion = Id_Area_Atencion;
+            self.DescripcionAA = Descripcion;
+        }
+        var GuardarAreasAtencion = function () {           
+            catalogoContext.GuardarAreasAtencion(
+                self.Id_Plan, self.Id_Area_Atencion,
+                function (resp) {
+                    switch (resp.ressult) {
+                        case "tgp":
+                            GridAreasAtencion();
+                            alert("¡Se han Guardado los datos correctamente!");
+                            break;
+                        case "notgp":
+                            self.mensaje_gral = resp.message;
+                            document.getElementById("Error").style.display = "block";
+                            document.getElementById("Message").innerHTML = self.mensaje_gral + " GuardarAreasAtencion";
+                            break;
+                        default:
+                            break;
+                    }
+                    $scope.$apply();
+                });
+
+        };
+        /********************************************************************************************************************************************************/
+        this.DeleteAA = function (Id) {            
+            var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
+            if (opcion == true) {
+                EliminarAreasAtencion(Id);
+                alert("¡Se ha eliminado con exito!");
+                GridAreasAtencion();
+
+            } else {
+                alert("No se ha eliminado el registro");
+            }
+        };        
+        var EliminarAreasAtencion = function (Id) {
+            catalogoContext.EliminarAreasAtencion(Id, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        GridAreasAtencion();
+                        break;
+                    case "notgp":
+
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                //$scope.$apply();
             });
         };
         /********************************************************************************************************************************************************/
@@ -281,7 +343,7 @@
         };
         /********************************************************************************************************************************************************/
         var GridUnidadesResp = function (idActividad) {
-            catalogoContext.GridUnidadesResp(idActividad, function (resp) {
+            catalogoContext.GridUnidadesResp(idActividad , function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
 
@@ -308,6 +370,7 @@
         /********************************************************************************************************************************************************/
         this.GridUR = function () {
             ObtenerGridUnidadesModal();
+            self.DescripcionUR = "";
         }
         var ObtenerGridUnidadesModal = function () {
             catalogoContext.ObtenerGridUnidadesModal(self.buscarDependencias, function (resp) {
@@ -350,8 +413,9 @@
         this.SaveUR = function () {
             GuardarUnidadesResp();
         }
-        this.getId = function (Id) {
+        this.getId = function (Id, Descripcion) {
             self.idU = Id;
+            self.DescripcionUR = Descripcion;
         }
         var GuardarUnidadesResp = function () {
 

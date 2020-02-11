@@ -307,7 +307,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-pagination="i in ctrl.ObtenerGridUnidadesModalView |  itemsPerPage: 5" pagination-id="PaginationModalUR" ng-click="ctrl.getId(i.Id)" class="cursor-pointer">
+                                <tr ng-pagination="i in ctrl.ObtenerGridUnidadesModalView |  itemsPerPage: 5" pagination-id="PaginationModalUR" ng-click="ctrl.getId(i.Id, i.Descripcion); UR= ctrl.DescripcionUR"  ng-class="{'Mybg text-white': UR == ctrl.DescripcionUR}" class="cursor-pointer">
                                     <td>{{i.Dependencia}}</td>
                                     <td>{{i.Clave}}</td>
                                     <td>{{i.Descripcion}}</td>
@@ -340,7 +340,7 @@
             <div class="modal-content">
                 <form name="modalForm" novalidate>
                     <div id="titleUR" class="modal-header btn-success justify-content-center">
-                        <h5 class="modal-title" id="exampleModalLabelUR">Agregar Area de Atención</h5>
+                        <h5 class="modal-title" id="exampleModalLabelUR">Agregar Área de Atención</h5>
                         <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close" ng-click="ctrl.close(modalForm)">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -353,15 +353,15 @@
                                         Id Plan
                                     </th>
                                     <th scope="col">
-                                        Id Area De Atención
+                                        Id Área De Atención
                                     </th>
                                     <th scope="col">
                                         Descripción
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr ng-pagination="i in ctrl.ObtenerModalGridAreasAtencionView | filter: ModalF|  itemsPerPage: 15" pagination-id="PaginationModalAR" ng-click="" class="cursor-pointer">
+                            <tbody ng-pagination="i in ctrl.ObtenerModalGridAreasAtencionView | filter: ModalF|  itemsPerPage: 10" pagination-id="PaginationModalAR" >
+                                <tr  ng-click="ctrl.getIdAA(i.Id_Plan, i.Id_Area, i.Descripcion); AA= ctrl.DescripcionAA"  ng-class="{'Mybg text-white': AA == ctrl.DescripcionAA}" class="cursor-pointer">
                                     <td>{{i.Id_Plan}}</td>
                                     <td>{{i.Id_Area}}</td>
                                     <td>{{i.Descripcion}}</td>
@@ -378,14 +378,13 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn btn-danger" ng-click="ctrl.close(modalForm)">Salir</button>
-                        <button type="button" id="btnModalUR" class="btn btn-success" ng-click="ctrl.SaveUR(); ctrl.close(modalForm)">Guardar</button>
+                        <button type="button" id="btnModalUR" class="btn btn-success" ng-click="ctrl.SaveAA(); ctrl.close(modalForm)">Guardar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-
     <div class="container">
 
 
@@ -442,7 +441,6 @@
     <br />
     <div class="container-fluid border-bottom border-info"></div>
     <br />
-
     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <div class="row">
         <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
@@ -473,7 +471,7 @@
                                 <td>0</td>
 
                                 <td style="text-align:center">
-                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminnarPeriodo(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.DeleteAA(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -608,11 +606,10 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Dependencia</th>
-                                            <th scope="col">Clave</th>
+                                            <th scope="col">Id</th>
+                                            <th scope="col">Id Actividad</th>
                                             <th scope="col">Descripción</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Coordinador</th>
+                                            <th scope="col">Contacto</th>                             
                                             <th scope="col" style="text-align:center" colspan="3"><em class="fa fa-cog"></em></th>
                                         </tr>
                                     </thead>
@@ -622,17 +619,16 @@
 
                                         <tr class="cursor-pointer">
 
-                                            <td>{{i.Dependencia}}</td>
-                                            <td>{{i.Clave}}</td>
+                                            <td>{{i.Id}}</td>
+                                            <td>{{i.Id_Actividad}}</td>
                                             <td>{{i.Descripcion}}</td>
-                                            <td>{{i.Status}}</td>
-                                            <td>{{i.Coordinador}}</td>
+                                            <td>{{i.Contacto}}</td>                                            
                                             <td colspan="3">
                                                 <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalUnidadesResp" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Editar" ng-click="ctrl.ModalUR(i.Id)">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                                 </button>
 
-                                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminarUR(i.IdR)" style="width:40px">
+                                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminarUR(i.Id)" style="width:40px">
                                                     <i class="fa fa-eraser" aria-hidden="true"></i>
                                                 </button>
                                             </td>
@@ -641,7 +637,7 @@
 
                                     <tfoot>
                                         <tr>
-                                            <th colspan="10"><dir-pagination-controls boundary-links="true" pagination-id="PaginationGridUR"></dir-pagination-controls></th>
+                                            <th colspan="9"><dir-pagination-controls boundary-links="true" pagination-id="PaginationGridUR"></dir-pagination-controls></th>
 
                                         </tr>
                                     </tfoot>
@@ -663,7 +659,6 @@
         <br />
         <br />
     </div>
-
 </div>
 
 

@@ -171,8 +171,7 @@ var catalogoContext =
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
                             self.ObtenerModalGridAreasAtencionLST.push({ Id_Plan: resp.Resultado[i].Id_Plan, Id_Area: resp.Resultado[i].Id_Area, Descripcion: resp.Resultado[i].Descripcion });
-                        }
-                        console.log(self.ObtenerModalGridAreasAtencionLST);
+                        }                     
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
                         }
@@ -183,6 +182,56 @@ var catalogoContext =
                 error: function (ex) {
                     if (callBackResult !== undefined) {
                         callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en ObtenerModalGridAreasAtencion." });
+                    }
+                }
+            });
+
+    },
+/********************************************************************************************************************************************************/
+    GuardarAreasAtencion: function (Id_Plan, Id_Area_Atencion, callBackResult) {
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'PlanTrabajo/GuardarAreasAtencion',
+                data: { Id_Plan, Id_Area_Atencion },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en GuardarAreasAtencion." });
+                    }
+                }
+            });
+
+    },
+/********************************************************************************************************************************************************/
+    EliminarAreasAtencion: function (Id, callBackResult) {
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'PlanTrabajo/EliminarAreasAtencion',
+                data: { Id },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EliminarAreasAtencion." });
                     }
                 }
             });
@@ -367,8 +416,8 @@ var catalogoContext =
                 data: { idActividad },
                 success: function (resp) {
                     if (resp.Error == false) {
-                        for (var i = 0; i < resp.Resultado.length; i++) {
-                            self.GridUnidadesRespLST.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependencia, Clave: resp.Resultado[i].Clave, Descripcion: resp.Resultado[i].Descripcion, Status: resp.Resultado[i].Status, Coordinador: resp.Resultado[i].Coordinador, IdR: resp.Resultado[i].Id2});                            
+                        for (var i = 0; i < resp.ResultadiPlanUnidadesResponsables.length; i++) {
+                            self.GridUnidadesRespLST.push({ Id: resp.ResultadiPlanUnidadesResponsables[i].Id, Id_Actividad: resp.ResultadiPlanUnidadesResponsables[i].Id_Actividad, Descripcion: resp.ResultadiPlanUnidadesResponsables[i].Descripcion, Contacto: resp.ResultadiPlanUnidadesResponsables[i].Contacto });                            
                         }                       
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
@@ -466,13 +515,13 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-    EliminarUnidadResponsable: function (IdR, callBackResult) {
+    EliminarUnidadResponsable: function (Id, callBackResult) {
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'PlanTrabajo/EliminarUnidadResponsable',
-                data: { IdR },
+                data: { Id },
                 success: function (resp) {
                     if (resp.Error == false) {
                         if (callBackResult !== undefined) {
