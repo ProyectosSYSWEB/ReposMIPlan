@@ -20,7 +20,7 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.catalogos = catalogoContext.catalogoslst;
-                        self.cve_catalogo = catalogoContext.catalogoslst[0].Id;
+                        self.cve_catalogo = catalogoContext.catalogoslst.Id;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -35,7 +35,7 @@
         };   
 
         var CargarGrid = function () {
-            catalogoContext.ObtenerBasicos(self.buscar,function(resp) {
+            catalogoContext.ObtenerBasicos(self.catal,function(resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         self.basicos = catalogoContext.basicoslst;
@@ -118,7 +118,8 @@
             self.cve_clave = "";
             self.cve_descripcion = "";
             self.cve_status = "";
-           
+
+
 
             self.cve_status = "";
             var iNumeroMayor = self.basicos[0].Clave;

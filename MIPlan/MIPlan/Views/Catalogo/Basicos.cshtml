@@ -22,7 +22,7 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lbcatalogo" class="text-success">Catalogo:</label>
-                    <select class="form-control border border-success" name="cmbcatalogo" ng-change="ctrl.Valorbasicos()" ng-model="ctrl.buscar" ng-options="option.Id as option.Descripcion for option in ctrl.catalogos" style="max-width:100%;">
+                    <select class="form-control border border-success" name="cmbcatalogo" ng-change="ctrl.Valorbasicos()" ng-model="ctrl.catal" ng-options="option.Id as option.Descripcion for option in ctrl.catalogos" style="max-width:100%;">
                         <option value="">--Seleccionar Catalogo--</option>
                         <option value="Todas">Todas</option>
                     </select>
@@ -184,12 +184,7 @@
                             </a>
                         </th>
 
-                        @*<th scope="col">
-                            <a href="" ng-click="sortType = 'Catálogo'; sortReverse = !sortReverse">
-                                Catálogo
-                                <span ng-class="sortType == 'Catálogo' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Catálogo' && sortReverse ? 'fa fa-arrow-up': ''"></span>
-                            </a>
-                        </th>*@
+                       
                         <th scope="col">
                             <a href="" ng-click="sortType = 'Clave'; sortReverse = !sortReverse">
                                 Clave
