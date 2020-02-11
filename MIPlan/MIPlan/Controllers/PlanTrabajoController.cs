@@ -105,7 +105,7 @@ namespace MIPlan.Controllers
                 else
                     SesionUsu.Usuario = "";
 
-                list = Data.PlanTrabajo.CursorDataContext.ObtenerComboUnidades(SesionUsu.Usuario);
+                list = Data.PlanTrabajo.CursorDataContext.GridUnidadesDisponibles(SesionUsu.Usuario);
                 objResultado.Error = false;
                 objResultado.MensajeError = string.Empty;
                 objResultado.Resultado = list;

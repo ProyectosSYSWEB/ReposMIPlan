@@ -7,16 +7,16 @@
 
 
         this.Inicio = function () {
-            CargarCombos();
-            //CargarGrid();
+            CargarCombos();  
+            self.DescripcionUD = "";
         };
 
-        var CargarCombos = function () {
+        var CargarCombos = function () {           
+            ObtenerDependencias();      
             ObtenerUnidadesPorUsuario();
-            ObtenerDependencias();            
         };
 
-        /********************************************************************************************************************************************************/
+/********************************************************************************************************************************************************/
         var ObtenerDependencias = function () {
             catalogoContext.ObtenerDependencias(function (resp) {
                 switch (resp.ressult) {
@@ -53,11 +53,34 @@
                 $scope.$apply();
             });
         };
+        /********************************************************************************************************************************************************/
+        this.ValorUsuario = function () {
+            console.log("It's Works", self.Usuario);
+            GridUnidadesDisponibles();
+        };
+        var GridUnidadesDisponibles = function () {
+            catalogoContext.GridUnidadesDisponibles(self.Usuario, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.GridUnidadesDisponiblesView = catalogoContext.GridUnidadesDisponiblesLST;
+                        console.log(self.GridUnidadesDisponiblesView);
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
 /********************************************************************************************************************************************************/
 
-
-
-
+        this.getIdUD = function (Id, Descripcion) {
+            self.DescripcionUD = Descripcion;
+        }
 
 
 

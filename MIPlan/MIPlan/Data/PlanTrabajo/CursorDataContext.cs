@@ -9,7 +9,7 @@ namespace MIPlan.Data.PlanTrabajo
 {
     public class CursorDataContext
     {
-        public static List<Comun> ObtenerComboUnidades(string Usuario)
+        public static List<Comun> GridUnidadesDisponibles(string Usuario)
         {
             //s
             OracleCommand cmd = null;
@@ -17,12 +17,12 @@ namespace MIPlan.Data.PlanTrabajo
 
             try
             {
-                string[] Parametros = { "P_Usuario" };
+                string[] Parametros = { "P_USUARIO" };
                 object[] Valores = { Usuario };
 
 
                 OracleDataReader dr = null;
-                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Combo_Unidades", ref dr, Parametros, Valores);
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Unidades_Disponibles", ref dr, Parametros, Valores);
                 List<Comun> listarUnidades = new List<Comun>();
                 while (dr.Read())
                 {

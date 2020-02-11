@@ -180,7 +180,6 @@
             catalogoContext.EliminarAreasAtencion(Id, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        GridAreasAtencion();
                         break;
                     case "notgp":
 

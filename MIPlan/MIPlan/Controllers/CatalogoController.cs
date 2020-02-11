@@ -1347,7 +1347,29 @@ namespace MIPlan.Controllers
             }
         }
 
-        /* FIN FORMULARIO INDICADORES */
+        public JsonResult GridUnidadesDisponibles(string Usuario)
+        {  
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            try
+            {
+                list = Data.PlanTrabajo.CursorDataContext.GridUnidadesDisponibles(Usuario);
+                objResultado.Error = false;
+                objResultado.MensajeError = string.Empty;
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+
+            }
+        }
+
+        /* FIN FORMULARIO UNIDADES POR USUARIO */
 
 
         /**/
