@@ -9,6 +9,49 @@ namespace MIPlan.Data.PlanTrabajo
 {
     public class GuardarDataContext
     {
+        public static void GuardarAreasAtencion(int Id_Plan, int Id_Area_Atencion, ref string Verificador)
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+            try
+            {
+                OracleDataReader dr = null;
+                string[] Parametros = { "P_ID_PLAN", "P_ID_AREA_ATENCION" };
+                object[] Valores = { Id_Plan, Id_Area_Atencion };
+                string[] ParametrosOut = { "P_BANDERA" };
+                cmd = exeProc.GenerarOracleCommand("INS_PLA_PLAN_METAS", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+        }
+        public static void EliminarAreasAtencion(int Id, ref string Verificador)
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+            try
+            {
+                OracleDataReader dr = null;
+                string[] Parametros = { "P_ID" };
+                object[] Valores = { Id };
+                string[] ParametrosOut = { "P_BANDERA" };
+                cmd = exeProc.GenerarOracleCommand("DEL_PLA_PLAN_METAS", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+        }
+
         public static void GuardarActividades(Actividades objActividad, string Usuario, ref string Verificador)
         {
             OracleCommand cmd = null;
@@ -95,15 +138,6 @@ namespace MIPlan.Data.PlanTrabajo
                 exeProc.LimpiarOracleCommand(ref cmd);
             }
         }
-
-
-
-
-
-
-
-
-
         public static void EditarUnidadesResp(UnidadesResponsables objUnidadesResp, ref string Verificador)
         {
             OracleCommand cmd = null;
@@ -125,8 +159,7 @@ namespace MIPlan.Data.PlanTrabajo
                 exeProc.LimpiarOracleCommand(ref cmd);
             }
         }    
-
-        public static void EliminarUnidadesResp(UnidadesResponsables objUnidad, ref string Verificador)
+        public static void EliminarUnidadesResp(int Id, ref string Verificador)
         {
             OracleCommand cmd = null;
             ExeProcedimiento exeProc = new ExeProcedimiento();
@@ -134,7 +167,7 @@ namespace MIPlan.Data.PlanTrabajo
             {
                 OracleDataReader dr = null;
                 string[] Parametros = { "P_ID" };
-                object[] Valores = { objUnidad.Id };
+                object[] Valores = { Id };
                 string[] ParametrosOut = { "P_BANDERA" };
                 cmd = exeProc.GenerarOracleCommand("DEL_PLA_PLAN_RESPONSABLES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
             }

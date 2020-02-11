@@ -11,8 +11,8 @@ namespace MIPlan.Models
         public int Id_Actividades { get; set; }
         public int Id_Unidad { get; set; }
         public string Contacto { get; set; }
-        
-        
+
+
     }
     public class ResultadoResponsable
     {

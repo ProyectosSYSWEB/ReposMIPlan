@@ -12,34 +12,10 @@
 <br />
 
 
-
-@*<table class="table" id="tableMain">
-  <thead>
-    <tr>
-      <th scope="col">Prueba de </th>
-      <th scope="col" width="50%">Multi-Fila Collapse By. LuisLG</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr class="categoryRow" data-toggle="collapse" data-target=".collapseCategory">
-          <td id="categoryTd" colspan="5">
-            Programa 01
-          </td>
-      </tr>
- 
-      <tr class="collapseCategory collapse breakrow"><td>Acción 02 </td><td></td></tr>
-
-      <tr class="collapseCategory collapse datarow" style="display:none"><td>sub- Acción 03</td><td>product 01</td></tr>
-
-  </tbody>
-</table>*@
-
-
-
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
 
-    <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
-    <!-- Modal Actividades-->
+    <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <!-- Modal Actividades Add & Update-->
     <div class="modal fade" data-keyboard="false" data-backdrop="static" id="ModalActividades" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -180,8 +156,7 @@
         </div>
     </div>
     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-    <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
-    <!-- Modal Unidades Responsables-->
+    <!-- Modal Unidades Responsables Update-->
     <div class="modal fade" data-keyboard="false" data-backdrop="static" id="ModalUnidadesResp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -297,8 +272,8 @@
             </div>
         </div>
     </div>
-    <!--------------------------------------------------------------data-dismiss="modal"------------------------------------------------------------------------------------------------------------------------------->
-    <!-- Modal Unidades Responsables-->
+    <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <!-- Modal Unidades Responsables Grid-->
     <div class="modal fade bd-example-modal-lg" data-keyboard="false" data-backdrop="static" id="ModalAddUR" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -332,7 +307,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-pagination="i in ctrl.ObtenerGridUnidadesModalView |  itemsPerPage: 5" ng-click="ctrl.getId(i.Id)" class="cursor-pointer">
+                                <tr ng-pagination="i in ctrl.ObtenerGridUnidadesModalView |  itemsPerPage: 5" pagination-id="PaginationModalUR" ng-click="ctrl.getId(i.Id, i.Descripcion); UR= ctrl.DescripcionUR"  ng-class="{'Mybg text-white': UR == ctrl.DescripcionUR}" class="cursor-pointer">
                                     <td>{{i.Dependencia}}</td>
                                     <td>{{i.Clave}}</td>
                                     <td>{{i.Descripcion}}</td>
@@ -343,7 +318,7 @@
                             <tfoot>
                                 <tr>
                                     <th colspan="5">
-                                        <ng-pagination-control boundary-links="true"></ng-pagination-control>
+                                        <ng-pagination-control boundary-links="true" pagination-id="PaginationModalUR"></ng-pagination-control>
                                     </th>
                                 </tr>
                             </tfoot>
@@ -358,11 +333,58 @@
         </div>
     </div>
     <!-------http://localhost:53805/PlanTrabajo/GuardarUnidadesResp?Id_Actividades=1&Id_Unidad=7-->
-    <!--------------------------------------------------------------data-dismiss="modal"------------------------------------------------------------------------------------------------------------------------------->
-
-
-
-
+    <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <!-- Modal Areas de Atencion Gird-->
+    <div class="modal fade bd-example-modal-lg" data-keyboard="false" data-backdrop="static" id="ModalAreasDeAtencion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <form name="modalForm" novalidate>
+                    <div id="titleUR" class="modal-header btn-success justify-content-center">
+                        <h5 class="modal-title" id="exampleModalLabelUR">Agregar Área de Atención</h5>
+                        <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close" ng-click="ctrl.close(modalForm)">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">                    
+                        <table class="table table-hover">
+                            <thead class="thead bgAct text-white">
+                                <tr>
+                                    <th scope="col">
+                                        Id Plan
+                                    </th>
+                                    <th scope="col">
+                                        Id Área De Atención
+                                    </th>
+                                    <th scope="col">
+                                        Descripción
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody ng-pagination="i in ctrl.ObtenerModalGridAreasAtencionView | filter: ModalF|  itemsPerPage: 10" pagination-id="PaginationModalAR" >
+                                <tr  ng-click="ctrl.getIdAA(i.Id_Plan, i.Id_Area, i.Descripcion); AA= ctrl.DescripcionAA"  ng-class="{'Mybg text-white': AA == ctrl.DescripcionAA}" class="cursor-pointer">
+                                    <td>{{i.Id_Plan}}</td>
+                                    <td>{{i.Id_Area}}</td>
+                                    <td>{{i.Descripcion}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="5">
+                                        <ng-pagination-control boundary-links="true" pagination-id="PaginationModalAR"></ng-pagination-control>
+                                    </th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn btn-danger" ng-click="ctrl.close(modalForm)">Salir</button>
+                        <button type="button" id="btnModalUR" class="btn btn-success" ng-click="ctrl.SaveAA(); ctrl.close(modalForm)">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <div class="container">
 
 
@@ -419,8 +441,7 @@
     <br />
     <div class="container-fluid border-bottom border-info"></div>
     <br />
-
-
+    <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <div class="row">
         <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
             <div class="panel panel-default panel-table">
@@ -428,7 +449,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col text-right">
-                                <a href="../Catalogo/AreasAtencion" id="btnCrear" class="btn btn-sm btn-success btn-create" style="width:120px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</a>
+                                <button id="btnCrear" class="btn btn-sm btn-success btn-create" style="width:120px" ng-click="ctrl.ModalAreasDeAtencion()" data-toggle="modal" data-target="#ModalAreasDeAtencion" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Agregar"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
                             </div>
                         </div>
                     </div>
@@ -444,13 +465,13 @@
                         </thead>
 
 
-                        <tbody ng-pagination="i in ctrl.GridAreasAtencionView |  itemsPerPage: 10 ">
+                        <tbody ng-pagination="i in ctrl.GridAreasAtencionView |  itemsPerPage: 10 " pagination-id="PaginationGridAR">
                             <tr ng-class="{'Mybg text-white': A == ctrl.Descripcion}">
                                 <td ng-click="ctrl.Meta(i.Id, i.Descripcion); A= ctrl.Descripcion" class="cursor-pointer"> {{i.Id}}.- {{i.Descripcion}} </td>
                                 <td>0</td>
 
                                 <td style="text-align:center">
-                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminnarPeriodo(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.DeleteAA(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -474,12 +495,12 @@
                         </tfoot>
                     </table>
                 </div>
-                <ng-pagination-control boundary-links="true"></ng-pagination-control>
+                <ng-pagination-control boundary-links="true" pagination-id="PaginationGridAR"></ng-pagination-control>
             </div>
             <br />
             <br />
             <br />
-        </div>
+        </div>     
         <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
 
             <div role="tabpanel" style="box-shadow: 10px 40px 96px rgba(0,0,0,.1)">
@@ -533,9 +554,9 @@
 
                                     <tbody>
 
-                                        <tr class="breakrow bgAct text-white cursor-pointer" ng-repeat="pro in ctrl.GridProgramas "> <td colspan="10">{{pro.Desc_Programa}}</td></tr>
+                                        <tr class="breakrow bgAct text-white cursor-pointer" ng-pagination="pro in ctrl.GridProgramas | itemsPerPage: 10 " pagination-id="PaginationGridActividades"> <td colspan="10">{{pro.Desc_Programa}}</td></tr>
 
-                                        <tr class="datarow cursor-pointer" style="display:none" ng-pagination="i in ctrl.GridActividadesView |  itemsPerPage: 5" ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'MybgUR text-white': A == ctrl.DescActividad}">
+                                        <tr class="datarow cursor-pointer" style="display:none" ng-repeat="i in ctrl.GridActividadesView " ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'MybgUR text-white': A == ctrl.DescActividad}">
                                             <td></td>
                                             <td>{{i.Desc_Accion}}</td>
                                             <td>{{i.Fecha_Inicio}}</td>
@@ -555,7 +576,7 @@
 
                                     <tfoot>
                                         <tr>
-                                            <th colspan="10"><dir-pagination-controls boundary-links="true"></dir-pagination-controls></th>
+                                            <th colspan="10"><dir-pagination-controls boundary-links="true" pagination-id="PaginationGridActividades"></dir-pagination-controls></th>
 
                                         </tr>
                                     </tfoot>
@@ -585,31 +606,29 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Dependencia</th>
-                                            <th scope="col">Clave</th>
+                                            <th scope="col">Id</th>
+                                            <th scope="col">Id Actividad</th>
                                             <th scope="col">Descripción</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Coordinador</th>
+                                            <th scope="col">Contacto</th>                             
                                             <th scope="col" style="text-align:center" colspan="3"><em class="fa fa-cog"></em></th>
                                         </tr>
                                     </thead>
 
 
-                                    <tbody ng-pagination="i in ctrl.GridUnidadesRespView |  itemsPerPage: 5">
+                                    <tbody ng-pagination="i in ctrl.GridUnidadesRespView |  itemsPerPage: 5" pagination-id="PaginationGridUR">
 
                                         <tr class="cursor-pointer">
 
-                                            <td>{{i.Dependencia}}</td>
-                                            <td>{{i.Clave}}</td>
+                                            <td>{{i.Id}}</td>
+                                            <td>{{i.Id_Actividad}}</td>
                                             <td>{{i.Descripcion}}</td>
-                                            <td>{{i.Status}}</td>
-                                            <td>{{i.Coordinador}}</td>
+                                            <td>{{i.Contacto}}</td>                                            
                                             <td colspan="3">
                                                 <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalUnidadesResp" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Editar" ng-click="ctrl.ModalUR(i.Id)">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                                 </button>
 
-                                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminarUR(i.IdR)" style="width:40px">
+                                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminarUR(i.Id)" style="width:40px">
                                                     <i class="fa fa-eraser" aria-hidden="true"></i>
                                                 </button>
                                             </td>
@@ -618,7 +637,7 @@
 
                                     <tfoot>
                                         <tr>
-                                            <th colspan="10"><dir-pagination-controls boundary-links="true"></dir-pagination-controls></th>
+                                            <th colspan="9"><dir-pagination-controls boundary-links="true" pagination-id="PaginationGridUR"></dir-pagination-controls></th>
 
                                         </tr>
                                     </tfoot>
@@ -640,7 +659,6 @@
         <br />
         <br />
     </div>
-
 </div>
 
 
@@ -662,11 +680,6 @@
 <script src="~/Scripts/Models/AccesoModel.js"></script>
 <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <script type="text/javascript">
-
-    //$('#inputEjercicio').datetimepicker({
-    //    timepicker: false,
-    //    format: 'Y'
-    //});
 
     $('#InicioUpdate').datetimepicker({
         timepicker: false,

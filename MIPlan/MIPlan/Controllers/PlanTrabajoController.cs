@@ -91,7 +91,7 @@ namespace MIPlan.Controllers
             }
         }
 
-        /******************************************************************************************************************************Combos**************************/
+        /******************************************************************************************************************************Combos*************************************/
         public JsonResult ListaUnidadResponsable()
         {
             Sesion SesionUsu = new Sesion();
@@ -168,11 +168,9 @@ namespace MIPlan.Controllers
 
             }
         }
-        /********************************************************************************************************************************************************/
         /******************************************************************************************************************************Areas de Atención**************************/
         public JsonResult GridAreasAtencion(string Dependencia)/**/
         {
-            Sesion SesionUsu = new Sesion();
             List<AreasAtencion> list = new List<AreasAtencion>();
             ResultadoAreasAtencion objResultado = new ResultadoAreasAtencion();
             try
@@ -191,9 +189,81 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
 
             }
-        }
+        }        
+        public JsonResult ObtenerModalGridAreasAtencion(int Ejercicio, string Dependencia)/**/
+        {       
+            List<AreasAtencion> list = new List<AreasAtencion>();
+            ResultadoAreasAtencion objResultado = new ResultadoAreasAtencion();
+            try
+            {
+                list = Data.PlanTrabajo.CursorDataContext.ObtenerModalGridAreasAtencion(Ejercicio, Dependencia);
+                objResultado.Error = false;
+                objResultado.MensajeError = string.Empty;
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
 
-        /******************************************************************************************************************************Actividades**************************/
+            }
+        }        
+        public JsonResult GuardarAreasAtencion(int Id_Plan, int Id_Area_Atencion)/**/
+        {            
+            string Verificador = string.Empty;
+            ResultadoActividades objResultado = new ResultadoActividades();
+            try
+            {
+
+
+                Data.PlanTrabajo.GuardarDataContext.GuardarAreasAtencion(Id_Plan, Id_Area_Atencion, ref Verificador);
+                objResultado.Error = false;
+                objResultado.MensajeError = string.Empty;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+
+            }
+        }
+        public JsonResult EliminarAreasAtencion(int Id)
+        {
+            ResultadoActividades objResultado = new ResultadoActividades();
+            string Verificador = string.Empty;
+            try
+            {      
+                Data.PlanTrabajo.GuardarDataContext.EliminarAreasAtencion(Id, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+        /******************************************************************************************************************************Actividades*******************************/
         public JsonResult GridActividades(int idMeta)/**/
         {
             Sesion SesionUsu = new Sesion();
@@ -248,9 +318,70 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-       
+        public JsonResult ObtenerProgramas()
+        {
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            try
+            {
+                string Verificador = string.Empty;
+                list = Data.CursorDataContext.ObtenerComboBasicos("PRO", "null");
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult GuardarActividades(string Meta, string Clave, string Descripcion, string Impacto, string Status, string FechaInicio, string FechaFin, string Programa, string Prioritaria)
+        {
+            Actividades objActividad = new Actividades();
+            ResultadoActividades objResultado = new ResultadoActividades();
+            string Verificador = string.Empty;
+            List<Sesion> SesionUsu = new List<Sesion>();
+            if (System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"] != null)
+                SesionUsu = (List<Sesion>)System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"];
+            try
+            {
+                objActividad.Id_Meta = Convert.ToInt32(Meta);
+                objActividad.Clave = Clave;
+                objActividad.Descripcion = Descripcion;
+                objActividad.Impacto = Impacto;
+                objActividad.Fecha_Inicio = FechaInicio;
+                objActividad.Fecha_Fin = FechaFin;
+                objActividad.Id_Programa = Convert.ToInt32(Programa);
+                objActividad.Prioritaria = Prioritaria;
+                objActividad.Status = Status;
+                Data.PlanTrabajo.GuardarDataContext.GuardarActividades(objActividad, SesionUsu[0].Usuario, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
 
-
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
         public JsonResult EditarActividades(int Id, string Programa, string Descripcion, string FechaInicio, string FechaFin, string Impacto, string Prioritaria, string Clave, string Status)
         {
             List<Sesion> SesionUsu = new List<Sesion>();
@@ -292,51 +423,7 @@ namespace MIPlan.Controllers
             {
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
-        }
-        public JsonResult GuardarActividades(string Meta, string Clave, string Descripcion, string Impacto,  string Status, string FechaInicio, string FechaFin, string Programa, string Prioritaria)
-        {
-            Actividades objActividad = new Actividades();
-            ResultadoActividades objResultado = new ResultadoActividades();
-            string Verificador = string.Empty;
-            List<Sesion> SesionUsu = new List<Sesion>();
-            if (System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"] != null)                        
-                SesionUsu = (List<Sesion>)System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"];
-            try
-            {
-                objActividad.Id_Meta = Convert.ToInt32(Meta);
-                objActividad.Clave = Clave;
-                objActividad.Descripcion = Descripcion;                
-                objActividad.Impacto = Impacto;
-                objActividad.Fecha_Inicio = FechaInicio;
-                objActividad.Fecha_Fin = FechaFin;
-                objActividad.Id_Programa = Convert.ToInt32(Programa);
-                objActividad.Prioritaria = Prioritaria;
-                objActividad.Status = Status;
-                Data.PlanTrabajo.GuardarDataContext.GuardarActividades(objActividad, SesionUsu[0].Usuario, ref Verificador);
-                if (Verificador == "0")
-                {
-                    objResultado.Error = false;
-                    objResultado.MensajeError = "";
-                    objResultado.Resultado = null;
-                }
-                else
-                {
-                    objResultado.Error = true;
-                    objResultado.MensajeError = Verificador;
-                    objResultado.Resultado = null;
-                }
-                return Json(objResultado, JsonRequestBehavior.AllowGet);
-
-            }
-            catch (Exception ex)
-            {
-                objResultado.Error = true;
-                objResultado.MensajeError = ex.Message;
-                objResultado.Resultado = null;
-                return Json(objResultado, JsonRequestBehavior.AllowGet);
-            }
-        }
-
+        }       
         public JsonResult EliminarActividades(int Id)
         {
             Actividades objActividades = new Actividades();
@@ -369,35 +456,12 @@ namespace MIPlan.Controllers
             }
         }
 
-
-        /********************************************************************************************************************************************************/
-        public JsonResult ObtenerProgramas()
-        {
-            List<Comun> list = new List<Comun>();
-            ResultadoComun objResultado = new ResultadoComun();
-            try
-            {
-                string Verificador = string.Empty;
-                list = Data.CursorDataContext.ObtenerComboBasicos("PRO", "null");
-                objResultado.Error = false;
-                objResultado.MensajeError = "";
-                objResultado.Resultado = list;
-                return Json(objResultado, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                objResultado.Error = true;
-                objResultado.MensajeError = ex.Message;
-                objResultado.Resultado = null;
-                return Json(ex.Message, JsonRequestBehavior.AllowGet);
-            }
-        }
-
-
-        /**********************************************************************************************************************Unidades Reponsables**********************************/
+        /***********************************************************************************************************************************************************************/
+     
+        /**********************************************************************************************************************Unidades Reponsables*******************************/
         public JsonResult GridUnidadesResp(int idActividad)/**/
         {            
-            List<UnidadesResponsables> list = new List<UnidadesResponsables>();
+            List<PlanUnidadesResponsables> list = new List<PlanUnidadesResponsables>();
             ResultadoUnidades objResultado = new ResultadoUnidades();
             string Verificador = string.Empty;
             List<Sesion> SesionUsu = new List<Sesion>();
@@ -408,10 +472,10 @@ namespace MIPlan.Controllers
             {
 
 
-                list = Data.PlanTrabajo.CursorDataContext.ObtenerGridUnidadesResp(idActividad, SesionUsu[0].Usuario, ref Verificador);
+                list = Data.PlanTrabajo.CursorDataContext.ObtenerGridUnidadesResp(idActividad, SesionUsu[0].Usuario);
                 objResultado.Error = false;
                 objResultado.MensajeError = string.Empty;
-                objResultado.Resultado = list;
+                objResultado.ResultadiPlanUnidadesResponsables = list;
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -423,7 +487,6 @@ namespace MIPlan.Controllers
 
             }
         }
-        /********************************************************************************************************************************************************/
         public JsonResult ObtenerDatosUnidadesResp(int IdUnidad)
         {
             UnidadesResponsables objUnidadesResp = new UnidadesResponsables();
@@ -454,7 +517,39 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-        /********************************************************************************************************************************************************/
+        public JsonResult GuardarUnidadesResp(int Id_Actividades, int Id_Unidad)
+        {
+            ResponsableModel objUnidadesResp = new ResponsableModel();
+            ResultadoResponsable objResultado = new ResultadoResponsable();
+            string Verificador = string.Empty;
+            try
+            {
+
+                objUnidadesResp.Id_Actividades = Id_Actividades;
+                objUnidadesResp.Id_Unidad = Id_Unidad;
+                Data.PlanTrabajo.GuardarDataContext.GuardarUnidadesResp(objUnidadesResp, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
         public JsonResult EditarUnidadesResp(int Id, string Dependencia, string Clave, string Descripcion, string Status, string Coordinador)
         {
 
@@ -490,18 +585,14 @@ namespace MIPlan.Controllers
             {
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
-        }
-        /********************************************************************************************************************************************************/
-
-        public JsonResult EliminarUnidadResponsable(int IdR)
-        {
-            UnidadesResponsables objUnidad = new UnidadesResponsables();
+        }  
+        public JsonResult EliminarUnidadResponsable(int Id)
+        {         
             ResultadoUnidad objResultado = new ResultadoUnidad();
             string Verificador = string.Empty;
             try
-            {
-                objUnidad.Id = IdR;
-                Data.PlanTrabajo.GuardarDataContext.EliminarUnidadesResp(objUnidad, ref Verificador);
+            {         
+                Data.PlanTrabajo.GuardarDataContext.EliminarUnidadesResp(Id, ref Verificador);
                 if (Verificador == "0")
                 {
                     objResultado.Error = false;
@@ -524,47 +615,6 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
-
-        /********************************************************************************************************************************************************/
-
-        public JsonResult GuardarUnidadesResp(int Id_Actividades, int Id_Unidad)
-        {
-            ResponsableModel objUnidadesResp = new ResponsableModel();
-            ResultadoResponsable objResultado = new ResultadoResponsable();
-            string Verificador = string.Empty;
-            try
-            {
-
-                objUnidadesResp.Id_Actividades = Id_Actividades;
-                objUnidadesResp.Id_Unidad = Id_Unidad;
-                Data.PlanTrabajo.GuardarDataContext.GuardarUnidadesResp(objUnidadesResp, ref Verificador);
-                if (Verificador == "0")
-                {
-                    objResultado.Error = false;
-                    objResultado.MensajeError = Verificador;
-                    objResultado.Resultado = null;
-                }
-                else
-                {
-                    objResultado.Error = true;
-                    objResultado.MensajeError = Verificador;
-                    objResultado.Resultado = null;
-                }
-                return Json(objResultado, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                objResultado.Error = true;
-                objResultado.MensajeError = ex.Message;
-                objResultado.Resultado = null;
-                return Json(objResultado, JsonRequestBehavior.AllowGet);
-            }
-        }
-
-        /********************************************************************************************************************************************************/
-
-
         public JsonResult ObtenerGridUnidadesModal(string dependencia)
         {
             List<UnidadesResponsables> list = new List<UnidadesResponsables>();
@@ -593,7 +643,7 @@ namespace MIPlan.Controllers
 
             }
         }
-
+        /********************************************************************************************************************************************************/
 
     }
 }

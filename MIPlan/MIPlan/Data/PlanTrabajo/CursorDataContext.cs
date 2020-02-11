@@ -113,6 +113,7 @@ namespace MIPlan.Data.PlanTrabajo
             }
 
         }
+        /********************************************************************************************************************************************************/
         public static List<AreasAtencion> ObtenerGridAreasAtencion(string Dependencia)
         {
             //s
@@ -121,7 +122,8 @@ namespace MIPlan.Data.PlanTrabajo
 
             try
             {
-
+                //No se envia nada por que en el procedimiento Obt_Grid_Areas_Atencion esta por defecto el plan 3 
+                //ya no debe recibir la dependencia, cambiar*
                 //string[] Parametros = { "p_dependencia" };
                 //object[] Valores = { Dependencia };
 
@@ -149,6 +151,50 @@ namespace MIPlan.Data.PlanTrabajo
             }
 
         }
+        /********************************************************************************************************************************************************/
+
+        public static List<AreasAtencion> ObtenerModalGridAreasAtencion(int Ejercicio, string Dependencia)
+        {
+            //s
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+
+            try
+            {
+
+                string[] Parametros = { "p_ejercicio", "p_dependencia" };
+                object[] Valores = { Ejercicio, Dependencia };
+
+                OracleDataReader dr = null;
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Plan_AreasAtencion", ref dr, Parametros, Valores);
+                List<AreasAtencion> listarAreasAtencion = new List<AreasAtencion>();
+                while (dr.Read())
+                {
+                    AreasAtencion objAreaAtencion = new AreasAtencion();               
+                    objAreaAtencion.Id_Area = Convert.ToInt32(dr[1]);
+                    objAreaAtencion.Descripcion = Convert.ToString(dr[2]);
+                    objAreaAtencion.Id_Plan = Convert.ToInt32(dr[0]);
+
+
+                    listarAreasAtencion.Add(objAreaAtencion);
+                }
+                return listarAreasAtencion;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
+        }
+        /********************************************************************************************************************************************************/
+
+
         public static List<Actividades> ObtenerGridActividades(int idMeta)
         {
             //s
@@ -236,7 +282,7 @@ namespace MIPlan.Data.PlanTrabajo
             }
 
         }
-        public static List<UnidadesResponsables> ObtenerGridUnidadesResp(int idActividad, string Usuario, ref string Verificador)
+        public static List<PlanUnidadesResponsables> ObtenerGridUnidadesResp(int idActividad, string Usuario)
         {
             //s
             OracleCommand cmd = null;
@@ -250,17 +296,15 @@ namespace MIPlan.Data.PlanTrabajo
 
                 OracleDataReader dr = null;
                 cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Unidades_Resp", ref dr, Parametros, Valores);
-                List<UnidadesResponsables> list = new List<UnidadesResponsables>();
+                List<PlanUnidadesResponsables> list = new List<PlanUnidadesResponsables>();
                 while (dr.Read())
                 {
-                    UnidadesResponsables objUnidadResp = new UnidadesResponsables();
+                    PlanUnidadesResponsables objUnidadResp = new PlanUnidadesResponsables();
                     objUnidadResp.Id = Convert.ToInt32(dr[0]);
-                    objUnidadResp.Dependencia = Convert.ToString(dr[1]);
-                    objUnidadResp.Clave = Convert.ToString(dr[2]);
-                    objUnidadResp.Descripcion = Convert.ToString(dr[3]);
-                    objUnidadResp.Status = Convert.ToString(dr[4]);
-                    objUnidadResp.Coordinador = Convert.ToString(dr[5]);
-                    objUnidadResp.Id2 = Convert.ToString(dr[6]);
+                    objUnidadResp.Id_Actividad = Convert.ToInt32(dr[1]);
+                    objUnidadResp.Descripcion = Convert.ToString(dr[2]);
+                    objUnidadResp.Contacto = Convert.ToString(dr[3]);
+
                     list.Add(objUnidadResp);
                 }
                 return list;
