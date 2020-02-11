@@ -113,6 +113,7 @@ namespace MIPlan.Data.PlanTrabajo
             }
 
         }
+        /********************************************************************************************************************************************************/
         public static List<AreasAtencion> ObtenerGridAreasAtencion(string Dependencia)
         {
             //s
@@ -121,7 +122,8 @@ namespace MIPlan.Data.PlanTrabajo
 
             try
             {
-
+                //No se envia nada por que en el procedimiento Obt_Grid_Areas_Atencion esta por defecto el plan 3 
+                //ya no debe recibir la dependencia, cambiar*
                 //string[] Parametros = { "p_dependencia" };
                 //object[] Valores = { Dependencia };
 
@@ -149,6 +151,50 @@ namespace MIPlan.Data.PlanTrabajo
             }
 
         }
+        /********************************************************************************************************************************************************/
+
+        public static List<AreasAtencion> ObtenerModalGridAreasAtencion(int Ejercicio, string Dependencia)
+        {
+            //s
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+
+            try
+            {
+
+                string[] Parametros = { "p_ejercicio", "p_dependencia" };
+                object[] Valores = { Ejercicio, Dependencia };
+
+                OracleDataReader dr = null;
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Plan_AreasAtencion", ref dr, Parametros, Valores);
+                List<AreasAtencion> listarAreasAtencion = new List<AreasAtencion>();
+                while (dr.Read())
+                {
+                    AreasAtencion objAreaAtencion = new AreasAtencion();               
+                    objAreaAtencion.Id_Area = Convert.ToInt32(dr[1]);
+                    objAreaAtencion.Descripcion = Convert.ToString(dr[2]);
+                    objAreaAtencion.Id_Plan = Convert.ToInt32(dr[0]);
+
+
+                    listarAreasAtencion.Add(objAreaAtencion);
+                }
+                return listarAreasAtencion;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
+        }
+        /********************************************************************************************************************************************************/
+
+
         public static List<Actividades> ObtenerGridActividades(int idMeta)
         {
             //s
