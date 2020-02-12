@@ -563,7 +563,7 @@
             var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
             if (opcion == true) {
                 EliminarActividad(Indice);
-                alert("¡Se ha eliminado con exito!");
+                alert("¡Se ha eliminado con exito!", Indice);
                 GridActividades(self.IDMETA);
 
             } else {
