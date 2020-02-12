@@ -128,7 +128,7 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-    GridAreasAtencion: function (Dependencia, callBackResult) {
+    GridAreasAtencion: function (buscarPlan, callBackResult) {
         var self = this;
         self.GridAreasAtencionLST.length = 0;
         $.ajax(
@@ -136,7 +136,7 @@ var catalogoContext =
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'PlanTrabajo/GridAreasAtencion',
-                data: { Dependencia },
+                data: { buscarPlan },
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {

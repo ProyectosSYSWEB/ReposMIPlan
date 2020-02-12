@@ -9,7 +9,7 @@ namespace MIPlan.Data.PlanTrabajo
 {
     public class CursorDataContext
     {
-        public static List<Comun> ObtenerComboUnidades(string Usuario)
+        public static List<Comun> GridUnidadesDisponibles(string Usuario)
         {
             //s
             OracleCommand cmd = null;
@@ -17,12 +17,12 @@ namespace MIPlan.Data.PlanTrabajo
 
             try
             {
-                string[] Parametros = { "P_Usuario" };
+                string[] Parametros = { "P_USUARIO" };
                 object[] Valores = { Usuario };
 
 
                 OracleDataReader dr = null;
-                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Combo_Unidades", ref dr, Parametros, Valores);
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Unidades_Disponibles", ref dr, Parametros, Valores);
                 List<Comun> listarUnidades = new List<Comun>();
                 while (dr.Read())
                 {
@@ -114,7 +114,7 @@ namespace MIPlan.Data.PlanTrabajo
 
         }
         /********************************************************************************************************************************************************/
-        public static List<AreasAtencion> ObtenerGridAreasAtencion(string Dependencia)
+        public static List<AreasAtencion> ObtenerGridAreasAtencion(int buscarPlan)
         {
             //s
             OracleCommand cmd = null;
@@ -124,11 +124,11 @@ namespace MIPlan.Data.PlanTrabajo
             {
                 //No se envia nada por que en el procedimiento Obt_Grid_Areas_Atencion esta por defecto el plan 3 
                 //ya no debe recibir la dependencia, cambiar*
-                //string[] Parametros = { "p_dependencia" };
-                //object[] Valores = { Dependencia };
+                string[] Parametros = { "P_PLAN" };
+                object[] Valores = { buscarPlan };
 
                 OracleDataReader dr = null;
-                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Areas_Atencion", ref dr);
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Areas_Atencion", ref dr, Parametros, Valores);
                 List<AreasAtencion> listarAreasAtencion = new List<AreasAtencion>();
                 while (dr.Read())
                 {

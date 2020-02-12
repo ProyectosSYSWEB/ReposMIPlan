@@ -416,7 +416,7 @@
             <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
                 <div class="form-group">
                     <label for="lblPlanes" class="text-primary">Plan de Trabajo:</label>
-                    <select class="form-control border border-primary" name="cmbPlanDeTrabajo" ng-change="ctrl.ValorPlanes()" ng-options="option.Id as option.Descripcion for option in ctrl.Planes" ng-model="ctrl.buscarPlanes" style="max-width:100%;">
+                    <select class="form-control border border-primary" name="cmbPlanDeTrabajo" ng-change="ctrl.ValorPlan()" ng-options="option.Id as option.Descripcion for option in ctrl.Planes" ng-model="ctrl.buscarPlan" style="max-width:100%;">
                         <option value="">Seleccionar Plan de Trabajo</option>
                     </select>
                 </div>
@@ -424,7 +424,7 @@
             <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
                 <div class="form-group">
                     <label for="lblUnidadesR" class="text-primary">Unidad Responsable</label>
-                    <select class="form-control border border-primary" name="cmbUnidadResponsable" ng-change="ctrl.ValorUnidad()" ng-options="option.Id as option.Descripcion for option in ctrl.UnidadesResponsables" ng-model="ctrl.buscar" style="max-width:100%;">
+                    <select class="form-control border border-primary" name="cmbUnidadResponsable" ng-change="ctrl.ValorUnidad()" ng-options="option.Id as option.Descripcion for option in ctrl.UnidadesResponsables" ng-model="ctrl.buscarUnidad" style="max-width:100%;">
                         <option value="">Seleccionar Unidad Responsable</option>
                     </select>
                 </div>

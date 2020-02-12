@@ -11,34 +11,6 @@
 <h2></h2>
 
 
-<!--
-    
-
-SELECT
-    Id, Descripcion
-FROM
-    PLA_UNIDADES
-WHERE
-    Id NOT IN (SELECT
-                    Id_Unidad
-               FROM
-                    PLA_UNIDADES_USUARIO
-               WHERE
-                    Usuario = 'BATALLA');
-
-    SELECT
-    a.Id, a.Descripcion
-FROM
-    PLA_UNIDADES a,
-    PLA_UNIDADES_USUARIO b
-WHERE
-    b.ID_UNIDAD NOT IN
-    a.ID
-AND
-    b.USUARIO = 'BATALLA';
--->
-
-
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
 
     <div id="Error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
@@ -57,10 +29,9 @@ AND
                     <label for="" class="font-weight-bold text-primary">
                         Usuario
                     </label>
-                    <select name="" id="" class="form-control border border-primary" ng-options="option.Id as option.Usuario for option in ctrl.Usuarios" ng-model="Usuario" required>
+                    <select name="" id="" class="form-control border border-primary" ng-change="ctrl.ValorUsuario()" ng-options="option.Usuario for option in ctrl.Usuarios" ng-model="ctrl.Usuario" required>
                         <option value="">Seleccionar Usuario...</option>
                     </select>
-
                 </div>
             </div>
 
@@ -72,7 +43,7 @@ AND
                     <label for="" class="font-weight-bold text-primary">
                         Dependencia
                     </label>
-                    <select name="" id="" class="form-control border border-primary" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="Dependencia" required>
+                    <select name="" id="" class="form-control border border-primary" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="Dependencia" required>
                         <option value="">Seleccionar Dependencia...</option>
                     </select>
 
@@ -94,32 +65,23 @@ AND
                 <table class="table table-hover">
                     <thead class="bg-info">
                         <tr>
-                            <th scope="col" class="text-white">#</th>
-                            <th scope="col" class="text-white">First</th>
-                            <th scope="col" class="text-white">Last</th>
-                            <th scope="col" class="text-white">Handle</th>
+                            <th scope="col" class="text-white">ID</th>
+                            <th scope="col" class="text-white">Descripción</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>10</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>14</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>13</td>
+                    <tbody ng-pagination="i in ctrl.GridUnidadesDisponiblesView | filter: UD|  itemsPerPage: 5" pagination-id="PaginationUD">
+                        <tr ng-click="ctrl.getIdUD(i.Id, i.Descripcion); AA= ctrl.DescripcionUD" ng-class="{'Mybg text-white': AA == ctrl.DescripcionUD}" class="cursor-pointer">
+                            <th scope="row">{{i.Id}}</th>
+                            <td>{{i.Descripcion}}</td>
                         </tr>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="2">
+                                <ng-pagination-control boundary-links="true" pagination-id="PaginationUD"></ng-pagination-control>
+                            </th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
             <!---------------------------------------------------------------------------------------------------->

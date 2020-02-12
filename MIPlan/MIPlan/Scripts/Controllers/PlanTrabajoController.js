@@ -94,7 +94,7 @@
         };
         /********************************************************************************************************************************************************/
         var GridAreasAtencion = function () {
-            catalogoContext.GridAreasAtencion(self.buscarDependencias, function (resp) {
+            catalogoContext.GridAreasAtencion(self.buscarPlan, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":                        
                         self.GridAreasAtencionView = catalogoContext.GridAreasAtencionLST;
@@ -180,7 +180,6 @@
             catalogoContext.EliminarAreasAtencion(Id, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        GridAreasAtencion();
                         break;
                     case "notgp":
 
@@ -620,6 +619,7 @@
             self.Prioritaria = null;
             self.ObtenerDatosUnidadesRespView = null;            
             self.EStatus = null;
+            self.idU = null;
         };
         this.reset = function (form) {
             $('#ModalActividades').modal('hide');
@@ -669,12 +669,14 @@
         };   
 
         this.ValorUnidad = function () {
-            alert("Unidades")
+            console.log("Unidades", self.buscarUnidad)
         }
 
-        this.Prueba = function () {
-            alert("Funciona");
+        this.ValorPlan = function () {
+            console.log("Plan", self.buscarPlan);
         }
+
+
         /*******************************************************************************************************************************************************/
 
     }]);

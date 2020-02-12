@@ -105,7 +105,7 @@ namespace MIPlan.Controllers
                 else
                     SesionUsu.Usuario = "";
 
-                list = Data.PlanTrabajo.CursorDataContext.ObtenerComboUnidades(SesionUsu.Usuario);
+                list = Data.PlanTrabajo.CursorDataContext.GridUnidadesDisponibles(SesionUsu.Usuario);
                 objResultado.Error = false;
                 objResultado.MensajeError = string.Empty;
                 objResultado.Resultado = list;
@@ -169,13 +169,13 @@ namespace MIPlan.Controllers
             }
         }
         /******************************************************************************************************************************Areas de Atención**************************/
-        public JsonResult GridAreasAtencion(string Dependencia)/**/
+        public JsonResult GridAreasAtencion(int buscarPlan)/**/
         {
             List<AreasAtencion> list = new List<AreasAtencion>();
             ResultadoAreasAtencion objResultado = new ResultadoAreasAtencion();
             try
             {
-                list = Data.PlanTrabajo.CursorDataContext.ObtenerGridAreasAtencion(Dependencia);
+                list = Data.PlanTrabajo.CursorDataContext.ObtenerGridAreasAtencion(buscarPlan);
                 objResultado.Error = false;
                 objResultado.MensajeError = string.Empty;
                 objResultado.Resultado = list;

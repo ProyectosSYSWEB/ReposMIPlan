@@ -607,5 +607,40 @@ namespace MIPlan.Data
 
         }
 
+        public static List<Comun> GridUnidadesDisponibles(string Usuario)
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+
+            try
+            {
+                string[] Parametros = { "P_USUARIO" };
+                object[] Valores = { Usuario };
+                OracleDataReader dr = null;
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Unidades_Dispobibles", ref dr, Parametros, Valores);
+                List<Comun> list = new List<Comun>();
+                while (dr.Read())
+                {
+                    Comun objIndicador = new Comun();
+                    objIndicador.Id = Convert.ToString(dr[0]);
+                    objIndicador.Descripcion = Convert.ToString(dr[1]);
+
+                    list.Add(objIndicador);
+                }
+                return list;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
+        }
+
     }
 }
