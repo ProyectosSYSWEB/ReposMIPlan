@@ -104,7 +104,7 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.acreditador = catalogoContext.acreditadoreslst;
-                       
+                        console.log(self.acreditador);
                         $('#acreditadores').modal('hide');
                         break;
                     case "notgp":
