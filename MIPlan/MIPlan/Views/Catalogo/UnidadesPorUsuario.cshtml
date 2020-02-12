@@ -11,34 +11,6 @@
 <h2></h2>
 
 
-<!--
-    
-
-SELECT
-    Id, Descripcion
-FROM
-    PLA_UNIDADES
-WHERE
-    Id NOT IN (SELECT
-                    Id_Unidad
-               FROM
-                    PLA_UNIDADES_USUARIO
-               WHERE
-                    Usuario = 'BATALLA');
-
-    SELECT
-    a.Id, a.Descripcion
-FROM
-    PLA_UNIDADES a,
-    PLA_UNIDADES_USUARIO b
-WHERE
-    b.ID_UNIDAD NOT IN
-    a.ID
-AND
-    b.USUARIO = 'BATALLA';
--->
-
-
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
 
     <div id="Error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
@@ -71,7 +43,7 @@ AND
                     <label for="" class="font-weight-bold text-primary">
                         Dependencia
                     </label>
-                    <select name="" id="" class="form-control border border-primary" ng-change="ctrl.ValorDependencia()"  ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="Dependencia" required>
+                    <select name="" id="" class="form-control border border-primary" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="Dependencia" required>
                         <option value="">Seleccionar Dependencia...</option>
                     </select>
 
@@ -97,9 +69,9 @@ AND
                             <th scope="col" class="text-white">Descripción</th>
                         </tr>
                     </thead>
-                    <tbody ng-pagination="i in ctrl.GridUnidadesDisponiblesView | filter: UD|  itemsPerPage: 8" pagination-id="PaginationUD">
+                    <tbody ng-pagination="i in ctrl.GridUnidadesDisponiblesView | filter: UD|  itemsPerPage: 5" pagination-id="PaginationUD">
                         <tr ng-click="ctrl.getIdUD(i.Id, i.Descripcion); AA= ctrl.DescripcionUD" ng-class="{'Mybg text-white': AA == ctrl.DescripcionUD}" class="cursor-pointer">
-                            <th scope="row">{{i.Id}}</th>                            
+                            <th scope="row">{{i.Id}}</th>
                             <td>{{i.Descripcion}}</td>
                         </tr>
                     </tbody>
