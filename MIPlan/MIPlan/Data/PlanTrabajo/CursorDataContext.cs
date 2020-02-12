@@ -114,7 +114,7 @@ namespace MIPlan.Data.PlanTrabajo
 
         }
         /********************************************************************************************************************************************************/
-        public static List<AreasAtencion> ObtenerGridAreasAtencion(string Dependencia)
+        public static List<AreasAtencion> ObtenerGridAreasAtencion(int buscarPlan)
         {
             //s
             OracleCommand cmd = null;
@@ -124,11 +124,11 @@ namespace MIPlan.Data.PlanTrabajo
             {
                 //No se envia nada por que en el procedimiento Obt_Grid_Areas_Atencion esta por defecto el plan 3 
                 //ya no debe recibir la dependencia, cambiar*
-                //string[] Parametros = { "p_dependencia" };
-                //object[] Valores = { Dependencia };
+                string[] Parametros = { "P_PLAN" };
+                object[] Valores = { buscarPlan };
 
                 OracleDataReader dr = null;
-                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Areas_Atencion", ref dr);
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Areas_Atencion", ref dr, Parametros, Valores);
                 List<AreasAtencion> listarAreasAtencion = new List<AreasAtencion>();
                 while (dr.Read())
                 {
