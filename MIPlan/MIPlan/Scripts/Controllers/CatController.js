@@ -34,7 +34,9 @@
             });
         };   
 
+
         var CargarGrid = function () {
+            self.basicos = "";
             catalogoContext.ObtenerBasicos(self.buscar,function(resp) {
                 switch (resp.ressult) {
                     case "tgp":
@@ -140,6 +142,7 @@
                     case "tgp":
 
                         alert("¡Se han actualizado los datos correctamente!");
+                        self.basicos = "";
                         CargarGrid();
                         break;
                     case "notgp":
