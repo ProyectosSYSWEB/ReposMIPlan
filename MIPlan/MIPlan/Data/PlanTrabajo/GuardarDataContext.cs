@@ -94,7 +94,7 @@ namespace MIPlan.Data.PlanTrabajo
                 exeProc.LimpiarOracleCommand(ref cmd);
             }
         }
-        public static void EliminarActividades(Actividades objActividades, ref string Verificador)
+        public static void EliminarActividades(int Id, ref string Verificador)
         {
             OracleCommand cmd = null;
             ExeProcedimiento exeProc = new ExeProcedimiento();
@@ -102,7 +102,7 @@ namespace MIPlan.Data.PlanTrabajo
             {
                 OracleDataReader dr = null;
                 string[] Parametros = { "P_ID" };
-                object[] Valores = { objActividades.Id };
+                object[] Valores = { Id };
                 string[] ParametrosOut = { "P_BANDERA" };
                 cmd = exeProc.GenerarOracleCommand("DEL_PLA_PLAN_ACTIVIDADES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
             }

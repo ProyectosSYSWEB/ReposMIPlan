@@ -397,6 +397,14 @@
 
 
         <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                <div class="form-group">
+                    <label for="lblUnidadesR" class="text-primary">Unidad Responsable</label>
+                    <select class="form-control border border-primary" name="cmbUnidadResponsable" ng-change="ctrl.ValorUnidad()" ng-options="option.Id as option.Descripcion for option in ctrl.UnidadesResponsables" ng-model="ctrl.buscarUnidad" style="max-width:100%;">
+                        <option value="">Seleccionar Unidad Responsable</option>
+                    </select>
+                </div>
+            </div>
             <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
                 <div class="form-group">
                     <label for="lblEjercicios" class="text-primary">Ejercicio:</label>
@@ -418,14 +426,6 @@
                     <label for="lblPlanes" class="text-primary">Plan de Trabajo:</label>
                     <select class="form-control border border-primary" name="cmbPlanDeTrabajo" ng-change="ctrl.ValorPlan()" ng-options="option.Id as option.Descripcion for option in ctrl.Planes" ng-model="ctrl.buscarPlan" style="max-width:100%;">
                         <option value="">Seleccionar Plan de Trabajo</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
-                <div class="form-group">
-                    <label for="lblUnidadesR" class="text-primary">Unidad Responsable</label>
-                    <select class="form-control border border-primary" name="cmbUnidadResponsable" ng-change="ctrl.ValorUnidad()" ng-options="option.Id as option.Descripcion for option in ctrl.UnidadesResponsables" ng-model="ctrl.buscarUnidad" style="max-width:100%;">
-                        <option value="">Seleccionar Unidad Responsable</option>
                     </select>
                 </div>
             </div>
@@ -558,12 +558,12 @@
 
                                         <tr class="datarow cursor-pointer" style="display:none" ng-repeat="i in ctrl.GridActividadesView " ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'MybgUR text-white': A == ctrl.DescActividad}">
                                             <td></td>
-                                            <td>{{i.Desc_Accion}}</td>
-                                            <td>{{i.Fecha_Inicio}}</td>
-                                            <td>{{i.Fecha_Fin}}</td>
-                                            <td>{{i.Impacto}}</td>
-                                            <td>{{i.Prioritaria}}</td>
-                                            <td>{{i.Status}}</td>
+                                            <td><font size="2">{{i.Desc_Accion}}</font></td>
+                                            <td><font size="2">{{i.Fecha_Inicio}}</font></td>
+                                            <td><font size="2">{{i.Fecha_Fin}}</font></td>
+                                            <td><font size="2">{{i.Impacto}}</font></td>
+                                            <td><font size="2">{{i.Prioritaria}}</font></td>
+                                            <td><font size="2">{{i.Status}}</font></td>
                                             <td colspan="3">
                                                 <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Editar" ng-click="ctrl.ModalACTV(i.Id)">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
