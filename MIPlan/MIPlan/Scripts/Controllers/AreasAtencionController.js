@@ -243,7 +243,7 @@
 
         this.ValorDependencia = function () { 
             CargarGrid();
-                if (self.buscar == "00000" || self.buscar == null) {
+                if (self.buscar == null) {
                     self.buscar = '';
                 }
         };
@@ -254,13 +254,26 @@
             }
         }
 
+        this.close = function (form) {
+            $('#areasatencion').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+                CargarGrid();
+            }
+            self.cve_dependencia = null;
+            self.cve_clave = null;
+            self.cve_desc = null;
+            self.cve_status = null;
+            self.cve_cat = null;
+        };
+
         this.reset = function (form) {
             $('#areasatencion').modal('hide');
             if (form) {
                 form.$setPristine();
                 form.$setUntouched();
             }
-            CargarGrid();
             self.cve_dependencia = null;
             self.cve_clave = null;
             self.cve_desc = null;

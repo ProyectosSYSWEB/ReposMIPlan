@@ -8,7 +8,6 @@
 
         this.Inicio = function () {
             CargarCombos();
-            //CargarGrid();
         };
 
         var CargarCombos = function () {

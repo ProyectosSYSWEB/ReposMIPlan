@@ -153,28 +153,28 @@
    AreasAtencionUpdate: function (id, dependencia, clave, descripcion, status, categoria, callBackResult) {
         var self = this;
        self.areasUplst.length = 0;
-        $.ajax(
-            {
-                type: 'POST',
-                cache: false,
-                url: urlServer + 'Catalogo/EditarAreasAtencion',
-                data: { id, dependencia, clave, descripcion, status, categoria },
-                success: function (resp) {
-                    if (resp.Error == false) {
+       $.ajax(
+           {
+               type: 'POST',
+               cache: false,
+               url: urlServer + 'Catalogo/EditarAreasAtencion',
+               data: { id, dependencia, clave, descripcion, status, categoria },
+               success: function (resp) {
+                   if (resp.Error == false) {
 
-                        if (callBackResult !== undefined) {
-                            callBackResult({ ressult: 'tgp', message: null });
-                        }
-                    } else {
-                        callBackResult({ ressult: "notgp", message: resp.MensajeError })
-                    }
-                },
-                error: function (ex) {
-                    if (callBackResult !== undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EditarAreasAtencion." });
-                    }
-                }
-            });
+                       if (callBackResult !== undefined) {
+                           callBackResult({ ressult: 'tgp', message: null });
+                       }
+                   } else {
+                       callBackResult({ ressult: "notgp", message: resp.MensajeError })
+                   }
+               },
+               error: function (ex) {
+                   if (callBackResult !== undefined) {
+                       callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en EditarAreasAtencion." });
+                   }
+               }
+           });
     },
 
     AreasAtencionCreate: function (dependencia, clave, descripcion, status, categoria, callBackResult) {
