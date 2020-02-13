@@ -154,13 +154,18 @@ namespace MIPlan.Controllers
         //    return Json(list, JsonRequestBehavior.AllowGet);
         //}s
 
+
         public JsonResult ObtenerDependencias()
-        {
+        {            
             List<Comun> list = new List<Comun>();
             ResultadoComun objResultado = new ResultadoComun();
             try
             {
-                list = CursorDataContext.ObtenerDependencias("LISSETH");
+                List<Sesion> SesionUsu = new List<Sesion>();
+                if (System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"] != null)
+                    SesionUsu = (List<Sesion>)System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"];
+
+                list = CursorDataContext.ObtenerDependencias(SesionUsu[0].Usuario);
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
                 objResultado.Resultado = list;

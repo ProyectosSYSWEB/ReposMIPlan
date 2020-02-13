@@ -430,9 +430,8 @@ namespace MIPlan.Controllers
             ResultadoActividades objResultado = new ResultadoActividades();
             string Verificador = string.Empty;
             try
-            {
-                objActividades.Id = Id;
-                Data.PlanTrabajo.GuardarDataContext.EliminarActividades(objActividades, ref Verificador);
+            {                
+                Data.PlanTrabajo.GuardarDataContext.EliminarActividades(Id , ref Verificador);
                 if(Verificador == "0")
                 {
                     objResultado.Error = false;
