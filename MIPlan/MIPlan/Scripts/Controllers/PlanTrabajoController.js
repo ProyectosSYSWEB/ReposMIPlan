@@ -6,8 +6,7 @@
 
         var self = this;
         self.buscar = '';
-
-
+       
         this.Inicio = function () {
             CargarCombos();                       
         };

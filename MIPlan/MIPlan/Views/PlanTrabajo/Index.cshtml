@@ -14,6 +14,8 @@
 
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
 
+
+
     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <!-- Modal Actividades Add & Update-->
     <div class="modal fade" data-keyboard="false" data-backdrop="static" id="ModalActividades" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -307,7 +309,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-pagination="i in ctrl.ObtenerGridUnidadesModalView |  itemsPerPage: 5" pagination-id="PaginationModalUR" ng-click="ctrl.getId(i.Id, i.Descripcion); UR= ctrl.DescripcionUR"  ng-class="{'Mybg text-white': UR == ctrl.DescripcionUR}" class="cursor-pointer">
+                                <tr ng-pagination="i in ctrl.ObtenerGridUnidadesModalView |  itemsPerPage: 5" pagination-id="PaginationModalUR" ng-click="ctrl.getId(i.Id, i.Descripcion); UR= ctrl.DescripcionUR" ng-class="{'Mybg text-white': UR == ctrl.DescripcionUR}" class="cursor-pointer">
                                     <td>{{i.Dependencia}}</td>
                                     <td>{{i.Clave}}</td>
                                     <td>{{i.Descripcion}}</td>
@@ -345,7 +347,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">                    
+                    <div class="modal-body">
                         <table class="table table-hover">
                             <thead class="thead bgAct text-white">
                                 <tr>
@@ -360,8 +362,8 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody ng-pagination="i in ctrl.ObtenerModalGridAreasAtencionView | filter: ModalF|  itemsPerPage: 10" pagination-id="PaginationModalAR" >
-                                <tr  ng-click="ctrl.getIdAA(i.Id_Plan, i.Id_Area, i.Descripcion); AA= ctrl.DescripcionAA"  ng-class="{'Mybg text-white': AA == ctrl.DescripcionAA}" class="cursor-pointer">
+                            <tbody ng-pagination="i in ctrl.ObtenerModalGridAreasAtencionView | filter: ModalF|  itemsPerPage: 10" pagination-id="PaginationModalAR">
+                                <tr ng-click="ctrl.getIdAA(i.Id_Plan, i.Id_Area, i.Descripcion); AA= ctrl.DescripcionAA" ng-class="{'Mybg text-white': AA == ctrl.DescripcionAA}" class="cursor-pointer">
                                     <td>{{i.Id_Plan}}</td>
                                     <td>{{i.Id_Area}}</td>
                                     <td>{{i.Descripcion}}</td>
@@ -500,7 +502,7 @@
             <br />
             <br />
             <br />
-        </div>     
+        </div>
         <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
 
             <div role="tabpanel" style="box-shadow: 10px 40px 96px rgba(0,0,0,.1)">
@@ -552,11 +554,11 @@
                                     </thead>
 
 
-                                    <tbody>
+                                    <tbody ng-pagination="pro in ctrl.GridProgramas | itemsPerPage: 10 " pagination-id="PaginationGridActividades">
 
-                                        <tr class="breakrow bgAct text-white cursor-pointer" ng-pagination="pro in ctrl.GridProgramas | itemsPerPage: 10 " pagination-id="PaginationGridActividades"> <td colspan="10">{{pro.Desc_Programa}}</td></tr>
+                                        <tr class="breakrow bgAct text-white cursor-pointer" > <td colspan="10">{{pro.Desc_Programa}}</td></tr>
 
-                                        <tr class="datarow cursor-pointer" style="display:none" ng-repeat="i in ctrl.GridActividadesView " ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'MybgUR text-white': A == ctrl.DescActividad}">
+                                        <tr class="datarow cursor-pointer" style="display:none" ng-repeat="i in ctrl.GridActividadesView" ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'MybgUR text-white': A == ctrl.DescActividad}">
                                             <td></td>
                                             <td>{{i.Desc_Accion}}</td>
                                             <td>{{i.Fecha_Inicio}}</td>
@@ -609,7 +611,7 @@
                                             <th scope="col">Id</th>
                                             <th scope="col">Id Actividad</th>
                                             <th scope="col">Descripción</th>
-                                            <th scope="col">Contacto</th>                             
+                                            <th scope="col">Contacto</th>
                                             <th scope="col" style="text-align:center" colspan="3"><em class="fa fa-cog"></em></th>
                                         </tr>
                                     </thead>
@@ -622,7 +624,7 @@
                                             <td>{{i.Id}}</td>
                                             <td>{{i.Id_Actividad}}</td>
                                             <td>{{i.Descripcion}}</td>
-                                            <td>{{i.Contacto}}</td>                                            
+                                            <td>{{i.Contacto}}</td>
                                             <td colspan="3">
                                                 <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalUnidadesResp" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Editar" ng-click="ctrl.ModalUR(i.Id)">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -661,7 +663,6 @@
     </div>
 </div>
 
-
 <br />
 <br />
 <br />
@@ -695,7 +696,7 @@
 
         //collapse and expand sections
 
-        //$('.breakrow').click(function(){
+        // $('.breakrow').click(function(){
         $('#tableMain').on('click', 'tr.breakrow', function () {
             $(this).nextUntil('tr.breakrow').slideToggle(200);
         });
