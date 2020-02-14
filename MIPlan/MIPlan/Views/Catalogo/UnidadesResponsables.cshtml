@@ -53,11 +53,11 @@
                                     <span ng-show="!ctrl.Clave" class="text-danger">Campo Requerido</span>
                                 </span>
                             </div>
-                            <div class="row justify-content-center">
+                            @*<div class="row justify-content-center">
                                 <span class="messages">
                                     <span ng-show="!modalForm.Clave.$valid" class="text-danger">¡Maximo 3 digitos!</span>
                                 </span>
-                            </div>
+                            </div>*@
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
                             <div class="row justify-content-center">
                                 <label id="lblDescripcion" class="">Descripción</label>
@@ -182,7 +182,7 @@
         </div>
 
         <div class="container table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.3)">
-            <table class="table table-hover">
+            <table class="table table-hover ">
                 <thead>
                     <tr>
                         <th scope="col">
@@ -219,7 +219,7 @@
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody ng-pagination="i in ctrl.unidades | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status | itemsPerPage: 5 ">
+                <tbody class="animate-repeat" ng-pagination="i in ctrl.unidades | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status | itemsPerPage: 5 ">
                     <tr>
                         <td>{{i.Dependencia}}</td>
                         <td>{{i.Clave}}</td>

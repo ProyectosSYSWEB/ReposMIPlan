@@ -388,25 +388,7 @@
             });
         };
         /********************************************************************************************************************************************************/
-        var ObtenerDatosUnidadesResp = function (Id) {
-            catalogoContext.ObtenerDatosUnidadesResp(Id, function (resp) {
-                switch (resp.ressult) {
-                    case "tgp":
-                        self.ObtenerDatosUnidadesRespView = catalogoContext.ObtenerDatosUnidadesRespLST;                        
-                        self.EStatus = self.ObtenerDatosUnidadesRespView[0].Status;
-                        self.Coordinador = self.ObtenerDatosUnidadesRespView[0].Coordinador;  
-                        break;
-                    case "notgp":
-                        self.mensaje_gral = resp.message;
-                        document.getElementById("Error").style.display = "block";
-                        document.getElementById("Message").innerHTML = self.mensaje_gral + " ObtenerDatosUnidadesResp";
-                        break;
-                    default:
-                        break;
-                }
-                $scope.$apply();
-            });
-        };
+
         /********************************************************************************************************************************************************/       
         this.SaveUR = function () {
             GuardarUnidadesResp();
@@ -439,31 +421,7 @@
 
         };
         /********************************************************************************************************************************************************/
-        var EditarUnidadesResp = function () {           
-            catalogoContext.EditarUnidadesResp(
-                self.ObtenerDatosUnidadesRespView[0].Id,
-                self.ObtenerDatosUnidadesRespView[0].Dependencia,
-                self.ObtenerDatosUnidadesRespView[0].Clave,
-                self.ObtenerDatosUnidadesRespView[0].Descripcion,
-                self.EStatus,
-                self.ObtenerDatosUnidadesRespView[0].Coordinador,
-                function (resp) {
-                    switch (resp.ressult) {
-                        case "tgp":
-                            alert("¡Se han actualizado los datos correctamente!");
-                            self.ObtenerDatosUnidadesRespView = null;
-                            break;
-                        case "notgp":
-                            self.mensaje_gral = resp.message;
-                            document.getElementById("Error").style.display = "block";
-                            document.getElementById("Message").innerHTML = self.mensaje_gral + " EditarUnidadesResp";
-                            break;
-                        default:
-                            break;
-                    }
-                    $scope.$apply();
-                });
-        };
+      
         /********************************************************************************************************************************************************/
         var EliminarUnidadesResp = function (Id) {         
             catalogoContext.EliminarUnidadResponsable(Id, function (resp) {
@@ -486,7 +444,7 @@
         /********************************************************************************************************************************************************/  
         this.ModalACTV = function (Id) {                        
                     document.getElementById("title").className = "modal-header btn-primary justify-content-center";
-                    document.getElementById("exampleModalLabel").innerHTML = "Actualizar Actividades";
+                     document.getElementById("TituloACTV").innerHTML = "Actualizar Actividades";
                     document.getElementById("btnModal").className = "btn btn-primary";
                     document.getElementById("lblPrograma").className = "text-primary";
                     document.getElementById("cmbPrograma").className = "form-control border border-primary";
@@ -507,27 +465,11 @@
 
                     ObtenerDatosActividades(Id);
                     ObtenerProgramas();
-        };
-        this.ModalUR = function (Id) {                   
-                    document.getElementById("titleUR").className = "modal-header btn-primary justify-content-center";
-                    document.getElementById("exampleModalLabelUR").innerHTML = "Actualizar Unidad Responsable";
-                    document.getElementById("btnModalUR").className = "btn btn-primary";
-                    document.getElementById("lblDependencia").className = "text-primary";
-                    document.getElementById("cmbDependencia").className = "form-control border border-primary";
-                    document.getElementById("lblClaveUR").className = "text-primary";
-                    document.getElementById("inputClaveUR").className = "form-control border border-primary";
-                    document.getElementById("lblDescripcion").className = "text-primary";
-                    document.getElementById("inputDescripcion").className = "form-control border  border-primary";
-                    document.getElementById("lblStatusUR").className = "text-primary";
-                    document.getElementById("cmbStatusUR").className = "form-control border  border-primary";
-                    document.getElementById("lblCoordinacion").className = "text-primary";
-                    document.getElementById("Radio").className = "radio-group form-control border border-primary text-center";
-                    ObtenerDatosUnidadesResp(Id);
-        };
+        };        
         this.ColorATCV = function () {
 
             document.getElementById("title").className = "modal-header btn-success justify-content-center";
-            document.getElementById("exampleModalLabel").innerHTML = "Crear Actividades";
+            document.getElementById("TituloACTV").innerHTML = "Crear Actividades";
             document.getElementById("btnModal").className = "btn btn-success";
             document.getElementById("lblPrograma").className = "text-success";
             document.getElementById("cmbPrograma").className = "form-control border border-success";
@@ -574,9 +516,7 @@
             self.DescActividad = Descripcion;
             self.idActividad = Id;
         }
-        this.EditUR = function () {            
-                EditarUnidadesResp();        
-        }   
+ 
         this.EliminarUR = function (Indice) {
             var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
             if (opcion == true) {
@@ -594,26 +534,17 @@
                 form.$setPristine();
                 form.$setUntouched();               
             }
-          
-
-            $('#ModalUnidadesResp').modal('hide');
-            if (form) {
-                form.$setPristine();
-                form.$setUntouched();                
-            }
-
-            $('#ModalAddUR').modal('hide');
-            if (form) {
-                form.$setPristine();
-                form.$setUntouched();
-            }
-
+         
             $('#ModalAreasDeAtencion').modal('hide');
             if (form) {
                 form.$setPristine();
                 form.$setUntouched();
             }
-
+            $('#ModalAddUR').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }
             self.ObtenerDatosActividadesView = null;            
             self.Prioritaria = null;
             self.ObtenerDatosUnidadesRespView = null;            
@@ -631,21 +562,8 @@
             self.Prioritaria = null;
             GridActividades(self.IDMETA);
    
-        };
-
-        this.resetUR = function (form) {
-            $('#ModalUnidadesResp').modal('hide');
-            if (form) {
-                form.$setPristine();
-                form.$setUntouched();
-            }
-            self.ObtenerDatosUnidadesRespView = null;
-            self.EStatus = null;          
-            GridUnidadesResp(self.idActividad);
-        };
-
-
-        this.Meta = function (idMeta, Descripcion) {
+        };    
+       this.Meta = function (idMeta, Descripcion) {
             GridActividades(idMeta);
             self.IDMETA = idMeta;
             self.Descripcion = Descripcion;
@@ -670,11 +588,6 @@
         this.ValorUnidad = function () {
             console.log("Unidades", self.buscarUnidad)
         }
-
-        this.ValorPlan = function () {
-            console.log("Plan", self.buscarPlan);
-        }
-
 
         /*******************************************************************************************************************************************************/
 

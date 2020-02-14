@@ -13,17 +13,102 @@
 
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
 
+    <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <!-- Modal Plan Maestro-->
+    <div class="modal fade" id="ModalPlanMastro" tabindex="-1" role="dialog" aria-labelledby="ModalPlanMastro" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form name="modalFormPM" novalidate>
+                    <div class="modal-header bg-info text-white">
+                        <h5 class="modal-title" id="exampleModalLabel">Crear Plan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
 
+                        <!----------------------------------------------------------------------------------------------------------------------------->
+                    </div>
+                    <div class="modal-body">
+                        <!------------------------------------------------------------------------------------------------------------------------------>
+                        <div class="row justify-content-center">
+                            <label for="" class="font-weight text-info">
+                                Cooordinación
+                            </label>
+                        </div>
+                        <select name="" id="" class="form-control border border-primary">
+                            <option selected> Seleccionar Coordinación...</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                        <!------------------------------------------------------------------------------------------------------------------------->
+                        <div class="row justify-content-center">
+                            <label for="" class="font-weight text-info">
+                                Status
+                            </label>
+                        </div>
+                        <select name="" id="" class="form-control border border-primary">
+                            <option value="1">Activo</option>
+                            <option value="2">Baja</option>
+                        </select>
+                        <!------------------------------------------------------------------------------------------------------------------------->
+                        <div class="row justify-content-center">
+                            <label for="" class="font-weight text-info">
+                                Ejercicio
+                            </label>
+                        </div>
 
+                        <select name="" id="" class="form-control border border-primary">
+                            <option selected>Seleccione Ejercicio</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                        <!------------------------------------------------------------------------------------------------------------------------->
+                        <div class="row justify-content-center">
+                            <label for="" class="font-weight text-info">
+                                Dependencia
+                            </label>
+                        </div>
+                        <select name="" id="" class="form-control border border-primary">
+                            <option selected>Seleccionar Dependencia </option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                        <!------------------------------------------------------------------------------------------------------------------------->
+                        <div class="row justify-content-center">
+                            <label for="" class="text-info">
+                                Descripción
+                            </label>
+                        </div>
+                        <textarea name="" id="" cols="30" rows="5" class="form-control border border-primary" placeholder=" Escriba una Descrición"></textarea>
+                        <!------------------------------------------------------------------------------------------------------------------------->
+                        <div class="row justify-content-center">
+                            <label for="" class="text-info">
+                                Fecha
+                            </label>
+                        </div>
+                        <input type="text" id="fechaPlan" class="form-control border border-primary" placeholder=" Seleccione una fecha">
+                        <!---------------------------------------------------------------------------------------->
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                        <button type="button" class="btn btn-primary" ng-disabled="modalFormPM.$invalid">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <!-- Modal Actividades Add & Update-->
     <div class="modal fade" data-keyboard="false" data-backdrop="static" id="ModalActividades" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form name="modalForm" novalidate>
+                <form name="modalFormActv" novalidate>
                     <div id="title" class="">
-                        <h5 class="modal-title" id="exampleModalLabel"></h5>
-                        <button type="button" class="close btn-danger" data-dismiss="modal" ng-click="ctrl.close(modalForm)" aria-label="Close">
+                        <h5 class="modal-title text-white" id="TituloACTV"></h5>
+                        <button type="button" class="close btn-danger" data-dismiss="modal" ng-click="ctrl.close(modalFormActv)" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -39,7 +124,7 @@
                                 </select>
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.cmbPrograma.$touched">
+                                <span class="messages" ng-show="modalFormActv.$submitted || modalFormActv.cmbPrograma.$touched">
                                     <span ng-show="!ctrl.ObtenerDatosActividadesView[0].Id_Programa" class="text-danger">Campo Requerido</span>
                                 </span>
                             </div>
@@ -51,7 +136,7 @@
                                 <input type="text" id="inputClave" class="" name="Clave" ng-model="ctrl.ObtenerDatosActividadesView[0].Clave" placeholder="Clave" required>
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.Clave.$touched">
+                                <span class="messages" ng-show="modalFormActv.$submitted || modalFormActv.Clave.$touched">
                                     <span ng-show="!ctrl.ObtenerDatosActividadesView[0].Clave" class="text-danger">Campo Requerido</span>
                                 </span>
                             </div>
@@ -63,7 +148,7 @@
                                 <textarea id="inputAccion" class="" name="Accion" rows="5" ng-model="ctrl.ObtenerDatosActividadesView[0].Accion" placeholder="Accion" required> </textarea>
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.Accion.$touched">
+                                <span class="messages" ng-show="modalFormActv.$submitted || modalFormActv.Accion.$touched">
                                     <span ng-show="!ctrl.ObtenerDatosActividadesView[0].Accion" class="text-danger">Campo Requerido</span>
                                 </span>
                             </div>
@@ -75,7 +160,7 @@
                                 <input type="text" class="" id="InicioUpdate" name="Inicio" ng-model="ctrl.ObtenerDatosActividadesView[0].Fecha_Inicio" placeholder="Inicio" required>
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.Inicio.$touched">
+                                <span class="messages" ng-show="modalFormActv.$submitted || modalFormActv.Inicio.$touched">
                                     <span ng-show="!ctrl.ObtenerDatosActividadesView[0].Fecha_Inicio" class="text-danger">Campo Requerido</span>
                                 </span>
                             </div>
@@ -87,7 +172,7 @@
                                 <input type="text" class="" id="FinUpdate" name="Fin" ng-model="ctrl.ObtenerDatosActividadesView[0].Fecha_Fin" placeholder="Fin" required>
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.Fin.$touched">
+                                <span class="messages" ng-show="modalFormActv.$submitted || modalFormActv.Fin.$touched">
                                     <span ng-show="!ctrl.ObtenerDatosActividadesView[0].Fecha_Fin" class="text-danger">Campo Requerido</span>
                                 </span>
                             </div>
@@ -99,7 +184,7 @@
                                 <input type="text" id="inputImpacto" class="" name="Impacto" ng-model="ctrl.ObtenerDatosActividadesView[0].Impacto" placeholder="Impacto" required>
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.Impacto.$touched">
+                                <span class="messages" ng-show="modalFormActv.$submitted || modalFormActv.Impacto.$touched">
                                     <span ng-show="!ctrl.ObtenerDatosActividadesView[0].Impacto" class="text-danger">Campo Requerido</span>
                                 </span>
                             </div>
@@ -114,7 +199,7 @@
                                 </select>
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.Prioritaria.$touched">
+                                <span class="messages" ng-show="modalFormActv.$submitted || modalFormActv.Prioritaria.$touched">
                                     <span ng-show="!ctrl.Prioritaria" class="text-danger">Campo Requerido</span>
                                 </span>
                             </div>
@@ -130,7 +215,7 @@
                                 </select>
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.Estatus.$touched">
+                                <span class="messages" ng-show="modalFormActv.$submitted || modalFormActv.Estatus.$touched">
                                     <span ng-show="!ctrl.EStatus" class="text-danger">Campo Requerido</span>
                                 </span>
                             </div>
@@ -149,125 +234,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn btn-danger" ng-click="ctrl.close(modalForm)">Salir</button>
-                        <button type="button" id="btnModal" class="btn" ng-click="ctrl.ActividadesCrud(ctrl.ObtenerDatosActividadesView[0].Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-    <!-- Modal Unidades Responsables Update-->
-    <div class="modal fade" data-keyboard="false" data-backdrop="static" id="ModalUnidadesResp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form name="modalForm" novalidate>
-                    <div id="titleUR" class="">
-                        <h5 class="modal-title" id="exampleModalLabelUR"></h5>
-                        <button type="button" class="close btn-danger" data-dismiss="modal" ng-click="ctrl.close(modalForm)" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
-                            <div class="row justify-content-center">
-                                <label id="lblDependencia" class="">Dependencia:</label>
-                            </div>
-                            <div class="row justify-content-center">
-                                <select id="cmbDependencia" class="" name="cmbDependencia" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.ObtenerDatosUnidadesRespView[0].Dependencia" required>
-                                    <option value="">--Seleccionar Dependencia--</option>
-                                </select>
-                            </div>
-                            <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.cmbDependencia.$touched">
-                                    <span ng-show="!ctrl.ObtenerDatosUnidadesRespView[0].Dependencia" class="text-danger">Campo Requerido</span>
-                                </span>
-                            </div>
-                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
-                            <div class="row justify-content-center">
-                                <label id="lblClaveUR" class="">Clave</label>
-                            </div>
-                            <div class="row justify-content-center">
-                                <input type="text" id="inputClaveUR" class="" name="ClaveUR" ng-maxlength="3" ng-model="ctrl.ObtenerDatosUnidadesRespView[0].Clave" placeholder="Clave" required>
-                            </div>
-                            <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.ClaveUR.$touched">
-                                    <span ng-show="!ctrl.ObtenerDatosUnidadesRespView[0].Clave" class="text-danger">Campo Requerido</span>
-                                </span>
-                            </div>
-                            <div class="row justify-content-center">
-                                <span class="messages">
-                                    <span ng-show="!modalForm.ClaveUR" class="text-danger">¡Maximo 3 digitos!</span>
-                                </span>
-                            </div>
-                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
-                            <div class="row justify-content-center">
-                                <label id="lblDescripcion" class="">Descripción</label>
-                            </div>
-                            <div class="row justify-content-center">
-                                <input type="text" id="inputDescripcion" name="Descripcion" class="" ng-model="ctrl.ObtenerDatosUnidadesRespView[0].Descripcion" required placeholder="Descripción">
-                            </div>
-                            <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.Descripcion.$touched">
-                                    <span ng-show="!ctrl.ObtenerDatosUnidadesRespView[0].Descripcion" class="text-danger">Campo Requerido</span>
-                                </span>
-                            </div>
-                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
-                            <div class="row justify-content-center">
-                                <label id="lblStatusUR" class="">Estatus</label>
-                            </div>
-                            <div class="row justify-content-center">
-                                <select id="cmbStatusUR" class="" name="cmbDependencia_status" ng-model="ctrl.EStatus" required>
-                                    <option value="A">Activo</option>
-                                    <option value="B">Baja</option>
-                                </select>
-                            </div>
-                            <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.cmbDependencia_status.$touched">
-                                    <span ng-show="!ctrl.EStatus" class="text-danger">Campo Requerido</span>
-                                </span>
-                            </div>
-                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
-                            <br />
-                            <div class="row justify-content-center">
-                                <label id="lblCoordinacion" class="">¿Es Coordinación?</label>
-                            </div>
-                            <div class="row justify-content-center">
-                                <div id="Radio" class="radio-group form-control border border-success text-center" style="max-width: 280px;">
-                                    <label class="radio ">
-                                        <input type="radio" value="S" name="gender" ng-model="ctrl.ObtenerDatosUnidadesRespView[0].Coordinador" required />
-                                        Si
-                                        <span></span>
-                                    </label>
-                                    <label class="radio">
-                                        <input type="radio" value="N" name="gender" ng-model="ctrl.ObtenerDatosUnidadesRespView[0].Coordinador" required />
-                                        No
-                                        <span></span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.gender.$touched">
-                                    <span ng-show="!ctrl.ObtenerDatosUnidadesRespView[0].Coordinador" class="text-danger">Campo Requerido</span>
-                                </span>
-                            </div>
-                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
-                            <br />
-                            <div class="row justify-content-center">
-                                <div id="ErrorModal" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
-                                    <strong id="MessageModal">¡Ha ocurrido un error! </strong>
-                                    <button type="button" class="close" ng-click="ctrl.DivErrorModal()" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            </div>
-                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn btn-danger" ng-click="ctrl.close(modalForm)">Salir</button>
-                        <button type="button" id="btnModalUR" class="btn btn-primary" ng-click="ctrl.EditUR(); ctrl.resetUR(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
+                        <button type="button" class="btn btn btn-danger" ng-click="ctrl.close(modalFormActv)">Salir</button>
+                        <button type="button" id="btnModal" class="btn btn-primary" ng-click="ctrl.ActividadesCrud(ctrl.ObtenerDatosActividadesView[0].Id); ctrl.reset(modalFormActv)" ng-disabled="modalFormActv.$invalid">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -275,59 +243,62 @@
     </div>
     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <!-- Modal Unidades Responsables Grid-->
-    <div class="modal fade bd-example-modal-lg" data-keyboard="false" data-backdrop="static" id="ModalAddUR" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+    <div class="modal fade" data-keyboard="false" data-backdrop="static" id="ModalAddUR" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form name="modalForm" novalidate>
+                <form name="modalFormUR" novalidate>
                     <div id="titleUR" class="modal-header btn-success justify-content-center">
                         <h5 class="modal-title" id="exampleModalLabelUR">Agregar Unidad Responsable</h5>
-                        <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close" ng-click="ctrl.close(modalForm)">
+                        <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close" ng-click="ctrl.close(modalFormUR)">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
+                        <!----------------------------------------------------------------->
+                        <div class="form-group">
+                            <div class="row justify-content-center">
+                                <label for="" class="text-primary">
+                                    Descripción
+                                </label>
+                            </div>
 
-                        <table class="table table-hover">
-                            <thead class="thead bgAct text-white">
-                                <tr>
-                                    <th scope="col">
-                                        Dependencia
-                                    </th>
-                                    <th scope="col">
-                                        Clave
-                                    </th>
-                                    <th scope="col">
-                                        Descripción
-                                    </th>
-                                    <th scope="col">
-                                        Estatus
-                                    </th>
-                                    <th scope="col">
-                                        Coordinación
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-pagination="i in ctrl.ObtenerGridUnidadesModalView |  itemsPerPage: 5" pagination-id="PaginationModalUR" ng-click="ctrl.getId(i.Id, i.Descripcion); UR= ctrl.DescripcionUR" ng-class="{'Mybg text-white': UR == ctrl.DescripcionUR}" class="cursor-pointer">
-                                    <td>{{i.Dependencia}}</td>
-                                    <td>{{i.Clave}}</td>
-                                    <td>{{i.Descripcion}}</td>
-                                    <td>{{i.Status}}</td>
-                                    <td>{{i.Coordinador}}</td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th colspan="5">
-                                        <ng-pagination-control boundary-links="true" pagination-id="PaginationModalUR"></ng-pagination-control>
-                                    </th>
-                                </tr>
-                            </tfoot>
-                        </table>
+                            <select class="form-control border border-primary" id="inputGroupSelect01">
+                                <option selected>Descripción</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <!---------------------------------------------------------------->
+
+                        <div class="from-group">
+                            <div class="row justify-content-center">
+                                <label for="" class="text-primary">Contacto</label>
+                            </div>
+                            <input type="text" class="form-control border border-primary" aria-label="Username" placeholder="Contacto" aria-describedby="addon-wrapping">
+                        </div>
+
+
+                        <!----------------------------------------------------------------->
+                        <div class="from-group">
+                            <div class="row justify-content-center">
+                                <label for="" class="text-primary">Teléfono</label>
+                            </div>
+                            <input type="number" class="form-control border border-primary" aria-label="Telefono" placeholder="Teléfono" aria-describedby="addon-wrapping">
+                        </div>
+                        <!----------------------------------------------------------------->
+                        <br />
+                        <div class="row justify-content-center">
+                            <label for="" class="text-primary">Correo</label>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control border border-primary" placeholder="Correo" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        </div>
+
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn btn-danger" ng-click="ctrl.close(modalForm)">Salir</button>
-                        <button type="button" id="btnModalUR" class="btn btn-success" ng-click="ctrl.SaveUR(); ctrl.close(modalForm)">Guardar</button>
+                        <button type="button" class="btn btn btn-danger" ng-click="ctrl.close(modalFormUR)">Salir</button>
+                        <button type="button" id="btnModalUR" class="btn btn-success" ng-click="ctrl.SaveUR(); ctrl.close(modalFormUR)" ng-disabled="modalFormActv.$invalid">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -339,10 +310,10 @@
     <div class="modal fade bd-example-modal-lg" data-keyboard="false" data-backdrop="static" id="ModalAreasDeAtencion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <form name="modalForm" novalidate>
+                <form name="modalFormAA" novalidate>
                     <div id="titleUR" class="modal-header btn-success justify-content-center">
                         <h5 class="modal-title" id="exampleModalLabelUR">Agregar Área de Atención</h5>
-                        <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close" ng-click="ctrl.close(modalForm)">
+                        <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close" ng-click="ctrl.close(modalFormAA)">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -378,8 +349,8 @@
                         </table>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn btn-danger" ng-click="ctrl.close(modalForm)">Salir</button>
-                        <button type="button" id="btnModalUR" class="btn btn-success" ng-click="ctrl.SaveAA(); ctrl.close(modalForm)">Guardar</button>
+                        <button type="button" class="btn btn btn-danger" ng-click="ctrl.close(modalFormAA)">Salir</button>
+                        <button type="button" id="btnModalAA" class="btn btn-success" ng-click="ctrl.SaveAA(); ctrl.close(modalFormAA)">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -397,8 +368,20 @@
         </div>
 
 
+
+
         <div class="row justify-content-center">
-            <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+
+            <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
+                <div class="form-group">
+                    <label for="lblBuscar" class="text-primary">&nbsp;</label>
+                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#ModalPlanMastro" style="max-width:100%;">
+                        Crear Plan
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
                 <div class="form-group">
                     <label for="lblUnidadesR" class="text-primary">Unidad Responsable</label>
                     <select class="form-control border border-primary" name="cmbUnidadResponsable" ng-change="ctrl.ValorUnidad()" ng-options="option.Id as option.Descripcion for option in ctrl.UnidadesResponsables" ng-model="ctrl.buscarUnidad" style="max-width:100%;">
@@ -414,7 +397,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+            <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
                 <div class="form-group">
                     <label for="lblDependencia" class="text-primary">Dependencia:</label>
                     <select class="form-control border border-primary" name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.buscarDependencias" style="max-width:100%;">
@@ -456,7 +439,7 @@
                     </div>
                 </div>
                 <div class="table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.1)">
-                    <table class="table table-hover ">
+                    <table class="table table-hover" id="tableAA">
                         <thead>
                             <tr>
                                 <th scope="col">Áreas de Atención</th>
@@ -467,9 +450,9 @@
 
 
                         <tbody ng-pagination="i in ctrl.GridAreasAtencionView |  itemsPerPage: 10 " pagination-id="PaginationGridAR">
-                            <tr ng-class="{'Mybg text-white': A == ctrl.Descripcion}">
-                                <td ng-click="ctrl.Meta(i.Id, i.Descripcion); A= ctrl.Descripcion" class="cursor-pointer"> {{i.Id}}.- {{i.Descripcion}} </td>
-                                <td>0</td>
+                            <tr id="tes" ng-class="{'Mybg text-white': A == ctrl.Descripcion}">
+                                <td ng-click="ctrl.Meta(i.Id, i.Descripcion); A= ctrl.Descripcion" class="cursor-pointer AAT" > {{i.Id}}.- {{i.Descripcion}} </td>
+                                <td> 0</td>
 
                                 <td style="text-align:center">
                                     <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.DeleteAA(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
@@ -556,9 +539,9 @@
 
                                     <tbody ng-pagination="pro in ctrl.GridProgramas | itemsPerPage: 10 " pagination-id="PaginationGridActividades">
 
-                                        <tr class="breakrow bgAct text-white cursor-pointer" > <td colspan="10">{{pro.Desc_Programa}}</td></tr>
+                                        <tr class="breakrow bgAct text-white cursor-pointer"> <td colspan="10">{{pro.Desc_Programa}}</td></tr>
 
-                                        <tr class="datarow cursor-pointer" style="display:none" ng-repeat="i in ctrl.GridActividadesView" ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'MybgUR text-white': A == ctrl.DescActividad}">
+                                        <tr class="datarow cursor-pointer" style="display:none" ng-repeat="i in ctrl.GridActividadesView" ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'MybgUR text-white': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === i.Desc_Programa">
                                             <td></td>
                                             <td><font size="2">{{i.Desc_Accion}}</font></td>
                                             <td><font size="2">{{i.Fecha_Inicio}}</font></td>
@@ -669,7 +652,6 @@
 <br />
 <br />
 
-
 <script src="~/Scripts/angular.min.js"></script>
 <script src="~/Scripts/angular.js"></script>
 <script src="~/Scripts/angular-pagination.js"></script>
@@ -690,16 +672,24 @@
         timepicker: false,
         format: 'd/m/Y'
     });
-
+    $('#fechaPlan').datetimepicker({
+        timepicker: false,
+        format: 'd/m/Y'
+    });
 
     $(document).ready(function () {
-
-        //collapse and expand sections
-
+     
         // $('.breakrow').click(function(){
         $('#tableMain').on('click', 'tr.breakrow', function () {
             $(this).nextUntil('tr.breakrow').slideToggle(200);
         });
+    
+      
+        $("#tableAA").on('click', 'td.AAT', function () {
+            console.log("Funciona");
+            $( "#Acciones-tab" ).click();
+        });  
+
     });
 
 </script>
