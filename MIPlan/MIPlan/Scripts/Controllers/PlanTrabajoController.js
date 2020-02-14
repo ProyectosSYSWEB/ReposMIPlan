@@ -97,8 +97,7 @@
                 switch (resp.ressult) {
                     case "tgp":                        
                         self.GridAreasAtencionView = catalogoContext.GridAreasAtencionLST;
-                        self.Descripcion = "";
-                        console.log(self.GridAreasAtencionView );
+                        self.Descripcion = "";                        
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -149,7 +148,11 @@
                     switch (resp.ressult) {
                         case "tgp":
                             GridAreasAtencion();
-                            alert("¡Se han Guardado los datos correctamente!");
+                            Swal.fire(
+                                '¡Listo!',
+                                '¡Se han guardado los datos correctamente!',
+                                'success'
+                            )
                             break;
                         case "notgp":
                             self.mensaje_gral = resp.message;
@@ -163,18 +166,33 @@
                 });
 
         };
+
+
         /********************************************************************************************************************************************************/
         this.DeleteAA = function (Id) {            
-            var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
-            if (opcion == true) {
-                EliminarAreasAtencion(Id);
-                alert("¡Se ha eliminado con exito!");
-                GridAreasAtencion();
-
-            } else {
-                alert("No se ha eliminado el registro");
-            }
+            Swal.fire({
+                title: '¿Seguro que Desea Eliminar el Resgistro?',
+                text: "Se Eliminara Permanentemente",
+                icon: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'No, Cancelar',
+                confirmButtonText: 'Si, Quiero Eliminarlo'
+            }).then((result) => {
+                if (result.value) {
+                    EliminarAreasAtencion(Id);
+                    
+                    Swal.fire(
+                        '¡Eliminado!',
+                        'Se ha eliminado con exito.',
+                        'success'
+                    );
+                    GridAreasAtencion();
+                }
+            })
         };        
+       
         var EliminarAreasAtencion = function (Id) {
             catalogoContext.EliminarAreasAtencion(Id, function (resp) {
                 switch (resp.ressult) {
@@ -212,6 +230,7 @@
                         }
 
                         self.DescActividad = "";
+                        self.itemDetails = "";
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -276,8 +295,12 @@
                 self.ObtenerDatosActividadesView[0].Id_Programa,
                 self.Prioritaria, function (resp) {
                     switch (resp.ressult) {
-                        case "tgp":
-                            alert("¡Se han guardado los datos correctamente!");
+                        case "tgp":                           
+                            Swal.fire(
+                                '¡Listo!',
+                                '¡Se han guardado los datos correctamente!',
+                                'success'
+                            )
                             self.ObtenerDatosActividadesView = null;
                             GridActividades(self.IDMETA);
                             break;
@@ -305,8 +328,12 @@
                 self.ObtenerDatosActividadesView[0].Clave,
                 self.EStatus, function (resp) {
                     switch (resp.ressult) {
-                        case "tgp":
-                            alert("¡Se han actualizado los datos correctamente!");
+                        case "tgp":                            
+                            Swal.fire(
+                                '¡Listo!',
+                                '¡Se han actualizado los datos correctamente!',
+                                'success'
+                            )
                             self.ObtenerDatosActividadesView = null;
                             break;
                         case "notgp":
@@ -320,7 +347,33 @@
                     $scope.$apply();
                 });
         };
-        /********************************************************************************************************************************************************/
+    /********************************************************************************************************************************************************/
+        this.EliminnarA = function (Indice) {
+            Swal.fire({
+                title: '¿Seguro que Desea Eliminar el Resgistro?',
+                text: "Se Eliminara Permanentemente",
+                icon: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'No, Cancelar',
+                confirmButtonText: 'Si, Quiero Eliminarlo'
+            }).then((result) => {
+                if (result.value) {
+                    EliminarActividad(Indice);
+
+                    Swal.fire(
+                        '¡Eliminado!',
+                        'Se ha eliminado con exito.',
+                        'success'
+                    );
+                    GridActividades(self.IDMETA);
+                }
+            })
+        };
+
+        
+
         var EliminarActividad = function (Id) {
             catalogoContext.EliminarActividades(Id, function (resp) {
                 switch (resp.ressult) {
@@ -405,8 +458,12 @@
                 function (resp) {
                     switch (resp.ressult) {
                         case "tgp":
-                            GridUnidadesResp(self.idActividad);
-                            alert("¡Se han Guardado los datos correctamente!");                             
+                            GridUnidadesResp(self.idActividad);                 
+                            Swal.fire(
+                                '¡Listo!',
+                                '¡Se han Guardado los datos correctamente!',
+                                'success'
+                            )
                             break;
                         case "notgp":
                             self.mensaje_gral = resp.message;
@@ -422,7 +479,32 @@
         };
         /********************************************************************************************************************************************************/
       
-        /********************************************************************************************************************************************************/
+    /********************************************************************************************************************************************************/
+
+        this.EliminarUR = function (Indice) {
+            Swal.fire({
+                title: '¿Seguro que Desea Eliminar el Resgistro?',
+                text: "Se Eliminara Permanentemente",
+                icon: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'No, Cancelar',
+                confirmButtonText: 'Si, Quiero Eliminarlo'
+            }).then((result) => {
+                if (result.value) {
+                    EliminarUnidadesResp(Indice);
+
+                    Swal.fire(
+                        '¡Eliminado!',
+                        'Se ha eliminado con exito.',
+                        'success'
+                    );
+                    GridUnidadesResp(self.idActividad);
+                }
+            })
+        };
+    
         var EliminarUnidadesResp = function (Id) {         
             catalogoContext.EliminarUnidadResponsable(Id, function (resp) {
                 switch (resp.ressult) {
@@ -500,34 +582,13 @@
                 GuardarActividades();
             }
         };
-        this.EliminnarA = function (Indice) {
-            var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
-            if (opcion == true) {
-                EliminarActividad(Indice);
-                alert("¡Se ha eliminado con exito!", Indice);
-                GridActividades(self.IDMETA);
-
-            } else {
-                alert("No se ha eliminado el registro");
-            }
-        };
+     
         this.getUR = function (Id, Descripcion) {
             GridUnidadesResp(Id);
             self.DescActividad = Descripcion;
             self.idActividad = Id;
         }
  
-        this.EliminarUR = function (Indice) {
-            var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
-            if (opcion == true) {
-                EliminarUnidadesResp(Indice);
-                alert("¡Se ha eliminado con exito!");
-                GridUnidadesResp(self.idActividad);
-
-            } else {
-                alert("No se ha eliminado el registro");
-            }
-        };
         this.close = function (form) {
             $('#ModalActividades').modal('hide');
             if (form) {
@@ -559,8 +620,7 @@
             }
             self.ObtenerDatosActividadesView = null;
             self.EStatus = null;
-            self.Prioritaria = null;
-            GridActividades(self.IDMETA);
+            self.Prioritaria = null;           
    
         };    
        this.Meta = function (idMeta, Descripcion) {

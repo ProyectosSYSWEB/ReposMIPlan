@@ -89,5 +89,6 @@ textarea {
     cursor: pointer;
 }
 
-
-
+.ds {
+    display: inline;
+}

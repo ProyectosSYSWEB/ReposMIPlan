@@ -537,7 +537,7 @@
 
 
 
-                                    <tbody ng-pagination="pro in ctrl.GridProgramas | itemsPerPage: 10 " pagination-id="PaginationGridActividades">
+                                    <tbody ng-pagination="pro in ctrl.GridProgramas | itemsPerPage: 10 " pagination-id="PaginationGridActividades" >
 
                                         <tr class="breakrow bgAct text-white cursor-pointer"> <td colspan="10">{{pro.Desc_Programa}}</td></tr>
 
@@ -678,13 +678,11 @@
     });
 
     $(document).ready(function () {
-     
-        // $('.breakrow').click(function(){
+
         $('#tableMain').on('click', 'tr.breakrow', function () {
-            $(this).nextUntil('tr.breakrow').slideToggle(200);
+            $(this).nextUntil('tr.breakrow').slideToggle(100);
         });
-    
-      
+          
         $("#tableAA").on('click', 'td.AAT', function () {
             console.log("Funciona");
             $( "#Acciones-tab" ).click();
