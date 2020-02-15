@@ -128,6 +128,31 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
+    GuardarPlan: function (Id_Coordinacion, Status, Ejercicio, Dependencia, Descripcion, Fecha, callBackResult) {
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'PlanTrabajo/GuardarPlan',
+                data: { Id_Coordinacion, Status, Ejercicio, Dependencia, Descripcion, Fecha },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en GuardarPlan." });
+                    }
+                }
+            });
+
+    },
+/********************************************************************************************************************************************************/
     GridAreasAtencion: function (buscarPlan, callBackResult) {
         var self = this;
         self.GridAreasAtencionLST.length = 0;

@@ -18,6 +18,10 @@
             CargarComboPlanes();
         };
 
+        this.ValorCoordinacion = function () {
+            console.log(self.ObtenerDatosPlanView[0].Id_Coordinacion);
+        }
+
         /********************************************************************************************************************************************************/
         var ObtenerDependencias = function () {
             catalogoContext.ObtenerDependencias(function (resp) {
@@ -109,6 +113,42 @@
                 }
                 $scope.$apply();
             });
+        };
+    /********************************************************************************************************************************************************/
+        this.SavePlan = function () {  
+            GuardarPlan();
+        }
+    
+        var GuardarPlan = function () {
+            catalogoContext.GuardarPlan(
+                self.ObtenerDatosPlanView[0].Id_Coordinacion,
+                self.EStatus,
+                self.ObtenerDatosPlanView[0].Ejercicio,
+                self.ObtenerDatosPlanView[0].Dependencia,                
+                self.ObtenerDatosPlanView[0].Descripcion,
+                self.ObtenerDatosPlanView[0].Fecha,
+                function (resp) {
+                    switch (resp.ressult) {
+                        case "tgp":
+                            Swal.fire(
+                                '¡Listo!',
+                                '¡Se han guardado los datos correctamente!',
+                                'success'
+                            )
+                            self.ObtenerDatosPlanView = null;
+                            self.EStatus = null;
+                            CargarComboPlanes();
+                            break;
+                        case "notgp":
+                            self.mensaje_gral = resp.message;
+                            document.getElementById("Error").style.display = "block";
+                            document.getElementById("Message").innerHTML = self.mensaje_gral + " GuardarActividades";
+                            break;
+                        default:
+                            break;
+                    }
+                    $scope.$apply();
+                });
         };
         /********************************************************************************************************************************************************/
         this.ModalAreasDeAtencion = function () {
@@ -422,6 +462,7 @@
         this.GridUR = function () {
             ObtenerGridUnidadesModal();
             self.DescripcionUR = "";
+            self.EStatus = "A";
         }
         var ObtenerGridUnidadesModal = function () {
             catalogoContext.ObtenerGridUnidadesModal(self.buscarDependencias, function (resp) {
@@ -606,11 +647,18 @@
                 form.$setPristine();
                 form.$setUntouched();
             }
+            $('#ModalPlanMastro').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }
             self.ObtenerDatosActividadesView = null;            
             self.Prioritaria = null;
             self.ObtenerDatosUnidadesRespView = null;            
             self.EStatus = null;
             self.idU = null;
+            self.ObtenerDatosPlanView = null;
+            self.EStatus = null;
         };
         this.reset = function (form) {
             $('#ModalActividades').modal('hide');
@@ -620,8 +668,13 @@
             }
             self.ObtenerDatosActividadesView = null;
             self.EStatus = null;
-            self.Prioritaria = null;           
-   
+            self.Prioritaria = null;    
+
+            $('#ModalPlanMastro').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }     
         };    
        this.Meta = function (idMeta, Descripcion) {
             GridActividades(idMeta);

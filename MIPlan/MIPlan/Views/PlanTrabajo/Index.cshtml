@@ -15,13 +15,13 @@
 
     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <!-- Modal Plan Maestro-->
-    <div class="modal fade" id="ModalPlanMastro" tabindex="-1" role="dialog" aria-labelledby="ModalPlanMastro" aria-hidden="true">
+    <div class="modal fade" data-keyboard="false" data-backdrop="static" id="ModalPlanMastro" tabindex="-1" role="dialog" aria-labelledby="ModalPlanMastro" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form name="modalFormPM" novalidate>
                     <div class="modal-header bg-info text-white">
                         <h5 class="modal-title" id="exampleModalLabel">Crear Plan</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" ng-click="ctrl.close(modalFormPM)" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
 
@@ -34,22 +34,29 @@
                                 Cooordinación
                             </label>
                         </div>
-                        <select name="" id="" class="form-control border border-primary">
-                            <option selected> Seleccionar Coordinación...</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                        <select class="form-control border border-primary" name="cmbCoordinacion" ng-change="ctrl.ValorCoordinacion()" ng-options="option.Id as option.Descripcion for option in ctrl.UnidadesResponsables" ng-model="ctrl.ObtenerDatosPlanView[0].Id_Coordinacion" style="max-width:100%;" required>
+                            <option value="">Seleccionar Coordinación</option>
                         </select>
+                        <div class="row justify-content-center">
+                            <span class="messages" ng-show="modalFormPM.$submitted || modalFormPM.cmbCoordinacion.$touched">
+                                <span ng-show="!ctrl.ObtenerDatosPlanView[0].Id_Coordinacion" class="text-danger">Campo Requerido</span>
+                            </span>
+                        </div>
                         <!------------------------------------------------------------------------------------------------------------------------->
                         <div class="row justify-content-center">
                             <label for="" class="font-weight text-info">
                                 Status
                             </label>
                         </div>
-                        <select name="" id="" class="form-control border border-primary">
-                            <option value="1">Activo</option>
-                            <option value="2">Baja</option>
+                        <select id="cmbStatusPlan" class="form-control border border-primary" name="cmbDependencia_status" ng-model="ctrl.EStatus" required>
+                            <option value="A">Activo</option>
+                            <option value="B">Baja</option>
                         </select>
+                        <div class="row justify-content-center">
+                            <span class="messages" ng-show="modalFormPM.$submitted || modalFormPM.cmbStatusPlan.$touched" required>
+                                <span ng-show="!ctrl.EStatus" class="text-danger">Campo Requerido</span>
+                            </span>
+                        </div>
                         <!------------------------------------------------------------------------------------------------------------------------->
                         <div class="row justify-content-center">
                             <label for="" class="font-weight text-info">
@@ -57,44 +64,58 @@
                             </label>
                         </div>
 
-                        <select name="" id="" class="form-control border border-primary">
-                            <option selected>Seleccione Ejercicio</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                        <select class="form-control border border-primary" name="cmbEjercicio" ng-change="ctrl.ValorEjercicio()" ng-options="option.Id as option.Descripcion for option in ctrl.Ejercicios" ng-model="ctrl.ObtenerDatosPlanView[0].Ejercicio" required>
+                            <option value="">Seleccionar Ejercicio</option>
                         </select>
+                        <div class="row justify-content-center">
+                            <span class="messages" ng-show="modalFormPM.$submitted || modalFormPM.cmbEjercicio.$touched">
+                                <span ng-show="!ctrl.ObtenerDatosPlanView[0].Ejercicio" class="text-danger">Campo Requerido</span>
+                            </span>
+                        </div>
                         <!------------------------------------------------------------------------------------------------------------------------->
                         <div class="row justify-content-center">
                             <label for="" class="font-weight text-info">
                                 Dependencia
                             </label>
                         </div>
-                        <select name="" id="" class="form-control border border-primary">
-                            <option selected>Seleccionar Dependencia </option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                        <select class="form-control border border-primary" name="cmbDependencia" ng-change="ctrl.ValorDependenciaPlan()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.ObtenerDatosPlanView[0].Dependencia" required>
+                            <option value="">Seleccionar Dependencia</option>
                         </select>
+                        <div class="row justify-content-center">
+                            <span class="messages" ng-show="modalFormPM.$submitted || modalFormPM.cmbDependencia.$touched">
+                                <span ng-show="!ctrl.ObtenerDatosPlanView[0].Dependencia" class="text-danger">Campo Requerido</span>
+                            </span>
+                        </div>
                         <!------------------------------------------------------------------------------------------------------------------------->
                         <div class="row justify-content-center">
                             <label for="" class="text-info">
                                 Descripción
                             </label>
                         </div>
-                        <textarea name="" id="" cols="30" rows="5" class="form-control border border-primary" placeholder=" Escriba una Descrición"></textarea>
+                        <textarea name="textAreaPlan" id="" cols="30" rows="5" class="form-control border border-primary" placeholder=" Escriba una Descrición" ng-model="ctrl.ObtenerDatosPlanView[0].Descripcion" required></textarea>
+                        <div class="row justify-content-center">
+                            <span class="messages" ng-show="modalFormPM.$submitted || modalFormPM.textAreaPlan.$touched">
+                                <span ng-show="!ctrl.ObtenerDatosPlanView[0].Descripcion" class="text-danger">Campo Requerido</span>
+                            </span>
+                        </div>
                         <!------------------------------------------------------------------------------------------------------------------------->
                         <div class="row justify-content-center">
                             <label for="" class="text-info">
                                 Fecha
                             </label>
                         </div>
-                        <input type="text" id="fechaPlan" class="form-control border border-primary" placeholder=" Seleccione una fecha">
+                        <input type="text" name="FechaPlan" id="fechaPlan" class="form-control border border-primary" placeholder=" Seleccione una fecha" ng-model="ctrl.ObtenerDatosPlanView[0].Fecha" required>
+                        <div class="row justify-content-center">
+                            <span class="messages" ng-show="modalFormPM.$submitted || modalFormPM.FechaPlan.$touched">
+                                <span ng-show="!ctrl.ObtenerDatosPlanView[0].Fecha" class="text-danger">Campo Requerido</span>
+                            </span>
+                        </div>
                         <!---------------------------------------------------------------------------------------->
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
-                        <button type="button" class="btn btn-primary" ng-disabled="modalFormPM.$invalid">Guardar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="ctrl.close(modalFormPM)">Salir</button>
+                        <button type="button" class="btn btn-primary" ng-click="ctrl.SavePlan(); ctrl.reset(modalFormPM)" ng-disabled="modalFormPM.$invalid">Guardar</button>        
                     </div>
                 </form>
             </div>
@@ -375,7 +396,7 @@
             <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                 <div class="form-group">
                     <label for="lblBuscar" class="text-primary">&nbsp;</label>
-                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#ModalPlanMastro" style="max-width:100%;">
+                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#ModalPlanMastro" style="max-width:100%;" ng-click="ctrl.GridUR();">
                         Crear Plan
                     </button>
                 </div>
@@ -683,8 +704,7 @@
             $(this).nextUntil('tr.breakrow').slideToggle(100);
         });
           
-        $("#tableAA").on('click', 'td.AAT', function () {
-            console.log("Funciona");
+        $("#tableAA").on('click', 'td.AAT', function () {        
             $( "#Acciones-tab" ).click();
         });  
 
