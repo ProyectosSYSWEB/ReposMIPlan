@@ -29,7 +29,7 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblSubtipo" class="text-info">Subtipo:</label>
-                    <select class="form-control border border-info" name="cmbsubtipo" ng-change="ctrl.SubtipoFun()" ng-options="option.Id as option.Descripcion for option in ctrl.subtipo" ng-model="ctrl.Subtipo.Subtipo" style="max-width:100%;">
+                    <select class="form-control border border-info" name="cmbsubtipo" ng-change="ctrl.SubtipoFun()" ng-options="option.Id as option.Descripcion for option in ctrl.subtipo" ng-model="ctrl.SubtipoBusqueda" style="max-width:100%;">
                         <option value="">--Seleccionar Subtipo--</option>
                     </select>
                 </div>
@@ -223,7 +223,7 @@
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody ng-pagination="i in ctrl.indicadores |  filter:ctrl.buscar | filter:ctrl.Subtipo.Subtipo | itemsPerPage: 5">
+                <tbody ng-pagination="i in ctrl.indicadores |  filter:ctrl.buscar | filter:ctrl.SubtipoBusqueda | itemsPerPage: 5">
                     <tr>
                         <td><font size="2">{{i.Cat}}</font></td>
                         <td><font size="2">{{i.Sub}}</font></td>

@@ -3,7 +3,7 @@ var catalogoContext =
 {
     dependenciaslst: [], ListaUnidadResponsableLST: [], ListaEjerciciosLST: [], ListaPlanesLST: [], GridAreasAtencionLST: [], ObtenerModalGridAreasAtencionLST: [],
     GridActividadesLST: [], ObtenerDatosActividadesLST: [], ObtenerProgramasLST: [], GridProgramas: [],
-    GridUnidadesRespLST: [], EditarActividadesLST: [], ObtenerDatosUnidadesRespLST: [], ObtenerGridUnidadesModalLST: [],
+    GridUnidadesRespLST: [], EditarActividadesLST: [], ObtenerDatosUnidadesRespLST: [], ObtenerComboUnidadesModalLST: [],
    
 /********************************************************************************************************************************************************/
     ObtenerDependencias: function (callBackResult) {
@@ -564,19 +564,19 @@ var catalogoContext =
             });
     },
 /********************************************************************************************************************************************************/
-    ObtenerGridUnidadesModal: function (dependencia, callBackResult) {
+    ObtenerComboUnidadesModal: function (dependencia, callBackResult) {
         var self = this;
-        self.ObtenerGridUnidadesModalLST.length = 0;
+        self.ObtenerComboUnidadesModalLST.length = 0;
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
-                url: urlServer + 'PlanTrabajo/ObtenerGridUnidadesModal',
+                url: urlServer + 'PlanTrabajo/ObtenerComboUnidadesModal',
                 data: { dependencia },
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
-                            self.ObtenerGridUnidadesModalLST.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependencia, Clave: resp.Resultado[i].Clave, Descripcion: resp.Resultado[i].Descripcion, Status: resp.Resultado[i].Status, Coordinador: resp.Resultado[i].Coordinador });
+                            self.ObtenerComboUnidadesModalLST.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependencia, Clave: resp.Resultado[i].Clave, Descripcion: resp.Resultado[i].Descripcion, Status: resp.Resultado[i].Status, Coordinador: resp.Resultado[i].Coordinador });
                         }                        
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });

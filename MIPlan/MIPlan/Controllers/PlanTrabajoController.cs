@@ -621,7 +621,7 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-        public JsonResult ObtenerGridUnidadesModal(string dependencia)
+        public JsonResult ObtenerComboUnidadesModal(string dependencia)
         {
             List<UnidadesResponsables> list = new List<UnidadesResponsables>();
             ResultadoUnidades objResultado = new ResultadoUnidades();
@@ -634,7 +634,7 @@ namespace MIPlan.Controllers
             {
 
 
-                list = Data.PlanTrabajo.CursorDataContext.ObtenerGridUnidadesModal(SesionUsu[0].Usuario, dependencia, ref Verificador);
+                list = Data.PlanTrabajo.CursorDataContext.ObtenerComboUnidadesModal(SesionUsu[0].Usuario, dependencia, ref Verificador);
                 objResultado.Error = false;
                 objResultado.MensajeError = string.Empty;
                 objResultado.Resultado = list;

@@ -239,7 +239,7 @@ namespace MIPlan.Data.PlanTrabajo
             }
 
         }
-        public static List<UnidadesResponsables> ObtenerGridUnidadesModal(string usuario, string dependencia, ref string Verificador)
+        public static List<UnidadesResponsables> ObtenerComboUnidadesModal(string usuario, string dependencia, ref string Verificador)
         {
             //s
             OracleCommand cmd = null;

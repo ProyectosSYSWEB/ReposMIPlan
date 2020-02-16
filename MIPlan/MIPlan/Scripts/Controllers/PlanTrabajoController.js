@@ -1,14 +1,14 @@
 ﻿
 (function () {
-    var app = angular.module('MIPlanWeb', ['ngPagination']);
+    var app = angular.module('MIPlanWeb', ['ngPagination', 'ngAnimate']);
     /********************************************************************************************************************************************************/
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
 
         var self = this;
         self.buscar = '';
-       
+
         this.Inicio = function () {
-            CargarCombos();                       
+            CargarCombos();    
         };
 
         var CargarCombos = function () {
@@ -17,10 +17,10 @@
             CargarComboEjercicios();
             CargarComboPlanes();
         };
-
-        this.ValorCoordinacion = function () {
-            console.log(self.ObtenerDatosPlanView[0].Id_Coordinacion);
+        this.PlanMaestroModal = function () {
+            self.EStatus = "A";
         }
+
 
         /********************************************************************************************************************************************************/
         var ObtenerDependencias = function () {
@@ -101,7 +101,14 @@
                 switch (resp.ressult) {
                     case "tgp":                        
                         self.GridAreasAtencionView = catalogoContext.GridAreasAtencionLST;
-                        self.Descripcion = "";                        
+                        self.Descripcion = "";      
+                        if (self.GridAreasAtencionView.length == 0) {
+                            document.getElementById("AAAlert").style.display = "block";                      
+                            self.NoPlan = "¡No Existen registros para el Plan Seleccionado!";
+                        } else {
+                            document.getElementById("AAAlert").style.display = "none";
+                            self.NoPlan = "";
+                        }
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -264,8 +271,10 @@
                         });  
                        
                         if (self.GridActividadesView.length == 0) {
+                            document.getElementById("ACTAlert").style.display = "block";     
                             self.NoActv = "¡No Existen registros para esta área de atención!";
                         } else {
+                            document.getElementById("ACTAlert").style.display = "none";
                             self.NoActv = "";
                         }
 
@@ -411,9 +420,7 @@
                 }
             })
         };
-
-        
-
+      
         var EliminarActividad = function (Id) {
             catalogoContext.EliminarActividades(Id, function (resp) {
                 switch (resp.ressult) {
@@ -442,8 +449,10 @@
 
 
                         if (self.GridUnidadesRespView.length == 0) {
+                            document.getElementById("URAlert").style.display = "block";     
                             self.NoUR = "¡No Existen registros para esta Actividad!";
                         } else {
+                            document.getElementById("URAlert").style.display = "none";  
                             self.NoUR = "";
                         }
                         break;
@@ -460,15 +469,15 @@
         };        
         /********************************************************************************************************************************************************/
         this.GridUR = function () {
-            ObtenerGridUnidadesModal();
+            ObtenerComboUnidadesModal();
             self.DescripcionUR = "";
-            self.EStatus = "A";
+            
         }
-        var ObtenerGridUnidadesModal = function () {
-            catalogoContext.ObtenerGridUnidadesModal(self.buscarDependencias, function (resp) {
+        var ObtenerComboUnidadesModal = function () {
+            catalogoContext.ObtenerComboUnidadesModal(self.buscarDependencias, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.ObtenerGridUnidadesModalView = catalogoContext.ObtenerGridUnidadesModalLST;
+                        self.ObtenerComboUnidadesModalView = catalogoContext.ObtenerComboUnidadesModalLST;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -487,15 +496,14 @@
         this.SaveUR = function () {
             GuardarUnidadesResp();
         }
-        this.getId = function (Id, Descripcion) {
-            self.idU = Id;
-            self.DescripcionUR = Descripcion;
-        }
         var GuardarUnidadesResp = function () {
 
             catalogoContext.GuardarUnidadesResp( 
                 self.idActividad,
-                self.idU,
+                self.ObtenerDatosUnidadesModalView[0].Descripcion,
+                self.ObtenerDatosUnidadesModalView[0].Contacto,
+                self.ObtenerDatosUnidadesModalView[0].Telefono,
+                self.ObtenerDatosUnidadesModalView[0].Correo,
                 function (resp) {
                     switch (resp.ressult) {
                         case "tgp":
@@ -680,6 +688,7 @@
             GridActividades(idMeta);
             self.IDMETA = idMeta;
             self.Descripcion = Descripcion;
+           self.GridUnidadesRespView = null;
         }
         this.URS = function (Descripcion) {            
             self.Descripcion = Descripcion;
