@@ -502,8 +502,8 @@ namespace MIPlan.Controllers
         /**********************************************************************************************************************Unidades Reponsables*******************************/
         public JsonResult GridUnidadesResp(int idActividad)/**/
         {            
-            List<PlanUnidadesResponsables> list = new List<PlanUnidadesResponsables>();
-            ResultadoUnidades objResultado = new ResultadoUnidades();
+            List<ResponsableModel> list = new List<ResponsableModel>();
+            ResultadoResponsable objResultado = new ResultadoResponsable();
             string Verificador = string.Empty;
             List<Sesion> SesionUsu = new List<Sesion>();
             if (System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"] != null)
@@ -516,7 +516,7 @@ namespace MIPlan.Controllers
                 list = Data.PlanTrabajo.CursorDataContext.ObtenerGridUnidadesResp(idActividad, SesionUsu[0].Usuario);
                 objResultado.Error = false;
                 objResultado.MensajeError = string.Empty;
-                objResultado.ResultadiPlanUnidadesResponsables = list;
+                objResultado.Resultado = list;
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -558,7 +558,7 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-        public JsonResult GuardarUnidadesResp(int Id_Actividades, int Id_Unidad)
+        public JsonResult GuardarUnidadesResp(int Id_Actividades, int Id_Unidad, string Contacto, string Telefono, string Correo)
         {
             ResponsableModel objUnidadesResp = new ResponsableModel();
             ResultadoResponsable objResultado = new ResultadoResponsable();
@@ -568,6 +568,9 @@ namespace MIPlan.Controllers
 
                 objUnidadesResp.Id_Actividades = Id_Actividades;
                 objUnidadesResp.Id_Unidad = Id_Unidad;
+                objUnidadesResp.Contacto = Contacto;
+                objUnidadesResp.Telefono = Telefono;
+                objUnidadesResp.Correo = Correo;
                 Data.PlanTrabajo.GuardarDataContext.GuardarUnidadesResp(objUnidadesResp, ref Verificador);
                 if (Verificador == "0")
                 {

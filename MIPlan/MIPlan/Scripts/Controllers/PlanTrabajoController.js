@@ -447,7 +447,7 @@
 
                         self.GridUnidadesRespView = catalogoContext.GridUnidadesRespLST;
 
-
+                        console.log(self.GridUnidadesRespView);
                         if (self.GridUnidadesRespView.length == 0) {
                             document.getElementById("URAlert").style.display = "block";     
                             self.NoUR = "¡No Existen registros para esta Actividad!";
@@ -661,8 +661,8 @@
                 form.$setUntouched();
             }
             self.ObtenerDatosActividadesView = null;            
-            self.Prioritaria = null;
-            self.ObtenerDatosUnidadesRespView = null;            
+            self.Prioritaria = null;            
+            self.ObtenerDatosUnidadesModalView = null;
             self.EStatus = null;
             self.idU = null;
             self.ObtenerDatosPlanView = null;
@@ -674,10 +674,15 @@
                 form.$setPristine();
                 form.$setUntouched();
             }
+            $('#ModalAddUR').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }
             self.ObtenerDatosActividadesView = null;
             self.EStatus = null;
-            self.Prioritaria = null;    
-
+            self.Prioritaria = null;
+            self.ObtenerDatosUnidadesModalView = null;
             $('#ModalPlanMastro').modal('hide');
             if (form) {
                 form.$setPristine();

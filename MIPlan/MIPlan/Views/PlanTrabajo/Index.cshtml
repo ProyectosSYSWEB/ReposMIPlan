@@ -332,7 +332,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn btn-danger" ng-click="ctrl.close(modalFormUR)">Salir</button>
-                        <button type="button" id="btnModalUR" class="btn btn-success" ng-click="ctrl.SaveUR(); ctrl.close(modalFormUR)" ng-disabled="modalFormUR.$invalid">Guardar</button>
+                        <button type="button" id="btnModalUR" class="btn btn-success" ng-click="ctrl.SaveUR(); ctrl.reset(modalFormUR)" ng-disabled="modalFormUR.$invalid">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -644,6 +644,8 @@
                                             <th scope="col">Id Actividad</th>
                                             <th scope="col">Unidad Responsable</th>
                                             <th scope="col">Contacto</th>
+                                            <th scope="col">Telefono</th>
+                                            <th scope="col">Correo</th>
                                             <th scope="col" style="text-align:center" colspan="3"><em class="fa fa-cog"></em></th>
                                         </tr>
                                     </thead>
@@ -657,6 +659,8 @@
                                             <td>{{i.Id_Actividad}}</td>
                                             <td>{{i.Descripcion}}</td>
                                             <td>{{i.Contacto}}</td>
+                                            <td>{{i.Telefono}}</td>
+                                            <td>{{i.Correo}}</td>
                                             <td colspan="3">
                                                 <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalUnidadesResp" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Editar" ng-click="ctrl.ModalUR(i.Id)">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>

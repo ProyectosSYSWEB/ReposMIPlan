@@ -441,9 +441,10 @@ var catalogoContext =
                 data: { idActividad },
                 success: function (resp) {
                     if (resp.Error == false) {
-                        for (var i = 0; i < resp.ResultadiPlanUnidadesResponsables.length; i++) {
-                            self.GridUnidadesRespLST.push({ Id: resp.ResultadiPlanUnidadesResponsables[i].Id, Id_Actividad: resp.ResultadiPlanUnidadesResponsables[i].Id_Actividad, Descripcion: resp.ResultadiPlanUnidadesResponsables[i].Descripcion, Contacto: resp.ResultadiPlanUnidadesResponsables[i].Contacto });                            
-                        }                       
+                        for (var i = 0; i < resp.Resultado.length; i++) {
+                            self.GridUnidadesRespLST.push({ Id: resp.Resultado[i].Id, Id_Actividad: resp.Resultado[i].Id_Actividad, Descripcion: resp.Resultado[i].Descripcion, Contacto: resp.Resultado[i].Contacto, Telefono: resp.Resultado[i].Telefono, Correo: resp.Resultado[i].Correo });                            
+                        }
+                        console.log(self.GridUnidadesRespLST);
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
                         }
@@ -490,13 +491,13 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-    GuardarUnidadesResp: function (Id_Actividades, Id_Unidad, callBackResult) {
+    GuardarUnidadesResp: function (Id_Actividades, Id_Unidad, Contacto, Telefono, Correo, callBackResult) {
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'PlanTrabajo/GuardarUnidadesResp',
-                data: { Id_Actividades, Id_Unidad },
+                data: { Id_Actividades, Id_Unidad, Contacto, Telefono, Correo },
                 success: function (resp) {
                     if (resp.Error == false) {
                         if (callBackResult !== undefined) {
