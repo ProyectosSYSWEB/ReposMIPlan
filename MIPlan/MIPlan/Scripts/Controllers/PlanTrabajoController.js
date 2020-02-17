@@ -21,7 +21,6 @@
             self.EStatus = "A";
         }
 
-
         /********************************************************************************************************************************************************/
         var ObtenerDependencias = function () {
             catalogoContext.ObtenerDependencias(function (resp) {
@@ -99,7 +98,7 @@
         var GridAreasAtencion = function () {
             catalogoContext.GridAreasAtencion(self.buscarPlan, function (resp) {
                 switch (resp.ressult) {
-                    case "tgp":                        
+                    case "tgp":                               
                         self.GridAreasAtencionView = catalogoContext.GridAreasAtencionLST;
                         self.Descripcion = "";      
                         if (self.GridAreasAtencionView.length == 0) {
@@ -396,7 +395,7 @@
                     $scope.$apply();
                 });
         };
-    /********************************************************************************************************************************************************/
+        /********************************************************************************************************************************************************/
         this.EliminnarA = function (Indice) {
             Swal.fire({
                 title: '¿Seguro que Desea Eliminar el Resgistro?',
@@ -446,8 +445,7 @@
                     case "tgp":
 
                         self.GridUnidadesRespView = catalogoContext.GridUnidadesRespLST;
-
-                        console.log(self.GridUnidadesRespView);
+                        console.log("Controller",self.GridUnidadesRespView);
                         if (self.GridUnidadesRespView.length == 0) {
                             document.getElementById("URAlert").style.display = "block";     
                             self.NoUR = "¡No Existen registros para esta Actividad!";
@@ -469,6 +467,18 @@
         };        
         /********************************************************************************************************************************************************/
         this.GridUR = function () {
+            document.getElementById("title").className = "modal-header btn-success justify-content-center";
+            document.getElementById("TituloURM").innerHTML = "Crear Responsables";
+            document.getElementById("btnModal").className = "btn btn-success";
+            document.getElementById("lblURM").className = "text-success";
+            document.getElementById("SelectURM").className = "form-control border border-success";
+            document.getElementById("lblContacto").className = "text-success";
+            document.getElementById("inputContacto").className = "form-control border border-success";
+            document.getElementById("lblTelefono").className = "text-success";
+            document.getElementById("inputTelefono").className = "form-control border border-success";
+            document.getElementById("lblCorreo").className = "text-success";
+            document.getElementById("inputCorreo").className = "form-control border border-success";
+
             ObtenerComboUnidadesModal();
             self.DescripcionUR = "";
             
@@ -493,8 +503,12 @@
         /********************************************************************************************************************************************************/
 
         /********************************************************************************************************************************************************/       
-        this.SaveUR = function () {
-            GuardarUnidadesResp();
+        this.SaveUR = function (Id) {
+            if (Id) {
+                EditarUnidadesResp(Id);                
+            } else {
+                GuardarUnidadesResp();                
+            }
         }
         var GuardarUnidadesResp = function () {
 
@@ -526,8 +540,74 @@
                 });
 
         };
+    /********************************************************************************************************************************************************/
+        var EditarUnidadesResp = function (Id) {
+            catalogoContext.EditarUnidadesResp(
+                Id,
+                self.idActividad,
+                self.ObtenerDatosUnidadesModalView[0].Descripcion,
+                self.ObtenerDatosUnidadesModalView[0].Contacto,
+                self.ObtenerDatosUnidadesModalView[0].Telefono,
+                self.ObtenerDatosUnidadesModalView[0].Correo,
+                function (resp) {
+                    switch (resp.ressult) {
+                        case "tgp":
+                            GridUnidadesResp(self.idActividad);
+                            Swal.fire(
+                                '¡Listo!',
+                                '¡Se han actualizado los datos correctamente!',
+                                'success'
+                            )
+                            self.ObtenerDatosUnidadesModalView = null;
+                            break;
+                        case "notgp":
+                            self.mensaje_gral = resp.message;
+                            document.getElementById("Error").style.display = "block";
+                            document.getElementById("Message").innerHTML = self.mensaje_gral + " EditarUnidadesResp";
+                            break;
+                        default:
+                            break;
+                    }
+                    $scope.$apply();
+                });
+
+        };
         /********************************************************************************************************************************************************/
-      
+        
+        this.UpdateResp = function (Id) {
+            document.getElementById("title").className = "modal-header btn-primary justify-content-center";
+            document.getElementById("TituloURM").innerHTML = "Actualizar Responsables";
+            document.getElementById("btnModal").className = "btn btn-primary";
+            document.getElementById("lblURM").className = "text-primary";
+            document.getElementById("SelectURM").className = "form-control border border-primary";
+            document.getElementById("lblContacto").className = "text-primary";
+            document.getElementById("inputContacto").className = "form-control border border-primary";
+            document.getElementById("lblTelefono").className = "text-primary";
+            document.getElementById("inputTelefono").className = "form-control border border-primary";
+            document.getElementById("lblCorreo").className = "text-primary";
+            document.getElementById("inputCorreo").className = "form-control border border-primary";
+            ObtenerComboUnidadesModal();
+            ObtenerDatosUnidadesResp(Id);
+        }
+        var ObtenerDatosUnidadesResp = function (Id) {
+            catalogoContext.ObtenerDatosUnidadesResp(Id,
+                function (resp) {
+                    switch (resp.ressult) {
+                        case "tgp":
+                            self.ObtenerDatosUnidadesModalView = catalogoContext.ObtenerDatosUnidadesRespLST;
+                            break;
+                        case "notgp":
+                            self.mensaje_gral = resp.message;
+                            document.getElementById("Error").style.display = "block";
+                            document.getElementById("Message").innerHTML = self.mensaje_gral + " GuardarUnidadesResp";
+                            break;
+                        default:
+                            break;
+                    }
+                    $scope.$apply();
+                });
+
+        };
     /********************************************************************************************************************************************************/
 
         this.EliminarUR = function (Indice) {
@@ -679,10 +759,10 @@
                 form.$setPristine();
                 form.$setUntouched();
             }
+  
             self.ObtenerDatosActividadesView = null;
             self.EStatus = null;
             self.Prioritaria = null;
-            self.ObtenerDatosUnidadesModalView = null;
             $('#ModalPlanMastro').modal('hide');
             if (form) {
                 form.$setPristine();

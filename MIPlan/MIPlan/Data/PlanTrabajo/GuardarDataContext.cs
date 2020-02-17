@@ -142,9 +142,8 @@ namespace MIPlan.Data.PlanTrabajo
             }
         }
 
-
-        public static void GuardarUnidadesResp(ResponsableModel objUnidadesResp , ref string Verificador)
-        {                   
+        public static void GuardarUnidadesResp(ResponsableModel objUnidadesResp, ref string Verificador)
+        {
             OracleCommand cmd = null;
             ExeProcedimiento exeProc = new ExeProcedimiento();
             try
@@ -163,8 +162,29 @@ namespace MIPlan.Data.PlanTrabajo
             {
                 exeProc.LimpiarOracleCommand(ref cmd);
             }
+        }  
+        public static void EditarUnidadesResp(ResponsableModel objUnidadesResp, ref string Verificador)
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+            try
+            {
+                OracleDataReader dr = null;
+                string[] Parametros = { "P_ID", "P_ID_ACTIVIDAD", "P_ID_UNIDAD", "P_CONTACTO", "P_TELEFONO", "P_CORREO" };
+                object[] Valores = { objUnidadesResp.Id, objUnidadesResp.Id_Actividades, objUnidadesResp.Id_Unidad, objUnidadesResp.Contacto, objUnidadesResp.Telefono, objUnidadesResp.Correo };
+                string[] ParametrosOut = { "P_BANDERA" };
+                cmd = exeProc.GenerarOracleCommand("UPD_PLA_PLAN_RESPONSABLES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
         }
-      
+
         public static void EliminarUnidadesResp(int Id, ref string Verificador)
         {
             OracleCommand cmd = null;

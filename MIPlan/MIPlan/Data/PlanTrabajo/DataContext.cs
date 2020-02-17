@@ -48,27 +48,28 @@ namespace MIPlan.Data.PlanTrabajo
             //return registroAgregado;
         }
 
-        public static List<UnidadesResponsables> ObtenerDatosUnidadesResp(int Id, ref string Verificador)
+        public static List<ResponsableModel> ObtenerDatosUnidadesResp(int Id, ref string Verificador)
         {
             OracleCommand cmd = null;
             ExeProcedimiento exeProc = new ExeProcedimiento();
-            List<UnidadesResponsables> list = new List<UnidadesResponsables>();
-            UnidadesResponsables objUnidadesResp = new UnidadesResponsables();
+            List<ResponsableModel> list = new List<ResponsableModel>();
+            ResponsableModel objUnidadesResp = new ResponsableModel();
             try
             {
 
                 OracleDataReader dr = null;
-                string[] Parametros = { "P_ID_UNIDAD" };
+                string[] Parametros = { "P_ID" };
                 object[] Valores = { Id };
-                string[] ParametrosOut = { "P_DEPENDENCIA", "P_CLAVE", "P_DESCRIPCION", "P_STATUS", "P_COORDINADOR", "P_BANDERA" };
-                cmd = exeProc.GenerarOracleCommand("OBT_UNIDADES_RESPONSABLES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
-
+                string[] ParametrosOut = { "P_ID_ACTIVIDAD", "P_ID_UNIDAD", "P_CONTACTO", "P_TELEFONO", "P_CORREO", "P_BANDERA" };
+                cmd = exeProc.GenerarOracleCommand("OBT_PLA_PLAN_RESPONSABLES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+                string TempActv = Convert.ToString(cmd.Parameters["P_ID_ACTIVIDAD"].Value);
+                string TempU = Convert.ToString(cmd.Parameters["P_ID_UNIDAD"].Value);
                 objUnidadesResp.Id = Id;
-                objUnidadesResp.Dependencia = Convert.ToString(cmd.Parameters["P_DEPENDENCIA"].Value);
-                objUnidadesResp.Clave = Convert.ToString(cmd.Parameters["P_CLAVE"].Value);
-                objUnidadesResp.Descripcion = Convert.ToString(cmd.Parameters["P_DESCRIPCION"].Value);
-                objUnidadesResp.Status = Convert.ToString(cmd.Parameters["P_STATUS"].Value);                
-                objUnidadesResp.Coordinador = Convert.ToString(cmd.Parameters["P_COORDINADOR"].Value);                                                                
+                objUnidadesResp.Id_Actividades = Convert.ToInt32(TempActv);
+                objUnidadesResp.Id_Unidad = Convert.ToInt32(TempU);
+                objUnidadesResp.Contacto = Convert.ToString(cmd.Parameters["P_CONTACTO"].Value);
+                objUnidadesResp.Telefono = Convert.ToString(cmd.Parameters["P_TELEFONO"].Value);                
+                objUnidadesResp.Correo = Convert.ToString(cmd.Parameters["P_CORREO"].Value);                                                                
                 list.Add(objUnidadesResp);
             }
             catch (Exception ex)

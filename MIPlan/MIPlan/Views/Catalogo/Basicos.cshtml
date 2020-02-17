@@ -82,8 +82,8 @@
                                 </div>
 
                                 <div class="row justify-content-center">
-                                    <span class="messages" ng-show="modalForm.$submitted || modalForm.cmbcatalogo.$touched">
-                                        <span ng-show="!ctrl.cve_catalogo" class="text-danger">Campo Requerido</span>
+                                    <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.cmbcatalogo.$touched">
+                                        <span ng-show="!ctrl.cve_catalogo" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                     </span>
                                 </div>
 
@@ -135,8 +135,8 @@
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <span class="messages" ng-show="modalForm.$submitted || modalForm.gender.$touched">
-                                        <span ng-show="!ctrl.cve_status" class="text-danger">Campo Requerido</span>
+                                    <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.gender.$touched">
+                                        <span ng-show="!ctrl.cve_status" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                     </span>
                                 </div>
 
@@ -255,6 +255,7 @@
 <script src="~/Scripts/angular.min.js"></script>
 <script src="~/Scripts/angular.js"></script>
 <script src="~/Scripts/angular-pagination.js"></script>
+<script src="~/Scripts/angular-animate.js"></script>
 <script src="~/Scripts/global.js"></script>
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/CatController.js"></script>

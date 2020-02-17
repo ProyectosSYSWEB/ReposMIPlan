@@ -455,7 +455,7 @@ namespace MIPlan.Controllers
                 else
                 {
                     objResultado.Error = true;
-                    objResultado.MensajeError = "No existe el registro";
+                    objResultado.MensajeError = Verificador;
                     objResultado.Resultado = null;
                 }
 
@@ -528,14 +528,14 @@ namespace MIPlan.Controllers
 
             }
         }
-        public JsonResult ObtenerDatosUnidadesResp(int IdUnidad)
+        public JsonResult ObtenerDatosUnidadesResp(int Id)
         {
-            UnidadesResponsables objUnidadesResp = new UnidadesResponsables();
-            ResultadoUnidades objResultado = new ResultadoUnidades();
+            ResponsableModel objUnidadesResp = new ResponsableModel();
+            ResultadoResponsable objResultado = new ResultadoResponsable();
             string Verificador = string.Empty;
             try
             {
-                objResultado.Resultado = Data.PlanTrabajo.DataContext.ObtenerDatosUnidadesResp(IdUnidad, ref Verificador);
+                objResultado.Resultado = Data.PlanTrabajo.DataContext.ObtenerDatosUnidadesResp(Id, ref Verificador);
                 if (Verificador == "0")
                 {
                     objResultado.Error = false;
@@ -594,7 +594,41 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-       
+        public JsonResult EditarUnidadesResp(int Id,int Id_Actividades, int Id_Unidad, string Contacto, string Telefono, string Correo)
+        {
+            ResponsableModel objUnidadesResp = new ResponsableModel();
+            ResultadoResponsable objResultado = new ResultadoResponsable();
+            string Verificador = string.Empty;
+            try
+            {
+                objUnidadesResp.Id = Id;      
+                objUnidadesResp.Id_Actividades = Id_Actividades;
+                objUnidadesResp.Id_Unidad = Id_Unidad;
+                objUnidadesResp.Contacto = Contacto;
+                objUnidadesResp.Telefono = Telefono;
+                objUnidadesResp.Correo = Correo;
+
+                Data.PlanTrabajo.GuardarDataContext.EditarUnidadesResp(objUnidadesResp, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
         public JsonResult EliminarUnidadResponsable(int Id)
         {         
             ResultadoUnidad objResultado = new ResultadoUnidad();

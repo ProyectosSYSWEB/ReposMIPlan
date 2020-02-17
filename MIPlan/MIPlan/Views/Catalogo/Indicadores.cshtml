@@ -71,8 +71,8 @@
                                                 </select>
                                             </div>
                                             <div class="row justify-content-center">
-                                                <span class="messages" ng-show="modalForm.$submitted || modalForm.cmdCategoria.$touched">
-                                                    <span ng-show="!ctrl.cve_cat" class="text-danger">Campo Requerido</span>
+                                                <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.cmdCategoria.$touched">
+                                                    <span ng-show="!ctrl.cve_cat" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                                 </span>
                                             </div>
                                             <br />
@@ -85,8 +85,8 @@
                                                 </select>
                                             </div>
                                             <div class="row justify-content-center">
-                                                <span class="messages" ng-show="modalForm.$submitted || modalForm.cmdSubtipo.$touched">
-                                                    <span ng-show="!ctrl.cve_sub" class="text-danger">Campo Requerido</span>
+                                                <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.cmdSubtipo.$touched">
+                                                    <span ng-show="!ctrl.cve_sub" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                                 </span>
                                             </div>
                                             <br />
@@ -97,8 +97,8 @@
                                                 <textarea id="txtDescripcion" class="form-control border border-success" name="txtDescripcion" type="text" ng-model="ctrl.cve_desc" required placeholder="Descripción"></textarea>
                                             </div>
                                             <div class="row justify-content-center">
-                                                <span class="messages" ng-show="modalForm.$submitted || modalForm.txtDescripcion.$touched">
-                                                    <span ng-show="!ctrl.cve_desc" class="text-danger">Campo Requerido</span>
+                                                <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.txtDescripcion.$touched">
+                                                    <span ng-show="!ctrl.cve_desc" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                                 </span>
                                             </div>
                                             <br />
@@ -148,8 +148,8 @@
                                                 </div>
                                             </div>
                                             <div class="row justify-content-center">
-                                                <span class="messages" ng-show="modalForm.$submitted || modalForm.btnseg.$touched">
-                                                    <span ng-show="!ctrl.cve_seg" class="text-danger">Campo Requerido</span>
+                                                <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.btnseg.$touched">
+                                                    <span ng-show="!ctrl.cve_seg" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                                 </span>
                                             </div>
                                             <br />
@@ -269,6 +269,7 @@
 <script src="~/Scripts/angular.min.js"></script>
 <script src="~/Scripts/angular.js"></script>
 <script src="~/Scripts/angular-pagination.js"></script>
+<script src="~/Scripts/angular-animate.js"></script>
 <script src="~/Scripts/global.js"></script>
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/IndicadoresController.js"></script>

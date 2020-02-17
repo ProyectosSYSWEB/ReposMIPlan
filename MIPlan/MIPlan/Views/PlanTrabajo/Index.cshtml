@@ -12,7 +12,7 @@
 <br />
 
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
-  
+
     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <!-- Modal Plan Maestro-->
     <div class="modal fade" data-keyboard="false" data-backdrop="static" id="ModalPlanMastro" tabindex="-1" role="dialog" aria-labelledby="ModalPlanMastro" aria-hidden="true">
@@ -129,7 +129,7 @@
                 <form name="modalFormActv" novalidate>
                     <div id="title" class="">
                         <h5 class="modal-title text-white" id="TituloACTV"></h5>
-                        <button type="button" class="close btn-danger" data-dismiss="modal" ng-click="ctrl.close(modalFormActv)" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" ng-click="ctrl.close(modalFormActv)" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -268,20 +268,20 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form name="modalFormUR" novalidate>
-                    <div id="titleUR" class="modal-header btn-success justify-content-center">
-                        <h5 class="modal-title" id="exampleModalLabelUR">Agregar Unidad Responsable</h5>
-                        <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close" ng-click="ctrl.close(modalFormUR)">
+                    <div id="title" class="modal-header btn-success justify-content-center">
+                        <h5 class="modal-title" id="TituloURM">Agregar Unidad Responsable</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="ctrl.close(modalFormUR)">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <!----------------------------------------------------------------->
                         <div class="row justify-content-center">
-                            <label for="" class="font-weight text-info">
-                                Cooordinación
+                            <label for="" id="lblURM" class="">
+                                Unidad Responsable
                             </label>
                         </div>
-                        <select class="form-control border border-primary" name="cmbDesc" ng-change="ctrl.ValorDesc()" ng-options="option.Id as option.Descripcion for option in ctrl.ObtenerComboUnidadesModalView" ng-model="ctrl.ObtenerDatosUnidadesModalView[0].Descripcion" style="max-width:100%;" required>
+                        <select id="SelectURM" class="" name="cmbDesc" ng-change="ctrl.ValorDesc()" ng-options="option.Id as option.Descripcion for option in ctrl.ObtenerComboUnidadesModalView" ng-model="ctrl.ObtenerDatosUnidadesModalView[0].Descripcion" style="max-width:100%;" required>
                             <option value="">Seleccionar Unidad Responsable</option>
                         </select>
                         <div class="row justify-content-center">
@@ -293,34 +293,33 @@
 
                         <div class="from-group">
                             <div class="row justify-content-center">
-                                <label for="" class="text-primary">Contacto</label>
+                                <label id="lblContacto"  for="" class="">Contacto</label>
                             </div>
-                            <input type="text" class="form-control border border-primary" name="Contacto" aria-label="Username" placeholder="Contacto" aria-describedby="addon-wrapping" ng-model="ctrl.ObtenerDatosUnidadesModalView[0].Contacto" required>
+                            <input type="text" id="inputContacto" class="" name="Contacto" aria-label="Username" placeholder="Contacto" aria-describedby="addon-wrapping" ng-model="ctrl.ObtenerDatosUnidadesModalView[0].Contacto" required>
                         </div>
-                        <div class="row justify-content-center">
+                        <div  class="row justify-content-center">
                             <span class="messages check-element animate-show-hide" ng-show="modalFormUR.$submitted || modalFormUR.Contacto.$touched">
                                 <span ng-show="!ctrl.ObtenerDatosUnidadesModalView[0].Contacto" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                             </span>
                         </div>
                         <!----------------------------------------------------------------->
                         <div class="from-group">
-                            <div class="row justify-content-center">
-                                <label for="" class="text-primary">Teléfono</label>
+                            <div  class="row justify-content-center">
+                                <label id="lblTelefono" for="" class="">Teléfono</label>
                             </div>
-                            <input type="number" class="form-control border border-primary" name="Telefono" aria-label="Telefono" placeholder="Teléfono" aria-describedby="addon-wrapping" maxlength="10" ng-model="ctrl.ObtenerDatosUnidadesModalView[0].Telefono" required>
+                            <input type="text" id="inputTelefono" class="" name="Telefono" aria-label="Telefono" placeholder="Teléfono" aria-describedby="addon-wrapping" ng-model="ctrl.ObtenerDatosUnidadesModalView[0].Telefono" required>
                         </div>
-                        <div class="row justify-content-center">
+                        <div  class="row justify-content-center">
                             <span class="messages check-element animate-show-hide" ng-show="modalFormUR.$submitted || modalFormUR.Telefono.$touched">
                                 <span ng-show="!ctrl.ObtenerDatosUnidadesModalView[0].Telefono" class="text-danger check-element animate-show-hide">Campo Requerido y Máximo 10 digitos</span>
                             </span>
                         </div>
                         <!----------------------------------------------------------------->
-                        <br />
                         <div class="row justify-content-center">
-                            <label for="" class="text-primary">Correo</label>
+                            <label for="" id="lblCorreo" class="">Correo</label>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control border border-primary" name="Correo" placeholder="Correo" aria-label="Recipient's username" aria-describedby="basic-addon2" ng-model="ctrl.ObtenerDatosUnidadesModalView[0].Correo" required>
+                            <input type="text" id="inputCorreo" class="" name="Correo" placeholder="Correo" aria-label="Recipient's username" aria-describedby="basic-addon2" ng-model="ctrl.ObtenerDatosUnidadesModalView[0].Correo" required>
                         </div>
                         <div class="row justify-content-center">
                             <span class="messages check-element animate-show-hide" ng-show="modalFormUR.$submitted || modalFormUR.Correo.$touched">
@@ -332,7 +331,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn btn-danger" ng-click="ctrl.close(modalFormUR)">Salir</button>
-                        <button type="button" id="btnModalUR" class="btn btn-success" ng-click="ctrl.SaveUR(); ctrl.reset(modalFormUR)" ng-disabled="modalFormUR.$invalid">Guardar</button>
+                        <button type="button" id="btnModalUR" class="btn btn-success" ng-click="ctrl.SaveUR(ctrl.ObtenerDatosUnidadesModalView[0].Id); ctrl.reset(modalFormUR)" ng-disabled="modalFormUR.$invalid">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -347,7 +346,7 @@
                 <form name="modalFormAA" novalidate>
                     <div id="titleUR" class="modal-header btn-success justify-content-center">
                         <h5 class="modal-title" id="exampleModalLabelUR">Agregar Área de Atención</h5>
-                        <button type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close" ng-click="ctrl.close(modalFormAA)">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="ctrl.close(modalFormAA)">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -402,15 +401,12 @@
     <div class="container">
 
 
-        <div id="Error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
+        <div id="Error" class="alert alert-danger alert-dismissible fade show"  role="alert" style="display:none">
             <strong id="Message">¡Ha ocurrido un error! </strong>
             <button type="button" class="close" ng-click="ctrl.DivError()" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-
-
-
 
         <div class="row justify-content-center">
 
@@ -492,6 +488,7 @@
 
 
                         <tbody ng-pagination="i in ctrl.GridAreasAtencionView |  itemsPerPage: 10 " pagination-id="PaginationGridAR">
+
                             <tr id="tes" ng-class="{'Mybg text-white': A == ctrl.Descripcion}">
                                 <td ng-click="ctrl.Meta(i.Id, i.Descripcion); A= ctrl.Descripcion" class="cursor-pointer AAT"> {{i.Id}}.- {{i.Descripcion}} </td>
                                 <td> 0</td>
@@ -520,6 +517,7 @@
                             </tr>
                         </tfoot>
                     </table>
+
                     <div class="mb-5 alert alert-danger text-center check-element animate-show-hide" id="AAAlert" ng-show="ctrl.NoPlan" role="alert">
                         {{ctrl.NoPlan}}
                     </div>
@@ -553,7 +551,7 @@
                         <br />
                         <div class="panel panel-default panel-table">
                             <div class="panel-heading">
-                                <div class="container">
+                                <div class="container-fluid">
                                     <div class="row">
                                         <div class="col text-left">
                                             <h6>Ubicación:  <span class="badge badge-secondary">{{ctrl.Descripcion}}</span></h6>
@@ -584,10 +582,10 @@
 
                                     <tbody ng-pagination="pro in ctrl.GridProgramas | itemsPerPage: 10 " pagination-id="PaginationGridActividades">
 
-                                        <tr class="breakrow bgAct text-white cursor-pointer" >
+                                        <tr class="breakrow bgAct text-white cursor-pointer">
                                             <td colspan="2"><i class="fa fa-plus-circle"></i></td>
                                             <td colspan="8">{{pro.Desc_Programa}}</td>
-                                        </tr>                                     
+                                        </tr>
                                         <tr class="datarow cursor-pointer" style="display:none" ng-repeat="i in ctrl.GridActividadesView" ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'MybgUR text-white': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === i.Desc_Programa">
                                             <td></td>
                                             <td><font size="2">{{i.Desc_Accion}}</font></td>
@@ -624,13 +622,13 @@
                         <br />
                         <div class="panel panel-default panel-table">
                             <div class="panel-heading">
-                                <div class="container">
+                                <div class="container-fluid">
                                     <div class="row">
                                         <div class="col text-left">
                                             <h6>Ubicación:  <span class="badge badge-secondary">{{ctrl.Descripcion}}  /  {{ctrl.DescActividad}}</span></h6>
                                         </div>
                                         <div class="col text-right">
-                                            <button type="button" class="btn btn-sm btn-success btn-create" style="width:120px" data-toggle="modal" data-target="#ModalAddUR" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Agregar" ng-click="ctrl.GridUR()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Unidad</button>
+                                            <button type="button" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#ModalAddUR" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Agregar" ng-click="ctrl.GridUR()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Unidad</button>
                                         </div>
                                     </div>
                                 </div>
@@ -662,7 +660,7 @@
                                             <td>{{i.Telefono}}</td>
                                             <td>{{i.Correo}}</td>
                                             <td colspan="3">
-                                                <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalUnidadesResp" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Editar" ng-click="ctrl.ModalUR(i.Id)">
+                                                <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalAddUR" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Editar" ng-click="ctrl.UpdateResp(i.Id)">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                                 </button>
 
@@ -731,12 +729,12 @@
     $('#fechaPlan').datetimepicker({
         timepicker: false,
         format: 'd/m/Y'
-    });
-
-    $(document).ready(function () {
-
+    });  
+    
+    $(document).ready(function () {      
+        $('.datepicker').pickadate();
         $('#tableMain').on('click', 'tr.breakrow', function () {
-            $(this).nextUntil('tr.breakrow').toggle("slow");
+            $(this).nextUntil('tr.breakrow').slideToggle(100);
         });
       
         $("#tableAA").on('click', 'td.AAT', function () {        

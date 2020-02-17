@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/Content/estilosMenu.css" rel="stylesheet" />
-    <link href="~/Content/Animate.css" rel="stylesheet" />  
+    <link href="~/Content/Animate.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -22,8 +22,10 @@
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-
+    <link rel="stylesheet" type="text/css" href="~/Content/mdb.css">
+ 
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
 
     <title>@ViewBag.Title </title>
     @Styles.Render("~/Content/css")
@@ -87,6 +89,7 @@
             <img style="width:100%" src="~/Imagenes/MiPlan pie.png" />
         </div>
     </div>
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
@@ -97,5 +100,6 @@
         <script src="~/Scripts/Controllers/AccesoController.js"></script>
         <script src="~/Scripts/Models/AccesoModel.js"></script>*@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="~/Scripts/mdb.js"></script>
 </body>
 </html>
