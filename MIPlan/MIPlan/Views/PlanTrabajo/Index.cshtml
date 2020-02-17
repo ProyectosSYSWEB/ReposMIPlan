@@ -293,23 +293,23 @@
 
                         <div class="from-group">
                             <div class="row justify-content-center">
-                                <label id="lblContacto"  for="" class="">Contacto</label>
+                                <label id="lblContacto" for="" class="">Contacto</label>
                             </div>
                             <input type="text" id="inputContacto" class="" name="Contacto" aria-label="Username" placeholder="Contacto" aria-describedby="addon-wrapping" ng-model="ctrl.ObtenerDatosUnidadesModalView[0].Contacto" required>
                         </div>
-                        <div  class="row justify-content-center">
+                        <div class="row justify-content-center">
                             <span class="messages check-element animate-show-hide" ng-show="modalFormUR.$submitted || modalFormUR.Contacto.$touched">
                                 <span ng-show="!ctrl.ObtenerDatosUnidadesModalView[0].Contacto" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                             </span>
                         </div>
                         <!----------------------------------------------------------------->
                         <div class="from-group">
-                            <div  class="row justify-content-center">
+                            <div class="row justify-content-center">
                                 <label id="lblTelefono" for="" class="">Teléfono</label>
                             </div>
                             <input type="text" id="inputTelefono" class="" name="Telefono" aria-label="Telefono" placeholder="Teléfono" aria-describedby="addon-wrapping" ng-model="ctrl.ObtenerDatosUnidadesModalView[0].Telefono" required>
                         </div>
-                        <div  class="row justify-content-center">
+                        <div class="row justify-content-center">
                             <span class="messages check-element animate-show-hide" ng-show="modalFormUR.$submitted || modalFormUR.Telefono.$touched">
                                 <span ng-show="!ctrl.ObtenerDatosUnidadesModalView[0].Telefono" class="text-danger check-element animate-show-hide">Campo Requerido y Máximo 10 digitos</span>
                             </span>
@@ -401,7 +401,7 @@
     <div class="container">
 
 
-        <div id="Error" class="alert alert-danger alert-dismissible fade show"  role="alert" style="display:none">
+        <div id="Error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
             <strong id="Message">¡Ha ocurrido un error! </strong>
             <button type="button" class="close" ng-click="ctrl.DivError()" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -413,7 +413,7 @@
             <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                 <div class="form-group">
                     <label for="lblBuscar" class="text-primary">&nbsp;</label>
-                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#ModalPlanMastro" style="max-width:100%;" ng-click="ctrl.PlanMaestroModal();">
+                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#ModalPlanMastro" title="Crear Nuevo Plan" style="max-width:100%;" ng-click="ctrl.PlanMaestroModal();">
                         Crear Plan
                     </button>
                 </div>
@@ -454,7 +454,7 @@
             <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                 <div class="form-group">
                     <label for="lblBuscar" class="text-primary">&nbsp;</label>
-                    <button class="btn btn-info btn-block" ng-click="ctrl.BtnBuscar()">Buscar</button>
+                    <button class="btn btn-info btn-block" id="Search" title="Buscar Plan" ng-click="ctrl.BtnBuscar()">Buscar</button>
                 </div>
             </div>
         </div>
@@ -471,7 +471,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col text-right">
-                                <button id="btnCrear" class="btn btn-sm btn-success btn-create" style="width:120px" ng-click="ctrl.ModalAreasDeAtencion()" data-toggle="modal" data-target="#ModalAreasDeAtencion" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Agregar"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                                <button id="btnCrear" class="btn btn-sm btn-success btn-create" style="width:120px" ng-click="ctrl.ModalAreasDeAtencion()" data-toggle="modal" data-target="#ModalAreasDeAtencion" data-backdrop="static" data-keyboard="false" title="Agregar Area de Atención"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
                             </div>
                         </div>
                     </div>
@@ -494,7 +494,10 @@
                                 <td> 0</td>
 
                                 <td style="text-align:center">
-                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.DeleteAA(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+                                    <div >
+                                        <button type="button" class="btn btn-danger" title="Eliminar" ng-click="ctrl.DeleteAA(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+                                    </div>
+                                    
                                 </td>
                             </tr>
                         </tbody>
@@ -505,12 +508,12 @@
 
                                 </th>
                                 <th>
-                                    <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:40px">
+                                    <button type="button" class="btn btn-success"  data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:40px">
                                         <i class="fa fa-file-excel-o" aria-hidden="true"></i>
                                     </button>
                                 </th>
                                 <th>
-                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Generar Reporte en PDF" ng-click="ctrl.BorrarImpViatico($index)" style="width:40px">
+                                    <button type="button" class="btn btn-danger"  data-placement="top" title="Generar Reporte en PDF" ng-click="ctrl.BorrarImpViatico($index)" style="width:40px">
                                         <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                     </button>
                                 </th>
@@ -557,7 +560,7 @@
                                             <h6>Ubicación:  <span class="badge badge-secondary">{{ctrl.Descripcion}}</span></h6>
                                         </div>
                                         <div class="col text-right">
-                                            <button type="button" id="btnCrear" class="btn btn-sm btn-success btn-create" style="width:120px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Crear" ng-click="ctrl.ColorATCV()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                                            <button type="button" id="btnCrear" class="btn btn-sm btn-success btn-create" style="width:120px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" title="Crear Actividad" ng-click="ctrl.ColorATCV()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
                                         </div>
                                     </div>
                                 </div>
@@ -595,11 +598,11 @@
                                             <td><font size="2">{{i.Prioritaria}}</font></td>
                                             <td><font size="2">{{i.Status}}</font></td>
                                             <td colspan="3">
-                                                <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Editar" ng-click="ctrl.ModalACTV(i.Id)">
+                                                <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" title="Editar" ng-click="ctrl.ModalACTV(i.Id)">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                                 </button>
 
-                                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminnarA(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+                                                <button type="button" class="btn btn-danger"  title="Eliminar" ng-click="ctrl.EliminnarA(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -628,7 +631,7 @@
                                             <h6>Ubicación:  <span class="badge badge-secondary">{{ctrl.Descripcion}}  /  {{ctrl.DescActividad}}</span></h6>
                                         </div>
                                         <div class="col text-right">
-                                            <button type="button" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#ModalAddUR" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Agregar" ng-click="ctrl.GridUR()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Unidad</button>
+                                            <button type="button" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#ModalAddUR" data-backdrop="static" data-keyboard="false" title="Agregar Responsable" ng-click="ctrl.GridUR()">Agregar Unidad</button>
                                         </div>
                                     </div>
                                 </div>
@@ -660,11 +663,11 @@
                                             <td>{{i.Telefono}}</td>
                                             <td>{{i.Correo}}</td>
                                             <td colspan="3">
-                                                <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalAddUR" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-html="true" title="Editar" ng-click="ctrl.UpdateResp(i.Id)">
+                                                <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalAddUR" data-backdrop="static" data-keyboard="false"  title="Editar" ng-click="ctrl.UpdateResp(i.Id)">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                                 </button>
 
-                                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-html="true" title="Eliminar" ng-click="ctrl.EliminarUR(i.Id)" style="width:40px">
+                                                <button type="button" class="btn btn-danger" title="Eliminar" ng-click="ctrl.EliminarUR(i.Id)" style="width:40px">
                                                     <i class="fa fa-eraser" aria-hidden="true"></i>
                                                 </button>
                                             </td>
@@ -730,9 +733,11 @@
         timepicker: false,
         format: 'd/m/Y'
     });  
-    
-    $(document).ready(function () {      
-        $('.datepicker').pickadate();
+      
+    $(document).ready(function () {     
+
+        $('button').tooltip();               
+        
         $('#tableMain').on('click', 'tr.breakrow', function () {
             $(this).nextUntil('tr.breakrow').slideToggle(100);
         });

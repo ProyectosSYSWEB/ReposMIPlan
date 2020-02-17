@@ -99,6 +99,7 @@
                         break;
                 }
                 $scope.$apply();
+                $('button').tooltip();
             });
         };
 

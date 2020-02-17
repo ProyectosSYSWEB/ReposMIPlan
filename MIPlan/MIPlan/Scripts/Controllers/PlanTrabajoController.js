@@ -100,6 +100,7 @@
                 switch (resp.ressult) {
                     case "tgp":                               
                         self.GridAreasAtencionView = catalogoContext.GridAreasAtencionLST;
+                        
                         self.Descripcion = "";      
                         if (self.GridAreasAtencionView.length == 0) {
                             document.getElementById("AAAlert").style.display = "block";                      
@@ -118,6 +119,7 @@
                         break;
                 }
                 $scope.$apply();
+                $('button').tooltip();     
             });
         };
     /********************************************************************************************************************************************************/
@@ -289,6 +291,7 @@
                         break;
                 }
                 $scope.$apply();
+                $('button').tooltip();
             });
         };             
         /********************************************************************************************************************************************************/
@@ -444,8 +447,7 @@
                 switch (resp.ressult) {
                     case "tgp":
 
-                        self.GridUnidadesRespView = catalogoContext.GridUnidadesRespLST;
-                        console.log("Controller",self.GridUnidadesRespView);
+                        self.GridUnidadesRespView = catalogoContext.GridUnidadesRespLST;                      
                         if (self.GridUnidadesRespView.length == 0) {
                             document.getElementById("URAlert").style.display = "block";     
                             self.NoUR = "¡No Existen registros para esta Actividad!";
@@ -463,6 +465,7 @@
                         break;
                 }
                 $scope.$apply();
+                $('button').tooltip();
             });
         };        
         /********************************************************************************************************************************************************/

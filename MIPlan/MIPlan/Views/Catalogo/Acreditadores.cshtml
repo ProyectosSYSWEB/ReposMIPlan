@@ -230,7 +230,7 @@
                                 <span ng-class="sortType == 'Observaciones' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Observaciones' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
-                       
+
 
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
@@ -246,7 +246,7 @@
                         <td>{{i.Status}}</td>
                         <td><font size="2">{{i.Observaciones}}</font></td>
 
-                      
+
                         <td style="text-align:right">
                             <button type="button" id="Actualizar" class="btn btn-primary" title="Editar" data-placement="top" data-toggle="modal" data-target="#acreditadores" data-backdrop="static" data-keyboard="false" data-html="true" ng-click="ctrl.ObtenerDatos(i.Id)" style="width:50px">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -309,17 +309,13 @@
         format: 'd/m/Y'
     });
 
-</script>
+     $(document).ready(function () {
 
-<script>
-    $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip();
+        $('button').tooltip();
+
     });
+
 </script>
-
-
-
-
 
 
 

@@ -443,8 +443,7 @@ var catalogoContext =
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
                             self.GridUnidadesRespLST.push({ Id: resp.Resultado[i].Id, Id_Actividad: resp.Resultado[i].Id_Actividades, Descripcion: resp.Resultado[i].Descripcion, Contacto: resp.Resultado[i].Contacto, Telefono: resp.Resultado[i].Telefono, Correo: resp.Resultado[i].Correo });                            
-                        }
-                        console.log("Model",self.GridUnidadesRespLST);
+                        }                      
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
                         }
