@@ -239,7 +239,7 @@ namespace MIPlan.Data.PlanTrabajo
             }
 
         }
-        public static List<UnidadesResponsables> ObtenerGridUnidadesModal(string usuario, string dependencia, ref string Verificador)
+        public static List<UnidadesResponsables> ObtenerComboUnidadesModal(string usuario, string dependencia, ref string Verificador)
         {
             //s
             OracleCommand cmd = null;
@@ -282,7 +282,7 @@ namespace MIPlan.Data.PlanTrabajo
             }
 
         }
-        public static List<PlanUnidadesResponsables> ObtenerGridUnidadesResp(int idActividad, string Usuario)
+        public static List<ResponsableModel> ObtenerGridUnidadesResp(int idActividad, string Usuario)
         {
             //s
             OracleCommand cmd = null;
@@ -296,14 +296,18 @@ namespace MIPlan.Data.PlanTrabajo
 
                 OracleDataReader dr = null;
                 cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Unidades_Resp", ref dr, Parametros, Valores);
-                List<PlanUnidadesResponsables> list = new List<PlanUnidadesResponsables>();
+                List<ResponsableModel> list = new List<ResponsableModel>();
                 while (dr.Read())
                 {
-                    PlanUnidadesResponsables objUnidadResp = new PlanUnidadesResponsables();
+                    ResponsableModel objUnidadResp = new ResponsableModel();
                     objUnidadResp.Id = Convert.ToInt32(dr[0]);
-                    objUnidadResp.Id_Actividad = Convert.ToInt32(dr[1]);
+                    objUnidadResp.Id_Actividades = Convert.ToInt32(dr[1]);                    
                     objUnidadResp.Descripcion = Convert.ToString(dr[2]);
                     objUnidadResp.Contacto = Convert.ToString(dr[3]);
+                    objUnidadResp.Telefono = Convert.ToString(dr[4]);
+                    objUnidadResp.Correo = Convert.ToString(dr[5]);
+
+
 
                     list.Add(objUnidadResp);
                 }

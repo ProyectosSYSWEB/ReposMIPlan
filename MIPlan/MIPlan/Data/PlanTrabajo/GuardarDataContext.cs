@@ -9,6 +9,32 @@ namespace MIPlan.Data.PlanTrabajo
 {
     public class GuardarDataContext
     {
+
+        public static void GuardarPlan(PlanModel Plan, ref string Verificador)
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+            try
+            {
+                OracleDataReader dr = null;
+                string[] Parametros = { "P_ID_COORDINACION", "P_STATUS", "P_EJERCICIO", "P_DEPENDENCIA", "P_DESCRIPCION", "P_FECHA", "P_USUARIO" };
+                object[] Valores = { Plan.Id_Coordinacion, Plan.Status, Plan.Ejercicio,Plan.Dependencia, Plan.Descripcion, Plan.Fecha, Plan.Usuario };
+                string[] ParametrosOut = { "P_BANDERA" };
+                cmd = exeProc.GenerarOracleCommand("INS_PLA_PLAN", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+        }
+
+
+
+
         public static void GuardarAreasAtencion(int Id_Plan, int Id_Area_Atencion, ref string Verificador)
         {
             OracleCommand cmd = null;
@@ -116,16 +142,15 @@ namespace MIPlan.Data.PlanTrabajo
             }
         }
 
-
         public static void GuardarUnidadesResp(ResponsableModel objUnidadesResp, ref string Verificador)
-        {                   
+        {
             OracleCommand cmd = null;
             ExeProcedimiento exeProc = new ExeProcedimiento();
             try
             {
                 OracleDataReader dr = null;
-                string[] Parametros = { "P_ID_ACTIVIDAD", "P_ID_UNIDAD" };
-                object[] Valores = { objUnidadesResp.Id_Actividades, objUnidadesResp.Id_Unidad };
+                string[] Parametros = { "P_ID_ACTIVIDAD", "P_ID_UNIDAD", "P_CONTACTO", "P_TELEFONO", "P_CORREO" };
+                object[] Valores = { objUnidadesResp.Id_Actividades, objUnidadesResp.Id_Unidad, objUnidadesResp.Contacto, objUnidadesResp.Telefono, objUnidadesResp.Correo };
                 string[] ParametrosOut = { "P_BANDERA" };
                 cmd = exeProc.GenerarOracleCommand("INS_PLA_PLAN_RESPONSABLES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
             }
@@ -137,18 +162,18 @@ namespace MIPlan.Data.PlanTrabajo
             {
                 exeProc.LimpiarOracleCommand(ref cmd);
             }
-        }
-        public static void EditarUnidadesResp(UnidadesResponsables objUnidadesResp, ref string Verificador)
+        }  
+        public static void EditarUnidadesResp(ResponsableModel objUnidadesResp, ref string Verificador)
         {
             OracleCommand cmd = null;
             ExeProcedimiento exeProc = new ExeProcedimiento();
             try
             {
                 OracleDataReader dr = null;
-                string[] Parametros = { "P_ID", "P_DEPENDENCIA", "P_CLAVE", "P_DESCRIPCION", "P_STATUS", "P_COORDINADOR"};
-                object[] Valores = { objUnidadesResp.Id, objUnidadesResp.Dependencia, objUnidadesResp.Clave, objUnidadesResp.Descripcion, objUnidadesResp.Status, objUnidadesResp.Coordinador};
+                string[] Parametros = { "P_ID", "P_ID_ACTIVIDAD", "P_ID_UNIDAD", "P_CONTACTO", "P_TELEFONO", "P_CORREO" };
+                object[] Valores = { objUnidadesResp.Id, objUnidadesResp.Id_Actividades, objUnidadesResp.Id_Unidad, objUnidadesResp.Contacto, objUnidadesResp.Telefono, objUnidadesResp.Correo };
                 string[] ParametrosOut = { "P_BANDERA" };
-                cmd = exeProc.GenerarOracleCommand("UPD_PLA_UNIDAES_RESP", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+                cmd = exeProc.GenerarOracleCommand("UPD_PLA_PLAN_RESPONSABLES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
             }
             catch (Exception ex)
             {
@@ -158,7 +183,8 @@ namespace MIPlan.Data.PlanTrabajo
             {
                 exeProc.LimpiarOracleCommand(ref cmd);
             }
-        }    
+        }
+
         public static void EliminarUnidadesResp(int Id, ref string Verificador)
         {
             OracleCommand cmd = null;

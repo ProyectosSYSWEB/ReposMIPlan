@@ -1,5 +1,5 @@
 ﻿(function () {
-    var app = angular.module('MIPlanWeb', ['ngPagination']);
+    var app = angular.module('MIPlanWeb', ['ngPagination', 'ngAnimate']);
     /********************************************************************************************************************************************************/
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
         var self = this;
@@ -73,7 +73,7 @@
                     default:
                         break;
                 }
-                $scope.$apply();
+                $scope.$apply();          
             });
         };
 /********************************************************************************************************************************************************/

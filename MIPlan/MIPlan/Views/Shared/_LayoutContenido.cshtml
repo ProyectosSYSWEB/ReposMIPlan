@@ -5,6 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/Content/estilosMenu.css" rel="stylesheet" />
+    <link href="~/Content/Animate.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -20,8 +22,11 @@
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/mdb.css">
 
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+ 
 
     <title>@ViewBag.Title </title>
     @Styles.Render("~/Content/css")
@@ -37,17 +42,17 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div  class="collapse navbar-collapse barraMenu container-fluid" id="navbarSupportedContent" ng-controller="MIPlanAccesoController as mnu">
+            <div class="collapse navbar-collapse barraMenu container-fluid" id="navbarSupportedContent" ng-controller="MIPlanAccesoController as mnu">
                 <form class="form-inline my-2 my-lg-0 ubicacion" ng-init="mnu.cargarMenu()">
 
                     <ul class="nav menu" ng-repeat="menu in mnu.SiteMenu">
                         <li class="{{menu.Clase}}">
-                            <a class="{{menu.Clase2}}" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="color:white">{{menu.NOMBRE}}</a>                            
-                                <ul class="dropdown-menu">
-                                    <li  ng-repeat="item in menu.SubMenu">
-                                        <a class="dropdown-item" href="{{item.CONTROL_NOMBRE}}">{{item.NOMBRE}}</a>
-                                    </li>
-                                </ul>
+                            <a class="{{menu.Clase2}}" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="color:white">{{menu.NOMBRE}}</a>
+                            <ul class="dropdown-menu">
+                                <li ng-repeat="item in menu.SubMenu">
+                                    <a class="dropdown-item" href="{{item.CONTROL_NOMBRE}}">{{item.NOMBRE}}</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </form>
@@ -62,15 +67,15 @@
                                 <div style="width: 18rem;">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">Usuario: {{mnu.Usuario}}</li>
-                                        <li class="list-group-item">Correo: {{mnu.Correo}}</li>                                        
+                                        <li class="list-group-item">Correo: {{mnu.Correo}}</li>
                                     </ul>
-                                    <div class="card-body">                                        
+                                    <div class="card-body">
                                         <a href="#" class="card-link" ng-click="mnu.cerrarSesion()">Cerrar Sesión</a>
                                     </div>
                                 </div>
                                 @*<a class="dropdown-item" style="color:black" href="#">Usuario: {{mnu.Usuario}}</a>
-        <a class="dropdown-item" style="color:black" href="#">Correo: {{mnu.Correo}}</a>
-        <a class="dropdown-item">Cerrar Sesión</a>*@
+                                    <a class="dropdown-item" style="color:black" href="#">Correo: {{mnu.Correo}}</a>
+                                    <a class="dropdown-item">Cerrar Sesión</a>*@
                             </div>
                         </li>
                     </ul>
@@ -85,14 +90,17 @@
             <img style="width:100%" src="~/Imagenes/MiPlan pie.png" />
         </div>
     </div>
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     @*<script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
-        <script src="~/Scripts/angular.min.js"></script>
-        <script src="~/Scripts/global.js"></script>
-        <script src="~/Scripts/checklist-model.js"></script>    
-    <script src="~/Scripts/Controllers/AccesoController.js"></script>
-    <script src="~/Scripts/Models/AccesoModel.js"></script>*@
+            <script src="~/Scripts/angular.min.js"></script>
+            <script src="~/Scripts/global.js"></script>
+            <script src="~/Scripts/checklist-model.js"></script>
+        <script src="~/Scripts/Controllers/AccesoController.js"></script>
+        <script src="~/Scripts/Models/AccesoModel.js"></script>*@
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="~/Scripts/mdb.js"></script>
 </body>
 </html>

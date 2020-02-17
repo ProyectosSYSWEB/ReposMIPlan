@@ -29,7 +29,7 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblSubtipo" class="text-info">Subtipo:</label>
-                    <select class="form-control border border-info" name="cmbsubtipo" ng-change="ctrl.SubtipoFun()" ng-options="option.Id as option.Descripcion for option in ctrl.subtipo" ng-model="ctrl.Subtipo.Subtipo" style="max-width:100%;">
+                    <select class="form-control border border-info" name="cmbsubtipo" ng-change="ctrl.SubtipoFun()" ng-options="option.Id as option.Descripcion for option in ctrl.subtipo" ng-model="ctrl.SubtipoBusqueda" style="max-width:100%;">
                         <option value="">--Seleccionar Subtipo--</option>
                     </select>
                 </div>
@@ -71,8 +71,8 @@
                                                 </select>
                                             </div>
                                             <div class="row justify-content-center">
-                                                <span class="messages" ng-show="modalForm.$submitted || modalForm.cmdCategoria.$touched">
-                                                    <span ng-show="!ctrl.cve_cat" class="text-danger">Campo Requerido</span>
+                                                <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.cmdCategoria.$touched">
+                                                    <span ng-show="!ctrl.cve_cat" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                                 </span>
                                             </div>
                                             <br />
@@ -85,8 +85,8 @@
                                                 </select>
                                             </div>
                                             <div class="row justify-content-center">
-                                                <span class="messages" ng-show="modalForm.$submitted || modalForm.cmdSubtipo.$touched">
-                                                    <span ng-show="!ctrl.cve_sub" class="text-danger">Campo Requerido</span>
+                                                <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.cmdSubtipo.$touched">
+                                                    <span ng-show="!ctrl.cve_sub" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                                 </span>
                                             </div>
                                             <br />
@@ -97,8 +97,8 @@
                                                 <textarea id="txtDescripcion" class="form-control border border-success" name="txtDescripcion" type="text" ng-model="ctrl.cve_desc" required placeholder="Descripción"></textarea>
                                             </div>
                                             <div class="row justify-content-center">
-                                                <span class="messages" ng-show="modalForm.$submitted || modalForm.txtDescripcion.$touched">
-                                                    <span ng-show="!ctrl.cve_desc" class="text-danger">Campo Requerido</span>
+                                                <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.txtDescripcion.$touched">
+                                                    <span ng-show="!ctrl.cve_desc" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                                 </span>
                                             </div>
                                             <br />
@@ -148,8 +148,8 @@
                                                 </div>
                                             </div>
                                             <div class="row justify-content-center">
-                                                <span class="messages" ng-show="modalForm.$submitted || modalForm.btnseg.$touched">
-                                                    <span ng-show="!ctrl.cve_seg" class="text-danger">Campo Requerido</span>
+                                                <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.btnseg.$touched">
+                                                    <span ng-show="!ctrl.cve_seg" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                                 </span>
                                             </div>
                                             <br />
@@ -223,7 +223,7 @@
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody ng-pagination="i in ctrl.indicadores |  filter:ctrl.buscar | filter:ctrl.Subtipo.Subtipo | itemsPerPage: 5">
+                <tbody ng-pagination="i in ctrl.indicadores |  filter:ctrl.buscar | filter:ctrl.SubtipoBusqueda | itemsPerPage: 5">
                     <tr>
                         <td><font size="2">{{i.Cat}}</font></td>
                         <td><font size="2">{{i.Sub}}</font></td>
@@ -269,6 +269,7 @@
 <script src="~/Scripts/angular.min.js"></script>
 <script src="~/Scripts/angular.js"></script>
 <script src="~/Scripts/angular-pagination.js"></script>
+<script src="~/Scripts/angular-animate.js"></script>
 <script src="~/Scripts/global.js"></script>
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/IndicadoresController.js"></script>
@@ -276,4 +277,14 @@
 <script src="~/Scripts/Controllers/AccesoController.js"></script>
 <script src="~/Scripts/Models/AccesoModel.js"></script>
 
+
+
+<!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('button').tooltip();
+
+    });
+</script>
 

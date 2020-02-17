@@ -1,15 +1,14 @@
 ﻿
 (function () {
-    var app = angular.module('MIPlanWeb', ['ngPagination']);
+    var app = angular.module('MIPlanWeb', ['ngPagination', 'ngAnimate']);
     /********************************************************************************************************************************************************/
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
 
         var self = this;
         self.buscar = '';
 
-
         this.Inicio = function () {
-            CargarCombos();                       
+            CargarCombos();    
         };
 
         var CargarCombos = function () {
@@ -18,6 +17,9 @@
             CargarComboEjercicios();
             CargarComboPlanes();
         };
+        this.PlanMaestroModal = function () {
+            self.EStatus = "A";
+        }
 
         /********************************************************************************************************************************************************/
         var ObtenerDependencias = function () {
@@ -96,10 +98,17 @@
         var GridAreasAtencion = function () {
             catalogoContext.GridAreasAtencion(self.buscarPlan, function (resp) {
                 switch (resp.ressult) {
-                    case "tgp":                        
+                    case "tgp":                               
                         self.GridAreasAtencionView = catalogoContext.GridAreasAtencionLST;
-                        self.Descripcion = "";
-                        console.log(self.GridAreasAtencionView );
+                        
+                        self.Descripcion = "";      
+                        if (self.GridAreasAtencionView.length == 0) {
+                            document.getElementById("AAAlert").style.display = "block";                      
+                            self.NoPlan = "¡No Existen registros para el Plan Seleccionado!";
+                        } else {
+                            document.getElementById("AAAlert").style.display = "none";
+                            self.NoPlan = "";
+                        }
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -110,7 +119,44 @@
                         break;
                 }
                 $scope.$apply();
+                $('button').tooltip();     
             });
+        };
+    /********************************************************************************************************************************************************/
+        this.SavePlan = function () {  
+            GuardarPlan();
+        }
+    
+        var GuardarPlan = function () {
+            catalogoContext.GuardarPlan(
+                self.ObtenerDatosPlanView[0].Id_Coordinacion,
+                self.EStatus,
+                self.ObtenerDatosPlanView[0].Ejercicio,
+                self.ObtenerDatosPlanView[0].Dependencia,                
+                self.ObtenerDatosPlanView[0].Descripcion,
+                self.ObtenerDatosPlanView[0].Fecha,
+                function (resp) {
+                    switch (resp.ressult) {
+                        case "tgp":
+                            Swal.fire(
+                                '¡Listo!',
+                                '¡Se han guardado los datos correctamente!',
+                                'success'
+                            )
+                            self.ObtenerDatosPlanView = null;
+                            self.EStatus = null;
+                            CargarComboPlanes();
+                            break;
+                        case "notgp":
+                            self.mensaje_gral = resp.message;
+                            document.getElementById("Error").style.display = "block";
+                            document.getElementById("Message").innerHTML = self.mensaje_gral + " GuardarActividades";
+                            break;
+                        default:
+                            break;
+                    }
+                    $scope.$apply();
+                });
         };
         /********************************************************************************************************************************************************/
         this.ModalAreasDeAtencion = function () {
@@ -150,7 +196,11 @@
                     switch (resp.ressult) {
                         case "tgp":
                             GridAreasAtencion();
-                            alert("¡Se han Guardado los datos correctamente!");
+                            Swal.fire(
+                                '¡Listo!',
+                                '¡Se han guardado los datos correctamente!',
+                                'success'
+                            )
                             break;
                         case "notgp":
                             self.mensaje_gral = resp.message;
@@ -164,18 +214,33 @@
                 });
 
         };
+
+
         /********************************************************************************************************************************************************/
         this.DeleteAA = function (Id) {            
-            var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
-            if (opcion == true) {
-                EliminarAreasAtencion(Id);
-                alert("¡Se ha eliminado con exito!");
-                GridAreasAtencion();
-
-            } else {
-                alert("No se ha eliminado el registro");
-            }
+            Swal.fire({
+                title: '¿Seguro que Desea Eliminar el Resgistro?',
+                text: "Se Eliminara Permanentemente",
+                icon: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'No, Cancelar',
+                confirmButtonText: 'Si, Quiero Eliminarlo'
+            }).then((result) => {
+                if (result.value) {
+                    EliminarAreasAtencion(Id);
+                    
+                    Swal.fire(
+                        '¡Eliminado!',
+                        'Se ha eliminado con exito.',
+                        'success'
+                    );
+                    GridAreasAtencion();
+                }
+            })
         };        
+       
         var EliminarAreasAtencion = function (Id) {
             catalogoContext.EliminarAreasAtencion(Id, function (resp) {
                 switch (resp.ressult) {
@@ -207,12 +272,15 @@
                         });  
                        
                         if (self.GridActividadesView.length == 0) {
+                            document.getElementById("ACTAlert").style.display = "block";     
                             self.NoActv = "¡No Existen registros para esta área de atención!";
                         } else {
+                            document.getElementById("ACTAlert").style.display = "none";
                             self.NoActv = "";
                         }
 
                         self.DescActividad = "";
+                        self.itemDetails = "";
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -223,6 +291,7 @@
                         break;
                 }
                 $scope.$apply();
+                $('button').tooltip();
             });
         };             
         /********************************************************************************************************************************************************/
@@ -277,8 +346,12 @@
                 self.ObtenerDatosActividadesView[0].Id_Programa,
                 self.Prioritaria, function (resp) {
                     switch (resp.ressult) {
-                        case "tgp":
-                            alert("¡Se han guardado los datos correctamente!");
+                        case "tgp":                           
+                            Swal.fire(
+                                '¡Listo!',
+                                '¡Se han guardado los datos correctamente!',
+                                'success'
+                            )
                             self.ObtenerDatosActividadesView = null;
                             GridActividades(self.IDMETA);
                             break;
@@ -306,8 +379,12 @@
                 self.ObtenerDatosActividadesView[0].Clave,
                 self.EStatus, function (resp) {
                     switch (resp.ressult) {
-                        case "tgp":
-                            alert("¡Se han actualizado los datos correctamente!");
+                        case "tgp":                            
+                            Swal.fire(
+                                '¡Listo!',
+                                '¡Se han actualizado los datos correctamente!',
+                                'success'
+                            )
                             self.ObtenerDatosActividadesView = null;
                             break;
                         case "notgp":
@@ -322,6 +399,30 @@
                 });
         };
         /********************************************************************************************************************************************************/
+        this.EliminnarA = function (Indice) {
+            Swal.fire({
+                title: '¿Seguro que Desea Eliminar el Resgistro?',
+                text: "Se Eliminara Permanentemente",
+                icon: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'No, Cancelar',
+                confirmButtonText: 'Si, Quiero Eliminarlo'
+            }).then((result) => {
+                if (result.value) {
+                    EliminarActividad(Indice);
+
+                    Swal.fire(
+                        '¡Eliminado!',
+                        'Se ha eliminado con exito.',
+                        'success'
+                    );
+                    GridActividades(self.IDMETA);
+                }
+            })
+        };
+      
         var EliminarActividad = function (Id) {
             catalogoContext.EliminarActividades(Id, function (resp) {
                 switch (resp.ressult) {
@@ -346,12 +447,12 @@
                 switch (resp.ressult) {
                     case "tgp":
 
-                        self.GridUnidadesRespView = catalogoContext.GridUnidadesRespLST;
-
-
+                        self.GridUnidadesRespView = catalogoContext.GridUnidadesRespLST;                      
                         if (self.GridUnidadesRespView.length == 0) {
+                            document.getElementById("URAlert").style.display = "block";     
                             self.NoUR = "¡No Existen registros para esta Actividad!";
                         } else {
+                            document.getElementById("URAlert").style.display = "none";  
                             self.NoUR = "";
                         }
                         break;
@@ -364,18 +465,32 @@
                         break;
                 }
                 $scope.$apply();
+                $('button').tooltip();
             });
         };        
         /********************************************************************************************************************************************************/
         this.GridUR = function () {
-            ObtenerGridUnidadesModal();
+            document.getElementById("title").className = "modal-header btn-success justify-content-center";
+            document.getElementById("TituloURM").innerHTML = "Crear Responsables";
+            document.getElementById("btnModal").className = "btn btn-success";
+            document.getElementById("lblURM").className = "text-success";
+            document.getElementById("SelectURM").className = "form-control border border-success";
+            document.getElementById("lblContacto").className = "text-success";
+            document.getElementById("inputContacto").className = "form-control border border-success";
+            document.getElementById("lblTelefono").className = "text-success";
+            document.getElementById("inputTelefono").className = "form-control border border-success";
+            document.getElementById("lblCorreo").className = "text-success";
+            document.getElementById("inputCorreo").className = "form-control border border-success";
+
+            ObtenerComboUnidadesModal();
             self.DescripcionUR = "";
+            
         }
-        var ObtenerGridUnidadesModal = function () {
-            catalogoContext.ObtenerGridUnidadesModal(self.buscarDependencias, function (resp) {
+        var ObtenerComboUnidadesModal = function () {
+            catalogoContext.ObtenerComboUnidadesModal(self.buscarDependencias, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.ObtenerGridUnidadesModalView = catalogoContext.ObtenerGridUnidadesModalLST;
+                        self.ObtenerComboUnidadesModalView = catalogoContext.ObtenerComboUnidadesModalLST;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -389,43 +504,32 @@
             });
         };
         /********************************************************************************************************************************************************/
-        var ObtenerDatosUnidadesResp = function (Id) {
-            catalogoContext.ObtenerDatosUnidadesResp(Id, function (resp) {
-                switch (resp.ressult) {
-                    case "tgp":
-                        self.ObtenerDatosUnidadesRespView = catalogoContext.ObtenerDatosUnidadesRespLST;                        
-                        self.EStatus = self.ObtenerDatosUnidadesRespView[0].Status;
-                        self.Coordinador = self.ObtenerDatosUnidadesRespView[0].Coordinador;  
-                        break;
-                    case "notgp":
-                        self.mensaje_gral = resp.message;
-                        document.getElementById("Error").style.display = "block";
-                        document.getElementById("Message").innerHTML = self.mensaje_gral + " ObtenerDatosUnidadesResp";
-                        break;
-                    default:
-                        break;
-                }
-                $scope.$apply();
-            });
-        };
+
         /********************************************************************************************************************************************************/       
-        this.SaveUR = function () {
-            GuardarUnidadesResp();
-        }
-        this.getId = function (Id, Descripcion) {
-            self.idU = Id;
-            self.DescripcionUR = Descripcion;
+        this.SaveUR = function (Id) {
+            if (Id) {
+                EditarUnidadesResp(Id);                
+            } else {
+                GuardarUnidadesResp();                
+            }
         }
         var GuardarUnidadesResp = function () {
 
             catalogoContext.GuardarUnidadesResp( 
                 self.idActividad,
-                self.idU,
+                self.ObtenerDatosUnidadesModalView[0].Descripcion,
+                self.ObtenerDatosUnidadesModalView[0].Contacto,
+                self.ObtenerDatosUnidadesModalView[0].Telefono,
+                self.ObtenerDatosUnidadesModalView[0].Correo,
                 function (resp) {
                     switch (resp.ressult) {
                         case "tgp":
-                            GridUnidadesResp(self.idActividad);
-                            alert("¡Se han Guardado los datos correctamente!");                             
+                            GridUnidadesResp(self.idActividad);                 
+                            Swal.fire(
+                                '¡Listo!',
+                                '¡Se han Guardado los datos correctamente!',
+                                'success'
+                            )
                             break;
                         case "notgp":
                             self.mensaje_gral = resp.message;
@@ -439,20 +543,25 @@
                 });
 
         };
-        /********************************************************************************************************************************************************/
-        var EditarUnidadesResp = function () {           
+    /********************************************************************************************************************************************************/
+        var EditarUnidadesResp = function (Id) {
             catalogoContext.EditarUnidadesResp(
-                self.ObtenerDatosUnidadesRespView[0].Id,
-                self.ObtenerDatosUnidadesRespView[0].Dependencia,
-                self.ObtenerDatosUnidadesRespView[0].Clave,
-                self.ObtenerDatosUnidadesRespView[0].Descripcion,
-                self.EStatus,
-                self.ObtenerDatosUnidadesRespView[0].Coordinador,
+                Id,
+                self.idActividad,
+                self.ObtenerDatosUnidadesModalView[0].Descripcion,
+                self.ObtenerDatosUnidadesModalView[0].Contacto,
+                self.ObtenerDatosUnidadesModalView[0].Telefono,
+                self.ObtenerDatosUnidadesModalView[0].Correo,
                 function (resp) {
                     switch (resp.ressult) {
                         case "tgp":
-                            alert("¡Se han actualizado los datos correctamente!");
-                            self.ObtenerDatosUnidadesRespView = null;
+                            GridUnidadesResp(self.idActividad);
+                            Swal.fire(
+                                '¡Listo!',
+                                '¡Se han actualizado los datos correctamente!',
+                                'success'
+                            )
+                            self.ObtenerDatosUnidadesModalView = null;
                             break;
                         case "notgp":
                             self.mensaje_gral = resp.message;
@@ -464,8 +573,70 @@
                     }
                     $scope.$apply();
                 });
+
         };
         /********************************************************************************************************************************************************/
+        
+        this.UpdateResp = function (Id) {
+            document.getElementById("title").className = "modal-header btn-primary justify-content-center";
+            document.getElementById("TituloURM").innerHTML = "Actualizar Responsables";
+            document.getElementById("btnModal").className = "btn btn-primary";
+            document.getElementById("lblURM").className = "text-primary";
+            document.getElementById("SelectURM").className = "form-control border border-primary";
+            document.getElementById("lblContacto").className = "text-primary";
+            document.getElementById("inputContacto").className = "form-control border border-primary";
+            document.getElementById("lblTelefono").className = "text-primary";
+            document.getElementById("inputTelefono").className = "form-control border border-primary";
+            document.getElementById("lblCorreo").className = "text-primary";
+            document.getElementById("inputCorreo").className = "form-control border border-primary";
+            ObtenerComboUnidadesModal();
+            ObtenerDatosUnidadesResp(Id);
+        }
+        var ObtenerDatosUnidadesResp = function (Id) {
+            catalogoContext.ObtenerDatosUnidadesResp(Id,
+                function (resp) {
+                    switch (resp.ressult) {
+                        case "tgp":
+                            self.ObtenerDatosUnidadesModalView = catalogoContext.ObtenerDatosUnidadesRespLST;
+                            break;
+                        case "notgp":
+                            self.mensaje_gral = resp.message;
+                            document.getElementById("Error").style.display = "block";
+                            document.getElementById("Message").innerHTML = self.mensaje_gral + " GuardarUnidadesResp";
+                            break;
+                        default:
+                            break;
+                    }
+                    $scope.$apply();
+                });
+
+        };
+    /********************************************************************************************************************************************************/
+
+        this.EliminarUR = function (Indice) {
+            Swal.fire({
+                title: '¿Seguro que Desea Eliminar el Resgistro?',
+                text: "Se Eliminara Permanentemente",
+                icon: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'No, Cancelar',
+                confirmButtonText: 'Si, Quiero Eliminarlo'
+            }).then((result) => {
+                if (result.value) {
+                    EliminarUnidadesResp(Indice);
+
+                    Swal.fire(
+                        '¡Eliminado!',
+                        'Se ha eliminado con exito.',
+                        'success'
+                    );
+                    GridUnidadesResp(self.idActividad);
+                }
+            })
+        };
+    
         var EliminarUnidadesResp = function (Id) {         
             catalogoContext.EliminarUnidadResponsable(Id, function (resp) {
                 switch (resp.ressult) {
@@ -487,7 +658,7 @@
         /********************************************************************************************************************************************************/  
         this.ModalACTV = function (Id) {                        
                     document.getElementById("title").className = "modal-header btn-primary justify-content-center";
-                    document.getElementById("exampleModalLabel").innerHTML = "Actualizar Actividades";
+                     document.getElementById("TituloACTV").innerHTML = "Actualizar Actividades";
                     document.getElementById("btnModal").className = "btn btn-primary";
                     document.getElementById("lblPrograma").className = "text-primary";
                     document.getElementById("cmbPrograma").className = "form-control border border-primary";
@@ -508,27 +679,11 @@
 
                     ObtenerDatosActividades(Id);
                     ObtenerProgramas();
-        };
-        this.ModalUR = function (Id) {                   
-                    document.getElementById("titleUR").className = "modal-header btn-primary justify-content-center";
-                    document.getElementById("exampleModalLabelUR").innerHTML = "Actualizar Unidad Responsable";
-                    document.getElementById("btnModalUR").className = "btn btn-primary";
-                    document.getElementById("lblDependencia").className = "text-primary";
-                    document.getElementById("cmbDependencia").className = "form-control border border-primary";
-                    document.getElementById("lblClaveUR").className = "text-primary";
-                    document.getElementById("inputClaveUR").className = "form-control border border-primary";
-                    document.getElementById("lblDescripcion").className = "text-primary";
-                    document.getElementById("inputDescripcion").className = "form-control border  border-primary";
-                    document.getElementById("lblStatusUR").className = "text-primary";
-                    document.getElementById("cmbStatusUR").className = "form-control border  border-primary";
-                    document.getElementById("lblCoordinacion").className = "text-primary";
-                    document.getElementById("Radio").className = "radio-group form-control border border-primary text-center";
-                    ObtenerDatosUnidadesResp(Id);
-        };
+        };        
         this.ColorATCV = function () {
 
             document.getElementById("title").className = "modal-header btn-success justify-content-center";
-            document.getElementById("exampleModalLabel").innerHTML = "Crear Actividades";
+            document.getElementById("TituloACTV").innerHTML = "Crear Actividades";
             document.getElementById("btnModal").className = "btn btn-success";
             document.getElementById("lblPrograma").className = "text-success";
             document.getElementById("cmbPrograma").className = "form-control border border-success";
@@ -559,67 +714,42 @@
                 GuardarActividades();
             }
         };
-        this.EliminnarA = function (Indice) {
-            var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
-            if (opcion == true) {
-                EliminarActividad(Indice);
-                alert("¡Se ha eliminado con exito!", Indice);
-                GridActividades(self.IDMETA);
-
-            } else {
-                alert("No se ha eliminado el registro");
-            }
-        };
+     
         this.getUR = function (Id, Descripcion) {
             GridUnidadesResp(Id);
             self.DescActividad = Descripcion;
             self.idActividad = Id;
         }
-        this.EditUR = function () {            
-                EditarUnidadesResp();        
-        }   
-        this.EliminarUR = function (Indice) {
-            var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
-            if (opcion == true) {
-                EliminarUnidadesResp(Indice);
-                alert("¡Se ha eliminado con exito!");
-                GridUnidadesResp(self.idActividad);
-
-            } else {
-                alert("No se ha eliminado el registro");
-            }
-        };
+ 
         this.close = function (form) {
             $('#ModalActividades').modal('hide');
             if (form) {
                 form.$setPristine();
                 form.$setUntouched();               
             }
-          
-
-            $('#ModalUnidadesResp').modal('hide');
-            if (form) {
-                form.$setPristine();
-                form.$setUntouched();                
-            }
-
-            $('#ModalAddUR').modal('hide');
-            if (form) {
-                form.$setPristine();
-                form.$setUntouched();
-            }
-
+         
             $('#ModalAreasDeAtencion').modal('hide');
             if (form) {
                 form.$setPristine();
                 form.$setUntouched();
             }
-
+            $('#ModalAddUR').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }
+            $('#ModalPlanMastro').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }
             self.ObtenerDatosActividadesView = null;            
-            self.Prioritaria = null;
-            self.ObtenerDatosUnidadesRespView = null;            
+            self.Prioritaria = null;            
+            self.ObtenerDatosUnidadesModalView = null;
             self.EStatus = null;
             self.idU = null;
+            self.ObtenerDatosPlanView = null;
+            self.EStatus = null;
         };
         this.reset = function (form) {
             $('#ModalActividades').modal('hide');
@@ -627,29 +757,26 @@
                 form.$setPristine();
                 form.$setUntouched();
             }
-            self.ObtenerDatosActividadesView = null;
-            self.EStatus = null;
-            self.Prioritaria = null;
-            GridActividades(self.IDMETA);
-   
-        };
-
-        this.resetUR = function (form) {
-            $('#ModalUnidadesResp').modal('hide');
+            $('#ModalAddUR').modal('hide');
             if (form) {
                 form.$setPristine();
                 form.$setUntouched();
             }
-            self.ObtenerDatosUnidadesRespView = null;
-            self.EStatus = null;          
-            GridUnidadesResp(self.idActividad);
-        };
-
-
-        this.Meta = function (idMeta, Descripcion) {
+  
+            self.ObtenerDatosActividadesView = null;
+            self.EStatus = null;
+            self.Prioritaria = null;
+            $('#ModalPlanMastro').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }     
+        };    
+       this.Meta = function (idMeta, Descripcion) {
             GridActividades(idMeta);
             self.IDMETA = idMeta;
             self.Descripcion = Descripcion;
+           self.GridUnidadesRespView = null;
         }
         this.URS = function (Descripcion) {            
             self.Descripcion = Descripcion;
@@ -671,11 +798,6 @@
         this.ValorUnidad = function () {
             console.log("Unidades", self.buscarUnidad)
         }
-
-        this.ValorPlan = function () {
-            console.log("Plan", self.buscarPlan);
-        }
-
 
         /*******************************************************************************************************************************************************/
 

@@ -37,8 +37,8 @@
                                 </select>
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.cmbDependencia.$touched">
-                                    <span ng-show="!ctrl.unidad[0].Dependencia" class="text-danger">Campo Requerido</span>
+                                <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.cmbDependencia.$touched">
+                                    <span ng-show="!ctrl.unidad[0].Dependencia" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                 </span>
                             </div>
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
@@ -49,15 +49,15 @@
                                 <input type="text" id="inputClave" class="" name="Clave" ng-maxlength="3" ng-model="ctrl.Clave" placeholder="Clave" required>
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.Clave.$touched">
-                                    <span ng-show="!ctrl.Clave" class="text-danger">Campo Requerido</span>
+                                <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.Clave.$touched">
+                                    <span ng-show="!ctrl.Clave" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                 </span>
                             </div>
-                            <div class="row justify-content-center">
+                            @*<div class="row justify-content-center">
                                 <span class="messages">
                                     <span ng-show="!modalForm.Clave.$valid" class="text-danger">¡Maximo 3 digitos!</span>
                                 </span>
-                            </div>
+                            </div>*@
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
                             <div class="row justify-content-center">
                                 <label id="lblDescripcion" class="">Descripción</label>
@@ -66,8 +66,8 @@
                                 <input type="text" id="inputDescripcion" name="Descripcion" class="" ng-model="ctrl.unidad[0].Descripcion" required placeholder="Descripción">
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.Descripcion.$touched">
-                                    <span ng-show="!ctrl.unidad[0].Descripcion" class="text-danger">Campo Requerido</span>
+                                <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.Descripcion.$touched">
+                                    <span ng-show="!ctrl.unidad[0].Descripcion" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                 </span>
                             </div>
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
@@ -81,8 +81,8 @@
                                 </select>
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.cmbDependencia_status.$touched">
-                                    <span ng-show="!ctrl.EStatus" class="text-danger">Campo Requerido</span>
+                                <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.cmbDependencia_status.$touched">
+                                    <span ng-show="!ctrl.EStatus" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                 </span>
                             </div>
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
@@ -105,8 +105,8 @@
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.gender.$touched">
-                                    <span ng-show="!ctrl.unidad[0].Coordinador" class="text-danger">Campo Requerido</span>
+                                <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.gender.$touched">
+                                    <span ng-show="!ctrl.unidad[0].Coordinador" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                 </span>
                             </div>
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
@@ -182,7 +182,7 @@
         </div>
 
         <div class="container table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.3)">
-            <table class="table table-hover">
+            <table class="table table-hover ">
                 <thead>
                     <tr>
                         <th scope="col">
@@ -219,7 +219,7 @@
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody ng-pagination="i in ctrl.unidades | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status | itemsPerPage: 5 ">
+                <tbody class="animate-repeat" ng-pagination="i in ctrl.unidades | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status | itemsPerPage: 5 ">
                     <tr>
                         <td>{{i.Dependencia}}</td>
                         <td>{{i.Clave}}</td>
@@ -274,6 +274,7 @@
 <script src="~/Scripts/angular.min.js"></script>
 <script src="~/Scripts/angular.js"></script>
 <script src="~/Scripts/angular-pagination.js"></script>
+<script src="~/Scripts/angular-animate.js"></script>
 <script src="~/Scripts/global.js"></script>
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/UnidadesResponsablesController.js"></script>
@@ -283,7 +284,11 @@
 
 <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <script type="text/javascript">
+      $(document).ready(function () {     
 
+        $('button').tooltip();                     
+
+    });  
 </script>
 
 

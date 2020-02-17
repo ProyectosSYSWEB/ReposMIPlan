@@ -1,5 +1,5 @@
 ﻿(function () {
-    var app = angular.module('MIPlanWeb', ['ngPagination']);
+    var app = angular.module('MIPlanWeb', ['ngPagination', 'ngAnimate']);
     /********************************************************************************************************************************************************/
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
         var self = this;
@@ -51,6 +51,7 @@
                         break;
                 }
                 $scope.$apply();
+                $('button').tooltip();
             });
         };
         /********************************************************************************************************************************************************/
@@ -120,7 +121,12 @@
             catalogoContext.UnidadResponsableUpdate(self.unidad[0].Id, self.unidad[0].Dependencia, self.Clave, self.unidad[0].Descripcion, self.EStatus, self.unidad[0].Coordinador, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        alert("¡Se han actualizado los datos correctamente!");
+                        GridAreasAtencion();
+                        Swal.fire(
+                            '¡Listo!',
+                            '¡Se han actualizado los datos correctamente!',
+                            'success'
+                        )
                         CargarGrid();
                         break;
                     case "notgp":
@@ -151,7 +157,11 @@
             catalogoContext.UnidadResponsableCreate(self.unidad[0].Dependencia, self.Clave, self.unidad[0].Descripcion, self.EStatus, self.unidad[0].Coordinador, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        alert("¡Se ha creado la unidad correctamente!");
+                        Swal.fire(
+                            '¡Listo!',
+                            '¡Se han guardado los datos correctamente!',
+                            'success'
+                        )
                         CargarGrid();
                         break;
                     case "notgp":
@@ -187,14 +197,27 @@
         };
 
         this.EliminnarUR = function (Indice) {
-            var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
-            if (opcion == true) {
-                eliminarUnidadResponsable(Indice);
-                alert("¡Se ha eliminado con exito!");  
-                CargarGrid();
-            } else {
-                alert("No se ha eliminado el registro");
-            }
+            Swal.fire({
+                title: '¿Seguro que Desea Eliminar el Resgistro?',
+                text: "Se Eliminara Permanentemente",
+                icon: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'No, Cancelar',
+                confirmButtonText: 'Si, Quiero Eliminarlo'
+            }).then((result) => {
+                if (result.value) {
+                    eliminarUnidadResponsable(Indice);
+
+                    Swal.fire(
+                        '¡Eliminado!',
+                        'Se ha eliminado con exito.',
+                        'success'
+                    );
+                    CargarGrid();
+                }
+            })
         };
         /*******************************************************************************************************************************************************/
         this.DivError = function () {
