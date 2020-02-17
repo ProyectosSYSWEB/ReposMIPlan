@@ -166,11 +166,23 @@
                                 <label id="lblAccion" for="formGroupExampleInput" class="">Acción</label>
                             </div>
                             <div class="row justify-content-center">
-                                <textarea id="inputAccion" class="" name="Accion" rows="5" ng-model="ctrl.ObtenerDatosActividadesView[0].Accion" placeholder="Accion" required> </textarea>
+                                <textarea id="inputAccion" class="" name="Accion" rows="2" ng-model="ctrl.ObtenerDatosActividadesView[0].Accion" placeholder="Accion" required> </textarea>
                             </div>
                             <div class="row justify-content-center">
                                 <span class="messages check-element animate-show-hide" ng-show="modalFormActv.$submitted || modalFormActv.Accion.$touched">
                                     <span ng-show="!ctrl.ObtenerDatosActividadesView[0].Accion" class="text-danger check-element animate-show-hide">Campo Requerido</span>
+                                </span>
+                            </div>
+                            <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+                            <div class="row justify-content-center">
+                                <label id="lblDetalles" for="formGroupExampleInput" class="">Detalles</label>
+                            </div>
+                            <div class="row justify-content-center">
+                                <textarea id="inputDetalles" class="" name="Detalles" rows="4" ng-model="ctrl.ObtenerDatosActividadesView[0].Detalles" placeholder="Detalles" required> </textarea>
+                            </div>
+                            <div class="row justify-content-center">
+                                <span class="messages check-element animate-show-hide" ng-show="modalFormActv.$submitted || modalFormActv.Detalles.$touched">
+                                    <span ng-show="!ctrl.ObtenerDatosActividadesView[0].Detalles" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                 </span>
                             </div>
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
@@ -569,8 +581,7 @@
 
                                 <table class="table table-hover" id="tableMain">
                                     <thead>
-                                        <tr>
-                                            <th scope="col">Programa</th>
+                                        <tr>                                            
                                             <th scope="col">Acción</th>
                                             <th scope="col">Inicio</th>
                                             <th scope="col">Fin</th>
@@ -586,30 +597,31 @@
                                     <tbody ng-pagination="pro in ctrl.GridProgramas | itemsPerPage: 10 " pagination-id="PaginationGridActividades">
 
                                         <tr class="breakrow bgAct text-white cursor-pointer">
-                                            <td colspan="2"><i class="fa fa-plus-circle"></i></td>
+                                            <td colspan="2"><i class="fa fa-plus" > Programa: </i></td>
                                             <td colspan="8">{{pro.Desc_Programa}}</td>
                                         </tr>
                                         <tr class="datarow cursor-pointer" style="display:none" ng-repeat="i in ctrl.GridActividadesView" ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'MybgUR text-white': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === i.Desc_Programa">
-                                            <td></td>
-                                            <td><font size="2">{{i.Desc_Accion}}</font></td>
+                                            <td title="Detalles:  {{i.Detalles}}"><font size="2">{{i.Desc_Accion}}</font></td>
                                             <td><font size="2">{{i.Fecha_Inicio}}</font></td>
                                             <td><font size="2">{{i.Fecha_Fin}}</font></td>
                                             <td><font size="2">{{i.Impacto}}</font></td>
                                             <td><font size="2">{{i.Prioritaria}}</font></td>
                                             <td><font size="2">{{i.Status}}</font></td>
                                             <td colspan="3">
-                                                <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" title="Editar" ng-click="ctrl.ModalACTV(i.Id)">
+                                                <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" title="Editar" ng-click="ctrl.ModalACTV(i.Id, i.Id_Padre)">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                                 </button>
-
-                                                <button type="button" class="btn btn-danger"  title="Eliminar" ng-click="ctrl.EliminnarA(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+                                                <button type="button" id="btnUpdate" class="btn btn-info" style="width:40px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" title="Agregar Actividad Secundaría" ng-click="ctrl.ModalH(i.Id)" ng-show="i.Prioritaria === 'Si'">
+                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-danger" title="Eliminar" ng-click="ctrl.EliminnarA(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
                                             </td>
                                         </tr>
                                     </tbody>
 
                                     <tfoot>
                                         <tr>
-                                            <th colspan="10"><dir-pagination-controls boundary-links="true" pagination-id="PaginationGridActividades"></dir-pagination-controls></th>
+                                            <th colspan="9"><dir-pagination-controls boundary-links="true" pagination-id="PaginationGridActividades"></dir-pagination-controls></th>
 
                                         </tr>
                                     </tfoot>
@@ -737,7 +749,9 @@
     $(document).ready(function () {     
 
         $('button').tooltip();               
+
         
+
         $('#tableMain').on('click', 'tr.breakrow', function () {
             $(this).nextUntil('tr.breakrow').slideToggle(100);
         });

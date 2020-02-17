@@ -381,7 +381,7 @@ namespace MIPlan.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-        public JsonResult GuardarActividades(string Meta, string Clave, string Descripcion, string Impacto, string Status, string FechaInicio, string FechaFin, string Programa, string Prioritaria)
+        public JsonResult GuardarActividades(string Meta, string Clave, string Descripcion, string Detalles, string Impacto, string Status, string FechaInicio, string FechaFin, string Programa, string Prioritaria, string Id_Padre)
         {
             Actividades objActividad = new Actividades();
             ResultadoActividades objResultado = new ResultadoActividades();
@@ -394,12 +394,15 @@ namespace MIPlan.Controllers
                 objActividad.Id_Meta = Convert.ToInt32(Meta);
                 objActividad.Clave = Clave;
                 objActividad.Descripcion = Descripcion;
+                objActividad.Detalles = Detalles;
                 objActividad.Impacto = Impacto;
                 objActividad.Fecha_Inicio = FechaInicio;
                 objActividad.Fecha_Fin = FechaFin;
                 objActividad.Id_Programa = Convert.ToInt32(Programa);
                 objActividad.Prioritaria = Prioritaria;
                 objActividad.Status = Status;
+                objActividad.Id_Padre = Convert.ToInt32(Id_Padre);
+
                 Data.PlanTrabajo.GuardarDataContext.GuardarActividades(objActividad, SesionUsu[0].Usuario, ref Verificador);
                 if (Verificador == "0")
                 {
@@ -424,7 +427,7 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-        public JsonResult EditarActividades(int Id, string Programa, string Descripcion, string FechaInicio, string FechaFin, string Impacto, string Prioritaria, string Clave, string Status)
+        public JsonResult EditarActividades(int Id, string Programa, string Descripcion, string Detalles, string FechaInicio, string FechaFin, string Impacto, string Prioritaria, string Clave, string Status, string Id_Padre)
         {
             List<Sesion> SesionUsu = new List<Sesion>();
             Sesion objUsuario = new Sesion();
@@ -437,12 +440,14 @@ namespace MIPlan.Controllers
                 objActividad.Id = Id;
                 objActividad.Id_Programa = Convert.ToInt32(Programa);
                 objActividad.Descripcion = Descripcion;
+                objActividad.Detalles = Detalles;
                 objActividad.Fecha_Inicio = FechaInicio;
                 objActividad.Fecha_Fin = FechaFin;
                 objActividad.Impacto = Impacto;
                 objActividad.Prioritaria = Prioritaria;
                 objActividad.Clave = Clave;
                 objActividad.Status = Status;
+                objActividad.Id_Padre = Convert.ToInt32(Id_Padre);
 
                 SesionUsu = (List<Sesion>)System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"];
                 Data.PlanTrabajo.GuardarDataContext.EditarActividades(objActividad, SesionUsu[0].Usuario, ref Verificador);

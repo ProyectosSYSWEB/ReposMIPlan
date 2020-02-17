@@ -212,15 +212,19 @@ namespace MIPlan.Data.PlanTrabajo
                 List<Actividades> listarActividades = new List<Actividades>();
                 while (dr.Read())
                 {
+                    
                     Actividades objActividad = new Actividades();
                     objActividad.Id = Convert.ToInt32(dr[0]);
                     objActividad.Desc_Programa = Convert.ToString(dr[1]);
                     objActividad.Desc_Accion = Convert.ToString(dr[2]);
-                    objActividad.Fecha_Inicio = Convert.ToString(dr[3]);
-                    objActividad.Fecha_Fin = Convert.ToString(dr[4]);
-                    objActividad.Impacto = Convert.ToString(dr[5]);
-                    objActividad.Prioritaria = Convert.ToString(dr[6]);
-                    objActividad.Status = Convert.ToString(dr[8]);
+                    objActividad.Detalles = Convert.ToString(dr[3]);
+                    objActividad.Fecha_Inicio = Convert.ToString(dr[4]);
+                    objActividad.Fecha_Fin = Convert.ToString(dr[5]);
+                    objActividad.Impacto = Convert.ToString(dr[6]);
+                    objActividad.Prioritaria = Convert.ToString(dr[7]);
+                    objActividad.Status = Convert.ToString(dr[9]);
+                    string tempId_Padre = Convert.ToString(dr[10]);
+                    objActividad.Id_Padre = Convert.ToInt32(tempId_Padre);
                    
                     
                     listarActividades.Add(objActividad);
