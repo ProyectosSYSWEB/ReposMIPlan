@@ -600,7 +600,7 @@
                                             <td colspan="2"><i class="fa fa-plus" > Programa: </i></td>
                                             <td colspan="8">{{pro.Desc_Programa}}</td>
                                         </tr>
-                                        <tr class="datarow cursor-pointer" style="display:none" ng-repeat="i in ctrl.GridActividadesView" ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'MybgUR text-white': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === i.Desc_Programa">
+                                        <tr class="datarow cursor-pointer" style="display:none" ng-repeat="i in ctrl.GridActividadesView" ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'MybgUR ': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === i.Desc_Programa">
                                             <td title="Detalles:  {{i.Detalles}}"><font size="2">{{i.Desc_Accion}}</font></td>
                                             <td><font size="2">{{i.Fecha_Inicio}}</font></td>
                                             <td><font size="2">{{i.Fecha_Fin}}</font></td>
