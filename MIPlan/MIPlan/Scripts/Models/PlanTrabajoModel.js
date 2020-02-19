@@ -276,7 +276,7 @@ var catalogoContext =
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
-                            self.GridActividadesLST.push({ Id: resp.Resultado[i].Id, Desc_Programa: resp.Resultado[i].Desc_Programa, Desc_Accion: resp.Resultado[i].Desc_Accion, Fecha_Inicio: resp.Resultado[i].Fecha_Inicio, Fecha_Fin: resp.Resultado[i].Fecha_Fin, Impacto: resp.Resultado[i].Impacto, Prioritaria: resp.Resultado[i].Prioritaria, Status: resp.Resultado[i].Status });
+                            self.GridActividadesLST.push({ Id: resp.Resultado[i].Id, Desc_Programa: resp.Resultado[i].Desc_Programa, Desc_Accion: resp.Resultado[i].Desc_Accion, Detalles: resp.Resultado[i].Detalles, Fecha_Inicio: resp.Resultado[i].Fecha_Inicio, Fecha_Fin: resp.Resultado[i].Fecha_Fin, Impacto: resp.Resultado[i].Impacto, Prioritaria: resp.Resultado[i].Prioritaria, Status: resp.Resultado[i].Status, Id_Padre: resp.Resultado[i].Id_Padre });
                             self.GridProgramas.push({ Desc_Programa: resp.Resultado[i].Desc_Programa });
                         }                      
                         if (callBackResult !== undefined) {
@@ -307,9 +307,8 @@ var catalogoContext =
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
-                            self.ObtenerDatosActividadesLST.push({ Id: resp.Resultado[i].Id, Id_Programa: resp.Resultado[i].Id_Programa, Accion: resp.Resultado[i].Descripcion, Fecha_Inicio: resp.Resultado[i].Fecha_Inicio, Fecha_Fin: resp.Resultado[i].Fecha_Fin, Impacto: resp.Resultado[i].Impacto, Prioritaria: resp.Resultado[i].Prioritaria, Status: resp.Resultado[i].Status, Clave: resp.Resultado[i].Clave });
-                        }
-                        console.log(self.ObtenerDatosActividadesLST);
+                            self.ObtenerDatosActividadesLST.push({ Id: resp.Resultado[i].Id, Id_Programa: resp.Resultado[i].Id_Programa, Accion: resp.Resultado[i].Descripcion, Detalles: resp.Resultado[i].Detalles, Fecha_Inicio: resp.Resultado[i].Fecha_Inicio, Fecha_Fin: resp.Resultado[i].Fecha_Fin, Impacto: resp.Resultado[i].Impacto, Prioritaria: resp.Resultado[i].Prioritaria, Status: resp.Resultado[i].Status, Clave: resp.Resultado[i].Clave, Id_Padre: resp.Resultado[i].Id_Padre});
+                        }                       
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
                         }
@@ -355,13 +354,13 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-    GuardarActividades: function (Meta, Clave, Descripcion, Impacto, Status, FechaInicio, FechaFin, Programa, Prioritaria, callBackResult) {
+    GuardarActividades: function (Meta, Clave, Descripcion, Detalles, Impacto, Status, FechaInicio, FechaFin, Programa, Prioritaria, Id_Padre, callBackResult) {
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'PlanTrabajo/GuardarActividades',
-                data: { Meta, Clave, Descripcion, Impacto, Status, FechaInicio, FechaFin, Programa, Prioritaria },
+                data: { Meta, Clave, Descripcion, Detalles, Impacto, Status, FechaInicio, FechaFin, Programa, Prioritaria, Id_Padre },
                 success: function (resp) {
                     if (resp.Error == false) {
                         if (callBackResult !== undefined) {
@@ -380,13 +379,15 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-    EditarActividades: function (Id, Programa, Descripcion, FechaInicio, FechaFin, Impacto, Prioritaria, Clave, Status, callBackResult) {
+    EditarActividades: function (Id, Programa, Descripcion, Detalles, FechaInicio, FechaFin, Impacto, Prioritaria, Clave, Status, Id_Padre, callBackResult) {    
+        console.log(Id, Programa, Descripcion, Detalles, FechaInicio, FechaFin, Impacto, Prioritaria, Clave, Status, Id_Padre);
+
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'PlanTrabajo/EditarActividades',
-                data: { Id, Programa, Descripcion, FechaInicio, FechaFin, Impacto, Prioritaria, Clave, Status },
+                data: { Id, Programa, Descripcion, Detalles, FechaInicio, FechaFin, Impacto, Prioritaria, Clave, Status, Id_Padre },
                 success: function (resp) {
                     if (resp.Error == false) {
                         if (callBackResult !== undefined) {

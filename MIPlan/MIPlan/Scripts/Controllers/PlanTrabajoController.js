@@ -20,7 +20,7 @@
         this.PlanMaestroModal = function () {
             self.EStatus = "A";
         }
-
+        self.Si = 'Si';
         /********************************************************************************************************************************************************/
         var ObtenerDependencias = function () {
             catalogoContext.ObtenerDependencias(function (resp) {
@@ -292,6 +292,7 @@
                 }
                 $scope.$apply();
                 $('button').tooltip();
+                $('td').tooltip();
             });
         };             
         /********************************************************************************************************************************************************/
@@ -335,16 +336,20 @@
         };
         /********************************************************************************************************************************************************/
         var GuardarActividades = function () {
+            self.ObtenerDatosActividadesView[0].Id_Padre = self.Id_Padre;
             catalogoContext.GuardarActividades(
                 self.IDMETA,
                 self.ObtenerDatosActividadesView[0].Clave,
                 self.ObtenerDatosActividadesView[0].Accion,
+                self.ObtenerDatosActividadesView[0].Detalles,
                 self.ObtenerDatosActividadesView[0].Impacto,
                 self.EStatus,
                 self.ObtenerDatosActividadesView[0].Fecha_Inicio,
                 self.ObtenerDatosActividadesView[0].Fecha_Fin,
-                self.ObtenerDatosActividadesView[0].Id_Programa,
-                self.Prioritaria, function (resp) {
+                self.ObtenerDatosActividadesView[0].Id_Programa,                
+                self.Prioritaria,
+                self.ObtenerDatosActividadesView[0].Id_Padre,
+                function (resp) {
                     switch (resp.ressult) {
                         case "tgp":                           
                             Swal.fire(
@@ -367,17 +372,20 @@
                 });
         };
         /********************************************************************************************************************************************************/
-        var EditarActividades = function () {
+        var EditarActividades = function () {               
             catalogoContext.EditarActividades(
                 self.ObtenerDatosActividadesView[0].Id,
                 self.ObtenerDatosActividadesView[0].Id_Programa,
                 self.ObtenerDatosActividadesView[0].Accion,
+                self.ObtenerDatosActividadesView[0].Detalles,
                 self.ObtenerDatosActividadesView[0].Fecha_Inicio,
                 self.ObtenerDatosActividadesView[0].Fecha_Fin,
                 self.ObtenerDatosActividadesView[0].Impacto,
                 self.Prioritaria,
                 self.ObtenerDatosActividadesView[0].Clave,
-                self.EStatus, function (resp) {
+                self.EStatus,
+                self.ObtenerDatosActividadesView[0].Id_Padre,
+                function (resp) {
                     switch (resp.ressult) {
                         case "tgp":                            
                             Swal.fire(
@@ -385,6 +393,7 @@
                                 '¡Se han actualizado los datos correctamente!',
                                 'success'
                             )
+                            GridActividades(self.IDMETA);
                             self.ObtenerDatosActividadesView = null;
                             break;
                         case "notgp":
@@ -656,29 +665,60 @@
             });
         };
         /********************************************************************************************************************************************************/  
-        this.ModalACTV = function (Id) {                        
-                    document.getElementById("title").className = "modal-header btn-primary justify-content-center";
-                     document.getElementById("TituloACTV").innerHTML = "Actualizar Actividades";
-                    document.getElementById("btnModal").className = "btn btn-primary";
-                    document.getElementById("lblPrograma").className = "text-primary";
-                    document.getElementById("cmbPrograma").className = "form-control border border-primary";
-                    document.getElementById("lblClave").className = "text-primary";
-                    document.getElementById("inputClave").className = "form-control border border-primary";
-                    document.getElementById("lblAccion").className = "text-primary";
-                    document.getElementById("inputAccion").className = "form-control border border-primary";
-                    document.getElementById("lblInicio").className = "text-primary";
-                    document.getElementById("InicioUpdate").className = "form-control border border-primary";
-                    document.getElementById("lblFin").className = "text-primary";
-                    document.getElementById("FinUpdate").className = "form-control border border-primary";
-                    document.getElementById("lblImpacto").className = "text-primary";
-                    document.getElementById("inputImpacto").className = "form-control border  border-primary";
-                    document.getElementById("lblPrioritaria").className = "text-primary";
-                    document.getElementById("cmbPrioritaria").className = "form-control border  border-primary";
-                    document.getElementById("lblStatus").className = "text-primary";
-                    document.getElementById("cmbStatus").className = "form-control border  border-primary";
-
-                    ObtenerDatosActividades(Id);
-                    ObtenerProgramas();
+        this.ModalACTV = function (Id, Id_Padre) {     
+            if (Id_Padre != 0) {
+                document.getElementById("title").className = "modal-header btn-primary justify-content-center";
+                document.getElementById("TituloACTV").innerHTML = "Actualizar Actividades Secundarías";
+                document.getElementById("btnModal").className = "btn btn-primary";
+                document.getElementById("lblPrograma").className = "text-primary";
+                document.getElementById("cmbPrograma").className = "form-control border border-primary";
+                document.getElementById("lblClave").className = "text-primary";
+                document.getElementById("inputClave").className = "form-control border border-primary";
+                document.getElementById("lblAccion").className = "text-primary";
+                document.getElementById("inputAccion").className = "form-control border border-primary";
+                document.getElementById("lblDetalles").className = "text-primary";
+                document.getElementById("inputDetalles").className = "form-control border border-primary";
+                document.getElementById("lblInicio").className = "text-primary";
+                document.getElementById("InicioUpdate").className = "form-control border border-primary";
+                document.getElementById("lblFin").className = "text-primary";
+                document.getElementById("FinUpdate").className = "form-control border border-primary";
+                document.getElementById("lblImpacto").className = "text-primary";
+                document.getElementById("inputImpacto").className = "form-control border  border-primary";
+                document.getElementById("lblPrioritaria").className = "text-primary";
+                document.getElementById("cmbPrioritaria").className = "form-control border  border-primary disabled";
+                document.getElementById("cmbPrioritaria").disabled = true;
+                document.getElementById("lblStatus").className = "text-primary";
+                document.getElementById("cmbStatus").className = "form-control border  border-primary";
+                self.Id_Padre = Id_Padre;
+                ObtenerDatosActividades(Id);
+                ObtenerProgramas();
+            } else {
+                document.getElementById("title").className = "modal-header btn-primary justify-content-center";
+                document.getElementById("TituloACTV").innerHTML = "Actualizar Actividades";
+                document.getElementById("btnModal").className = "btn btn-primary";
+                document.getElementById("lblPrograma").className = "text-primary";
+                document.getElementById("cmbPrograma").className = "form-control border border-primary";
+                document.getElementById("lblClave").className = "text-primary";
+                document.getElementById("inputClave").className = "form-control border border-primary";
+                document.getElementById("lblAccion").className = "text-primary";
+                document.getElementById("inputAccion").className = "form-control border border-primary";
+                document.getElementById("lblDetalles").className = "text-primary";
+                document.getElementById("inputDetalles").className = "form-control border border-primary";
+                document.getElementById("lblInicio").className = "text-primary";
+                document.getElementById("InicioUpdate").className = "form-control border border-primary";
+                document.getElementById("lblFin").className = "text-primary";
+                document.getElementById("FinUpdate").className = "form-control border border-primary";
+                document.getElementById("lblImpacto").className = "text-primary";
+                document.getElementById("inputImpacto").className = "form-control border  border-primary";
+                document.getElementById("lblPrioritaria").className = "text-primary";
+                document.getElementById("cmbPrioritaria").className = "form-control border  border-primary";
+                document.getElementById("cmbPrioritaria").disabled = false;
+                document.getElementById("lblStatus").className = "text-primary";
+                document.getElementById("cmbStatus").className = "form-control border  border-primary";
+                self.Id_Padre = 0;
+                ObtenerDatosActividades(Id);
+                ObtenerProgramas();
+            }
         };        
         this.ColorATCV = function () {
 
@@ -691,6 +731,8 @@
             document.getElementById("inputClave").className = "form-control border border-success";
             document.getElementById("lblAccion").className = "text-success";
             document.getElementById("inputAccion").className = "form-control border border-success";
+            document.getElementById("lblDetalles").className = "text-success";
+            document.getElementById("inputDetalles").className = "form-control border border-success";
             document.getElementById("lblInicio").className = "text-success";
             document.getElementById("InicioUpdate").className = "form-control border border-success";
             document.getElementById("lblFin").className = "text-success";
@@ -701,10 +743,42 @@
             document.getElementById("cmbPrioritaria").className = "form-control border  border-success";
             document.getElementById("lblStatus").className = "text-success";
             document.getElementById("cmbStatus").className = "form-control border  border-success";
+            self.Id_Padre = 0;
             self.EStatus = "P";
             self.Prioritaria = "S";
             ObtenerProgramas();
         };
+        this.ModalH = function (Id) {
+          
+                document.getElementById("title").className = "modal-header btn-info justify-content-center";
+                document.getElementById("TituloACTV").innerHTML = "Agregar Actividades Secundarías";
+                document.getElementById("btnModal").className = "btn btn-info";
+                document.getElementById("lblPrograma").className = "text-info";
+                document.getElementById("cmbPrograma").className = "form-control border border-info";
+                document.getElementById("lblClave").className = "text-info";
+                document.getElementById("inputClave").className = "form-control border border-info";
+                document.getElementById("lblAccion").className = "text-info";
+                document.getElementById("inputAccion").className = "form-control border border-info";
+                document.getElementById("lblDetalles").className = "text-info";
+                document.getElementById("inputDetalles").className = "form-control border border-info";
+                document.getElementById("lblInicio").className = "text-info";
+                document.getElementById("InicioUpdate").className = "form-control border border-info";
+                document.getElementById("lblFin").className = "text-primary";
+                document.getElementById("FinUpdate").className = "form-control border border-info";
+                document.getElementById("lblImpacto").className = "text-info";
+                document.getElementById("inputImpacto").className = "form-control border  border-info";
+                document.getElementById("lblPrioritaria").className = "text-info";
+                document.getElementById("cmbPrioritaria").className = "form-control border  border-info disabled";
+                document.getElementById("cmbPrioritaria").disabled = true;
+                document.getElementById("lblStatus").className = "text-info";
+                document.getElementById("cmbStatus").className = "form-control border  border-info";                      
+
+            self.Id_Padre = Id;
+
+            self.EStatus = "P";
+            self.Prioritaria = "N";
+            ObtenerProgramas();
+        };        
         /*******************************************************************************************************************************************************/
 
         this.ActividadesCrud = function (ID) {

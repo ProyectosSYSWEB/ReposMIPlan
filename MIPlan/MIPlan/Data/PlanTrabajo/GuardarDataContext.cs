@@ -85,8 +85,8 @@ namespace MIPlan.Data.PlanTrabajo
             try
             {
                 OracleDataReader dr = null;
-                string[] Parametros = { "P_ID_META", "P_CLAVE", "P_DESCRIPCION", "P_IMPACTO",  "P_FECHA_INICIO", "P_FECHA_FIN", "P_ALTA_USUARIO", "P_ID_PROGRAMA", "P_PRIORITARIA", "P_STATUS" };
-                object[] Valores = { objActividad.Id_Meta, objActividad.Clave, objActividad.Descripcion, objActividad.Impacto, objActividad.Fecha_Inicio, objActividad.Fecha_Fin, Usuario, objActividad.Id_Programa, objActividad.Prioritaria, objActividad.Status };
+                string[] Parametros = { "P_ID_META", "P_CLAVE", "P_DESCRIPCION", "P_DETALLES", "P_IMPACTO",  "P_FECHA_INICIO", "P_FECHA_FIN", "P_ALTA_USUARIO", "P_ID_PROGRAMA", "P_PRIORITARIA", "P_STATUS" , "P_ID_PADRE" };
+                object[] Valores = { objActividad.Id_Meta, objActividad.Clave, objActividad.Descripcion, objActividad.Detalles, objActividad.Impacto, objActividad.Fecha_Inicio, objActividad.Fecha_Fin, Usuario, objActividad.Id_Programa, objActividad.Prioritaria, objActividad.Status , objActividad.Id_Padre };
                 string[] ParametrosOut = { "P_BANDERA" };
                 cmd = exeProc.GenerarOracleCommand("INS_PLA_PLAN_ACTIVIDADES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
             }
@@ -106,8 +106,8 @@ namespace MIPlan.Data.PlanTrabajo
             try
             {
                 OracleDataReader dr = null;
-                string[] Parametros = { "P_ID", "P_ID_PROGRAMA", "P_DESCRIPCION", "P_FECHA_INICIO", "P_FECHA_FIN", "P_IMPACTO", "P_PRIORITARIA", "P_USUARIO_MODIFICA", "P_CLAVE", "P_STATUS"};
-                object[] Valores = { objActividad.Id, objActividad.Id_Programa, objActividad.Descripcion, objActividad.Fecha_Inicio, objActividad.Fecha_Fin, objActividad.Impacto, objActividad.Prioritaria, Usuario, objActividad.Clave, objActividad.Status };
+                string[] Parametros = { "P_ID", "P_ID_PROGRAMA", "P_DESCRIPCION", "P_DETALLES", "P_FECHA_INICIO", "P_FECHA_FIN", "P_IMPACTO", "P_PRIORITARIA", "P_USUARIO_MODIFICA", "P_CLAVE", "P_STATUS", "P_ID_PADRE" };
+                object[] Valores = { objActividad.Id, objActividad.Id_Programa, objActividad.Descripcion, objActividad.Detalles, objActividad.Fecha_Inicio, objActividad.Fecha_Fin, objActividad.Impacto, objActividad.Prioritaria, Usuario, objActividad.Clave, objActividad.Status, objActividad.Id_Padre };
                 string[] ParametrosOut = { "P_BANDERA" };
                 cmd = exeProc.GenerarOracleCommand("UPD_PLA_PLAN_ACTIVIDADES", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
             }
