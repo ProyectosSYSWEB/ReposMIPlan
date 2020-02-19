@@ -712,6 +712,7 @@
                 document.getElementById("inputImpacto").className = "form-control border  border-primary";
                 document.getElementById("lblPrioritaria").className = "text-primary";
                 document.getElementById("cmbPrioritaria").className = "form-control border  border-primary";
+                document.getElementById("cmbPrioritaria").disabled = false;
                 document.getElementById("lblStatus").className = "text-primary";
                 document.getElementById("cmbStatus").className = "form-control border  border-primary";
                 self.Id_Padre = 0;
