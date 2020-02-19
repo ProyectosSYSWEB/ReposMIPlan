@@ -606,7 +606,7 @@
                                             <td><font size="2">{{i.Fecha_Fin}}</font></td>
                                             <td><font size="2">{{i.Impacto}}</font></td>
                                             <td><font size="2">{{i.Prioritaria}}</font></td>
-                                            <td><font size="2">{{i.Status}}</font></td>
+                                            <td ng-class="{'btn-danger': i.Status == 'Cancelada', 'btn-success': i.Status == 'Terminada', 'btn-warning': i.Status == 'En Proceso'}"><font size="2">{{i.Status}}</font></td>
                                             <td colspan="3">
                                                 <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" title="Editar" ng-click="ctrl.ModalACTV(i.Id, i.Id_Padre)">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -626,7 +626,7 @@
                                         </tr>
                                     </tfoot>
                                 </table>
-                                <div class="mb-5 alert alert-danger text-center check-element animate-show-hide" id="ACTAlert" ng-show="ctrl.NoActv" role="alert">
+                                <div class="mb-5 alert alert-danger text-center check-element animate-show-hide " id="ACTAlert" ng-show="ctrl.NoActv" role="alert">
                                     {{ctrl.NoActv}}
                                 </div>
                             </div>
