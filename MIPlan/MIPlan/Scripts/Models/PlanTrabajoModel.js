@@ -276,7 +276,7 @@ var catalogoContext =
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
-                            self.GridActividadesLST.push({ Id: resp.Resultado[i].Id, Desc_Programa: resp.Resultado[i].Desc_Programa, Desc_Accion: resp.Resultado[i].Desc_Accion, Detalles: resp.Resultado[i].Detalles, Fecha_Inicio: resp.Resultado[i].Fecha_Inicio, Fecha_Fin: resp.Resultado[i].Fecha_Fin, Impacto: resp.Resultado[i].Impacto, Prioritaria: resp.Resultado[i].Prioritaria, Status: resp.Resultado[i].Status, Id_Padre: resp.Resultado[i].Id_Padre });
+                            self.GridActividadesLST.push({ Id: resp.Resultado[i].Id, Desc_Programa: resp.Resultado[i].Desc_Programa, Desc_Accion: resp.Resultado[i].Desc_Accion, Detalles: resp.Resultado[i].Detalles, Fecha_Inicio: resp.Resultado[i].Fecha_Inicio, Fecha_Fin: resp.Resultado[i].Fecha_Fin, Impacto: resp.Resultado[i].Impacto, Prioritaria: resp.Resultado[i].Prioritaria, Status: resp.Resultado[i].Status, Id_Padre: resp.Resultado[i].Id_Padre, Id_Programa: resp.Resultado[i].Id_Programa  });
                             self.GridProgramas.push({ Desc_Programa: resp.Resultado[i].Desc_Programa });
                         }                      
                         if (callBackResult !== undefined) {

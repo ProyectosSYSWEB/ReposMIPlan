@@ -292,7 +292,7 @@ namespace MIPlan.Controllers
                 else
                 {
                     objResultado.Error = true;
-                    objResultado.MensajeError = "";
+                    objResultado.MensajeError = Verificador;
                     objResultado.Resultado = null;
                 }
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
@@ -488,7 +488,7 @@ namespace MIPlan.Controllers
                 else
                 {
                     objResultado.Error = true;
-                    objResultado.MensajeError = "";
+                    objResultado.MensajeError = Verificador;
                     objResultado.Resultado = null;
                 }
                 return Json(objResultado, JsonRequestBehavior.AllowGet);

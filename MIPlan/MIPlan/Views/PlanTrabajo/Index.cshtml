@@ -140,7 +140,7 @@
                                 <label id="lblPrograma" class="">Programa</label>
                             </div>
                             <div class="row justify-content-center">
-                                <select id="cmbPrograma" class="" name="cmbPrograma" ng-options="option.Id as option.Programa for option in ctrl.ObtenerProgramasView" ng-model="ctrl.ObtenerDatosActividadesView[0].Id_Programa" required>
+                                <select id="cmbPrograma" class="" name="cmbPrograma" ng-options="option.Id as option.Programa for option in ctrl.ObtenerProgramasView" ng-model="ctrl.Id_Programa" required>
                                     <option value="">--Seleccionar Programa--</option>
                                 </select>
                             </div>
@@ -611,7 +611,7 @@
                                                 <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" title="Editar" ng-click="ctrl.ModalACTV(i.Id, i.Id_Padre)">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                                 </button>
-                                                <button type="button" id="btnUpdate" class="btn btn-info" style="width:40px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" title="Agregar Actividad Secundaría" ng-click="ctrl.ModalH(i.Id)" ng-show="i.Prioritaria === 'Si'">
+                                                <button type="button" id="btnUpdate" class="btn btn-info" style="width:40px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" title="Agregar Actividad Secundaría" ng-click="ctrl.ModalH(i.Id, i.Id_Programa)" ng-show="i.Prioritaria === 'Si'">
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                                 </button>
                                                 <button type="button" class="btn btn-danger" title="Eliminar" ng-click="ctrl.EliminnarA(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
@@ -619,7 +619,7 @@
                                         </tr>
                                     </tbody>
 
-                                    <tfoot>
+                                    <tfoot> 
                                         <tr>
                                             <th colspan="9"><dir-pagination-controls boundary-links="true" pagination-id="PaginationGridActividades"></dir-pagination-controls></th>
 
