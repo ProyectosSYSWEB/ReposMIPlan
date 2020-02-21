@@ -12,29 +12,7 @@
 <br />
 
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
-
-
-    @*<table class="table" id="tableMain">
-        <thead>
-            <tr>
-                <th scope="col">Prueba de </th>
-                <th scope="col" width="50%">Multi-Fila Collapse By. LuisLG</th>
-            </tr>
-        </thead>
-        <tbody ng-repeat="i in ctrl.GridActividadesView" ng-if="i.Desc_Programa == i.Desc_Programa && i.Id_Padre === 0">
-            <tr class="" data-toggle="collapse" data-target="#A-{{i.Id}}">
-                <td id="categoryTd" colspan="5">
-                    {{i.Desc_Programa}}
-                </td>
-            </tr>
-
-            <tr id="A-{{i.Id}}" class="collapse breakrow" ng-if="i.Desc_Programa === i.Desc_Programa && i.Id_Padre === 0 "><td> {{i.Desc_Accion}} </td><td></td></tr>
-
-            <tr id="A-{{i.Id}}" class="collapse datarow" style="display:none" ng-if="i.Desc_Programa === i.Desc_Programa "><td>{{i.Desc_Accion}} 03</td><td>product 01</td></tr>
-
-        </tbody>
-    </table>*@
-
+ 
     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <!-- Modal Plan Maestro-->
     <div class="modal fade" data-keyboard="false" data-backdrop="static" id="ModalPlanMastro" tabindex="-1" role="dialog" aria-labelledby="ModalPlanMastro" aria-hidden="true">
