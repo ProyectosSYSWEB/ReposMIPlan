@@ -21,6 +21,13 @@
             self.EStatus = "A";
         }
         self.Si = 'Si';
+
+        this.getChildren = function (student) {
+            self.studen = !student; // expand/collapse items
+            if (student.children) { // request a server only once to get the children
+                return;
+            }
+        }
         /********************************************************************************************************************************************************/
         var ObtenerDependencias = function () {
             catalogoContext.ObtenerDependencias(function (resp) {
