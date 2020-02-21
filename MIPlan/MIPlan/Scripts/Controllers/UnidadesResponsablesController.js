@@ -182,9 +182,18 @@
             catalogoContext.eliminarUnidad(Idunidad, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'Se ha eliminado con exito.',
+                            'success'
+                        );
                         break;
                     case "notgp":
+                        Swal.fire(
+                            'Oooops :(',
+                            '¡Fallo al reaizar esta acción!',
+                            'error'
+                        );
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
                         document.getElementById("Message").innerHTML = self.mensaje_gral;
@@ -200,7 +209,7 @@
             Swal.fire({
                 title: '¿Seguro que Desea Eliminar el Resgistro?',
                 text: "Se Eliminara Permanentemente",
-                icon: 'error',
+                icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -210,11 +219,7 @@
                 if (result.value) {
                     eliminarUnidadResponsable(Indice);
 
-                    Swal.fire(
-                        '¡Eliminado!',
-                        'Se ha eliminado con exito.',
-                        'success'
-                    );
+                  
                     CargarGrid();
                 }
             })

@@ -171,7 +171,7 @@
             self.DescripcionAA = "";
         }
         var ObtenerModalGridAreasAtencion = function () {
-            catalogoContext.ObtenerModalGridAreasAtencion(self.buscarEjercicios, self.buscarDependencias, function (resp) {
+            catalogoContext.ObtenerModalGridAreasAtencion(self.buscarEjercicios, self.buscarDependencias, self.buscarPlan, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         self.ObtenerModalGridAreasAtencionView = catalogoContext.ObtenerModalGridAreasAtencionLST;
@@ -229,7 +229,7 @@
             Swal.fire({
                 title: '¿Seguro que Desea Eliminar el Resgistro?',
                 text: "Se Eliminara Permanentemente",
-                icon: 'error',
+                icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -239,11 +239,7 @@
                 if (result.value) {
                     EliminarAreasAtencion(Id);
                     
-                    Swal.fire(
-                        '¡Eliminado!',
-                        'Se ha eliminado con exito.',
-                        'success'
-                    );
+                    
                     GridAreasAtencion();
                 }
             })
@@ -253,10 +249,19 @@
             catalogoContext.EliminarAreasAtencion(Id, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'Se ha eliminado con exito.',
+                            'success'
+                        );
                         GridActividades(self.IDMETA);
                         break;
                     case "notgp":
-
+                        Swal.fire(
+                            'Oooops :(',
+                            '¡Fallo al reaizar esta acción!',
+                            'error'
+                        );
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
                         document.getElementById("Message").innerHTML = self.mensaje_gral;
@@ -423,7 +428,7 @@
             Swal.fire({
                 title: '¿Seguro que Desea Eliminar el Resgistro?',
                 text: "Se Eliminara Permanentemente",
-                icon: 'error',
+                icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -433,11 +438,7 @@
                 if (result.value) {
                     EliminarActividad(Indice);
 
-                    Swal.fire(
-                        '¡Eliminado!',
-                        'Se ha eliminado con exito.',
-                        'success'
-                    );
+                   
                     GridActividades(self.IDMETA);
                 }
             })
@@ -447,10 +448,19 @@
             catalogoContext.EliminarActividades(Id, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'Se ha eliminado con exito.',
+                            'success'
+                        );
                         GridUnidadesResp(self.idActividad);
                         break;
                     case "notgp":
-
+                        Swal.fire(
+                            'Oooops :(',
+                            '¡Fallo al reaizar esta acción!',
+                            'error'
+                        );
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
                         document.getElementById("Message").innerHTML = self.mensaje_gral;
@@ -637,7 +647,7 @@
             Swal.fire({
                 title: '¿Seguro que Desea Eliminar el Resgistro?',
                 text: "Se Eliminara Permanentemente",
-                icon: 'error',
+                icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -661,10 +671,18 @@
             catalogoContext.EliminarUnidadResponsable(Id, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'Se ha eliminado con exito.',
+                            'success'
+                        );
                         break;
                     case "notgp":
-
+                        Swal.fire(
+                            'Oooops :(',
+                            '¡Fallo al reaizar esta acción!',
+                            'error'
+                        );
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
                         document.getElementById("Message").innerHTML = self.mensaje_gral;

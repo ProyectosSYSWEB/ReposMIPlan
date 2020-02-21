@@ -183,7 +183,7 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-    ObtenerModalGridAreasAtencion: function (Ejercicio, Dependencia, callBackResult) {
+    ObtenerModalGridAreasAtencion: function (Ejercicio, Dependencia, buscarPlan, callBackResult) {
         var self = this;
         self.ObtenerModalGridAreasAtencionLST.length = 0;
         $.ajax(
@@ -191,7 +191,7 @@ var catalogoContext =
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'PlanTrabajo/ObtenerModalGridAreasAtencion',
-                data: { Ejercicio, Dependencia },
+                data: { Ejercicio, Dependencia, buscarPlan },
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
