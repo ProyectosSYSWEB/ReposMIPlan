@@ -22,6 +22,13 @@
         }
         self.Si = 'Si';
 
+        self.setShowDetail = function (index) {
+            if (index === self.itemDetails) {
+                self.itemDetails = null;
+            } else {
+                self.itemDetails = index;
+            }
+        }
         /********************************************************************************************************************************************************/
         var ObtenerDependencias = function () {
             catalogoContext.ObtenerDependencias(function (resp) {
