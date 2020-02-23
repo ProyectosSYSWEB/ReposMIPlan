@@ -477,7 +477,7 @@
     <br />
     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <div class="row">
-        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
             <div class="panel panel-default panel-table">
                 <div class="panel-heading">
                     <div class="container">
@@ -543,7 +543,7 @@
             <br />
             <br />
         </div>
-        <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+        <div class="col-sm-12 col-md-8 col-lg-9 col-xl-9">
 
             <div role="tabpanel" style="box-shadow: 10px 40px 96px rgba(0,0,0,.1)">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -582,10 +582,11 @@
                                 <table class="table table-hover" id="tableMain">
                                     <thead>
                                         <tr>
+                                            <th></th>
                                             <th scope="col">Acción</th>
                                             <th scope="col">Inicio</th>
                                             <th scope="col">Fin</th>
-                                            <th scope="col">Impacto</th>
+                                            <th colspan="2" scope="col">Impacto</th>
                                             <th scope="col">Prioritaria</th>
                                             <th scope="col">Status</th>
                                             <th scope="col" style="text-align:center" colspan="3"><em class="fa fa-cog"></em></th>
@@ -598,14 +599,16 @@
                                  
 
                                         <tr class="bgAct text-white cursor-pointer" data-toggle="collapse" data-target="#A-{{pro.Id}}" ng-if="pro.Desc_Programa == pro.Desc_Programa && pro.Id_Padre === 0" >
-                                            <td colspan="2"><i class="fa fa-plus"> Programa: </i></td>
+                                            <td><i class="fa fa-plus text-primary">  </i></td>
+                                            <td>Programa:</td>
                                             <td colspan="8">{{pro.Desc_Programa}}</td>
                                         </tr>
-                                        <tr id="A-{{pro.Id}}" class="collapse breakrow cursor-pointer"  ng-repeat-start="i in ctrl.GridActividadesView"  ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad; ctrl.getChildren(i.Desc_Programa)" ng-class="{'MybgUR ': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === i.Desc_Programa && i.Id_Padre === 0 ">
-                                            <td title="Descripción:  {{i.Detalles}}"><font size="2"><i class="fa fa-plus"> {{i.Desc_Accion}} </i></font></td>
+                                        <tr id="A-{{pro.Id}}" class="collapse breakrow cursor-pointer"  ng-repeat-start="i in ctrl.GridActividadesView"  ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'MybgUR ': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === i.Desc_Programa && i.Id_Padre === 0 ">
+                                            <td><i class="fa fa-plus text-primary"></td>
+                                            <td title="Descripción:  {{i.Detalles}}"><font size="2"> {{i.Desc_Accion}}</font></td>
                                             <td><font size="2">{{i.Fecha_Inicio}}</font></td>
                                             <td><font size="2">{{i.Fecha_Fin}}</font></td>
-                                            <td><font size="2">{{i.Impacto}}</font></td>
+                                            <td colspan="2"><font size="2">{{i.Impacto}}</font></td>
                                             <td><font size="2">{{i.Prioritaria}}</font></td>
                                             <td ng-class="{'btn-danger': i.Status == 'Cancelada', 'btn-success': i.Status == 'Terminada', 'btn-warning': i.Status == 'En Proceso'}"><font size="2">{{i.Status}}</font></td>
                                             <td colspan="3">
@@ -619,10 +622,11 @@
                                             </td>
                                         </tr>
                                         <tr id="A-{{pro.Id}}" class="collapse datarow cursor-pointer" style="display:none" ng-repeat-end ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'MybgUR ': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === i.Desc_Programa && i.Id_Padre != 0">
+                                            <td></td>
                                             <td title="Descripción:  {{i.Detalles}}"><font size="2">{{i.Desc_Accion}}</font></td>
                                             <td><font size="2">{{i.Fecha_Inicio}}</font></td>
                                             <td><font size="2">{{i.Fecha_Fin}}</font></td>
-                                            <td><font size="2">{{i.Impacto}}</font></td>
+                                            <td colspan="2"><font size="2">{{i.Impacto}}</font></td>
                                             <td><font size="2">{{i.Prioritaria}}</font></td>
                                             <td ng-class="{'btn-danger': i.Status == 'Cancelada', 'btn-success': i.Status == 'Terminada', 'btn-warning': i.Status == 'En Proceso'}"><font size="2">{{i.Status}}</font></td>
                                             <td colspan="3">
@@ -639,7 +643,7 @@
 
                                     <tfoot>
                                         <tr>
-                                            <th colspan="9"><dir-pagination-controls boundary-links="true" pagination-id="PaginationGridActividades"></dir-pagination-controls></th>
+                                            <th colspan="11"><dir-pagination-controls boundary-links="true" pagination-id="PaginationGridActividades"></dir-pagination-controls></th>
 
                                         </tr>
                                     </tfoot>
