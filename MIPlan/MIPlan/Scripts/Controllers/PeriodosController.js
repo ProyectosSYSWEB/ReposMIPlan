@@ -192,6 +192,7 @@
                             'Se ha eliminado con exito.',
                             'success'
                         );
+                        CargarGrid();   
                         break;
                     case "notgp":
                         Swal.fire(
@@ -221,10 +222,7 @@
                 confirmButtonText: 'Si, Quiero Eliminarlo'
             }).then((result) => {
                 if (result.value) {
-                    EliminnarPeriodoF(Indice);
-
-                  
-                    CargarGrid();   
+                    EliminnarPeriodoF(Indice);                  
                 }
             })
         };

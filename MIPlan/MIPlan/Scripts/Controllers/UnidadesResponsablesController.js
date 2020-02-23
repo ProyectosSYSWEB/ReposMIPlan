@@ -187,6 +187,7 @@
                             'Se ha eliminado con exito.',
                             'success'
                         );
+                        CargarGrid();   
                         break;
                     case "notgp":
                         Swal.fire(
@@ -217,10 +218,7 @@
                 confirmButtonText: 'Si, Quiero Eliminarlo'
             }).then((result) => {
                 if (result.value) {
-                    eliminarUnidadResponsable(Indice);
-
-                  
-                    CargarGrid();
+                    eliminarUnidadResponsable(Indice);                                     
                 }
             })
         };

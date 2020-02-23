@@ -177,7 +177,8 @@
                             '¡Listo!',
                             '¡Se han actualizado los datos correctamente!',
                             'success'
-                        ) 
+                        )
+                        CargarGrid();
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -187,8 +188,7 @@
                     default:
                         break;
                 }
-                $scope.$apply();
-                CargarGrid();
+                $scope.$apply();              
             });
         };
 
@@ -233,6 +233,7 @@
                             'Se ha eliminado con exito.',
                             'success'
                         );
+                        CargarGrid();
                         break;
                     case "notgp":
                         Swal.fire(
@@ -264,13 +265,6 @@
             }).then((result) => {
                 if (result.value) {
                     eliminarIndicadores(Indice);
-
-                    Swal.fire(
-                        '¡Eliminado!',
-                        'Se ha eliminado con exito.',
-                        'success'
-                    );
-                    CargarGrid();
                 }
             })
         };
@@ -303,8 +297,7 @@
             if (form) {
                 form.$setPristine();
                 form.$setUntouched();
-            }
-            CargarGrid();
+            }         
             self.cve_cat = null;
             self.cve_sub = null;
             self.cve_desc = null;

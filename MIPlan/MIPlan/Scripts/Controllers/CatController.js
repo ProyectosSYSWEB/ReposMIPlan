@@ -208,6 +208,8 @@
                             'Se ha eliminado con exito.',
                             'success'
                         );
+
+                        CargarGrid();
                       
                         break;
                     case "notgp":
@@ -240,10 +242,7 @@
                 confirmButtonText: 'Si, Quiero Eliminarlo'
             }).then((result) => {
                 if (result.value) {
-                    BasicoDelete(Indice);
-
-                   
-                    CargarGrid();
+                    BasicoDelete(Indice);                                    
                 }
             })
         };
@@ -290,8 +289,7 @@
             if (form) {
                 form.$setPristine();
                 form.$setUntouched();
-            }
-            CargarGrid();
+            }          
             self.cve_catalogo = null;
             self.cve_orden = null;
             self.cve_clave = null;

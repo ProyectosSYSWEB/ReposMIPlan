@@ -267,7 +267,7 @@ this.AcreditadorCreate = function () { AcreditadorCreate(); }
                             'Se ha eliminado con exito.',
                             'success'
                         );
-
+                        CargarGrid();
                         break;
                     case "notgp":
                         Swal.fire(
@@ -306,7 +306,7 @@ this.AcreditadorCreate = function () { AcreditadorCreate(); }
                         'Se ha eliminado con exito.',
                         'success'
                     );
-                    CargarGrid();
+                  
                 }
             })
         };
@@ -333,8 +333,7 @@ this.AcreditadorCreate = function () { AcreditadorCreate(); }
         }
 
         
-        this.reset = function (form) {
-            CargarGrid();
+        this.reset = function (form) {          
             self.cve_dependencia = null;
             self.cve_carrera = null;
             self.cve_organismo = null;

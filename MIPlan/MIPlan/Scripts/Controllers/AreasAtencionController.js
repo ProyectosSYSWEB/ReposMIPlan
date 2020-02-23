@@ -157,6 +157,7 @@
                             'Se ha eliminado con exito.',
                             'success'
                         );
+                        CargarGrid();
                         break;
                     case "notgp":
                         Swal.fire(
@@ -189,11 +190,7 @@
                 confirmButtonText: 'Si, Quiero Eliminarlo'
             }).then((result) => {
                 if (result.value) {
-                    eliminarAreaAtencion(Indice);
-
-                  
-                   
-                    CargarGrid();
+                    eliminarAreaAtencion(Indice);                                                        
                 }
             })
         };
@@ -289,7 +286,7 @@
                 form.$setPristine();
                 form.$setUntouched();
             }
-            CargarGrid();
+           
             self.cve_dependencia = null;
             self.cve_clave = null;
             self.cve_desc = null;

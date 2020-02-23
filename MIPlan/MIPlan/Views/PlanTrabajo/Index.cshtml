@@ -147,7 +147,7 @@
                             </div>
                             <div class="row justify-content-center">
                                 <span class="messages check-element animate-show-hide" ng-show="modalFormActv.$submitted || modalFormActv.cmbPrograma.$touched">
-                                    <span ng-show="!ctrl.ObtenerDatosActividadesView[0].Id_Programa" class="text-danger check-element animate-show-hide">Campo Requerido</span>
+                                    <span ng-show="!ctrl.Id_Programa" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                 </span>
                             </div>
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
@@ -414,14 +414,14 @@
     <div class="container">
 
 
-        <div id="Error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
+        <div id="Error" class="alert alert-danger alert-dismissible fade show " role="alert" style="display:none">
             <strong id="Message">¡Ha ocurrido un error! </strong>
             <button type="button" class="close" ng-click="ctrl.DivError()" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center ">
 
             <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                 <div class="form-group">
@@ -488,10 +488,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.1)">
+                <div class="table-responsive z-depth-1" style="box-shadow: 10px 40px 96px rgba(0,0,0,.1)">
                     <table class="table table-hover" id="tableAA">
                         <thead>
-                            <tr>
+                            <tr class="light-blue darken-3 text-white">
                                 <th scope="col">Áreas de Atención</th>
                                 <th scope="col">%</th>
                                 <th scope="col" style="text-align:center"><em class="fa fa-cog"></em></th>
@@ -501,7 +501,7 @@
 
                         <tbody ng-pagination="i in ctrl.GridAreasAtencionView |  itemsPerPage: 10 " pagination-id="PaginationGridAR">
 
-                            <tr id="tes" ng-class="{'Mybg text-white': A == ctrl.Descripcion}">
+                            <tr id="tes" ng-class="{'light-blue darken-1 text-white': A == ctrl.Descripcion}">
                                 <td ng-click="ctrl.Meta(i.Id, i.Descripcion); A= ctrl.Descripcion" class="cursor-pointer AAT"> {{i.Id}}.- {{i.Descripcion}} </td>
                                 <td> 0</td>
 
@@ -545,37 +545,36 @@
         </div>
         <div class="col-sm-12 col-md-8 col-lg-9 col-xl-9">
 
-            <div role="tabpanel" style="box-shadow: 10px 40px 96px rgba(0,0,0,.1)">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <div role="tabpanel" class="z-depth-1">
+                <ul class="nav nav-tabs md-tabs tabs-primary" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="Acciones-tab" data-toggle="tab" href="#Acciones" role="tab" aria-controls="Acciones" aria-selected="true">Actividades</a>
+                        <a class="nav-link waves-light active show" id="Acciones-tab" data-toggle="tab" href="#Acciones" role="tab" aria-controls="Acciones" aria-selected="true">Actividades</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="UR-tab" data-toggle="tab" href="#UR" role="tab" aria-controls="UR" aria-selected="false">Unidades Responsables</a>
+                        <a class="nav-link waves-light" id="UR-tab" data-toggle="tab" href="#UR" role="tab" aria-controls="UR" aria-selected="false">Unidades Responsables</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="Indicadores-tab" data-toggle="tab" href="#Indicadores" role="tab" aria-controls="Indicadores" aria-selected="false">Indicadores</a>
+                        <a class="nav-link waves-light" id="Indicadores-tab" data-toggle="tab" href="#Indicadores" role="tab" aria-controls="Indicadores" aria-selected="false">Indicadores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="Evidencias-tab" data-toggle="tab" href="#Evidencias" role="tab" aria-controls="Evidencias" aria-selected="false">Evidencias</a>
+                        <a class="nav-link waves-light" id="Evidencias-tab" data-toggle="tab" href="#Evidencias" role="tab" aria-controls="Evidencias" aria-selected="false">Evidencias</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
 
-                    <div class="tab-pane fade show active" id="Acciones" role="tabpanel" aria-labelledby="Acciones-tab">
-                        <br />
+                    <div class="tab-pane fade show active" id="Acciones" role="tabpanel" aria-labelledby="Acciones-tab">         
                         <div class="panel panel-default panel-table">
                             <div class="panel-heading">
-                                <div class="container-fluid">
+                             
                                     <div class="row">
                                         <div class="col text-left">
                                             <h6>Ubicación:  <span class="badge badge-secondary">{{ctrl.Descripcion}}</span></h6>
                                         </div>
                                         <div class="col text-right">
-                                            <button type="button" id="btnCrear" class="btn btn-sm btn-success btn-create" style="width:120px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" title="Crear Actividad" ng-click="ctrl.ColorATCV()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                                            <button type="button" id="btnCrear" class="btn btn-sm btn-success btn-create" style="width:120px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" title="Crear Actividad" ng-click="ctrl.ColorATCV()" ng-disabled="!ctrl.IDMETA"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
                                         </div>
                                     </div>
-                                </div>
+                                
                             </div>
                        
                                 <div class="mb-5 alert alert-danger text-center check-element animate-show-hide " id="ACTAlert" ng-show="ctrl.NoActv" role="alert">
@@ -584,7 +583,7 @@
 
 
                             <!--Accordion wrapper-->
-                            <div class="accordion md-accordion accordion-blocks" id="accordionEx78" role="tablist"
+                            <div class="accordion md-accordion accordion-blocks " id="accordionEx78" role="tablist"
                                  aria-multiselectable="true">
 
 
@@ -597,10 +596,10 @@
 
 
                                         <!-- Heading -->
-                                        <a class="btn btn-info" data-toggle="collapse" data-parent="#accordionEx78" href="#B-{{pro.Id}}" aria-expanded="true"
+                                        <a class="btn btn-info z-depth-2" data-toggle="collapse" data-parent="#accordionEx78" href="#B-{{pro.Id}}" aria-expanded="true"
                                            aria-controls="collapse79" ng-if="pro.Desc_Programa == pro.Desc_Programa && pro.Id_Padre === 0" ng-click="ctrl.setShowDetail($index)">
-                                            <h6 class="mt-1 mb-0">
-                                                <span>{{pro.Desc_Programa}}</span>
+                                            <h6 class="mt-1 mb-1">
+                                                <span>Programa: {{pro.Desc_Programa}}</span>
                                             </h6>
                                         </a>
                                         @*<i class="fa fa-angle-down rotate-icon"></i>*@
@@ -615,8 +614,8 @@
                                             <!-- Table responsive wrapper -->
                                             <div class="table-responsive mx-3">
                                                 <!--Table-->
-                                                <table class="table">
-                                                    <thead class="thead-dark">
+                                                <table class="table table-hover">
+                                                    <thead class="teal darken-3 text-white">
                                                         <tr>
                                                             <th></th>
                                                             <th scope="col">Acción</th>
@@ -629,9 +628,9 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody ng-repeat="i in ctrl.GridActividadesView">
-                                                        <tr class="cursor-pointer"  ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'MybgUR ': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === i.Desc_Programa && i.Id_Padre === 0 " data-toggle="collapse" data-target="#C-{{i.Id}}">
-                                                            <td><i class="fa fa-plus text-primary"></i></td>
-                                                            <td title="Descripción:  {{i.Detalles}}"><font size="2"> {{i.Desc_Accion}}</font></td>
+                                                        <tr class="cursor-pointer"  ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'teal lighten-1 text-white ': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === i.Desc_Programa && i.Id_Padre === 0 " >
+                                                            <td data-toggle="collapse" data-target="#C-{{i.Id}}"><i class="fa fa-plus"></i></td>
+                                                            <td title="Descripción:  {{i.Detalles}}" data-toggle="collapse" data-target="#C-{{i.Id}}"><font size="2"> {{i.Desc_Accion}}</font></td>
                                                             <td><font size="2">{{i.Fecha_Inicio}}</font></td>
                                                             <td><font size="2">{{i.Fecha_Fin}}</font></td>
                                                             <td colspan="2"><font size="2">{{i.Impacto}}</font></td>
@@ -647,7 +646,7 @@
                                                                 <button type="button" class="btn btn-danger" title="Eliminar" ng-click="ctrl.EliminnarA(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
                                                             </td>
                                                         </tr>
-                                                        <tr id="C-{{i.Id}}" class="collapse cursor-pointer" ng-repeat="j in ctrl.GridActividadesView" ng-click="ctrl.getUR(j.Id, j.Desc_Accion); A= ctrl.DescActividad" ng-class="{'MybgUR ': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === j.Desc_Programa && j.Id_Padre != 0 && j.Id_Padre == i.Id">
+                                                        <tr id="C-{{i.Id}}" class="collapse cursor-pointer" ng-repeat="j in ctrl.GridActividadesView" ng-click="ctrl.getUR(j.Id, j.Desc_Accion); A= ctrl.DescActividad" ng-class="{'teal lighten-1 text-white ': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === j.Desc_Programa && j.Id_Padre != 0 && j.Id_Padre == i.Id">
                                                             <td><div id="C-{{i.Id}}" class="collapse"></div></td>
                                                             <td title="Descripción:  {{j.Detalles}}"><div id="C-{{i.Id}}" class="collapse"><font size="2">{{j.Desc_Accion}}</font></div></td>
                                                             <td><div id="C-{{i.Id}}" class="collapse"><font size="2">{{j.Fecha_Inicio}}</font></div></td>
@@ -699,7 +698,7 @@
                                             <h6>Ubicación:  <span class="badge badge-secondary">{{ctrl.Descripcion}}  /  {{ctrl.DescActividad}}</span></h6>
                                         </div>
                                         <div class="col text-right">
-                                            <button type="button" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#ModalAddUR" data-backdrop="static" data-keyboard="false" title="Agregar Responsable" ng-click="ctrl.GridUR()">Agregar Unidad</button>
+                                            <button type="button" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#ModalAddUR" data-backdrop="static" data-keyboard="false" title="Agregar Responsable" ng-click="ctrl.GridUR()" ng-disabled="!ctrl.idActividad">Agregar Unidad</button>
                                         </div>
                                     </div>
                                 </div>
