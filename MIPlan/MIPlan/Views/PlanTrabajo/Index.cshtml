@@ -429,8 +429,7 @@
                         Crear Plan
                     </button>
                 </div>
-            </div>
-
+            </div>     
             <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
                 <div class="form-group">
                     <label for="lblUnidadesR" class="text-primary">Unidad Responsable</label>
@@ -768,7 +767,7 @@
 
         $('button').tooltip();               
 
-        
+        $('.mdb-select').materialSelect();
 
         $('#tableMain').on('click', 'tr.breakrow', function () {
             $(this).nextUntil('tr.breakrow').slideToggle(100);
