@@ -6,10 +6,9 @@
 
 <h2></h2>
 
+<br class="imgUnach" />
 <br />
-<br />
-<br />
-<br />
+
 
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
  
@@ -601,8 +600,15 @@
                                                 <span>Programa: {{pro.Desc_Programa}}</span>
                                             </h6>
                                         </a>
+
+
                                         @*<i class="fa fa-angle-down rotate-icon"></i>*@
-                                        <i class="fa fa-chevron-right rotate" ng-class="ctrl.itemDetails === $index ? 'down' : ''"></i>
+                                        @*<i class="fa fa-chevron-right rotate" ng-class="ctrl.itemDetails === $index ? 'down' : ''"></i>*@
+                                        <button class="navbar-toggler first-button cursor-pointer"  type="button" id="BURGER" data-toggle="collapse" data-parent="#accordionEx78" href="#B-{{pro.Id}}" aria-expanded="true"
+                                                aria-controls="collapse79" ng-if="pro.Desc_Programa == pro.Desc_Programa && pro.Id_Padre === 0" ng-click="ctrl.setShowDetail($index)">
+                                            <div class="animated-icon1 cursor-pointer" ng-class="ctrl.itemDetails === $index ? 'open' : ''"><span ></span><span></span><span></span></div>
+                                        </button>
+
                                     </div>
 
                                     <!-- Card body -->
@@ -809,7 +815,8 @@
       
         $("#tableAA").on('click', 'td.AAT', function () {        
             $( "#Acciones-tab" ).click();
-        });  
+        });          
+
 
     });
 
