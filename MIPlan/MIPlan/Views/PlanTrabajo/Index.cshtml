@@ -12,8 +12,7 @@
 <br />
 
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
-
-   
+ 
     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <!-- Modal Plan Maestro-->
     <div class="modal fade" data-keyboard="false" data-backdrop="static" id="ModalPlanMastro" tabindex="-1" role="dialog" aria-labelledby="ModalPlanMastro" aria-hidden="true">
@@ -548,7 +547,7 @@
             <div role="tabpanel" class="z-depth-1">
                 <ul class="nav nav-tabs md-tabs tabs-primary" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link waves-light active show" id="Acciones-tab" data-toggle="tab" href="#Acciones" role="tab" aria-controls="Acciones" aria-selected="true">Actividades</a>
+                        <a class="nav-link  active show" id="Acciones-tab" data-toggle="tab" href="#Acciones" role="tab" aria-controls="Acciones" aria-selected="true">Actividades</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link waves-light" id="UR-tab" data-toggle="tab" href="#UR" role="tab" aria-controls="UR" aria-selected="false">Unidades Responsables</a>
@@ -628,7 +627,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody ng-repeat="i in ctrl.GridActividadesView">
-                                                        <tr class="cursor-pointer"  ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'teal lighten-1 text-white ': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === i.Desc_Programa && i.Id_Padre === 0 " >
+                                                        <tr class="cursor-pointer AAT"  ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'teal lighten-1 text-white ': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === i.Desc_Programa && i.Id_Padre === 0 " >
                                                             <td data-toggle="collapse" data-target="#C-{{i.Id}}"><i class="fa fa-plus"></i></td>
                                                             <td title="Descripción:  {{i.Detalles}}" data-toggle="collapse" data-target="#C-{{i.Id}}"><font size="2"> {{i.Desc_Accion}}</font></td>
                                                             <td><font size="2">{{i.Fecha_Inicio}}</font></td>
@@ -646,7 +645,7 @@
                                                                 <button type="button" class="btn btn-danger" title="Eliminar" ng-click="ctrl.EliminnarA(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
                                                             </td>
                                                         </tr>
-                                                        <tr id="C-{{i.Id}}" class="collapse cursor-pointer" ng-repeat="j in ctrl.GridActividadesView" ng-click="ctrl.getUR(j.Id, j.Desc_Accion); A= ctrl.DescActividad" ng-class="{'teal lighten-1 text-white ': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === j.Desc_Programa && j.Id_Padre != 0 && j.Id_Padre == i.Id">
+                                                        <tr id="C-{{i.Id}}" class="collapse cursor-pointer AAT" ng-repeat="j in ctrl.GridActividadesView" ng-click="ctrl.getUR(j.Id, j.Desc_Accion); A= ctrl.DescActividad" ng-class="{'teal lighten-1 text-white ': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === j.Desc_Programa && j.Id_Padre != 0 && j.Id_Padre == i.Id">
                                                             <td><div id="C-{{i.Id}}" class="collapse"></div></td>
                                                             <td title="Descripción:  {{j.Detalles}}"><div id="C-{{i.Id}}" class="collapse"><font size="2">{{j.Desc_Accion}}</font></div></td>
                                                             <td><div id="C-{{i.Id}}" class="collapse"><font size="2">{{j.Fecha_Inicio}}</font></div></td>
@@ -688,8 +687,6 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="UR" role="tabpanel" aria-labelledby="UR-tab">
-
-                        <br />
                         <div class="panel panel-default panel-table">
                             <div class="panel-heading">
                                 <div class="container-fluid">
@@ -706,7 +703,7 @@
                             <div class="table-responsive">
 
                                 <table class="table table-hover">
-                                    <thead>
+                                    <thead class="teal darken-3 text-white">
                                         <tr>
                                             <th scope="col">Id</th>
                                             <th scope="col">Id Actividad</th>
@@ -804,8 +801,7 @@
     $(document).ready(function () {     
 
         $('button').tooltip();               
-
-        $('.mdb-select').materialSelect();
+     
 
         $('#tableMain').on('click', 'tr.breakrow', function () {
             $(this).nextUntil('tr.breakrow').slideToggle(100);
