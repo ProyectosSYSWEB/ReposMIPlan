@@ -1374,6 +1374,24 @@ namespace MIPlan.Controllers
             }
         }
 
+        //ObjPolizaDet.Cargo = TotCargo;
+        //ObjPolizaDet.Abono = TotAbono;           
+
+
+        //        if (Session["PolizaDet"] == null)
+        //        {
+        //            ListPDet = new List<Poliza_Detalle>();
+        //            ListPDet.Add(ObjPolizaDet);
+        //        }
+        //        else
+        //        {
+        //            ListPDet = (List<Poliza_Detalle>)Session["PolizaDet"];
+        //            ListPDet.Add(ObjPolizaDet);
+        //        }
+
+        //        Session["PolizaDet"] = ListPDet;
+        //        CargarGridDetalle(ListPDet);  
+
         /* FIN FORMULARIO UNIDADES POR USUARIO */
 
 

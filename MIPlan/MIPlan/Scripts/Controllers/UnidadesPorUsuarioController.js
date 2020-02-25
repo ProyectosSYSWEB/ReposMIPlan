@@ -15,7 +15,7 @@
             ObtenerDependencias();      
             ObtenerUnidadesPorUsuario();
         };
-
+     
 /********************************************************************************************************************************************************/
         var ObtenerDependencias = function () {
             catalogoContext.ObtenerDependencias(function (resp) {
@@ -62,8 +62,7 @@
             catalogoContext.GridUnidadesDisponibles(self.Usuario, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.GridUnidadesDisponiblesView = catalogoContext.GridUnidadesDisponiblesLST;
-                        console.log(self.GridUnidadesDisponiblesView);
+                        self.GridUnidadesDisponiblesView = catalogoContext.GridUnidadesDisponiblesLST;                        
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -76,14 +75,38 @@
                 $scope.$apply();          
             });
         };
+
+        //ObjPolizaDet.Cargo = TotCargo;
+        //ObjPolizaDet.Abono = TotAbono;           
+
+
+        //        if (Session["PolizaDet"] == null)
+        //        {
+        //            ListPDet = new List<Poliza_Detalle>();
+        //            ListPDet.Add(ObjPolizaDet);
+        //        }
+        //        else
+        //        {
+        //            ListPDet = (List<Poliza_Detalle>)Session["PolizaDet"];
+        //            ListPDet.Add(ObjPolizaDet);
+        //        }
+
+        //        Session["PolizaDet"] = ListPDet;
+        //        CargarGridDetalle(ListPDet);
 /********************************************************************************************************************************************************/
 
         this.getIdUD = function (Id, Descripcion) {
+            self.rightId = Id;
             self.DescripcionUD = Descripcion;
         }
-
-
-
+        self.NewGridUnidadesDisponibles = [];
+        this.right = function () {
+            self.NewGridUnidadesDisponibles.push({ Id: self.rightId, Descripcion: self.DescripcionUD });
+        }        
+        this.getIdUDNew = function (Id, Descripcion) {
+         
+            self.DescripcionUD = Descripcion;
+        }
 
     }]);
 })();
