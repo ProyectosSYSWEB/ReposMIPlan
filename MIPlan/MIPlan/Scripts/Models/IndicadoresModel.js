@@ -50,7 +50,6 @@
                 url: urlServer + 'Catalogo/ObtenerGridIndicadores',
                 data: { Categoria },
                 success: function (resp) {
-                    console.log(resp);
                     for (var i = 0; i < resp.Resultado.length; i++) {
                         self.indicadoreslst.push({ Id: resp.Resultado[i].Id, Cat: resp.Resultado[i].Categoria, Sub: resp.Resultado[i].Subtipo, Desc: resp.Resultado[i].Descripcion, Et1: resp.Resultado[i].Etiqueta_1, Et2: resp.Resultado[i].Etiqueta_2, Seg: resp.Resultado[i].Evolutivo });
                     }

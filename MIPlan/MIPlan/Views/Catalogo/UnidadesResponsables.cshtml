@@ -4,11 +4,9 @@
     Layout = "~/Views/Shared/_LayoutContenido.cshtml";
 
 }
+<br class="imgUnach" />
+<br />
 
-<h2>UnidadesResponsables</h2>
-<br />
-<br />
-<br />
 
 
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
@@ -54,10 +52,10 @@
                                 </span>
                             </div>
                             @*<div class="row justify-content-center">
-                                <span class="messages">
-                                    <span ng-show="!modalForm.Clave.$valid" class="text-danger">¡Maximo 3 digitos!</span>
-                                </span>
-                            </div>*@
+                                    <span class="messages">
+                                        <span ng-show="!modalForm.Clave.$valid" class="text-danger">¡Maximo 3 digitos!</span>
+                                    </span>
+                                </div>*@
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
                             <div class="row justify-content-center">
                                 <label id="lblDescripcion" class="">Descripción</label>
@@ -183,34 +181,34 @@
 
         <div class="container table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.3)">
             <table class="table table-hover ">
-                <thead>
+                <thead class="light-blue darken-3 text-white">
                     <tr>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Dependencia'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Dependencia'; sortReverse = !sortReverse">
                                 Dependencia
                                 <span ng-class="sortType == 'Dependencia' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Dependencia' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Clave'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Clave'; sortReverse = !sortReverse">
                                 Clave
                                 <span ng-class="sortType == 'Clave' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Clave' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Descripcion'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Descripcion'; sortReverse = !sortReverse">
                                 Descripción
                                 <span ng-class="sortType == 'Descripcion' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Descripcion' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Status'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Status'; sortReverse = !sortReverse">
                                 Estatus
                                 <span ng-class="sortType == 'Status' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Status' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Coordinador'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Coordinador'; sortReverse = !sortReverse">
                                 Coordinación
                                 <span ng-class="sortType == 'Coordinador' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Coordinador' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
@@ -219,7 +217,7 @@
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody class="animate-repeat" ng-pagination="i in ctrl.unidades | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status | itemsPerPage: 5 ">
+                <tbody ng-pagination="i in ctrl.unidades | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status | itemsPerPage: 5 ">
                     <tr>
                         <td>{{i.Dependencia}}</td>
                         <td>{{i.Clave}}</td>
@@ -284,11 +282,11 @@
 
 <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <script type="text/javascript">
-      $(document).ready(function () {     
+    $(document).ready(function () {
 
-        $('button').tooltip();                     
+        $('button').tooltip();
 
-    });  
+    });
 </script>
 
 

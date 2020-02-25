@@ -6,13 +6,12 @@
 
 <h2></h2>
 
+<br class="imgUnach" />
 <br />
-<br />
-<br />
-<br />
+
 
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
-
+ 
     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <!-- Modal Plan Maestro-->
     <div class="modal fade" data-keyboard="false" data-backdrop="static" id="ModalPlanMastro" tabindex="-1" role="dialog" aria-labelledby="ModalPlanMastro" aria-hidden="true">
@@ -140,13 +139,13 @@
                                 <label id="lblPrograma" class="">Programa</label>
                             </div>
                             <div class="row justify-content-center">
-                                <select id="cmbPrograma" class="" name="cmbPrograma" ng-options="option.Id as option.Programa for option in ctrl.ObtenerProgramasView" ng-model="ctrl.ObtenerDatosActividadesView[0].Id_Programa" required>
+                                <select id="cmbPrograma" class="" name="cmbPrograma" ng-options="option.Id as option.Programa for option in ctrl.ObtenerProgramasView" ng-model="ctrl.Id_Programa" required>
                                     <option value="">--Seleccionar Programa--</option>
                                 </select>
                             </div>
                             <div class="row justify-content-center">
                                 <span class="messages check-element animate-show-hide" ng-show="modalFormActv.$submitted || modalFormActv.cmbPrograma.$touched">
-                                    <span ng-show="!ctrl.ObtenerDatosActividadesView[0].Id_Programa" class="text-danger check-element animate-show-hide">Campo Requerido</span>
+                                    <span ng-show="!ctrl.Id_Programa" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                 </span>
                             </div>
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
@@ -175,7 +174,7 @@
                             </div>
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
                             <div class="row justify-content-center">
-                                <label id="lblDetalles" for="formGroupExampleInput" class="">Detalles</label>
+                                <label id="lblDetalles" for="formGroupExampleInput" class="">Descripción</label>
                             </div>
                             <div class="row justify-content-center">
                                 <textarea id="inputDetalles" class="" name="Detalles" rows="4" ng-model="ctrl.ObtenerDatosActividadesView[0].Detalles" placeholder="Detalles" required> </textarea>
@@ -413,14 +412,14 @@
     <div class="container">
 
 
-        <div id="Error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
+        <div id="Error" class="alert alert-danger alert-dismissible fade show " role="alert" style="display:none">
             <strong id="Message">¡Ha ocurrido un error! </strong>
             <button type="button" class="close" ng-click="ctrl.DivError()" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center ">
 
             <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                 <div class="form-group">
@@ -430,7 +429,6 @@
                     </button>
                 </div>
             </div>
-
             <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
                 <div class="form-group">
                     <label for="lblUnidadesR" class="text-primary">Unidad Responsable</label>
@@ -477,7 +475,7 @@
     <br />
     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <div class="row">
-        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
             <div class="panel panel-default panel-table">
                 <div class="panel-heading">
                     <div class="container">
@@ -488,10 +486,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.1)">
+                <div class="table-responsive z-depth-1" style="box-shadow: 10px 40px 96px rgba(0,0,0,.1)">
                     <table class="table table-hover" id="tableAA">
                         <thead>
-                            <tr>
+                            <tr class="light-blue darken-3 text-white">
                                 <th scope="col">Áreas de Atención</th>
                                 <th scope="col">%</th>
                                 <th scope="col" style="text-align:center"><em class="fa fa-cog"></em></th>
@@ -501,15 +499,15 @@
 
                         <tbody ng-pagination="i in ctrl.GridAreasAtencionView |  itemsPerPage: 10 " pagination-id="PaginationGridAR">
 
-                            <tr id="tes" ng-class="{'Mybg text-white': A == ctrl.Descripcion}">
+                            <tr id="tes" ng-class="{'light-blue darken-1 text-white': A == ctrl.Descripcion}">
                                 <td ng-click="ctrl.Meta(i.Id, i.Descripcion); A= ctrl.Descripcion" class="cursor-pointer AAT"> {{i.Id}}.- {{i.Descripcion}} </td>
                                 <td> 0</td>
 
                                 <td style="text-align:center">
-                                    <div >
+                                    <div>
                                         <button type="button" class="btn btn-danger" title="Eliminar" ng-click="ctrl.DeleteAA(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
                                     </div>
-                                    
+
                                 </td>
                             </tr>
                         </tbody>
@@ -520,12 +518,12 @@
 
                                 </th>
                                 <th>
-                                    <button type="button" class="btn btn-success"  data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:40px">
+                                    <button type="button" class="btn btn-success" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:40px">
                                         <i class="fa fa-file-excel-o" aria-hidden="true"></i>
                                     </button>
                                 </th>
                                 <th>
-                                    <button type="button" class="btn btn-danger"  data-placement="top" title="Generar Reporte en PDF" ng-click="ctrl.BorrarImpViatico($index)" style="width:40px">
+                                    <button type="button" class="btn btn-danger" data-placement="top" title="Generar Reporte en PDF" ng-click="ctrl.BorrarImpViatico($index)" style="width:40px">
                                         <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                     </button>
                                 </th>
@@ -543,98 +541,158 @@
             <br />
             <br />
         </div>
-        <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+        <div class="col-sm-12 col-md-8 col-lg-9 col-xl-9">
 
-            <div role="tabpanel" style="box-shadow: 10px 40px 96px rgba(0,0,0,.1)">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <div role="tabpanel" class="z-depth-1">
+                <ul class="nav nav-tabs md-tabs tabs-primary" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="Acciones-tab" data-toggle="tab" href="#Acciones" role="tab" aria-controls="Acciones" aria-selected="true">Actividades</a>
+                        <a class="nav-link  active show" id="Acciones-tab" data-toggle="tab" href="#Acciones" role="tab" aria-controls="Acciones" aria-selected="true">Actividades</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="UR-tab" data-toggle="tab" href="#UR" role="tab" aria-controls="UR" aria-selected="false">Unidades Responsables</a>
+                        <a class="nav-link waves-light" id="UR-tab" data-toggle="tab" href="#UR" role="tab" aria-controls="UR" aria-selected="false">Unidades Responsables</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="Indicadores-tab" data-toggle="tab" href="#Indicadores" role="tab" aria-controls="Indicadores" aria-selected="false">Indicadores</a>
+                        <a class="nav-link waves-light" id="Indicadores-tab" data-toggle="tab" href="#Indicadores" role="tab" aria-controls="Indicadores" aria-selected="false">Indicadores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="Evidencias-tab" data-toggle="tab" href="#Evidencias" role="tab" aria-controls="Evidencias" aria-selected="false">Evidencias</a>
+                        <a class="nav-link waves-light" id="Evidencias-tab" data-toggle="tab" href="#Evidencias" role="tab" aria-controls="Evidencias" aria-selected="false">Evidencias</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
 
-                    <div class="tab-pane fade show active" id="Acciones" role="tabpanel" aria-labelledby="Acciones-tab">
-                        <br />
+                    <div class="tab-pane fade show active" id="Acciones" role="tabpanel" aria-labelledby="Acciones-tab">         
                         <div class="panel panel-default panel-table">
                             <div class="panel-heading">
-                                <div class="container-fluid">
+                             
                                     <div class="row">
                                         <div class="col text-left">
                                             <h6>Ubicación:  <span class="badge badge-secondary">{{ctrl.Descripcion}}</span></h6>
                                         </div>
                                         <div class="col text-right">
-                                            <button type="button" id="btnCrear" class="btn btn-sm btn-success btn-create" style="width:120px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" title="Crear Actividad" ng-click="ctrl.ColorATCV()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                                            <button type="button" id="btnCrear" class="btn btn-sm btn-success btn-create" style="width:120px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" title="Crear Actividad" ng-click="ctrl.ColorATCV()" ng-disabled="!ctrl.IDMETA"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
                                         </div>
                                     </div>
-                                </div>
+                                
                             </div>
-                            <div class="table-responsive">
-
-                                <table class="table table-hover" id="tableMain">
-                                    <thead>
-                                        <tr>                                            
-                                            <th scope="col">Acción</th>
-                                            <th scope="col">Inicio</th>
-                                            <th scope="col">Fin</th>
-                                            <th scope="col">Impacto</th>
-                                            <th scope="col">Prioritaria</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col" style="text-align:center" colspan="3"><em class="fa fa-cog"></em></th>
-                                        </tr>
-                                    </thead>
-
-
-
-                                    <tbody ng-pagination="pro in ctrl.GridProgramas | itemsPerPage: 10 " pagination-id="PaginationGridActividades">
-
-                                        <tr class="breakrow bgAct text-white cursor-pointer">
-                                            <td colspan="2"><i class="fa fa-plus" > Programa: </i></td>
-                                            <td colspan="8">{{pro.Desc_Programa}}</td>
-                                        </tr>
-                                        <tr class="datarow cursor-pointer" style="display:none" ng-repeat="i in ctrl.GridActividadesView" ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'MybgUR ': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === i.Desc_Programa">
-                                            <td title="Detalles:  {{i.Detalles}}"><font size="2">{{i.Desc_Accion}}</font></td>
-                                            <td><font size="2">{{i.Fecha_Inicio}}</font></td>
-                                            <td><font size="2">{{i.Fecha_Fin}}</font></td>
-                                            <td><font size="2">{{i.Impacto}}</font></td>
-                                            <td><font size="2">{{i.Prioritaria}}</font></td>
-                                            <td ng-class="{'btn-danger': i.Status == 'Cancelada', 'btn-success': i.Status == 'Terminada', 'btn-warning': i.Status == 'En Proceso'}"><font size="2">{{i.Status}}</font></td>
-                                            <td colspan="3">
-                                                <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" title="Editar" ng-click="ctrl.ModalACTV(i.Id, i.Id_Padre)">
-                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                </button>
-                                                <button type="button" id="btnUpdate" class="btn btn-info" style="width:40px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" title="Agregar Actividad Secundaría" ng-click="ctrl.ModalH(i.Id)" ng-show="i.Prioritaria === 'Si'">
-                                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-danger" title="Eliminar" ng-click="ctrl.EliminnarA(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-
-                                    <tfoot>
-                                        <tr>
-                                            <th colspan="9"><dir-pagination-controls boundary-links="true" pagination-id="PaginationGridActividades"></dir-pagination-controls></th>
-
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                       
                                 <div class="mb-5 alert alert-danger text-center check-element animate-show-hide " id="ACTAlert" ng-show="ctrl.NoActv" role="alert">
                                     {{ctrl.NoActv}}
                                 </div>
+
+
+                            <!--Accordion wrapper-->
+                            <div class="accordion md-accordion accordion-blocks " id="accordionEx78" role="tablist"
+                                 aria-multiselectable="true">
+
+
+                                <!-- Accordion card -->
+                                <div class="card" ng-pagination="pro in ctrl.GridActividadesView |  itemsPerPage: 5" pagination-id="PaginationGridActividades">
+
+                                    <!-- Card header -->
+                                    <div class="card-header" role="tab" id="heading79" ng-if="pro.Desc_Programa == pro.Desc_Programa && pro.Id_Padre === 0">
+
+
+
+                                        <!-- Heading -->
+                                        <a class="btn btn-info z-depth-2" data-toggle="collapse" data-parent="#accordionEx78" href="#B-{{pro.Id}}" aria-expanded="true"
+                                           aria-controls="collapse79" ng-if="pro.Desc_Programa == pro.Desc_Programa && pro.Id_Padre === 0" ng-click="ctrl.setShowDetail($index)">
+                                            <h6 class="mt-1 mb-1">
+                                                <span>Programa: {{pro.Desc_Programa}}</span>
+                                            </h6>
+                                        </a>
+
+
+                                        @*<i class="fa fa-angle-down rotate-icon"></i>*@
+                                        @*<i class="fa fa-chevron-right rotate" ng-class="ctrl.itemDetails === $index ? 'down' : ''"></i>*@
+                                        <button class="navbar-toggler first-button cursor-pointer"  type="button" id="BURGER" data-toggle="collapse" data-parent="#accordionEx78" href="#B-{{pro.Id}}" aria-expanded="true"
+                                                aria-controls="collapse79" ng-if="pro.Desc_Programa == pro.Desc_Programa && pro.Id_Padre === 0" ng-click="ctrl.setShowDetail($index)">
+                                            <div class="animated-icon1 cursor-pointer" ng-class="ctrl.itemDetails === $index ? 'open' : ''"><span ></span><span></span><span></span></div>
+                                        </button>
+
+                                    </div>
+
+                                    <!-- Card body -->
+                                    <div id="B-{{pro.Id}}" class="collapse " role="tabpanel" aria-labelledby="heading79"
+                                         data-parent="#accordionEx78" ng-if="pro.Desc_Programa == pro.Desc_Programa && pro.Id_Padre === 0">
+                                        <div class="card-body">
+
+                                            <!-- Table responsive wrapper -->
+                                            <div class="table-responsive mx-3">
+                                                <!--Table-->
+                                                <table class="table table-hover">
+                                                    <thead class="teal darken-3 text-white">
+                                                        <tr>
+                                                            <th></th>
+                                                            <th scope="col">Acción</th>
+                                                            <th scope="col">Inicio</th>
+                                                            <th scope="col">Fin</th>
+                                                            <th colspan="2" scope="col">Impacto</th>
+                                                            <th scope="col">Prioritaria</th>
+                                                            <th scope="col">Status</th>
+                                                            <th scope="col" style="text-align:center" colspan="3"><em class="fa fa-cog"></em></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody ng-repeat="i in ctrl.GridActividadesView">
+                                                        <tr class="cursor-pointer AAT"  ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'teal lighten-1 text-white ': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === i.Desc_Programa && i.Id_Padre === 0 " >
+                                                            <td data-toggle="collapse" data-target="#C-{{i.Id}}"><i class="fa fa-plus"></i></td>
+                                                            <td title="Descripción:  {{i.Detalles}}" data-toggle="collapse" data-target="#C-{{i.Id}}"><font size="2"> {{i.Desc_Accion}}</font></td>
+                                                            <td><font size="2">{{i.Fecha_Inicio}}</font></td>
+                                                            <td><font size="2">{{i.Fecha_Fin}}</font></td>
+                                                            <td colspan="2"><font size="2">{{i.Impacto}}</font></td>
+                                                            <td><font size="2">{{i.Prioritaria}}</font></td>
+                                                            <td ng-class="{'btn-danger': i.Status == 'Cancelada', 'btn-success': i.Status == 'Terminada', 'btn-warning': i.Status == 'En Proceso'}"><font size="2">{{i.Status}}</font></td>
+                                                            <td colspan="3">
+                                                                <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" title="Editar" ng-click="ctrl.ModalACTV(i.Id, i.Id_Padre)">
+                                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                                </button>
+                                                                <button type="button" id="btnUpdate" class="btn btn-info" style="width:40px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" title="Agregar Actividad Secundaría" ng-click="ctrl.ModalH(i.Id, i.Id_Programa)" ng-show="i.Prioritaria === 'Si'">
+                                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn-danger" title="Eliminar" ng-click="ctrl.EliminnarA(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr id="C-{{i.Id}}" class="collapse cursor-pointer AAT" ng-repeat="j in ctrl.GridActividadesView" ng-click="ctrl.getUR(j.Id, j.Desc_Accion); A= ctrl.DescActividad" ng-class="{'teal lighten-1 text-white ': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === j.Desc_Programa && j.Id_Padre != 0 && j.Id_Padre == i.Id">
+                                                            <td><div id="C-{{i.Id}}" class="collapse"></div></td>
+                                                            <td title="Descripción:  {{j.Detalles}}"><div id="C-{{i.Id}}" class="collapse"><font size="2">{{j.Desc_Accion}}</font></div></td>
+                                                            <td><div id="C-{{i.Id}}" class="collapse"><font size="2">{{j.Fecha_Inicio}}</font></div></td>
+                                                            <td><div id="C-{{i.Id}}" class="collapse"><font size="2">{{j.Fecha_Fin}}</font></div></td>
+                                                            <td colspan="2"><div id="C-{{i.Id}}" class="collapse"><font size="2">{{j.Impacto}}</font></div></td>
+                                                            <td><div id="C-{{i.Id}}" class="collapse"><font size="2">{{j.Prioritaria}}</font></div></td>
+                                                            <td ng-class="{'btn-danger': j.Status == 'Cancelada', 'btn-success': j.Status == 'Terminada', 'btn-warning': j.Status == 'En Proceso'}"><div id="C-{{i.Id}}" class="collapse"><font size="2">{{j.Status}}</font></div></td>
+                                                            <td colspan="3"><div id="C-{{i.Id}}" class="collapse">
+                                                                <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" title="Editar" ng-click="ctrl.ModalACTV(j.Id, j.Id_Padre)">
+                                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                                </button>
+                                                                <button type="button" id="btnUpdate" class="btn btn-info" style="width:40px" data-toggle="modal" data-target="#ModalActividades" data-backdrop="static" data-keyboard="false" title="Agregar Actividad Secundaría" ng-click="ctrl.ModalH(j.Id, j.Id_Programa)" ng-show="j.Prioritaria === 'Si'">
+                                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn-danger" title="Eliminar" ng-click="ctrl.EliminnarA(j.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th colspan="11"><dir-pagination-controls boundary-links="true" pagination-id="PaginationGridActividades"></dir-pagination-controls></th>
+
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>                                             
+                                            </div>
+                                            <!-- Table responsive wrapper -->
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Accordion card -->
+
                             </div>
+                            <!--/.Accordion wrapper-->
+
                         </div>
                     </div>
                     <div class="tab-pane fade" id="UR" role="tabpanel" aria-labelledby="UR-tab">
-
-                        <br />
                         <div class="panel panel-default panel-table">
                             <div class="panel-heading">
                                 <div class="container-fluid">
@@ -643,7 +701,7 @@
                                             <h6>Ubicación:  <span class="badge badge-secondary">{{ctrl.Descripcion}}  /  {{ctrl.DescActividad}}</span></h6>
                                         </div>
                                         <div class="col text-right">
-                                            <button type="button" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#ModalAddUR" data-backdrop="static" data-keyboard="false" title="Agregar Responsable" ng-click="ctrl.GridUR()">Agregar Unidad</button>
+                                            <button type="button" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#ModalAddUR" data-backdrop="static" data-keyboard="false" title="Agregar Responsable" ng-click="ctrl.GridUR()" ng-disabled="!ctrl.idActividad">Agregar Unidad</button>
                                         </div>
                                     </div>
                                 </div>
@@ -651,7 +709,7 @@
                             <div class="table-responsive">
 
                                 <table class="table table-hover">
-                                    <thead>
+                                    <thead class="teal darken-3 text-white">
                                         <tr>
                                             <th scope="col">Id</th>
                                             <th scope="col">Id Actividad</th>
@@ -675,7 +733,7 @@
                                             <td>{{i.Telefono}}</td>
                                             <td>{{i.Correo}}</td>
                                             <td colspan="3">
-                                                <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalAddUR" data-backdrop="static" data-keyboard="false"  title="Editar" ng-click="ctrl.UpdateResp(i.Id)">
+                                                <button type="button" id="btnUpdate" class="btn btn-primary" style="width:40px" data-toggle="modal" data-target="#ModalAddUR" data-backdrop="static" data-keyboard="false" title="Editar" ng-click="ctrl.UpdateResp(i.Id)">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                                 </button>
 
@@ -749,8 +807,7 @@
     $(document).ready(function () {     
 
         $('button').tooltip();               
-
-        
+     
 
         $('#tableMain').on('click', 'tr.breakrow', function () {
             $(this).nextUntil('tr.breakrow').slideToggle(100);
@@ -758,7 +815,8 @@
       
         $("#tableAA").on('click', 'td.AAT', function () {        
             $( "#Acciones-tab" ).click();
-        });  
+        });          
+
 
     });
 

@@ -4,11 +4,9 @@
     Layout = "~/Views/Shared/_LayoutContenido.cshtml";
 }
 
-<br />
-<br />
+<br class="imgUnach" />
 <br />
 
-<h2></h2>
 
 
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
@@ -63,7 +61,7 @@
                 <br />
                 <br />
                 <table class="table table-hover">
-                    <thead class="bg-info">
+                    <thead class="light-blue darken-3 text-white">
                         <tr>
                             <th scope="col" class="text-white">ID</th>
                             <th scope="col" class="text-white">Descripción</th>
@@ -119,7 +117,7 @@
                 <br />
                 <br />
                 <table class="table table-hover">
-                    <thead class="bg-primary">
+                    <thead class="cyan darken-3 text-white">
                         <tr>
                             <th scope="col" class="text-white">#</th>
                             <th scope="col" class="text-white">First</th>
@@ -201,10 +199,10 @@
 
 <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <script type="text/javascript">
-      $(document).ready(function () {     
+    $(document).ready(function () {
 
-        $('button').tooltip();                     
+        $('button').tooltip();
 
-    });  
+    });
 </script>
 

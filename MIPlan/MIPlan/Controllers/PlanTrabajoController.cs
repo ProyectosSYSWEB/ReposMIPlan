@@ -232,13 +232,13 @@ namespace MIPlan.Controllers
 
             }
         }        
-        public JsonResult ObtenerModalGridAreasAtencion(int Ejercicio, string Dependencia)/**/
+        public JsonResult ObtenerModalGridAreasAtencion(int Ejercicio, string Dependencia, int buscarPlan)/**/
         {       
             List<AreasAtencion> list = new List<AreasAtencion>();
             ResultadoAreasAtencion objResultado = new ResultadoAreasAtencion();
             try
             {
-                list = Data.PlanTrabajo.CursorDataContext.ObtenerModalGridAreasAtencion(Ejercicio, Dependencia);
+                list = Data.PlanTrabajo.CursorDataContext.ObtenerModalGridAreasAtencion(Ejercicio, Dependencia, buscarPlan);
                 objResultado.Error = false;
                 objResultado.MensajeError = string.Empty;
                 objResultado.Resultado = list;
@@ -292,7 +292,7 @@ namespace MIPlan.Controllers
                 else
                 {
                     objResultado.Error = true;
-                    objResultado.MensajeError = "";
+                    objResultado.MensajeError = Verificador;
                     objResultado.Resultado = null;
                 }
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
@@ -488,7 +488,7 @@ namespace MIPlan.Controllers
                 else
                 {
                     objResultado.Error = true;
-                    objResultado.MensajeError = "";
+                    objResultado.MensajeError = Verificador;
                     objResultado.Resultado = null;
                 }
                 return Json(objResultado, JsonRequestBehavior.AllowGet);

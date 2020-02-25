@@ -153,7 +153,7 @@ namespace MIPlan.Data.PlanTrabajo
         }
         /********************************************************************************************************************************************************/
 
-        public static List<AreasAtencion> ObtenerModalGridAreasAtencion(int Ejercicio, string Dependencia)
+        public static List<AreasAtencion> ObtenerModalGridAreasAtencion(int Ejercicio, string Dependencia, int buscarPlan)
         {
             //s
             OracleCommand cmd = null;
@@ -162,8 +162,8 @@ namespace MIPlan.Data.PlanTrabajo
             try
             {
 
-                string[] Parametros = { "p_ejercicio", "p_dependencia" };
-                object[] Valores = { Ejercicio, Dependencia };
+                string[] Parametros = { "p_ejercicio", "p_dependencia", "P_ID_AREA"};
+                object[] Valores = { Ejercicio, Dependencia, buscarPlan};
 
                 OracleDataReader dr = null;
                 cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Plan_AreasAtencion", ref dr, Parametros, Valores);
@@ -222,11 +222,14 @@ namespace MIPlan.Data.PlanTrabajo
                     objActividad.Fecha_Fin = Convert.ToString(dr[5]);
                     objActividad.Impacto = Convert.ToString(dr[6]);
                     objActividad.Prioritaria = Convert.ToString(dr[7]);
+                    objActividad.Id_Programa = Convert.ToInt32(dr[8]);
                     objActividad.Status = Convert.ToString(dr[9]);
                     string tempId_Padre = Convert.ToString(dr[10]);
                     objActividad.Id_Padre = Convert.ToInt32(tempId_Padre);
-                   
                     
+
+
+
                     listarActividades.Add(objActividad);
                 }
                 return listarActividades;

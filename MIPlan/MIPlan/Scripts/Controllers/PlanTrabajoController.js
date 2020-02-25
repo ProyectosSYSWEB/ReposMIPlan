@@ -21,6 +21,14 @@
             self.EStatus = "A";
         }
         self.Si = 'Si';
+
+        self.setShowDetail = function (index) {
+            if (index === self.itemDetails) {
+                self.itemDetails = null;
+            } else {
+                self.itemDetails = index;
+            }
+        }
         /********************************************************************************************************************************************************/
         var ObtenerDependencias = function () {
             catalogoContext.ObtenerDependencias(function (resp) {
@@ -56,6 +64,7 @@
                         break;
                 }
                 $scope.$apply();
+               
             });
         };      
         /********************************************************************************************************************************************************/
@@ -119,7 +128,7 @@
                         break;
                 }
                 $scope.$apply();
-                $('button').tooltip();     
+                //$('button').tooltip();     
             });
         };
     /********************************************************************************************************************************************************/
@@ -164,7 +173,7 @@
             self.DescripcionAA = "";
         }
         var ObtenerModalGridAreasAtencion = function () {
-            catalogoContext.ObtenerModalGridAreasAtencion(self.buscarEjercicios, self.buscarDependencias, function (resp) {
+            catalogoContext.ObtenerModalGridAreasAtencion(self.buscarEjercicios, self.buscarDependencias, self.buscarPlan, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         self.ObtenerModalGridAreasAtencionView = catalogoContext.ObtenerModalGridAreasAtencionLST;
@@ -189,7 +198,8 @@
             self.Id_Area_Atencion = Id_Area_Atencion;
             self.DescripcionAA = Descripcion;
         }
-        var GuardarAreasAtencion = function () {           
+        var GuardarAreasAtencion = function () {
+            console.log(self.Id_Plan, self.Id_Area_Atencion);
             catalogoContext.GuardarAreasAtencion(
                 self.Id_Plan, self.Id_Area_Atencion,
                 function (resp) {
@@ -221,7 +231,7 @@
             Swal.fire({
                 title: '¿Seguro que Desea Eliminar el Resgistro?',
                 text: "Se Eliminara Permanentemente",
-                icon: 'error',
+                icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -231,11 +241,7 @@
                 if (result.value) {
                     EliminarAreasAtencion(Id);
                     
-                    Swal.fire(
-                        '¡Eliminado!',
-                        'Se ha eliminado con exito.',
-                        'success'
-                    );
+                    
                     GridAreasAtencion();
                 }
             })
@@ -245,9 +251,19 @@
             catalogoContext.EliminarAreasAtencion(Id, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'Se ha eliminado con exito.',
+                            'success'
+                        );
+                        GridActividades(self.IDMETA);
                         break;
                     case "notgp":
-
+                        Swal.fire(
+                            'Oooops :(',
+                            '¡Fallo al reaizar esta acción!',
+                            'error'
+                        );
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
                         document.getElementById("Message").innerHTML = self.mensaje_gral;
@@ -292,7 +308,7 @@
                 }
                 $scope.$apply();
                 $('button').tooltip();
-                $('td').tooltip();
+                $('td').tooltip();                      
             });
         };             
         /********************************************************************************************************************************************************/
@@ -304,6 +320,8 @@
                         self.Prioritaria = self.ObtenerDatosActividadesView[0].Prioritaria;
                         self.EStatus = self.ObtenerDatosActividadesView[0].Status;
                         self.ObtenerDatosActividadesView[0].Id_Programa = self.ObtenerDatosActividadesView[0].Id_Programa + "";
+                        self.Id_Programa = self.ObtenerDatosActividadesView[0].Id_Programa + "";
+                 
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -346,7 +364,7 @@
                 self.EStatus,
                 self.ObtenerDatosActividadesView[0].Fecha_Inicio,
                 self.ObtenerDatosActividadesView[0].Fecha_Fin,
-                self.ObtenerDatosActividadesView[0].Id_Programa,                
+                self.Id_Programa,  
                 self.Prioritaria,
                 self.ObtenerDatosActividadesView[0].Id_Padre,
                 function (resp) {
@@ -375,7 +393,7 @@
         var EditarActividades = function () {               
             catalogoContext.EditarActividades(
                 self.ObtenerDatosActividadesView[0].Id,
-                self.ObtenerDatosActividadesView[0].Id_Programa,
+                self.Id_Programa,
                 self.ObtenerDatosActividadesView[0].Accion,
                 self.ObtenerDatosActividadesView[0].Detalles,
                 self.ObtenerDatosActividadesView[0].Fecha_Inicio,
@@ -412,7 +430,7 @@
             Swal.fire({
                 title: '¿Seguro que Desea Eliminar el Resgistro?',
                 text: "Se Eliminara Permanentemente",
-                icon: 'error',
+                icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -422,11 +440,7 @@
                 if (result.value) {
                     EliminarActividad(Indice);
 
-                    Swal.fire(
-                        '¡Eliminado!',
-                        'Se ha eliminado con exito.',
-                        'success'
-                    );
+                   
                     GridActividades(self.IDMETA);
                 }
             })
@@ -436,10 +450,19 @@
             catalogoContext.EliminarActividades(Id, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'Se ha eliminado con exito.',
+                            'success'
+                        );
+                        GridUnidadesResp(self.idActividad);
                         break;
                     case "notgp":
-
+                        Swal.fire(
+                            'Oooops :(',
+                            '¡Fallo al reaizar esta acción!',
+                            'error'
+                        );
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
                         document.getElementById("Message").innerHTML = self.mensaje_gral;
@@ -533,7 +556,7 @@
                 function (resp) {
                     switch (resp.ressult) {
                         case "tgp":
-                            GridUnidadesResp(self.idActividad);                 
+                            GridUnidadesResp(self.idActividad);
                             Swal.fire(
                                 '¡Listo!',
                                 '¡Se han Guardado los datos correctamente!',
@@ -606,7 +629,7 @@
                 function (resp) {
                     switch (resp.ressult) {
                         case "tgp":
-                            self.ObtenerDatosUnidadesModalView = catalogoContext.ObtenerDatosUnidadesRespLST;
+                            self.ObtenerDatosUnidadesModalView = catalogoContext.ObtenerDatosUnidadesRespLST;                            
                             break;
                         case "notgp":
                             self.mensaje_gral = resp.message;
@@ -626,7 +649,7 @@
             Swal.fire({
                 title: '¿Seguro que Desea Eliminar el Resgistro?',
                 text: "Se Eliminara Permanentemente",
-                icon: 'error',
+                icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -650,10 +673,18 @@
             catalogoContext.EliminarUnidadResponsable(Id, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'Se ha eliminado con exito.',
+                            'success'
+                        );
                         break;
                     case "notgp":
-
+                        Swal.fire(
+                            'Oooops :(',
+                            '¡Fallo al reaizar esta acción!',
+                            'error'
+                        );
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
                         document.getElementById("Message").innerHTML = self.mensaje_gral;
@@ -671,7 +702,8 @@
                 document.getElementById("TituloACTV").innerHTML = "Actualizar Actividades Secundarías";
                 document.getElementById("btnModal").className = "btn btn-primary";
                 document.getElementById("lblPrograma").className = "text-primary";
-                document.getElementById("cmbPrograma").className = "form-control border border-primary";
+                document.getElementById("cmbPrograma").className = "form-control border border-primary disabled";
+                document.getElementById("cmbPrograma").disabled = true;
                 document.getElementById("lblClave").className = "text-primary";
                 document.getElementById("inputClave").className = "form-control border border-primary";
                 document.getElementById("lblAccion").className = "text-primary";
@@ -698,6 +730,7 @@
                 document.getElementById("btnModal").className = "btn btn-primary";
                 document.getElementById("lblPrograma").className = "text-primary";
                 document.getElementById("cmbPrograma").className = "form-control border border-primary";
+                document.getElementById("cmbPrograma").disabled = false;
                 document.getElementById("lblClave").className = "text-primary";
                 document.getElementById("inputClave").className = "form-control border border-primary";
                 document.getElementById("lblAccion").className = "text-primary";
@@ -748,13 +781,14 @@
             self.Prioritaria = "S";
             ObtenerProgramas();
         };
-        this.ModalH = function (Id) {
+        this.ModalH = function (Id, Desc_Programa) {
           
                 document.getElementById("title").className = "modal-header btn-info justify-content-center";
                 document.getElementById("TituloACTV").innerHTML = "Agregar Actividades Secundarías";
                 document.getElementById("btnModal").className = "btn btn-info";
                 document.getElementById("lblPrograma").className = "text-info";
-                document.getElementById("cmbPrograma").className = "form-control border border-info";
+                document.getElementById("cmbPrograma").className = "form-control border border-info disabled";
+                document.getElementById("cmbPrograma").disabled = true;
                 document.getElementById("lblClave").className = "text-info";
                 document.getElementById("inputClave").className = "form-control border border-info";
                 document.getElementById("lblAccion").className = "text-info";
@@ -777,7 +811,12 @@
 
             self.EStatus = "P";
             self.Prioritaria = "N";
+            //ctrl.ObtenerDatosActividadesView[0].Id_Programa
             ObtenerProgramas();
+            self.Id_Programa = Desc_Programa + "";  
+            console.log(self.Id_Programa);
+            
+                      
         };        
         /*******************************************************************************************************************************************************/
 
@@ -824,6 +863,8 @@
             self.idU = null;
             self.ObtenerDatosPlanView = null;
             self.EStatus = null;
+            self.Id_Programa = null;
+            self.ObtenerProgramasView = null;
         };
         this.reset = function (form) {
             $('#ModalActividades').modal('hide');
@@ -840,6 +881,8 @@
             self.ObtenerDatosActividadesView = null;
             self.EStatus = null;
             self.Prioritaria = null;
+            self.Id_Programa = null;
+            self.ObtenerProgramasView = null;
             $('#ModalPlanMastro').modal('hide');
             if (form) {
                 form.$setPristine();

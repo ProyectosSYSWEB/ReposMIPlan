@@ -177,7 +177,8 @@
                             '¡Listo!',
                             '¡Se han actualizado los datos correctamente!',
                             'success'
-                        ) 
+                        )
+                        CargarGrid();
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -187,8 +188,7 @@
                     default:
                         break;
                 }
-                $scope.$apply();
-                CargarGrid();
+                $scope.$apply();              
             });
         };
 
@@ -228,11 +228,20 @@
             catalogoContext.eliminarIndicador(Id, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        console.log("Controller Eliminar ejecutado");
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'Se ha eliminado con exito.',
+                            'success'
+                        );
+                        CargarGrid();
                         break;
                     case "notgp":
+                        Swal.fire(
+                            'Oooops :(',
+                            '¡Fallo al reaizar esta acción!',
+                            'error'
+                        );
                         self.mensaje_gral = resp.message;
-                        console.log("Error Controller");
                         document.getElementById("Error").style.display = "block";
                         document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
@@ -247,7 +256,7 @@
             Swal.fire({
                 title: '¿Seguro que Desea Eliminar el Resgistro?',
                 text: "Se Eliminara Permanentemente",
-                icon: 'error',
+                icon: 'waring',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -256,13 +265,6 @@
             }).then((result) => {
                 if (result.value) {
                     eliminarIndicadores(Indice);
-
-                    Swal.fire(
-                        '¡Eliminado!',
-                        'Se ha eliminado con exito.',
-                        'success'
-                    );
-                    CargarGrid();
                 }
             })
         };
@@ -295,8 +297,7 @@
             if (form) {
                 form.$setPristine();
                 form.$setUntouched();
-            }
-            CargarGrid();
+            }         
             self.cve_cat = null;
             self.cve_sub = null;
             self.cve_desc = null;

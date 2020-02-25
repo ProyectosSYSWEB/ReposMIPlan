@@ -2,10 +2,9 @@
     ViewBag.Title = "Acreditadores";
     Layout = "~/Views/Shared/_LayoutContenido.cshtml";
 }
-<h2>Acreditaciones</h2>
+<br class="imgUnach" />
 <br />
-<br />
-<br />
+
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
 
 
@@ -180,52 +179,52 @@
         <input type="hidden" ng-model="ctrl.cve_id" />
         <div class="container table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.3)">
             <table class="table table-hover">
-                <thead>
+                <thead class="light-blue darken-3 text-white">
                     <tr>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Id'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Id'; sortReverse = !sortReverse">
                                 Id
                                 <span ng-class="sortType == 'Id' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Id' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Dependencia'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Dependencia'; sortReverse = !sortReverse">
                                 Dependencia
                                 <span ng-class="sortType == 'Dependencia' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Dependencia' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Carrera'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Carrera'; sortReverse = !sortReverse">
                                 Carrera
                                 <span ng-class="sortType == 'Carrera' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Carrera' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Organismo'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Organismo'; sortReverse = !sortReverse">
                                 Organismo
                                 <span ng-class="sortType == 'Organismo' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Organismo' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Inicio'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Fecha_Inicial'; sortReverse = !sortReverse">
                                 Inicio
-                                <span ng-class="sortType == 'Inicio' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Inicio' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                <span ng-class="sortType == 'Fecha_Inicial' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Fecha_Inicial' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Fin'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Fecha_Final'; sortReverse = !sortReverse">
                                 Fin
-                                <span ng-class="sortType == 'Fin' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Fin' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                <span ng-class="sortType == 'Fecha_Final' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Fecha_Final' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Estatus'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Status'; sortReverse = !sortReverse">
                                 Estatus
-                                <span ng-class="sortType == 'Estatus' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Estatus' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                <span ng-class="sortType == 'Status' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Status' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Observaciones'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Observaciones'; sortReverse = !sortReverse">
                                 Observaciones
                                 <span ng-class="sortType == 'Observaciones' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Observaciones' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
@@ -309,7 +308,7 @@
         format: 'd/m/Y'
     });
 
-     $(document).ready(function () {
+    $(document).ready(function () {
 
         $('button').tooltip();
 

@@ -1,0 +1,605 @@
+﻿/***************************************************************************************/
+
+
+.md-tabs {
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    border: 0;
+    padding: 0.7rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: -20px;
+    background-color: #2bbbad;
+    z-index: 1;
+    position: relative;
+    border-radius: 0.25rem;
+}
+
+    .md-tabs .nav-item + .nav-item {
+        margin-left: 0;
+    }
+
+    .md-tabs .nav-item.disabled {
+        pointer-events: none !important;
+    }
+
+        .md-tabs .nav-item.disabled .nav-link {
+            color: #6c757d;
+        }
+
+    .md-tabs .nav-link {
+        transition: all 0.4s;
+        border: 0;
+        color: #fff;
+    }
+
+        .md-tabs .nav-link.active,
+        .md-tabs .nav-item.open .nav-link {
+            background-color: rgba(0, 0, 0, 0.2);
+            color: #fff;
+            transition: all 1s;
+            border-radius: 0.25rem;
+        }
+
+    .md-tabs .nav-item.show .nav-link {
+        background-color: #2bbbad;
+        color: #fff;
+        transition: all 1s;
+        border-radius: 0.25rem;
+    }
+
+        .md-tabs .nav-item.show .nav-link.dropdown-toggle {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+.tab-content {
+    padding: 1rem;
+    padding-top: 2rem;
+}
+
+    .tab-content.vertical {
+        padding-top: 0;
+    }
+
+.md-pills {
+    border: 0;
+}
+
+    .md-pills li {
+        padding: 0.6rem;
+    }
+
+    .md-pills .show > .nav-link {
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+        color: #fff;
+        background-color: #2bbbad;
+    }
+
+    .md-pills .nav-link {
+        transition: all 0.4s;
+        border-radius: 2px;
+        color: #666666;
+        text-align: center;
+    }
+
+        .md-pills .nav-link.active {
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+            color: #fff;
+            background-color: #2bbbad;
+        }
+
+            .md-pills .nav-link.active:hover {
+                box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+            }
+
+.pills-primary .show > .nav-link {
+    background-color: #4285f4 !important;
+}
+
+.pills-primary .nav-link.active {
+    background-color: #4285f4 !important;
+}
+
+.tabs-primary {
+    background-color: #4285f4 !important;
+}
+
+.pills-danger .show > .nav-link {
+    background-color: #ff3547 !important;
+}
+
+.pills-danger .nav-link.active {
+    background-color: #ff3547 !important;
+}
+
+.tabs-danger {
+    background-color: #ff3547 !important;
+}
+
+.pills-warning .show > .nav-link {
+    background-color: #ffbb33 !important;
+}
+
+.pills-warning .nav-link.active {
+    background-color: #ffbb33 !important;
+}
+
+.tabs-warning {
+    background-color: #ffbb33 !important;
+}
+
+.pills-success .show > .nav-link {
+    background-color: #00c851 !important;
+}
+
+.pills-success .nav-link.active {
+    background-color: #00c851 !important;
+}
+
+.tabs-success {
+    background-color: #00c851 !important;
+}
+
+.pills-info .show > .nav-link {
+    background-color: #33b5e5 !important;
+}
+
+.pills-info .nav-link.active {
+    background-color: #33b5e5 !important;
+}
+
+.tabs-info {
+    background-color: #33b5e5 !important;
+}
+
+.pills-default .show > .nav-link {
+    background-color: #2bbbad !important;
+}
+
+.pills-default .nav-link.active {
+    background-color: #2bbbad !important;
+}
+
+.tabs-default {
+    background-color: #2bbbad !important;
+}
+
+.pills-secondary .show > .nav-link {
+    background-color: #aa66cc !important;
+}
+
+.pills-secondary .nav-link.active {
+    background-color: #aa66cc !important;
+}
+
+.tabs-secondary {
+    background-color: #aa66cc !important;
+}
+
+.pills-elegant .show > .nav-link {
+    background-color: #2e2e2e !important;
+}
+
+.pills-elegant .nav-link.active {
+    background-color: #2e2e2e !important;
+}
+
+.tabs-elegant {
+    background-color: #2e2e2e !important;
+}
+
+.pills-unique .show > .nav-link {
+    background-color: #880e4f !important;
+}
+
+.pills-unique .nav-link.active {
+    background-color: #880e4f !important;
+}
+
+.tabs-unique {
+    background-color: #880e4f !important;
+}
+
+.pills-dark-green .show > .nav-link {
+    background-color: #388e3c !important;
+}
+
+.pills-dark-green .nav-link.active {
+    background-color: #388e3c !important;
+}
+
+.tabs-dark-green {
+    background-color: #388e3c !important;
+}
+
+.pills-mdb-color .show > .nav-link {
+    background-color: #59698d !important;
+}
+
+.pills-mdb-color .nav-link.active {
+    background-color: #59698d !important;
+}
+
+.tabs-mdb-color {
+    background-color: #59698d !important;
+}
+
+.pills-red .show > .nav-link {
+    background-color: #d32f2f !important;
+}
+
+.pills-red .nav-link.active {
+    background-color: #d32f2f !important;
+}
+
+.tabs-red {
+    background-color: #d32f2f !important;
+}
+
+.pills-pink .show > .nav-link {
+    background-color: #ec407a !important;
+}
+
+.pills-pink .nav-link.active {
+    background-color: #ec407a !important;
+}
+
+.tabs-pink {
+    background-color: #ec407a !important;
+}
+
+.pills-purple .show > .nav-link {
+    background-color: #8e24aa !important;
+}
+
+.pills-purple .nav-link.active {
+    background-color: #8e24aa !important;
+}
+
+.tabs-purple {
+    background-color: #8e24aa !important;
+}
+
+.pills-deep-purple .show > .nav-link {
+    background-color: #512da8 !important;
+}
+
+.pills-deep-purple .nav-link.active {
+    background-color: #512da8 !important;
+}
+
+.tabs-deep-purple {
+    background-color: #512da8 !important;
+}
+
+.pills-indigo .show > .nav-link {
+    background-color: #3f51b5 !important;
+}
+
+.pills-indigo .nav-link.active {
+    background-color: #3f51b5 !important;
+}
+
+.tabs-indigo {
+    background-color: #3f51b5 !important;
+}
+
+.pills-blue .show > .nav-link {
+    background-color: #1976d2 !important;
+}
+
+.pills-blue .nav-link.active {
+    background-color: #1976d2 !important;
+}
+
+.tabs-blue {
+    background-color: #1976d2 !important;
+}
+
+.pills-light-blue .show > .nav-link {
+    background-color: #82b1ff !important;
+}
+
+.pills-light-blue .nav-link.active {
+    background-color: #82b1ff !important;
+}
+
+.tabs-light-blue {
+    background-color: #82b1ff !important;
+}
+
+.pills-cyan .show > .nav-link {
+    background-color: #00bcd4 !important;
+}
+
+.pills-cyan .nav-link.active {
+    background-color: #00bcd4 !important;
+}
+
+.tabs-cyan {
+    background-color: #00bcd4 !important;
+}
+
+.pills-teal .show > .nav-link {
+    background-color: #00796b !important;
+}
+
+.pills-teal .nav-link.active {
+    background-color: #00796b !important;
+}
+
+.tabs-teal {
+    background-color: #00796b !important;
+}
+
+.pills-green .show > .nav-link {
+    background-color: #388e3c !important;
+}
+
+.pills-green .nav-link.active {
+    background-color: #388e3c !important;
+}
+
+.tabs-green {
+    background-color: #388e3c !important;
+}
+
+.pills-light-green .show > .nav-link {
+    background-color: #8bc34a !important;
+}
+
+.pills-light-green .nav-link.active {
+    background-color: #8bc34a !important;
+}
+
+.tabs-light-green {
+    background-color: #8bc34a !important;
+}
+
+.pills-lime .show > .nav-link {
+    background-color: #afb42b !important;
+}
+
+.pills-lime .nav-link.active {
+    background-color: #afb42b !important;
+}
+
+.tabs-lime {
+    background-color: #afb42b !important;
+}
+
+.pills-yellow .show > .nav-link {
+    background-color: #fbc02d !important;
+}
+
+.pills-yellow .nav-link.active {
+    background-color: #fbc02d !important;
+}
+
+.tabs-yellow {
+    background-color: #fbc02d !important;
+}
+
+.pills-amber .show > .nav-link {
+    background-color: #ffa000 !important;
+}
+
+.pills-amber .nav-link.active {
+    background-color: #ffa000 !important;
+}
+
+.tabs-amber {
+    background-color: #ffa000 !important;
+}
+
+.pills-orange .show > .nav-link {
+    background-color: #f57c00 !important;
+}
+
+.pills-orange .nav-link.active {
+    background-color: #f57c00 !important;
+}
+
+.tabs-orange {
+    background-color: #f57c00 !important;
+}
+
+.pills-deep-orange .show > .nav-link {
+    background-color: #ff7043 !important;
+}
+
+.pills-deep-orange .nav-link.active {
+    background-color: #ff7043 !important;
+}
+
+.tabs-deep-orange {
+    background-color: #ff7043 !important;
+}
+
+.pills-brown .show > .nav-link {
+    background-color: #795548 !important;
+}
+
+.pills-brown .nav-link.active {
+    background-color: #795548 !important;
+}
+
+.tabs-brown {
+    background-color: #795548 !important;
+}
+
+.pills-grey .show > .nav-link {
+    background-color: #616161 !important;
+}
+
+.pills-grey .nav-link.active {
+    background-color: #616161 !important;
+}
+
+.tabs-grey {
+    background-color: #616161 !important;
+}
+
+.pills-blue-grey .show > .nav-link {
+    background-color: #78909c !important;
+}
+
+.pills-blue-grey .nav-link.active {
+    background-color: #78909c !important;
+}
+
+.tabs-blue-grey {
+    background-color: #78909c !important;
+}
+
+.pills-dark .show > .nav-link {
+    background-color: #212121 !important;
+}
+
+.pills-dark .nav-link.active {
+    background-color: #212121 !important;
+}
+
+.tabs-dark {
+    background-color: #212121 !important;
+}
+
+.pills-light .show > .nav-link {
+    background-color: #e0e0e0 !important;
+}
+
+.pills-light .nav-link.active {
+    background-color: #e0e0e0 !important;
+}
+
+.tabs-light {
+    background-color: #e0e0e0 !important;
+}
+
+.pills-white .show > .nav-link {
+    background-color: #fff !important;
+}
+
+.pills-white .nav-link.active {
+    background-color: #fff !important;
+}
+
+.tabs-white {
+    background-color: #fff !important;
+}
+
+.pills-black .show > .nav-link {
+    background-color: #000 !important;
+}
+
+.pills-black .nav-link.active {
+    background-color: #000 !important;
+}
+
+.tabs-black {
+    background-color: #000 !important;
+}
+
+.classic-tabs .nav {
+    white-space: nowrap;
+    overflow-x: auto;
+    position: relative;
+    border-radius: 0.3rem 0.3rem 0 0;
+}
+
+@media (min-width: 62rem) {
+    .classic-tabs .nav {
+        overflow-x: hidden;
+    }
+}
+
+.classic-tabs .nav li a {
+    display: block;
+    padding: 20px 24px;
+    font-size: 13px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    border-radius: 0;
+}
+
+    .classic-tabs .nav li a:not(.active) {
+        margin-bottom: 3px;
+    }
+
+    .classic-tabs .nav li a.active {
+        border-bottom: 3px solid;
+        color: #fff;
+    }
+
+@media (min-width: 62em) {
+    .classic-tabs .nav li:first-child {
+        margin-left: 56px;
+    }
+}
+
+.classic-tabs .nav.tabs-cyan li a.active {
+    border-color: #ffeb3b;
+}
+
+.classic-tabs .nav.tabs-orange li a.active {
+    border-color: #e53935;
+}
+
+.classic-tabs .nav.tabs-grey li a.active {
+    border-color: #fff;
+}
+
+.classic-tabs .nav.tabs-pink li a.active {
+    border-color: #673ab7;
+}
+
+.classic-tabs .nav.tabs-green li a.active {
+    border-color: #1565c0;
+}
+
+.classic-tabs .nav.tabs-primary li a.active {
+    border-color: #fff;
+}
+
+.classic-tabs .nav.tabs-animated li a.active {
+    border: none;
+}
+
+.classic-tabs .nav.tabs-animated.tabs-cyan .floor {
+    background-color: #ffeb3b;
+}
+
+.classic-tabs .nav.tabs-animated.tabs-orange .floor {
+    background-color: #e53935;
+}
+
+.classic-tabs .nav.tabs-animated.tabs-grey .floor {
+    background-color: #fff;
+}
+
+.classic-tabs .nav.tabs-animated.tabs-pink .floor {
+    background-color: #673ab7;
+}
+
+.classic-tabs .nav.tabs-animated.tabs-green .floor {
+    background-color: #1565c0;
+}
+
+.classic-tabs .nav.tabs-animated.tabs-primary .floor {
+    background-color: #fff;
+}
+
+.classic-tabs .nav.tabs-animated .floor {
+    display: inline-block;
+    width: 30px;
+    height: 3px;
+    position: absolute;
+    z-index: 1200;
+    bottom: 0;
+    transition: all .4s linear;
+}
+
+.classic-tabs .tab-content.card {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
