@@ -1,5 +1,6 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
+using Microsoft.AspNetCore.Http;
 using MIPlan.Data;
 using MIPlan.Models;
 using System;
@@ -8,12 +9,13 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ConnectionInfo = CrystalDecisions.Shared.ConnectionInfo;
 
 namespace MIPlan.Controllers
 {
     public class CatalogoController : Controller
     {
-        // GET: Catalogo
+        // GET: Catalogos
         public ActionResult Index()
         {
             return View();
@@ -54,6 +56,10 @@ namespace MIPlan.Controllers
         }
 
         public ActionResult Indicadores()
+        {
+            return View();
+        }
+        public ActionResult UnidadesPorUsuario()
         {
             return View();
         }
@@ -1320,8 +1326,53 @@ namespace MIPlan.Controllers
         }
         /* FIN FORMULARIO INDICADORES */
 
+        public JsonResult ObtenerUsuarios()
+        {
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            try
+            {
+                list = CursorDataContext.ObtenerUsuarios();
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
 
-        /**/        
+        public JsonResult GridUnidadesDisponibles(string Usuario)
+        {  
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            try
+            {
+                list = Data.PlanTrabajo.CursorDataContext.GridUnidadesDisponibles(Usuario);
+                objResultado.Error = false;
+                objResultado.MensajeError = string.Empty;
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+
+            }
+        }
+
+        /* FIN FORMULARIO UNIDADES POR USUARIO */
+
+
+        /**/
         public ActionResult ReporteAreasAtencionPdf(string Dependencia)
         {
             ConnectionInfo connectionInfo = new ConnectionInfo();

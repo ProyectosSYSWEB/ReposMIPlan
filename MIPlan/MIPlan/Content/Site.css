@@ -21,7 +21,7 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 100%;
 }
 
 .inputAccion {
@@ -34,6 +34,9 @@ textarea {
     background-color:cadetblue;
 }
 .MybgUR {
+    background-color: rgba(95,158,160,.5);
+}
+.Colortable {
     background-color: rgba(95,158,160,.5);
 }
 .radio {

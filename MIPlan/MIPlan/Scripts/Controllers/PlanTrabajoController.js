@@ -74,8 +74,7 @@
                 $scope.$apply();
             });
         };
-        /********************************************************************************************************************************************************/
-     
+        /********************************************************************************************************************************************************/     
         var CargarComboPlanes = function () {
             catalogoContext.ListaPlanes(function (resp) {
                 switch (resp.ressult) {
@@ -93,14 +92,14 @@
                 $scope.$apply();
             });
         };
-
         /********************************************************************************************************************************************************/
         var GridAreasAtencion = function () {
-            catalogoContext.GridAreasAtencion(self.buscarDependencias, function (resp) {
+            catalogoContext.GridAreasAtencion(self.buscarPlan, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":                        
                         self.GridAreasAtencionView = catalogoContext.GridAreasAtencionLST;
                         self.Descripcion = "";
+                        console.log(self.GridAreasAtencionView );
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -113,7 +112,87 @@
                 $scope.$apply();
             });
         };
+        /********************************************************************************************************************************************************/
+        this.ModalAreasDeAtencion = function () {
+            ObtenerModalGridAreasAtencion();
+            self.DescripcionAA = "";
+        }
+        var ObtenerModalGridAreasAtencion = function () {
+            catalogoContext.ObtenerModalGridAreasAtencion(self.buscarEjercicios, self.buscarDependencias, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.ObtenerModalGridAreasAtencionView = catalogoContext.ObtenerModalGridAreasAtencionLST;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral + "  ObtenerModalGridAreasAtencion";
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+        /********************************************************************************************************************************************************/
+        this.SaveAA = function () {
+            GuardarAreasAtencion();
+        }
+        this.getIdAA = function (Id_Plan, Id_Area_Atencion, Descripcion) {
+            self.Id_Plan = Id_Plan;
+            self.Id_Area_Atencion = Id_Area_Atencion;
+            self.DescripcionAA = Descripcion;
+        }
+        var GuardarAreasAtencion = function () {           
+            catalogoContext.GuardarAreasAtencion(
+                self.Id_Plan, self.Id_Area_Atencion,
+                function (resp) {
+                    switch (resp.ressult) {
+                        case "tgp":
+                            GridAreasAtencion();
+                            alert("¡Se han Guardado los datos correctamente!");
+                            break;
+                        case "notgp":
+                            self.mensaje_gral = resp.message;
+                            document.getElementById("Error").style.display = "block";
+                            document.getElementById("Message").innerHTML = self.mensaje_gral + " GuardarAreasAtencion";
+                            break;
+                        default:
+                            break;
+                    }
+                    $scope.$apply();
+                });
 
+        };
+        /********************************************************************************************************************************************************/
+        this.DeleteAA = function (Id) {            
+            var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
+            if (opcion == true) {
+                EliminarAreasAtencion(Id);
+                alert("¡Se ha eliminado con exito!");
+                GridAreasAtencion();
+
+            } else {
+                alert("No se ha eliminado el registro");
+            }
+        };        
+        var EliminarAreasAtencion = function (Id) {
+            catalogoContext.EliminarAreasAtencion(Id, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        break;
+                    case "notgp":
+
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                //$scope.$apply();
+            });
+        };
         /********************************************************************************************************************************************************/
         var GridActividades = function (idMeta) {
             catalogoContext.GridActividades(idMeta, function (resp) {
@@ -145,12 +224,125 @@
                 }
                 $scope.$apply();
             });
-        };     
-        
+        };             
         /********************************************************************************************************************************************************/
+        var ObtenerDatosActividades = function (Id) {
+            catalogoContext.ObtenerDatosActividades(Id, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.ObtenerDatosActividadesView = catalogoContext.ObtenerDatosActividadesLST;
+                        self.Prioritaria = self.ObtenerDatosActividadesView[0].Prioritaria;
+                        self.EStatus = self.ObtenerDatosActividadesView[0].Status;
+                        self.ObtenerDatosActividadesView[0].Id_Programa = self.ObtenerDatosActividadesView[0].Id_Programa + "";
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral + " ObtenerDatosActividades";
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+        /********************************************************************************************************************************************************/
+        var ObtenerProgramas = function () {
+            catalogoContext.ObtenerProgramas(function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.ObtenerProgramasView = catalogoContext.ObtenerProgramasLST;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral + " ObtenerProgramas";
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+            });
+        };
+        /********************************************************************************************************************************************************/
+        var GuardarActividades = function () {
+            catalogoContext.GuardarActividades(
+                self.IDMETA,
+                self.ObtenerDatosActividadesView[0].Clave,
+                self.ObtenerDatosActividadesView[0].Accion,
+                self.ObtenerDatosActividadesView[0].Impacto,
+                self.EStatus,
+                self.ObtenerDatosActividadesView[0].Fecha_Inicio,
+                self.ObtenerDatosActividadesView[0].Fecha_Fin,
+                self.ObtenerDatosActividadesView[0].Id_Programa,
+                self.Prioritaria, function (resp) {
+                    switch (resp.ressult) {
+                        case "tgp":
+                            alert("¡Se han guardado los datos correctamente!");
+                            self.ObtenerDatosActividadesView = null;
+                            GridActividades(self.IDMETA);
+                            break;
+                        case "notgp":
+                            self.mensaje_gral = resp.message;
+                            document.getElementById("Error").style.display = "block";
+                            document.getElementById("Message").innerHTML = self.mensaje_gral + " GuardarActividades";
+                            break;
+                        default:
+                            break;
+                    }
+                    $scope.$apply();
+                });
+        };
+        /********************************************************************************************************************************************************/
+        var EditarActividades = function () {
+            catalogoContext.EditarActividades(
+                self.ObtenerDatosActividadesView[0].Id,
+                self.ObtenerDatosActividadesView[0].Id_Programa,
+                self.ObtenerDatosActividadesView[0].Accion,
+                self.ObtenerDatosActividadesView[0].Fecha_Inicio,
+                self.ObtenerDatosActividadesView[0].Fecha_Fin,
+                self.ObtenerDatosActividadesView[0].Impacto,
+                self.Prioritaria,
+                self.ObtenerDatosActividadesView[0].Clave,
+                self.EStatus, function (resp) {
+                    switch (resp.ressult) {
+                        case "tgp":
+                            alert("¡Se han actualizado los datos correctamente!");
+                            self.ObtenerDatosActividadesView = null;
+                            break;
+                        case "notgp":
+                            self.mensaje_gral = resp.message;
+                            document.getElementById("Error").style.display = "block";
+                            document.getElementById("Message").innerHTML = self.mensaje_gral + " EditarActividades";
+                            break;
+                        default:
+                            break;
+                    }
+                    $scope.$apply();
+                });
+        };
+        /********************************************************************************************************************************************************/
+        var EliminarActividad = function (Id) {
+            catalogoContext.EliminarActividades(Id, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
 
+                        break;
+                    case "notgp":
+
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                //$scope.$apply();
+            });
+        };
+        /********************************************************************************************************************************************************/
         var GridUnidadesResp = function (idActividad) {
-            catalogoContext.GridUnidadesResp(idActividad, function (resp) {
+            catalogoContext.GridUnidadesResp(idActividad , function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
 
@@ -174,22 +366,21 @@
                 $scope.$apply();
             });
         };        
-
         /********************************************************************************************************************************************************/
-
-        var ObtenerDatosActividades = function (Id) {
-            catalogoContext.ObtenerDatosActividades(Id, function (resp) {
+        this.GridUR = function () {
+            ObtenerGridUnidadesModal();
+            self.DescripcionUR = "";
+        }
+        var ObtenerGridUnidadesModal = function () {
+            catalogoContext.ObtenerGridUnidadesModal(self.buscarDependencias, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.ObtenerDatosActividadesView = catalogoContext.ObtenerDatosActividadesLST;                        
-                        self.Prioritaria = self.ObtenerDatosActividadesView[0].Prioritaria;
-                        self.EStatus = self.ObtenerDatosActividadesView[0].Status;
-                        self.ObtenerDatosActividadesView[0].Id_Programa = self.ObtenerDatosActividadesView[0].Id_Programa + "";                        
+                        self.ObtenerGridUnidadesModalView = catalogoContext.ObtenerGridUnidadesModalLST;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
-                        document.getElementById("Message").innerHTML = self.mensaje_gral + " ObtenerDatosActividades";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral + "  ObtenerGridUnidadesModal";
                         break;
                     default:
                         break;
@@ -197,9 +388,7 @@
                 $scope.$apply();
             });
         };
-
-       /********************************************************************************************************************************************************/
-
+        /********************************************************************************************************************************************************/
         var ObtenerDatosUnidadesResp = function (Id) {
             catalogoContext.ObtenerDatosUnidadesResp(Id, function (resp) {
                 switch (resp.ressult) {
@@ -219,8 +408,38 @@
                 $scope.$apply();
             });
         };
+        /********************************************************************************************************************************************************/       
+        this.SaveUR = function () {
+            GuardarUnidadesResp();
+        }
+        this.getId = function (Id, Descripcion) {
+            self.idU = Id;
+            self.DescripcionUR = Descripcion;
+        }
+        var GuardarUnidadesResp = function () {
 
-         /********************************************************************************************************************************************************/
+            catalogoContext.GuardarUnidadesResp( 
+                self.idActividad,
+                self.idU,
+                function (resp) {
+                    switch (resp.ressult) {
+                        case "tgp":
+                            GridUnidadesResp(self.idActividad);
+                            alert("¡Se han Guardado los datos correctamente!");                             
+                            break;
+                        case "notgp":
+                            self.mensaje_gral = resp.message;
+                            document.getElementById("Error").style.display = "block";
+                            document.getElementById("Message").innerHTML = self.mensaje_gral + " GuardarUnidadesResp";
+                            break;
+                        default:
+                            break;
+                    }
+                    $scope.$apply();
+                });
+
+        };
+        /********************************************************************************************************************************************************/
         var EditarUnidadesResp = function () {           
             catalogoContext.EditarUnidadesResp(
                 self.ObtenerDatosUnidadesRespView[0].Id,
@@ -246,9 +465,7 @@
                     $scope.$apply();
                 });
         };
-
-       /********************************************************************************************************************************************************/
-
+        /********************************************************************************************************************************************************/
         var EliminarUnidadesResp = function (Id) {         
             catalogoContext.EliminarUnidadResponsable(Id, function (resp) {
                 switch (resp.ressult) {
@@ -267,111 +484,7 @@
                 //$scope.$apply();
             });
         };
-
-    /********************************************************************************************************************************************************/
-
-        var EliminarActividad = function (Id) {
-            catalogoContext.EliminarActividades(Id, function (resp) {
-                switch (resp.ressult) {
-                    case "tgp":
-                        
-                        break;
-                    case "notgp":     
-                    
-                        self.mensaje_gral = resp.message;
-                        document.getElementById("Error").style.display = "block";
-                        document.getElementById("Message").innerHTML = self.mensaje_gral ;
-                        break;
-                    default:
-                        break;
-                }
-                //$scope.$apply();
-            });
-        };
-
-        /********************************************************************************************************************************************************/
-
-        var ObtenerProgramas = function () {
-            catalogoContext.ObtenerProgramas(function (resp) {
-                switch (resp.ressult) {
-                    case "tgp":
-                        self.ObtenerProgramasView = catalogoContext.ObtenerProgramasLST;                       
-                        break;
-                    case "notgp":
-                        self.mensaje_gral = resp.message;
-                        document.getElementById("Error").style.display = "block";
-                        document.getElementById("Message").innerHTML = self.mensaje_gral + " ObtenerProgramas";
-                        break;
-                    default:
-                        break;
-                }
-                $scope.$apply();
-            });
-        };
-
-        /********************************************************************************************************************************************************/
-
-        var EditarActividades = function () {   
-            catalogoContext.EditarActividades(
-                self.ObtenerDatosActividadesView[0].Id,
-                self.ObtenerDatosActividadesView[0].Id_Programa,
-                self.ObtenerDatosActividadesView[0].Accion,
-                self.ObtenerDatosActividadesView[0].Fecha_Inicio,
-                self.ObtenerDatosActividadesView[0].Fecha_Fin,
-                self.ObtenerDatosActividadesView[0].Impacto,
-                self.Prioritaria,
-                self.ObtenerDatosActividadesView[0].Clave,
-                self.EStatus,function (resp) {
-                switch (resp.ressult) {
-                    case "tgp":                                                
-                        alert("¡Se han actualizado los datos correctamente!");                    
-                        self.ObtenerDatosActividadesView = null;                 
-                        break;
-                    case "notgp":
-                        self.mensaje_gral = resp.message;
-                        document.getElementById("Error").style.display = "block";
-                        document.getElementById("Message").innerHTML = self.mensaje_gral + " EditarActividades";
-                        break;
-                    default:
-                        break;
-                }
-                $scope.$apply();
-            });
-        };
-
-        /********************************************************************************************************************************************************/
-
-        var GuardarActividades = function () {
-            catalogoContext.GuardarActividades(
-                self.IDMETA,
-                self.ObtenerDatosActividadesView[0].Clave,
-                self.ObtenerDatosActividadesView[0].Accion,
-                self.ObtenerDatosActividadesView[0].Impacto,
-                self.EStatus,
-                self.ObtenerDatosActividadesView[0].Fecha_Inicio,
-                self.ObtenerDatosActividadesView[0].Fecha_Fin,
-                self.ObtenerDatosActividadesView[0].Id_Programa,
-                self.Prioritaria, function (resp) {
-                switch (resp.ressult) {
-                    case "tgp":
-                        alert("¡Se han guardado los datos correctamente!");
-                        self.ObtenerDatosActividadesView = null;
-                        GridActividades(self.IDMETA);
-                        break;
-                    case "notgp":
-                        self.mensaje_gral = resp.message;
-                        document.getElementById("Error").style.display = "block";
-                        document.getElementById("Message").innerHTML = self.mensaje_gral + " GuardarActividades";
-                        break;
-                    default:
-                        break;
-                }
-                $scope.$apply();
-            });
-        };
-
-        /********************************************************************************************************************************************************/
-
+        /********************************************************************************************************************************************************/  
         this.ModalACTV = function (Id) {                        
                     document.getElementById("title").className = "modal-header btn-primary justify-content-center";
                     document.getElementById("exampleModalLabel").innerHTML = "Actualizar Actividades";
@@ -437,30 +550,7 @@
             self.Prioritaria = "S";
             ObtenerProgramas();
         };
-        this.ColorUR = function () {
-                    document.getElementById("titleUR").className = "modal-header btn-success justify-content-center";
-                    document.getElementById("exampleModalLabelUR").innerHTML = "Crear Unidad Responsable";
-                    document.getElementById("btnModalUR").className = "btn btn-success";
-                    document.getElementById("lblDependencia").className = "text-success";
-                    document.getElementById("cmbDependencia").className = "form-control border border-success";
-                    document.getElementById("lblClaveUR").className = "text-success";
-                    document.getElementById("inputClaveUR").className = "form-control border border-success";
-                    document.getElementById("lblDescripcion").className = "text-success";
-                    document.getElementById("inputDescripcion").className = "form-control border  border-success";
-                    document.getElementById("lblStatusUR").className = "text-success";
-                    document.getElementById("cmbStatusUR").className = "form-control border  border-success";
-                    document.getElementById("lblCoordinacion").className = "text-success";
-                    document.getElementById("Radio").className = "radio-group form-control border border-success text-center";
-
-                    self.EStatus = "A";                                            
-        };
         /*******************************************************************************************************************************************************/
-        this.getUR = function (Id, Descripcion)
-        {
-            GridUnidadesResp(Id);
-            self.DescActividad = Descripcion;
-            self.idActividad = Id;
-        }
 
         this.ActividadesCrud = function (ID) {
             if (ID) { 
@@ -469,26 +559,25 @@
                 GuardarActividades();
             }
         };
-
-        this.UnidadResponsableCRUD = function (ID) {
-            if (ID) {                
-                EditarUnidadesResp();
-            } else {
-                
-            }
-        }
-
         this.EliminnarA = function (Indice) {
             var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
             if (opcion == true) {
-                EliminarActividad(Indice);                               
-                alert("¡Se ha eliminado con exito!");    
+                EliminarActividad(Indice);
+                alert("¡Se ha eliminado con exito!");
                 GridActividades(self.IDMETA);
-                
+
             } else {
                 alert("No se ha eliminado el registro");
             }
         };
+        this.getUR = function (Id, Descripcion) {
+            GridUnidadesResp(Id);
+            self.DescActividad = Descripcion;
+            self.idActividad = Id;
+        }
+        this.EditUR = function () {            
+                EditarUnidadesResp();        
+        }   
         this.EliminarUR = function (Indice) {
             var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
             if (opcion == true) {
@@ -514,10 +603,23 @@
                 form.$setUntouched();                
             }
 
+            $('#ModalAddUR').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }
+
+            $('#ModalAreasDeAtencion').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }
+
             self.ObtenerDatosActividadesView = null;            
             self.Prioritaria = null;
             self.ObtenerDatosUnidadesRespView = null;            
             self.EStatus = null;
+            self.idU = null;
         };
         this.reset = function (form) {
             $('#ModalActividades').modal('hide');
@@ -549,7 +651,9 @@
             self.IDMETA = idMeta;
             self.Descripcion = Descripcion;
         }
-
+        this.URS = function (Descripcion) {            
+            self.Descripcion = Descripcion;
+        }
         this.BtnBuscar = function () {
             GridAreasAtencion();            
         }
@@ -565,12 +669,14 @@
         };   
 
         this.ValorUnidad = function () {
-            alert("Unidades")
+            console.log("Unidades", self.buscarUnidad)
         }
 
-        this.Prueba = function () {
-            alert("Funciona");
+        this.ValorPlan = function () {
+            console.log("Plan", self.buscarPlan);
         }
+
+
         /*******************************************************************************************************************************************************/
 
     }]);
