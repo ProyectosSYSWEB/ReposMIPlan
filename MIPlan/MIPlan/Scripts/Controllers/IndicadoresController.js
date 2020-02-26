@@ -266,7 +266,7 @@
             }
         }
 
-        this.reset = function (form) {
+        this.close = function (form) {
             $('#indicadores').modal('hide');
             if (form) {
                 form.$setPristine();
@@ -295,7 +295,7 @@
             self.cve_seg = null;
         };
 
-        this.PdfReportIndicadores = function (Categoria) {
+        this.PdfReportIndicadores = function (Categoria, Subtipo) {
             var xhr = new XMLHttpRequest();
             var ruta = urlServer + 'Catalogo/ReporteIndicadoresPdf';
             xhr.responseType = 'blob';
@@ -309,7 +309,7 @@
                     window.open(link, "", "width=600,height=800");
                 }
             }
-            xhr.send("Categoria=" + Categoria);
+            xhr.send("Categoria=" + self.buscar + "&Sub_tipo=" + self.Sub.Sub);
         };
 
     }]);

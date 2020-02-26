@@ -137,7 +137,8 @@
             self.cve_status = "";
             self.cve_cat = "";
 
-            self.cve_status = "A";           
+            self.cve_status = "A";
+            
             var iNumeroMayor = self.areasatencion[0].Cve;
             for (var i = 0; i < self.areasatencion.length; i++) {
                 if (self.areasatencion[i].Cve > iNumeroMayor) {
@@ -306,7 +307,7 @@
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function () {//Call a function when the state changes.
                 if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-                    var blob = new Blob([this.response], { type: 'application/xlsx' });
+                    var blob = new Blob([this.response], { type: 'application/xls' });
                     var link = document.createElement('a');
                     link.href = window.URL.createObjectURL(blob);
                     window.open(link, "", "width=600,height=800");
