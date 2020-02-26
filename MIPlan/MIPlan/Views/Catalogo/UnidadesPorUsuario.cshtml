@@ -94,13 +94,13 @@
                     <button type="button" class="btn btn-outline-primary" ng-click="ctrl.right()">></button>
                     <br />
                     <br />
-                    <button type="button" class="btn btn-outline-primary"><</button>
+                    <button type="button" class="btn btn-outline-primary" ng-click="ctrl.left()"><</button>
                     <br />
                     <br />
-                    <button type="button" class="btn btn-outline-primary">>></button>
+                    <button type="button" class="btn btn-outline-primary" ng-click="ctrl.AllRight()">>></button>
                     <br />
                     <br />
-                    <button type="button" class="btn btn-outline-primary"><<</button>
+                    <button type="button" class="btn btn-outline-primary" ng-click="ctrl.AllLeft()"><<</button>
 
 
                 </div>
@@ -123,7 +123,7 @@
                             <th scope="col" class="text-white">Descripción</th>
                         </tr>
                     </thead>
-                    <tbody ng-pagination="i in ctrl.NewGridUnidadesDisponibles | itemsPerPage: 5" pagination-id="PaginationUDNew">
+                    <tbody ng-pagination="i in ctrl.AgregarUnidadGrid | itemsPerPage: 5" pagination-id="PaginationUDNew">
                         <tr ng-click="ctrl.getIdUDNew(i.Id, i.Descripcion); AA= ctrl.DescripcionUD" ng-class="{'Mybg text-white': AA == ctrl.DescripcionUD}" class="cursor-pointer">
                             <th scope="row">{{i.Id}}</th>
                             <td>{{i.Descripcion}}</td>

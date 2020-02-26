@@ -54,12 +54,17 @@
             });
         };
         /********************************************************************************************************************************************************/
-        this.ValorUsuario = function () {
-            console.log("It's Works", self.Usuario);
+        this.ValorUsuario = function () {           
             GridUnidadesDisponibles();
         };
-        var GridUnidadesDisponibles = function () {
-            catalogoContext.GridUnidadesDisponibles(self.Usuario, function (resp) {
+        var GridUnidadesDisponibles = function (lado) {
+            if (self.rightId == null) {
+                self.rightId = 0;
+                self.DescripcionUD = "";
+                lado = 2;
+            }
+
+            catalogoContext.GridUnidadesDisponibles(self.rightId, self.DescripcionUD, self.Usuario, lado, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         self.GridUnidadesDisponiblesView = catalogoContext.GridUnidadesDisponiblesLST;                        
@@ -72,41 +77,77 @@
                     default:
                         break;
                 }
-                $scope.$apply();          
+                //$scope.$apply();          
+            });
+        };       
+/********************************************************************************************************************************************************/
+
+
+
+
+
+        this.getIdUD = function (Id, Descripcion) {            
+            self.rightId = Id
+            self.DescripcionUD = Descripcion;
+            self.ladoR = 0;
+        }        
+        this.getIdUDNew = function (Id, Descripcion) {
+            self.rightId = Id
+            self.DescripcionUD = Descripcion;
+            self.ladoL = 1;
+        }
+    /********************************************************************************************************************************************************/
+        this.right = function () {            
+            AgregarUnidadGrid(self.ladoR);
+            GridUnidadesDisponibles(self.ladoR);
+        }        
+        this.left = function () {
+            AgregarUnidadGrid(self.ladoL);
+            GridUnidadesDisponibles(self.ladoL);
+        }
+        this.AllRight =  function () {
+            for (var i = 0; i < self.GridUnidadesDisponiblesView.length; i++) {
+                self.rightId = self.GridUnidadesDisponiblesView[i].Id;
+                self.DescripcionUD = self.GridUnidadesDisponiblesView[i].Descripcion;                
+                ladoL = 0;
+                AgregarUnidadGrid(ladoL);                
+            }
+            for (var i = 0; i < self.GridUnidadesDisponiblesView.length; i++) {
+                self.rightId = self.GridUnidadesDisponiblesView[i].Id;                
+                ladoL = 0;
+                GridUnidadesDisponibles(ladoL);
+            }
+           
+
+        }
+
+        this.AllLeft = function () {            
+            self.GridUnidadesDisponiblesView = self.AgregarUnidadGrid;
+
+            //self.AgregarUnidadGrid.length = 0;
+        }
+    /********************************************************************************************************************************************************/
+        var AgregarUnidadGrid = function (lado) {            
+            catalogoContext.AgregarUnidadGrid(
+                self.rightId, self.DescripcionUD, self.Usuario, lado,
+                function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+                        self.AgregarUnidadGrid = catalogoContext.AgregarUnidadGridLST;
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                //$scope.$apply();
             });
         };
 
-        //ObjPolizaDet.Cargo = TotCargo;
-        //ObjPolizaDet.Abono = TotAbono;           
-
-
-        //        if (Session["PolizaDet"] == null)
-        //        {
-        //            ListPDet = new List<Poliza_Detalle>();
-        //            ListPDet.Add(ObjPolizaDet);
-        //        }
-        //        else
-        //        {
-        //            ListPDet = (List<Poliza_Detalle>)Session["PolizaDet"];
-        //            ListPDet.Add(ObjPolizaDet);
-        //        }
-
-        //        Session["PolizaDet"] = ListPDet;
-        //        CargarGridDetalle(ListPDet);
-/********************************************************************************************************************************************************/
-
-        this.getIdUD = function (Id, Descripcion) {
-            self.rightId = Id;
-            self.DescripcionUD = Descripcion;
-        }
-        self.NewGridUnidadesDisponibles = [];
-        this.right = function () {
-            self.NewGridUnidadesDisponibles.push({ Id: self.rightId, Descripcion: self.DescripcionUD });
-        }        
-        this.getIdUDNew = function (Id, Descripcion) {
-         
-            self.DescripcionUD = Descripcion;
-        }
+       
 
     }]);
 })();
