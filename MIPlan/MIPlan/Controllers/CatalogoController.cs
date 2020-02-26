@@ -45,6 +45,10 @@ namespace MIPlan.Controllers
             return View();
         }
 
+        public ActionResult ProgramasEducativos()
+        {
+            return View();
+        }
         public ActionResult AcreditadoresRegistro()
         {
             return View();

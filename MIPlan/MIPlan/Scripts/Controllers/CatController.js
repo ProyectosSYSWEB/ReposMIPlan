@@ -265,7 +265,7 @@
                 form.$setPristine();
                 form.$setUntouched();
             }
-            CargarGrid();
+            //CargarGrid();
             self.cve_catalogo = null;
             self.cve_orden = null;
             self.cve_clave = null;
