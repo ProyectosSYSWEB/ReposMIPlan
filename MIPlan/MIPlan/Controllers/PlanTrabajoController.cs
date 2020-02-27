@@ -95,8 +95,8 @@ namespace MIPlan.Controllers
         public JsonResult ListaUnidadResponsable()
         {
             Sesion SesionUsu = new Sesion();
-            List<Comun> list = new List<Comun>();
-            ResultadoComun objResultado = new ResultadoComun();
+            List<Unidades> list = new List<Unidades>();
+            ResultadoUnidad objResultado = new ResultadoUnidad();
             try
             {
 

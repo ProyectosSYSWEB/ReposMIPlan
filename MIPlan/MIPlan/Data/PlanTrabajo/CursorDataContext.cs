@@ -9,7 +9,7 @@ namespace MIPlan.Data.PlanTrabajo
 {
     public class CursorDataContext
     {
-        public static List<Comun> GridUnidadesDisponibles(string Usuario)
+        public static List<Unidades> GridUnidadesDisponibles(string Usuario)
         {
             //s
             OracleCommand cmd = null;
@@ -23,11 +23,11 @@ namespace MIPlan.Data.PlanTrabajo
 
                 OracleDataReader dr = null;
                 cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Unidades_Disponibles", ref dr, Parametros, Valores);
-                List<Comun> listarUnidades = new List<Comun>();
+                List<Unidades> listarUnidades = new List<Unidades>();
                 while (dr.Read())
                 {
-                    Comun objUnidades = new Comun();
-                    objUnidades.Id = Convert.ToString(dr[0]);
+                    Unidades objUnidades = new Unidades();
+                    objUnidades.Id = Convert.ToInt32(dr[0]);
                     objUnidades.Descripcion = Convert.ToString(dr[1]);
                     listarUnidades.Add(objUnidades);
                 }
