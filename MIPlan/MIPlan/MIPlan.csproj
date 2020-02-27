@@ -444,6 +444,7 @@
     <Content Include="Scripts\Controllers\IndicadoresController.js" />
     <Content Include="Scripts\Controllers\PeriodosController.js" />
     <Content Include="Scripts\Controllers\PlanTrabajoController.js" />
+    <Content Include="Scripts\Controllers\ProgramaController.js" />
     <Content Include="Scripts\Controllers\UnidadesPorUsuarioController.js" />
     <Content Include="Scripts\Controllers\UnidadesResponsablesController.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
@@ -1307,6 +1308,7 @@
     <Content Include="Scripts\Models\IndicadoresModel.js" />
     <Content Include="Scripts\Models\PeriodosModel.js" />
     <Content Include="Scripts\Models\PlanTrabajoModel.js" />
+    <Content Include="Scripts\Models\ProgramaModelo.js" />
     <Content Include="Scripts\Models\UnidadesPorUsuarioModel.js" />
     <Content Include="Scripts\Models\UnidadesResponsablesModel.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
@@ -1356,6 +1358,7 @@
     <Content Include="Views\Catalogo\Indicadores.cshtml" />
     <Content Include="Views\Movimientos\Configuracion.cshtml" />
     <Content Include="Views\Catalogo\UnidadesPorUsuario.cshtml" />
+    <Content Include="Views\Catalogo\ProgramasEducativos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

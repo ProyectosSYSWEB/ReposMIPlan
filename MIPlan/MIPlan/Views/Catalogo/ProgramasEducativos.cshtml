@@ -1,0 +1,259 @@
+﻿
+@{
+
+    ViewBag.Title = "Programas Educativos";
+    Layout = "~/Views/Shared/_LayoutContenido.cshtml";
+
+}
+<h2>Programas Educativos</h2>
+<br />
+<br />
+<br />
+
+<div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
+    <div class="container">
+        <div id="Error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
+            <strong id="Message">¡Ha ocurrido un error! </strong>
+            <button type="button" class="close" ng-click="ctrl.DivError()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                <label for="lbldependencia" class="text-success ">Dependencia:</label>
+                <select class="form-control border border-success " name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.buscar" style="max-width:100%;">
+                    <option value="">--Seleccionar Dependencia--</option>
+                </select>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                <div class="form-group">
+                    <label for="lblnivel" class="text-info">Nivel:</label>
+                    <select class="form-control border border-info" name="cmbDependencia" @*ng-change="ctrl.StatusFun()" ng-model="ctrl.Status.Status"*@ style="max-width:100%;">
+                        <option value="">--Seleccionar Nivel--</option>
+                       
+                    </select>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+    <div class="panel panel-default panel-table">
+        <div class="panel-heading">
+            <div class="container">
+                <div class="col text-right">
+                    <button type="button" id="Nuevo" class="btn btn-sm btn-success btn-create" data-toggle="modal" data-target="#basicos" style="width:120px" ng-click="ctrl.Nuevo()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                    <br />
+                    <br />
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="basicos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form name="modalForm" novalidate>
+                        <div id="Titulo" class="modal-header btn-success justify-content-center">
+                            <h5 class="modal-title" id="exampleModalLabel">{{ctrl.Titulo}}</h5>
+                            <button type="button" class="close btn-danger" data-dismiss="modal" ng-click="ctrl.reset(modalForm)" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row justify-content-center">
+                                    <label id="lbldependencia" for="lbldependencia" class="text-success">Dependencia:</label>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <select id="cmbdependencia" class="form-control border border-success" name="cmbdependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.buscar"  style="max-width:100%; ">
+                                        <option value="">--Seleccionar Dependencia--</option>
+                                        <option value="Todas">Todas</option>
+
+                                    </select>
+                                </div>
+
+                                @*<div class="row justify-content-center">
+                                    <span class="messages" ng-show="modalForm.$submitted || modalForm.cmbcatalogo.$touched">
+                                        <span ng-show="!ctrl.cve_catalogo" class="text-danger">Campo Requerido</span>
+                                    </span>
+                                </div>*@
+
+                                <div class="row justify-content-center">
+                                    <label id="lblnivel" for="lblnivel" class="text-success">Nivel:</label>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <input type="text" id="txtnivel" class="form-control border border-success" name="txtnivel" maxlength="6" placeholder="Nivel" ng-model="ctrl.cve_nivel">
+                                </div>
+
+                                @*<div class="row justify-content-center">
+                                        <span class="messages" ng-show="modalForm.$submitted || modalForm.txtClave.$touched">
+                                            <span ng-show="!ctrl.cve_clave" class="text-danger">Campo Requerido</span>
+                                        </span>
+                                    </div>*@
+                                <div class="row justify-content-center">
+                                    <label id="lblcarrera" for="lblcarrera" class="text-success">Carrera:</label>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <select id="cmbcarrera" class="form-control border border-success" name="cmbcarrera" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_carrera" style="max-width:100%; ">
+                                        <option value="">--Seleccionar Catalogo--</option>
+                                        <option value="Todas">Todas</option>
+
+                                    </select>
+                                    </div>
+
+                                         @*<div class="row justify-content-center">
+                                              <span class="messages" ng-show="modalForm.$submitted || modalForm.txtorden.$touched">
+                                             <span ng-show="!ctrl.cve_orden" class="text-danger">Campo Requerido</span>
+                                                </span>
+                                               </div>*@
+                                    <div class="row justify-content-center">
+                                        <label id="lblstatus" for="lblstatus" class="text-success">Estatus:</label>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <div id="Radio" class="radio-group form-control border border-success text-center" style="max-width: 280px;">
+                                            <label class="radio ">
+                                                <input type="radio" value="A" name="gender" ng-model="ctrl.cve_status" required />
+                                                Alta
+                                                <span></span>
+                                            </label>
+                                            <label class="radio">
+                                                <input type="radio" value="B" name="gender" ng-model="ctrl.cve_status" required />
+                                                Baja
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    @*<div class="row justify-content-center">
+                                        <span class="messages" ng-show="modalForm.$submitted || modalForm.gender.$touched">
+                                            <span ng-show="!ctrl.cve_status" class="text-danger">Campo Requerido</span>
+                                        </span>
+                                    </div>*@
+
+
+                                </div>
+                            <br />
+                            <div class="row justify-content-center">
+                                <div id="ErrorModal" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
+                                    <strong id="MessageModal">¡Ha ocurrido un error! </strong>
+                                    <button type="button" class="close" ng-click="ctrl.DivErrorModal()" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                                <button type="button" id="btnNuevo" class="btn btn-success" data-dismiss="modal" ng-click="ctrl.BasicoCreate(ctrl.cve_id.Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
+                                <button type="button" id="btnActualizar" class="btn btn-primary" data-dismiss="modal" ng-click="ctrl.BasicoUpdate(ctrl.cve_id.Id); ctrl.reset(modalForm)" @*ng-disabled="modalForm.$invalid*@>Guardar</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+                <br />
+            </div>
+        </div>
+        <input type="hidden" ng-model="ctrl.cve_id" />
+        <div class="container table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.3)">
+            <table id="table_basico" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <a href="" ng-click="sortType = 'Id'; sortReverse = !sortReverse">
+                                Id
+                                <span ng-class="sortType == 'Id' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Id' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                            </a>
+                        </th>
+
+                        <th scope="col">
+                            <a href="" ng-click="sortType = 'Dependencia'; sortReverse = !sortReverse">
+                                Dependencia
+                                <span ng-class="sortType == 'Dependencia' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Dependencia' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                            </a>
+                        </th>
+
+
+                        <th scope="col">
+                            <a href="" ng-click="sortType = 'Nivel'; sortReverse = !sortReverse">
+                                Nivel
+                                <span ng-class="sortType == 'Nivel' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Nivel' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                            </a>
+                        </th>
+                        <th scope="col">
+                            <a href="" ng-click="sortType = 'Carrera'; sortReverse = !sortReverse">
+                                Carrera
+                                <span ng-class="sortType == 'Carrera' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Carrera' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                            </a>
+                        </th>
+                        <th scope="col">
+                            <a href="" ng-click="sortType = 'Estatus'; sortReverse = !sortReverse">
+                                Estatus
+                                <span ng-class="sortType == 'Estatus' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Estatus' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                            </a>
+                        </th>
+
+
+                        <th style="text-align:center"><em class="fa fa-cog"></em></th>
+                    </tr>
+                </thead>
+                <tbody ng-pagination="i in ctrl.basicos | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status  | itemsPerPage: 5  ">
+                    <tr>
+                        <td>{{i.Id}}</td>
+                        <td>{{i.Dependencia}}</td>
+                        <td>{{i.Nivel}}</td>
+                        <td><font size="2">{{i.Carrera}}</font></td>
+                        <td>{{i.Status}}</td>
+
+                        <td style="text-align:right">
+                            <button type="button" id="Actualizar" class="btn btn-primary" title="Editar" data-placement="top" data-toggle="modal" data-target="#basicos" data-backdrop="static" data-keyboard="false" data-html="true" ng-click="ctrl.ObtenerDatos(i.Id)" style="width:50px">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" title="Eliminar" ng-click="ctrl.Eliminar(i.Id)" style="width:50px">
+                                <i class="fa fa-eraser" data-placement="top" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+
+
+                <tfoot>
+                    <tr>
+                        <th colspan="4">
+                            <ng-pagination-control boundary-links="true"></ng-pagination-control>
+                        </th>
+                        <th></th>
+                        <th style="text-align:right" colspan="3">
+                            <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.exportTableToExcel('table_basico')" style="width:50px">
+                                <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Generar Reporte en PDF" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                            </button>
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular-pagination.js"></script>
+<script src="~/Scripts/global.js"></script>
+@*<script src="~/Scripts/angular.ng-modules.js"></script>*@
+<script src="~/Scripts/Controllers/ProgramaController.js" ></script>
+<script src="~/Scripts/Models/ProgramaModelo.js" ></script>
+<script src="~/Scripts/Controllers/AccesoController.js"></script>
+<script src="~/Scripts/Models/AccesoModel.js"></script>
+
+
+
+

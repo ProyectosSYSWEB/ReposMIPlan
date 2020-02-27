@@ -2,7 +2,7 @@
 // <reference path="../Models/CatModel.js"/>
 
 (function () {
-    var app = angular.module('MIPlanWeb', ['ngPagination', 'ngAnimate']);
+    var app = angular.module('MIPlanWeb', ['ngPagination']);
 
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
         var self = this;
@@ -49,7 +49,6 @@
                         break;
                 }
                 $scope.$apply();
-                $('button').tooltip();
             });
         };   
 
@@ -140,11 +139,8 @@
             catalogoContext.BasicoUpdate(self.cve_id, self.cve_catalogo,self.cve_clave, self.cve_descripcion, self.cve_orden,self.cve_status, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        Swal.fire(
-                            '¡Listo!',
-                            '¡Se han actualizado los datos correctamente!',
-                            'success'
-                        ) 
+
+                        alert("¡Se han actualizado los datos correctamente!");
                         CargarGrid();
                         break;
                     case "notgp":
@@ -174,11 +170,7 @@
                         self.cve_clave = null;
                         self.cve_descripcion = null;
                         self.cve_status = null;
-                        Swal.fire(
-                            '¡Listo!',
-                            '¡Se han guardado los datos correctamente!',
-                            'success'
-                        )
+                        alert("¡Se ha creado la unidad correctamente!");
                         CargarGrid();
 
                         break;
@@ -203,25 +195,14 @@
             catalogoContext.eliminarBasico(Id, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        Swal.fire(
-                            '¡Eliminado!',
-                            'Se ha eliminado con exito.',
-                            'success'
-                        );
 
-                        CargarGrid();
-                      
+                        console.log("Controller Eliminar ejecutado");
                         break;
                     case "notgp":
-                        Swal.fire(
-                            'Oooops :(',
-                            '¡Fallo al reaizar esta acción!',
-                            'error'
-                        );
                         self.mensaje_gral = resp.message;
                         document.getElementById("Error").style.display = "block";
                         document.getElementById("Message").innerHTML = self.mensaje_gral;
-                       
+                        console.log("Error Controller");
                         break;
                     default:
                         break;
@@ -231,20 +212,14 @@
         };
 
         this.Eliminar = function (Indice) {
-            Swal.fire({
-                title: '¿Seguro que Desea Eliminar el Resgistro?',
-                text: "Se Eliminara Permanentemente",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                cancelButtonText: 'No, Cancelar',
-                confirmButtonText: 'Si, Quiero Eliminarlo'
-            }).then((result) => {
-                if (result.value) {
-                    BasicoDelete(Indice);                                    
-                }
-            })
+            var opcion = confirm("¿Seguro que desea Eliminar el Registro?");
+            if (opcion == true) {
+                BasicoDelete(Indice);
+                alert("¡Se ha eliminado con exito!");
+                CargarGrid();
+            } else {
+                alert("No se ha eliminado el registro");
+            }
         };
 
         this.DivError = function () {
@@ -289,7 +264,8 @@
             if (form) {
                 form.$setPristine();
                 form.$setUntouched();
-            }          
+            }
+            //CargarGrid();
             self.cve_catalogo = null;
             self.cve_orden = null;
             self.cve_clave = null;
