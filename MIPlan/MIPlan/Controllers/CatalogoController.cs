@@ -1453,23 +1453,52 @@ namespace MIPlan.Controllers
             }
         }
 
-        //ObjPolizaDet.Cargo = TotCargo;
-        //ObjPolizaDet.Abono = TotAbono;           
+        public JsonResult ObtenerCarreras()
+        {
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            try
+            {                
 
+                list = CursorDataContext.ObtenerCarreras();
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
 
-        //        if (Session["PolizaDet"] == null)
-        //        {
-        //            ListPDet = new List<Poliza_Detalle>();
-        //            ListPDet.Add(ObjPolizaDet);
-        //        }
-        //        else
-        //        {
-        //            ListPDet = (List<Poliza_Detalle>)Session["PolizaDet"];
-        //            ListPDet.Add(ObjPolizaDet);
-        //        }
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
 
-        //        Session["PolizaDet"] = ListPDet;
-        //        CargarGridDetalle(ListPDet);  
+        public JsonResult ObtenerNiveles()
+        {
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            try
+            {
+
+                list = CursorDataContext.ObtenerNiveles();
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
 
         /* FIN FORMULARIO UNIDADES POR USUARIO */
 
