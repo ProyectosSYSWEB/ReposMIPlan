@@ -1,7 +1,7 @@
 ﻿// <reference path="../Models/IndicadoresModel.js"/>
 
 (function () {
-    var app = angular.module('MIPlanWeb', ['ngPagination', 'ngAnimate']);
+    var app = angular.module('MIPlanWeb', ['ngPagination']);
 
 
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
@@ -99,7 +99,6 @@
                         break;
                 }
                 $scope.$apply();
-                $('button').tooltip();
             });
         };
 
@@ -173,12 +172,7 @@
             catalogoContext.IndicadoresUpdate(self.cve_id, self.cve_cat, self.cve_desc, self.cve_sub, self.cve_et1, self.cve_et2, self.cve_seg, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        Swal.fire(
-                            '¡Listo!',
-                            '¡Se han actualizado los datos correctamente!',
-                            'success'
-                        )
-                        CargarGrid();
+                        alert("¡Se han actualizado los datos correctamente!");
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -188,7 +182,8 @@
                     default:
                         break;
                 }
-                $scope.$apply();              
+                $scope.$apply();
+                CargarGrid();
             });
         };
 
@@ -201,11 +196,7 @@
             catalogoContext.IndicadoresCreate(self.cve_cat, self.cve_desc, self.cve_sub, self.cve_et1, self.cve_et2, self.cve_seg, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        Swal.fire(
-                            '¡Listo!',
-                            '¡Se han guardado los datos correctamente!',
-                            'success'
-                        )
+                        alert("¡Se han actualizado los datos correctamente!");
                         CargarGrid();
                         break;
                     case "notgp":
@@ -228,20 +219,11 @@
             catalogoContext.eliminarIndicador(Id, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        Swal.fire(
-                            '¡Eliminado!',
-                            'Se ha eliminado con exito.',
-                            'success'
-                        );
-                        CargarGrid();
+                        console.log("Controller Eliminar ejecutado");
                         break;
                     case "notgp":
-                        Swal.fire(
-                            'Oooops :(',
-                            '¡Fallo al reaizar esta acción!',
-                            'error'
-                        );
                         self.mensaje_gral = resp.message;
+                        console.log("Error Controller");
                         document.getElementById("Error").style.display = "block";
                         document.getElementById("Message").innerHTML = self.mensaje_gral;
                         break;
@@ -253,20 +235,14 @@
         };
 
         this.EliminarIndicadores = function (Indice) {
-            Swal.fire({
-                title: '¿Seguro que Desea Eliminar el Resgistro?',
-                text: "Se Eliminara Permanentemente",
-                icon: 'waring',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                cancelButtonText: 'No, Cancelar',
-                confirmButtonText: 'Si, Quiero Eliminarlo'
-            }).then((result) => {
-                if (result.value) {
-                    eliminarIndicadores(Indice);
-                }
-            })
+            var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
+            if (opcion == true) {
+                eliminarIndicadores(Indice);
+                alert("¡Se ha elimnado con exito!");
+                CargarGrid();
+            } else {
+                alert("No se ha eliminado el registro");
+            }
         };
 
         this.DivError = function () {
@@ -276,10 +252,8 @@
         this.DivErrorModal = function () {
             document.getElementById("ErrorModal").style.display = "none";
         };
-        
 
         this.ValorCategoria = function () {
-            console.log(self.buscar);
             CargarGrid();
             if (self.buscar == null) {
                 self.buscar = '';
@@ -287,23 +261,55 @@
         };
 
         this.SubtipoFun = function () {
-            if (self.SubtipoBusqueda == null) {
-                self.SubtipoBusqueda = '';
+            if (self.Sub.Sub == "") {
+                self.Sub.Sub = '';
             }
         }
 
-        this.reset = function (form) {
+        this.close = function (form) {
             $('#indicadores').modal('hide');
             if (form) {
                 form.$setPristine();
                 form.$setUntouched();
-            }         
+                CargarGrid();
+            }
             self.cve_cat = null;
             self.cve_sub = null;
             self.cve_desc = null;
             self.cve_et1 = null;
             self.cve_et2 = null;
             self.cve_seg = null;
+        };
+
+        this.reset = function (form) {
+            $('#indicadores').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }
+            self.cve_cat = null;
+            self.cve_sub = null;
+            self.cve_desc = null;
+            self.cve_et1 = null;
+            self.cve_et2 = null;
+            self.cve_seg = null;
+        };
+
+        this.PdfReportIndicadores = function (Categoria, Subtipo) {
+            var xhr = new XMLHttpRequest();
+            var ruta = urlServer + 'Catalogo/ReporteIndicadoresPdf';
+            xhr.responseType = 'blob';
+            xhr.open("POST", ruta, true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {//Call a function when the state changes.
+                if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+                    var blob = new Blob([this.response], { type: 'application/pdf' });
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    window.open(link, "", "width=600,height=800");
+                }
+            }
+            xhr.send("Categoria=" + self.buscar + "&Sub_tipo=" + self.Sub.Sub);
         };
 
     }]);

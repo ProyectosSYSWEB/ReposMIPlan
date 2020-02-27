@@ -1,7 +1,7 @@
 ﻿// <reference path="../Models/AreasAtencionModel.js"/>
 
 (function () {
-    var app = angular.module('MIPlanWeb', ['ngPagination', 'ngAnimate']);
+    var app = angular.module('MIPlanWeb', ['ngPagination']);
 
 
     app.controller('MIPlanController', ['$scope', '$compile', function ($scope, $compile) {
@@ -75,7 +75,6 @@
                         break;
                 }
                 $scope.$apply();
-                $('button').tooltip();
             });
         };
 
@@ -138,7 +137,8 @@
             self.cve_status = "";
             self.cve_cat = "";
 
-            self.cve_status = "A";           
+            self.cve_status = "A";
+            
             var iNumeroMayor = self.areasatencion[0].Cve;
             for (var i = 0; i < self.areasatencion.length; i++) {
                 if (self.areasatencion[i].Cve > iNumeroMayor) {
@@ -152,20 +152,9 @@
             catalogoContext.eliminarArea(IdArea, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        Swal.fire(
-                            '¡Eliminado!',
-                            'Se ha eliminado con exito.',
-                            'success'
-                        );
-                        CargarGrid();
+                        console.log("Controller Eliminar ejecutado");
                         break;
                     case "notgp":
-                        Swal.fire(
-                            'Oooops :(',
-                            '¡Fallo al reaizar esta acción!',
-                            'error'
-                        );
-
                         self.mensaje_gral = resp.message;
                         console.log("Error Controller");
                         document.getElementById("Error").style.display = "block";
@@ -179,20 +168,14 @@
         };
 
         this.EliminarAreaAtencion = function (Indice) {
-            Swal.fire({
-                title: '¿Seguro que Desea Eliminar el Resgistro?',
-                text: "Se Eliminara Permanentemente",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                cancelButtonText: 'No, Cancelar',
-                confirmButtonText: 'Si, Quiero Eliminarlo'
-            }).then((result) => {
-                if (result.value) {
-                    eliminarAreaAtencion(Indice);                                                        
-                }
-            })
+            var opcion = confirm("¿Seguro que desea Eliminar el Resgistro?");
+            if (opcion == true) {
+                eliminarAreaAtencion(Indice);
+                alert("¡Se ha elimnado con exito!");
+                CargarGrid();
+            } else {
+                alert("No se ha eliminado el registro");
+            }
         };
 
         var areasUpdate = function () {
@@ -204,11 +187,7 @@
                         self.cve_desc = null;
                         self.cve_status = null;
                         self.cve_cat = null;
-                        Swal.fire(
-                            '¡Listo!',
-                            '¡Se han actualizado los datos correctamente!',
-                            'success'
-                        ) 
+                        alert("¡Se han actualizado los datos correctamente!");
                         CargarGrid();
                         break;
                     case "notgp":
@@ -237,11 +216,7 @@
                         self.cve_desc = null;
                         self.cve_status = null;
                         self.cve_cat = null;
-                        Swal.fire(
-                            '¡Listo!',
-                            '¡Se han guardado los datos correctamente!',
-                            'success'
-                        )
+                        alert("¡Se ha creado el área correctamente!");
                         CargarGrid();
                         break;
                     case "notgp":
@@ -269,7 +244,7 @@
 
         this.ValorDependencia = function () { 
             CargarGrid();
-                if (self.buscar == "00000" || self.buscar == null) {
+                if (self.buscar == null) {
                     self.buscar = '';
                 }
         };
@@ -280,13 +255,26 @@
             }
         }
 
+        this.close = function (form) {
+            $('#areasatencion').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+                CargarGrid();
+            }
+            self.cve_dependencia = null;
+            self.cve_clave = null;
+            self.cve_desc = null;
+            self.cve_status = null;
+            self.cve_cat = null;
+        };
+
         this.reset = function (form) {
             $('#areasatencion').modal('hide');
             if (form) {
                 form.$setPristine();
                 form.$setUntouched();
             }
-           
             self.cve_dependencia = null;
             self.cve_clave = null;
             self.cve_desc = null;
@@ -311,21 +299,21 @@
             xhr.send("Dependencia=" + Dependencia);
         };
 
-        this.ExcelReportAreas = function (Dependencia) {
-            var xhr = new XMLHttpRequest();
-            var ruta = urlServer + 'Catalogo/ReporteAreasAtencionExcel';
-            xhr.responseType = 'blob';
-            xhr.open("POST", ruta, true);
-            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhr.onreadystatechange = function () {//Call a function when the state changes.
-                if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-                    var blob = new Blob([this.response], { type: 'application/xlsx' });
-                    var link = document.createElement('a');
-                    link.href = window.URL.createObjectURL(blob);
-                    window.open(link, "", "width=600,height=800");
-                }
-            }
-            xhr.send("Dependencia=" + Dependencia);
-        };
+        //this.ExcelReportAreas = function (Dependencia) {
+        //    var xhr = new XMLHttpRequest();
+        //    var ruta = urlServer + 'Catalogo/ReporteAreasAtencionExcel';
+        //    xhr.responseType = 'blob';
+        //    xhr.open("POST", ruta, true);
+        //    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        //    xhr.onreadystatechange = function () {//Call a function when the state changes.
+        //        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+        //            var blob = new Blob([this.response], { type: 'application/xls' });
+        //            var link = document.createElement('a');
+        //            link.href = window.URL.createObjectURL(blob);
+        //            window.open(link, "", "width=600,height=800");
+        //        }
+        //    }
+        //    xhr.send("Dependencia=" + Dependencia);
+        //};
     }]);
 })();

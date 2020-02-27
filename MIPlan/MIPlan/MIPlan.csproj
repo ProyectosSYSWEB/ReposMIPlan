@@ -205,6 +205,18 @@
       <DependentUpon>ReporteAreasAtencionPdf.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="reports\ReporteBasicosPdf.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteBasicosPdf.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="reports\ReporteIndicadoresPdf.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteIndicadoresPdf.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -1369,6 +1381,14 @@
     <EmbeddedResource Include="reports\ReporteAreasAtencionPdf.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteAreasAtencionPdf.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reports\ReporteBasicosPdf.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteBasicosPdf.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reports\ReporteIndicadoresPdf.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteIndicadoresPdf.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
