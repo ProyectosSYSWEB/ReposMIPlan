@@ -79,7 +79,7 @@ namespace MIPlan.Data
         }
         public static List<Comun> ObtenerDependencias(string Usuario)
         {
-            string[] Parametros = { "p_tipo" };
+            string[] Parametros = { "p_usuario" };
             object[] Valores = { Usuario };
             var Lista = ExeProcedimiento.GenerarOracleCommandCursor_Combo("PKG_PLANEACION.Obt_Combo_Dependencia", Parametros, Valores);
             return Lista;
@@ -487,11 +487,6 @@ namespace MIPlan.Data
             }
 
         }
-
-
-
-
-        //Menú
         public static MENU ObtenerMenu(string Valor)
         {
             OracleCommand cmd = null;
@@ -551,11 +546,6 @@ namespace MIPlan.Data
             }
 
         }
-
-
-
-
-
         public static List<SUBMENU> SubMenu(List<MENU> ListMenu, int IdMenu)
         {
             try
@@ -576,7 +566,6 @@ namespace MIPlan.Data
                 throw new Exception(ex.Message);
             }
         }
-
         public static List<Comun> ObtenerUsuarios()
         {
             OracleCommand cmd = null;
@@ -606,7 +595,6 @@ namespace MIPlan.Data
             }
 
         }
-
         public static List<Comun> GridUnidadesDisponibles(string Usuario)
         {
             OracleCommand cmd = null;
@@ -641,6 +629,17 @@ namespace MIPlan.Data
             }
 
         }
+        public static List<Comun> ObtenerCarreras()
+        {           
+            var Lista = ExeProcedimiento.GenerarOracleCommandCursor_Combo("PKG_PLANEACION.Obt_Combo_Carreras");
+            return Lista;
+        }
+        public static List<Comun> ObtenerNiveles()
+        {
+            var Lista = ExeProcedimiento.GenerarOracleCommandCursor_Combo("PKG_PLANEACION.Obt_Combo_Niveles");
+            return Lista;
+        }
+
 
     }
 }

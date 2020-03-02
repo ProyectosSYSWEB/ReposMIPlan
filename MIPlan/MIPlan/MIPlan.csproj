@@ -182,6 +182,7 @@
     <Compile Include="Models\Comun.cs" />
     <Compile Include="Models\Indicadores.cs" />
     <Compile Include="Models\MENU.cs" />
+    <Compile Include="Models\PlanModel.cs" />
     <Compile Include="Models\ResponsableModel.cs" />
     <Compile Include="Models\Resultado.cs" />
     <Compile Include="Models\Sesion.cs" />
@@ -202,6 +203,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReporteAreasAtencionPdf.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="reports\ReporteBasicosPdf.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteBasicosPdf.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="reports\ReporteIndicadoresPdf.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteIndicadoresPdf.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
@@ -371,6 +384,8 @@
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\estilosMenu.css" />
     <Content Include="Content\jquery.datetimepicker.css" />
+    <Content Include="Content\mdb.css" />
+    <Content Include="Content\mdtabs.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -1284,6 +1299,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\mdb.js" />
     <Content Include="Scripts\Models\AccesoModel.js" />
     <Content Include="Scripts\Models\AcreditadorModel.js" />
     <Content Include="Scripts\Models\AreasAtencionModel.js" />
@@ -1368,6 +1384,14 @@
     <EmbeddedResource Include="reports\ReporteAreasAtencionPdf.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteAreasAtencionPdf.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reports\ReporteBasicosPdf.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteBasicosPdf.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reports\ReporteIndicadoresPdf.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteIndicadoresPdf.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

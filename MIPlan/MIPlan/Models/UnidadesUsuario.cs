@@ -9,5 +9,8 @@ namespace MIPlan.Models
     {
         public int IdUnidad { get; set; }
         public string Usuario { get; set; }
+
+        public string Id { get; set; }
+        public string Descripcion { get; set; }
     }
 }

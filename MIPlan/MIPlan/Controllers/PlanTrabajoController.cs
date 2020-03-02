@@ -95,8 +95,8 @@ namespace MIPlan.Controllers
         public JsonResult ListaUnidadResponsable()
         {
             Sesion SesionUsu = new Sesion();
-            List<Comun> list = new List<Comun>();
-            ResultadoComun objResultado = new ResultadoComun();
+            List<Unidades> list = new List<Unidades>();
+            ResultadoUnidad objResultado = new ResultadoUnidad();
             try
             {
 
@@ -168,6 +168,48 @@ namespace MIPlan.Controllers
 
             }
         }
+        /***********************************************************************************************************************************************************************************/
+        public JsonResult GuardarPlan(string Id_Coordinacion, string Status, string Ejercicio, string Dependencia, string Descripcion, string Fecha)
+        {
+            PlanModel objPlan = new PlanModel();
+            ResultadoPlanModel objResultado = new ResultadoPlanModel();
+            string Verificador = string.Empty;
+            List<Sesion> SesionUsu = new List<Sesion>();
+            if (System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"] != null)
+                SesionUsu = (List<Sesion>)System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"];
+            try
+            {
+                objPlan.Id_Coordinacion = Convert.ToInt32(Id_Coordinacion);
+                objPlan.Status = Status;
+                objPlan.Ejercicio = Ejercicio;
+                objPlan.Dependencia = Dependencia;
+                objPlan.Descripcion = Descripcion;
+                objPlan.Fecha = Fecha;
+                objPlan.Usuario = SesionUsu[0].Usuario;
+                Data.PlanTrabajo.GuardarDataContext.GuardarPlan(objPlan, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
         /******************************************************************************************************************************Areas de Atención**************************/
         public JsonResult GridAreasAtencion(int buscarPlan)/**/
         {
@@ -190,13 +232,13 @@ namespace MIPlan.Controllers
 
             }
         }        
-        public JsonResult ObtenerModalGridAreasAtencion(int Ejercicio, string Dependencia)/**/
+        public JsonResult ObtenerModalGridAreasAtencion(int Ejercicio, string Dependencia, int buscarPlan)/**/
         {       
             List<AreasAtencion> list = new List<AreasAtencion>();
             ResultadoAreasAtencion objResultado = new ResultadoAreasAtencion();
             try
             {
-                list = Data.PlanTrabajo.CursorDataContext.ObtenerModalGridAreasAtencion(Ejercicio, Dependencia);
+                list = Data.PlanTrabajo.CursorDataContext.ObtenerModalGridAreasAtencion(Ejercicio, Dependencia, buscarPlan);
                 objResultado.Error = false;
                 objResultado.MensajeError = string.Empty;
                 objResultado.Resultado = list;
@@ -250,7 +292,7 @@ namespace MIPlan.Controllers
                 else
                 {
                     objResultado.Error = true;
-                    objResultado.MensajeError = "";
+                    objResultado.MensajeError = Verificador;
                     objResultado.Resultado = null;
                 }
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
@@ -339,7 +381,7 @@ namespace MIPlan.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-        public JsonResult GuardarActividades(string Meta, string Clave, string Descripcion, string Impacto, string Status, string FechaInicio, string FechaFin, string Programa, string Prioritaria)
+        public JsonResult GuardarActividades(string Meta, string Clave, string Descripcion, string Detalles, string Impacto, string Status, string FechaInicio, string FechaFin, string Programa, string Prioritaria, string Id_Padre)
         {
             Actividades objActividad = new Actividades();
             ResultadoActividades objResultado = new ResultadoActividades();
@@ -352,12 +394,15 @@ namespace MIPlan.Controllers
                 objActividad.Id_Meta = Convert.ToInt32(Meta);
                 objActividad.Clave = Clave;
                 objActividad.Descripcion = Descripcion;
+                objActividad.Detalles = Detalles;
                 objActividad.Impacto = Impacto;
                 objActividad.Fecha_Inicio = FechaInicio;
                 objActividad.Fecha_Fin = FechaFin;
                 objActividad.Id_Programa = Convert.ToInt32(Programa);
                 objActividad.Prioritaria = Prioritaria;
                 objActividad.Status = Status;
+                objActividad.Id_Padre = Convert.ToInt32(Id_Padre);
+
                 Data.PlanTrabajo.GuardarDataContext.GuardarActividades(objActividad, SesionUsu[0].Usuario, ref Verificador);
                 if (Verificador == "0")
                 {
@@ -382,7 +427,7 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-        public JsonResult EditarActividades(int Id, string Programa, string Descripcion, string FechaInicio, string FechaFin, string Impacto, string Prioritaria, string Clave, string Status)
+        public JsonResult EditarActividades(int Id, string Programa, string Descripcion, string Detalles, string FechaInicio, string FechaFin, string Impacto, string Prioritaria, string Clave, string Status, string Id_Padre)
         {
             List<Sesion> SesionUsu = new List<Sesion>();
             Sesion objUsuario = new Sesion();
@@ -395,12 +440,14 @@ namespace MIPlan.Controllers
                 objActividad.Id = Id;
                 objActividad.Id_Programa = Convert.ToInt32(Programa);
                 objActividad.Descripcion = Descripcion;
+                objActividad.Detalles = Detalles;
                 objActividad.Fecha_Inicio = FechaInicio;
                 objActividad.Fecha_Fin = FechaFin;
                 objActividad.Impacto = Impacto;
                 objActividad.Prioritaria = Prioritaria;
                 objActividad.Clave = Clave;
                 objActividad.Status = Status;
+                objActividad.Id_Padre = Convert.ToInt32(Id_Padre);
 
                 SesionUsu = (List<Sesion>)System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"];
                 Data.PlanTrabajo.GuardarDataContext.EditarActividades(objActividad, SesionUsu[0].Usuario, ref Verificador);
@@ -413,7 +460,7 @@ namespace MIPlan.Controllers
                 else
                 {
                     objResultado.Error = true;
-                    objResultado.MensajeError = "No existe el registro";
+                    objResultado.MensajeError = Verificador;
                     objResultado.Resultado = null;
                 }
 
@@ -430,9 +477,8 @@ namespace MIPlan.Controllers
             ResultadoActividades objResultado = new ResultadoActividades();
             string Verificador = string.Empty;
             try
-            {
-                objActividades.Id = Id;
-                Data.PlanTrabajo.GuardarDataContext.EliminarActividades(objActividades, ref Verificador);
+            {                
+                Data.PlanTrabajo.GuardarDataContext.EliminarActividades(Id , ref Verificador);
                 if(Verificador == "0")
                 {
                     objResultado.Error = false;
@@ -442,7 +488,7 @@ namespace MIPlan.Controllers
                 else
                 {
                     objResultado.Error = true;
-                    objResultado.MensajeError = "";
+                    objResultado.MensajeError = Verificador;
                     objResultado.Resultado = null;
                 }
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
@@ -461,8 +507,8 @@ namespace MIPlan.Controllers
         /**********************************************************************************************************************Unidades Reponsables*******************************/
         public JsonResult GridUnidadesResp(int idActividad)/**/
         {            
-            List<PlanUnidadesResponsables> list = new List<PlanUnidadesResponsables>();
-            ResultadoUnidades objResultado = new ResultadoUnidades();
+            List<ResponsableModel> list = new List<ResponsableModel>();
+            ResultadoResponsable objResultado = new ResultadoResponsable();
             string Verificador = string.Empty;
             List<Sesion> SesionUsu = new List<Sesion>();
             if (System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"] != null)
@@ -475,7 +521,7 @@ namespace MIPlan.Controllers
                 list = Data.PlanTrabajo.CursorDataContext.ObtenerGridUnidadesResp(idActividad, SesionUsu[0].Usuario);
                 objResultado.Error = false;
                 objResultado.MensajeError = string.Empty;
-                objResultado.ResultadiPlanUnidadesResponsables = list;
+                objResultado.Resultado = list;
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -487,14 +533,14 @@ namespace MIPlan.Controllers
 
             }
         }
-        public JsonResult ObtenerDatosUnidadesResp(int IdUnidad)
+        public JsonResult ObtenerDatosUnidadesResp(int Id)
         {
-            UnidadesResponsables objUnidadesResp = new UnidadesResponsables();
-            ResultadoUnidades objResultado = new ResultadoUnidades();
+            ResponsableModel objUnidadesResp = new ResponsableModel();
+            ResultadoResponsable objResultado = new ResultadoResponsable();
             string Verificador = string.Empty;
             try
             {
-                objResultado.Resultado = Data.PlanTrabajo.DataContext.ObtenerDatosUnidadesResp(IdUnidad, ref Verificador);
+                objResultado.Resultado = Data.PlanTrabajo.DataContext.ObtenerDatosUnidadesResp(Id, ref Verificador);
                 if (Verificador == "0")
                 {
                     objResultado.Error = false;
@@ -517,7 +563,7 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-        public JsonResult GuardarUnidadesResp(int Id_Actividades, int Id_Unidad)
+        public JsonResult GuardarUnidadesResp(int Id_Actividades, int Id_Unidad, string Contacto, string Telefono, string Correo)
         {
             ResponsableModel objUnidadesResp = new ResponsableModel();
             ResultadoResponsable objResultado = new ResultadoResponsable();
@@ -527,6 +573,9 @@ namespace MIPlan.Controllers
 
                 objUnidadesResp.Id_Actividades = Id_Actividades;
                 objUnidadesResp.Id_Unidad = Id_Unidad;
+                objUnidadesResp.Contacto = Contacto;
+                objUnidadesResp.Telefono = Telefono;
+                objUnidadesResp.Correo = Correo;
                 Data.PlanTrabajo.GuardarDataContext.GuardarUnidadesResp(objUnidadesResp, ref Verificador);
                 if (Verificador == "0")
                 {
@@ -550,21 +599,20 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-        public JsonResult EditarUnidadesResp(int Id, string Dependencia, string Clave, string Descripcion, string Status, string Coordinador)
+        public JsonResult EditarUnidadesResp(int Id,int Id_Actividades, int Id_Unidad, string Contacto, string Telefono, string Correo)
         {
-
-            UnidadesResponsables objUnidadesResp = new UnidadesResponsables();
-            ResultadoUnidades objResultado = new ResultadoUnidades();
+            ResponsableModel objUnidadesResp = new ResponsableModel();
+            ResultadoResponsable objResultado = new ResultadoResponsable();
             string Verificador = string.Empty;
             try
             {
-                objUnidadesResp.Id = Id;
-                objUnidadesResp.Dependencia = Dependencia;
-                objUnidadesResp.Clave = Clave;
-                objUnidadesResp.Descripcion = Descripcion;
-                objUnidadesResp.Status = Status;
-                objUnidadesResp.Coordinador = Coordinador;
-           
+                objUnidadesResp.Id = Id;      
+                objUnidadesResp.Id_Actividades = Id_Actividades;
+                objUnidadesResp.Id_Unidad = Id_Unidad;
+                objUnidadesResp.Contacto = Contacto;
+                objUnidadesResp.Telefono = Telefono;
+                objUnidadesResp.Correo = Correo;
+
                 Data.PlanTrabajo.GuardarDataContext.EditarUnidadesResp(objUnidadesResp, ref Verificador);
                 if (Verificador == "0")
                 {
@@ -585,7 +633,7 @@ namespace MIPlan.Controllers
             {
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
-        }  
+        }
         public JsonResult EliminarUnidadResponsable(int Id)
         {         
             ResultadoUnidad objResultado = new ResultadoUnidad();
@@ -615,7 +663,7 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-        public JsonResult ObtenerGridUnidadesModal(string dependencia)
+        public JsonResult ObtenerComboUnidadesModal(string dependencia)
         {
             List<UnidadesResponsables> list = new List<UnidadesResponsables>();
             ResultadoUnidades objResultado = new ResultadoUnidades();
@@ -628,7 +676,7 @@ namespace MIPlan.Controllers
             {
 
 
-                list = Data.PlanTrabajo.CursorDataContext.ObtenerGridUnidadesModal(SesionUsu[0].Usuario, dependencia, ref Verificador);
+                list = Data.PlanTrabajo.CursorDataContext.ObtenerComboUnidadesModal(SesionUsu[0].Usuario, dependencia, ref Verificador);
                 objResultado.Error = false;
                 objResultado.MensajeError = string.Empty;
                 objResultado.Resultado = list;

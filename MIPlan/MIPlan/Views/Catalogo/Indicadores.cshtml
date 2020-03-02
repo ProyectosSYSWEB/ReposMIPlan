@@ -29,7 +29,7 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="lblSubtipo" class="text-info">Subtipo:</label>
-                    <select class="form-control border border-info" name="cmbsubtipo" ng-change="ctrl.SubtipoFun()" ng-options="option.Id as option.Descripcion for option in ctrl.subtipo" ng-model="ctrl.Subtipo.Subtipo" style="max-width:100%;">
+                    <select class="form-control border border-info" name="cmbsubtipo" ng-change="ctrl.SubtipoFun()" ng-options="option.Id as option.Descripcion for option in ctrl.subtipo" ng-model="ctrl.Sub.Sub" style="max-width:100%;">
                         <option value="">--Seleccionar Subtipo--</option>
                     </select>
                 </div>
@@ -55,7 +55,7 @@
                                 <form name="modalForm" novalidate>
                                     <div id="Titulo" class="modal-header btn-success justify-content-center">
                                         <h5 class="modal-title" id="exampleModalLabel">{{ctrl.Titulo}}</h5>
-                                        <button type="button" class="close btn-danger" data-dismiss="modal" ng-click="ctrl.reset(modalForm)" aria-label="Close">
+                                        <button type="button" class="close btn-danger" data-dismiss="modal" ng-click="ctrl.close(modalForm)" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
@@ -164,9 +164,9 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
-                                        <button type="button" id="btnNuevo" class="btn btn-success" ng-click="ctrl.IndicadoresCreate(ctrl.cve_id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
-                                        <button type="button" id="btnActualizar" class="btn btn-primary" ng-click="ctrl.IndicadoresUpdate(ctrl.cve_id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
+                                        <button type="button" class="btn btn btn-danger" ng-click="ctrl.close(modalForm)">Salir</button>
+                                        <button type="button" id="btnNuevo" class="btn btn-success" ng-click="ctrl.IndicadorCreat(ctrl.cve_id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
+                                        <button type="button" id="btnActualizar" class="btn btn-primary" ng-click="ctrl.IndicadorUp(ctrl.cve_id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
                                     </div>
                                 </form>
                             </div>
@@ -185,45 +185,45 @@
                 <thead>
                     <tr>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Categoría'; sortReverse = !sortReverse">
+                            <a href="" ng-click="sortType = 'Id'; sortReverse = !sortReverse">
                                 Categoría
-                                <span ng-class="sortType == 'Categoría' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Categoría' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                <span ng-class="sortType == 'Id' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Categoria' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Subtipo'; sortReverse = !sortReverse">
+                            <a href="" ng-click="sortType = 'Dependencia'; sortReverse = !sortReverse">
                                 Subtipo
-                                <span ng-class="sortType == 'Subtipo' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Subtipo' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                <span ng-class="sortType == 'Dependencia' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Subtipo' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Descripción'; sortReverse = !sortReverse">
+                            <a href="" ng-click="sortType = 'Clave'; sortReverse = !sortReverse">
                                 Descripción
-                                <span ng-class="sortType == 'Descripción' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Descripción' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                <span ng-class="sortType == 'Clave' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Descripción' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Etiqueta 1'; sortReverse = !sortReverse">
+                            <a href="" ng-click="sortType = 'Descripcion'; sortReverse = !sortReverse">
                                 Etiqueta 1
-                                <span ng-class="sortType == 'Etiqueta 1' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Etiqueta 1' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                <span ng-class="sortType == 'Descripcion' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Etiqueta 1' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Etiqueta 2'; sortReverse = !sortReverse">
+                            <a href="" ng-click="sortType = 'Estatus'; sortReverse = !sortReverse">
                                 Etiqueta 2
-                                <span ng-class="sortType == 'Etiqueta 2' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Etiqueta 2' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                <span ng-class="sortType == 'Estatus' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Etiqueta 2' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Seguimiento'; sortReverse = !sortReverse">
+                            <a href="" ng-click="sortType = 'Categoria'; sortReverse = !sortReverse">
                                 Seguimiento
-                                <span ng-class="sortType == 'Seguimiento' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Seguimiento' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                <span ng-class="sortType == 'Categoria' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Seguimiento' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody ng-pagination="i in ctrl.indicadores |  filter:ctrl.buscar | filter:ctrl.Subtipo.Subtipo | itemsPerPage: 5">
+                <tbody ng-pagination="i in ctrl.indicadores |  filter:ctrl.buscar | filter:ctrl.Sub | itemsPerPage: 5">
                     <tr>
                         <td><font size="2">{{i.Cat}}</font></td>
                         <td><font size="2">{{i.Sub}}</font></td>
@@ -245,13 +245,15 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="4"><ng-pagination-control boundary-links="true"></ng-pagination-control></th>
+                        <th colspan="4">
+                            <ng-pagination-control boundary-links="true"></ng-pagination-control>
+                        </th>
                         <th></th>
                         <th style="text-align:right" colspan="2">
                             <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
                                 <i class="fa fa-file-excel-o" aria-hidden="true"></i>
                             </button>
-                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Generar Reporte en PDF" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Generar Reporte en PDF" ng-click="ctrl.PdfReportIndicadores(ctrl.buscar)" style="width:50px">
                                 <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                             </button>
                         </th>

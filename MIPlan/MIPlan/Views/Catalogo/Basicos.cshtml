@@ -5,10 +5,9 @@
     Layout = "~/Views/Shared/_LayoutContenido.cshtml";
 
 }
-<h2>Basicos</h2>
+<br class="imgUnach" />
 <br />
-<br />
-<br />
+
 
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
     <div class="container">
@@ -55,13 +54,13 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="basicos"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="basicos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <form name="modalForm" novalidate>
                         <div id="Titulo" class="modal-header btn-success justify-content-center">
                             <h5 class="modal-title" id="exampleModalLabel">{{ctrl.Titulo}}</h5>
-                            <button type="button" class="close btn-danger" data-dismiss="modal" ng-click="ctrl.reset(modalForm)" aria-label="Close">
+                            <button type="button" class="close " data-dismiss="modal" ng-click="ctrl.reset(modalForm)" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -74,7 +73,7 @@
                                     <label id="lblcatalogo" for="lblcatalogo" class="text-success">Catalogo:</label>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <select id="cmbcatalogo" class="form-control border border-success" name="cmbcatalogo" required  ng-model="ctrl.cve_catalogo" ng-options="option.Id as option.Descripcion for option in ctrl.catalogos">
+                                    <select id="cmbcatalogo" class="form-control border border-success" name="cmbcatalogo" required ng-model="ctrl.cve_catalogo" ng-options="option.Id as option.Descripcion for option in ctrl.catalogos">
                                         <option value="">--Seleccionar Catalogo--</option>
                                         <option value="Todas">Todas</option>
 
@@ -82,8 +81,8 @@
                                 </div>
 
                                 <div class="row justify-content-center">
-                                    <span class="messages" ng-show="modalForm.$submitted || modalForm.cmbcatalogo.$touched">
-                                        <span ng-show="!ctrl.cve_catalogo" class="text-danger">Campo Requerido</span>
+                                    <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.cmbcatalogo.$touched">
+                                        <span ng-show="!ctrl.cve_catalogo" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                     </span>
                                 </div>
 
@@ -91,14 +90,14 @@
                                     <label id="lblClave" for="lblClave" class="text-success">Clave:</label>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <input type="text" id="txtClave" class="form-control border border-success" name="txtClave"  maxlength="6" placeholder="Clave" ng-model="ctrl.cve_clave">
+                                    <input type="text" id="txtClave" class="form-control border border-success" name="txtClave" maxlength="6" placeholder="Clave" ng-model="ctrl.cve_clave">
                                 </div>
 
                                 @*<div class="row justify-content-center">
-                                    <span class="messages" ng-show="modalForm.$submitted || modalForm.txtClave.$touched">
-                                        <span ng-show="!ctrl.cve_clave" class="text-danger">Campo Requerido</span>
-                                    </span>
-                                </div>*@
+                                        <span class="messages" ng-show="modalForm.$submitted || modalForm.txtClave.$touched">
+                                            <span ng-show="!ctrl.cve_clave" class="text-danger">Campo Requerido</span>
+                                        </span>
+                                    </div>*@
                                 <div class="row justify-content-center">
                                     <label id="lblDescripcion" for="lblDescripcion" class="text-success">Descripcion:</label>
                                 </div>
@@ -113,10 +112,10 @@
 
                                 </div>
                                 @*<div class="row justify-content-center">
-                                    <span class="messages" ng-show="modalForm.$submitted || modalForm.txtorden.$touched">
-                                        <span ng-show="!ctrl.cve_orden" class="text-danger">Campo Requerido</span>
-                                    </span>
-                                </div>*@
+                                        <span class="messages" ng-show="modalForm.$submitted || modalForm.txtorden.$touched">
+                                            <span ng-show="!ctrl.cve_orden" class="text-danger">Campo Requerido</span>
+                                        </span>
+                                    </div>*@
                                 <div class="row justify-content-center">
                                     <label id="lblstatus" for="lblstatus" class="text-success">Estatus:</label>
                                 </div>
@@ -135,8 +134,8 @@
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <span class="messages" ng-show="modalForm.$submitted || modalForm.gender.$touched">
-                                        <span ng-show="!ctrl.cve_status" class="text-danger">Campo Requerido</span>
+                                    <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.gender.$touched">
+                                        <span ng-show="!ctrl.cve_status" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                     </span>
                                 </div>
 
@@ -155,7 +154,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                                 <button type="button" id="btnNuevo" class="btn btn-success" data-dismiss="modal" ng-click="ctrl.BasicoCreate(ctrl.cve_id.Id); ctrl.reset(modalForm)" ng-disabled="modalForm.$invalid">Guardar</button>
-                                <button type="button" id="btnActualizar" class="btn btn-primary" data-dismiss="modal" ng-click="ctrl.BasicoUpdate(ctrl.cve_id.Id); ctrl.reset(modalForm)" @*ng-disabled="modalForm.$invalid*@">Guardar</button>
+                                <button type="button" id="btnActualizar" class="btn btn-primary" data-dismiss="modal" ng-click="ctrl.BasicoUpdate(ctrl.cve_id.Id); ctrl.reset(modalForm)" @*ng-disabled="modalForm.$invalid*@>Guardar</button>
                             </div>
 
                         </div>
@@ -168,39 +167,39 @@
         <input type="hidden" ng-model="ctrl.cve_id" />
         <div class="container table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.3)">
             <table id="table_basico" class="table table-hover">
-                <thead>
+                <thead class="light-blue darken-3 text-white">
                     <tr>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Id'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Id'; sortReverse = !sortReverse">
                                 Id
                                 <span ng-class="sortType == 'Id' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Id' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
 
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Catálogo'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'DescripcionPadre'; sortReverse = !sortReverse">
                                 Catálogo
-                                <span ng-class="sortType == 'Catálogo' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Catálogo' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                <span ng-class="sortType == 'DescripcionPadre' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'DescripcionPadre' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
 
-                       
+
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Clave'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Clave'; sortReverse = !sortReverse">
                                 Clave
                                 <span ng-class="sortType == 'Clave' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Clave' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Descripción'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Descripcion'; sortReverse = !sortReverse">
                                 Descripción
-                                <span ng-class="sortType == 'Descripción' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Descripción' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                <span ng-class="sortType == 'Descripcion' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Descripcion' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Estatus'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Status'; sortReverse = !sortReverse">
                                 Estatus
-                                <span ng-class="sortType == 'Estatus' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Estatus' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                <span ng-class="sortType == 'Status' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Status' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
 
@@ -257,6 +256,7 @@
 <script src="~/Scripts/angular.min.js"></script>
 <script src="~/Scripts/angular.js"></script>
 <script src="~/Scripts/angular-pagination.js"></script>
+<script src="~/Scripts/angular-animate.js"></script>
 <script src="~/Scripts/global.js"></script>
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/CatController.js"></script>
@@ -264,4 +264,14 @@
 <script src="~/Scripts/Controllers/AccesoController.js"></script>
 <script src="~/Scripts/Models/AccesoModel.js"></script>
 
+
+
+<!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('button').tooltip();
+
+    });
+</script>
 
