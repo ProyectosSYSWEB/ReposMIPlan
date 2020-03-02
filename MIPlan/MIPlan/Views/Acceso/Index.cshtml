@@ -17,87 +17,87 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-           
-              
-
-                    <div class="modal-body card">
-
-                        <h5 class="card-header info-color white-text text-center py-4">
-                            <strong>Iniciar Sesión</strong>
-                        </h5>
-
-                        <!--Card content-->
-                        <div class="card-body">
-
-                         
-                                <!-- User -->
-                            <div class="form-group">
-                                <label for="materialLoginFormEmail" class="font-weight text-info">Usuario</label>
-                                <input type="text" id="materialLoginFormEmail" class="form-control border border-primary" placeholder="Usuario" ng-model="ctrl.Usuario">
-
-                            </div>
-
-                                <!-- Password -->
-                            <div class="form-group">
-                                <label for="materialLoginFormPassword" class="font-weight text-info">Contraseña</label>
-                                <input type="password" id="materialLoginFormPassword" class="form-control border border-primary" placeholder="Contraseña" ng-model="ctrl.Contrasena">
-
-                            </div>
-                                <!-- Ejercicio -->
-                                <div class="form-group ">
-                                    <label for="materialLoginFormEjer" class="font-weight text-info">Ejercicio</label>
-                                    <select class="form-control border border-primary" id="materialLoginFormEjer" style="max-width:100%" ng-model="ctrl.Ejercicio">
-                                        <option value="" selected>Seleccionar Ejercicio</option>
-                                        <option value="2019">2019</option>
-                                        <option value="2018">2018</option>
-                                        <option value="2017">2017</option>
-                                        <option value="2016">2016</option>
-                                    </select>
-
-                                </div>
 
 
-                                <div class="row justify-content-end">
-                                    <button type="button" class="btn btn-unique text-white" data-dismiss="modal">Cerrar</button>
-                                    <button type="button" class="btn btn-primary" ng-click="ctrl.IniciarSesion()">Iniciar Sesión</button>
-                                </div>
-                           
+
+                <div class="modal-body card">
+
+                    <h5 class="card-header info-color white-text text-center py-4">
+                        <strong>Iniciar Sesión</strong>
+                    </h5>
+
+                    <!--Card content-->
+                    <div class="card-body">
+
+
+                        <!-- User -->
+                        <div class="form-group">
+                            <label for="materialLoginFormEmail" class="font-weight text-info">Usuario</label>
+                            <input type="text" id="materialLoginFormEmail" class="form-control border border-primary" placeholder="Usuario" ng-model="ctrl.Usuario">
 
                         </div>
 
+                        <!-- Password -->
+                        <div class="form-group">
+                            <label for="materialLoginFormPassword" class="font-weight text-info">Contraseña</label>
+                            <input type="password" id="materialLoginFormPassword" class="form-control border border-primary" placeholder="Contraseña" ng-model="ctrl.Contrasena">
+
+                        </div>
+                        <!-- Ejercicio -->
+                        <div class="form-group ">
+                            <label for="materialLoginFormEjer" class="font-weight text-info">Ejercicio</label>
+                            <select class="form-control border border-primary" id="materialLoginFormEjer" style="max-width:100%" ng-model="ctrl.Ejercicio">
+                                <option value="" selected>Seleccionar Ejercicio</option>
+                                <option value="2019">2019</option>
+                                <option value="2018">2018</option>
+                                <option value="2017">2017</option>
+                                <option value="2016">2016</option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="row justify-content-end">
+                            <button type="button" id="btn-two" class="btn btn-unique text-white" data-dismiss="modal">Cerrar</button>
+                            <button type="button" id="btn-one" class="btn btn-primary" ng-click="ctrl.IniciarSesion()">Iniciar Sesión</button>
+                        </div>
+
+
                     </div>
 
+                </div>
 
-                    @*<div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Usuario</span>
-            </div>
-            <input style="max-width:100%" type="text" class="form-control" placeholder="Usuario" aria-label="Username" aria-describedby="basic-addon1" ng-model="ctrl.Usuario">
-        </div>
 
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Contraseña</span>
-            </div>
-            <input style="max-width:100%" type="password" class="form-control" placeholder="Contraseña" aria-label="Password" aria-describedby="basic-addon1" ng-model="ctrl.Contrasena">
-        </div>
+                @*<div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Usuario</span>
+                        </div>
+                        <input style="max-width:100%" type="text" class="form-control" placeholder="Usuario" aria-label="Username" aria-describedby="basic-addon1" ng-model="ctrl.Usuario">
+                    </div>
 
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Ejercicio</span>
-            </div>
-            <select class="custom-select" style="max-width:100%" ng-model="ctrl.Ejercicio">
-                <option value="2019">2019</option>
-                <option value="2018">2018</option>
-                <option value="2017">2017</option>
-                <option value="2016">2016</option>
-            </select>
-        </div>*@
-          
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Contraseña</span>
+                        </div>
+                        <input style="max-width:100%" type="password" class="form-control" placeholder="Contraseña" aria-label="Password" aria-describedby="basic-addon1" ng-model="ctrl.Contrasena">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Ejercicio</span>
+                        </div>
+                        <select class="custom-select" style="max-width:100%" ng-model="ctrl.Ejercicio">
+                            <option value="2019">2019</option>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                            <option value="2016">2016</option>
+                        </select>
+                    </div>*@
+
                 @*<div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" ng-click="ctrl.IniciarSesion()">Iniciar Sesión</button>
-                </div>*@
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" ng-click="ctrl.IniciarSesion()">Iniciar Sesión</button>
+                    </div>*@
             </div>
         </div>
     </div>
@@ -111,3 +111,13 @@
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/AccesoController.js"></script>
 <script src="~/Scripts/Models/AccesoModel.js"></script>
+
+<!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<script type="text/javascript">
+    $('#btn-one').click(function () {
+        $('#btn-one').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Iniciando Sesión...').addClass('disabled');
+    });
+    $('#btn-two').click(function () {
+        $('#btn-one').html('').addClass('enable');
+    });
+</script>

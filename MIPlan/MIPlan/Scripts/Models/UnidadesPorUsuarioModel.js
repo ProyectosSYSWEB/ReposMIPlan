@@ -67,16 +67,15 @@
     },
 /********************************************************************************************************************************************************/
 
-    GridUnidadesDisponibles: function (Id, Descripcion, Usuario, lado, callBackResult) {
+    GridUnidadesDisponibles: function (Id, Descripcion, NombreUsuario, lado, callBackResult) {
         var self = this;
         self.GridUnidadesDisponiblesLST.length = 0;
         $.ajax(
             {
-                type: 'GET',
-                async: false,
+                type: 'GET',                
                 cache: false,
                 url: urlServer + 'Catalogo/GridUnidadesDisponibles',
-                data: { Id, Descripcion, Usuario, lado },
+                data: { Id, Descripcion, NombreUsuario, lado },
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
@@ -106,8 +105,7 @@
         self.AgregarUnidadGridLST.length = 0;
         $.ajax(
             {
-                type: 'GET',
-                async: false,
+                type: 'GET',               
                 cache: false,
                 url: urlServer + 'Catalogo/AgregarUnidadGrid',
                 data: { Id, Descripcion, Usuario, lado },

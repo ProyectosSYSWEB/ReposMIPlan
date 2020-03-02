@@ -54,20 +54,26 @@
             });
         };
         /********************************************************************************************************************************************************/
-        this.ValorUsuario = function () {           
-            GridUnidadesDisponibles();
+        this.ValorUsuario = function () {
+            document.getElementById("loading").style.opacity = 100;           
+            setTimeout(function () {        
+               var lado = 999
+                GridUnidadesDisponibles(lado);
+            }, 1000);
+             
         };
         var GridUnidadesDisponibles = function (lado) {
             if (self.rightId == null) {
                 self.rightId = 0;
-                self.DescripcionUD = "";
-                lado = 2;
-            }
-
-            catalogoContext.GridUnidadesDisponibles(self.rightId, self.DescripcionUD, self.Usuario, lado, function (resp) {
+                self.DescripcionUD = "";                
+            }            
+            catalogoContext.GridUnidadesDisponibles(self.rightId, self.DescripcionUD, self.Usuario.Usuario, lado, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.GridUnidadesDisponiblesView = catalogoContext.GridUnidadesDisponiblesLST;                        
+                        self.GridUnidadesDisponiblesView = catalogoContext.GridUnidadesDisponiblesLST;
+                        if (self.GridUnidadesDisponiblesView.length >0) {
+                            document.getElementById("loading").style.opacity = 0;                                     
+                        }
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -77,14 +83,10 @@
                     default:
                         break;
                 }
-                //$scope.$apply();          
+                $scope.$apply();          
             });
         };       
 /********************************************************************************************************************************************************/
-
-
-
-
 
         this.getIdUD = function (Id, Descripcion) {            
             self.rightId = Id
@@ -97,39 +99,36 @@
             self.ladoL = 1;
         }
     /********************************************************************************************************************************************************/
-        this.right = function () {            
+        this.right = function () {       
             AgregarUnidadGrid(self.ladoR);
             GridUnidadesDisponibles(self.ladoR);
         }        
-        this.left = function () {
-            AgregarUnidadGrid(self.ladoL);
-            GridUnidadesDisponibles(self.ladoL);
+        this.left = function () {          
+                AgregarUnidadGrid(self.ladoL);
+                GridUnidadesDisponibles(self.ladoL);       
         }
-        this.AllRight =  function () {
-            for (var i = 0; i < self.GridUnidadesDisponiblesView.length; i++) {
-                self.rightId = self.GridUnidadesDisponiblesView[i].Id;
-                self.DescripcionUD = self.GridUnidadesDisponiblesView[i].Descripcion;                
-                ladoL = 0;
-                AgregarUnidadGrid(ladoL);                
-            }
-            for (var i = 0; i < self.GridUnidadesDisponiblesView.length; i++) {
-                self.rightId = self.GridUnidadesDisponiblesView[i].Id;                
-                ladoL = 0;
-                GridUnidadesDisponibles(ladoL);
-            }
-           
-
+        this.AllRight =  function () {                
+            ladoR = 2;
+            ladoL = 2;
+            AgregarUnidadGrid(ladoR);
+            GridUnidadesDisponibles(ladoL);     
+            
         }
 
         this.AllLeft = function () {            
-            self.GridUnidadesDisponiblesView = self.AgregarUnidadGrid;
-
-            //self.AgregarUnidadGrid.length = 0;
+            ladoR = 3;
+            ladoL = 3;
+            AgregarUnidadGrid(ladoR);
+            GridUnidadesDisponibles(ladoL);     
         }
     /********************************************************************************************************************************************************/
-        var AgregarUnidadGrid = function (lado) {            
+        var AgregarUnidadGrid = function (lado) {    
+            if (self.rightId == null) {
+                self.rightId = 0;
+                self.DescripcionUD = "";                
+            }
             catalogoContext.AgregarUnidadGrid(
-                self.rightId, self.DescripcionUD, self.Usuario, lado,
+                self.rightId, self.DescripcionUD, self.Usuario.Usuario, lado,
                 function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
@@ -143,7 +142,7 @@
                     default:
                         break;
                 }
-                //$scope.$apply();
+                $scope.$apply();
             });
         };
 
@@ -151,3 +150,16 @@
 
     }]);
 })();
+
+
+//for (var i = 0; i < self.GridUnidadesDisponiblesView.length; i++) {
+//    self.rightId = self.GridUnidadesDisponiblesView[i].Id;
+//    self.DescripcionUD = self.GridUnidadesDisponiblesView[i].Descripcion;
+//    ladoL = 0;
+//    AgregarUnidadGrid(ladoL);
+//}
+//for (var i = 0; i < self.GridUnidadesDisponiblesView.length; i++) {
+//    self.rightId = self.GridUnidadesDisponiblesView[i].Id;
+//    ladoL = 0;
+//    GridUnidadesDisponibles(ladoL);
+//}

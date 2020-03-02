@@ -9,7 +9,7 @@ namespace MIPlan.Data.PlanTrabajo
 {
     public class CursorDataContext
     {
-        public static List<Unidades> GridUnidadesDisponibles(string Usuario)
+        public static List<Unidades> GridUnidadesDisponibles(string NombreUsuario)
         {
             //s
             OracleCommand cmd = null;
@@ -18,11 +18,47 @@ namespace MIPlan.Data.PlanTrabajo
             try
             {
                 string[] Parametros = { "P_USUARIO" };
-                object[] Valores = { Usuario };
+                object[] Valores = { NombreUsuario };
 
 
                 OracleDataReader dr = null;
                 cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Unidades_Disponibles", ref dr, Parametros, Valores);
+                List<Unidades> listarUnidades = new List<Unidades>();
+                while (dr.Read())
+                {
+                    Unidades objUnidades = new Unidades();
+                    objUnidades.Id = Convert.ToInt32(dr[0]);
+                    objUnidades.Descripcion = Convert.ToString(dr[1]);
+                    listarUnidades.Add(objUnidades);
+                }
+                return listarUnidades;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
+        }
+        public static List<Unidades> GridUnidadesAsignadas(string NombreUsuario)
+        {
+            //s
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+
+            try
+            {
+                string[] Parametros = { "P_USUARIO" };
+                object[] Valores = { NombreUsuario };
+
+
+                OracleDataReader dr = null;
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Unidades_Asignadas", ref dr, Parametros, Valores);
                 List<Unidades> listarUnidades = new List<Unidades>();
                 while (dr.Read())
                 {

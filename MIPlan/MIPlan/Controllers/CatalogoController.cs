@@ -1353,8 +1353,9 @@ namespace MIPlan.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
+      
 
-        public JsonResult GridUnidadesDisponibles(int Id, string Descripcion, string Usuario, int lado)
+        public JsonResult GridUnidadesDisponibles(int Id, string Descripcion, string NombreUsuario, int lado)
         {  
             List<Unidades> list = new List<Unidades>();
             Unidades pbjTemp = new Unidades();
@@ -1364,17 +1365,17 @@ namespace MIPlan.Controllers
             {
                 pbjTemp.Id = Id;
                 pbjTemp.Descripcion = Descripcion;
-                pbjTemp.Usuario = Usuario;
-                if (Session["QuitarUnidadG"] == null)
+                pbjTemp.Usuario = NombreUsuario;
+                if (Session["QuitarUnidadG"] == null && lado != 2 )
                 {
-                    list = Data.PlanTrabajo.CursorDataContext.GridUnidadesDisponibles(Usuario);
+                    list = Data.PlanTrabajo.CursorDataContext.GridUnidadesDisponibles(NombreUsuario);
                     objResultado.Error = false;
                     objResultado.MensajeError = string.Empty;                     
                     Session["QuitarUnidadG"] = list;
                     list = list.OrderBy(x => x.Id).ToList();
                     objResultado.Resultado = list;
                 }
-                else
+                else 
                 {
                     if (lado == 0)
                     {
@@ -1392,6 +1393,22 @@ namespace MIPlan.Controllers
                         list = list.OrderBy(x => x.Id).ToList();
                         objResultado.Resultado = list;
                     }
+                    else if (lado == 2 && Session["AgregarUnidadG"] != null)
+                    {
+                        Session["QuitarUnidadG"] = null;
+                        list = (List<Unidades>)Session["QuitarUnidadG"];
+                        Session["AgregarUnidadG"] = list;                        
+                        objResultado.Resultado = list;
+                    }
+                    else if (lado == 3)
+                    {
+                        Session["QuitarUnidadG"] = null;
+                        list = (List<Unidades>)Session["AgregarUnidadG"];
+                        Session["QuitarUnidadG"] = list;
+                        list = list.OrderBy(x => x.Id).ToList();
+                        objResultado.Resultado = list;
+                    }
+
                 }
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
                 
@@ -1415,7 +1432,7 @@ namespace MIPlan.Controllers
                 pbjTemp.Id = Id;
                 pbjTemp.Descripcion = Descripcion;
                 pbjTemp.Usuario = Usuario;
-                if (Session["AgregarUnidadG"] == null)
+                if (Session["AgregarUnidadG"] == null && lado != 2)
                 {
                     list = new List<Unidades>();
                     list.Add(pbjTemp);
@@ -1440,6 +1457,22 @@ namespace MIPlan.Controllers
                         objResultado.Resultado = list;
 
                     }
+                    else if (lado == 2)
+                    {
+                        Session["AgregarUnidadG"] = null;
+                        list = (List<Unidades>)Session["QuitarUnidadG"];
+                        Session["AgregarUnidadG"] = list;
+                        list = list.OrderBy(x => x.Id).ToList();
+                        objResultado.Resultado = list;
+                    } 
+                    else if (lado == 3 && Session["QuitarUnidadG"] != null)
+                    {
+                        Session["AgregarUnidadG"] = null;
+                        list = (List<Unidades>)Session["AgregarUnidadG"];
+                        Session["QuitarUnidadG"] = list;                        
+                        objResultado.Resultado = list;
+
+                    }
                 }
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
@@ -1448,25 +1481,7 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-
-        //ObjPolizaDet.Cargo = TotCargo;
-        //ObjPolizaDet.Abono = TotAbono;           
-
-
-        //        if (Session["PolizaDet"] == null)
-        //        {
-        //            ListPDet = new List<Poliza_Detalle>();
-        //            ListPDet.Add(ObjPolizaDet);
-        //        }
-        //        else
-        //        {
-        //            ListPDet = (List<Poliza_Detalle>)Session["PolizaDet"];
-        //            ListPDet.Add(ObjPolizaDet);
-        //        }
-
-        //        Session["PolizaDet"] = ListPDet;
-        //        CargarGridDetalle(ListPDet);  
-
+          
         /* FIN FORMULARIO UNIDADES POR USUARIO */
 
 
@@ -1534,8 +1549,6 @@ namespace MIPlan.Controllers
                 Console.WriteLine(ex.Message);
             }
         }
-
-
-
+             
     }
 }

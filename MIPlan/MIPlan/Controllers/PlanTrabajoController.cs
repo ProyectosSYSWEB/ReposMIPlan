@@ -93,21 +93,20 @@ namespace MIPlan.Controllers
 
         /******************************************************************************************************************************Combos*************************************/
         public JsonResult ListaUnidadResponsable()
-        {
-            Sesion SesionUsu = new Sesion();
+        {            
             List<Unidades> list = new List<Unidades>();
             ResultadoUnidad objResultado = new ResultadoUnidad();
             try
             {
 
-                if (Session["UsuarioPlan"] != null)
-                    SesionUsu = (Sesion)System.Web.HttpContext.Current.Session["UsuarioPlan"];
-                else
-                    SesionUsu.Usuario = "";
+                List<Sesion> SesionUsu = new List<Sesion>();
+                if (System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"] != null)
+                    SesionUsu = (List<Sesion>)System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"];
 
-                list = Data.PlanTrabajo.CursorDataContext.GridUnidadesDisponibles(SesionUsu.Usuario);
+                list = Data.PlanTrabajo.CursorDataContext.GridUnidadesDisponibles(SesionUsu[0].Usuario);
                 objResultado.Error = false;
                 objResultado.MensajeError = string.Empty;
+                 list = list.OrderBy(x => x.Id).ToList();
                 objResultado.Resultado = list;
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
