@@ -11,12 +11,6 @@
 
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
 
-    <div id="Error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
-        <strong id="Message">¡Ha ocurrido un error! </strong>
-        <button type="button" class="close" ng-click="ctrl.DivError()" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
 
     <div class="container">
         <!---------------------------------------------------------------------------------------------------->
@@ -24,12 +18,10 @@
 
             <div class="container col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
-                    <label for="" class="font-weight-bold text-primary">
-                        Usuario
-                    </label>
-                    <select name="" id="" class="form-control border border-primary" ng-change="ctrl.ValorUsuario()" ng-options="option.Usuario for option in ctrl.Usuarios" ng-model="ctrl.Usuario" required>
-                        <option value="">Seleccionar Usuario...</option>
-                    </select>
+                    <label for="" class="font-weight-bold text-primary">Usuario</label>
+                    <br />
+                    <input type="text" class="form-control border border-primary" placeholder="Usuario">
+
                 </div>
             </div>
 
@@ -41,180 +33,154 @@
                     <label for="" class="font-weight-bold text-primary">
                         Dependencia
                     </label>
-                    <select name="" id="" class="form-control border border-primary" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="Dependencia" required>
-                        <option value="">Seleccionar Dependencia...</option>
+                    <select name="" id="" class="form-control border border-primary">
+                        <option selected>Seleccionar Dependencia...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
                     </select>
 
                 </div>
             </div>
         </div>
         <!---------------------------------------------------------------------------------------------------->
-        <div class="row">
 
 
-            <div class="col-sm-12 col-md-6 col-lg-5 col-xl-5">
-                <br />
-                <br />
-                <label for="" class="text-primary">
-                    Unidades disponibles
-                </label>
-                <br />
-                <br />
+
+        <div class="form-group text-center">
+            <br />
+            <br />
+            <label for="" class="font-weight-bold text-info">Unidades Asignadas</label>
+            <br />
+            <br />
+            <!----------------------------------------------MODAL---------------------------------------------------------------------------------------->
+            <div class="form-group text-right">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Nueva Unidad Disponible
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header text-white" style="background-color: #01579b;">
+                                Unidades Disponibles
+                            </div>
+
+                            <!------------------------CUERPO DE LA TABLA------------------------------------------>
+                            <div class="modal-body">
+                                <div>
+                                    <table class="table table-hover">
+                                        <thead class="bg-primary">
+                                            <tr>
+                                                <th scope="col" class="text-white">#</th>
+                                                <th scope="col" class="text-white">First</th>
+                                                <th scope="col" class="text-white">Last</th>
+                                                <th scope="col" class="text-white">Handle</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>mdo</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Jacob</td>
+                                                <td>Thornton</td>
+                                                <td>fat</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>Larry</td>
+                                                <td>the Bird</td>
+                                                <td>twitter</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!------------------------------------------------------------------>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary">Guardar Cambios</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-------------------------------------------------------------------------------------------------------------------------------------->
+            </div>
+            <div class="table-responsive">
                 <table class="table table-hover">
-                    <thead class="light-blue darken-3 text-white">
+                    <thead class="bg-primary">
                         <tr>
-                            <th scope="col" class="text-white">ID</th>
-                            <th scope="col" class="text-white">Descripción</th>
+                            <th scope="col" class="text-white">#</th>
+                            <th scope="col" class="text-white">First</th>
+                            <th scope="col" class="text-white">Last</th>
+                            <th scope="col" class="text-white">Handle</th>
                         </tr>
                     </thead>
-                    <tbody ng-pagination="i in ctrl.GridUnidadesDisponiblesView | filter: UD|  itemsPerPage: 5" pagination-id="PaginationUD">
-                        <tr ng-click="ctrl.getIdUD(i.Id, i.Descripcion); AA= ctrl.DescripcionUD" ng-class="{'Mybg text-white': AA == ctrl.DescripcionUD}" class="cursor-pointer">
-                            <th scope="row">{{i.Id}}</th>
-                            <td>{{i.Descripcion}}</td>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>
+                                <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-danger"><i class="fa fa-eraser"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>
+                                <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-danger"><i class="fa fa-eraser"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>
+                                <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-danger"><i class="fa fa-eraser"></i></button>
+                            </td>
+
+
                         </tr>
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="2">
-                                <ng-pagination-control boundary-links="true" pagination-id="PaginationUD"></ng-pagination-control>
-                            </th>
-                        </tr>
-                    </tfoot>
                 </table>
-                <div id="loading" style="opacity:0;">
-                    <div class="d-flex justify-content-center">
-                        <div id="Load" class="spinner-grow text-primary" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                        <div id="Load1" class="spinner-grow text-secondary" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                        <div id="Load2" class="spinner-grow text-success" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                        <div id="Load3" class="spinner-grow text-danger" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                        <div id="Load4" class="spinner-grow text-warning" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                        <div id="Load5" class="spinner-grow text-info" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                        <div id="Load6" class="spinner-grow text-dark" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!---------------------------------------------------------------------------------------------------->
-
-            <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
-                <div class="form-group text-center">
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <button type="button" class="btn btn-outline-primary" ng-click="ctrl.right()">></button>
-                    <br />
-                    <br />
-                    <button type="button" class="btn btn-outline-primary" ng-click="ctrl.left()"><</button>
-                    <br />
-                    <br />
-                    <button type="button" class="btn btn-outline-primary" ng-click="ctrl.AllRight()">>></button>
-                    <br />
-                    <br />
-                    <button type="button" class="btn btn-outline-primary" ng-click="ctrl.AllLeft()"><<</button>
-
-
-                </div>
-
-            </div>
-            <!---------------------------------------------------------------------------------------------------->
-
-            <div class="col-sm-12 col-md-6 col-lg-5 col-xl-5">
-                <br />
-                <br />
-                <label for="" class="text-primary">
-                    Unidades asignadas
-                </label>
-                <br />
-                <br />
-                <table class="table table-hover">
-                    <thead class="cyan darken-3 text-white">
-                        <tr>
-                            <th scope="col" class="text-white">ID</th>
-                            <th scope="col" class="text-white">Descripción</th>
-                        </tr>
-                    </thead>
-                    <tbody ng-pagination="i in ctrl.AgregarUnidadGrid | itemsPerPage: 5" pagination-id="PaginationUDNew">
-                        <tr ng-click="ctrl.getIdUDNew(i.Id, i.Descripcion); AA= ctrl.DescripcionUD" ng-class="{'Mybg text-white': AA == ctrl.DescripcionUD}" class="cursor-pointer">
-                            <th scope="row">{{i.Id}}</th>
-                            <td>{{i.Descripcion}}</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="2">
-                                <ng-pagination-control boundary-links="true" pagination-id="PaginationUDNew"></ng-pagination-control>
-                            </th>
-                        </tr>
-                    </tfoot>
-                </table>
-                <div class="externo">
-                    <div id="Load" class="spinner-grow text-primary" style="display:none" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                    <div id="Load1" class="spinner-grow text-secondary" style="display:none" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                    <div id="Load2" class="spinner-grow text-success" style="display:none" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                    <div id="Load3" class="spinner-grow text-danger" style="display:none" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                    <div id="Load4" class="spinner-grow text-warning" style="display:none" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                    <div id="Load5" class="spinner-grow text-info" style="display:none" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                    <div id="Load6" class="spinner-grow text-dark" style="display:none" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                </div>
             </div>
         </div>
 
-        <!---------------------------------------------------------------------------------------------------->
-
-        <br />
-        <br />
-        <br />
-        <div class="col text-right">
-            <button class="btn btn-primary">
-                Guardar
-            </button>
-
-            <button class="btn btn-danger">
-                Salir
-            </button>
-        </div>
+    </div>
 
 
+    <!---------------------------------------------------------------------------------------------------->
 
+    <br />
+    <br />
+    <div class="col text-right">
+        <button class="btn btn-primary">
+            Guardar
+        </button>
 
+        <button class="btn btn-danger">
+            Salir
+        </button>
     </div>
 
 
 
 
-
 </div>
-
-
+</div>
 
 
 
