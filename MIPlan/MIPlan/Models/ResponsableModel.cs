@@ -10,7 +10,10 @@ namespace MIPlan.Models
         public int Id { get; set; }
         public int Id_Actividades { get; set; }
         public int Id_Unidad { get; set; }
+        public string Descripcion { get; set; }
         public string Contacto { get; set; }
+        public string Telefono { get; set; }
+        public string Correo { get; set; }
 
 
     }
@@ -18,7 +21,7 @@ namespace MIPlan.Models
     {
         public bool Error { get; set; }
         public string MensajeError { get; set; }
-        public List<Actividades> Resultado { get; set; }
+        public List<ResponsableModel> Resultado { get; set; }
 
     }
 }

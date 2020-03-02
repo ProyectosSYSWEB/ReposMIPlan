@@ -23,8 +23,9 @@
     <link rel="stylesheet" type="text/css" href="~/Content/jquery.datetimepicker.css" />
     <script src="~/Scripts/jquery.datetimepicker.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-
+    <link rel="stylesheet" type="text/css" href="~/Content/mdb.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
 
 
@@ -39,50 +40,50 @@
                 <div class="row py-5">
                     <br />
                     <br />
-                    <br />                    
+                    <br />
                     @*<ul class="navbar-nav col-md-7">
-            <li class="nav-item col-md-2 text-center">
-                <a href=""><img src="~/Imagenes/MiPlan inicio.png" /></a>
-            </li>
-            <li class="nav-item col-md-2 text-center">
-                <a href=""><img src="~/Imagenes/MiPlan catalogos.png" /></a>
-            </li>
-            <li class="nav-item col-md-2 text-center">
-                <a href=""><img src="~/Imagenes/MiPlan movimientos.png" /></a>
-            </li>
-            <li class="nav-item col-md-2 text-center">
-                <a href=""><img src="~/Imagenes/MiPlan reportes.png" /></a>
-            </li>
-            <li class="nav-item col-md-2 text-center">
-                <a href=""><img src="~/Imagenes/MiPlan ayuda.png" /></a>
-            </li>
-            <li class="nav-item col-md-2 text-center">
-                <a href=""><img src="~/Imagenes/MiPlan salir.png" /></a>
-            </li>
-        </ul>
-        <ul class="navbar-nav col-md-7" style="background-color:#E5C514">
-            <li class="nav-item col-md-2 text-center">
-                <a href=""><span class="col-md-1" style="color:white">Inicio</span></a>
-            </li>
-            <li class="nav-item col-md-2 text-center">
-                <a href=""><span class="col-md-1" style="color:white">Catálogos</span></a>
-            </li>
-            <li class="nav-item col-md-2 text-center">
-                <a href=""><span class="col-md-1" style="color:white">Movimientos</span></a>
-            </li>
-            <li class="nav-item col-md-2 text-center">
-                <a href=""><span class="col-md-1" style="color:white">Reportes</span></a>
-            </li>
-            <li class="nav-item col-md-2 text-center">
-                <a href=""><span class="col-md-1" style="color:white">Ayuda</span></a>
-            </li>
-            <li class="nav-item col-md-2 text-center">
-                <a href=""><span class="col-md-1" style="color:white">Salir</span></a>
-            </li>
-            <li class="nav-item col-md-6">
+                            <li class="nav-item col-md-2 text-center">
+                                <a href=""><img src="~/Imagenes/MiPlan inicio.png" /></a>
+                            </li>
+                            <li class="nav-item col-md-2 text-center">
+                                <a href=""><img src="~/Imagenes/MiPlan catalogos.png" /></a>
+                            </li>
+                            <li class="nav-item col-md-2 text-center">
+                                <a href=""><img src="~/Imagenes/MiPlan movimientos.png" /></a>
+                            </li>
+                            <li class="nav-item col-md-2 text-center">
+                                <a href=""><img src="~/Imagenes/MiPlan reportes.png" /></a>
+                            </li>
+                            <li class="nav-item col-md-2 text-center">
+                                <a href=""><img src="~/Imagenes/MiPlan ayuda.png" /></a>
+                            </li>
+                            <li class="nav-item col-md-2 text-center">
+                                <a href=""><img src="~/Imagenes/MiPlan salir.png" /></a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav col-md-7" style="background-color:#E5C514">
+                            <li class="nav-item col-md-2 text-center">
+                                <a href=""><span class="col-md-1" style="color:white">Inicio</span></a>
+                            </li>
+                            <li class="nav-item col-md-2 text-center">
+                                <a href=""><span class="col-md-1" style="color:white">Catálogos</span></a>
+                            </li>
+                            <li class="nav-item col-md-2 text-center">
+                                <a href=""><span class="col-md-1" style="color:white">Movimientos</span></a>
+                            </li>
+                            <li class="nav-item col-md-2 text-center">
+                                <a href=""><span class="col-md-1" style="color:white">Reportes</span></a>
+                            </li>
+                            <li class="nav-item col-md-2 text-center">
+                                <a href=""><span class="col-md-1" style="color:white">Ayuda</span></a>
+                            </li>
+                            <li class="nav-item col-md-2 text-center">
+                                <a href=""><span class="col-md-1" style="color:white">Salir</span></a>
+                            </li>
+                            <li class="nav-item col-md-6">
 
-            </li>s
-        </ul>*@
+                            </li>s
+                        </ul>*@
                 </div>
             </div>
         </div>
@@ -94,6 +95,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-
+    <script src="~/Scripts/mdb.js"></script>
 </body>
 </html>

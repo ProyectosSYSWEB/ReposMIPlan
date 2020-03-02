@@ -45,6 +45,10 @@ namespace MIPlan.Controllers
             return View();
         }
 
+        public ActionResult ProgramasEducativos()
+        {
+            return View();
+        }
         public ActionResult AcreditadoresRegistro()
         {
             return View();
@@ -154,13 +158,18 @@ namespace MIPlan.Controllers
         //    return Json(list, JsonRequestBehavior.AllowGet);
         //}s
 
+
         public JsonResult ObtenerDependencias()
-        {
+        {            
             List<Comun> list = new List<Comun>();
             ResultadoComun objResultado = new ResultadoComun();
             try
             {
-                list = CursorDataContext.ObtenerDependencias("LISSETH");
+                List<Sesion> SesionUsu = new List<Sesion>();
+                if (System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"] != null)
+                    SesionUsu = (List<Sesion>)System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"];
+
+                list = CursorDataContext.ObtenerDependencias(SesionUsu[0].Usuario);
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
                 objResultado.Resultado = list;
@@ -1336,6 +1345,8 @@ namespace MIPlan.Controllers
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
                 objResultado.Resultado = list;
+                Session["AgregarUnidadG"] = null;
+                Session["QuitarUnidadG"] = null;
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -1347,17 +1358,47 @@ namespace MIPlan.Controllers
             }
         }
 
-        public JsonResult GridUnidadesDisponibles(string Usuario)
+        public JsonResult GridUnidadesDisponibles(int Id, string Descripcion, string Usuario, int lado)
         {  
-            List<Comun> list = new List<Comun>();
-            ResultadoComun objResultado = new ResultadoComun();
+            List<Unidades> list = new List<Unidades>();
+            Unidades pbjTemp = new Unidades();
+            ResultadoUnidad objResultado = new ResultadoUnidad();
+
             try
             {
-                list = Data.PlanTrabajo.CursorDataContext.GridUnidadesDisponibles(Usuario);
-                objResultado.Error = false;
-                objResultado.MensajeError = string.Empty;
-                objResultado.Resultado = list;
+                pbjTemp.Id = Id;
+                pbjTemp.Descripcion = Descripcion;
+                pbjTemp.Usuario = Usuario;
+                if (Session["QuitarUnidadG"] == null)
+                {
+                    list = Data.PlanTrabajo.CursorDataContext.GridUnidadesDisponibles(Usuario);
+                    objResultado.Error = false;
+                    objResultado.MensajeError = string.Empty;                     
+                    Session["QuitarUnidadG"] = list;
+                    list = list.OrderBy(x => x.Id).ToList();
+                    objResultado.Resultado = list;
+                }
+                else
+                {
+                    if (lado == 0)
+                    {
+                        list = (List<Unidades>)Session["QuitarUnidadG"];
+                        list.RemoveAll(x => x.Id == Id);
+                        Session["QuitarUnidadG"] = list;
+                        list = list.OrderBy(x => x.Id).ToList();
+                        objResultado.Resultado = list;
+                    }
+                    else if(lado == 1){
+
+                        list = (List<Unidades>)Session["QuitarUnidadG"];
+                        list.Add(pbjTemp);
+                        Session["QuitarUnidadG"] = list;
+                        list = list.OrderBy(x => x.Id).ToList();
+                        objResultado.Resultado = list;
+                    }
+                }
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
+                
             }
             catch (Exception ex)
             {
@@ -1367,7 +1408,97 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
 
             }
+        }        
+        public JsonResult AgregarUnidadGrid(int Id, string Descripcion, string Usuario, int lado)
+        {
+            List<Unidades> list = new List<Unidades>();
+            Unidades pbjTemp = new Unidades();
+            ResultadoUnidad objResultado = new ResultadoUnidad();
+            try
+            {
+                pbjTemp.Id = Id;
+                pbjTemp.Descripcion = Descripcion;
+                pbjTemp.Usuario = Usuario;
+                if (Session["AgregarUnidadG"] == null)
+                {
+                    list = new List<Unidades>();
+                    list.Add(pbjTemp);
+                    Session["AgregarUnidadG"] = list;
+                    objResultado.Resultado = list;
+                }
+                else
+                {
+                    if (lado == 0)
+                    {
+                        list = (List<Unidades>)Session["AgregarUnidadG"];
+                        list.Add(pbjTemp);
+                        Session["AgregarUnidadG"] = list;
+                        list = list.OrderBy(x => x.Id).ToList();
+                        objResultado.Resultado = list;
+                    }else if (lado == 1)
+                    {
+                        list = (List<Unidades>)Session["AgregarUnidadG"];
+                        list.RemoveAll(x => x.Id == Id);
+                        Session["AgregarUnidadG"] = list;
+                        list = list.OrderBy(x => x.Id).ToList();
+                        objResultado.Resultado = list;
+
+                    }
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {              
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
         }
+
+        public JsonResult ObtenerCarreras()
+        {
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            try
+            {                
+
+                list = CursorDataContext.ObtenerCarreras();
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult ObtenerNiveles()
+        {
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            try
+            {
+
+                list = CursorDataContext.ObtenerNiveles();
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
 
         /* FIN FORMULARIO UNIDADES POR USUARIO */
 

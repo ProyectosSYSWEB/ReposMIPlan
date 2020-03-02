@@ -3,7 +3,7 @@ var catalogoContext =
 {
     dependenciaslst: [], ListaUnidadResponsableLST: [], ListaEjerciciosLST: [], ListaPlanesLST: [], GridAreasAtencionLST: [], ObtenerModalGridAreasAtencionLST: [],
     GridActividadesLST: [], ObtenerDatosActividadesLST: [], ObtenerProgramasLST: [], GridProgramas: [],
-    GridUnidadesRespLST: [], EditarActividadesLST: [], ObtenerDatosUnidadesRespLST: [], ObtenerGridUnidadesModalLST: [],
+    GridUnidadesRespLST: [], EditarActividadesLST: [], ObtenerDatosUnidadesRespLST: [], ObtenerComboUnidadesModalLST: [],
    
 /********************************************************************************************************************************************************/
     ObtenerDependencias: function (callBackResult) {
@@ -128,6 +128,31 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
+    GuardarPlan: function (Id_Coordinacion, Status, Ejercicio, Dependencia, Descripcion, Fecha, callBackResult) {
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'PlanTrabajo/GuardarPlan',
+                data: { Id_Coordinacion, Status, Ejercicio, Dependencia, Descripcion, Fecha },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en GuardarPlan." });
+                    }
+                }
+            });
+
+    },
+/********************************************************************************************************************************************************/
     GridAreasAtencion: function (buscarPlan, callBackResult) {
         var self = this;
         self.GridAreasAtencionLST.length = 0;
@@ -158,7 +183,7 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-    ObtenerModalGridAreasAtencion: function (Ejercicio, Dependencia, callBackResult) {
+    ObtenerModalGridAreasAtencion: function (Ejercicio, Dependencia, buscarPlan, callBackResult) {
         var self = this;
         self.ObtenerModalGridAreasAtencionLST.length = 0;
         $.ajax(
@@ -166,7 +191,7 @@ var catalogoContext =
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'PlanTrabajo/ObtenerModalGridAreasAtencion',
-                data: { Ejercicio, Dependencia },
+                data: { Ejercicio, Dependencia, buscarPlan },
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
@@ -251,7 +276,7 @@ var catalogoContext =
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
-                            self.GridActividadesLST.push({ Id: resp.Resultado[i].Id, Desc_Programa: resp.Resultado[i].Desc_Programa, Desc_Accion: resp.Resultado[i].Desc_Accion, Fecha_Inicio: resp.Resultado[i].Fecha_Inicio, Fecha_Fin: resp.Resultado[i].Fecha_Fin, Impacto: resp.Resultado[i].Impacto, Prioritaria: resp.Resultado[i].Prioritaria, Status: resp.Resultado[i].Status });
+                            self.GridActividadesLST.push({ Id: resp.Resultado[i].Id, Desc_Programa: resp.Resultado[i].Desc_Programa, Desc_Accion: resp.Resultado[i].Desc_Accion, Detalles: resp.Resultado[i].Detalles, Fecha_Inicio: resp.Resultado[i].Fecha_Inicio, Fecha_Fin: resp.Resultado[i].Fecha_Fin, Impacto: resp.Resultado[i].Impacto, Prioritaria: resp.Resultado[i].Prioritaria, Status: resp.Resultado[i].Status, Id_Padre: resp.Resultado[i].Id_Padre, Id_Programa: resp.Resultado[i].Id_Programa  });
                             self.GridProgramas.push({ Desc_Programa: resp.Resultado[i].Desc_Programa });
                         }                      
                         if (callBackResult !== undefined) {
@@ -282,9 +307,8 @@ var catalogoContext =
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
-                            self.ObtenerDatosActividadesLST.push({ Id: resp.Resultado[i].Id, Id_Programa: resp.Resultado[i].Id_Programa, Accion: resp.Resultado[i].Descripcion, Fecha_Inicio: resp.Resultado[i].Fecha_Inicio, Fecha_Fin: resp.Resultado[i].Fecha_Fin, Impacto: resp.Resultado[i].Impacto, Prioritaria: resp.Resultado[i].Prioritaria, Status: resp.Resultado[i].Status, Clave: resp.Resultado[i].Clave });
-                        }
-                        console.log(self.ObtenerDatosActividadesLST);
+                            self.ObtenerDatosActividadesLST.push({ Id: resp.Resultado[i].Id, Id_Programa: resp.Resultado[i].Id_Programa, Accion: resp.Resultado[i].Descripcion, Detalles: resp.Resultado[i].Detalles, Fecha_Inicio: resp.Resultado[i].Fecha_Inicio, Fecha_Fin: resp.Resultado[i].Fecha_Fin, Impacto: resp.Resultado[i].Impacto, Prioritaria: resp.Resultado[i].Prioritaria, Status: resp.Resultado[i].Status, Clave: resp.Resultado[i].Clave, Id_Padre: resp.Resultado[i].Id_Padre});
+                        }                       
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
                         }
@@ -330,13 +354,13 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-    GuardarActividades: function (Meta, Clave, Descripcion, Impacto, Status, FechaInicio, FechaFin, Programa, Prioritaria, callBackResult) {
+    GuardarActividades: function (Meta, Clave, Descripcion, Detalles, Impacto, Status, FechaInicio, FechaFin, Programa, Prioritaria, Id_Padre, callBackResult) {
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'PlanTrabajo/GuardarActividades',
-                data: { Meta, Clave, Descripcion, Impacto, Status, FechaInicio, FechaFin, Programa, Prioritaria },
+                data: { Meta, Clave, Descripcion, Detalles, Impacto, Status, FechaInicio, FechaFin, Programa, Prioritaria, Id_Padre },
                 success: function (resp) {
                     if (resp.Error == false) {
                         if (callBackResult !== undefined) {
@@ -355,13 +379,15 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-    EditarActividades: function (Id, Programa, Descripcion, FechaInicio, FechaFin, Impacto, Prioritaria, Clave, Status, callBackResult) {
+    EditarActividades: function (Id, Programa, Descripcion, Detalles, FechaInicio, FechaFin, Impacto, Prioritaria, Clave, Status, Id_Padre, callBackResult) {    
+        console.log(Id, Programa, Descripcion, Detalles, FechaInicio, FechaFin, Impacto, Prioritaria, Clave, Status, Id_Padre);
+
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'PlanTrabajo/EditarActividades',
-                data: { Id, Programa, Descripcion, FechaInicio, FechaFin, Impacto, Prioritaria, Clave, Status },
+                data: { Id, Programa, Descripcion, Detalles, FechaInicio, FechaFin, Impacto, Prioritaria, Clave, Status, Id_Padre },
                 success: function (resp) {
                     if (resp.Error == false) {
                         if (callBackResult !== undefined) {
@@ -416,9 +442,9 @@ var catalogoContext =
                 data: { idActividad },
                 success: function (resp) {
                     if (resp.Error == false) {
-                        for (var i = 0; i < resp.ResultadiPlanUnidadesResponsables.length; i++) {
-                            self.GridUnidadesRespLST.push({ Id: resp.ResultadiPlanUnidadesResponsables[i].Id, Id_Actividad: resp.ResultadiPlanUnidadesResponsables[i].Id_Actividad, Descripcion: resp.ResultadiPlanUnidadesResponsables[i].Descripcion, Contacto: resp.ResultadiPlanUnidadesResponsables[i].Contacto });                            
-                        }                       
+                        for (var i = 0; i < resp.Resultado.length; i++) {
+                            self.GridUnidadesRespLST.push({ Id: resp.Resultado[i].Id, Id_Actividad: resp.Resultado[i].Id_Actividades, Descripcion: resp.Resultado[i].Descripcion, Contacto: resp.Resultado[i].Contacto, Telefono: resp.Resultado[i].Telefono, Correo: resp.Resultado[i].Correo });                            
+                        }                      
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
                         }
@@ -435,19 +461,19 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-    ObtenerDatosUnidadesResp: function (IdUnidad, callBackResult) {
+    ObtenerDatosUnidadesResp: function (Id, callBackResult) {
         var self = this;
         self.ObtenerDatosUnidadesRespLST.length = 0;
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
-                url: urlServer + 'PlanTrabajo/ObtenerDatosUnidadesResp',
-                data: { IdUnidad },
+                url: urlServer + 'PlanTrabajo/ObtenerDatosUnidadesResp',  
+                data: { Id },
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
-                            self.ObtenerDatosUnidadesRespLST.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependencia, Clave: resp.Resultado[i].Clave, Descripcion: resp.Resultado[i].Descripcion, Status: resp.Resultado[i].Status, Coordinador: resp.Resultado[i].Coordinador});
+                            self.ObtenerDatosUnidadesRespLST.push({ Id: resp.Resultado[i].Id, Id_Actividad: resp.Resultado[i].Id_Actividades, Descripcion: resp.Resultado[i].Id_Unidad, Contacto: resp.Resultado[i].Contacto, Telefono: resp.Resultado[i].Telefono, Correo: resp.Resultado[i].Correo});
                         }
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
@@ -465,13 +491,13 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-    GuardarUnidadesResp: function (Id_Actividades, Id_Unidad, callBackResult) {
+    GuardarUnidadesResp: function (Id_Actividades, Id_Unidad, Contacto, Telefono, Correo, callBackResult) {
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'PlanTrabajo/GuardarUnidadesResp',
-                data: { Id_Actividades, Id_Unidad },
+                data: { Id_Actividades, Id_Unidad, Contacto, Telefono, Correo },
                 success: function (resp) {
                     if (resp.Error == false) {
                         if (callBackResult !== undefined) {
@@ -490,13 +516,13 @@ var catalogoContext =
 
     },
 /********************************************************************************************************************************************************/
-    EditarUnidadesResp: function (Id, Dependencia, Clave, Descripcion, Status, Coordinador, callBackResult) {
+    EditarUnidadesResp: function (Id, Id_Actividades, Id_Unidad, Contacto, Telefono, Correo , callBackResult) {
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'PlanTrabajo/EditarUnidadesResp',
-                data: { Id, Dependencia, Clave, Descripcion, Status, Coordinador },
+                data: { Id, Id_Actividades, Id_Unidad, Contacto, Telefono, Correo },
                 success: function (resp) {
                     if (resp.Error == false) {
                         if (callBackResult !== undefined) {
@@ -539,19 +565,19 @@ var catalogoContext =
             });
     },
 /********************************************************************************************************************************************************/
-    ObtenerGridUnidadesModal: function (dependencia, callBackResult) {
+    ObtenerComboUnidadesModal: function (dependencia, callBackResult) {
         var self = this;
-        self.ObtenerGridUnidadesModalLST.length = 0;
+        self.ObtenerComboUnidadesModalLST.length = 0;
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
-                url: urlServer + 'PlanTrabajo/ObtenerGridUnidadesModal',
+                url: urlServer + 'PlanTrabajo/ObtenerComboUnidadesModal',
                 data: { dependencia },
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
-                            self.ObtenerGridUnidadesModalLST.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependencia, Clave: resp.Resultado[i].Clave, Descripcion: resp.Resultado[i].Descripcion, Status: resp.Resultado[i].Status, Coordinador: resp.Resultado[i].Coordinador });
+                            self.ObtenerComboUnidadesModalLST.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependencia, Clave: resp.Resultado[i].Clave, Descripcion: resp.Resultado[i].Descripcion, Status: resp.Resultado[i].Status, Coordinador: resp.Resultado[i].Coordinador });
                         }                        
                         if (callBackResult !== undefined) {
                             callBackResult({ ressult: 'tgp', message: null });

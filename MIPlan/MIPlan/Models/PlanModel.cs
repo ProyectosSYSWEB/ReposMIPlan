@@ -5,22 +5,23 @@ using System.Web;
 
 namespace MIPlan.Models
 {
-    public class Unidades
+    public class PlanModel
     {
-        public int Id { get; set; }
-        public string Dependencia { get; set; }
-        public string Clave { get; set; }
-        public string Descripcion { get; set; }
+        public int Id_Coordinacion { get; set; }
         public string Status { get; set; }
-        public string Coordinador { get; set; }
+        public string Ejercicio { get; set; }
+        public string Dependencia { get; set; }
+        public string Descripcion { get; set; }
+        public string Fecha { get; set; }
         public string Usuario { get; set; }
+
     }
 
-    public class ResultadoUnidad
+    public class ResultadoPlanModel
     {
         public bool Error { get; set; }
         public string MensajeError { get; set; }
-        public List<Unidades> Resultado { get; set; }
+        public List<Acreditaciones> Resultado { get; set; }
 
     }
 }

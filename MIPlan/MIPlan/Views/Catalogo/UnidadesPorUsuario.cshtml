@@ -4,11 +4,9 @@
     Layout = "~/Views/Shared/_LayoutContenido.cshtml";
 }
 
-<br />
-<br />
+<br class="imgUnach" />
 <br />
 
-<h2></h2>
 
 
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
@@ -63,7 +61,7 @@
                 <br />
                 <br />
                 <table class="table table-hover">
-                    <thead class="bg-info">
+                    <thead class="light-blue darken-3 text-white">
                         <tr>
                             <th scope="col" class="text-white">ID</th>
                             <th scope="col" class="text-white">Descripción</th>
@@ -93,16 +91,16 @@
                     <br />
                     <br />
                     <br />
-                    <button type="button" class="btn btn-outline-primary">></button>
+                    <button type="button" class="btn btn-outline-primary" ng-click="ctrl.right()">></button>
                     <br />
                     <br />
-                    <button type="button" class="btn btn-outline-primary"><</button>
+                    <button type="button" class="btn btn-outline-primary" ng-click="ctrl.left()"><</button>
                     <br />
                     <br />
-                    <button type="button" class="btn btn-outline-primary">>></button>
+                    <button type="button" class="btn btn-outline-primary" ng-click="ctrl.AllRight()">>></button>
                     <br />
                     <br />
-                    <button type="button" class="btn btn-outline-primary"><<</button>
+                    <button type="button" class="btn btn-outline-primary" ng-click="ctrl.AllLeft()"><<</button>
 
 
                 </div>
@@ -119,34 +117,25 @@
                 <br />
                 <br />
                 <table class="table table-hover">
-                    <thead class="bg-primary">
+                    <thead class="cyan darken-3 text-white">
                         <tr>
-                            <th scope="col" class="text-white">#</th>
-                            <th scope="col" class="text-white">First</th>
-                            <th scope="col" class="text-white">Last</th>
-                            <th scope="col" class="text-white">Handle</th>
+                            <th scope="col" class="text-white">ID</th>
+                            <th scope="col" class="text-white">Descripción</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>13</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>12</td>
+                    <tbody ng-pagination="i in ctrl.AgregarUnidadGrid | itemsPerPage: 5" pagination-id="PaginationUDNew">
+                        <tr ng-click="ctrl.getIdUDNew(i.Id, i.Descripcion); AA= ctrl.DescripcionUD" ng-class="{'Mybg text-white': AA == ctrl.DescripcionUD}" class="cursor-pointer">
+                            <th scope="row">{{i.Id}}</th>
+                            <td>{{i.Descripcion}}</td>
                         </tr>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="2">
+                                <ng-pagination-control boundary-links="true" pagination-id="PaginationUDNew"></ng-pagination-control>
+                            </th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
 
@@ -191,6 +180,7 @@
 <script src="~/Scripts/angular.min.js"></script>
 <script src="~/Scripts/angular.js"></script>
 <script src="~/Scripts/angular-pagination.js"></script>
+<script src="~/Scripts/angular-animate.js"></script>
 <script src="~/Scripts/global.js"></script>
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/UnidadesPorUsuarioController.js"></script>
@@ -200,6 +190,10 @@
 
 <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <script type="text/javascript">
+    $(document).ready(function () {
 
+        $('button').tooltip();
+
+    });
 </script>
 

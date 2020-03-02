@@ -1,13 +1,14 @@
 ﻿
 @{
 
-    ViewBag.Title = "Basicos";
+    ViewBag.Title = "Programas Educativos";
     Layout = "~/Views/Shared/_LayoutContenido.cshtml";
 
 }
-<br class="imgUnach" />
+<h2>Programas Educativos</h2>
 <br />
-
+<br />
+<br />
 
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
     <div class="container">
@@ -19,23 +20,18 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
-                <div class="form-group">
-                    <label for="lbcatalogo" class="text-success">Catalogo:</label>
-                    <select class="form-control border border-success" name="cmbcatalogo" ng-change="ctrl.Valorbasicos()" ng-model="ctrl.catal" ng-options="option.Id as option.Descripcion for option in ctrl.catalogos" style="max-width:100%;">
-                        <option value="">--Seleccionar Catalogo--</option>
-                        <option value="Todas">Todas</option>
-                    </select>
-                </div>
+                <label for="lbldependencia" class="text-success ">Dependencia:</label>
+                <select class="form-control border border-success " name="cmbDependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.buscar" style="max-width:100%;">
+                    <option value="">--Seleccionar Dependencia--</option>
+                </select>
             </div>
+
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div class="form-group">
-                    <label for="lblstatus" class="text-info">Estatus:</label>
-                    <select class="form-control border border-info" name="cmbDependencia" ng-change="ctrl.StatusFun()" ng-model="ctrl.Status.Status" style="max-width:100%;">
-                        <option value="">--Seleccionar Estatus--</option>
-                        <option value="Todos">TODOS</option>
-                        <option value="A">ALTA</option>
-                        <option value="B">BAJA</option>
-
+                    <label for="lblnivel" class="text-info">Nivel:</label>
+                    <select class="form-control border border-info" name="cmbDependencia" @*ng-change="ctrl.StatusFun()" ng-model="ctrl.Status.Status"*@ style="max-width:100%;">
+                        <option value="">--Seleccionar Nivel--</option>
+                       
                     </select>
                 </div>
             </div>
@@ -60,37 +56,34 @@
                     <form name="modalForm" novalidate>
                         <div id="Titulo" class="modal-header btn-success justify-content-center">
                             <h5 class="modal-title" id="exampleModalLabel">{{ctrl.Titulo}}</h5>
-                            <button type="button" class="close " data-dismiss="modal" ng-click="ctrl.reset(modalForm)" aria-label="Close">
+                            <button type="button" class="close btn-danger" data-dismiss="modal" ng-click="ctrl.reset(modalForm)" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <div class="container-fluid">
-
-
-
                                 <div class="row justify-content-center">
-                                    <label id="lblcatalogo" for="lblcatalogo" class="text-success">Catalogo:</label>
+                                    <label id="lbldependencia" for="lbldependencia" class="text-success">Dependencia:</label>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <select id="cmbcatalogo" class="form-control border border-success" name="cmbcatalogo" required ng-model="ctrl.cve_catalogo" ng-options="option.Id as option.Descripcion for option in ctrl.catalogos">
-                                        <option value="">--Seleccionar Catalogo--</option>
+                                    <select id="cmbdependencia" class="form-control border border-success" name="cmbdependencia" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.buscar"  style="max-width:100%; ">
+                                        <option value="">--Seleccionar Dependencia--</option>
                                         <option value="Todas">Todas</option>
 
                                     </select>
                                 </div>
 
-                                <div class="row justify-content-center">
-                                    <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.cmbcatalogo.$touched">
-                                        <span ng-show="!ctrl.cve_catalogo" class="text-danger check-element animate-show-hide">Campo Requerido</span>
+                                @*<div class="row justify-content-center">
+                                    <span class="messages" ng-show="modalForm.$submitted || modalForm.cmbcatalogo.$touched">
+                                        <span ng-show="!ctrl.cve_catalogo" class="text-danger">Campo Requerido</span>
                                     </span>
-                                </div>
+                                </div>*@
 
                                 <div class="row justify-content-center">
-                                    <label id="lblClave" for="lblClave" class="text-success">Clave:</label>
+                                    <label id="lblnivel" for="lblnivel" class="text-success">Nivel:</label>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <input type="text" id="txtClave" class="form-control border border-success" name="txtClave" maxlength="6" placeholder="Clave" ng-model="ctrl.cve_clave">
+                                    <input type="text" id="txtnivel" class="form-control border border-success" name="txtnivel" maxlength="6" placeholder="Nivel" ng-model="ctrl.cve_nivel">
                                 </div>
 
                                 @*<div class="row justify-content-center">
@@ -99,48 +92,46 @@
                                         </span>
                                     </div>*@
                                 <div class="row justify-content-center">
-                                    <label id="lblDescripcion" for="lblDescripcion" class="text-success">Descripcion:</label>
+                                    <label id="lblcarrera" for="lblcarrera" class="text-success">Carrera:</label>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <textarea id="txtDescripcion" class="form-control border border-success" name="txtDescripcion" placeholder="Descripcion" ng-model="ctrl.cve_descripcion"></textarea>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <label id="lblorden" for="lblorden" class="text-success">Orden:</label>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <input type="text" id="txtorden" class="form-control border border-success" name="txtorden" placeholder="Orden" ng-model="ctrl.cve_orden">
+                                    <select id="cmbcarrera" class="form-control border border-success" name="cmbcarrera" ng-change="ctrl.ValorDependencia()" ng-options="option.Id as option.Descripcion for option in ctrl.dependencias" ng-model="ctrl.cve_carrera" style="max-width:100%; ">
+                                        <option value="">--Seleccionar Catalogo--</option>
+                                        <option value="Todas">Todas</option>
 
-                                </div>
-                                @*<div class="row justify-content-center">
-                                        <span class="messages" ng-show="modalForm.$submitted || modalForm.txtorden.$touched">
-                                            <span ng-show="!ctrl.cve_orden" class="text-danger">Campo Requerido</span>
+                                    </select>
+                                    </div>
+
+                                         @*<div class="row justify-content-center">
+                                              <span class="messages" ng-show="modalForm.$submitted || modalForm.txtorden.$touched">
+                                             <span ng-show="!ctrl.cve_orden" class="text-danger">Campo Requerido</span>
+                                                </span>
+                                               </div>*@
+                                    <div class="row justify-content-center">
+                                        <label id="lblstatus" for="lblstatus" class="text-success">Estatus:</label>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <div id="Radio" class="radio-group form-control border border-success text-center" style="max-width: 280px;">
+                                            <label class="radio ">
+                                                <input type="radio" value="A" name="gender" ng-model="ctrl.cve_status" required />
+                                                Alta
+                                                <span></span>
+                                            </label>
+                                            <label class="radio">
+                                                <input type="radio" value="B" name="gender" ng-model="ctrl.cve_status" required />
+                                                Baja
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    @*<div class="row justify-content-center">
+                                        <span class="messages" ng-show="modalForm.$submitted || modalForm.gender.$touched">
+                                            <span ng-show="!ctrl.cve_status" class="text-danger">Campo Requerido</span>
                                         </span>
                                     </div>*@
-                                <div class="row justify-content-center">
-                                    <label id="lblstatus" for="lblstatus" class="text-success">Estatus:</label>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <div id="Radio" class="radio-group form-control border border-success text-center" style="max-width: 280px;">
-                                        <label class="radio ">
-                                            <input type="radio" value="A" name="gender" ng-model="ctrl.cve_status" required />
-                                            Alta
-                                            <span></span>
-                                        </label>
-                                        <label class="radio">
-                                            <input type="radio" value="B" name="gender" ng-model="ctrl.cve_status" required />
-                                            Baja
-                                            <span></span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.gender.$touched">
-                                        <span ng-show="!ctrl.cve_status" class="text-danger check-element animate-show-hide">Campo Requerido</span>
-                                    </span>
-                                </div>
 
 
-                            </div>
+                                </div>
                             <br />
                             <div class="row justify-content-center">
                                 <div id="ErrorModal" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
@@ -167,39 +158,39 @@
         <input type="hidden" ng-model="ctrl.cve_id" />
         <div class="container table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.3)">
             <table id="table_basico" class="table table-hover">
-                <thead class="light-blue darken-3 text-white">
+                <thead>
                     <tr>
                         <th scope="col">
-                            <a class="text-white" href="" ng-click="sortType = 'Id'; sortReverse = !sortReverse">
+                            <a href="" ng-click="sortType = 'Id'; sortReverse = !sortReverse">
                                 Id
                                 <span ng-class="sortType == 'Id' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Id' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
 
                         <th scope="col">
-                            <a class="text-white" href="" ng-click="sortType = 'DescripcionPadre'; sortReverse = !sortReverse">
-                                Catálogo
-                                <span ng-class="sortType == 'DescripcionPadre' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'DescripcionPadre' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                            <a href="" ng-click="sortType = 'Dependencia'; sortReverse = !sortReverse">
+                                Dependencia
+                                <span ng-class="sortType == 'Dependencia' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Dependencia' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
 
 
                         <th scope="col">
-                            <a class="text-white" href="" ng-click="sortType = 'Clave'; sortReverse = !sortReverse">
-                                Clave
-                                <span ng-class="sortType == 'Clave' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Clave' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                            <a href="" ng-click="sortType = 'Nivel'; sortReverse = !sortReverse">
+                                Nivel
+                                <span ng-class="sortType == 'Nivel' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Nivel' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a class="text-white" href="" ng-click="sortType = 'Descripcion'; sortReverse = !sortReverse">
-                                Descripción
-                                <span ng-class="sortType == 'Descripcion' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Descripcion' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                            <a href="" ng-click="sortType = 'Carrera'; sortReverse = !sortReverse">
+                                Carrera
+                                <span ng-class="sortType == 'Carrera' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Carrera' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a class="text-white" href="" ng-click="sortType = 'Status'; sortReverse = !sortReverse">
+                            <a href="" ng-click="sortType = 'Estatus'; sortReverse = !sortReverse">
                                 Estatus
-                                <span ng-class="sortType == 'Status' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Status' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                <span ng-class="sortType == 'Estatus' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Estatus' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
 
@@ -210,9 +201,9 @@
                 <tbody ng-pagination="i in ctrl.basicos | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status  | itemsPerPage: 5  ">
                     <tr>
                         <td>{{i.Id}}</td>
-                        <td>{{i.DescripcionPadre}}</td>
-                        <td>{{i.Clave}}</td>
-                        <td><font size="2">{{i.Descripcion}}</font></td>
+                        <td>{{i.Dependencia}}</td>
+                        <td>{{i.Nivel}}</td>
+                        <td><font size="2">{{i.Carrera}}</font></td>
                         <td>{{i.Status}}</td>
 
                         <td style="text-align:right">
@@ -245,7 +236,7 @@
                 </tfoot>
             </table>
         </div>
-
+        
     </div>
 </div>
 <br />
@@ -256,22 +247,13 @@
 <script src="~/Scripts/angular.min.js"></script>
 <script src="~/Scripts/angular.js"></script>
 <script src="~/Scripts/angular-pagination.js"></script>
-<script src="~/Scripts/angular-animate.js"></script>
 <script src="~/Scripts/global.js"></script>
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
-<script src="~/Scripts/Controllers/CatController.js"></script>
-<script src="~/Scripts/Models/CatModel.js"></script>
+<script src="~/Scripts/Controllers/ProgramaController.js" ></script>
+<script src="~/Scripts/Models/ProgramaModelo.js" ></script>
 <script src="~/Scripts/Controllers/AccesoController.js"></script>
 <script src="~/Scripts/Models/AccesoModel.js"></script>
 
 
 
-<!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        $('button').tooltip();
-
-    });
-</script>
 
