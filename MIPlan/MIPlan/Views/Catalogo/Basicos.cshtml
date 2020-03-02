@@ -1,5 +1,6 @@
 ﻿
 @{
+<a href="~/Views/Catalogo/Basicos.cshtml">~/Views/Catalogo/Basicos.cshtml</a>
 
     ViewBag.Title = "Basicos";
     Layout = "~/Views/Shared/_LayoutContenido.cshtml";
@@ -237,7 +238,7 @@
                             <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.exportTableToExcel('table_basico')" style="width:50px">
                                 <i class="fa fa-file-excel-o" aria-hidden="true"></i>
                             </button>
-                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Generar Reporte en PDF" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
+                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Generar Reporte en PDF" ng-click="ctrl.PdfReportAreas()" style="width:50px">
                                 <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                             </button>
                         </th>

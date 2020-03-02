@@ -1551,7 +1551,7 @@ namespace MIPlan.Controllers
             return File(stream, "application/pdf", "CuotasPosgrado_General.pdf");
         }
 
-        public ActionResult ReporteBasicosPdf(string Categoria)
+        public ActionResult ReporteBasicosPdf(string Catalogo)
         {
             ConnectionInfo connectionInfo = new ConnectionInfo();
             System.Web.UI.Page p = new System.Web.UI.Page();
@@ -1559,7 +1559,7 @@ namespace MIPlan.Controllers
             ReportDocument rd = new ReportDocument();
             string Ruta = Path.Combine(Server.MapPath("~/reports"), "ReporteBasicosPdf.rpt");
             rd.Load(Path.Combine(Server.MapPath("~/reports"), "ReporteBasicosPdf.rpt"));
-            rd.SetParameterValue(0, Categoria);
+            rd.SetParameterValue(0, Catalogo);
             rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
             connectionInfo.ServerName = "DSIA";
             connectionInfo.UserID = "ANUARIOS";

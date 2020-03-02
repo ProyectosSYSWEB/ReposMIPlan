@@ -273,38 +273,27 @@
             self.cve_status = null;
         };
 
-    }]);
 
-    this.exportTableToExcel= function (table_basico, filename = '') {
-        var downloadLink;
-        var dataType = 'application/vnd.ms-excel';
-        var tableSelect = document.getElementById(table_basico);
-        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+        this.PdfReportAreas = function () {
+            var xhr = new XMLHttpRequest();
+            var ruta = urlServer + 'Catalogo/ReporteBasicosPdf';
+            xhr.responseType = 'blob';
+            xhr.open("POST", ruta, true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {//Call a function when the state changes.
+                if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+                    var blob = new Blob([this.response], { type: 'application/pdf' });
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    window.open(link, "", "width=600,height=800");
+                }
+            }
+            xhr.send("Catalogo=" + self.catal);
 
-        // Specify file name
-        filename = filename ? filename + '.xls' : 'excel_data.xls';
 
-        // Create download link element
-        downloadLink = document.createElement("a");
-
-        document.body.appendChild(downloadLink);
-
-        if (navigator.msSaveOrOpenBlob) {
-            var blob = new Blob(['ufeff', tableHTML], {
-                type: dataType
-            });
-            navigator.msSaveOrOpenBlob(blob, filename);
-        } else {
-            // Create a link to the file
-            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-
-            // Setting the file name
-            downloadLink.download = filename;
-
-            //triggering the function
-            downloadLink.click();
         }
-    }
 
+    }]);
+}) ();
 
-})();
+    

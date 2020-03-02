@@ -199,25 +199,19 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="reports\ReporteBasicosPdf.cs">
+      <DependentUpon>ReporteBasicosPdf.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="reports\ReporteAreasAtencionPdf.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReporteAreasAtencionPdf.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="reports\ReporteBasicosPdf.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReporteBasicosPdf.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="reports\ReporteIndicadoresPdf.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReporteIndicadoresPdf.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="reports\ReporteIndicadoresPdf1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReporteIndicadoresPdf.rpt</DependentUpon>
@@ -1387,13 +1381,13 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteAreasAtencionExcel.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="reports\ReporteAreasAtencionPdf.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ReporteAreasAtencionPdf.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="reports\ReporteBasicosPdf.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteBasicosPdf.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reports\ReporteAreasAtencionPdf.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteAreasAtencionPdf.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="reports\ReporteIndicadoresPdf.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
