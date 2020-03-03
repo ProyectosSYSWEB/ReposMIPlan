@@ -13,7 +13,7 @@
 
         var CargarCombos = function () {           
             ObtenerDependencias();      
-            ObtenerUnidadesPorUsuario();
+            ObtenerUsuarios();
         };
      
 /********************************************************************************************************************************************************/
@@ -36,11 +36,11 @@
             });
         };
 /********************************************************************************************************************************************************/
-        var ObtenerUnidadesPorUsuario = function () {
-            catalogoContext.ObtenerUnidadesPorUsuario(function (resp) {
+        var ObtenerUsuarios = function () {
+            catalogoContext.ObtenerUsuarios(function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.Usuarios = catalogoContext.UnidadesPorUsuariolst;
+                        self.Usuarios = catalogoContext.ObtenerUsuarioslst;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -54,20 +54,14 @@
             });
         };
         /********************************************************************************************************************************************************/
-        this.ValorUsuario = function () {
+        this.ValorUsuario = function () {      
             document.getElementById("loading").style.opacity = 100;           
-            setTimeout(function () {        
-               var lado = 999
-                GridUnidadesDisponibles(lado);
-            }, 1000);
-             
+            setTimeout(function () {                      
+                GridUnidadesDisponibles();
+            }, 900);             
         };
-        var GridUnidadesDisponibles = function (lado) {
-            if (self.rightId == null) {
-                self.rightId = 0;
-                self.DescripcionUD = "";                
-            }            
-            catalogoContext.GridUnidadesDisponibles(self.rightId, self.DescripcionUD, self.Usuario.Usuario, lado, function (resp) {
+        var GridUnidadesDisponibles = function () {          
+            catalogoContext.GridUnidadesDisponibles(self.Usuario.Usuario, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         self.GridUnidadesDisponiblesView = catalogoContext.GridUnidadesDisponiblesLST;
@@ -83,56 +77,19 @@
                     default:
                         break;
                 }
-                $scope.$apply();          
+                $scope.$apply();        
+                $('button').tooltip();            
             });
         };       
-/********************************************************************************************************************************************************/
-
-        this.getIdUD = function (Id, Descripcion) {            
-            self.rightId = Id
-            self.DescripcionUD = Descripcion;
-            self.ladoR = 0;
-        }        
-        this.getIdUDNew = function (Id, Descripcion) {
-            self.rightId = Id
-            self.DescripcionUD = Descripcion;
-            self.ladoL = 1;
+        this.AddUA = function () {
+            self.DescripcionUA = "";
+            GridUnidadesAsignadas();            
         }
-    /********************************************************************************************************************************************************/
-        this.right = function () {       
-            AgregarUnidadGrid(self.ladoR);
-            GridUnidadesDisponibles(self.ladoR);
-        }        
-        this.left = function () {          
-                AgregarUnidadGrid(self.ladoL);
-                GridUnidadesDisponibles(self.ladoL);       
-        }
-        this.AllRight =  function () {                
-            ladoR = 2;
-            ladoL = 2;
-            AgregarUnidadGrid(ladoR);
-            GridUnidadesDisponibles(ladoL);     
-            
-        }
-
-        this.AllLeft = function () {            
-            ladoR = 3;
-            ladoL = 3;
-            AgregarUnidadGrid(ladoR);
-            GridUnidadesDisponibles(ladoL);     
-        }
-    /********************************************************************************************************************************************************/
-        var AgregarUnidadGrid = function (lado) {    
-            if (self.rightId == null) {
-                self.rightId = 0;
-                self.DescripcionUD = "";                
-            }
-            catalogoContext.AgregarUnidadGrid(
-                self.rightId, self.DescripcionUD, self.Usuario.Usuario, lado,
-                function (resp) {
+        var GridUnidadesAsignadas = function () {
+            catalogoContext.GridUnidadesAsignadas(self.Usuario.Usuario, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.AgregarUnidadGrid = catalogoContext.AgregarUnidadGridLST;
+                        self.GridUnidadesAsignadasView = catalogoContext.GridUnidadesAsignadasLST;                       
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -143,23 +100,27 @@
                         break;
                 }
                 $scope.$apply();
+                $('button').tooltip();            
             });
+        };       
+/********************************************************************************************************************************************************/
+        this.getIdUA = function (Id, Descripcion) {
+            self.Id = Id;            
+            self.DescripcionUA = Descripcion;
+        }
+
+        this.DivError = function () {
+            document.getElementById("Error").style.display = "none";
         };
 
-       
+        this.close = function (form) {
+            $('#ModalUA').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }        
+        };
 
     }]);
 })();
 
-
-//for (var i = 0; i < self.GridUnidadesDisponiblesView.length; i++) {
-//    self.rightId = self.GridUnidadesDisponiblesView[i].Id;
-//    self.DescripcionUD = self.GridUnidadesDisponiblesView[i].Descripcion;
-//    ladoL = 0;
-//    AgregarUnidadGrid(ladoL);
-//}
-//for (var i = 0; i < self.GridUnidadesDisponiblesView.length; i++) {
-//    self.rightId = self.GridUnidadesDisponiblesView[i].Id;
-//    ladoL = 0;
-//    GridUnidadesDisponibles(ladoL);
-//}

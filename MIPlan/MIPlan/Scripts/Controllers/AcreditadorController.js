@@ -104,7 +104,9 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.acreditador = catalogoContext.acreditadoreslst;
-                       
+                        if (self.acreditador.length > 0) {
+                            document.getElementById("loading").style.opacity = 0;
+                        }
                         $('#acreditadores').modal('hide');
                         break;
                     case "notgp":
@@ -319,7 +321,11 @@ this.AcreditadorCreate = function () { AcreditadorCreate(); }
         };
 
         this.ValorDependencia = function () {
-            CargarGrid();
+            
+            document.getElementById("loading").style.opacity = 100;
+            setTimeout(function () {
+                CargarGrid();
+            }, 900);      
             if (self.buscar == "00000" || self.buscar == null) {
                 self.buscar = '';
             }

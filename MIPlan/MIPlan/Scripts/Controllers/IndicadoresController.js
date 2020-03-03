@@ -89,6 +89,9 @@
                     case "tgp":
                         
                         self.indicadores = catalogoContext.indicadoreslst;
+                        if (self.indicadores.length > 0) {
+                            document.getElementById("loading").style.opacity = 0;
+                        }
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -279,8 +282,10 @@
         
 
         this.ValorCategoria = function () {
-            console.log(self.buscar);
-            CargarGrid();
+            document.getElementById("loading").style.opacity = 100;
+            setTimeout(function () {
+                CargarGrid();
+            }, 900);      
             if (self.buscar == null) {
                 self.buscar = '';
             }

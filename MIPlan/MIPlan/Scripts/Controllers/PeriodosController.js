@@ -45,7 +45,10 @@
             catalogoContext.ObtenerGridPeriodos(self.depen,function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.periodos = catalogoContext.periodoslst;                                                 
+                        self.periodos = catalogoContext.periodoslst;    
+                        if (self.periodos.length > 0) {
+                            document.getElementById("loading").style.opacity = 0;
+                        }
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -235,7 +238,10 @@
         };
 
         this.ValorDependencia = function () {     
-            CargarGrid();
+            document.getElementById("loading").style.opacity = 100;
+            setTimeout(function () {
+                CargarGrid();
+            }, 900);      
             if (self.buscar == "00000" || self.buscar == null) {
                 self.buscar = '';
             }            

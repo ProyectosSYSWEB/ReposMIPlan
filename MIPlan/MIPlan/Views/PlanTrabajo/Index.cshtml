@@ -377,7 +377,7 @@
                                 </tr>
                             </thead>
                             <tbody ng-pagination="i in ctrl.ObtenerModalGridAreasAtencionView | filter: ModalF|  itemsPerPage: 10" pagination-id="PaginationModalAR">
-                                <tr ng-click="ctrl.getIdAA(i.Id_Plan, i.Id_Area, i.Descripcion); AA= ctrl.DescripcionAA" ng-class="{'Mybg text-white': AA == ctrl.DescripcionAA}" class="cursor-pointer">
+                                <tr ng-click="ctrl.getIdAA(i.Id_Plan, i.Id_Area, i.Descripcion); AA= ctrl.DescripcionAA" ng-class="{'light-blue darken-1  text-white': AA == ctrl.DescripcionAA}" class="cursor-pointer">
                                     <td>{{i.Id_Plan}}</td>
                                     <td>{{i.Id_Area}}</td>
                                     <td>{{i.Descripcion}}</td>
@@ -397,7 +397,7 @@
                     </div>
                     <div class="row justify-content-center">
                         <span class="messages check-element animate-show-hide" ng-show="modalFormAA.$submitted || modalFormAA.Desc.$touched">
-                            <span ng-show="!ctrl.ObtenerDatosActividadesView[0].Clave" class="text-danger check-element animate-show-hide">Campo Requerido</span>
+                            <span ng-show="!ctrl.DescripcionAA" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                         </span>
                     </div>
                     <div class="modal-footer">
@@ -464,7 +464,7 @@
             <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
                 <div class="form-group">
                     <label for="lblBuscar" class="text-primary">&nbsp;</label>
-                    <button class="btn btn-info btn-block" id="Search" title="Buscar Plan" ng-click="ctrl.BtnBuscar()">Buscar</button>
+                    <button class="btn btn-info btn-block" id="Search" title="Buscar Plan" ng-disabled="!ctrl.buscarUnidad;!ctrl.buscarEjercicios;!ctrl.buscarDependencias;!ctrl.buscarPlan" ng-click="ctrl.BtnBuscar()">Buscar</button>
                 </div>
             </div>
         </div>
@@ -481,7 +481,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col text-right">
-                                <button id="btnCrear" class="btn btn-sm btn-success btn-create" style="width:120px" ng-click="ctrl.ModalAreasDeAtencion()" data-toggle="modal" data-target="#ModalAreasDeAtencion" data-backdrop="static" data-keyboard="false" title="Agregar Area de Atención"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
+                                <button id="btnCrear" class="btn btn-sm btn-success btn-create" style="width:120px" ng-disabled="!ctrl.GridAreasAtencionView" ng-click="ctrl.ModalAreasDeAtencion()" data-toggle="modal" data-target="#ModalAreasDeAtencion" data-backdrop="static" data-keyboard="false" title="Agregar Area de Atención"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo</button>
                             </div>
                         </div>
                     </div>
@@ -621,7 +621,7 @@
                                                 <!--Table-->
                                                 <table class="table table-hover">
                                                     <thead class="teal darken-3 text-white">
-                                                        <tr>
+                                                        <tr class="text-center">
                                                             <th></th>
                                                             <th scope="col">Acción</th>
                                                             <th scope="col">Inicio</th>
@@ -633,7 +633,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody ng-repeat="i in ctrl.GridActividadesView">
-                                                        <tr class="cursor-pointer AAT"  ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'teal lighten-1 text-white ': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === i.Desc_Programa && i.Id_Padre === 0 " >
+                                                        <tr class="cursor-pointer text-center AAT"  ng-click="ctrl.getUR(i.Id, i.Desc_Accion); A= ctrl.DescActividad" ng-class="{'teal lighten-1 text-white ': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === i.Desc_Programa && i.Id_Padre === 0 " >
                                                             <td data-toggle="collapse" data-target="#C-{{i.Id}}"><i class="fa fa-plus"></i></td>
                                                             <td title="Descripción:  {{i.Detalles}}" data-toggle="collapse" data-target="#C-{{i.Id}}"><font size="2"> {{i.Desc_Accion}}</font></td>
                                                             <td><font size="2">{{i.Fecha_Inicio}}</font></td>
@@ -709,8 +709,8 @@
                             <div class="table-responsive">
 
                                 <table class="table table-hover">
-                                    <thead class="teal darken-3 text-white">
-                                        <tr>
+                                    <thead class="teal darken-3  text-white">
+                                        <tr class="text-center">
                                             <th scope="col">Id</th>
                                             <th scope="col">Id Actividad</th>
                                             <th scope="col">Unidad Responsable</th>
@@ -724,7 +724,7 @@
 
                                     <tbody ng-pagination="i in ctrl.GridUnidadesRespView |  itemsPerPage: 5" pagination-id="PaginationGridUR">
 
-                                        <tr class="cursor-pointer">
+                                        <tr class="cursor-pointer text-center">
 
                                             <td>{{i.Id}}</td>
                                             <td>{{i.Id_Actividad}}</td>

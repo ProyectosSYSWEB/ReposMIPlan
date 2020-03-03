@@ -1,6 +1,6 @@
 ﻿var catalogoContext =
 {
-    dependenciaslst: [], UnidadesPorUsuariolst: [], GridUnidadesDisponiblesLST: [], AgregarUnidadGridLST: [],
+    dependenciaslst: [], ObtenerUsuarioslst: [], GridUnidadesDisponiblesLST: [], AgregarUnidadGridLST: [], GridUnidadesAsignadasLST:[],
     
     /********************************************************************************************************************************************************/
     ObtenerDependencias: function (callBackResult) {
@@ -35,9 +35,9 @@
     },
 /********************************************************************************************************************************************************/
 
-    ObtenerUnidadesPorUsuario: function (callBackResult) {
+    ObtenerUsuarios: function (callBackResult) {
         var self = this;
-        self.UnidadesPorUsuariolst.length = 0;
+        self.ObtenerUsuarioslst.length = 0;
         $.ajax(
             {
                 type: 'GET',
@@ -47,7 +47,7 @@
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
 
-                            self.UnidadesPorUsuariolst.push({ Usuario: resp.Resultado[i].Usuario });
+                            self.ObtenerUsuarioslst.push({ Usuario: resp.Resultado[i].Usuario });
                         }
                         if (callBackResult != undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
@@ -67,7 +67,7 @@
     },
 /********************************************************************************************************************************************************/
 
-    GridUnidadesDisponibles: function (Id, Descripcion, NombreUsuario, lado, callBackResult) {
+    GridUnidadesDisponibles: function (NombreUsuario, callBackResult) {
         var self = this;
         self.GridUnidadesDisponiblesLST.length = 0;
         $.ajax(
@@ -75,12 +75,12 @@
                 type: 'GET',                
                 cache: false,
                 url: urlServer + 'Catalogo/GridUnidadesDisponibles',
-                data: { Id, Descripcion, NombreUsuario, lado },
+                data: { NombreUsuario },
                 success: function (resp) {
                     if (resp.Error == false) {
                         for (var i = 0; i < resp.Resultado.length; i++) {
 
-                            self.GridUnidadesDisponiblesLST.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion });
+                            self.GridUnidadesDisponiblesLST.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependencia, Clave: resp.Resultado[i].Clave, Descripcion: resp.Resultado[i].Descripcion, Status: resp.Resultado[i].Status, Coordinador: resp.Resultado[i].Coordinador });
                         }
                         if (callBackResult != undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
@@ -99,21 +99,19 @@
 
     },
 /********************************************************************************************************************************************************/
-
-    AgregarUnidadGrid: function (Id, Descripcion, Usuario, lado, callBackResult) {
+    GridUnidadesAsignadas: function (NombreUsuario, callBackResult) {
         var self = this;
-        self.AgregarUnidadGridLST.length = 0;
+        self.GridUnidadesAsignadasLST.length = 0;
         $.ajax(
             {
-                type: 'GET',               
+                type: 'GET',
                 cache: false,
-                url: urlServer + 'Catalogo/AgregarUnidadGrid',
-                data: { Id, Descripcion, Usuario, lado },
+                url: urlServer + 'Catalogo/GridUnidadesAsignadas',
+                data: { NombreUsuario },
                 success: function (resp) {
                     if (resp.Error == false) {
-                        for (var i = 0; i < resp.Resultado.length; i++) {
-
-                            self.AgregarUnidadGridLST.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion });
+                        for (var i = 0; i < resp.Resultado.length; i++) {                           
+                            self.GridUnidadesAsignadasLST.push({ Id: resp.Resultado[i].Id, Dependencia: resp.Resultado[i].Dependencia, Clave: resp.Resultado[i].Clave, Descripcion: resp.Resultado[i].Descripcion});
                         }
                         if (callBackResult != undefined) {
                             callBackResult({ ressult: 'tgp', message: null });
@@ -125,12 +123,13 @@
                 },
                 error: function (ex) {
                     if (callBackResult != undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en  AgregarUnidadGrid." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en  GridUnidadesDisponibles." });
                     }
                 }
             });
 
     },
+   
 /********************************************************************************************************************************************************/
 
 

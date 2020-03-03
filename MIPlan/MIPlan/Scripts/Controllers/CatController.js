@@ -39,6 +39,10 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.basicos = catalogoContext.basicoslst;
+                        if (self.basicos.length > 0) {
+                            document.getElementById("loading").style.opacity = 0;
+                        }
+                        $('#acreditadores').modal('hide');
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -256,7 +260,10 @@
 
         this.Valorbasicos = function () {
            
-            CargarGrid();
+            document.getElementById("loading").style.opacity = 100;
+            setTimeout(function () {
+                CargarGrid();
+            }, 900);      
             if (self.buscar == "Todas") {
                 self.buscar = '';
             }

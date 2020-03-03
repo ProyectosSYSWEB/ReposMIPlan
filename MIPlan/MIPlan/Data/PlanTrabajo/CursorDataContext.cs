@@ -26,10 +26,14 @@ namespace MIPlan.Data.PlanTrabajo
                 List<Unidades> listarUnidades = new List<Unidades>();
                 while (dr.Read())
                 {
-                    Unidades objUnidades = new Unidades();
-                    objUnidades.Id = Convert.ToInt32(dr[0]);
-                    objUnidades.Descripcion = Convert.ToString(dr[1]);
-                    listarUnidades.Add(objUnidades);
+                    Unidades objrUnidades = new Unidades();
+                    objrUnidades.Id = Convert.ToInt32(dr[0]);
+                    objrUnidades.Dependencia = Convert.ToString(dr[1]);
+                    objrUnidades.Clave = Convert.ToString(dr[2]);
+                    objrUnidades.Descripcion = Convert.ToString(dr[3]);
+                    objrUnidades.Status = Convert.ToString(dr[4]);
+                    objrUnidades.Coordinador = Convert.ToString(dr[4]);
+                    listarUnidades.Add(objrUnidades);
                 }
                 return listarUnidades;
 
@@ -62,10 +66,14 @@ namespace MIPlan.Data.PlanTrabajo
                 List<Unidades> listarUnidades = new List<Unidades>();
                 while (dr.Read())
                 {
-                    Unidades objUnidades = new Unidades();
-                    objUnidades.Id = Convert.ToInt32(dr[0]);
-                    objUnidades.Descripcion = Convert.ToString(dr[1]);
-                    listarUnidades.Add(objUnidades);
+                    Unidades objrUnidades = new Unidades();
+                    objrUnidades.Id = Convert.ToInt32(dr[0]);
+                    objrUnidades.Dependencia = Convert.ToString(dr[1]);
+                    objrUnidades.Clave = Convert.ToString(dr[2]);
+                    objrUnidades.Descripcion = Convert.ToString(dr[3]);
+                    objrUnidades.Status = Convert.ToString(dr[4]);
+                    objrUnidades.Coordinador = Convert.ToString(dr[4]);
+                    listarUnidades.Add(objrUnidades);
                 }
                 return listarUnidades;
 

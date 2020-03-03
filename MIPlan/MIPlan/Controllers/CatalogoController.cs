@@ -1340,9 +1340,7 @@ namespace MIPlan.Controllers
                 list = CursorDataContext.ObtenerUsuarios();
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
-                objResultado.Resultado = list;
-                Session["AgregarUnidadG"] = null;
-                Session["QuitarUnidadG"] = null;
+                objResultado.Resultado = list;            
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -1355,61 +1353,21 @@ namespace MIPlan.Controllers
         }
       
 
-        public JsonResult GridUnidadesDisponibles(int Id, string Descripcion, string NombreUsuario, int lado)
+        public JsonResult GridUnidadesDisponibles(string NombreUsuario)
         {  
             List<Unidades> list = new List<Unidades>();
             Unidades pbjTemp = new Unidades();
             ResultadoUnidad objResultado = new ResultadoUnidad();
 
             try
-            {
-                pbjTemp.Id = Id;
-                pbjTemp.Descripcion = Descripcion;
-                pbjTemp.Usuario = NombreUsuario;
-                if (Session["QuitarUnidadG"] == null && lado != 2 )
-                {
+            {            
                     list = Data.PlanTrabajo.CursorDataContext.GridUnidadesDisponibles(NombreUsuario);
                     objResultado.Error = false;
                     objResultado.MensajeError = string.Empty;                     
-                    Session["QuitarUnidadG"] = list;
+                    //Session["QuitarUnidadG"] = list;
                     list = list.OrderBy(x => x.Id).ToList();
                     objResultado.Resultado = list;
-                }
-                else 
-                {
-                    if (lado == 0)
-                    {
-                        list = (List<Unidades>)Session["QuitarUnidadG"];
-                        list.RemoveAll(x => x.Id == Id);
-                        Session["QuitarUnidadG"] = list;
-                        list = list.OrderBy(x => x.Id).ToList();
-                        objResultado.Resultado = list;
-                    }
-                    else if(lado == 1){
-
-                        list = (List<Unidades>)Session["QuitarUnidadG"];
-                        list.Add(pbjTemp);
-                        Session["QuitarUnidadG"] = list;
-                        list = list.OrderBy(x => x.Id).ToList();
-                        objResultado.Resultado = list;
-                    }
-                    else if (lado == 2 && Session["AgregarUnidadG"] != null)
-                    {
-                        Session["QuitarUnidadG"] = null;
-                        list = (List<Unidades>)Session["QuitarUnidadG"];
-                        Session["AgregarUnidadG"] = list;                        
-                        objResultado.Resultado = list;
-                    }
-                    else if (lado == 3)
-                    {
-                        Session["QuitarUnidadG"] = null;
-                        list = (List<Unidades>)Session["AgregarUnidadG"];
-                        Session["QuitarUnidadG"] = list;
-                        list = list.OrderBy(x => x.Id).ToList();
-                        objResultado.Resultado = list;
-                    }
-
-                }
+        
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
                 
             }
@@ -1421,68 +1379,35 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
 
             }
-        }        
-        public JsonResult AgregarUnidadGrid(int Id, string Descripcion, string Usuario, int lado)
+        }
+
+        public JsonResult GridUnidadesAsignadas(string NombreUsuario)
         {
             List<Unidades> list = new List<Unidades>();
             Unidades pbjTemp = new Unidades();
             ResultadoUnidad objResultado = new ResultadoUnidad();
+
             try
             {
-                pbjTemp.Id = Id;
-                pbjTemp.Descripcion = Descripcion;
-                pbjTemp.Usuario = Usuario;
-                if (Session["AgregarUnidadG"] == null && lado != 2)
-                {
-                    list = new List<Unidades>();
-                    list.Add(pbjTemp);
-                    Session["AgregarUnidadG"] = list;
-                    objResultado.Resultado = list;
-                }
-                else
-                {
-                    if (lado == 0)
-                    {
-                        list = (List<Unidades>)Session["AgregarUnidadG"];
-                        list.Add(pbjTemp);
-                        Session["AgregarUnidadG"] = list;
-                        list = list.OrderBy(x => x.Id).ToList();
-                        objResultado.Resultado = list;
-                    }else if (lado == 1)
-                    {
-                        list = (List<Unidades>)Session["AgregarUnidadG"];
-                        list.RemoveAll(x => x.Id == Id);
-                        Session["AgregarUnidadG"] = list;
-                        list = list.OrderBy(x => x.Id).ToList();
-                        objResultado.Resultado = list;
+                list = Data.PlanTrabajo.CursorDataContext.GridUnidadesAsignadas(NombreUsuario);
+                objResultado.Error = false;
+                objResultado.MensajeError = string.Empty;
+                //Session["QuitarUnidadG"] = list;
+                list = list.OrderBy(x => x.Id).ToList();
+                objResultado.Resultado = list;
 
-                    }
-                    else if (lado == 2)
-                    {
-                        Session["AgregarUnidadG"] = null;
-                        list = (List<Unidades>)Session["QuitarUnidadG"];
-                        Session["AgregarUnidadG"] = list;
-                        list = list.OrderBy(x => x.Id).ToList();
-                        objResultado.Resultado = list;
-                    } 
-                    else if (lado == 3 && Session["QuitarUnidadG"] != null)
-                    {
-                        Session["AgregarUnidadG"] = null;
-                        list = (List<Unidades>)Session["AgregarUnidadG"];
-                        Session["QuitarUnidadG"] = list;                        
-                        objResultado.Resultado = list;
-
-                    }
-                }
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
+
             }
             catch (Exception ex)
-            {              
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
+
             }
         }
-          
-        /* FIN FORMULARIO UNIDADES POR USUARIO */
 
 
         /**/
