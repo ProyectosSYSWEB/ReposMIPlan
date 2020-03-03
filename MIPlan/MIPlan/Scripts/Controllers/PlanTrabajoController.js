@@ -198,8 +198,7 @@
             self.Id_Area_Atencion = Id_Area_Atencion;
             self.DescripcionAA = Descripcion;
         }
-        var GuardarAreasAtencion = function () {
-            console.log(self.Id_Plan, self.Id_Area_Atencion);
+        var GuardarAreasAtencion = function () {            
             catalogoContext.GuardarAreasAtencion(
                 self.Id_Plan, self.Id_Area_Atencion,
                 function (resp) {

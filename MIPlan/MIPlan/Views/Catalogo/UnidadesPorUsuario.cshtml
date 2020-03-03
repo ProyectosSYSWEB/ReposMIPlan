@@ -13,7 +13,7 @@
 
     <!-- Modal -->
     <div class="modal fade" id="ModalUA" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form name="modalFormUA" novalidate>
                     <div class="modal-header text-white" style="background-color: #01579b;">
@@ -25,29 +25,43 @@
                     <!------------------------CUERPO DE LA TABLA------------------------------------------>
                     <div class="modal-body">
                         <table class="table table-hover">
-                            <thead class="bg-primary">
-                                <tr class="text-white text-center">
+                            <thead class="light-blue darken-3 text-white">
+                                <tr class="text-center">
                                     <th scope="col">
                                         Id
                                     </th>
                                     <th scope="col">
                                         Dependencia
+                                    </th>                                  
+                                    <th scope="col">
+                                        <a class="text-white" href="" ng-click="sortType = 'Descripcion'; sortReverse = !sortReverse">
+                                            Descripción
+                                            <span ng-class="sortType == 'Descripcion' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Descripcion' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                        </a>
                                     </th>
                                     <th scope="col">
-                                        Clave
+                                        <a class="text-white" href="" ng-click="sortType = 'Status'; sortReverse = !sortReverse">
+                                            Estatus
+                                            <span ng-class="sortType == 'Status' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Status' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                        </a>
                                     </th>
                                     <th scope="col">
-                                        Descripción
+                                        <a class="text-white" href="" ng-click="sortType = 'Coordinador'; sortReverse = !sortReverse">
+                                            Coordinación
+                                            <span ng-class="sortType == 'Coordinador' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Coordinador' && sortReverse ? 'fa fa-arrow-up': ''"></span>
+                                        </a>
                                     </th>
+
+                                    <th style="text-align:center"><em class="fa fa-cog"></em></th>
                                 </tr>
                             </thead>
-                            <tbody ng-pagination="i in ctrl.GridUnidadesAsignadasView | filter:ctrl.buscarModal | itemsPerPage: 5 " pagination-id="PaginationGridUnidadesAsignadasView">
-                                <tr class="text-center cursor-pointer" ng-click="ctrl.getIdUA(i.Id, i.Descripcion); AA= ctrl.DescripcionUA" ng-class="{'light-blue darken-1 text-white': AA == ctrl.DescripcionUA}">
+                            <tbody ng-pagination="i in ctrl.GridUnidadesDisponiblesView | filter:ctrl.buscarModal | itemsPerPage: 5" pagination-id="PaginationGridUnidadesDisponiblesView">
+                                <tr tr class="text-center cursor-pointer" ng-click="ctrl.getIdUA(i.Id, i.Descripcion); AA= ctrl.DescripcionUA" ng-class="{'light-blue darken-1 text-white': AA == ctrl.DescripcionUA}">
                                     <td>{{i.Id}}</td>
-                                    <td>{{i.Dependencia}}</td>
-                                    <td>{{i.Clave}}</td>
+                                    <td>{{i.Dependencia}}</td>                                  
                                     <td>{{i.Descripcion}}</td>
-
+                                    <td>{{i.Status}}</td>
+                                    <td>{{i.Coordinador}}</td>                                   
                                 </tr>
                             </tbody>
                             <tfoot>
@@ -62,11 +76,11 @@
                             <span ng-show="!ctrl.DescripcionUA" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                         </span>
                     </div>
-                    <ng-pagination-control boundary-links="true" pagination-id="PaginationGridUnidadesAsignadasView"></ng-pagination-control>
+                    <ng-pagination-control boundary-links="true" pagination-id="PaginationGridUnidadesDisponiblesView"></ng-pagination-control>
                     <!------------------------------------------------------------------>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="ctrl.close(modalFormUA)">Cerrar</button>
-                        <button type="button" title="Guardar Unidad" class="btn btn-primary" ng-disabled="modalFormUA.$invalid">Guardar</button>
+                        <button type="button" title="Guardar Unidad" class="btn btn-primary" ng-disabled="modalFormUA.$invalid" ng-click="ctrl.SaveUA(i.Id); ctrl.close(modalFormAA)">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -134,7 +148,7 @@
 
         <!---------------------------------------------------------------------------------------------------->
 
-        <div class="table-responsive"  style="box-shadow: 10px 40px 96px rgba(0,0,0,.3)">
+        <div class="table-responsive "  >
             <table class="table table-hover ">
                 <thead class="light-blue darken-3 text-white">
                     <tr class="text-center">
@@ -178,7 +192,7 @@
                         <th style="text-align:center"><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
-                <tbody ng-pagination="i in ctrl.GridUnidadesDisponiblesView | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status | itemsPerPage: 5 " pagination-id="PaginationGridUnidadesDisponiblesView">
+                <tbody ng-pagination="i in ctrl.GridUnidadesAsignadasView | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status | itemsPerPage: 5 " pagination-id="PaginationGridUnidadesAsignadasView">
                     <tr class="text-center">
                         <td>{{i.Id}}</td>
                         <td>{{i.Dependencia}}</td>
@@ -189,7 +203,7 @@
 
 
                         <td style="text-align:center">
-                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar" ng-click="ctrl.EliminnarUR(i.Id)" style="width:50px">
+                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar" ng-click="ctrl.EliminnarUA(i.Id)" style="width:50px">
                                 <i class="fa fa-eraser" aria-hidden="true"></i>
                             </button>
                         </td>
@@ -198,7 +212,7 @@
                 <tfoot>
                     <tr>
                         <th colspan="5">
-                            <ng-pagination-control boundary-links="true" pagination-id="PaginationGridUnidadesDisponiblesView"></ng-pagination-control>
+                            <ng-pagination-control boundary-links="true" pagination-id="PaginationGridUnidadesAsignadasView"></ng-pagination-control>
                         </th>
                         <th style="text-align:center" colspan="2">
                             <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">

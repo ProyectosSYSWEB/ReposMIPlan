@@ -123,7 +123,7 @@
                 },
                 error: function (ex) {
                     if (callBackResult != undefined) {
-                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en  GridUnidadesDisponibles." });
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en  GridUnidadesAsignadas." });
                     }
                 }
             });
@@ -133,8 +133,62 @@
 /********************************************************************************************************************************************************/
 
 
+    GuardarUnidadesAsignadas: function (Id, Usuario, callBackResult) {      
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'Catalogo/GuardarUnidadesAsignadas',
+                data: { Id, Usuario },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                      
+                        if (callBackResult != undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
 
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult != undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en  GuardarUnidadesAsignadas." });
+                    }
+                }
+            });
 
+    },
 
+/********************************************************************************************************************************************************/
+
+    EliminarUnidadAignada: function (IdUnidad, callBackResult) {
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'Catalogo/EliminarUnidadAignada',
+                data: { IdUnidad },
+                success: function (resp) {
+                    if (resp.Error == false) {
+
+                        if (callBackResult != undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult != undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en  EliminarUnidadAignada." });
+                    }
+                }
+            });
+
+    },
+
+/********************************************************************************************************************************************************/
 
 };

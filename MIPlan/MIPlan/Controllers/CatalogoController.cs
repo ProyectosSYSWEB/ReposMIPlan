@@ -1409,6 +1409,65 @@ namespace MIPlan.Controllers
             }
         }
 
+        public JsonResult GuardarUnidadesAsignadas(int Id, string Usuario)
+        {
+            ResultadoUnidad objResultado = new ResultadoUnidad();
+            try
+            {
+                string Verificador = string.Empty;              
+                GuardarDataContext.GuardarUnidadesAsignadas(Id, Usuario, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult EliminarUnidadAignada(int IdUnidad)
+        {
+            Unidades objUnidad = new Unidades();
+            ResultadoUnidad objResultado = new ResultadoUnidad();
+            string Verificador = string.Empty;
+            try
+            {                
+                GuardarDataContext.EliminarUnidadAignada(IdUnidad, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         /**/
         public ActionResult ReporteAreasAtencionPdf(string Dependencia)

@@ -351,7 +351,7 @@
     <!-------http://localhost:53805/PlanTrabajo/GuardarUnidadesResp?Id_Actividades=1&Id_Unidad=7-->
     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <!-- Modal Areas de Atencion Gird-->
-    <div class="modal fade bd-example-modal-lg" data-keyboard="false" data-backdrop="static" id="ModalAreasDeAtencion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" data-keyboard="false" data-backdrop="static" id="ModalAreasDeAtencion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form name="modalFormAA" novalidate>
@@ -376,7 +376,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody ng-pagination="i in ctrl.ObtenerModalGridAreasAtencionView | filter: ModalF|  itemsPerPage: 10" pagination-id="PaginationModalAR">
+                            <tbody ng-pagination="i in ctrl.ObtenerModalGridAreasAtencionView | filter: ModalF|  itemsPerPage: 6" pagination-id="PaginationModalAR">
                                 <tr ng-click="ctrl.getIdAA(i.Id_Plan, i.Id_Area, i.Descripcion); AA= ctrl.DescripcionAA" ng-class="{'light-blue darken-1  text-white': AA == ctrl.DescripcionAA}" class="cursor-pointer">
                                     <td>{{i.Id_Plan}}</td>
                                     <td>{{i.Id_Area}}</td>
