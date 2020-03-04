@@ -274,7 +274,7 @@
         };
 
 
-        this.PdfReportAreas = function () {
+        this.PdfReportBasicos = function () {
             var xhr = new XMLHttpRequest();
             var ruta = urlServer + 'Catalogo/ReporteBasicosPdf';
             xhr.responseType = 'blob';

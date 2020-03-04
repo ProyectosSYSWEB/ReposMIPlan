@@ -211,6 +211,12 @@
       <DependentUpon>ReporteAreasAtencionPdf.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="reports\ReporteAcreditadoresPdf.cs">
+      <DependentUpon>ReporteAcreditadoresPdf.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="reports\ReporteIndicadoresPdf.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1388,6 +1394,10 @@
     <EmbeddedResource Include="reports\ReporteAreasAtencionPdf.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteAreasAtencionPdf.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reports\ReporteAcreditadoresPdf.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteAcreditadoresPdf.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="reports\ReporteIndicadoresPdf.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
