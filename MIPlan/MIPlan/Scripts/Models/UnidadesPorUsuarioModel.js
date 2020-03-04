@@ -160,15 +160,45 @@
 
     },
 
+    /********************************************************************************************************************************************************/
+
+
+    GuardarTodasUD: function ( Usuario, callBackResult) {
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'Catalogo/GuardarTodasUD',
+                data: { Usuario },
+                success: function (resp) {
+                    if (resp.Error == false) {
+
+                        if (callBackResult != undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult != undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en  GuardarTodasUD." });
+                    }
+                }
+            });
+
+    },
+
 /********************************************************************************************************************************************************/
 
-    EliminarUnidadAignada: function (IdUnidad, callBackResult) {
+    EliminarUnidadAignada: function (IdUnidad, Usuario, callBackResult) {
         $.ajax(
             {
                 type: 'GET',
                 cache: false,
                 url: urlServer + 'Catalogo/EliminarUnidadAignada',
-                data: { IdUnidad },
+                data: { IdUnidad, Usuario },
                 success: function (resp) {
                     if (resp.Error == false) {
 
@@ -190,5 +220,32 @@
     },
 
 /********************************************************************************************************************************************************/
+    EliminarTodasUnidadAignada: function (Usuario, callBackResult) {
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'Catalogo/EliminarTodasUnidadAignada',
+                data: { Usuario },
+                success: function (resp) {
+                    if (resp.Error == false) {
 
+                        if (callBackResult != undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult != undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en  EliminarTodasUnidadAignada." });
+                    }
+                }
+            });
+
+    },
+
+/********************************************************************************************************************************************************/
 };

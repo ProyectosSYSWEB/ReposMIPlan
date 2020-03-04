@@ -455,15 +455,15 @@ namespace MIPlan.Data
                 exeProc.LimpiarOracleCommand(ref cmd);
             }
         }
-        public static void EliminarUnidadAignada(int IdUnidad, ref string Verificador)
+        public static void EliminarUnidadAignada(int IdUnidad, string Usuario, ref string Verificador)
         {
             OracleCommand cmd = null;
             ExeProcedimiento exeProc = new ExeProcedimiento();
             try
             {
                 OracleDataReader dr = null;
-                string[] Parametros = { "P_ID_UNIDAD" };
-                object[] Valores = { IdUnidad };
+                string[] Parametros = { "P_ID_UNIDAD", "P_USUARIO" };
+                object[] Valores = { IdUnidad, Usuario };
                 string[] ParametrosOut = { "P_BANDERA" };
                 cmd = exeProc.GenerarOracleCommand("DEL_PLA_UNIDADES_USUARIO", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
             }
@@ -477,6 +477,57 @@ namespace MIPlan.Data
             }
         }
 
+        public static void GuardarTodasUD(List<Unidades> objResultado, string Usuario, ref string Verificador)
+        {
+            for (int i = 0; i < objResultado.Count; i++)
+            {
+
+                OracleCommand cmd = null;
+                ExeProcedimiento exeProc = new ExeProcedimiento();
+                try
+                {
+                    OracleDataReader dr = null;
+                    string[] Parametros = { "P_ID", "P_USUARIO" };
+                    object[] Valores = { objResultado[i].Id, Usuario };
+                    string[] ParametrosOut = { "P_BANDERA" };
+                    cmd = exeProc.GenerarOracleCommand("INS_PLA_UNIDADES_USUARIO", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+                }
+                catch (Exception ex)
+                {
+                    Verificador = ex.Message;
+                }
+                finally
+                {
+                    exeProc.LimpiarOracleCommand(ref cmd);
+                }
+            }
+
+        }
+
+        public static void EliminarTodasUnidadAignada(List<Unidades>  objResultado, string Usuario, ref string Verificador)
+        {
+            for (int i = 0; i < objResultado.Count; i++)
+            {
+                OracleCommand cmd = null;
+                ExeProcedimiento exeProc = new ExeProcedimiento();
+                try
+                {
+                    OracleDataReader dr = null;
+                    string[] Parametros = { "P_ID_UNIDAD", "P_USUARIO" };
+                    object[] Valores = { objResultado[i].Id, Usuario };
+                    string[] ParametrosOut = { "P_BANDERA" };
+                    cmd = exeProc.GenerarOracleCommand("DEL_PLA_UNIDADES_USUARIO", ref Verificador, ref dr, Parametros, Valores, ParametrosOut);
+                }
+                catch (Exception ex)
+                {
+                    Verificador = ex.Message;
+                }
+                finally
+                {
+                    exeProc.LimpiarOracleCommand(ref cmd);
+                }
+            }
+        }
 
     }
 }

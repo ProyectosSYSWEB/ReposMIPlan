@@ -65,9 +65,9 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.GridUnidadesAsignadasView = catalogoContext.GridUnidadesAsignadasLST;
-                        if (self.GridUnidadesAsignadasView.length > 0) {
+                        if (self.GridUnidadesAsignadasView.length > 0 || self.GridUnidadesAsignadasView.length == 0) {
                             document.getElementById("loading").style.opacity = 0;
-                        }
+                        }                      
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -105,19 +105,103 @@
         };       
       
     /********************************************************************************************************************************************************/
-        this.SaveUA = function () {          
-            GuardarUnidadesAsignadas();
+        this.SaveUA = function (Id) {          
+            GuardarUnidadesAsignadas(Id);
         }
-        var GuardarUnidadesAsignadas = function () {         
-            catalogoContext.GuardarUnidadesAsignadas(self.Id ,self.Usuario.Usuario, function (resp) {
+        var GuardarUnidadesAsignadas = function (Id) {         
+            catalogoContext.GuardarUnidadesAsignadas(Id ,self.Usuario.Usuario, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                       
                         Swal.fire(
                             '¡Listo!',
-                            '¡Se han actualizado los datos correctamente!',
+                            '¡Se han guardado los datos correctamente!',
                             'success'
                         )
+                        GridUnidadesDisponibles();
+                        GridUnidadesAsignadas();
+
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+                $('button').tooltip();
+            });
+        };
+        /********************************************************************************************************************************************************/
+        this.SaveAllUA = function () {            
+            Swal.fire({
+                title: '¿Seguro que Desea Todos Los Resgistros?',
+                text: "Se agregarán todas las unidades disponibles",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'No, Cancelar',
+                confirmButtonText: 'Si, Quiero Agregarlos'
+            }).then((result) => {
+                if (result.value) {
+                    GuardarTodasUD();
+                }
+            })
+        }
+        var GuardarTodasUD = function () {
+            catalogoContext.GuardarTodasUD(self.Usuario.Usuario, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+
+                        Swal.fire(
+                            '¡Listo!',
+                            '¡Se han guardado los datos correctamente!',
+                            'success'
+                        )                        
+                        GridUnidadesAsignadas();
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral;
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+                $('button').tooltip();
+            });
+        };
+        /********************************************************************************************************************************************************/
+        this.DelAllUA = function () {
+            Swal.fire({
+                title: '¿Seguro que Desea Eliminar Los Resgistros Para el Usuario Actual?',
+                text: "Se eliminaran todas las unidades disponibles",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'No, Cancelar',
+                confirmButtonText: 'Si, Quiero Eliminarlos'
+            }).then((result) => {
+                if (result.value) {
+                    EliminarTodasUnidadAignada();
+                }
+            })
+        }
+        var EliminarTodasUnidadAignada = function () {
+            catalogoContext.EliminarTodasUnidadAignada(self.Usuario.Usuario, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+
+                        Swal.fire(
+                            '¡Listo!',
+                            '¡Se han eliminado los datos correctamente!',
+                            'success'
+                        )                        
                         GridUnidadesAsignadas();
                         break;
                     case "notgp":
@@ -134,7 +218,7 @@
         };
         /********************************************************************************************************************************************************/
         var EliminarUnidadAignada = function (Idunidad) {
-            catalogoContext.EliminarUnidadAignada(Idunidad, function (resp) {
+            catalogoContext.EliminarUnidadAignada(Idunidad, self.Usuario.Usuario, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         Swal.fire(
@@ -179,7 +263,7 @@
         };
 /********************************************************************************************************************************************************/
         this.getIdUA = function (Id, Descripcion) {
-            self.Id = Id;            
+            //xself.Id = Id;            
             self.DescripcionUA = Descripcion;
         }
 

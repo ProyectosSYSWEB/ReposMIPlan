@@ -1364,7 +1364,7 @@ namespace MIPlan.Controllers
                     list = Data.PlanTrabajo.CursorDataContext.GridUnidadesDisponibles(NombreUsuario);
                     objResultado.Error = false;
                     objResultado.MensajeError = string.Empty;                     
-                    //Session["QuitarUnidadG"] = list;
+                    Session["AddUD"] = list;
                     list = list.OrderBy(x => x.Id).ToList();
                     objResultado.Resultado = list;
         
@@ -1380,7 +1380,38 @@ namespace MIPlan.Controllers
 
             }
         }
-
+        public JsonResult GuardarTodasUD(string Usuario)
+        {
+            ResultadoUnidad objResultado = new ResultadoUnidad();
+            List<Unidades> list = new List<Unidades>();                     
+            try
+            {
+                string Verificador = string.Empty;                
+                list = (List<Unidades>)Session["AddUD"];
+                Session["AddUD"] = null;                
+                GuardarDataContext.GuardarTodasUD(list, Usuario, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
         public JsonResult GridUnidadesAsignadas(string NombreUsuario)
         {
             List<Unidades> list = new List<Unidades>();
@@ -1392,7 +1423,7 @@ namespace MIPlan.Controllers
                 list = Data.PlanTrabajo.CursorDataContext.GridUnidadesAsignadas(NombreUsuario);
                 objResultado.Error = false;
                 objResultado.MensajeError = string.Empty;
-                //Session["QuitarUnidadG"] = list;
+                Session["DelUA"] = list;
                 list = list.OrderBy(x => x.Id).ToList();
                 objResultado.Resultado = list;
 
@@ -1438,14 +1469,46 @@ namespace MIPlan.Controllers
                 return Json(objResultado, JsonRequestBehavior.AllowGet);
             }
         }
-        public JsonResult EliminarUnidadAignada(int IdUnidad)
+        public JsonResult EliminarTodasUnidadAignada(string Usuario)
+        {
+            ResultadoUnidad objResultado = new ResultadoUnidad();
+            List<Unidades> list = new List<Unidades>();
+            try
+            {
+                string Verificador = string.Empty;
+                list = (List<Unidades>)Session["DelUA"];
+                Session["DelUA"] = null;                
+                GuardarDataContext.EliminarTodasUnidadAignada(list, Usuario, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objResultado.Error = false;
+                    objResultado.MensajeError = "";
+                    objResultado.Resultado = null;
+                }
+                else
+                {
+                    objResultado.Error = true;
+                    objResultado.MensajeError = Verificador;
+                    objResultado.Resultado = null;
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult EliminarUnidadAignada(int IdUnidad, string Usuario)
         {
             Unidades objUnidad = new Unidades();
             ResultadoUnidad objResultado = new ResultadoUnidad();
             string Verificador = string.Empty;
             try
             {                
-                GuardarDataContext.EliminarUnidadAignada(IdUnidad, ref Verificador);
+                GuardarDataContext.EliminarUnidadAignada(IdUnidad, Usuario, ref Verificador);
                 if (Verificador == "0")
                 {
                     objResultado.Error = false;
