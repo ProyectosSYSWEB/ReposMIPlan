@@ -50,7 +50,7 @@
                 data: { Dependencia },
                 success: function (resp) {
                     for (var i = 0; i < resp.Resultado.length; i++) {
-                        self.carreralst.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion, Carrera: resp.Resultado[i].Carrera });
+                        self.carreralst.push({ Id: resp.Resultado[i].Id, Descripcion: resp.Resultado[i].Descripcion, Carrera: resp.Resultado[i].Carrera});
                     }
                     if (callBackResult != undefined) {
                         callBackResult({ ressult: 'tgp', message: null });
