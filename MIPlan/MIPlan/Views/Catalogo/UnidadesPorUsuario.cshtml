@@ -51,8 +51,6 @@
                                             <span ng-class="sortType == 'Coordinador' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Coordinador' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                                         </a>
                                     </th>
-
-                                    <th style="text-align:center"><em class="fa fa-cog"></em></th>
                                 </tr>
                             </thead>
                             <tbody ng-pagination="i in ctrl.GridUnidadesDisponiblesView | filter:ctrl.buscarModal | itemsPerPage: 5" pagination-id="PaginationGridUnidadesDisponiblesView">
