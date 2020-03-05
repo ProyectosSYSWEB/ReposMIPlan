@@ -118,16 +118,16 @@
                     <br />
                     <br />
                     <br />
-                    <button type="button" class="btn btn-outline-primary" ng-click="ctrl.SaveUA()">></button>
+                    <button type="button" title="Agregar" class="btn btn-outline-primary" ng-disabled="!ctrl.IdUA" ng-click="ctrl.SaveUA()">></button>
                     <br />
                     <br />
-                    <button type="button" class="btn btn-outline-primary" ng-click="ctrl.EliminnarUA()"><</button>
+                    <button type="button" title="Eliminar" class="btn btn-outline-primary" ng-disabled="!ctrl.IdUD" ng-click="ctrl.EliminnarUA()"><</button>
                     <br />
                     <br />
-                    <button type="button" class="btn btn-outline-primary" ng-click="ctrl.SaveAllUA()">>></button>
+                    <button type="button" title="Agregar Todas" class="btn btn-outline-primary" ng-disabled="ctrl.GridUnidadesDisponiblesView == 0 || !ctrl.GridUnidadesDisponiblesView" ng-click="ctrl.SaveAllUA()">>></button>
                     <br />
                     <br />
-                    <button type="button" class="btn btn-outline-primary" ng-click="ctrl.DelAllUA()"><<</button>
+                    <button type="button" title="Eliminar Todas" class="btn btn-outline-primary" ng-disabled="ctrl.GridUnidadesAsignadasView == 0 || !ctrl.GridUnidadesAsignadasView " ng-click="ctrl.DelAllUA()"><<</button>
 
 
                 </div>

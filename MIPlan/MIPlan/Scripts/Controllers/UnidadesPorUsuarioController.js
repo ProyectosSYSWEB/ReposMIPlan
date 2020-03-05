@@ -94,7 +94,7 @@
                 switch (resp.ressult) {
                     case "tgp":
                         self.GridUnidadesDisponiblesView = catalogoContext.GridUnidadesDisponiblesLST;   
-                        if (self.GridUnidadesDisponiblesView.length > 0 || self.GridUnidadesAsignadasView.length == 0) {
+                        if (self.GridUnidadesDisponiblesView.length > 0 || self.GridUnidadesDisponiblesView.length == 0) {
                             document.getElementById("loading2").style.opacity = 0;
                         }        
                         break;
@@ -127,7 +127,7 @@
                         )
                         GridUnidadesDisponibles();
                         GridUnidadesAsignadas();
-
+                        self.IdUA = null;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -174,7 +174,8 @@
                         )       
                         GridUnidadesDisponibles();
                         GridUnidadesAsignadas();
-                       
+                        self.IdUA = null;
+                        self.IdUD = null;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -220,7 +221,8 @@
                         )                
                         GridUnidadesDisponibles();
                         GridUnidadesAsignadas();
-                       
+                        self.IdUA = null;
+                        self.IdUD = null;
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -246,7 +248,7 @@
                         );
                         GridUnidadesDisponibles();
                         GridUnidadesAsignadas();
-                       
+                        self.IdUD = null;
                         break;
                     case "notgp":
                         Swal.fire(
