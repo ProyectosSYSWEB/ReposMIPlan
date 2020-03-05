@@ -11,89 +11,6 @@
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="ModalUA" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <form name="modalFormUA" novalidate>
-                    <div class="modal-header text-white" style="background-color: #01579b;">
-                        <h5 class="modal-title" id="exampleModalLabelUR">Unidades Asignadas</h5>
-                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" ng-click="ctrl.close(modalFormAA)">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <!------------------------CUERPO DE LA TABLA------------------------------------------>
-                    <div class="modal-body">
-                        <table class="table table-hover">
-                            <thead class="light-blue darken-3 text-white">
-                                <tr class="text-center">
-                                    <th scope="col">
-                                        Id
-                                    </th>
-                                    <th scope="col">
-                                        Dependencia
-                                    </th>
-                                    <th scope="col">
-                                        <a class="text-white" href="" ng-click="sortType = 'Descripcion'; sortReverse = !sortReverse">
-                                            Descripción
-                                            <span ng-class="sortType == 'Descripcion' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Descripcion' && sortReverse ? 'fa fa-arrow-up': ''"></span>
-                                        </a>
-                                    </th>
-                                    <th scope="col">
-                                        <a class="text-white" href="" ng-click="sortType = 'Status'; sortReverse = !sortReverse">
-                                            Estatus
-                                            <span ng-class="sortType == 'Status' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Status' && sortReverse ? 'fa fa-arrow-up': ''"></span>
-                                        </a>
-                                    </th>
-                                    <th scope="col">
-                                        <a class="text-white" href="" ng-click="sortType = 'Coordinador'; sortReverse = !sortReverse">
-                                            Coordinación
-                                            <span ng-class="sortType == 'Coordinador' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Coordinador' && sortReverse ? 'fa fa-arrow-up': ''"></span>
-                                        </a>
-                                    </th>
-                                    <th style="text-align:center"><em class="fa fa-cog"></em></th>
-                                </tr>                            
-                            </thead>
-                            <tbody ng-pagination="i in ctrl.GridUnidadesDisponiblesView | filter:ctrl.buscarModal | itemsPerPage: 5" pagination-id="PaginationGridUnidadesDisponiblesView">
-                                <tr tr class="cursor-pointer" ng-click="ctrl.getIdUA(i.Id, i.Descripcion); AA= ctrl.DescripcionUA" ng-class="{'light-blue darken-1 text-white': AA == ctrl.DescripcionUA}">
-                                    <td>{{i.Id}}</td>
-                                    <td>{{i.Dependencia}}</td>
-                                    <td>{{i.Descripcion}}</td>
-                                    <td>{{i.Status}}</td>
-                                    <td>{{i.Coordinador}}</td>
-                                    <td style="text-align:center">
-                                        <button type="button"   class="btn btn-success"  ng-click="ctrl.SaveUA(i.Id)" style="width:50px">
-                                            <i class="fa fa-plus" aria-hidden="true"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                            </tfoot>
-                        </table>
-                    </div>
-                    <div class="row justify-content-center">
-                        <input type="text" id="inputDescripcionUA" class="d-none" name="Desc" ng-model="ctrl.DescripcionUA" required>
-                    </div>
-                    <div class="row justify-content-center">
-                        <span class="messages check-element animate-show-hide" ng-show="modalFormAA.$submitted || modalFormAA.Desc.$touched">
-                            <span ng-show="!ctrl.DescripcionUA" class="text-danger check-element animate-show-hide">Campo Requerido</span>
-                        </span>
-                    </div>
-                    <ng-pagination-control boundary-links="true" pagination-id="PaginationGridUnidadesDisponiblesView"></ng-pagination-control>
-                    <!------------------------------------------------------------------>
-                    <div class="modal-footer">
-                        <button type="button" title="Guardar todas las unidades" class="btn btn-warning" ng-click="ctrl.SaveAllUA()"> Agregar Todas</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="ctrl.close(modalFormUA)">Cerrar</button>
-                        @*<button type="button" title="Guardar Unidad" class="btn btn-primary" ng-disabled="modalFormUA.$invalid" ng-click="ctrl.SaveUA(i.Id); ctrl.close(modalFormAA)">Guardar</button>*@
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-------------------------------------------------------------------------------------------------------------------------------------------->
-
     <div id="Error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display:none">
         <strong id="Message">¡Ha ocurrido un error! </strong>
         <button type="button" class="close" ng-click="ctrl.DivError()" aria-label="Close">
@@ -110,7 +27,7 @@
                     <label for="" class="font-weight-bold text-primary">
                         Usuario
                     </label>
-                    <select name="" id="" class="form-control border border-primary" ng-change="ctrl.ValorUsuario()" ng-options="option.Usuario for option in ctrl.Usuarios" ng-model="ctrl.Usuario" required>
+                    <select name="" id="" class="form-control border border-primary" ng-change="ctrl.ValorUsuario(); ctrl.AddUA();" ng-options="option.Usuario for option in ctrl.Usuarios" ng-model="ctrl.Usuario" required>
                         <option value="">Seleccionar Usuario...</option>
                     </select>
                 </div>
@@ -132,140 +49,157 @@
             </div>
         </div>
         <!---------------------------------------------------------------------------------------------------->
-        <!---------------------------------------------------------------------------------------------------->
+        <div class="row">
 
 
-
-        <div class="form-group text-center">
-
-            <label for="" class="font-weight-bold text-info">Unidades Asignadas</label>
-
-            <!----------------------------------------------MODAL---------------------------------------------------------------------------------------->
-            <div class="form-group text-right">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-info" title="Agregar Unidad" data-toggle="modal" data-target="#ModalUA" data-backdrop="static" data-keyboard="false" ng-disabled="!ctrl.Usuario.Usuario" ng-click="ctrl.AddUA()">
-                    Agregar
-                </button>
-                <!-------------------------------------------------------------------------------------------------------------------------------------->
-            </div>
-        </div>
-
-
-        <!---------------------------------------------------------------------------------------------------->
-
-        <div class="table-responsive ">
-            <table class="table table-hover ">
-                <thead class="light-blue darken-3 text-white">
-                    <tr class="text-center">
-                        <th scope="col">
-                            <a class="text-white" href="" ng-click="sortType = 'Id'; sortReverse = !sortReverse">
-                                Id
-                                <span ng-class="sortType == 'Id' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Id' && sortReverse ? 'fa fa-arrow-up': ''"></span>
-                            </a>
-                        </th>
-                        <th scope="col">
-                            <a class="text-white" href="" ng-click="sortType = 'Dependencia'; sortReverse = !sortReverse">
-                                Dependencia
-                                <span ng-class="sortType == 'Dependencia' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Dependencia' && sortReverse ? 'fa fa-arrow-up': ''"></span>
-                            </a>
-                        </th>
-                        <th scope="col">
-                            <a class="text-white" href="" ng-click="sortType = 'Clave'; sortReverse = !sortReverse">
-                                Clave
-                                <span ng-class="sortType == 'Clave' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Clave' && sortReverse ? 'fa fa-arrow-up': ''"></span>
-                            </a>
-                        </th>
-                        <th scope="col">
-                            <a class="text-white" href="" ng-click="sortType = 'Descripcion'; sortReverse = !sortReverse">
-                                Descripción
-                                <span ng-class="sortType == 'Descripcion' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Descripcion' && sortReverse ? 'fa fa-arrow-up': ''"></span>
-                            </a>
-                        </th>
-                        <th scope="col">
-                            <a class="text-white" href="" ng-click="sortType = 'Status'; sortReverse = !sortReverse">
-                                Estatus
-                                <span ng-class="sortType == 'Status' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Status' && sortReverse ? 'fa fa-arrow-up': ''"></span>
-                            </a>
-                        </th>
-                        <th scope="col">
-                            <a class="text-white" href="" ng-click="sortType = 'Coordinador'; sortReverse = !sortReverse">
-                                Coordinación
-                                <span ng-class="sortType == 'Coordinador' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Coordinador' && sortReverse ? 'fa fa-arrow-up': ''"></span>
-                            </a>
-                        </th>
-
-                        <th style="text-align:center"><em class="fa fa-cog"></em></th>
-                    </tr>
-                </thead>
-                <tbody ng-pagination="i in ctrl.GridUnidadesAsignadasView | orderBy:sortType:sortReverse | filter:ctrl.buscar | filter:ctrl.Status | itemsPerPage: 5 " pagination-id="PaginationGridUnidadesAsignadasView">
-                    <tr class="text-center">
-                        <td>{{i.Id}}</td>
-                        <td>{{i.Dependencia}}</td>
-                        <td>{{i.Clave}}</td>
-                        <td>{{i.Descripcion}}</td>
-                        <td>{{i.Status}}</td>
-                        <td>{{i.Coordinador}}</td>
-
-
-                        <td style="text-align:center">
-                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar" ng-click="ctrl.EliminnarUA(i.Id)" style="width:50px">
-                                <i class="fa fa-eraser" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="3">
-                            <ng-pagination-control boundary-links="true" pagination-id="PaginationGridUnidadesAsignadasView"></ng-pagination-control>
+            <div class="col-sm-12 col-md-6 col-lg-5 col-xl-5">
+                <br />
+                <br />
+                <label for="" class="text-primary">
+                    Unidades disponibles
+                </label>
+                <br />
+                <br />
+                <table class="table table-hover">
+                    <thead class="light-blue darken-3 text-white">
+                        <tr>
+                            <th scope="col" class="text-white">ID</th>
+                            <th scope="col" class="text-white">Descripción</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody ng-pagination="i in ctrl.GridUnidadesDisponiblesView | filter: UD|  itemsPerPage: 5" pagination-id="PaginationUD">
+                        <tr tr class="cursor-pointer" ng-click="ctrl.getIdUA(i.Id, i.Descripcion); AA= ctrl.DescripcionUA" ng-class="{'light-blue darken-1 text-white': AA == ctrl.DescripcionUA}">
+                            <td>{{i.Id}}</td>
+                            <td>{{i.Descripcion}}</td>
                             
-                        </th>
-                        <th class="text-right" colspan="3">
-                            <button class="btn btn-danger" ng-disabled="!ctrl.Usuario.Usuario" ng-click="ctrl.DelAllUA()">
-                                Eliminar Todos los registros para el usuario: {{ctrl.Usuario.Usuario}}
-                            </button>
-                        </th>
-                        <th class="text-center" colspan="1">                           
-                            <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Generar Reporte en Excel" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
-                                <i class="fa fa-file-excel-o" aria-hidden="true"></i>
-                            </button>
-                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Generar Reporte en PDF" ng-click="ctrl.BorrarImpViatico($index)" style="width:50px">
-                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                            </button>
-                        </th>
-                    </tr>
-                </tfoot>
-            </table>
-            <div id="loading" style="opacity:0;">
-                <div class="d-flex justify-content-center">
-                    <div id="Load" class="spinner-grow text-primary" role="status">
-                        <span class="sr-only">Loading...</span>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="2">
+                                <ng-pagination-control boundary-links="true" pagination-id="PaginationUD"></ng-pagination-control>
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div id="loading" style="opacity:0;">
+                    <div class="d-flex justify-content-center">
+                        <div id="Load" class="spinner-grow text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div id="Load1" class="spinner-grow text-secondary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div id="Load2" class="spinner-grow text-success" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div id="Load3" class="spinner-grow text-danger" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div id="Load4" class="spinner-grow text-warning" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div id="Load5" class="spinner-grow text-info" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div id="Load6" class="spinner-grow text-dark" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
                     </div>
-                    <div id="Load1" class="spinner-grow text-secondary" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                    <div id="Load2" class="spinner-grow text-success" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                    <div id="Load3" class="spinner-grow text-danger" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                    <div id="Load4" class="spinner-grow text-warning" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                    <div id="Load5" class="spinner-grow text-info" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                    <div id="Load6" class="spinner-grow text-dark" role="status">
-                        <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <!---------------------------------------------------------------------------------------------------->
+
+            <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
+                <div class="form-group text-center">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <button type="button" class="btn btn-outline-primary" ng-click="ctrl.SaveUA()">></button>
+                    <br />
+                    <br />
+                    <button type="button" class="btn btn-outline-primary" ng-click="ctrl.EliminnarUA()"><</button>
+                    <br />
+                    <br />
+                    <button type="button" class="btn btn-outline-primary" ng-click="ctrl.SaveAllUA()">>></button>
+                    <br />
+                    <br />
+                    <button type="button" class="btn btn-outline-primary" ng-click="ctrl.DelAllUA()"><<</button>
+
+
+                </div>
+
+            </div>
+            <!---------------------------------------------------------------------------------------------------->
+
+            <div class="col-sm-12 col-md-6 col-lg-5 col-xl-5">
+                <br />
+                <br />
+                <label for="" class="text-primary">
+                    Unidades asignadas
+                </label>
+                <br />
+                <br />
+                <table class="table table-hover">
+                    <thead class="cyan darken-3 text-white">
+                        <tr>
+                            <th scope="col" class="text-white">ID</th>
+                            <th scope="col" class="text-white">Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-pagination="i in ctrl.GridUnidadesAsignadasView | itemsPerPage: 5" pagination-id="PaginationUDNew">
+                        <tr ng-click="ctrl.getIdUDNew(i.Id, i.Descripcion); AA= ctrl.DescripcionUD" ng-class="{'cyan darken-1 text-white': AA == ctrl.DescripcionUD}" class="cursor-pointer">
+                            <th scope="row">{{i.Id}}</th>
+                            <td>{{i.Descripcion}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="2">
+                                <ng-pagination-control boundary-links="true" pagination-id="PaginationUDNew"></ng-pagination-control>
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div id="loading2" style="opacity:0;">
+                    <div class="d-flex justify-content-center">
+                        <div id="Load" class="spinner-grow text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div id="Load1" class="spinner-grow text-secondary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div id="Load2" class="spinner-grow text-success" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div id="Load3" class="spinner-grow text-danger" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div id="Load4" class="spinner-grow text-warning" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div id="Load5" class="spinner-grow text-info" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div id="Load6" class="spinner-grow text-dark" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!---------------------------------------------------------------------------------------------------->
 
-        <!---------------------------------------------------------------------------------------------------->       
+        <br />
+        <br />
+        <br />
     </div>
+</div>
+
 
 </div>
 

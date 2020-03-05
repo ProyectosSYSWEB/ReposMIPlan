@@ -56,9 +56,10 @@
         /********************************************************************************************************************************************************/
         this.ValorUsuario = function () {      
             document.getElementById("loading").style.opacity = 100;           
-            setTimeout(function () {                      
+            setTimeout(function () {
+                self.DescripcionUD = "";
                 GridUnidadesAsignadas();    
-            }, 900);             
+            }, 600);             
         };
         var GridUnidadesAsignadas = function () {
             catalogoContext.GridUnidadesAsignadas(self.Usuario.Usuario, function (resp) {
@@ -82,14 +83,20 @@
             });
         };       
         this.AddUA = function () {
-            self.DescripcionUA = "";
-            GridUnidadesDisponibles();                    
+            self.DescripcionUA = "";                                  
+            document.getElementById("loading2").style.opacity = 100;
+            setTimeout(function () {
+                GridUnidadesDisponibles(); 
+            }, 600);   
         }
         var GridUnidadesDisponibles = function () {
             catalogoContext.GridUnidadesDisponibles(self.Usuario.Usuario, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
-                        self.GridUnidadesDisponiblesView = catalogoContext.GridUnidadesDisponiblesLST;                       
+                        self.GridUnidadesDisponiblesView = catalogoContext.GridUnidadesDisponiblesLST;   
+                        if (self.GridUnidadesDisponiblesView.length > 0 || self.GridUnidadesAsignadasView.length == 0) {
+                            document.getElementById("loading2").style.opacity = 0;
+                        }        
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -105,11 +112,11 @@
         };       
       
     /********************************************************************************************************************************************************/
-        this.SaveUA = function (Id) {          
-            GuardarUnidadesAsignadas(Id);
+        this.SaveUA = function () {          
+            GuardarUnidadesAsignadas();
         }
-        var GuardarUnidadesAsignadas = function (Id) {         
-            catalogoContext.GuardarUnidadesAsignadas(Id ,self.Usuario.Usuario, function (resp) {
+        var GuardarUnidadesAsignadas = function () {
+            catalogoContext.GuardarUnidadesAsignadas(self.IdUA, self.Usuario.Usuario, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                       
@@ -146,8 +153,12 @@
                 cancelButtonText: 'No, Cancelar',
                 confirmButtonText: 'Si, Quiero Agregarlos'
             }).then((result) => {
-                if (result.value) {
+                if (result.value)
+                {
+                    document.getElementById("loading").style.opacity = 100;
+                    document.getElementById("loading2").style.opacity = 100;
                     GuardarTodasUD();
+                  
                 }
             })
         }
@@ -160,8 +171,10 @@
                             '¡Listo!',
                             '¡Se han guardado los datos correctamente!',
                             'success'
-                        )                        
+                        )       
+                        GridUnidadesDisponibles();
                         GridUnidadesAsignadas();
+                       
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -188,7 +201,10 @@
                 confirmButtonText: 'Si, Quiero Eliminarlos'
             }).then((result) => {
                 if (result.value) {
+                    document.getElementById("loading").style.opacity = 100;
+                    document.getElementById("loading2").style.opacity = 100;
                     EliminarTodasUnidadAignada();
+
                 }
             })
         }
@@ -201,8 +217,10 @@
                             '¡Listo!',
                             '¡Se han eliminado los datos correctamente!',
                             'success'
-                        )                        
+                        )                
+                        GridUnidadesDisponibles();
                         GridUnidadesAsignadas();
+                       
                         break;
                     case "notgp":
                         self.mensaje_gral = resp.message;
@@ -217,8 +235,8 @@
             });
         };
         /********************************************************************************************************************************************************/
-        var EliminarUnidadAignada = function (Idunidad) {
-            catalogoContext.EliminarUnidadAignada(Idunidad, self.Usuario.Usuario, function (resp) {
+        var EliminarUnidadAignada = function () {
+            catalogoContext.EliminarUnidadAignada(self.IdUD, self.Usuario.Usuario, function (resp) {
                 switch (resp.ressult) {
                     case "tgp":
                         Swal.fire(
@@ -226,7 +244,9 @@
                             'Se ha eliminado con exito.',
                             'success'
                         );
+                        GridUnidadesDisponibles();
                         GridUnidadesAsignadas();
+                       
                         break;
                     case "notgp":
                         Swal.fire(
@@ -245,7 +265,7 @@
             });
         };
 
-        this.EliminnarUA = function (Indice) {
+        this.EliminnarUA = function () {
             Swal.fire({
                 title: '¿Seguro que Desea Eliminar el Resgistro?',
                 text: "Se Eliminara Permanentemente",
@@ -257,16 +277,19 @@
                 confirmButtonText: 'Si, Quiero Eliminarlo'
             }).then((result) => {
                 if (result.value) {
-                    EliminarUnidadAignada(Indice);
+                    EliminarUnidadAignada();
                 }
             })
         };
 /********************************************************************************************************************************************************/
         this.getIdUA = function (Id, Descripcion) {
-            //xself.Id = Id;            
+            self.IdUA = Id;            
             self.DescripcionUA = Descripcion;
         }
-
+        this.getIdUDNew = function (Id, Descripcion) {
+            self.IdUD = Id;
+            self.DescripcionUD = Descripcion;
+        }
         this.DivError = function () {
             document.getElementById("Error").style.display = "none";
         };
