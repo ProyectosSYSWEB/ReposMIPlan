@@ -3,7 +3,7 @@ var catalogoContext =
 {
     dependenciaslst: [], ListaUnidadResponsableLST: [], ListaEjerciciosLST: [], ListaPlanesLST: [], GridAreasAtencionLST: [], ObtenerModalGridAreasAtencionLST: [],
     GridActividadesLST: [], ObtenerDatosActividadesLST: [], ObtenerProgramasLST: [], GridProgramas: [],
-    GridUnidadesRespLST: [], EditarActividadesLST: [], ObtenerDatosUnidadesRespLST: [], ObtenerComboUnidadesModalLST: [],
+    GridUnidadesRespLST: [], EditarActividadesLST: [], ObtenerDatosUnidadesRespLST: [], ObtenerComboUnidadesModalLST: [], GridUnidadesIndicadoresLST:[],
    
 /********************************************************************************************************************************************************/
     ObtenerDependencias: function (callBackResult) {
@@ -594,4 +594,36 @@ var catalogoContext =
             });
 
     },
+    /********************************************************************************************************************************************************/
+    GridUnidadesIndicadores: function (idActividad, callBackResult) {
+        var self = this;
+        self.GridUnidadesIndicadoresLST.length = 0;
+        $.ajax(
+            {
+                type: 'GET',
+                cache: false,
+                url: urlServer + 'PlanTrabajo/GridIndicadores',
+                data: { idActividad },
+                success: function (resp) {
+                    if (resp.Error == false) {
+                        for (var i = 0; i < resp.Resultado.length; i++) {
+                            self.GridUnidadesIndicadoresLST.push({ Id: resp.Resultado[i].Id, Descripcion1: resp.Resultado[i].Descripcion1, Descripcion2: resp.Resultado[i].Descripcion2, Etiqueta1: resp.Resultado[i].Etiqueta1, Etiqueta2: resp.Resultado[i].Etiqueta2, ValorProgramado1: resp.Resultado[i].ValorProgramado1, ValorProgramado2: resp.Resultado[i].ValorProgramado2, ValorAlcanzado1: resp.Resultado[i].ValorAlcanzado1, ValorAlcanzado2: resp.Resultado[i].ValorAlcanzado2});
+                        }
+                        if (callBackResult !== undefined) {
+                            callBackResult({ ressult: 'tgp', message: null });
+                        }
+                    } else {
+                        callBackResult({ ressult: "notgp", message: resp.MensajeError });
+                    }
+                },
+                error: function (ex) {
+                    if (callBackResult !== undefined) {
+                        callBackResult({ ressult: "notgp", message: "Ocurrio un error al obtener los datos en GridUnidadesResp." });
+                    }
+                }
+            });
+
+    },
+/********************************************************************************************************************************************************/
+
 };

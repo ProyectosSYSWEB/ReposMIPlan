@@ -651,7 +651,7 @@
                                                                 <button type="button" class="btn btn-danger" title="Eliminar" ng-click="ctrl.EliminnarA(i.Id)" style="width:40px"><i class="fa fa-eraser" aria-hidden="true"></i></button>
                                                             </td>
                                                         </tr>
-                                                        <tr id="C-{{i.Id}}" class="collapse cursor-pointer AAT" ng-repeat="j in ctrl.GridActividadesView" ng-click="ctrl.getUR(j.Id, j.Desc_Accion); A= ctrl.DescActividad" ng-class="{'teal lighten-1 text-white ': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === j.Desc_Programa && j.Id_Padre != 0 && j.Id_Padre == i.Id">
+                                                        <tr id="C-{{i.Id}}" class="collapse cursor-pointer AAT text-center" ng-repeat="j in ctrl.GridActividadesView" ng-click="ctrl.getUR(j.Id, j.Desc_Accion); A= ctrl.DescActividad" ng-class="{'teal lighten-1 text-white ': A == ctrl.DescActividad}" ng-if="pro.Desc_Programa === j.Desc_Programa && j.Id_Padre != 0 && j.Id_Padre == i.Id">
                                                             <td><div id="C-{{i.Id}}" class="collapse"></div></td>
                                                             <td title="Descripción:  {{j.Detalles}}"><div id="C-{{i.Id}}" class="collapse"><font size="2">{{j.Desc_Accion}}</font></div></td>
                                                             <td><div id="C-{{i.Id}}" class="collapse"><font size="2">{{j.Fecha_Inicio}}</font></div></td>
@@ -784,50 +784,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="text-center">
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>mdo</td>
-                                            <td>Luis</td>
-                                            <td>joel</td>
-                                            <td>Zaid</td>
-                                            <td>Gerardo</td>
-                                            <td>
-                                                <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
-                                                <button class="btn btn-danger"><i class="fa fa-eraser"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr class="text-center">
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>fat</td>
-                                            <td>Luis</td>
-                                            <td>joel</td>
-                                            <td>Zaid</td>
-                                            <td>Gerardo</td>
-                                            <td>
-                                                <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
-                                                <button class="btn btn-danger"><i class="fa fa-eraser"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr class="text-center">
-                                            <th scope="row">3</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>twitter</td>
-                                            <td>Luis</td>
-                                            <td>joel</td>
-                                            <td>Zaid</td>
-                                            <td>Gerardo</td>
+                                        <tr class="text-center" ng-pagination="i in ctrl.GridUnidadesIndicadoresView |  itemsPerPage: 5" pagination-id="PaginationGridI">
+                                            <td>{{i.Descripcion1}}</td>
+                                            <td>{{i.Descripcion2}}</td>
+                                            <td>{{i.Etiqueta1}}</td>
+                                            <td>{{i.ValorProgramado1}}</td>
+                                            <td>{{i.ValorAlcanzado1}}</td>
+                                            <td>{{i.Etiqueta2}}</td>
+                                            <td>{{i.ValorProgramado2}}</td>
+                                            <td>{{i.ValorAlcanzado2}}</td>
                                             <td>
                                                 <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
                                                 <button class="btn btn-danger"><i class="fa fa-eraser"></i></button>
                                             </td>
                                         </tr>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="9"><dir-pagination-controls boundary-links="true" pagination-id="PaginationGridI"></dir-pagination-controls></th>
 
+                                        </tr>
+                                    </tfoot>
                                 </table>
 
                             </div>

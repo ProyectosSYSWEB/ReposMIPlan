@@ -500,6 +500,34 @@
             });
         };        
         /********************************************************************************************************************************************************/
+        var GridUnidadesIndicadores = function (idActividad) {
+            catalogoContext.GridUnidadesIndicadores(idActividad, function (resp) {
+                switch (resp.ressult) {
+                    case "tgp":
+
+                        self.GridUnidadesIndicadoresView = catalogoContext.GridUnidadesIndicadoresLST;
+                        if (self.GridUnidadesIndicadoresView.length == 0) {
+                            document.getElementById("URAlert").style.display = "block";
+                            self.NoUR = "¡No Existen registros para esta Actividad!";
+                        } else {
+                            document.getElementById("URAlert").style.display = "none";
+                            self.NoUR = "";
+                        }
+                        break;
+                    case "notgp":
+                        self.mensaje_gral = resp.message;
+                        document.getElementById("Error").style.display = "block";
+                        document.getElementById("Message").innerHTML = self.mensaje_gral + " GridUnidadesResp";
+                        break;
+                    default:
+                        break;
+                }
+                $scope.$apply();
+                $('button').tooltip();
+            });
+        };
+        /********************************************************************************************************************************************************/
+        /********************************************************************************************************************************************************/
         this.GridUR = function () {
             document.getElementById("title").className = "modal-header btn-success justify-content-center";
             document.getElementById("TituloURM").innerHTML = "Crear Responsables";
@@ -829,6 +857,7 @@
      
         this.getUR = function (Id, Descripcion) {
             GridUnidadesResp(Id);
+            GridUnidadesIndicadores(Id);
             self.DescActividad = Descripcion;
             self.idActividad = Id;
         }

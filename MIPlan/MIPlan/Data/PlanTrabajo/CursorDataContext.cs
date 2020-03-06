@@ -377,6 +377,64 @@ namespace MIPlan.Data.PlanTrabajo
 
         }
 
+        public static List<PlaIndicadoresModel> ObtenerGridIndicadores(int idActividad)
+        {
+            //s
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+
+            try
+            {
+
+                string[] Parametros = { "P_ID_ACTIVIDAD"};
+                object[] Valores = { idActividad };
+
+                OracleDataReader dr = null;
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Plan_Indicadores", ref dr, Parametros, Valores);
+                List<PlaIndicadoresModel> list = new List<PlaIndicadoresModel>();
+                while (dr.Read())
+                {
+                    PlaIndicadoresModel objUnidadResp = new PlaIndicadoresModel();
+                    objUnidadResp.Id = Convert.ToInt32(dr[6]);
+                    objUnidadResp.Descripcion1 = Convert.ToString(dr[0]);
+                    objUnidadResp.Descripcion2 = Convert.ToString(dr[1]);
+                    objUnidadResp.Etiqueta1 = Convert.ToString(dr[2]);
+                    objUnidadResp.Etiqueta2 = Convert.ToString(dr[4]);
+                    objUnidadResp.ValorProgramado1 = Convert.ToString(dr[3]);
+                    objUnidadResp.ValorProgramado2 = Convert.ToString(dr[5]);
+                    objUnidadResp.ValorAlcanzado1 = Convert.ToString(dr[11]);
+                    objUnidadResp.ValorAlcanzado2 = Convert.ToString(dr[12]);
+
+
+                    //Extras
+                    objUnidadResp.IdActividad = Convert.ToString(dr[7]);
+                    objUnidadResp.IdIndicadr = Convert.ToString(dr[8]);
+                    objUnidadResp.FechaAlcanzado = Convert.ToString(dr[13]);
+                    objUnidadResp.Usuario = Convert.ToString(dr[14]);
+                    objUnidadResp.Ejercicio = Convert.ToString(dr[15]);
+                    objUnidadResp.PeriodoLectivo = Convert.ToString(dr[16]);
+
+
+
+
+
+                    list.Add(objUnidadResp);
+                }
+                return list;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
+        }
+
 
     }
 }

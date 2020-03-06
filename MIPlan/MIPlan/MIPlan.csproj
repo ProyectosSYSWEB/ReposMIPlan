@@ -182,6 +182,7 @@
     <Compile Include="Models\Comun.cs" />
     <Compile Include="Models\Indicadores.cs" />
     <Compile Include="Models\MENU.cs" />
+    <Compile Include="Models\PlaIndicadoresModel.cs" />
     <Compile Include="Models\PlanModel.cs" />
     <Compile Include="Models\ResponsableModel.cs" />
     <Compile Include="Models\Resultado.cs" />

@@ -691,6 +691,31 @@ namespace MIPlan.Controllers
             }
         }
         /********************************************************************************************************************************************************/
+        public JsonResult GridIndicadores(int idActividad)/**/
+        {
+            List<PlaIndicadoresModel> list = new List<PlaIndicadoresModel>();
+            ResultadoPlaIndicadores objResultado = new ResultadoPlaIndicadores();
+            string Verificador = string.Empty;
+          
 
+            try
+            {
+
+
+                list = Data.PlanTrabajo.CursorDataContext.ObtenerGridIndicadores(idActividad);
+                objResultado.Error = false;
+                objResultado.MensajeError = string.Empty;
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+
+            }
+        }
     }
 }
