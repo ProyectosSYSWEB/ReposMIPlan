@@ -16,14 +16,14 @@ namespace MIPlan.reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class ReporteAcreditadoresPdf : ReportClass {
+    public class ReporteAcreditacionesPdf : ReportClass {
         
-        public ReporteAcreditadoresPdf() {
+        public ReporteAcreditacionesPdf() {
         }
         
         public override string ResourceName {
             get {
-                return "ReporteAcreditadoresPdf.rpt";
+                return "ReporteAcreditacionesPdf.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace MIPlan.reports {
         
         public override string FullResourceName {
             get {
-                return "MIPlan.reports.ReporteAcreditadoresPdf.rpt";
+                return "MIPlan.reports.ReporteAcreditacionesPdf.rpt";
             }
             set {
                 // Do nothing
@@ -66,7 +66,7 @@ namespace MIPlan.reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -74,7 +74,7 @@ namespace MIPlan.reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection2 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,7 +82,7 @@ namespace MIPlan.reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
             get {
                 return this.ReportDefinition.Sections[4];
             }
@@ -90,57 +90,17 @@ namespace MIPlan.reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection2 {
-            get {
-                return this.ReportDefinition.Sections[5];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
-            get {
-                return this.ReportDefinition.Sections[6];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
-            get {
-                return this.ReportDefinition.Sections[7];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
-            get {
-                return this.ReportDefinition.Sections[8];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Categoria {
+        public CrystalDecisions.Shared.IParameterField Parameter_P_Dependencia {
             get {
                 return this.DataDefinition.ParameterFields[0];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Subtipo {
-            get {
-                return this.DataDefinition.ParameterFields[1];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedReporteAcreditadoresPdf : Component, ICachedReport {
+    public class CachedReporteAcreditacionesPdf : Component, ICachedReport {
         
-        public CachedReporteAcreditadoresPdf() {
+        public CachedReporteAcreditacionesPdf() {
         }
         
         [Browsable(false)]
@@ -177,7 +137,7 @@ namespace MIPlan.reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            ReporteAcreditadoresPdf rpt = new ReporteAcreditadoresPdf();
+            ReporteAcreditacionesPdf rpt = new ReporteAcreditacionesPdf();
             rpt.Site = this.Site;
             return rpt;
         }
