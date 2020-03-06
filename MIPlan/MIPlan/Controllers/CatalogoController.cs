@@ -26,10 +26,10 @@ namespace MIPlan.Controllers
             return View();
         }
 
-        public ActionResult BasicosRegistro()
-        {
-            return View();
-        }
+        //public ActionResult BasicosRegistro()
+        //{
+        //    return View();
+        //}
         public ActionResult Acreditadores()
         {
             return View();
@@ -49,10 +49,10 @@ namespace MIPlan.Controllers
         {
             return View();
         }
-        public ActionResult AcreditadoresRegistro()
-        {
-            return View();
-        }
+        //public ActionResult AcreditadoresRegistro()
+        //{
+        //    return View();
+        //}
 
         public ActionResult AreasAtencion()
         {

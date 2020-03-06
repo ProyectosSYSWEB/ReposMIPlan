@@ -216,11 +216,11 @@
                         <td>{{i.Status}}</td>
 
                         <td style="text-align:right">
-                            <button type="button" id="Actualizar" class="btn btn-primary"  title="Editar"  data-toggle="modal" data-target="#basicos" data-backdrop="static" data-keyboard="false" data-html="true" ng-click="ctrl.ObtenerDatos(i.Id)" style="width:50px">
+                            <button type="button" id="Actualizar" class="btn btn-primary" style="width:50px" data-toggle="modal" data-target="#basicos" data-backdrop="static" data-keyboard="false" data-toggle="tooltip" data-placement="top" title="Editar" ng-click="ctrl.ObtenerDatos(i.Id)">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
-                            <button type="button" class="btn btn-danger" title="Eliminar" ng-click="ctrl.Eliminar(i.Id)" style="width:50px">
-                                <i class="fa fa-eraser" data-placement="top" aria-hidden="true"></i>
+                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar" ng-click="ctrl.Eliminar(i.Id)" style="width:50px">
+                                <i class="fa fa-eraser" aria-hidden="true"></i>
                             </button>
                         </td>
                     </tr>
@@ -274,4 +274,7 @@
 
     });
 </script>
+
+
+
 

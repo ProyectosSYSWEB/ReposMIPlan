@@ -1348,9 +1348,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\_LayoutContenido.cshtml" />
-    <Content Include="Views\Catalogo\BasicosRegistro.cshtml" />
     <Content Include="Views\Catalogo\Acreditadores.cshtml" />
-    <Content Include="Views\Catalogo\AcreditadoresRegistro.cshtml" />
     <Content Include="Views\Catalogo\AreasAtencion.cshtml" />
     <Content Include="Views\Catalogo\UnidadesResponsables.cshtml" />
     <Content Include="Views\Catalogo\Periodos.cshtml" />
