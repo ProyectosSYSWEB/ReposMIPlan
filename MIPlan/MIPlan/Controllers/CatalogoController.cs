@@ -1618,7 +1618,7 @@ namespace MIPlan.Controllers
             Response.ClearHeaders();
             Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.ExcelWorkbook);
             stream.Seek(0, SeekOrigin.Begin);
-            return File(stream, "application/xls");
+            return File(stream, "application / vnd.openxmlformats - officedocument.spreadsheetml.sheet", "FichaRef.xlsx");
         }
 
         /* Fin EXCEL */
