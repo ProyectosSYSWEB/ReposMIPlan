@@ -79,7 +79,7 @@ namespace MIPlan.Data
         }
         public static List<Comun> ObtenerDependencias(string Usuario)
         {
-            string[] Parametros = { "p_tipo" };
+            string[] Parametros = { "p_usuario" };
             object[] Valores = { Usuario };
             var Lista = ExeProcedimiento.GenerarOracleCommandCursor_Combo("PKG_PLANEACION.Obt_Combo_Dependencia", Parametros, Valores);
             return Lista;
@@ -344,7 +344,7 @@ namespace MIPlan.Data
                 {
                     UnidadesResponsables objrUnidades = new UnidadesResponsables();
                     objrUnidades.Id = Convert.ToInt32(dr[0]);
-                    objrUnidades.Dependecia = Convert.ToString(dr[1]);
+                    objrUnidades.Dependencia = Convert.ToString(dr[1]);
                     objrUnidades.Clave = Convert.ToString(dr[2]);
                     objrUnidades.Descripcion = Convert.ToString(dr[3]);
                     objrUnidades.Status = Convert.ToString(dr[4]);
@@ -485,48 +485,8 @@ namespace MIPlan.Data
             {
                 exeProc.LimpiarOracleCommand(ref cmd);
             }
-        }
-
-        public static List<Unidades> ObtenerGridUnidades(string IdActividad)
-        {
-            OracleCommand cmd = null;
-            ExeProcedimiento exeProc = new ExeProcedimiento();
-
-            try
-            {
-                string[] Parametros = { "P_Id_Actividad" };
-                object[] Valores = { IdActividad };
-                OracleDataReader dr = null;
-                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Unidades_Resp", ref dr, Parametros, Valores);
-                List<Unidades> list = new List<Unidades>();
-                while (dr.Read())
-                {
-                    Unidades objUnidades = new Unidades();
-                    objUnidades.Id = Convert.ToInt32(dr[0]);
-                    objUnidades.Dependencia = Convert.ToString(dr[1]);
-                    objUnidades.Clave = Convert.ToString(dr[2]);
-                    objUnidades.Descripcion = Convert.ToString(dr[3]);
-                    objUnidades.Status = Convert.ToString(dr[4]);
-                    objUnidades.Coordinador = Convert.ToString(dr[5]);
-                    list.Add(objUnidades);
-                }
-                return list;
-
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                exeProc.LimpiarOracleCommand(ref cmd);
-            }
 
         }
-
-
-        //Menú
         public static MENU ObtenerMenu(string Valor)
         {
             OracleCommand cmd = null;
@@ -586,11 +546,6 @@ namespace MIPlan.Data
             }
 
         }
-
-
-
-
-
         public static List<SUBMENU> SubMenu(List<MENU> ListMenu, int IdMenu)
         {
             try
@@ -611,6 +566,80 @@ namespace MIPlan.Data
                 throw new Exception(ex.Message);
             }
         }
+        public static List<Comun> ObtenerUsuarios()
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+
+            try
+            {
+                OracleDataReader dr = null;
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Combo_Usuarios", ref dr);
+                List<Comun> listarComun = new List<Comun>();
+                while (dr.Read())
+                {
+                    Comun objComun = new Comun();
+                    objComun.Usuario = Convert.ToString(dr[0]);
+                    listarComun.Add(objComun);
+                }
+                return listarComun;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
+        }
+        public static List<Comun> GridUnidadesDisponibles(string Usuario)
+        {
+            OracleCommand cmd = null;
+            ExeProcedimiento exeProc = new ExeProcedimiento();
+
+            try
+            {
+                string[] Parametros = { "P_USUARIO" };
+                object[] Valores = { Usuario };
+                OracleDataReader dr = null;
+                cmd = exeProc.GenerarOracleCommandCursor("PKG_PLANEACION.Obt_Grid_Unidades_Dispobibles", ref dr, Parametros, Valores);
+                List<Comun> list = new List<Comun>();
+                while (dr.Read())
+                {
+                    Comun objIndicador = new Comun();
+                    objIndicador.Id = Convert.ToString(dr[0]);
+                    objIndicador.Descripcion = Convert.ToString(dr[1]);
+
+                    list.Add(objIndicador);
+                }
+                return list;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                exeProc.LimpiarOracleCommand(ref cmd);
+            }
+
+        }
+        public static List<Comun> ObtenerCarreras()
+        {           
+            var Lista = ExeProcedimiento.GenerarOracleCommandCursor_Combo("PKG_PLANEACION.Obt_Combo_Carreras");
+            return Lista;
+        }
+        public static List<Comun> ObtenerNiveles()
+        {
+            var Lista = ExeProcedimiento.GenerarOracleCommandCursor_Combo("PKG_PLANEACION.Obt_Combo_Niveles");
+            return Lista;
+        }
+
 
     }
 }

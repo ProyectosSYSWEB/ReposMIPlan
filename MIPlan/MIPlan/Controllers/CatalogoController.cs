@@ -1,5 +1,6 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
+using Microsoft.AspNetCore.Http;
 using MIPlan.Data;
 using MIPlan.Models;
 using System;
@@ -8,12 +9,13 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ConnectionInfo = CrystalDecisions.Shared.ConnectionInfo;
 
 namespace MIPlan.Controllers
 {
     public class CatalogoController : Controller
     {
-        // GET: Catalogo
+        // GET: Catalogos
         public ActionResult Index()
         {
             return View();
@@ -43,6 +45,10 @@ namespace MIPlan.Controllers
             return View();
         }
 
+        public ActionResult ProgramasEducativos()
+        {
+            return View();
+        }
         public ActionResult AcreditadoresRegistro()
         {
             return View();
@@ -54,6 +60,10 @@ namespace MIPlan.Controllers
         }
 
         public ActionResult Indicadores()
+        {
+            return View();
+        }
+        public ActionResult UnidadesPorUsuario()
         {
             return View();
         }
@@ -148,13 +158,18 @@ namespace MIPlan.Controllers
         //    return Json(list, JsonRequestBehavior.AllowGet);
         //}s
 
+
         public JsonResult ObtenerDependencias()
-        {
+        {            
             List<Comun> list = new List<Comun>();
             ResultadoComun objResultado = new ResultadoComun();
             try
             {
-                list = CursorDataContext.ObtenerDependencias("LISSETH");
+                List<Sesion> SesionUsu = new List<Sesion>();
+                if (System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"] != null)
+                    SesionUsu = (List<Sesion>)System.Web.HttpContext.Current.Session["SessionDatosUsuarioLogeado"];
+
+                list = CursorDataContext.ObtenerDependencias(SesionUsu[0].Usuario);
                 objResultado.Error = false;
                 objResultado.MensajeError = "";
                 objResultado.Resultado = list;
@@ -1320,16 +1335,185 @@ namespace MIPlan.Controllers
         }
         /* FIN FORMULARIO INDICADORES */
 
+        public JsonResult ObtenerUsuarios()
+        {
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            try
+            {
+                list = CursorDataContext.ObtenerUsuarios();
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                Session["AgregarUnidadG"] = null;
+                Session["QuitarUnidadG"] = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
 
-        /**/        
+        public JsonResult GridUnidadesDisponibles(int Id, string Descripcion, string Usuario, int lado)
+        {  
+            List<Unidades> list = new List<Unidades>();
+            Unidades pbjTemp = new Unidades();
+            ResultadoUnidad objResultado = new ResultadoUnidad();
+
+            try
+            {
+                pbjTemp.Id = Id;
+                pbjTemp.Descripcion = Descripcion;
+                pbjTemp.Usuario = Usuario;
+                if (Session["QuitarUnidadG"] == null)
+                {
+                    list = Data.PlanTrabajo.CursorDataContext.GridUnidadesDisponibles(Usuario);
+                    objResultado.Error = false;
+                    objResultado.MensajeError = string.Empty;                     
+                    Session["QuitarUnidadG"] = list;
+                    list = list.OrderBy(x => x.Id).ToList();
+                    objResultado.Resultado = list;
+                }
+                else
+                {
+                    if (lado == 0)
+                    {
+                        list = (List<Unidades>)Session["QuitarUnidadG"];
+                        list.RemoveAll(x => x.Id == Id);
+                        Session["QuitarUnidadG"] = list;
+                        list = list.OrderBy(x => x.Id).ToList();
+                        objResultado.Resultado = list;
+                    }
+                    else if(lado == 1){
+
+                        list = (List<Unidades>)Session["QuitarUnidadG"];
+                        list.Add(pbjTemp);
+                        Session["QuitarUnidadG"] = list;
+                        list = list.OrderBy(x => x.Id).ToList();
+                        objResultado.Resultado = list;
+                    }
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+                
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+
+            }
+        }        
+        public JsonResult AgregarUnidadGrid(int Id, string Descripcion, string Usuario, int lado)
+        {
+            List<Unidades> list = new List<Unidades>();
+            Unidades pbjTemp = new Unidades();
+            ResultadoUnidad objResultado = new ResultadoUnidad();
+            try
+            {
+                pbjTemp.Id = Id;
+                pbjTemp.Descripcion = Descripcion;
+                pbjTemp.Usuario = Usuario;
+                if (Session["AgregarUnidadG"] == null)
+                {
+                    list = new List<Unidades>();
+                    list.Add(pbjTemp);
+                    Session["AgregarUnidadG"] = list;
+                    objResultado.Resultado = list;
+                }
+                else
+                {
+                    if (lado == 0)
+                    {
+                        list = (List<Unidades>)Session["AgregarUnidadG"];
+                        list.Add(pbjTemp);
+                        Session["AgregarUnidadG"] = list;
+                        list = list.OrderBy(x => x.Id).ToList();
+                        objResultado.Resultado = list;
+                    }else if (lado == 1)
+                    {
+                        list = (List<Unidades>)Session["AgregarUnidadG"];
+                        list.RemoveAll(x => x.Id == Id);
+                        Session["AgregarUnidadG"] = list;
+                        list = list.OrderBy(x => x.Id).ToList();
+                        objResultado.Resultado = list;
+
+                    }
+                }
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {              
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult ObtenerCarreras()
+        {
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            try
+            {                
+
+                list = CursorDataContext.ObtenerCarreras();
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult ObtenerNiveles()
+        {
+            List<Comun> list = new List<Comun>();
+            ResultadoComun objResultado = new ResultadoComun();
+            try
+            {
+
+                list = CursorDataContext.ObtenerNiveles();
+                objResultado.Error = false;
+                objResultado.MensajeError = "";
+                objResultado.Resultado = list;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                objResultado.Error = true;
+                objResultado.MensajeError = ex.Message;
+                objResultado.Resultado = null;
+                return Json(objResultado, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        /* FIN FORMULARIO UNIDADES POR USUARIO */
+
+
+        /**/
+
+        /* PDF */
         public ActionResult ReporteAreasAtencionPdf(string Dependencia)
         {
             ConnectionInfo connectionInfo = new ConnectionInfo();
             System.Web.UI.Page p = new System.Web.UI.Page();
 
             ReportDocument rd = new ReportDocument();
-            string Ruta = Path.Combine(Server.MapPath("~/Reports"), "rpt_CuotasPosgradoGral.rpt");
-            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "rpt_CuotasPosgradoGral.rpt"));
+            string Ruta = Path.Combine(Server.MapPath("~/reports"), "ReporteAreasAtencionPdf.rpt");
+            rd.Load(Path.Combine(Server.MapPath("~/reports"), "ReporteAreasAtencionPdf.rpt"));
             rd.SetParameterValue(0, Dependencia);
             rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
             connectionInfo.ServerName = "DSIA";
@@ -1343,6 +1527,79 @@ namespace MIPlan.Controllers
             stream.Seek(0, SeekOrigin.Begin);
             return File(stream, "application/pdf", "CuotasPosgrado_General.pdf");
         }
+
+        public ActionResult ReporteIndicadoresPdf(string Categoria, string Sub_tipo)
+        {
+            ConnectionInfo connectionInfo = new ConnectionInfo();
+            System.Web.UI.Page p = new System.Web.UI.Page();
+
+            ReportDocument rd = new ReportDocument();
+            string Ruta = Path.Combine(Server.MapPath("~/reports"), "ReporteIndicadoresPdf.rpt");
+            rd.Load(Path.Combine(Server.MapPath("~/reports"), "ReporteIndicadoresPdf.rpt"));
+            rd.SetParameterValue(0, Categoria);
+            rd.SetParameterValue(1, Sub_tipo);
+            rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
+            connectionInfo.ServerName = "DSIA";
+            connectionInfo.UserID = "ANUARIOS";
+            connectionInfo.Password = "conta41101";
+            SetDBLogonForReport(connectionInfo, rd);
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "CuotasPosgrado_General.pdf");
+        }
+
+        public ActionResult ReporteBasicosPdf(string Categoria)
+        {
+            ConnectionInfo connectionInfo = new ConnectionInfo();
+            System.Web.UI.Page p = new System.Web.UI.Page();
+
+            ReportDocument rd = new ReportDocument();
+            string Ruta = Path.Combine(Server.MapPath("~/reports"), "ReporteBasicosPdf.rpt");
+            rd.Load(Path.Combine(Server.MapPath("~/reports"), "ReporteBasicosPdf.rpt"));
+            rd.SetParameterValue(0, Categoria);
+            rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
+            connectionInfo.ServerName = "DSIA";
+            connectionInfo.UserID = "ANUARIOS";
+            connectionInfo.Password = "conta41101";
+            SetDBLogonForReport(connectionInfo, rd);
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "CuotasPosgrado_General.pdf");
+        }
+
+        /* Fin PDF */
+
+
+        /* EXCEL */
+        //public ActionResult ReporteAreasAtencionExcel(string Dependencia)
+        //{
+        //    ConnectionInfo connectionInfo = new ConnectionInfo();
+        //    System.Web.UI.Page p = new System.Web.UI.Page();
+
+        //    ReportDocument rd = new ReportDocument();
+        //    string Ruta = Path.Combine(Server.MapPath("~/reports"), "ReporteAreasAtencionExcel.rpt");
+        //    rd.Load(Path.Combine(Server.MapPath("~/reports"), "ReporteAreasAtencionExcel.rpt"));
+        //    rd.SetParameterValue(0, Dependencia);
+        //    rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
+        //    connectionInfo.ServerName = "DSIA";
+        //    connectionInfo.UserID = "ANUARIOS";
+        //    connectionInfo.Password = "conta41101";
+        //    SetDBLogonForReport(connectionInfo, rd);
+        //    Response.Buffer = false;
+        //    Response.ClearContent();
+        //    Response.ClearHeaders();
+        //    Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.ExcelWorkbook);
+        //    stream.Seek(0, SeekOrigin.Begin);
+        //    return File(stream, "application/xls", "CuotasPosgrado_General.xls");
+        //}
+
+        /* Fin EXCEL */
 
         private void SetDBLogonForReport(ConnectionInfo connectionInfo, ReportDocument reportDocument)
         {

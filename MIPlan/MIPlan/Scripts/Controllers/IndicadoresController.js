@@ -266,19 +266,50 @@
             }
         }
 
-        this.reset = function (form) {
+        this.close = function (form) {
             $('#indicadores').modal('hide');
             if (form) {
                 form.$setPristine();
                 form.$setUntouched();
+                CargarGrid();
             }
-            CargarGrid();
             self.cve_cat = null;
             self.cve_sub = null;
             self.cve_desc = null;
             self.cve_et1 = null;
             self.cve_et2 = null;
             self.cve_seg = null;
+        };
+
+        this.reset = function (form) {
+            $('#indicadores').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }
+            self.cve_cat = null;
+            self.cve_sub = null;
+            self.cve_desc = null;
+            self.cve_et1 = null;
+            self.cve_et2 = null;
+            self.cve_seg = null;
+        };
+
+        this.PdfReportIndicadores = function (Categoria, Subtipo) {
+            var xhr = new XMLHttpRequest();
+            var ruta = urlServer + 'Catalogo/ReporteIndicadoresPdf';
+            xhr.responseType = 'blob';
+            xhr.open("POST", ruta, true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {//Call a function when the state changes.
+                if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+                    var blob = new Blob([this.response], { type: 'application/pdf' });
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    window.open(link, "", "width=600,height=800");
+                }
+            }
+            xhr.send("Categoria=" + self.buscar + "&Sub_tipo=" + self.Sub.Sub);
         };
 
     }]);

@@ -5,10 +5,9 @@
 
 }
 
-<h2>Periodos</h2>
+<br class="imgUnach" />
 <br />
-<br />
-<br />
+
 
 <div ng-controller="MIPlanController as ctrl" ng-init="ctrl.Inicio()">
     <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
@@ -35,8 +34,8 @@
                                 </select>
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.cmbDependencia.$touched">
-                                    <span ng-show="!ctrl.periodo[0].Dependencia" class="text-danger">Campo Requerido</span>
+                                <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.cmbDependencia.$touched">
+                                    <span ng-show="!ctrl.periodo[0].Dependencia" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                 </span>
                             </div>
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
@@ -47,8 +46,8 @@
                                 <input type="text" id="inputPeriodo" class="" name="Periodo" ng-model="ctrl.periodo[0].Periodo" placeholder="Periodo" required>
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.Periodo.$touched">
-                                    <span ng-show="!ctrl.periodo[0].Periodo" class="text-danger">Campo Requerido</span>
+                                <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.Periodo.$touched">
+                                    <span ng-show="!ctrl.periodo[0].Periodo" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                 </span>
                             </div>
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
@@ -59,8 +58,8 @@
                                 <input type="text" id="inputDescripcion" class="" name="Descripcion" ng-model="ctrl.periodo[0].Descripcion" placeholder="Descripción" required>
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.Descripcion.$touched">
-                                    <span ng-show="!ctrl.periodo[0].Descripcion" class="text-danger">Campo Requerido</span>
+                                <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.Descripcion.$touched">
+                                    <span ng-show="!ctrl.periodo[0].Descripcion" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                 </span>
                             </div>
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
@@ -74,8 +73,8 @@
                                 </select>
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.cmbDependencia_status.$touched">
-                                    <span ng-show="!ctrl.EStatus" class="text-danger">Campo Requerido</span>
+                                <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.cmbDependencia_status.$touched">
+                                    <span ng-show="!ctrl.EStatus" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                 </span>
                             </div>
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
@@ -86,8 +85,8 @@
                                 <input type="text" id="inputEjercicio" class="" name="Ejercicio" ng-model="ctrl.Ejercicio" placeholder="Ejercicio" required>
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.Ejercicio.$touched">
-                                    <span ng-show="!ctrl.Ejercicio" class="text-danger">Campo Requerido</span>
+                                <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.Ejercicio.$touched">
+                                    <span ng-show="!ctrl.Ejercicio" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                 </span>
                             </div>
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
@@ -98,8 +97,8 @@
                                 <input type="text" class="" id="InicioUpdate" name="Inicio" ng-model="ctrl.periodo[0].Inicio" placeholder="Inicio" required>
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.Inicio.$touched">
-                                    <span ng-show="!ctrl.periodo[0].Inicio" class="text-danger">Campo Requerido</span>
+                                <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.Inicio.$touched">
+                                    <span ng-show="!ctrl.periodo[0].Inicio" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                 </span>
                             </div>
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
@@ -110,8 +109,8 @@
                                 <input type="text" class="" id="FinUpdate" name="Fin" ng-model="ctrl.periodo[0].Fin" placeholder="Fin" required>
                             </div>
                             <div class="row justify-content-center">
-                                <span class="messages" ng-show="modalForm.$submitted || modalForm.Fin.$touched">
-                                    <span ng-show="!ctrl.periodo[0].Fin" class="text-danger">Campo Requerido</span>
+                                <span class="messages check-element animate-show-hide" ng-show="modalForm.$submitted || modalForm.Fin.$touched">
+                                    <span ng-show="!ctrl.periodo[0].Fin" class="text-danger check-element animate-show-hide">Campo Requerido</span>
                                 </span>
                             </div>
                             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
@@ -186,46 +185,46 @@
         </div>
         <div class="container table-responsive" style="box-shadow: 10px 40px 96px rgba(0,0,0,.3)">
             <table class="table table-hover">
-                <thead>
+                <thead class="light-blue darken-3 text-white">
                     <tr>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Dependencia'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Dependencia'; sortReverse = !sortReverse">
                                 Dependencia
                                 <span ng-class="sortType == 'Dependencia' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Dependencia' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Periodo'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Periodo'; sortReverse = !sortReverse">
                                 Periodo
                                 <span ng-class="sortType == 'Periodo' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Periodo' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Descripcion'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Descripcion'; sortReverse = !sortReverse">
                                 Descripción
                                 <span ng-class="sortType == 'Descripcion' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Descripcion' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Status'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Status'; sortReverse = !sortReverse">
                                 Estatus
                                 <span ng-class="sortType == 'Status' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Status' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Ejercicio'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Ejercicio'; sortReverse = !sortReverse">
                                 Ejercicio
                                 <span ng-class="sortType == 'Ejercicio' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Ejercicio' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Inicio'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Inicio'; sortReverse = !sortReverse">
                                 Inicio
                                 <span ng-class="sortType == 'Inicio' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Inicio' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
                         </th>
                         <th scope="col">
-                            <a href="" ng-click="sortType = 'Fin'; sortReverse = !sortReverse">
+                            <a class="text-white" href="" ng-click="sortType = 'Fin'; sortReverse = !sortReverse">
                                 Fin
                                 <span ng-class="sortType == 'Fin' && !sortReverse ? 'fa fa-arrow-down' : sortType == 'Fin' && sortReverse ? 'fa fa-arrow-up': ''"></span>
                             </a>
@@ -291,6 +290,7 @@
 <script src="~/Scripts/angular.min.js"></script>
 <script src="~/Scripts/angular.js"></script>
 <script src="~/Scripts/angular-pagination.js"></script>
+<script src="~/Scripts/angular-animate.js"></script>
 <script src="~/Scripts/global.js"></script>
 @*<script src="~/Scripts/angular.ng-modules.js"></script>*@
 <script src="~/Scripts/Controllers/PeriodosController.js"></script>
@@ -313,5 +313,11 @@
     $('#FinUpdate').datetimepicker({
         timepicker: false,
         format: 'd/m/Y'
+    });
+
+    $(document).ready(function () {
+
+        $('button').tooltip();
+
     });
 </script>

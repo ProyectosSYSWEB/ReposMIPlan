@@ -137,7 +137,8 @@
             self.cve_status = "";
             self.cve_cat = "";
 
-            self.cve_status = "A";           
+            self.cve_status = "A";
+            
             var iNumeroMayor = self.areasatencion[0].Cve;
             for (var i = 0; i < self.areasatencion.length; i++) {
                 if (self.areasatencion[i].Cve > iNumeroMayor) {
@@ -243,7 +244,7 @@
 
         this.ValorDependencia = function () { 
             CargarGrid();
-                if (self.buscar == "00000" || self.buscar == null) {
+                if (self.buscar == null) {
                     self.buscar = '';
                 }
         };
@@ -254,18 +255,65 @@
             }
         }
 
-        this.reset = function (form) {
+        this.close = function (form) {
             $('#areasatencion').modal('hide');
             if (form) {
                 form.$setPristine();
                 form.$setUntouched();
+                CargarGrid();
             }
-            CargarGrid();
             self.cve_dependencia = null;
             self.cve_clave = null;
             self.cve_desc = null;
             self.cve_status = null;
             self.cve_cat = null;
         };
+
+        this.reset = function (form) {
+            $('#areasatencion').modal('hide');
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }
+            self.cve_dependencia = null;
+            self.cve_clave = null;
+            self.cve_desc = null;
+            self.cve_status = null;
+            self.cve_cat = null;
+        };
+
+        this.PdfReportAreas = function (Dependencia) {
+            var xhr = new XMLHttpRequest();
+            var ruta = urlServer + 'Catalogo/ReporteAreasAtencionPdf';
+            xhr.responseType = 'blob';
+            xhr.open("POST", ruta, true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {//Call a function when the state changes.
+                if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+                    var blob = new Blob([this.response], { type: 'application/pdf' });
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    window.open(link, "", "width=600,height=800");
+                }
+            }
+            xhr.send("Dependencia=" + Dependencia);
+        };
+
+        //this.ExcelReportAreas = function (Dependencia) {
+        //    var xhr = new XMLHttpRequest();
+        //    var ruta = urlServer + 'Catalogo/ReporteAreasAtencionExcel';
+        //    xhr.responseType = 'blob';
+        //    xhr.open("POST", ruta, true);
+        //    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        //    xhr.onreadystatechange = function () {//Call a function when the state changes.
+        //        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+        //            var blob = new Blob([this.response], { type: 'application/xls' });
+        //            var link = document.createElement('a');
+        //            link.href = window.URL.createObjectURL(blob);
+        //            window.open(link, "", "width=600,height=800");
+        //        }
+        //    }
+        //    xhr.send("Dependencia=" + Dependencia);
+        //};
     }]);
 })();
